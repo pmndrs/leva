@@ -31,7 +31,8 @@
   box-sizing: border-box;
 }
 
-.root input {
+.root input[type='number'],
+.root input[type='text'] {
   background: transparent;
   font-family: inherit;
   color: inherit;
