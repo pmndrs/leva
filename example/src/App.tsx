@@ -4,7 +4,7 @@ import { useTwix, folder, Twix } from 'use-twix'
 function Comp1() {
   const t = useTwix(
     { color: '#fff', number: { value: 4, min: 3 } },
-    folder('sub', { a: false, b: 3 }, folder('sub2', { c: 4 }))
+    folder('sub', { a: false, b: 3 }, folder({ name: 'sub2', collapsed: true }, { c: 4 }, folder('sub3', { d: 4 })))
   )
   return (
     <div>
@@ -25,14 +25,13 @@ function Comp2() {
 }
 
 function Comp3() {
-  const t = useTwix('Comp3', { comp3: "heya" })
+  const t = useTwix('Comp3', { comp3: 'heya' })
 
   return (
     <div>
       <h1>Comp3</h1>
       {JSON.stringify(t)}
     </div>
-
   )
 }
 
