@@ -1,11 +1,11 @@
 import React from 'react'
 import { GenericText } from './GenericText'
-import { SettingsNumber } from '../../types'
+import { NumberSettings } from '../../types'
 
 type NumberProps = {
   value: number
   onUpdate: (value: number) => void
-} & SettingsNumber
+} & NumberSettings
 
 export function Number({ value, onUpdate, ...settings }: NumberProps) {
   return (

@@ -1,21 +1,21 @@
 export type Value = number | string | boolean
 
-export type SettingsNumber = { min: number; max: number; step: number }
-export type SettingsString = never
-export type SettingsBoolean = never
+export type NumberSettings = { min: number; max: number; step: number }
+export type StringSettings = never
+export type BooleanSettings = never
 
 // TODO Support folders settings
-export type SettingsFolder = {
+export type FolderSettings = {
   name: string
   collapsed?: boolean
 }
 
 export type Settings<T extends Value = Value> = T extends number
-  ? SettingsNumber
+  ? NumberSettings
   : T extends string
-  ? SettingsString
+  ? StringSettings
   : T extends boolean
-  ? SettingsBoolean
+  ? BooleanSettings
   : never
 
 export type Input<T extends Value = Value> = Value | ({ value: T } & Settings<T>)
