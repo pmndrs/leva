@@ -1,0 +1,1 @@
+export { String } from '../Text'
