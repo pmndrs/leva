@@ -4,6 +4,12 @@ export type SettingsNumber = { min: number; max: number; step: number }
 export type SettingsString = never
 export type SettingsBoolean = never
 
+// TODO Support folders settings
+export type SettingsFolder = {
+  name: string
+  collapsed?: boolean
+}
+
 export type Settings<T extends Value = Value> = T extends number
   ? SettingsNumber
   : T extends string
