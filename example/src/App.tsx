@@ -1,10 +1,19 @@
 import React from 'react'
-import { useTwix, folder, Twix } from 'use-twix'
+import { useTwix, folder, button, Twix } from 'use-twix'
 
 function Comp1() {
   const t = useTwix(
+    { first: { value: 5, max: 10 } },
     { color: '#fff', number: { value: 4, min: 3 } },
-    folder('sub', { a: false, b: 3 }, folder({ name: 'sub2', collapsed: true }, { c: 4 }, folder('sub3', { d: 4 })))
+    folder(
+      'sub',
+      { a: false, b: 3 },
+      folder(
+        { name: 'sub2', collapsed: true },
+        // button('Click', () => console.log('hello')),
+        folder('sub3', { d: 4 })
+      )
+    )
   )
   return (
     <div>
@@ -15,7 +24,11 @@ function Comp1() {
 }
 
 function Comp2() {
-  const t = useTwix('sub.sub2', { comp2: 'prop' })
+  const t = useTwix(
+    'sub.sub2',
+    { comp2: 'prop' }
+    // button('Click', () => console.log('hello'))
+  )
   return (
     <div>
       <h1>Comp2</h1>

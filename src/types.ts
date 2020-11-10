@@ -31,4 +31,8 @@ export type Data = {
   [key: string]: DataInput
 }
 
-// const SpecialTypes = { SEPARATOR: 0, FOLDER: 1, BUTTON: 2, MONITOR: 3 };
+export enum InputTypes {
+  SEPARATOR,
+  BUTTON,
+  MONITOR,
+}
