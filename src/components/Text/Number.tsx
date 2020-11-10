@@ -10,12 +10,7 @@ type NumberProps = {
 export function Number({ value, onUpdate, ...settings }: NumberProps) {
   return (
     <>
-      <GenericText 
-        value={value} 
-        {...settings} 
-        label={"X"}
-        onUpdate={onUpdate}
-      />
+      <GenericText value={value} {...settings} onUpdate={onUpdate} />
     </>
   )
 }

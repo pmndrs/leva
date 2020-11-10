@@ -1,27 +1,22 @@
 import create from 'zustand'
 import shallow from 'zustand/shallow'
-import { join, normalizeInput } from './utils'
+import { join, normalizeInput, pick, getKeyPath } from './utils'
 import { Data, Value } from './types'
 
-type State = {
-  data: Data
-}
+// TODO add folder settings
+type State = { data: Data }
 
-const store = create<State>(() => ({ data: {} }))
-export const useStore = store
+const _store = create<State>(() => ({ data: {} }))
+const useStore = _store
 
-// @ts-expect-error
-window.store = store
-
-export const getStoreData = () => store.getState().data
-
-export const setStoreData = (data: Data) => store.setState(s => ({ data: { ...s.data, ...data } }))
-
-export const setValueForPath = (path: string, value: Value) =>
-  store.setState(s => {
+const getData = () => _store.getState().data
+const setData = (data: Data) => _store.setState(s => ({ data: { ...s.data, ...data } }))
+const setValueAtPath = (path: string, value: Value) => {
+  _store.setState(s => {
     const current = s.data[path]
     return { data: { ...s.data, [path]: { ...current, value } } }
   })
+}
 
 const getVisiblePaths = (data: Data) =>
   Object.entries(data)
@@ -30,7 +25,15 @@ const getVisiblePaths = (data: Data) =>
 
 export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shallow)
 
-export function useValueType(path: string) {
+const getValuesForPaths = (data: Data, paths: string[]) =>
+  Object.entries(pick(data, paths) as Data).reduce(
+    (acc, [path, { value }]) => ({ ...acc, [getKeyPath(path)[0]!]: value }),
+    {} as { [path: string]: Value }
+  )
+
+export const useValuesForPath = (paths: string[]) => useStore(s => getValuesForPaths(s.data, paths), shallow)
+
+export function useInput(path: string) {
   return useStore(s => {
     const { value, type, settings } = s.data[path]
     return { value, type, settings }
@@ -40,18 +43,18 @@ export function useValueType(path: string) {
 }
 
 // @ts-expect-error
-export const init = (rootPath?: string, schema) => {
+const getDataFromSchema = (rootPath?: string, schema) => {
   const paths: string[] = []
   const _data: Data = {}
-  const data = getStoreData()
+  const data = getData()
   // @ts-expect-error
   schema.flat().forEach(item => {
     // @ts-expect-error
     Object.entries(item).forEach(([key, value]: [string, Value]) => {
       const path = join(rootPath, key)
-      const current = data[path]
-      if (current) {
-        _data[path] = { ...current, count: current.count + 1 }
+      const currentInput = data[path]
+      if (currentInput) {
+        _data[path] = { ...currentInput, count: currentInput.count + 1 }
       } else {
         // TODO not sure why tsdx throws an error here
         // @ts-ignore
@@ -61,15 +64,27 @@ export const init = (rootPath?: string, schema) => {
       paths.push(path)
     })
   })
-  return [paths, _data] as [string[], Data]
+  return [_data, paths] as [Data, string[]]
 }
 
-export const disposePaths = (paths: string[]) => {
-  const data = getStoreData()
+const disposePaths = (paths: string[]) => {
+  const data = getData()
   const _data: Data = {}
   paths.forEach(path => {
     const { count, ...current } = data[path]
     _data[path] = { ...current, count: count - 1 }
   })
-  setStoreData(_data)
+  setData(_data)
 }
+
+export const store = {
+  getData,
+  setData,
+  setValueAtPath,
+  getDataFromSchema,
+  disposePaths,
+}
+
+// TODO remove this
+// @ts-expect-error
+window.store = store

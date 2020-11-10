@@ -1,4 +1,4 @@
-import { Data, Value, Input } from './types'
+import { Input } from './types'
 
 export const clamp = (x: number, min: number, max: number) => Math.max(min, Math.min(max, x))
 export const floor = (min: number, x: number) => Math.max(min, Math.floor(x))
@@ -30,9 +30,3 @@ export function normalizeInput(input: Input) {
   }
   return { value: input, type: typeof input }
 }
-
-export const getValuesForPaths = (data: Data, paths: string[]) =>
-  Object.entries(pick(data, paths) as Data).reduce(
-    (acc, [key, { value }]) => ({ ...acc, [getKeyPath(key)[0]!]: value }),
-    {} as { [key: string]: Value }
-  )
