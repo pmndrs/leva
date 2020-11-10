@@ -5,11 +5,13 @@
 
   --twix-color-background-dark: #1a1a1f;
 
-  --twix-color-background-header: #333;
+  --twix-color-background-header: rgb(56, 56, 70);
   --twix-color-text-header: #bebec0;
 
   --twix-color-input-focus: royalblue;
   --twix-color-input-hover: #bebec0;
+
+  --twix-color-input-inner-label: #7b7b7c;
 }
 
 .root {
@@ -25,8 +27,11 @@
   border-radius: 5px;
 }
 
-.root input[type='number'],
-.root input[type='text'] {
+.root * {
+  box-sizing: border-box;
+}
+
+.root input {
   background: transparent;
   font-family: inherit;
   color: inherit;

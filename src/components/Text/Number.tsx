@@ -8,5 +8,14 @@ type NumberProps = {
 } & SettingsNumber
 
 export function Number({ value, onUpdate, ...settings }: NumberProps) {
-  return <GenericText type="number" value={value} {...settings} onUpdate={onUpdate} />
+  return (
+    <>
+      <GenericText 
+        value={value} 
+        {...settings} 
+        label={"X"}
+        onUpdate={onUpdate}
+      />
+    </>
+  )
 }
