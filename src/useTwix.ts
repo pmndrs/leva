@@ -1,20 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { prefix, join, FOLDER_SETTINGS_KEY } from './utils'
 import { store, useValuesForPath } from './store'
-import { FolderSettings } from './types'
-
-const getDefaultSettings = (settings: FolderSettings) => ({ collapsed: false, ...settings })
-
-// @ts-expect-error
-export const folder = (nameOrSettings: string | FolderSettings, ...schemas) => {
-  const _settings = getDefaultSettings(typeof nameOrSettings === 'string' ? { name: nameOrSettings } : nameOrSettings)
-  const { name, ...settings } = _settings
-
-  return schemas
-    .flat() // flattens schema
-    .map(schema => prefix(schema, name)) // prefix all keys
-    .concat({ [join(name, FOLDER_SETTINGS_KEY)]: settings }) // concat special settings object
-}
+import { folder } from './helpers/folder'
 
 // TODO fix name type
 // @ts-expect-error
