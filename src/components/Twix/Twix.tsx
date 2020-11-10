@@ -4,7 +4,6 @@ import merge from 'merge-value'
 import { useVisiblePaths } from '../../store'
 import { getKeyPath, join } from '../../utils'
 import { Folder } from './../Folder/'
-import { InputWrapper } from '../InputWrapper'
 
 import styles from './twix.module.css'
 
@@ -20,12 +19,14 @@ type Tree = {
 
 const buildTree = (paths: string[]) => {
   const tree = {}
-  paths.forEach(p => {
-    const [key, folderPath] = getKeyPath(p)
+  paths.forEach(path => {
+    const [key, folderPath] = getKeyPath(path)
     merge(tree, join('__root', folderPath), {
-      [`_i-${key}`]: <InputWrapper path={p} key={key} valueKey={key!} />,
+      ...(folderPath ? { ___path: folderPath } : null),
+      [`_i-${key}`]: { type: 'input', path, key, valueKey: key },
     })
   })
+  console.log({ tree })
   return tree as Tree
 }
 
