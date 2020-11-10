@@ -1,12 +1,15 @@
-export type Value = number | string
+export type Value = number | string | boolean
 
 export type SettingsNumber = { min: number; max: number; step: number }
 export type SettingsString = never
+export type SettingsBoolean = never
 
 export type Settings<T extends Value = Value> = T extends number
   ? SettingsNumber
   : T extends string
   ? SettingsString
+  : T extends boolean
+  ? SettingsBoolean
   : never
 
 export type Input<T extends Value = Value> = Value | ({ value: T } & Settings<T>)

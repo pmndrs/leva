@@ -4,7 +4,7 @@ import { SettingsNumber } from '../../types'
 
 type NumberProps = {
   value: number
-  onUpdate: (e: React.SyntheticEvent) => {}
+  onUpdate: (value: number) => void
 } & SettingsNumber
 
 export function Number({ value, onUpdate, ...settings }: NumberProps) {

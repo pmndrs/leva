@@ -4,7 +4,7 @@ import { useTwix, folder, Twix } from 'use-twix'
 function Comp1() {
   const t = useTwix(
     { color: '#fff', number: { value: 4, min: 3 } },
-    folder('sub', { a: 2, b: 3 }, folder('sub2', { c: 4 }))
+    folder('sub', { a: false, b: 3 }, folder('sub2', { c: 4 }))
   )
   return (
     <div>

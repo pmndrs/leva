@@ -4,9 +4,9 @@ import { GenericText } from './GenericText'
 
 type StringProps = {
   value: string
-  onUpdate: (e: React.SyntheticEvent) => {}
+  onUpdate: (value: string) => void
 } & SettingsString
 
 export function String({ value, onUpdate }: StringProps) {
-  return <GenericText value={value} onUpdate={onUpdate} />
+  return <GenericText type="text" value={value} onUpdate={onUpdate} />
 }

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Number, String } from './Text'
+import { Boolean } from './Boolean'
 import { setValueForPath, useValueType } from '../store'
 
 const Inputs = {
   string: String,
   number: Number,
+  boolean: Boolean,
 }
 
 type InputWrapperProps = {
