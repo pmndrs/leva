@@ -22,7 +22,7 @@ const buildTree = (paths: string[]) => {
   paths.forEach(path => {
     const [key, folderPath] = getKeyPath(path)
     merge(tree, join('__root', folderPath), {
-      ...(folderPath ? { ___path: folderPath } : null),
+      ...(folderPath ? { __path: folderPath } : null),
       [`_i-${key}`]: { path, key, valueKey: key },
     })
   })

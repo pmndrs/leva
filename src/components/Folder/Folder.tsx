@@ -12,8 +12,8 @@ type FolderProps = {
 const isInput = (key: string) => key.indexOf('_i-') === 0
 
 // @ts-expect-error
-const createFolder = (key: string, { ___path, ...tree }) => {
-  return <Folder key={key} path={___path} name={key} tree={tree} />
+const createFolder = (key: string, { __path, ...tree }) => {
+  return <Folder key={key} path={__path} name={key} tree={tree} />
 }
 
 export function Folder({ name, path, tree }: FolderProps) {
