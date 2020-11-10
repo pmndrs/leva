@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import style from './folder.module.css'
 
 type FolderProps = {
   name?: string
@@ -9,30 +10,31 @@ export function Folder({ name, tree }: FolderProps) {
   const [toggle, setToggle] = useState(false)
   return (
     <div
-      className="f"
-      style={{
-        marginTop: 20,
-        marginBottom: 20,
-        marginLeft: name ? 50 : 0,
-        border: '1px solid black',
-        padding: 10,
-      }}>
+      className={style.container}>
+        
       {name && (
-        <div style={{ marginBottom: 10, fontWeight: 'bold' }}>
-          {name} <button onClick={() => setToggle(t => !t)}>{toggle ? 'Expand' : 'Collapse'}</button>
+        <div className={style.title} onClick={() => setToggle(t => !t)}>
+          <div>
+          {name} 
+          </div>
+          <span>{toggle ? 'A' : 'V'}</span>
         </div>
       )}
-      <div
+      
+      {!toggle && <div
         style={{
           maxHeight: toggle ? 0 : '100vh',
           overflow: 'hidden',
           transition: 'all 350ms ease',
-        }}>
+        }}
+        className={style.content}
+      >
         {Object.entries(tree).map(([key, value]) => {
           // @ts-expect-error
           return React.isValidElement(value) ? value : <Folder key={key} name={key} tree={value} />
         })}
-      </div>
+      </div>}
+      
     </div>
   )
 }

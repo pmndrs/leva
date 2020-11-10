@@ -1,0 +1,20 @@
+.input {
+  appearance: none;
+  width: 100%;
+  border: none;
+  padding: 2px 4px;
+  outline: none;
+} 
+
+.inputContainer {
+  border: 2px solid var(--twix-color-input-border);
+  border-radius: 4px;
+}
+
+.inputContainer:hover {
+  border-color: white;
+}
+
+.inputContainer:focus-within {
+  border-color: var(--twix-color-input-focus);
+}

@@ -4,7 +4,7 @@ import merge from 'merge-value'
 import { useVisiblePaths } from '../../store'
 import { getKeyPath, join } from '../../utils'
 import { Folder } from './../Folder/'
-import InputWrapper from './../InputWrapper'
+import { InputWrapper } from '../InputWrapper'
 
 import styles from './twix.module.css'
 

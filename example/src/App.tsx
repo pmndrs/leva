@@ -24,6 +24,18 @@ function Comp2() {
   )
 }
 
+function Comp3() {
+  const t = useTwix('Comp3', { comp3: "heya" })
+
+  return (
+    <div>
+      <h1>Comp3</h1>
+      {JSON.stringify(t)}
+    </div>
+
+  )
+}
+
 export default function App() {
   const [c2, setC2] = React.useState(false)
   const [c1, setC1] = React.useState(true)
@@ -33,6 +45,7 @@ export default function App() {
       <Comp1 />
       {c2 && <Comp2 />}
       {c1 && <Comp1 />}
+      <Comp3 />
       <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Comp2</button>
       <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Last Comp1</button>
     </div>

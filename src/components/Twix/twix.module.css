@@ -5,7 +5,7 @@
 
   --twix-color-background-dark: #1a1a1f;
 
-  --twix-color-background-header: #26262e;
+  --twix-color-background-header: #333;
   --twix-color-text-header: #bebec0;
 
   --twix-color-input-focus: royalblue;
@@ -16,11 +16,13 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace;
   font-size: 12px;
   color: var(--twix-color-text);
-  background-color: var(--twix-color-background);
 
   position: absolute;
   top: 10px;
   right: 10px;
+
+  width: 16rem;
+  border-radius: 5px;
 }
 
 .root input[type='number'],
@@ -30,5 +32,4 @@
   color: inherit;
   font-size: inherit;
   appearance: none;
-  border: 1px solid var(--twix-color-input-border);
 }

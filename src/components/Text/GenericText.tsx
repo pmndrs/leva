@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import styles from './text.module.css'
 
 type GenericTextProps<T extends number | string> = {
   value: T
@@ -20,12 +21,15 @@ export function GenericText<T extends number | string>({ value, onUpdate, ...pro
   const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && _onUpdate(e)
 
   return (
-    <input
-      {...props}
-      value={_value}
-      onChange={e => _setValue(e.target.value as T)}
-      onBlur={_onUpdate}
-      onKeyPress={onKeyPress}
-    />
+    <div className={styles.inputContainer}>
+      <input
+        {...props}
+        className={styles.input}
+        value={_value}
+        onChange={e => _setValue(e.target.value as T)}
+        onBlur={_onUpdate}
+        onKeyPress={onKeyPress}
+      />
+    </div>
   )
 }
