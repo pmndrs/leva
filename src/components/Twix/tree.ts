@@ -1,14 +1,11 @@
 // @ts-expect-error
 import merge from 'merge-value'
 import { getKeyPath, join } from '../../utils'
+import { Tree } from '../../types'
 
-type Leaf = {
-  [key: string]: JSX.Element | Leaf
-}
-
-type Tree = {
+type RootTree = {
   __root: {
-    [key: string]: Leaf
+    [key: string]: Tree
   }
 }
 
@@ -20,5 +17,5 @@ export const buildTree = (paths: string[]) => {
       [`_i-${key}`]: { path, key, valueKey: key },
     })
   })
-  return tree as Tree
+  return tree as RootTree
 }

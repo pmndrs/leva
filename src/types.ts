@@ -32,6 +32,10 @@ export type Data = {
   [key: string]: DataInput
 }
 
+export type Tree = {
+  [key: string]: JSX.Element | Tree
+}
+
 export enum InputTypes {
   SEPARATOR,
   BUTTON,
