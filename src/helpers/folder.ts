@@ -1,4 +1,4 @@
-import { prefix, join, FOLDER_SETTINGS_KEY } from '../utils'
+import { prefix, join, FolderSettingsKey } from '../utils'
 import { FolderSettings } from '../types'
 
 type UserFolderSettings = string | (FolderSettings & { name: string })
@@ -11,5 +11,5 @@ export function folder(nameOrSettings: UserFolderSettings, ...schemas) {
   return schemas
     .flat() // flattens schema
     .map(schema => prefix(schema, name)) // prefix all keys
-    .concat({ [join(name, FOLDER_SETTINGS_KEY)]: settings }) // concat special settings object
+    .concat({ [join(name, FolderSettingsKey)]: settings }) // concat special settings object
 }

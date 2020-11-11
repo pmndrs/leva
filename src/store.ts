@@ -1,6 +1,6 @@
 import create from 'zustand'
 import shallow from 'zustand/shallow'
-import { join, normalizeInput, pick, getKeyPath, FOLDER_SETTINGS_KEY } from './utils'
+import { join, normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
 import { Data, FolderSettings, Value, Folders } from './types'
 
 type State = { data: Data }
@@ -56,7 +56,7 @@ const getDataFromSchema = (rootPath?: string, schema) => {
     // @ts-expect-error
     Object.entries(item).forEach(([path, value]: [string, Value | FolderSettings]) => {
       const [key, base] = getKeyPath(path)
-      if (key === FOLDER_SETTINGS_KEY) FOLDERS[join(rootPath, base)] = value as FolderSettings
+      if (key === FolderSettingsKey) FOLDERS[join(rootPath, base)] = value as FolderSettings
       else {
         const fullPath = join(rootPath, path)
         const currentInput = data[fullPath]
