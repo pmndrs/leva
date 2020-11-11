@@ -1,25 +1,21 @@
 import React, { useState } from 'react'
-import { useFolderSettings } from '../../store'
+import { getFolderSettings } from '../../store'
+import { FolderSettings } from '../../types'
 import { InputWrapper } from '../InputWrapper'
 import style from './folder.module.css'
 
-type FolderProps = {
-  name?: string
-  path?: string
-  tree: any
-}
+type FolderProps = { name?: string; tree: any } & FolderSettings
 
 const isInput = (key: string) => key.indexOf('_i-') === 0
 
 // @ts-expect-error
 const createFolder = (key: string, { __path, ...tree }) => {
-  return <Folder key={key} path={__path} name={key} tree={tree} />
+  const settings = getFolderSettings(__path)
+  return <Folder key={key} name={key} tree={tree} {...settings} />
 }
 
-export function Folder({ name, path, tree }: FolderProps) {
-  const settings = useFolderSettings(path) || { collapsed: false }
-  const [toggle, setToggle] = useState(!!settings.collapsed)
-
+export function Folder({ name, tree, collapsed = false }: FolderProps) {
+  const [toggle, setToggle] = useState(collapsed)
   return (
     <div className={style.container}>
       {name && (

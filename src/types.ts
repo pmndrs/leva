@@ -4,9 +4,10 @@ export type NumberSettings = { min: number; max: number; step: number }
 export type StringSettings = never
 export type BooleanSettings = never
 
+export type Folders = Record<string, FolderSettings>
+
 // TODO Support folders settings
 export type FolderSettings = {
-  name: string
   collapsed?: boolean
 }
 

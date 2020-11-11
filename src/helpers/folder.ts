@@ -1,11 +1,11 @@
 import { prefix, join, FOLDER_SETTINGS_KEY } from '../utils'
 import { FolderSettings } from '../types'
 
-const getDefaultSettings = (settings: FolderSettings) => ({ collapsed: false, ...settings })
+type UserFolderSettings = string | (FolderSettings & { name: string })
 
 // @ts-expect-error
-export function folder(nameOrSettings: string | FolderSettings, ...schemas) {
-  const _settings = getDefaultSettings(typeof nameOrSettings === 'string' ? { name: nameOrSettings } : nameOrSettings)
+export function folder(nameOrSettings: UserFolderSettings, ...schemas) {
+  const _settings = typeof nameOrSettings === 'string' ? { name: nameOrSettings } : nameOrSettings
   const { name, ...settings } = _settings
 
   return schemas

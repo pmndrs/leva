@@ -1,17 +1,16 @@
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { join, normalizeInput, pick, getKeyPath, FOLDER_SETTINGS_KEY } from './utils'
-import { Data, FolderSettings, Value } from './types'
+import { Data, FolderSettings, Value, Folders } from './types'
 
-type Folders = Record<string, FolderSettings>
-type State = { data: Data; folders: Folders }
+type State = { data: Data }
 
-const _store = create<State>(() => ({ data: {}, folders: {} }))
+const _store = create<State>(() => ({ data: {} }))
 const useStore = _store
 
 const getData = () => _store.getState().data
 const setData = (data: Data) => _store.setState(s => ({ data: { ...s.data, ...data } }))
-const setFolders = (folders: Folders) => _store.setState(s => ({ folders: { ...s.folders, ...folders } }))
+
 const setValueAtPath = (path: string, value: Value) => {
   _store.setState(s => {
     const current = s.data[path]
@@ -33,7 +32,6 @@ const getValuesForPaths = (data: Data, paths: string[]) =>
   )
 
 export const useValuesForPath = (paths: string[]) => useStore(s => getValuesForPaths(s.data, paths), shallow)
-export const useFolderSettings = (path?: string) => useStore(s => (path ? s.folders[path] : null), shallow)
 
 export function useInput(path: string) {
   return useStore(s => {
@@ -44,18 +42,21 @@ export function useInput(path: string) {
   }, shallow)
 }
 
+const FOLDERS: Folders = {}
+
+export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
+
 // @ts-expect-error
 const getDataFromSchema = (rootPath?: string, schema) => {
   const paths: string[] = []
   const _data: Data = {}
-  const folders: Folders = {}
   const data = getData()
   // @ts-expect-error
   schema.flat().forEach(item => {
     // @ts-expect-error
     Object.entries(item).forEach(([path, value]: [string, Value | FolderSettings]) => {
       const [key, base] = getKeyPath(path)
-      if (key === FOLDER_SETTINGS_KEY) folders[join(rootPath, base)] = value as FolderSettings
+      if (key === FOLDER_SETTINGS_KEY) FOLDERS[join(rootPath, base)] = value as FolderSettings
       else {
         const fullPath = join(rootPath, path)
         const currentInput = data[fullPath]
@@ -68,7 +69,7 @@ const getDataFromSchema = (rootPath?: string, schema) => {
       }
     })
   })
-  return [_data, paths, folders] as [Data, string[], Folders]
+  return [_data, paths] as [Data, string[]]
 }
 
 const disposePaths = (paths: string[]) => {
@@ -84,7 +85,6 @@ const disposePaths = (paths: string[]) => {
 export const store = {
   getData,
   setData,
-  setFolders,
   setValueAtPath,
   getDataFromSchema,
   disposePaths,
