@@ -1,14 +1,20 @@
 import React from 'react'
 import { Number, String } from '../Text'
 import { Boolean } from '../Boolean'
+import { Button } from '../Button'
 import { store, useInput } from '../../store'
+
+import { SpecialInputTypes, ValueInputTypes } from '../../types'
 
 import styles from './inputWrapper.module.css'
 
 const Inputs = {
-  string: String,
-  number: Number,
-  boolean: Boolean,
+  [ValueInputTypes.STRING]: String,
+  [ValueInputTypes.NUMBER]: Number,
+  [ValueInputTypes.BOOLEAN]: Boolean,
+  [SpecialInputTypes.BUTTON]: Button,
+  [SpecialInputTypes.SEPARATOR]: String,
+  [SpecialInputTypes.MONITOR]: String,
 }
 
 type InputWrapperProps = {
@@ -16,8 +22,22 @@ type InputWrapperProps = {
   path: string
 }
 
+// TODO we can probably do better than this
 export function InputWrapper({ valueKey, path }: InputWrapperProps) {
-  const { value, settings, type } = useInput(path)
+  const { type, ...props } = useInput(path)
+
+  if (type in SpecialInputTypes) {
+    const SpecialInputForType = Inputs[type]
+    // @ts-expect-error
+    return <SpecialInputForType {...props} />
+  }
+
+  return <InputValueWrapper type={type} valueKey={valueKey} path={path} {...props} />
+}
+
+type InputValueWrapperProps = InputWrapperProps & { type: string }
+
+function InputValueWrapper({ valueKey, path, type, ...props }: InputValueWrapperProps) {
   const onUpdate = (value: string | number) => store.setValueAtPath(path, value)
 
   // @ts-expect-error
@@ -28,7 +48,7 @@ export function InputWrapper({ valueKey, path }: InputWrapperProps) {
       <div className={styles.key}>{valueKey}</div>
 
       <div className={styles.inputs}>
-        <InputForType id={valueKey} value={value} {...settings} onUpdate={onUpdate} />
+        <InputForType {...props} onUpdate={onUpdate} />
       </div>
     </div>
   )

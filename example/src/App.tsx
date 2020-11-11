@@ -10,7 +10,8 @@ function Comp1() {
       { a: false, b: 3 },
       folder(
         { name: 'sub2', collapsed: true },
-        // button('Click', () => console.log('hello')),
+        { c: 4 },
+        button('Click', () => console.log('hello')),
         folder('sub3', { d: 4 })
       )
     )
@@ -26,8 +27,9 @@ function Comp1() {
 function Comp2() {
   const t = useTwix(
     'sub.sub2',
-    { comp2: 'prop' }
-    // button('Click', () => console.log('hello'))
+    { c: 4 },
+    { comp2: 'prop' },
+    button('Click2', () => console.log('hello2'))
   )
   return (
     <div>

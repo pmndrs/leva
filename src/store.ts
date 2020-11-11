@@ -1,6 +1,6 @@
 import create from 'zustand'
 import shallow from 'zustand/shallow'
-import { join, normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
+import { normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
 import { Data, FolderSettings, Value, Folders } from './types'
 
 type State = { data: Data }
@@ -9,7 +9,19 @@ const _store = create<State>(() => ({ data: {} }))
 const useStore = _store
 
 const getData = () => _store.getState().data
-const setData = (data: Data) => _store.setState(s => ({ data: { ...s.data, ...data } }))
+
+// increments count for existing paths
+const setData = (data: Data) => {
+  _store.setState(s => {
+    const _data = s.data
+    const mergedData = Object.entries(data).reduce((acc, [key, value]) => {
+      const current = _data[key]
+      if (current) return { ...acc, [key]: { ...current, count: current.count! + 1 } }
+      return { ...acc, [key]: { ...value, count: 1 } }
+    }, {})
+    return { data: { ..._data, ...mergedData } }
+  })
+}
 
 const setValueAtPath = (path: string, value: Value) => {
   _store.setState(s => {
@@ -20,13 +32,16 @@ const setValueAtPath = (path: string, value: Value) => {
 
 const getVisiblePaths = (data: Data) =>
   Object.entries(data)
-    .map(([path, { count }]) => (count > 0 ? path : undefined))
+    .map(([path, { count }]) => (count! > 0 ? path : undefined))
     .filter(Boolean) as string[]
 
 export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shallow)
 
 const getValuesForPaths = (data: Data, paths: string[]) =>
   Object.entries(pick(data, paths) as Data).reduce(
+    // getValuesForPath is only called from paths that are inputs, so
+    // they always have a value
+    // @ts-expect-error
     (acc, [path, { value }]) => ({ ...acc, [getKeyPath(path)[0]!]: value }),
     {} as { [path: string]: Value }
   )
@@ -35,10 +50,8 @@ export const useValuesForPath = (paths: string[]) => useStore(s => getValuesForP
 
 export function useInput(path: string) {
   return useStore(s => {
-    const { value, type, settings } = s.data[path]
-    return { value, type, settings }
-    // TODO fix pick types
-    // return pick(s.data[path], ['value', 'settings', 'type'])
+    const { count, ...input } = s.data[path]
+    return input
   }, shallow)
 }
 
@@ -47,23 +60,17 @@ const FOLDERS: Folders = {}
 export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
 
 // @ts-expect-error
-const getDataFromSchema = (rootPath?: string, schema) => {
+const getDataFromSchema = schema => {
   const paths: string[] = []
-  const _data: Data = {}
-  const data = getData()
+  const _data: any = {}
   // @ts-expect-error
   schema.flat().forEach(item => {
     // @ts-expect-error
     Object.entries(item).forEach(([path, value]: [string, Value | FolderSettings]) => {
       const [key, base] = getKeyPath(path)
-      if (key === FolderSettingsKey) FOLDERS[join(rootPath, base)] = value as FolderSettings
+      if (key === FolderSettingsKey) FOLDERS[base!] = value as FolderSettings
       else {
-        const fullPath = join(rootPath, path)
-        const currentInput = data[fullPath]
-        if (currentInput) _data[fullPath] = { ...currentInput, count: currentInput.count + 1 }
-        // TODO not sure why tsdx throws an error here
-        // @ts-ignore
-        else _data[path] = { ...normalizeInput(value as Value), count: 1 }
+        _data[path] = normalizeInput(value as Value)
 
         paths.push(path)
       }
@@ -77,7 +84,7 @@ const disposePaths = (paths: string[]) => {
   const _data: Data = {}
   paths.forEach(path => {
     const { count, ...current } = data[path]
-    _data[path] = { ...current, count: count - 1 }
+    _data[path] = { ...current, count: count! - 1 }
   })
   setData(_data)
 }

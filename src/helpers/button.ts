@@ -1,6 +1,5 @@
-import { InputTypes } from './../types'
+import { SpecialInputTypes, ButtonInput } from './../types'
 
-export function button(name: string, fn: () => any) {
-  console.log('button', { name })
-  return { [name]: { __type: InputTypes.BUTTON, fn } }
+export function button(name: string, onClick: () => any): Record<string, ButtonInput> {
+  return { [name]: { type: SpecialInputTypes.BUTTON, name, onClick } }
 }

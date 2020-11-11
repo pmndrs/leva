@@ -7,7 +7,7 @@ import { folder } from './helpers/folder'
 export function useTwix(nameOrInput: string, ...args) {
   const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
   const schema = useRef(_name ? folder(_name, args) : [nameOrInput, ...args])
-  const [data, paths] = useMemo(() => store.getDataFromSchema(_name, schema.current), [_name])
+  const [data, paths] = useMemo(() => store.getDataFromSchema(schema.current), [])
 
   const values = useValuesForPath(paths)
 
