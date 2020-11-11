@@ -12,8 +12,13 @@
   margin-left: 4px;
 }
 
+.content {
+  overflow: hidden;
+  transition: all 350ms ease;
+}
+
 .title {
-  padding: .5rem;
+  padding: 0.5rem;
   background-color: var(--twix-color-background-header);
   display: flex;
   justify-content: space-between;
