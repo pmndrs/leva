@@ -2,6 +2,8 @@ export enum ValueInputTypes {
   STRING = 'STRING',
   NUMBER = 'NUMBER',
   BOOLEAN = 'BOOLEAN',
+  POINT2D = 'POINT2D',
+  POINT3D = 'POINT3D',
 }
 
 export enum SpecialInputTypes {
@@ -10,7 +12,10 @@ export enum SpecialInputTypes {
   MONITOR = 'MONITOR',
 }
 
-export type Value = number | string | boolean
+export type Point2d = { x: number; y: number } | [number, number]
+export type Point3d = { x: number; y: number; z: number } | [number, number, number]
+
+export type Value = number | string | boolean | Point2d | Point3d
 
 export type NumberSettings = { min: number; max: number; step: number }
 export type StringSettings = {}

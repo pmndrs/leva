@@ -61,7 +61,6 @@ export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[pa
 
 // @ts-expect-error
 const getDataFromSchema = schema => {
-  const paths: string[] = []
   const _data: any = {}
   // @ts-expect-error
   schema.flat().forEach(item => {
@@ -70,13 +69,12 @@ const getDataFromSchema = schema => {
       const [key, base] = getKeyPath(path)
       if (key === FolderSettingsKey) FOLDERS[base!] = value as FolderSettings
       else {
-        _data[path] = normalizeInput(value as Value)
-
-        paths.push(path)
+        const input = normalizeInput(value as Value, path)
+        if (input) _data[path] = input
       }
     })
   })
-  return [_data, paths] as [Data, string[]]
+  return _data as Data
 }
 
 const disposePaths = (paths: string[]) => {

@@ -7,12 +7,12 @@ function Comp1() {
     { color: '#fff', number: { value: 4, min: 3 } },
     folder(
       'sub',
-      { a: false, b: 3 },
+      { a: false, b: { x: 4, z: 3 } },
       folder(
         { name: 'sub2', collapsed: true },
         { c: 4 },
         button('Click', () => console.log('hello')),
-        folder('sub3', { d: 4 })
+        folder('sub3', { d: { x: 3, y: 4, z: 5 } })
       )
     )
   )

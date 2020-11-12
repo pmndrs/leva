@@ -43,6 +43,11 @@ function InputValueWrapper({ valueKey, path, type, ...props }: InputValueWrapper
   // @ts-expect-error
   const InputForType = Inputs[type]
 
+  if (!InputForType) {
+    console.log(`[TWIX]: you've passed a ${type} input at path "${path}" but we don't support it yet`)
+    return null
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.key}>{valueKey}</div>
