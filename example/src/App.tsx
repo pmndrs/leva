@@ -5,14 +5,15 @@ function Comp1() {
   const t = useTwix(
     { first: { value: 5, max: 10 } },
     { color: '#fff', number: { value: 4, min: 3 } },
+    { colorObj: { r: 1, g: 2, b: 3 } },
     folder(
-      'sub',
-      { a: false, b: { x: 4, z: 3 } },
+      'folder',
+      { boolean: false, spring: { tension: 4, friction: 30 } },
       folder(
-        { name: 'sub2', collapsed: true },
-        { c: 4 },
-        button('Click', () => console.log('hello')),
-        folder('sub3', { d: { x: 3, y: 4, z: 5 } })
+        { name: 'sub folder', collapsed: true },
+        { number: 4 },
+        button('Button 1', () => console.log('hello')),
+        folder('sub3', { pos: { x: 3, y: 4, z: 5 } })
       )
     )
   )
@@ -26,10 +27,10 @@ function Comp1() {
 
 function Comp2() {
   const t = useTwix(
-    'sub.sub2',
-    { c: 4 },
-    { comp2: 'prop' },
-    button('Click2', () => console.log('hello2'))
+    'folder.subfolder',
+    { number: 4 },
+    { string: 'some string' },
+    button('Button 2', () => console.log('hello2'))
   )
   return (
     <div>
@@ -40,7 +41,7 @@ function Comp2() {
 }
 
 function Comp3() {
-  const t = useTwix('Comp3', { comp3: 'heya' })
+  const t = useTwix('folder3', { comp3: 'heya' })
 
   return (
     <div>

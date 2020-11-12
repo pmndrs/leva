@@ -27,8 +27,8 @@ export function InputWrapper({ valueKey, path }: InputWrapperProps) {
   const { type, ...props } = useInput(path)
 
   if (type in SpecialInputTypes) {
-    const SpecialInputForType = Inputs[type]
     // @ts-expect-error
+    const SpecialInputForType = Inputs[type]
     return <SpecialInputForType {...props} />
   }
 

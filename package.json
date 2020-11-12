@@ -33,6 +33,7 @@
     "react-dom": ">= 16.8.0"
   },
   "dependencies": {
+    "color-parser": "^0.1.0",
     "merge-value": "^1.0.0",
     "react": "^17.0.1",
     "v8n": "^1.3.3",
