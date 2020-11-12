@@ -44,7 +44,7 @@ function InputValueWrapper({ valueKey, path, type, ...props }: InputValueWrapper
   const InputForType = Inputs[type]
 
   if (!InputForType) {
-    console.log(`[TWIX]: you've passed a ${type} input at path "${path}" but we don't support it yet`)
+    console.log(`**TWIX** you've passed a ${type} input at path "${path}" but we don't support it yet`)
     return null
   }
 

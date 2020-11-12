@@ -39,10 +39,11 @@ const checkers = [
   checkFn(spring, 'SPRING'),
 ]
 
-export function getValueType(value: any) {
+export function getValueType(value: any, path: string) {
   for (let checker of checkers) {
     const type = checker(value)
     if (type) return type
   }
+  console.warn(`**TWIX** input at path "${path}" is not supported`, value)
   return undefined
 }

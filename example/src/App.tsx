@@ -41,7 +41,7 @@ function Comp2() {
 }
 
 function Comp3() {
-  const t = useTwix('folder3', { comp3: 'heya' })
+  const t = useTwix('folder3', { comp3: { s: 'heya' } })
 
   return (
     <div>
