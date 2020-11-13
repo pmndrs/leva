@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Number, String } from '../Text'
 import { Boolean } from '../Boolean'
 import { Button } from '../Button'
+import { ColorPicker } from '../ColorPicker'
+
 import { store, useInput } from '../../store'
 
-import { SpecialInputTypes, ValueInputTypes } from '../../types'
+import { SpecialInputTypes, Value, ValueInputTypes } from '../../types'
 
 import styles from './inputWrapper.module.css'
+import { log, TwixErrors } from '../../utils/log'
 
 const Inputs = {
   [ValueInputTypes.STRING]: String,
   [ValueInputTypes.NUMBER]: Number,
   [ValueInputTypes.BOOLEAN]: Boolean,
+  [ValueInputTypes.COLOR]: ColorPicker,
   [SpecialInputTypes.BUTTON]: Button,
-  [SpecialInputTypes.SEPARATOR]: String,
-  [SpecialInputTypes.MONITOR]: String,
 }
 
 type InputWrapperProps = {
@@ -38,13 +40,12 @@ export function InputWrapper({ valueKey, path }: InputWrapperProps) {
 type InputValueWrapperProps = InputWrapperProps & { type: string }
 
 function InputValueWrapper({ valueKey, path, type, ...props }: InputValueWrapperProps) {
-  const onUpdate = (value: string | number) => store.setValueAtPath(path, value)
-
+  const onUpdate = useCallback((value: Value) => store.setValueAtPath(path, value), [path])
   // @ts-expect-error
   const InputForType = Inputs[type]
 
   if (!InputForType) {
-    console.log(`**TWIX** you've passed a ${type} input at path "${path}" but we don't support it yet`)
+    log(TwixErrors.UNSUPPORTED_INPUT, type, path)
     return null
   }
 

@@ -1,3 +1,4 @@
+import { warn, TwixErrors } from './utils/log'
 // @ts-expect-error
 import v8n from 'v8n'
 // @ts-ignore
@@ -44,6 +45,6 @@ export function getValueType(value: any, path: string) {
     const type = checker(value)
     if (type) return type
   }
-  console.warn(`**TWIX** input at path "${path}" is not supported`, value)
+  warn(TwixErrors.UNKNOWN_INPUT, path, value)
   return undefined
 }

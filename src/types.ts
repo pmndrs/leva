@@ -5,6 +5,7 @@ export enum ValueInputTypes {
   POINT2D = 'POINT2D',
   POINT3D = 'POINT3D',
   SPRING = 'SPRING',
+  COLOR = 'COLOR',
 }
 
 export enum SpecialInputTypes {
@@ -18,7 +19,7 @@ export type Point3d = { x: number; y: number; z: number } | [number, number, num
 export type Spring = { tension: number; friction: number; mass?: number }
 export type Color = { r: number; g: number; b: number; a?: number }
 
-export type Value = number | string | boolean | Point2d | Point3d
+export type Value = number | string | boolean | Point2d | Point3d | Spring | Color
 
 export type NumberSettings = { min: number; max: number; step: number }
 export type StringSettings = {}
