@@ -1,3 +1,4 @@
+import { warn, TwixErrors } from './utils/log'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
@@ -42,7 +43,14 @@ const getValuesForPaths = (data: Data, paths: string[]) =>
     // getValuesForPath is only called from paths that are inputs, so
     // they always have a value
     // @ts-expect-error
-    (acc, [path, { value }]) => ({ ...acc, [getKeyPath(path)[0]!]: value }),
+    (acc, [path, { value }]) => {
+      const key = getKeyPath(path)[0]
+      if (acc[key] !== undefined) {
+        warn(TwixErrors.DUPLICATE_KEYS, key, path)
+        return acc
+      }
+      return { ...acc, [key]: value }
+    },
     {} as { [path: string]: Value }
   )
 
