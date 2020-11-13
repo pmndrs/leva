@@ -24,6 +24,7 @@ export type Value = number | string | boolean | Point2d | Point3d | Spring | Col
 export type NumberSettings = { min: number; max: number; step: number }
 export type StringSettings = {}
 export type BooleanSettings = {}
+export type ColorSettings = {}
 
 export type Folders = Record<string, FolderSettings>
 
@@ -38,6 +39,8 @@ export type Settings<T extends Value = Value> = T extends number
   ? StringSettings
   : T extends boolean
   ? BooleanSettings
+  : T extends Color
+  ? ColorSettings
   : never
 
 export type ValueInput<T extends Value = Value> = Value | ({ value: T } & Settings<T>)

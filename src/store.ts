@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { warn, TwixErrors } from './utils/log'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
@@ -38,7 +39,7 @@ const getVisiblePaths = (data: Data) =>
 
 export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shallow)
 
-const getValuesForPaths = (data: Data, paths: string[]) =>
+const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) =>
   Object.entries(pick(data, paths) as Data).reduce(
     // getValuesForPath is only called from paths that are inputs, so
     // they always have a value
@@ -46,7 +47,7 @@ const getValuesForPaths = (data: Data, paths: string[]) =>
     (acc, [path, { value }]) => {
       const key = getKeyPath(path)[0]
       if (acc[key] !== undefined) {
-        warn(TwixErrors.DUPLICATE_KEYS, key, path)
+        if (shouldWarn) warn(TwixErrors.DUPLICATE_KEYS, key, path)
         return acc
       }
       return { ...acc, [key]: value }
@@ -54,7 +55,12 @@ const getValuesForPaths = (data: Data, paths: string[]) =>
     {} as { [path: string]: Value }
   )
 
-export const useValuesForPath = (paths: string[]) => useStore(s => getValuesForPaths(s.data, paths), shallow)
+export const useValuesForPath = (paths: string[]) => {
+  const warned = useRef(false)
+  const valuesForPath = useStore(s => getValuesForPaths(s.data, paths, !warned.current), shallow)
+  warned.current = true
+  return valuesForPath
+}
 
 export function useInput(path: string) {
   return useStore(s => {

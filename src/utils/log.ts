@@ -6,11 +6,11 @@ export enum TwixErrors {
 
 const ErrorList = {
   [TwixErrors.UNSUPPORTED_INPUT]: (type: string, path: string) => [
-    `you've passed a ${type} input at path "${path}" but we don't support it yet`,
+    `you've passed a ${type} input at path "${path}" but we don't support it yet.`,
   ],
-  [TwixErrors.UNKNOWN_INPUT]: (path: string, value: unknown) => [`input at path "${path}" is not recognized`, value],
+  [TwixErrors.UNKNOWN_INPUT]: (path: string, value: unknown) => [`input at path "${path}" is not recognized.`, value],
   [TwixErrors.DUPLICATE_KEYS]: (key: string, path: string) => [
-    `Key ${key} already exists at path "${path}" in your hook. Even nested keys need to be unique'`,
+    `Key ${key} already exists at path "${path}" in your hook. Even nested keys need to be unique.`,
   ],
 }
 

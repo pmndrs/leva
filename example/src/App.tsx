@@ -5,12 +5,12 @@ function Comp1() {
   const t = useTwix(
     { first: { value: 5, max: 10 } },
     { color: '#fff', number: { value: 4, min: 3 } },
-    { colorObj: { r: 1, g: 2, b: 3 } },
+    // { colorObj: { r: 1, g: 2, b: 3 } },
     folder(
       'folder',
       { boolean: false, spring: { tension: 4, friction: 30 } },
       folder(
-        { name: 'sub folder', collapsed: true },
+        { name: 'sub folder', collapsed: false },
         { number: 4 },
         button('Button 1', () => console.log('hello')),
         folder('sub3', { pos: { x: 3, y: 4, z: 5 } })
@@ -27,7 +27,7 @@ function Comp1() {
 
 function Comp2() {
   const t = useTwix(
-    'folder.subfolder',
+    'folder.sub folder',
     { number: 4 },
     { string: 'some string' },
     button('Button 2', () => console.log('hello2'))

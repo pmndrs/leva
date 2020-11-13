@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Number, String } from '../Text'
 import { Boolean } from '../Boolean'
 import { Button } from '../Button'
-import { ColorPicker } from '../ColorPicker'
+import { Color } from '../Color'
 
 import { store, useInput } from '../../store'
 
@@ -15,7 +15,7 @@ const Inputs = {
   [ValueInputTypes.STRING]: String,
   [ValueInputTypes.NUMBER]: Number,
   [ValueInputTypes.BOOLEAN]: Boolean,
-  [ValueInputTypes.COLOR]: ColorPicker,
+  [ValueInputTypes.COLOR]: Color,
   [SpecialInputTypes.BUTTON]: Button,
 }
 
