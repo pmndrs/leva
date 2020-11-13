@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react'
 import { ColorChangeHandler, SketchPicker } from 'react-color'
-import { PresetColor } from 'react-color/lib/components/sketch/Sketch'
 import { ColorSettings } from '../../types'
+import { Overlay } from '../Misc'
 
-const emptyArray: PresetColor[] = []
+const emptyArray: any = []
 
 type ColorProps = {
   value: string
@@ -19,6 +19,7 @@ export function Color({ value, onUpdate }: ColorProps) {
       <div onClick={() => setShowPicker(true)} style={{ height: 20, width: 20, background: value }} />
       {showPicker && (
         <div style={{ position: 'absolute', left: -50, zIndex: 100 }}>
+          <Overlay onClick={() => setShowPicker(false)} />
           <SketchPicker presetColors={emptyArray} color={value} onChange={_onUpdate} />
         </div>
       )}
