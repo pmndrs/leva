@@ -11748,6 +11748,11 @@ react-textarea-autosize@^8.1.1:
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
 
+react-use-gesture@^8.1.0-alpha.11:
+  version "8.1.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-8.1.0-alpha.11.tgz#51b7bdaa6f021917e3f426db4c622e3a6ad47543"
+  integrity sha512-8aA7gUKLpcU2o23skVzqUF2IrIzkKHCRHlbWKPHzydDAu++WCOCj1EswmHr12fg6Hib82vgAeIj4FDD1fsyCFQ==
+
 react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"

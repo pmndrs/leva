@@ -39,3 +39,7 @@
   font-size: inherit;
   appearance: none;
 }
+
+.root input[type='number']:not(:focus) {
+  cursor: ew-resize;
+}
