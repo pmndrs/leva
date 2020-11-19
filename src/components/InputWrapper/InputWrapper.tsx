@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
-import { Number, String } from '../Text'
+import { Number } from '../Number'
+import { String } from '../String'
 import { Boolean } from '../Boolean'
 import { Button } from '../Button'
 import { Color } from '../Color'

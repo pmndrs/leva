@@ -1,19 +1,14 @@
 import React, { useState, useRef } from 'react'
 import { useDrag } from 'react-use-gesture'
-import styles from './text.module.css'
+import styles from './input.module.css'
 
-type GenericTextProps<T extends number | string> = {
+type ValueInputProps<T extends number | string> = {
   value: T
   dragEnabled: boolean
   onUpdate: (value: T) => void
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export function GenericText<T extends number | string>({
-  value,
-  onUpdate,
-  dragEnabled,
-  ...props
-}: GenericTextProps<T>) {
+export function ValueInput<T extends number | string>({ value, onUpdate, dragEnabled, ...props }: ValueInputProps<T>) {
   const [_value, _setValue] = useState(value)
   const lastCorrectValue = useRef(value)
   const ref = useRef<HTMLInputElement>(null)

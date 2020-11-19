@@ -21,7 +21,7 @@ export type Color = { r: number; g: number; b: number; a?: number }
 
 export type Value = number | string | boolean | Point2d | Point3d | Spring | Color
 
-export type NumberSettings = { min: number; max: number; step: number }
+export type NumberSettings = { min?: number; max?: number; step?: number }
 export type StringSettings = {}
 export type BooleanSettings = {}
 export type ColorSettings = {}
@@ -71,3 +71,5 @@ export type Data = {
 export type Tree = {
   [key: string]: JSX.Element | Tree
 }
+
+export type V8N = { test: (o: any) => boolean }

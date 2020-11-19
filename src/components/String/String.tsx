@@ -1,6 +1,6 @@
 import React from 'react'
+import { ValueInput } from '../ValueInput'
 import { StringSettings } from '../../types'
-import { GenericText } from './GenericText'
 
 type StringProps = {
   value: string
@@ -8,5 +8,5 @@ type StringProps = {
 } & StringSettings
 
 export function String({ value, onUpdate }: StringProps) {
-  return <GenericText type="text" value={value} onUpdate={onUpdate} />
+  return <ValueInput type="text" value={value} onUpdate={onUpdate} />
 }

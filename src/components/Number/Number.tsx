@@ -1,5 +1,5 @@
 import React from 'react'
-import { GenericText } from './GenericText'
+import { ValueInput } from '../ValueInput'
 import { NumberSettings } from '../../types'
 
 type NumberProps = {
@@ -8,5 +8,5 @@ type NumberProps = {
 } & NumberSettings
 
 export function Number({ value, onUpdate, ...settings }: NumberProps) {
-  return <GenericText type="number" value={value} {...settings} dragEnabled onUpdate={onUpdate} />
+  return <ValueInput type="number" value={value} {...settings} dragEnabled onUpdate={onUpdate} />
 }

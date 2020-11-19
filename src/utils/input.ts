@@ -1,6 +1,6 @@
 import { ButtonInput } from './../types'
 import { ValueInput } from '../types'
-import { getValueType } from '../schemas'
+import { getValueType } from './schemas'
 
 // returns a value in the form of { value, settings}
 export function normalizeInput(input: ValueInput | ButtonInput, path: string) {
