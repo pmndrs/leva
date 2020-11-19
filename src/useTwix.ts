@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store, useValuesForPath } from './store'
+import { store, getDataFromSchema, useValuesForPath } from './store'
 import { folder } from './helpers/folder'
 
 // TODO fix name type
@@ -7,14 +7,14 @@ import { folder } from './helpers/folder'
 export function useTwix(nameOrInput: string, ...args) {
   const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
   const schema = useRef(_name ? folder(_name, args) : [nameOrInput, ...args])
-  const data = useMemo(() => store.getDataFromSchema(schema.current), [])
-  const paths = useMemo(() => Object.keys(data), [data])
-  const values = useValuesForPath(paths)
+  const initialData = useMemo(() => getDataFromSchema(schema.current), [])
+  const paths = useMemo(() => Object.keys(initialData), [initialData])
+  const values = useValuesForPath(paths, initialData)
 
   useEffect(() => {
-    store.setData(data)
+    store.setData(initialData)
     return () => store.disposePaths(paths)
-  }, [paths, data])
+  }, [paths, initialData])
 
   return values
 }

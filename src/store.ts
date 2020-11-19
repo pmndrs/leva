@@ -39,8 +39,8 @@ const getVisiblePaths = (data: Data) =>
 
 export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shallow)
 
-const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) =>
-  Object.entries(pick(data, paths) as Data).reduce(
+const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) => {
+  return Object.entries(pick(data, paths) as Data).reduce(
     // getValuesForPath is only called from paths that are inputs, so
     // they always have a value
     // @ts-expect-error
@@ -54,11 +54,17 @@ const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) =>
     },
     {} as { [path: string]: Value }
   )
+}
 
-export const useValuesForPath = (paths: string[]) => {
-  const warned = useRef(false)
-  const valuesForPath = useStore(s => getValuesForPaths(s.data, paths, !warned.current), shallow)
-  warned.current = true
+export const useValuesForPath = (paths: string[], initialData: Data) => {
+  const init = useRef(true)
+
+  const valuesForPath = useStore(s => {
+    const data = init.current ? initialData : s.data
+    return getValuesForPaths(data, paths, init.current)
+  }, shallow)
+
+  init.current = false
   return valuesForPath
 }
 
@@ -74,7 +80,7 @@ const FOLDERS: Folders = {}
 export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
 
 // @ts-expect-error
-const getDataFromSchema = schema => {
+export const getDataFromSchema = schema => {
   const _data: any = {}
   // @ts-expect-error
   schema.flat().forEach(item => {
@@ -105,7 +111,6 @@ export const store = {
   getData,
   setData,
   setValueAtPath,
-  getDataFromSchema,
   disposePaths,
 }
 
