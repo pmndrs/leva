@@ -1,6 +1,6 @@
 import { ButtonInput } from './../types'
 import { ValueInput } from '../types'
-import { getValueType } from './schemas'
+import { getValueType, normalizeSettings } from './schemas'
 
 // returns a value in the form of { value, settings}
 export function normalizeInput(input: ValueInput | ButtonInput, path: string) {
@@ -8,13 +8,13 @@ export function normalizeInput(input: ValueInput | ButtonInput, path: string) {
     // only special inputs should have the type attribute
     if ('type' in input) return input
     if ('value' in input) {
-      const { value, ...settings } = input
+      const { value } = input
       const type = getValueType(value, path)
       if (!type) return null
-      return { value, settings, type }
+      return { type, value, settings: normalizeSettings(type, input) }
     }
   }
   const type = getValueType(input, path)
   if (!type) return null
-  return { value: input, type }
+  return { type, value: input, settings: normalizeSettings(type, { value: input }) }
 }

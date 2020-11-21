@@ -21,7 +21,17 @@ export type Color = { r: number; g: number; b: number; a?: number }
 
 export type Value = number | string | boolean | Point2d | Point3d | Spring | Color
 
-export type NumberSettings = { min?: number; max?: number; step?: number }
+export type MapTypesEnum = {
+  [ValueInputTypes.STRING]: string
+  [ValueInputTypes.NUMBER]: number
+  [ValueInputTypes.BOOLEAN]: boolean
+  [ValueInputTypes.POINT2D]: Point2d
+  [ValueInputTypes.POINT3D]: Point3d
+  [ValueInputTypes.SPRING]: Spring
+  [ValueInputTypes.COLOR]: Color
+}
+
+export type NumberSettings = { min?: number; max?: number; step?: number; pad?: number }
 export type StringSettings = {}
 export type BooleanSettings = {}
 export type ColorSettings = {}
@@ -43,7 +53,8 @@ export type Settings<T extends Value = Value> = T extends number
   ? ColorSettings
   : never
 
-export type ValueInput<T extends Value = Value> = Value | ({ value: T } & Settings<T>)
+export type CompleteValueInput<T extends Value = Value> = { value: T } & Settings<T>
+export type ValueInput<T extends Value = Value> = Value | CompleteValueInput<T>
 
 export type DataInput<T extends Value = Value> = {
   type: ValueInputTypes

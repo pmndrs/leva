@@ -1,1 +1,1 @@
-export * from './spring-format'
+export * from './spring-props'

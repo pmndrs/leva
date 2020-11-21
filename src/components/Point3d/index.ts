@@ -1,1 +1,1 @@
-export * from './point3d-format'
+export * from './point3d-props'

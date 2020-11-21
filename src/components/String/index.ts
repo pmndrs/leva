@@ -1,2 +1,2 @@
 export * from './String'
-export * from './string-format'
+export * from './string-props'

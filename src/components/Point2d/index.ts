@@ -1,1 +1,1 @@
-export * from './point2d-format'
+export * from './point2d-props'

@@ -1,2 +1,2 @@
 export * from './Color'
-export * from './color-format'
+export * from './color-props'

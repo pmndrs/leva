@@ -1,2 +1,2 @@
 export * from './Boolean'
-export * from './boolean-format'
+export * from './boolean-props'

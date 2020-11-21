@@ -1,55 +1,25 @@
-import React, { useState, useRef } from 'react'
-import { useDrag } from 'react-use-gesture'
+import React from 'react'
 import styles from './input.module.css'
 
-type ValueInputProps<T extends number | string> = {
-  value: T
-  dragEnabled: boolean
-  onUpdate: (value: T) => void
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type ValueInputProps = {
+  label: string
+  value: string
+  onUpdate: (value: string) => void
+  onChange: (value: string) => void
+}
 
-export function ValueInput<T extends number | string>({ value, onUpdate, dragEnabled, ...props }: ValueInputProps<T>) {
-  const [_value, _setValue] = useState(value)
-  const lastCorrectValue = useRef(value)
-  const ref = useRef<HTMLInputElement>(null)
-  const hasFocus = () => ref.current === document.activeElement
-
-  const bind = useDrag(
-    ({ event, movement: [x], memo = ~~value }) => {
-      if (event.type === 'pointerdown' && !hasFocus()) event.preventDefault()
-      else if (event.type === 'pointerup' && !hasFocus() && !x) ref.current!.focus()
-      else if (hasFocus()) return
-      else {
-        const newValue = (memo + x / 10) as T
-        lastCorrectValue.current = newValue
-        _setValue(newValue)
-        onUpdate(newValue)
-        return memo
-      }
-    },
-    { enabled: dragEnabled, threshold: 10, triggerAllEvents: true, axis: 'x' }
-  )
-
-  const _onUpdate = (e: React.SyntheticEvent) => {
-    // @ts-expect-error
-    const eventValue: T = e.target.value
-    if (eventValue !== '') {
-      onUpdate(eventValue)
-      lastCorrectValue.current = eventValue
-    } else _setValue(lastCorrectValue.current)
-  }
-  const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && _onUpdate(e)
+export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputProps) {
+  const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && onUpdate((e.target as any).value)
 
   return (
     <div className={styles.inputContainer}>
       <input
-        ref={ref}
-        {...bind()}
+        type="text"
         {...props}
         className={styles.input}
-        value={_value}
-        onChange={e => _setValue(e.target.value as T)}
-        onBlur={_onUpdate}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        onBlur={e => onUpdate(e.target.value)}
         onKeyPress={onKeyPress}
       />
     </div>

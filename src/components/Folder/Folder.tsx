@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { getFolderSettings } from '../../store'
 import { join } from '../../utils'
-import { InputWrapper } from '../InputWrapper'
+import { TwixWrapper } from '../TwixWrapper'
 import { FolderSettings, Tree } from '../../types'
 
 import styles from './folder.module.css'
@@ -29,7 +29,7 @@ export function Folder({ name, parent, tree, collapsed = false }: FolderProps) {
       <div className={styles.content} style={{ maxHeight: toggle ? 0 : '100vh' }}>
         {Object.entries(tree).map(([key, value]) => {
           // @ts-expect-error
-          return isInput(key) ? <InputWrapper {...value} /> : createFolder(key, parent, value as Tree)
+          return isInput(key) ? <TwixWrapper {...value} /> : createFolder(key, parent, value as Tree)
         })}
       </div>
     </div>

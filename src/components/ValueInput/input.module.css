@@ -3,8 +3,7 @@
   border: none;
   padding: 2px 4px;
   outline: none;
-  
-} 
+}
 
 .inputContainer {
   border: 2px solid var(--twix-color-input-border);
@@ -23,7 +22,7 @@
 
 .label {
   position: absolute;
-  right: .5rem;
+  right: 0.5rem;
   top: 0;
   bottom: 0;
   display: flex;
