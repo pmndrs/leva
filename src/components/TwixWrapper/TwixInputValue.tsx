@@ -2,14 +2,14 @@ import React, { useCallback } from 'react'
 import { useTwixUpdate } from '../../hooks/useTwixUpdate'
 import { store } from '../../store'
 
-import { Settings, Value, ValueInputTypes, TwixInputProps } from '../../types'
+import { Settings, Value, TwixInputProps } from '../../types'
 import styles from './twixInput.module.css'
 
 type TwixValueInputProps = {
   as: React.ComponentType<TwixInputProps>
   valueKey: string
   path: string
-  type: ValueInputTypes
+  type: string
   value: Value
   settings: Settings
 }

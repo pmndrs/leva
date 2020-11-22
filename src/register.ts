@@ -1,28 +1,9 @@
 import { warn, TwixErrors } from './utils/log'
+import { Plugin, ValueInputWithSettings } from './types'
 
-import { ValueInputTypes, Settings, ValueInputWithSettings, MapTypesEnum } from './types'
+const schemas: ((v: any) => false | string)[] = []
 
-type ValueInputFromType<T extends ValueInputTypes> = ValueInputWithSettings<MapTypesEnum[T]>
-type SettingsFromType<T extends ValueInputTypes> = Settings<MapTypesEnum[T]>
-type NormalizerFn<T extends ValueInputTypes> = (i: ValueInputFromType<T>) => SettingsFromType<T>
-
-type SettingsNormalizers = { [key in ValueInputTypes]?: NormalizerFn<key> }
-
-type Sanitizers = {
-  [key in ValueInputTypes]?: (value: string, settings?: SettingsFromType<key>) => ValueInputFromType<key>['value']
-}
-
-type Formatters = {
-  [key in ValueInputTypes]?: (value: ValueInputFromType<key>['value'], settings?: SettingsFromType<key>) => string
-}
-
-type Validators = {
-  [key in ValueInputTypes]?: (value: any, settings?: SettingsFromType<key>) => boolean
-}
-
-export const Plugins = {}
-
-const schemas = []
+export const Plugins: Record<string, Omit<Plugin, 'schema'>> = {}
 
 export function getValueType(value: any, path: string) {
   for (let checker of schemas) {
@@ -33,16 +14,16 @@ export function getValueType(value: any, path: string) {
   return undefined
 }
 
-export function register({ schema, ...plugin }, type) {
+export function register({ schema, ...plugin }: Plugin, type: string) {
   if (type in Plugins) {
     warn(TwixErrors.ALREADY_REGISTERED_TYPE, type)
     return
   }
-  schemas.push(schema)
+  schemas.push((value: any) => schema(value) && type)
   Plugins[type] = plugin
 }
 
-export function normalizeSettings(type, input) {
+export function normalizeSettings(type: string, input: ValueInputWithSettings) {
   const { settings } = Plugins[type]
   if (settings) return settings(input)
   const { value, ...s } = input

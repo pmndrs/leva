@@ -1,13 +1,3 @@
-export enum ValueInputTypes {
-  STRING = 'STRING',
-  NUMBER = 'NUMBER',
-  BOOLEAN = 'BOOLEAN',
-  POINT2D = 'POINT2D',
-  POINT3D = 'POINT3D',
-  SPRING = 'SPRING',
-  COLOR = 'COLOR',
-}
-
 export enum SpecialInputTypes {
   SEPARATOR = 'SEPARATOR',
   BUTTON = 'BUTTON',
@@ -20,16 +10,6 @@ export type Spring = { tension: number; friction: number; mass?: number }
 export type Color = { r: number; g: number; b: number; a?: number }
 
 export type Value = number | string | boolean | Point2d | Point3d | Spring | Color
-
-export type MapTypesEnum = {
-  [ValueInputTypes.STRING]: string
-  [ValueInputTypes.NUMBER]: number
-  [ValueInputTypes.BOOLEAN]: boolean
-  [ValueInputTypes.POINT2D]: Point2d
-  [ValueInputTypes.POINT3D]: Point3d
-  [ValueInputTypes.SPRING]: Spring
-  [ValueInputTypes.COLOR]: Color
-}
 
 export type NumberSettings = { min?: number; max?: number; step?: number; pad?: number }
 export type StringSettings = {}
@@ -56,7 +36,7 @@ export type ValueInputWithSettings<T extends Value = Value> = { value: T } & Set
 export type ValueInput<T extends Value = Value> = Value | ValueInputWithSettings<T>
 
 export type DataInput<T extends Value = Value> = {
-  type: ValueInputTypes
+  type: string
   value: T
   settings?: Settings<T>
   count?: number
@@ -91,3 +71,12 @@ export type TwixInputProps<T extends Value = Value> = {
   onChange: (value: any) => void
   onUpdate: (value: any) => void
 } & Settings<T>
+
+export type Plugin = {
+  schema: (value: any) => boolean
+  component: React.ComponentType<TwixInputProps>
+  formatter?: (value: any, settings?: Settings) => any
+  validator?: (value: any, settings?: Settings) => boolean
+  sanitizer?: (value: any, settings?: Settings) => Value
+  settings?: (input: ValueInputWithSettings) => Settings
+}

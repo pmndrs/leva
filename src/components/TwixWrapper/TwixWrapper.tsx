@@ -26,7 +26,7 @@ export function TwixWrapper({ valueKey, path }: TwixWrapperProps) {
     log(TwixErrors.UNSUPPORTED_INPUT, type, path)
     return null
   }
-  // @ts-expect-error
+
   const Input = Plugins[type].component
 
   // @ts-expect-error

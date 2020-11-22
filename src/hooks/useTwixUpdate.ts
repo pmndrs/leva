@@ -1,30 +1,27 @@
 import { useState, useCallback, useRef } from 'react'
 import { Plugins } from '../register'
-import { Settings, Value, ValueInputTypes } from '../types'
+import { Settings, Value } from '../types'
 
-function sanitize(type: ValueInputTypes, value: any, settings: Settings): Value {
-  // @ts-ignore don't understand why this triggers an error
+function sanitize(type: string, value: any, settings: Settings): Value {
   const { sanitizer } = Plugins[type]
   if (sanitizer) return sanitizer(value, settings)
   return value
 }
 
-function format(type: ValueInputTypes, value: Value, settings: Settings): string {
-  // @ts-ignore don't understand why this triggers an error
+function format(type: string, value: Value, settings: Settings): string {
   const { formatter } = Plugins[type]
   if (formatter) return formatter(value, settings)
   return value as string
 }
 
-function validate(type: ValueInputTypes, value: any, settings: Settings) {
-  // @ts-ignore don't understand why this triggers an error
+function validate(type: string, value: any, settings: Settings) {
   const { validator } = Plugins[type]
   if (validator) return validator(value, settings)
   return true
 }
 
 type Props = {
-  type: ValueInputTypes
+  type: string
   value: Value
   settings: Settings
   set: (v: Value) => void

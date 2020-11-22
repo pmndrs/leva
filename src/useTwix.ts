@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getDataFromSchema, useValuesForPath } from './store'
 import { folder } from './helpers/folder'
-import { ValueInput, ValueInputTypes } from './types'
+import { ValueInput } from './types'
 import { register } from './register'
 
 import number from './components/Number'
@@ -12,13 +12,13 @@ import point3d from './components/Point3d'
 import point2d from './components/Point2d'
 import spring from './components/Spring'
 
-register(number, ValueInputTypes.NUMBER)
-register(color, ValueInputTypes.COLOR)
-register(string, ValueInputTypes.STRING)
-register(boolean, ValueInputTypes.BOOLEAN)
-register(point3d, ValueInputTypes.POINT3D)
-register(point2d, ValueInputTypes.POINT2D)
-register(spring, ValueInputTypes.SPRING)
+register(number, 'NUMBER')
+register(color, 'COLOR')
+register(string, 'STRING')
+register(boolean, 'BOOLEAN')
+register(point3d, 'POINT3D')
+register(point2d, 'POINT2D')
+register(spring, 'SPRING')
 
 // TODO fix name type
 // @ts-expect-error

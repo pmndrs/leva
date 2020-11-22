@@ -1,13 +1,13 @@
 import { NumberSettings } from '../../types'
 // @ts-expect-error
 import v8n from 'v8n'
-import { ValueInputWithSettings, ValueInputTypes } from '../../types'
+import { ValueInputWithSettings } from '../../types'
 import { getStep, clamp } from '../../utils'
 
 export const schema = (o: any) =>
   v8n()
     .number()
-    .test(o) && ValueInputTypes.NUMBER
+    .test(o)
 
 export const validator = (v: any) => !isNaN(v)
 
