@@ -38,7 +38,6 @@ export type ColorSettings = {}
 
 export type Folders = Record<string, FolderSettings>
 
-// TODO Support folders settings
 export type FolderSettings = {
   collapsed?: boolean
 }
@@ -53,8 +52,8 @@ export type Settings<T extends Value = Value> = T extends number
   ? ColorSettings
   : never
 
-export type CompleteValueInput<T extends Value = Value> = { value: T } & Settings<T>
-export type ValueInput<T extends Value = Value> = Value | CompleteValueInput<T>
+export type ValueInputWithSettings<T extends Value = Value> = { value: T } & Settings<T>
+export type ValueInput<T extends Value = Value> = Value | ValueInputWithSettings<T>
 
 export type DataInput<T extends Value = Value> = {
   type: ValueInputTypes
@@ -84,3 +83,11 @@ export type Tree = {
 }
 
 export type V8N = { test: (o: any) => boolean }
+
+export type TwixInputProps<T extends Value = Value> = {
+  label: string
+  formattedValue: string
+  value: T
+  onChange: (value: any) => void
+  onUpdate: (value: any) => void
+} & Settings<T>

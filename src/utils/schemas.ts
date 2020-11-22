@@ -7,7 +7,7 @@ import * as point3d from '../components/Point3d'
 import * as point2d from '../components/Point2d'
 import * as spring from '../components/Spring'
 
-import { ValueInputTypes, Settings, CompleteValueInput, MapTypesEnum } from '../types'
+import { ValueInputTypes, Settings, ValueInputWithSettings, MapTypesEnum } from '../types'
 
 const checkers = [
   number.schema,
@@ -28,7 +28,7 @@ export function getValueType(value: any, path: string) {
   return undefined
 }
 
-type ValueInputFromType<T extends ValueInputTypes> = CompleteValueInput<MapTypesEnum[T]>
+type ValueInputFromType<T extends ValueInputTypes> = ValueInputWithSettings<MapTypesEnum[T]>
 type SettingsFromType<T extends ValueInputTypes> = Settings<MapTypesEnum[T]>
 type NormalizerFn<T extends ValueInputTypes> = (i: ValueInputFromType<T>) => SettingsFromType<T>
 

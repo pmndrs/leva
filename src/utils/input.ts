@@ -1,4 +1,4 @@
-import { ButtonInput } from './../types'
+import { ButtonInput } from '../types'
 import { ValueInput } from '../types'
 import { getValueType, normalizeSettings } from './schemas'
 

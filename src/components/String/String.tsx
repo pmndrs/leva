@@ -1,16 +1,8 @@
 import React from 'react'
 import { ValueInput } from '../ValueInput'
-import { StringSettings } from '../../types'
+import { TwixInputProps } from '../../types'
 
-type StringProps = {
-  label: string
-  formattedValue: string
-  value: string
-  onChange: (value: string) => void
-  onUpdate: (value: string) => void
-} & StringSettings
-
-export function String({ label, formattedValue, onUpdate, onChange }: StringProps) {
+export function String({ label, formattedValue, onUpdate, onChange }: TwixInputProps<string>) {
   return (
     <>
       <label>{label}</label>

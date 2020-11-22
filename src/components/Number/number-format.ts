@@ -1,7 +1,7 @@
-import { NumberSettings } from './../../types'
+import { NumberSettings } from '../../types'
 // @ts-expect-error
 import v8n from 'v8n'
-import { CompleteValueInput, ValueInputTypes } from '../../types'
+import { ValueInputWithSettings, ValueInputTypes } from '../../types'
 import { getStepAndPad } from '../../utils'
 
 export const schema = (o: any) =>
@@ -15,7 +15,7 @@ export const validator = (v: any, { min = -Infinity, max = Infinity }: NumberSet
 export const formatter = (v: number, { pad = 0 }: NumberSettings) => v.toFixed(pad)
 export const sanitizer = (v: string) => Number(v)
 
-export const settings = ({ value, ...s }: CompleteValueInput<number>) => {
+export const settings = ({ value, ...s }: ValueInputWithSettings<number>) => {
   const [step, pad] = getStepAndPad(value)
   return { step, pad, min: -Infinity, max: -Infinity, ...s }
 }

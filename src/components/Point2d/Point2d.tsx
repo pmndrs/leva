@@ -1,9 +1,17 @@
 import React from 'react'
 import { useDrag } from 'react-use-gesture'
 import { ValueInput } from '../ValueInput'
-import { TwixInputProps } from '../../types'
+import { NumberSettings } from '../../types'
 
-export function Number({ label, formattedValue, value, onUpdate, onChange, step }: TwixInputProps<number>) {
+type NumberProps = {
+  label: string
+  formattedValue: string
+  value: number
+  onChange: (value: string) => void
+  onUpdate: (value: string) => void
+} & NumberSettings
+
+export function Point2d({ label, formattedValue, value, onUpdate, onChange, step }: NumberProps) {
   const bind = useDrag(
     ({ movement: [x], memo = value }) => {
       onUpdate(memo + Math.round(x) * step!)

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useInput } from '../../store'
-import { TwixInput } from './TwixInput'
+import { TwixValueInput } from './TwixInputValue'
 import allInputs from './allInputs'
+import { log, TwixErrors } from '../../utils/log'
 
 import { SpecialInputTypes } from '../../types'
 
@@ -16,6 +17,14 @@ export function TwixWrapper({ valueKey, path }: TwixWrapperProps) {
     const SpecialInputForType = allInputs[type]
     return <SpecialInputForType {...props} />
   }
+
   // @ts-expect-error
-  return <TwixInput type={type} valueKey={valueKey} path={path} {...props} />
+  const Input = allInputs[type]
+
+  if (!Input) {
+    log(TwixErrors.UNSUPPORTED_INPUT, type, path)
+    return null
+  }
+  // @ts-expect-error
+  return <TwixValueInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
 }

@@ -1,10 +1,11 @@
 import React from 'react'
+import { TwixInputProps } from '../../types'
 
-type BooleanProps = {
-  value: boolean
-  onUpdate: (value: boolean) => void
-}
-
-export function Boolean({ value, onUpdate }: BooleanProps) {
-  return <input type="checkbox" checked={value} onChange={e => onUpdate(e.target.checked)} />
+export function Boolean({ label, value, onUpdate }: TwixInputProps<boolean>) {
+  return (
+    <>
+      <label>{label}</label>
+      <input type="checkbox" checked={value} onChange={e => onUpdate(e.target.checked)} />
+    </>
+  )
 }
