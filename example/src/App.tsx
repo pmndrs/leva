@@ -13,7 +13,7 @@ function Comp1() {
         { name: 'sub folder', collapsed: false },
         { number: 5 },
         button('Button 1', () => console.log('hello')),
-        folder('sub3', { pos: { x: 3, y: 4, z: 5 } })
+        folder('sub3', { pos: { x: 3, y: 4 } })
       )
     )
   )

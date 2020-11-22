@@ -1,7 +1,24 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getDataFromSchema, useValuesForPath } from './store'
 import { folder } from './helpers/folder'
-import { ValueInput } from './types'
+import { ValueInput, ValueInputTypes } from './types'
+import { register } from './register'
+
+import number from './components/Number'
+import color from './components/Color'
+import string from './components/String'
+import boolean from './components/Boolean'
+import point3d from './components/Point3d'
+import point2d from './components/Point2d'
+import spring from './components/Spring'
+
+register(number, ValueInputTypes.NUMBER)
+register(color, ValueInputTypes.COLOR)
+register(string, ValueInputTypes.STRING)
+register(boolean, ValueInputTypes.BOOLEAN)
+register(point3d, ValueInputTypes.POINT3D)
+register(point2d, ValueInputTypes.POINT2D)
+register(spring, ValueInputTypes.SPRING)
 
 // TODO fix name type
 // @ts-expect-error

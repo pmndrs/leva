@@ -2,6 +2,7 @@ import React from 'react'
 
 export * from './useTwix'
 export * from './helpers/'
+export { register } from './register'
 export { Twix } from './components/Twix/'
 
 if (process.env.NODE_ENV === 'development') {

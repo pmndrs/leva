@@ -1,12 +1,16 @@
 import React from 'react'
 import { useInput } from '../../store'
 import { TwixValueInput } from './TwixInputValue'
-import allInputs from './allInputs'
 import { log, TwixErrors } from '../../utils/log'
-
 import { SpecialInputTypes } from '../../types'
+import { Plugins } from '../../register'
+import { Button } from '../Button'
 
 type TwixWrapperProps = { valueKey: string; path: string }
+
+const specialComponents = {
+  [SpecialInputTypes.BUTTON]: Button,
+}
 
 // TODO we can probably do better than this
 export function TwixWrapper({ valueKey, path }: TwixWrapperProps) {
@@ -14,17 +18,17 @@ export function TwixWrapper({ valueKey, path }: TwixWrapperProps) {
 
   if (type in SpecialInputTypes) {
     // @ts-expect-error
-    const SpecialInputForType = allInputs[type]
+    const SpecialInputForType = specialComponents[type]
     return <SpecialInputForType {...props} />
   }
 
-  // @ts-expect-error
-  const Input = allInputs[type]
-
-  if (!Input) {
+  if (!(type in Plugins)) {
     log(TwixErrors.UNSUPPORTED_INPUT, type, path)
     return null
   }
+  // @ts-expect-error
+  const Input = Plugins[type].component
+
   // @ts-expect-error
   return <TwixValueInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
 }
