@@ -3,7 +3,7 @@ import { Plugin, ValueInputWithSettings } from './types'
 
 const schemas: ((v: any) => false | string)[] = []
 
-export const Plugins: Record<string, Omit<Plugin, 'schema'>> = {}
+export const Plugins: Record<string, Omit<Plugin<any, any>, 'schema'>> = {}
 
 export function getValueType(value: any, path: string) {
   for (let checker of schemas) {
@@ -14,7 +14,7 @@ export function getValueType(value: any, path: string) {
   return undefined
 }
 
-export function register({ schema, ...plugin }: Plugin, type: string) {
+export function register<V, Settings extends object>({ schema, ...plugin }: Plugin<V, Settings>, type: string) {
   if (type in Plugins) {
     warn(TwixErrors.ALREADY_REGISTERED_TYPE, type)
     return
@@ -23,7 +23,10 @@ export function register({ schema, ...plugin }: Plugin, type: string) {
   Plugins[type] = plugin
 }
 
-export function normalizeSettings(type: string, input: ValueInputWithSettings) {
+export function normalizeSettings<V, Settings extends object>(
+  type: string,
+  input: ValueInputWithSettings<V, Settings>
+) {
   const { settings } = Plugins[type]
   if (settings) return settings(input)
   const { value, ...s } = input

@@ -1,33 +1,32 @@
 import { useState, useCallback, useRef } from 'react'
 import { Plugins } from '../register'
-import { Settings, Value } from '../types'
 
-function sanitize(type: string, value: any, settings: Settings): Value {
+function sanitize<V, Settings extends object>(type: string, value: any, settings: Settings): V {
   const { sanitizer } = Plugins[type]
   if (sanitizer) return sanitizer(value, settings)
   return value
 }
 
-function format(type: string, value: Value, settings: Settings): string {
+function format<Settings extends object>(type: string, value: unknown, settings: Settings): string {
   const { formatter } = Plugins[type]
   if (formatter) return formatter(value, settings)
   return value as string
 }
 
-function validate(type: string, value: any, settings: Settings) {
+function validate<Settings extends object>(type: string, value: any, settings: Settings) {
   const { validator } = Plugins[type]
   if (validator) return validator(value, settings)
   return true
 }
 
-type Props = {
+type Props<V, Settings> = {
   type: string
-  value: Value
+  value: V
   settings: Settings
-  set: (v: Value) => void
+  set: (v: V) => void
 }
 
-export function useTwixUpdate({ value, type, settings, set }: Props) {
+export function useTwixUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
   // the last correct registered value
   const lastCorrectValue = useRef(value)
 

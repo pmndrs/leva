@@ -11,3 +11,5 @@ export const schema = (o: any) =>
       mass: v8n().optional(number),
     })
     .test(o)
+
+export type Spring = { tension: number; friction: number; mass?: number }

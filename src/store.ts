@@ -3,7 +3,7 @@ import { warn, TwixErrors } from './utils/log'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
-import { Data, FolderSettings, Value, Folders } from './types'
+import { Data, FolderSettings, Folders } from './types'
 
 type State = { data: Data }
 
@@ -25,7 +25,7 @@ const setData = (data: Data) => {
   })
 }
 
-const setValueAtPath = (path: string, value: Value) => {
+const setValueAtPath = (path: string, value: any) => {
   _store.setState(s => {
     const current = s.data[path]
     return { data: { ...s.data, [path]: { ...current, value } } }
@@ -52,7 +52,7 @@ const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) => 
       }
       return { ...acc, [key]: value }
     },
-    {} as { [path: string]: Value }
+    {} as { [path: string]: any }
   )
 }
 
@@ -82,14 +82,13 @@ export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[pa
 // @ts-expect-error
 export const getDataFromSchema = schema => {
   const _data: any = {}
-  // @ts-expect-error
+  // @ts-expect-errorÒ
   schema.flat().forEach(item => {
-    // @ts-expect-error
-    Object.entries(item).forEach(([path, value]: [string, Value | FolderSettings]) => {
+    Object.entries(item).forEach(([path, value]: [string, any | FolderSettings]) => {
       const [key, base] = getKeyPath(path)
       if (key === FolderSettingsKey) FOLDERS[base!] = value as FolderSettings
       else {
-        const input = normalizeInput(value as Value, path)
+        const input = normalizeInput(value, path)
         if (input) _data[path] = input
       }
     })

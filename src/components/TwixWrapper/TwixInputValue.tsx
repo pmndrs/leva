@@ -2,19 +2,26 @@ import React, { useCallback } from 'react'
 import { useTwixUpdate } from '../../hooks/useTwixUpdate'
 import { store } from '../../store'
 
-import { Settings, Value, TwixInputProps } from '../../types'
+import { TwixInputProps } from '../../types'
 import styles from './twixInput.module.css'
 
-type TwixValueInputProps = {
-  as: React.ComponentType<TwixInputProps>
+type TwixValueInputProps<V, Settings extends object> = {
+  as: React.ComponentType<TwixInputProps<V, Settings>>
   valueKey: string
   path: string
   type: string
-  value: Value
+  value: V
   settings: Settings
 }
 
-export function TwixValueInput({ as: Input, valueKey, path, type, value, settings }: TwixValueInputProps) {
+export function TwixValueInput<V, Settings extends object>({
+  as: Input,
+  valueKey,
+  path,
+  type,
+  value,
+  settings,
+}: TwixValueInputProps<V, Settings>) {
   const set = useCallback(value => store.setValueAtPath(path, value), [path])
 
   const [formattedValue, onChange, onUpdate] = useTwixUpdate({ type, value, settings, set })

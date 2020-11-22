@@ -10,3 +10,5 @@ export const schema = (o: any) =>
   v8n()
     .passesAnyOf(point2dObj, point2dArray)
     .test(o)
+
+export type Point2d = { x: number; y: number } | [number, number]

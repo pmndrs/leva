@@ -1,9 +1,11 @@
-import { ButtonInput } from '../types'
-import { ValueInput } from '../types'
 import { getValueType, normalizeSettings } from '../register'
+import { ValueInput, SpecialInputs } from '../types'
 
 // returns a value in the form of { value, settings}
-export function normalizeInput(input: ValueInput | ButtonInput, path: string) {
+export function normalizeInput<V, Settings extends object>(
+  input: ValueInput<V, Settings> | SpecialInputs,
+  path: string
+) {
   if (typeof input === 'object') {
     // only special inputs should have the type attribute
     if ('type' in input) return input

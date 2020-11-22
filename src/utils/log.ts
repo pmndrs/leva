@@ -24,7 +24,7 @@ function _log<T extends TwixErrors>(fn: 'log' | 'warn', errorType: T, ...args: P
   console[fn]('TWIX: ' + message, ...rest)
 }
 
-// @ts-ignore
+// @ts-expect-error
 export const warn = _log.bind(null, 'warn')
-// @ts-ignore
+// @ts-expect-error
 export const log = _log.bind(null, 'log')

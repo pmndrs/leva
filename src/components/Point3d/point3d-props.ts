@@ -10,3 +10,5 @@ export const schema = (o: any) =>
   v8n()
     .passesAnyOf(point3dObj, point3dArray)
     .test(o)
+
+export type Point3d = { x: number; y: number; z: number } | [number, number, number]

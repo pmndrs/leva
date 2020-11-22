@@ -13,3 +13,5 @@ export const schema = (o: any) =>
   v8n()
     .passesAnyOf(colorString, colorObj)
     .test(o)
+
+export type Color = string | { r: number; g: number; b: number; a?: number }
