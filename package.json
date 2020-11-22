@@ -35,6 +35,7 @@
   "dependencies": {
     "@welldone-software/why-did-you-render": "^6.0.0-rc.1",
     "color-parser": "^0.1.0",
+    "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
     "react": "^17.0.1",
     "react-color": "^3.0.0-beta.3",

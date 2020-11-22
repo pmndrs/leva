@@ -24,7 +24,7 @@ export function TwixValueInput<V, Settings extends object>({
 }: TwixValueInputProps<V, Settings>) {
   const set = useCallback(value => store.setValueAtPath(path, value), [path])
 
-  const [formattedValue, onChange, onUpdate] = useTwixUpdate({ type, value, settings, set })
+  const { formattedValue, onChange, onUpdate, settings: s } = useTwixUpdate({ type, value, settings, set })
 
   return (
     <div className={styles.container}>
@@ -34,7 +34,7 @@ export function TwixValueInput<V, Settings extends object>({
         value={value}
         onChange={onChange}
         onUpdate={onUpdate}
-        {...settings}
+        settings={s}
       />
     </div>
   )

@@ -1,5 +1,5 @@
 import { warn, TwixErrors } from './utils/log'
-import { Plugin, ValueInputWithSettings } from './types'
+import { Plugin } from './types'
 
 const schemas: ((v: any) => false | string)[] = []
 
@@ -21,14 +21,4 @@ export function register<V, Settings extends object>({ schema, ...plugin }: Plug
   }
   schemas.push((value: any) => schema(value) && type)
   Plugins[type] = plugin
-}
-
-export function normalizeSettings<V, Settings extends object>(
-  type: string,
-  input: ValueInputWithSettings<V, Settings>
-) {
-  const { settings } = Plugins[type]
-  if (settings) return settings(input)
-  const { value, ...s } = input
-  return s
 }

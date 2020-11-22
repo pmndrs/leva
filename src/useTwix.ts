@@ -21,8 +21,7 @@ register(point2d, 'POINT2D')
 register(spring, 'SPRING')
 
 // TODO fix name type
-// @ts-expect-error
-export function useTwix(nameOrInput: string | ValueInput, ...args) {
+export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {
   const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
   const schema = useRef(_name ? folder(_name, args) : [nameOrInput, ...args])
   const initialData = useMemo(() => getDataFromSchema(schema.current), [])

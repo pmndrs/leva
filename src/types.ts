@@ -51,7 +51,8 @@ export type TwixInputProps<V, Settings extends object = {}> = {
   value: V
   onChange: (value: any) => void
   onUpdate: (value: any) => void
-} & Settings
+  settings?: Settings
+}
 
 export type Plugin<V, Settings extends object = {}> = {
   schema: (value: any) => boolean
@@ -59,5 +60,5 @@ export type Plugin<V, Settings extends object = {}> = {
   formatter?: (value: any, settings?: Settings) => any
   validator?: (value: any, settings?: Settings) => boolean
   sanitizer?: (value: any, settings?: Settings) => V
-  settings?: (input: ValueInputWithSettings<V, Settings>) => any
+  normalizeSettings?: (value: V, settings: Settings) => Settings
 }

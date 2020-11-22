@@ -6,10 +6,12 @@ import { NumberSettings } from './number-props'
 
 type NumberProps = TwixInputProps<number, NumberSettings>
 
-export function Number({ label, formattedValue, value, onUpdate, onChange, step }: NumberProps) {
+const defaultSettings = { step: 1 }
+
+export function Number({ label, formattedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
   const bind = useDrag(
     ({ movement: [x], memo = value }) => {
-      onUpdate(memo + Math.round(x) * step!)
+      onUpdate(memo + Math.round(x) * settings.step!)
       return memo
     },
     { threshold: 10, axis: 'x' }

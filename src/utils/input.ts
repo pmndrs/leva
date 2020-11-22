@@ -1,4 +1,4 @@
-import { getValueType, normalizeSettings } from '../register'
+import { getValueType } from '../register'
 import { ValueInput, SpecialInputs } from '../types'
 
 // returns a value in the form of { value, settings}
@@ -10,13 +10,13 @@ export function normalizeInput<V, Settings extends object>(
     // only special inputs should have the type attribute
     if ('type' in input) return input
     if ('value' in input) {
-      const { value } = input
+      const { value, ...settings } = input
       const type = getValueType(value, path)
       if (!type) return null
-      return { type, value, settings: normalizeSettings(type, input) }
+      return { type, value, settings }
     }
   }
   const type = getValueType(input, path)
   if (!type) return null
-  return { type, value: input, settings: normalizeSettings(type, { value: input }) }
+  return { type, value: input }
 }
