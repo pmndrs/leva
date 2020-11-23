@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './input.module.css'
 
 type ValueInputProps = {
   label: string
@@ -17,11 +16,10 @@ export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputPr
   const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && update(onUpdate)(e)
 
   return (
-    <div className={styles.inputContainer}>
+    <div>
       <input
         type="text"
         {...props}
-        className={styles.input}
         value={value}
         onChange={update(onChange)}
         onBlur={update(onUpdate)}
