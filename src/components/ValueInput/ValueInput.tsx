@@ -9,7 +9,12 @@ type ValueInputProps = {
 }
 
 export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputProps) {
-  const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && onUpdate((e.target as any).value)
+  const update = (fn: (value: string) => void) => (event: any) => {
+    const _value = event.target.value
+    fn(_value)
+  }
+
+  const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && update(onUpdate)(e)
 
   return (
     <div className={styles.inputContainer}>
@@ -18,8 +23,8 @@ export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputPr
         {...props}
         className={styles.input}
         value={value}
-        onChange={e => onChange(e.target.value)}
-        onBlur={e => onUpdate(e.target.value)}
+        onChange={update(onChange)}
+        onBlur={update(onUpdate)}
         onKeyPress={onKeyPress}
       />
     </div>

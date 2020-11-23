@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from 'react'
 import { Plugins } from '../register'
 import { useDeepMemo } from './useDeepMemo'
+import { dequal } from 'dequal'
 
 function sanitize<V, Settings extends object>(type: string, value: any, settings?: Settings): V {
   const { sanitizer } = Plugins[type]
@@ -47,6 +48,9 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
 
   const onUpdate = useCallback(
     value => {
+      // if new value is equivalent to previous value do nothing
+      if (dequal(value, lastCorrectValue.current)) return
+
       if (value !== '' && validate(type, value, _settings)) {
         value = sanitize(type, value, _settings)
         setFormat(value)

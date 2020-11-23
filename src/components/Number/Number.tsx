@@ -25,3 +25,7 @@ export function Number({ label, formattedValue, value, onUpdate, onChange, setti
     </>
   )
 }
+
+// Number.whyDidYouRender = {
+//   logAllValues: true,
+// }
