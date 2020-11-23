@@ -13,7 +13,7 @@ export function Point2d({ label, value, onUpdate, onChange, settings = { x: {}, 
   const setY = useCallback((y: number) => onUpdate({ ...value, y }), [onUpdate, value])
 
   const numberX = useTwixUpdate({ type: 'NUMBER', value: x, set: setX, settings: sx })
-  const numberY = useTwixUpdate({ type: 'NUMBER', value: x, set: setY, settings: sy })
+  const numberY = useTwixUpdate({ type: 'NUMBER', value: y, set: setY, settings: sy })
 
   return (
     <>
