@@ -3,32 +3,64 @@ import styled, { ThemeProvider } from '@xstyled/styled-components'
 import { useVisiblePaths } from '../../store'
 import { Folder } from './../Folder/'
 import { buildTree } from './tree'
-import { theme } from '../styles'
+import { TwixTheme } from '../styles'
 
 const Root = styled.div`
-  font-family: ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace;
-  font-size: 14px;
-  color: text;
-  display: flex;
+  /* position */
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 16rem;
-  border-radius: 5px;
-  background-color: background-dark;
+
+  /* global styling */
+  font-family: mono;
+  font-size: root;
+  width: root;
+  overflow: hidden;
+  background-color: root-bg;
+  border-radius: root;
+  box-shadow: soft;
+  border-style: solid;
+  border-width: root;
+  border-color: root-border;
 
   input[type='number'],
   input[type='text'] {
-    background: transparent;
-    font-family: inherit;
-    color: inherit;
-    font-size: inherit;
+    /* input reset */
+    background-color: transparent;
     appearance: none;
+    font-family: inherit;
+    font-size: inherit;
+
+    /* input styling */
+    color: input-text;
+    padding: input;
     border: none;
+    outline: none;
+    border-radius: input;
+    border-style: solid;
+    border-width: input;
+    border-color: input-border;
+    transition: border-color 250ms ease;
+    &:hover {
+      border-color: input-hover-border;
+    }
+    &:focus {
+      border-color: input-focus-border;
+    }
+  }
+
+  &,
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+  }
+  *::selection {
+    background-color: main-400;
   }
 `
 
-export function Twix() {
+export function Twix({ theme = TwixTheme }) {
   const paths = useVisiblePaths()
   const tree = useMemo(() => buildTree(paths), [paths])
 
@@ -36,7 +68,7 @@ export function Twix() {
   return (
     <ThemeProvider theme={theme}>
       <Root>
-        <Folder tree={tree.__root} />
+        <Folder root tree={tree.__root} />
       </Root>
     </ThemeProvider>
   )

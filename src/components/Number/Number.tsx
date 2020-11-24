@@ -3,6 +3,7 @@ import { useDrag } from 'react-use-gesture'
 import { ValueInput } from '../ValueInput'
 import { TwixInputProps } from '../../types'
 import { NumberSettings } from './number-props'
+import { Label, Row } from '../styles'
 
 type NumberProps = TwixInputProps<number, NumberSettings>
 
@@ -17,12 +18,12 @@ export function Number({ label, formattedValue, value, onUpdate, onChange, setti
     { threshold: 10, axis: 'x' }
   )
   return (
-    <>
-      <label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
+    <Row grid>
+      <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
         {label}
-      </label>
+      </Label>
       <ValueInput label={label} value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
-    </>
+    </Row>
   )
 }
 

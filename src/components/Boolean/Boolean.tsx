@@ -1,11 +1,12 @@
 import React from 'react'
 import { TwixInputProps } from '../../types'
+import { Label, Row } from '../styles'
 
 export function Boolean({ label, value, onUpdate }: TwixInputProps<boolean>) {
   return (
-    <>
-      <label>{label}</label>
+    <Row grid>
+      <Label>{label}</Label>
       <input type="checkbox" checked={value} onChange={e => onUpdate(e.target.checked)} />
-    </>
+    </Row>
   )
 }
