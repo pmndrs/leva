@@ -1,13 +1,14 @@
 import React from 'react'
+import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
-  label: string
   value: string
+  children?: React.ReactNode
   onUpdate: (value: string) => void
   onChange: (value: string) => void
 }
 
-export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputProps) {
+export function ValueInput({ children, value, onUpdate, onChange, ...props }: ValueInputProps) {
   const update = (fn: (value: string) => void) => (event: any) => {
     const _value = event.target.value
     fn(_value)
@@ -16,8 +17,9 @@ export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputPr
   const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && update(onUpdate)(e)
 
   return (
-    <div>
-      <input
+    <InputContainer>
+      {children && <InnerLabel>{children}</InnerLabel>}
+      <StyledInput
         type="text"
         {...props}
         value={value}
@@ -25,6 +27,6 @@ export function ValueInput({ value, onUpdate, onChange, ...props }: ValueInputPr
         onBlur={update(onUpdate)}
         onKeyPress={onKeyPress}
       />
-    </div>
+    </InputContainer>
   )
 }

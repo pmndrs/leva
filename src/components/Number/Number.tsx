@@ -1,32 +1,38 @@
 import React from 'react'
-import { useDrag } from 'react-use-gesture'
 import { ValueInput } from '../ValueInput'
 import { TwixInputProps } from '../../types'
 import { NumberSettings } from './number-props'
 import { Label, Row } from '../styles'
+import { useDragNumber } from '../../hooks'
 
 type NumberProps = TwixInputProps<number, NumberSettings>
 
 const defaultSettings = { step: 1 }
 
 export function Number({ label, formattedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
-  const bind = useDrag(
-    ({ movement: [x], memo = value }) => {
-      onUpdate(memo + Math.round(x) * settings.step!)
-      return memo
-    },
-    { threshold: 10, axis: 'x' }
-  )
+  const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
     <Row grid>
       <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
         {label}
       </Label>
-      <ValueInput label={label} value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
+      <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }
 
-// Number.whyDidYouRender = {
-//   logAllValues: true,
-// }
+export function NumberInner({
+  label,
+  formattedValue,
+  value,
+  onUpdate,
+  onChange,
+  settings = defaultSettings,
+}: NumberProps) {
+  const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
+  return (
+    <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange}>
+      <div {...bind()}>{label}</div>
+    </ValueInput>
+  )
+}

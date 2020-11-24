@@ -3,5 +3,5 @@ import { Number } from './Number'
 
 const plugin = { ...props, component: Number }
 
-export { Number }
+export * from './Number'
 export default plugin

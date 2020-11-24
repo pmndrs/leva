@@ -7,7 +7,7 @@ export function String({ label, formattedValue, onUpdate, onChange }: TwixInputP
   return (
     <Row grid>
       <Label>{label}</Label>
-      <ValueInput label={label} value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
+      <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }

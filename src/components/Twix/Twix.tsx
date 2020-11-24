@@ -23,32 +23,6 @@ const Root = styled.div`
   border-width: root;
   border-color: root-border;
 
-  input[type='number'],
-  input[type='text'] {
-    /* input reset */
-    background-color: transparent;
-    appearance: none;
-    font-family: inherit;
-    font-size: inherit;
-
-    /* input styling */
-    color: input-text;
-    padding: input;
-    border: none;
-    outline: none;
-    border-radius: input;
-    border-style: solid;
-    border-width: input;
-    border-color: input-border;
-    transition: border-color 250ms ease;
-    &:hover {
-      border-color: input-hover-border;
-    }
-    &:focus {
-      border-color: input-focus-border;
-    }
-  }
-
   &,
   *,
   *:after,
