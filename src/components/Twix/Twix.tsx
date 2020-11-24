@@ -56,7 +56,7 @@ const Root = styled.div`
     box-sizing: border-box;
   }
   *::selection {
-    background-color: main-400;
+    background-color: selection;
   }
 `
 
