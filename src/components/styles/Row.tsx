@@ -6,7 +6,7 @@ export const Row = styled.div<{ grid?: boolean }>`
     props.grid &&
     css`
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: auto 160px;
       align-items: center;
       grid-column-gap: row-gap;
     `}
