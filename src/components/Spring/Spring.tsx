@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import styled, { useTheme } from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
+import { useDrag } from 'react-use-gesture'
 import { a, useSpring } from 'react-spring'
 import { PointCoordinates } from '../PointCoordinates'
 import { Row, Label } from '../styles'
-import { Canvas } from './StyledSpring'
+import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
 import { TwixInputProps } from '../../types'
 import { Spring as SpringType, SpringSettings } from './spring-props'
@@ -17,6 +18,8 @@ const Container = styled.div`
   grid-column-gap: col-gap;
 `
 
+const SpringPreviewAnimated = a(SpringPreview)
+
 export function Spring({ label, value, onUpdate, settings }: SpringProps) {
   const theme = useTheme()
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -24,17 +27,29 @@ export function Spring({ label, value, onUpdate, settings }: SpringProps) {
 
   const { tension, friction, mass } = value
 
-  useEffect(() => {
-    function handleCanvas() {
-      canvas.current!.width = canvas.current!.offsetWidth
-      canvas.current!.height = canvas.current!.offsetHeight
-    }
-    window.addEventListener('resize', handleCanvas)
-    handleCanvas()
-    return () => window.removeEventListener('resize', handleCanvas)
-  }, [])
+  const [spring, set] = useSpring(() => ({
+    scaleX: 0.5,
+    opacity: 0.2,
+    immediate: k => k === 'opacity',
+  }))
 
-  useEffect(() => {
+  const bind = useDrag(
+    ({ movement: [x, y], axis, last, memo = [tension, friction] }) => {
+      if (axis === 'x') onUpdate({ ...value, tension: memo[0] - x * 2 })
+      else if (axis === 'y') onUpdate({ ...value, friction: memo[1] - y / 5 })
+      if (last) {
+        set({
+          from: { scaleX: 0, opacity: 0.7 },
+          to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
+          config: { friction, tension, mass },
+        })
+      }
+      return memo
+    },
+    { lockDirection: true }
+  )
+
+  const drawSpring = useCallback(() => {
     if (!ctx.current) ctx.current = canvas.current!.getContext('2d')
     const _ctx = ctx.current!
     const { width, height } = canvas.current!
@@ -46,12 +61,28 @@ export function Spring({ label, value, onUpdate, settings }: SpringProps) {
     }
     _ctx.strokeStyle = th.color('folder-border')({ theme })
     _ctx.stroke()
-  }, [friction, tension, mass])
+  }, [tension, friction, mass, theme])
+
+  useEffect(() => {
+    drawSpring()
+  }, [drawSpring])
+
+  useEffect(() => {
+    function handleCanvas() {
+      canvas.current!.width = canvas.current!.offsetWidth
+      canvas.current!.height = canvas.current!.offsetHeight
+      drawSpring()
+    }
+    window.addEventListener('resize', handleCanvas)
+    handleCanvas()
+    return () => window.removeEventListener('resize', handleCanvas)
+  }, [drawSpring])
 
   return (
     <>
       <Row>
-        <Canvas ref={canvas} />
+        <Canvas {...bind()} ref={canvas} />
+        <SpringPreviewAnimated style={spring} />
       </Row>
       <Row grid>
         <Label>{label}</Label>

@@ -8,7 +8,7 @@ function Comp1() {
     { colorObj: { r: 1, g: 2, b: 3 } },
     folder(
       'folder',
-      { boolean: false, spring: { tension: 120, friction: 30 } },
+      { boolean: false, spring: { tension: 100, friction: 30 } },
       folder(
         { name: 'sub folder', collapsed: false },
         { number: 5 },

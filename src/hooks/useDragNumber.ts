@@ -12,6 +12,6 @@ export function useDragNumber({ value, step = 1, onDrag }: UseDragNumberProps) {
       onDrag(memo + Math.round(x) * step!)
       return memo
     },
-    { threshold: 10, axis: 'x' }
+    { axis: 'x' }
   )
 }

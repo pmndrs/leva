@@ -2,6 +2,7 @@ import styled, { css } from '@xstyled/styled-components'
 
 export const Row = styled.div<{ grid?: boolean }>`
   padding: row-v row-h;
+  position: relative;
   ${props =>
     props.grid &&
     css`
