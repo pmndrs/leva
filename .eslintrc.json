@@ -1,4 +1,3 @@
 {
-  "extends": "react-app",
-  "plugins": ["@emotion"]
+  "extends": "react-app"
 }
