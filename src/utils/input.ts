@@ -1,4 +1,4 @@
-import { getValueType } from '../register'
+import { normalize, getValueType } from '../register'
 import { ValueInput, SpecialInputs } from '../types'
 
 // returns a value in the form of { value, settings}
@@ -13,10 +13,10 @@ export function normalizeInput<V, Settings extends object>(
       const { value, ...settings } = input
       const type = getValueType(value, path)
       if (!type) return null
-      return { type, value, settings }
+      return { type, ...normalize(type, value, settings) }
     }
   }
   const type = getValueType(input, path)
   if (!type) return null
-  return { type, value: input }
+  return { type, ...normalize(type, input) }
 }

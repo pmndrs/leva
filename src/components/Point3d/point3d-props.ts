@@ -1,13 +1,12 @@
 // @ts-expect-error
 import v8n from 'v8n'
-import { NumberSettings } from '../Number/number-props'
+import { orderKeys } from '../../utils'
+import { NumberSettings, normalizeKeyValue } from '../Number/number-props'
 
 export type Point3d = { x: number; y: number; z: number }
 
 export type Point3dSettings = {
-  x?: NumberSettings
-  y?: NumberSettings
-  z?: NumberSettings
+  [key in keyof Point3d]?: NumberSettings
 }
 
 const number = v8n().number()
@@ -19,3 +18,7 @@ export const schema = (o: any) =>
   v8n()
     .passesAnyOf(point3dObj, point3dArray)
     .test(o)
+
+export const normalize = (value: Point3d, settings: Point3dSettings = {}) => {
+  return normalizeKeyValue(orderKeys(value, ['x', 'y', 'z']), settings)
+}

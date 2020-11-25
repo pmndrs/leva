@@ -1,6 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
 import { Plugins } from '../register'
-import { useDeepMemo } from './useDeepMemo'
 import { dequal } from 'dequal'
 
 function sanitize<V, Settings extends object>(type: string, value: any, settings?: Settings): V {
@@ -21,12 +20,6 @@ function validate<Settings extends object>(type: string, value: any, settings?: 
   return true
 }
 
-export function normalizeSettings<V, Settings extends object>(type: string, value: V, settings?: Settings) {
-  const { normalizeSettings } = Plugins[type]
-  if (normalizeSettings) return normalizeSettings(value, settings)
-  return settings
-}
-
 type Props<V, Settings> = {
   type: string
   value: V
@@ -37,34 +30,25 @@ type Props<V, Settings> = {
 export function useTwixUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
   // the last correct registered value
   const lastCorrectValue = useRef(value)
-  const initialValue = useRef(value)
-
-  // TODO fix rerender shallow compare settings
-  const _settings = useDeepMemo(() => normalizeSettings(type, initialValue.current, settings), [settings, type])
 
   // the value shown by the panel
-  const [_value, _setValue] = useState(format(type, value, _settings))
-  const setFormat = useCallback(value => _setValue(format(type, value, _settings)), [type, _settings])
+  const [_value, _setValue] = useState(format(type, value, settings))
+  const setFormat = useCallback(value => _setValue(format(type, value, settings)), [type, settings])
 
   const onUpdate = useCallback(
     value => {
       // if new value is equivalent to previous value do nothing
       if (dequal(value, lastCorrectValue.current)) return
 
-      if (value !== '' && validate(type, value, _settings)) {
-        value = sanitize(type, value, _settings)
+      if (value !== '' && validate(type, value, settings)) {
+        value = sanitize(type, value, settings)
         setFormat(value)
         set(value)
         lastCorrectValue.current = value
       } else setFormat(lastCorrectValue.current)
     },
-    [type, _settings, setFormat, set]
+    [type, settings, setFormat, set]
   )
 
-  return {
-    formattedValue: _value,
-    onChange: _setValue,
-    onUpdate,
-    settings: _settings,
-  }
+  return { formattedValue: _value, onChange: _setValue, onUpdate }
 }

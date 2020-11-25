@@ -14,6 +14,12 @@ export function getValueType(value: any, path: string) {
   return undefined
 }
 
+export function normalize<V, Settings extends object>(type: string, value: V, settings?: Settings) {
+  const { normalize: _normalize } = Plugins[type]
+  if (_normalize) return _normalize(value, settings)
+  return { value, settings }
+}
+
 export function register<V, Settings extends object>({ schema, ...plugin }: Plugin<V, Settings>, type: string) {
   if (type in Plugins) {
     warn(TwixErrors.ALREADY_REGISTERED_TYPE, type)

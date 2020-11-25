@@ -23,7 +23,7 @@ export function Coordinate<T extends CoordinateValue>({ value, valueKey, setting
       formattedValue={number.formattedValue}
       onUpdate={number.onUpdate}
       onChange={number.onChange}
-      settings={number.settings}
+      settings={settings}
     />
   )
 }
