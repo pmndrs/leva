@@ -2,13 +2,15 @@ import styled from '@xstyled/styled-components'
 
 export const StyledInput = styled.input`
   /* input reset */
-  background-color: transparent;
+  background: none;
   appearance: none;
   font-family: inherit;
   font-size: inherit;
   color: inherit;
   padding: input;
-  width: auto;
+  width: 0;
+  min-width: 0;
+  flex: 1;
   /* input styling */
   border: none;
   outline: none;

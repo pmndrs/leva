@@ -1,5 +1,14 @@
 // @ts-expect-error
 import v8n from 'v8n'
+import { NumberSettings } from '../Number/number-props'
+
+export type Point3d = { x: number; y: number; z: number }
+
+export type Point3dSettings = {
+  x?: NumberSettings
+  y?: NumberSettings
+  z?: NumberSettings
+}
 
 const number = v8n().number()
 
@@ -10,5 +19,3 @@ export const schema = (o: any) =>
   v8n()
     .passesAnyOf(point3dObj, point3dArray)
     .test(o)
-
-export type Point3d = { x: number; y: number; z: number } | [number, number, number]

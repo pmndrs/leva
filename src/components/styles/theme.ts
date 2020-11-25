@@ -20,9 +20,9 @@ export const TwixTheme = {
     input: 6,
     'folder-h': 6,
     'folder-v': 6,
-    'row-h': 6,
+    'row-h': 3,
     'row-v': 3,
-    'row-gap': 6,
+    'col-gap': 3,
   },
   fonts: {
     mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,

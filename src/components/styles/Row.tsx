@@ -8,11 +8,12 @@ export const Row = styled.div<{ grid?: boolean }>`
       display: grid;
       grid-template-columns: auto 160px;
       align-items: center;
-      grid-column-gap: row-gap;
+      grid-column-gap: col-gap;
     `}
 `
 
 export const Label = styled.label`
+  padding-left: row-h;
   color: label-text;
   font-weight: label;
 `
