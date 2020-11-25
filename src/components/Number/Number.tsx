@@ -32,7 +32,9 @@ export function NumberInner({
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
     <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange}>
-      <div {...bind()}>{label}</div>
+      <div title={label} {...bind()}>
+        {label.charAt(0)}
+      </div>
     </ValueInput>
   )
 }

@@ -18,7 +18,7 @@ const Root = styled.div`
   overflow: hidden;
   background-color: root-bg;
   border-radius: root;
-  box-shadow: soft;
+  box-shadow: root;
   border-style: solid;
   border-width: root;
   border-color: root-border;

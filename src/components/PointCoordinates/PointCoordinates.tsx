@@ -14,8 +14,8 @@ type CoordinateProps<T extends CoordinateValue> = {
 
 export function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUpdate }: CoordinateProps<T>) {
   const set = useCallback((v: number) => onUpdate({ ...value, [valueKey]: v }), [onUpdate, value, valueKey])
-
   const number = useTwixUpdate({ type: 'NUMBER', value: value[valueKey], set, settings })
+
   return (
     <NumberInner
       label={valueKey as string}

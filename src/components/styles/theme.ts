@@ -34,7 +34,7 @@ export const TwixTheme = {
     root: 280,
   },
   shadows: {
-    soft: '0 0 40px #10002b44',
+    root: '0 0 40px #10002b44',
   },
   borderWidths: {
     input: 1,
