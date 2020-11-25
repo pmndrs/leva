@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { Plugins } from '../register'
 import { dequal } from 'dequal'
 
@@ -49,6 +49,10 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
     },
     [type, settings, setFormat, set]
   )
+
+  useEffect(() => {
+    if (!dequal(value, lastCorrectValue.current)) setFormat(value)
+  }, [value, setFormat])
 
   return { formattedValue: _value, onChange: _setValue, onUpdate }
 }
