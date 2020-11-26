@@ -17,6 +17,7 @@ export const StyledInput = styled.input`
 `
 
 export const InnerLabel = styled.div`
+  height: 100%;
   > :first-of-type {
     width: 14px;
     height: 100%;
@@ -49,5 +50,8 @@ export const InputContainer = styled.div`
   }
   &:focus-within {
     border-color: input-focus-border;
+  }
+  &:active {
+    background-color: input-active-bg;
   }
 `
