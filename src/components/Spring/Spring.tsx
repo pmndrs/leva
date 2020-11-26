@@ -37,6 +37,7 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
 
   const bind = useDrag(
     ({ movement: [x, y], axis, memo = [tension, friction] }) => {
+      // TODO fix steps
       if (axis === 'x') onChange({ ...value, tension: memo[0] - x * 2 })
       else if (axis === 'y') onChange({ ...value, friction: memo[1] - y / 5 })
       return memo

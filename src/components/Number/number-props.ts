@@ -12,7 +12,7 @@ export const schema = (o: any) =>
 export const validator = (v: string | number) => v !== '' && !isNaN(Number(v))
 
 export const formatter = (v: any, { pad = 0 }: NumberSettings = {}) => Number(v).toFixed(pad)
-export const sanitizer = (v: string, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>
+export const sanitizer = (v: string, { min = -Infinity, max = Infinity, step }: NumberSettings = {}) =>
   clamp(Number(v), min, max)
 
 export const normalize = (value: number, settings: NumberSettings = {}) => {

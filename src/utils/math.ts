@@ -14,3 +14,6 @@ export function getStep(number: number) {
   const step = Math.pow(10, numberLog - significantDigits)
   return step / 10
 }
+
+export const range = (v: number, min: number, max: number) => (v - min) / (max - min)
+export const invertedRange = (p: number, min: number, max: number) => p * (max - min) + min

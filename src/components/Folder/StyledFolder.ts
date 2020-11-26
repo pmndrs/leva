@@ -39,7 +39,7 @@ export const StyledTitle = styled.div`
   color: folder-text;
   font-weight: folder;
   background-color: folder-title-bg;
-  padding: row-v row-h;
+  padding: row-v row-h row-v 0;
   user-select: none;
   cursor: pointer;
   > i {
