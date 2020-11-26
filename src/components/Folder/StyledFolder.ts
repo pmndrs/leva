@@ -29,10 +29,31 @@ export const StyledContent = styled.div<{ root: boolean }>`
 `
 
 export const StyledTitle = styled.div`
+  display: flex;
+  align-items: center;
   color: folder-text;
   font-weight: folder;
   background-color: folder-title-bg;
   padding: row-v row-h;
   user-select: none;
   cursor: pointer;
+  > i {
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: folder-text;
+    margin-right: 4px;
+    transition: transform 300ms ease;
+    &:after {
+      content: '';
+      display: block;
+      position: relative;
+      left: 2px;
+      top: 4px;
+      border-radius: 1px;
+      height: 2px;
+      width: 6px;
+      background-color: folder-title-bg;
+    }
+  }
 `

@@ -33,14 +33,14 @@ export function Folder({ name, parent, tree, root = false, collapsed = false }: 
     if (toggled) {
       set({ to: [{ height }, { height: 'auto' }] })
     } else set({ from: { height }, to: { height: 0 } })
-  }, [toggled])
+  }, [set, toggled])
 
   return (
     <StyledFolder root={root}>
       {name && (
         <StyledTitle onClick={toggle}>
+          <i style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }} />
           <div>{name}</div>
-          <span>{toggled ? 'A' : 'V'}</span>
         </StyledTitle>
       )}
       <a.div style={{ height }}>
