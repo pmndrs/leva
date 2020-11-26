@@ -11,12 +11,16 @@ const defaultSettings = { step: 1 }
 
 export function Number({ label, displayedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
+  const hasRangeSlider = settings.max !== Infinity && settings.min !== -Infinity
   return (
     <Row grid>
       <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
         {label}
       </Label>
-      <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
+      <div>
+        {hasRangeSlider && 'RANGE'}
+        <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
+      </div>
     </Row>
   )
 }

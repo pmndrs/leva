@@ -1,8 +1,14 @@
 import styled, { css } from '@xstyled/styled-components'
 
 export const Row = styled.div<{ grid?: boolean }>`
-  padding: row-v row-h;
+  padding: 0 row-h;
   position: relative;
+  &:first-of-type {
+    padding-top: row-v;
+  }
+  &:last-of-type {
+    padding-bottom: row-v;
+  }
   ${props =>
     props.grid &&
     css`
