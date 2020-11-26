@@ -15,6 +15,7 @@ export const StyledFolder = styled.div<{ root: boolean }>`
 `
 
 export const StyledContent = styled.div<{ root: boolean }>`
+  transition: opacity 250ms ease;
   > ${StyledFolder} {
     margin-left: folder-h;
   }
