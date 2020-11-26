@@ -6,7 +6,7 @@ type ValueInputProps = {
   children?: React.ReactNode
   onUpdate: (value: string) => void
   onChange: (value: string) => void
-}
+} & React.ComponentProps<typeof StyledInput>
 
 export function ValueInput({ children, value, onUpdate, onChange, ...props }: ValueInputProps) {
   const update = (fn: (value: string) => void) => (event: any) => {

@@ -7,6 +7,8 @@ export const TwixTheme = {
     'root-border': '#c8b1e4',
     'folder-border': '#c8b1e4',
     'folder-title-bg': '#c8b1e4',
+    'boolean-bg': '#c8b1e4',
+    'boolean-checked-bg': '#a468ec',
     'input-border': '#e9dbf9',
     'input-hover-border': '#c8b1e4',
     'input-focus-border': '#9b72cf',
