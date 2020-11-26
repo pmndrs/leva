@@ -3,5 +3,5 @@ import { Boolean } from './Boolean'
 
 const plugin = { ...props, component: Boolean }
 
-export { Boolean }
+export * from './Boolean'
 export default plugin

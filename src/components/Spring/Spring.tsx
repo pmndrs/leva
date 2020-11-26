@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react'
+import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import styled, { useTheme } from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
 import { useDrag } from 'react-use-gesture'
@@ -9,8 +9,9 @@ import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
 import { TwixInputProps } from '../../types'
 import { Spring as SpringType, SpringSettings } from './spring-props'
+import { debounce } from '../../utils'
 
-type SpringProps = TwixInputProps<SpringType, SpringSettings>
+type SpringProps = TwixInputProps<SpringType & { mass: number }, SpringSettings>
 
 const Container = styled.div`
   display: grid;
@@ -20,12 +21,13 @@ const Container = styled.div`
 
 const SpringPreviewAnimated = a(SpringPreview)
 
-export function Spring({ label, value, onUpdate, settings }: SpringProps) {
+export function Spring({ label, displayedValue, value, onUpdate, onChange, settings }: SpringProps) {
   const theme = useTheme()
   const canvas = useRef<HTMLCanvasElement>(null)
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
+  const springRef = useRef(displayedValue)
 
-  const { tension, friction, mass } = value
+  const { tension, friction, mass = 1 } = displayedValue
 
   const [spring, set] = useSpring(() => ({
     scaleX: 0.5,
@@ -34,22 +36,30 @@ export function Spring({ label, value, onUpdate, settings }: SpringProps) {
   }))
 
   const bind = useDrag(
-    ({ movement: [x, y], axis, last, memo = [tension, friction] }) => {
-      if (axis === 'x') onUpdate({ ...value, tension: memo[0] - x * 2 })
-      else if (axis === 'y') onUpdate({ ...value, friction: memo[1] - y / 5 })
-      if (last) {
-        set({
-          from: { scaleX: 0, opacity: 0.7 },
-          to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
-          config: { friction, tension, mass },
-        })
-      }
+    ({ movement: [x, y], axis, memo = [tension, friction] }) => {
+      if (axis === 'x') onChange({ ...value, tension: memo[0] - x * 2 })
+      else if (axis === 'y') onChange({ ...value, friction: memo[1] - y / 5 })
       return memo
     },
     { lockDirection: true }
   )
 
+  const updateSpring = useMemo(
+    () =>
+      debounce(() => {
+        const { tension, friction, mass } = springRef.current
+        onUpdate(springRef.current)
+        set({
+          from: { scaleX: 0, opacity: 0.7 },
+          to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
+          config: { friction, tension, mass },
+        })
+      }, 250),
+    [set, onUpdate]
+  )
+
   const drawSpring = useCallback(() => {
+    const { tension, friction, mass } = springRef.current
     if (!ctx.current) ctx.current = canvas.current!.getContext('2d')
     const _ctx = ctx.current!
     const { width, height } = canvas.current!
@@ -61,18 +71,20 @@ export function Spring({ label, value, onUpdate, settings }: SpringProps) {
     }
     _ctx.strokeStyle = th.color('folder-border')({ theme })
     _ctx.stroke()
-  }, [tension, friction, mass, theme])
+  }, [theme])
 
   useEffect(() => {
+    springRef.current = { tension, friction, mass }
     drawSpring()
-  }, [drawSpring])
+    updateSpring()
+  }, [drawSpring, updateSpring, tension, friction, mass])
 
   useEffect(() => {
-    function handleCanvas() {
+    const handleCanvas = debounce(() => {
       canvas.current!.width = canvas.current!.offsetWidth
       canvas.current!.height = canvas.current!.offsetHeight
       drawSpring()
-    }
+    }, 250)
     window.addEventListener('resize', handleCanvas)
     handleCanvas()
     return () => window.removeEventListener('resize', handleCanvas)
@@ -87,7 +99,7 @@ export function Spring({ label, value, onUpdate, settings }: SpringProps) {
       <Row grid>
         <Label>{label}</Label>
         <Container>
-          <PointCoordinates value={value} settings={settings} onUpdate={onUpdate} />
+          <PointCoordinates value={displayedValue} settings={settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </>

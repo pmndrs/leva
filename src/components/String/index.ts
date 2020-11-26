@@ -3,5 +3,5 @@ import { String } from './String'
 
 const plugin = { ...props, component: String }
 
-export { String }
+export * from './String'
 export default plugin

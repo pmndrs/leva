@@ -20,7 +20,7 @@ export function Coordinate<T extends CoordinateValue>({ value, valueKey, setting
     <NumberInner
       label={valueKey as string}
       value={value[valueKey]}
-      formattedValue={number.formattedValue}
+      displayedValue={number.displayedValue}
       onUpdate={number.onUpdate}
       onChange={number.onChange}
       settings={settings}

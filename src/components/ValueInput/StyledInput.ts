@@ -17,13 +17,22 @@ export const StyledInput = styled.input`
 `
 
 export const InnerLabel = styled.div`
-  padding: input;
-  margin-right: -input;
-  cursor: ew-resize;
-  text-transform: uppercase;
-  opacity: 0.6;
-  font-size: 0.8em;
-  user-select: none;
+  > :first-of-type {
+    width: 14px;
+    height: 100%;
+    margin-right: -input;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ew-resize;
+    text-transform: uppercase;
+    opacity: 0.3;
+    font-size: 0.8em;
+    user-select: none;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `
 
 export const InputContainer = styled.div`

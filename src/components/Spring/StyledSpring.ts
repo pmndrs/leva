@@ -8,6 +8,8 @@ export const Canvas = styled.canvas`
 `
 
 export const SpringPreview = styled.div`
+  position: relative;
+  top: -2px;
   background-color: folder-border;
   width: 100%;
   height: 2px;

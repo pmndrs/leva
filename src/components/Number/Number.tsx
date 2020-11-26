@@ -9,21 +9,21 @@ type NumberProps = TwixInputProps<number, NumberSettings>
 
 const defaultSettings = { step: 1 }
 
-export function Number({ label, formattedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
+export function Number({ label, displayedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
     <Row grid>
       <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
         {label}
       </Label>
-      <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange} />
+      <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }
 
 export function NumberInner({
   label,
-  formattedValue,
+  displayedValue,
   value,
   onUpdate,
   onChange,
@@ -31,7 +31,7 @@ export function NumberInner({
 }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
-    <ValueInput value={formattedValue} onUpdate={onUpdate} onChange={onChange}>
+    <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange}>
       <div title={label} {...bind()}>
         {label.charAt(0)}
       </div>

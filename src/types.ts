@@ -47,9 +47,9 @@ export type V8N = { test: (o: any) => boolean }
 
 export type TwixInputProps<V, Settings extends object = {}> = {
   label: string
-  formattedValue: string
+  displayedValue: any
   value: V
-  onChange: (value: any) => void
+  onChange: React.Dispatch<any>
   onUpdate: (value: any) => void
   settings?: Settings
 }
@@ -60,5 +60,5 @@ export type Plugin<V, Settings extends object = {}> = {
   formatter?: (value: any, settings?: Settings) => any
   validator?: (value: any, settings?: Settings) => boolean
   sanitizer?: (value: any, settings?: Settings) => V
-  normalize?: (value: V, settings: Settings) => Settings
+  normalize?: (value: V, settings: Settings) => { value: V; settings: Settings }
 }

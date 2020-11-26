@@ -23,12 +23,12 @@ export function TwixValueInput<V, Settings extends object>({
 }: TwixValueInputProps<V, Settings>) {
   const set = useCallback(value => store.setValueAtPath(path, value), [path])
 
-  const { formattedValue, onChange, onUpdate } = useTwixUpdate({ type, value, settings, set })
+  const { displayedValue, onChange, onUpdate } = useTwixUpdate({ type, value, settings, set })
 
   return (
     <Input
       label={valueKey}
-      formattedValue={formattedValue}
+      displayedValue={displayedValue}
       value={value}
       onChange={onChange}
       onUpdate={onUpdate}

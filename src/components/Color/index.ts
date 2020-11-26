@@ -3,5 +3,5 @@ import { Color } from './Color'
 
 const plugin = { ...props, component: Color }
 
-export { Color }
+export * from './Color'
 export default plugin

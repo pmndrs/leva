@@ -9,7 +9,7 @@ export const schema = (o: any) =>
     .number()
     .test(o)
 
-export const validator = (v: any) => !isNaN(v)
+export const validator = (v: string | number) => v !== '' && !isNaN(Number(v))
 
 export const formatter = (v: any, { pad = 0 }: NumberSettings = {}) => Number(v).toFixed(pad)
 export const sanitizer = (v: string, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>

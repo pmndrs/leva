@@ -3,5 +3,5 @@ import { Spring } from './Spring'
 
 const plugin = { ...props, component: Spring }
 
-export { Spring }
+export * from './Spring'
 export default plugin

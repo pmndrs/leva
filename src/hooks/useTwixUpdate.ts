@@ -2,16 +2,16 @@ import { useState, useCallback, useEffect, useRef } from 'react'
 import { Plugins } from '../register'
 import { dequal } from 'dequal'
 
-function sanitize<V, Settings extends object>(type: string, value: any, settings?: Settings): V {
+function sanitize<Settings extends object>(type: string, value: any, settings?: Settings) {
   const { sanitizer } = Plugins[type]
   if (sanitizer) return sanitizer(value, settings)
   return value
 }
 
-function format<Settings extends object>(type: string, value: unknown, settings?: Settings): string {
+function format<Settings extends object>(type: string, value: any, settings?: Settings) {
   const { formatter } = Plugins[type]
   if (formatter) return formatter(value, settings)
-  return value as string
+  return value
 }
 
 function validate<Settings extends object>(type: string, value: any, settings?: Settings) {
@@ -31,21 +31,23 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
   // the last correct registered value
   const lastCorrectValue = useRef(value)
 
-  // the value shown by the panel
+  // the value used by the panel vs the value
   const [_value, _setValue] = useState(format(type, value, settings))
-  const setFormat = useCallback(value => _setValue(format(type, value, settings)), [type, settings])
+  const setFormat = useCallback(v => _setValue(format(type, v, settings)), [type, settings])
 
   const onUpdate = useCallback(
-    value => {
+    (displayValue: any) => {
       // if new value is equivalent to previous value do nothing
-      if (dequal(value, lastCorrectValue.current)) return
+      if (!validate(type, displayValue, settings)) {
+        setFormat(lastCorrectValue.current)
+        return
+      }
+      const newValue = sanitize(type, displayValue, settings)
+      if (dequal(newValue, lastCorrectValue.current)) return
 
-      if (value !== '' && validate(type, value, settings)) {
-        value = sanitize(type, value, settings)
-        setFormat(value)
-        set(value)
-        lastCorrectValue.current = value
-      } else setFormat(lastCorrectValue.current)
+      lastCorrectValue.current = newValue
+      setFormat(newValue)
+      set(newValue)
     },
     [type, settings, setFormat, set]
   )
@@ -54,5 +56,5 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
     if (!dequal(value, lastCorrectValue.current)) setFormat(value)
   }, [value, setFormat])
 
-  return { formattedValue: _value, onChange: _setValue, onUpdate }
+  return { displayedValue: _value, onChange: _setValue, onUpdate }
 }
