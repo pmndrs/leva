@@ -32,7 +32,7 @@ export function Folder({ name, parent, tree, root = false, collapsed = false }: 
     const { height } = contentRef.current!.getBoundingClientRect()
     if (toggled) {
       set({ to: [{ height }, { height: 'auto' }] })
-    } else set({ from: { height }, to: { height: 0 }, delay: 200 })
+    } else set({ from: { height }, to: { height: 0 } })
   }, [set, toggled])
 
   return (
@@ -44,7 +44,7 @@ export function Folder({ name, parent, tree, root = false, collapsed = false }: 
         </StyledTitle>
       )}
       <a.div style={{ height }}>
-        <StyledContent ref={contentRef} root={root} style={{ opacity: toggled ? 1 : 0 }}>
+        <StyledContent ref={contentRef} root={root} toggled={toggled}>
           {Object.entries(tree).map(([key, value]) =>
             // @ts-expect-error
             isInput(key) ? <TwixWrapper {...value} /> : createFolder(key, parent, value as Tree)
