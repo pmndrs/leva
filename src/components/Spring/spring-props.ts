@@ -3,6 +3,8 @@ import v8n from 'v8n'
 import { orderKeys } from '../../utils'
 import { NumberSettings, normalizeKeyValue } from '../Number/number-props'
 
+// TODO default settings
+
 export type Spring = { tension: number; friction: number; mass?: number }
 
 export type SpringSettings = {

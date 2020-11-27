@@ -16,8 +16,8 @@ export const schema = (o: any) =>
     .test(o)
 
 export const sanitizer = ({ min, max }: Interval, { bounds: [MIN, MAX] }: IntervalSettings) => ({
-  min: clamp(Number(min), MIN, max),
-  max: clamp(Number(max), min, MAX),
+  min: clamp(Number(min), MIN, Math.max(MIN, max)),
+  max: clamp(Number(max), Math.min(MAX, min), MAX),
 })
 
 export const normalize = ({ bounds, ..._value }: Interval) => {
