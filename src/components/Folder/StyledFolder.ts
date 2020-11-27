@@ -15,6 +15,7 @@ export const StyledFolder = styled.div<{ root: boolean }>`
 `
 
 export const StyledContent = styled.div<{ root: boolean; toggled: boolean }>`
+  padding-top: row-v;
   display: grid;
   grid-row-gap: row-v;
   opacity: ${props => (props.toggled ? 1 : 0)};

@@ -11,6 +11,7 @@ import boolean from './components/Boolean'
 import point3d from './components/Point3d'
 import point2d from './components/Point2d'
 import spring from './components/Spring'
+import interval from './components/Interval'
 
 register(number, 'NUMBER')
 register(color, 'COLOR')
@@ -19,6 +20,7 @@ register(boolean, 'BOOLEAN')
 register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
+register(interval, 'INTERVAL')
 
 // TODO fix name type
 export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {

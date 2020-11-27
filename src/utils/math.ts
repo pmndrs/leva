@@ -10,7 +10,7 @@ export function getStep(number: number) {
   while (n !== 0 && n % 10 === 0) n /= 10
   //kill the 0s at the end of n
   const significantDigits = Math.floor(Math.log(n) / log10) + 1
-  const numberLog = Math.floor(Math.log10(number))
+  const numberLog = Math.floor(Math.log10(Math.abs(number)))
   const step = Math.pow(10, numberLog - significantDigits)
   return step / 10
 }

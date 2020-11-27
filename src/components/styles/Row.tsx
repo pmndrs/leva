@@ -1,20 +1,25 @@
 import styled, { css } from '@xstyled/styled-components'
+import { StyledContent } from '../Folder/StyledFolder'
 
-export const Row = styled.div<{ grid?: boolean }>`
-  padding: 0 row-h;
+export const Row = styled.div<{ input?: boolean }>`
   position: relative;
-  &:first-of-type {
-    padding-top: row-v;
-  }
-  &:last-of-type {
-    padding-bottom: row-v;
+  display: grid;
+  grid-row-gap: row-v;
+  grid-template-rows: minmax(25px, max-content);
+  align-items: center;
+  ${StyledContent} > & {
+    padding: 0 row-h;
+    :first-of-type {
+      padding-top: row-v;
+    }
+    :last-of-type {
+      padding-bottom: row-v;
+    }
   }
   ${props =>
-    props.grid &&
+    props.input &&
     css`
-      display: grid;
       grid-template-columns: auto 160px;
-      align-items: center;
       grid-column-gap: col-gap;
     `}
 `

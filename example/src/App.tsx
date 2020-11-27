@@ -4,6 +4,7 @@ import { useTwix, folder, button, Twix } from 'use-twix'
 function Comp1() {
   const t = useTwix(
     { first: { value: 0, min: -10, max: 10 } },
+    { interval: {value: { min: -10, max: 10 }, bounds: [-100, 100] },
     { color: '#fff', number: { value: 1000, min: 3 } },
     { colorObj: { r: 1, g: 2, b: 3 } },
     folder(

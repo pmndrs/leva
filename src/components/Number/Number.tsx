@@ -38,7 +38,7 @@ export function Number({ label, displayedValue, value, onUpdate, onChange, setti
   const bind = useDragNumber({ value, step, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
   return (
-    <Row grid>
+    <Row input>
       <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
         {label}
       </Label>

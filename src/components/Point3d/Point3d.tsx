@@ -15,7 +15,7 @@ const Container = styled.div`
 
 export function Point3d({ label, value, onUpdate, settings }: Point3dProps) {
   return (
-    <Row grid>
+    <Row input>
       <Label>{label}</Label>
       <Container>
         <PointCoordinates value={value} settings={settings} onUpdate={onUpdate} />

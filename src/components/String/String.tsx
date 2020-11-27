@@ -5,7 +5,7 @@ import { Label, Row } from '../styles'
 
 export function String({ label, displayedValue, onUpdate, onChange }: TwixInputProps<string>) {
   return (
-    <Row grid>
+    <Row input>
       <Label>{label}</Label>
       <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>

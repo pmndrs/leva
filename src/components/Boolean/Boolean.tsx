@@ -6,7 +6,7 @@ import { StyledInputWrapper } from './StyledBoolean'
 export function Boolean({ label, value, onUpdate }: TwixInputProps<boolean>) {
   // htmlFor might raise a conflict if two booleans are labeled the same way
   return (
-    <Row grid>
+    <Row input>
       <Label htmlFor={label}>{label}</Label>
       <StyledInputWrapper>
         <input id={label} type="checkbox" checked={value} onChange={e => onUpdate(e.target.checked)} />

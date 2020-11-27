@@ -97,7 +97,7 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
         <Canvas {...bind()} ref={canvas} />
         <SpringPreviewAnimated style={spring} />
       </Row>
-      <Row grid>
+      <Row input>
         <Label>{label}</Label>
         <Container>
           <PointCoordinates value={displayedValue} settings={settings} onUpdate={onUpdate} />
