@@ -3,7 +3,9 @@ import v8n from 'v8n'
 import { clamp, orderKeys } from '../../utils'
 import { normalizeKeyValue } from '../Number/number-props'
 
-export type Interval = { min: number; max: number }
+// TODO FIX TYPES
+
+export type Interval = { min: number; max: number; bounds: [number, number] }
 
 export type IntervalSettings = { bounds: [number, number] }
 
@@ -18,7 +20,7 @@ export const sanitizer = ({ min, max }: Interval, { bounds: [MIN, MAX] }: Interv
   max: clamp(Number(max), min, MAX),
 })
 
-export const normalize = (_value: Interval, { bounds }: IntervalSettings) => {
+export const normalize = ({ bounds, ..._value }: Interval) => {
   // const _settings = { min: normalizeNumber(settings.min), max: normalizeNumber(settings.max) }
   const { value, settings } = normalizeKeyValue(orderKeys(_value, ['min', 'max']), {})
   return { value, settings: { ...settings, bounds } }

@@ -3,7 +3,6 @@ import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../types'
 import { Interval as IntervalType, IntervalSettings } from './interval-props'
 import { Label, Row } from '../styles'
-import { useDragNumber } from '../../hooks'
 import { PointCoordinates } from '../PointCoordinates'
 import { Range, Scrubber } from '../Number'
 import { useDrag } from 'react-use-gesture'
@@ -38,7 +37,7 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   )
 }
 
-export function Interval({ label, displayedValue, value, onUpdate, onChange, settings }: IntervalProps) {
+export function Interval({ label, value, onUpdate, settings }: IntervalProps) {
   const { bounds, ..._settings } = settings!
   return (
     <Row input>
