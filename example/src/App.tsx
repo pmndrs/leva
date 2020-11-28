@@ -14,7 +14,7 @@ function Comp1() {
         { name: 'sub folder', collapsed: false },
         { number: 5 },
         button('Button 1', () => console.log('hello')),
-        folder('sub3', { pos2d: { x: 3, y: 4 }, pos3d: { x: 10, y: 20, z: 4 } })
+        folder('sub3', { pos2d: { x: 3, y: 4 }, pos2dArr: [100, 200], pos3d: [10, 20, 4] })
       )
     )
   )

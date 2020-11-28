@@ -8,8 +8,8 @@ import number from './components/Number'
 import color from './components/Color'
 import string from './components/String'
 import boolean from './components/Boolean'
-import point3d from './components/Point3d'
-import point2d from './components/Point2d'
+import point3d from './components/Point/Point3d'
+import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
 import interval from './components/Interval'
 
@@ -18,6 +18,7 @@ register(number, 'NUMBER')
 register(color, 'COLOR')
 register(string, 'STRING')
 register(boolean, 'BOOLEAN')
+// @ts-expect-error
 register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')

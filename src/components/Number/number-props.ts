@@ -29,7 +29,10 @@ export const normalize = (value: number, settings: NumberSettings = {}) => {
   return { value, settings: { step, pad, min: -Infinity, max: Infinity, ...settings } }
 }
 
-export const normalizeKeyValue = <K extends object>(obj: K, settings: { [key in keyof K]?: NumberSettings }) => {
+export const normalizeKeyValue = <K extends object>(
+  obj: K,
+  settings: { [key in keyof K]?: NumberSettings } & { [key: string]: any }
+) => {
   const _settings: { [key in keyof K]?: NumberSettings } = {}
   Object.entries(obj).forEach(([key, v]) => {
     _settings[key as keyof K] = normalize(v, settings[key as keyof K]).settings
