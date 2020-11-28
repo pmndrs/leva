@@ -1,13 +1,13 @@
 import { warn, TwixErrors } from './utils/log'
 import { Plugin } from './types'
 
-const schemas: ((v: any) => false | string)[] = []
+const schemas: ((v: any, settings?: any) => false | string)[] = []
 
 export const Plugins: Record<string, Omit<Plugin<any, any>, 'schema'>> = {}
 
-export function getValueType(value: any, path: string) {
+export function getValueType(value: any, settings: any, path: string) {
   for (let checker of schemas) {
-    const type = checker(value)
+    const type = checker(value, settings)
     if (type) return type
   }
   warn(TwixErrors.UNKNOWN_INPUT, path, value)
@@ -25,6 +25,6 @@ export function register<V, Settings extends object>({ schema, ...plugin }: Plug
     warn(TwixErrors.ALREADY_REGISTERED_TYPE, type)
     return
   }
-  schemas.push((value: any) => schema(value) && type)
+  schemas.push((value: any, settings?: any) => schema(value, settings) && type)
   Plugins[type] = plugin
 }

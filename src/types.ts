@@ -54,8 +54,8 @@ export type TwixInputProps<V, Settings extends object = {}> = {
   settings?: Settings
 }
 
-export type Plugin<V, Settings extends object = {}> = {
-  schema: (value: any) => boolean
+export type Plugin<V, Settings extends object> = {
+  schema: (value: any, settings?: Settings) => boolean
   component: React.ComponentType<TwixInputProps<V, Settings>>
   format?: (value: any, settings?: Settings) => any
   validate?: (value: any, settings?: Settings) => boolean

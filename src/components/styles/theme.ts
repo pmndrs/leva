@@ -13,6 +13,7 @@ export const TwixTheme = {
     'input-hover-border': '#c8b1e4',
     'input-focus-border': '#9b72cf',
     'input-active-bg': '#e9dbf9',
+    'select-bg': '#fff',
     selection: '#c8b1e4',
   },
   radii: {

@@ -11,12 +11,12 @@ export function normalizeInput<V, Settings extends object>(
     if ('type' in input) return input
     if ('value' in input) {
       const { value, ...settings } = input
-      const type = getValueType(value, path)
+      const type = getValueType(value, settings, path)
       if (!type) return null
       return { type, ...normalize(type, value, settings) }
     }
   }
-  const type = getValueType(input, path)
+  const type = getValueType(input, null, path)
   if (!type) return null
   return { type, ...normalize(type, input) }
 }

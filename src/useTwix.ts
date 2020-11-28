@@ -5,6 +5,7 @@ import { ValueInput } from './types'
 import { register } from './register'
 
 import number from './components/Number'
+import select from './components/Select'
 import color from './components/Color'
 import string from './components/String'
 import boolean from './components/Boolean'
@@ -13,6 +14,7 @@ import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
 import interval from './components/Interval'
 
+register(select, 'SELECT')
 register(number, 'NUMBER')
 // @ts-expect-error
 register(color, 'COLOR')
@@ -20,6 +22,7 @@ register(string, 'STRING')
 register(boolean, 'BOOLEAN')
 // @ts-expect-error
 register(point3d, 'POINT3D')
+// @ts-expect-error
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
 // @ts-expect-error
