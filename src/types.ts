@@ -60,5 +60,5 @@ export type Plugin<V, Settings extends object> = {
   format?: (value: any, settings?: Settings) => any
   validate?: (value: any, settings?: Settings) => boolean
   sanitize?: (value: any, settings?: Settings) => V
-  normalize?: (value: V, settings: Settings) => { value: V; settings: Settings }
+  normalize?: (input: ValueInputWithSettings<V, Settings>) => ValueInputWithSettings<V, Settings>
 }

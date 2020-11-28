@@ -13,10 +13,10 @@ export function normalizeInput<V, Settings extends object>(
       const { value, ...settings } = input
       const type = getValueType(value, settings, path)
       if (!type) return null
-      return { type, ...normalize(type, value, settings) }
+      return { type, ...normalize(type, input) }
     }
   }
   const type = getValueType(input, null, path)
   if (!type) return null
-  return { type, ...normalize(type, input) }
+  return { type, ...normalize(type, { value: input }) }
 }

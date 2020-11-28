@@ -1,15 +1,15 @@
 // @ts-expect-error
 import v8n from 'v8n'
+import { ValueInputWithSettings } from '../../types'
 import { orderKeys } from '../../utils'
 import { NumberSettings, normalizeKeyValue } from '../Number/number-props'
 
 // TODO add spring default settings
 
 export type Spring = { tension: number; friction: number; mass?: number }
+export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
 
-export type SpringSettings = {
-  [key in keyof Spring]?: NumberSettings
-}
+type SpringInput = ValueInputWithSettings<Spring, SpringSettings>
 
 const number = v8n().number()
 
@@ -22,7 +22,7 @@ export const schema = (o: any) =>
     })
     .test(o)
 
-export const normalize = (value: Spring, settings: SpringSettings = {}) => {
+export const normalize = ({ value, ...settings }: SpringInput) => {
   const _value = orderKeys({ mass: 1, ...value }, ['tension', 'friction', 'mass'])
   return normalizeKeyValue(_value, settings)
 }
