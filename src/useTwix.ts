@@ -14,6 +14,7 @@ import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
 import interval from './components/Interval'
 
+// @ts-expect-error
 register(select, 'SELECT')
 register(number, 'NUMBER')
 // @ts-expect-error

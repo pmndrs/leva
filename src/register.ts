@@ -5,7 +5,7 @@ const schemas: ((v: any, settings?: any) => false | string)[] = []
 
 export const Plugins: Record<string, Omit<Plugin<any, any>, 'schema'>> = {}
 
-export function getValueType(value: any, settings: any, path: string) {
+export function getValueType({ value, ...settings }: any, path: string) {
   for (let checker of schemas) {
     const type = checker(value, settings)
     if (type) return type

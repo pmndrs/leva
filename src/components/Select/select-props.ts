@@ -1,11 +1,10 @@
 // @ts-expect-error
 import v8n from 'v8n'
-import { ValueInputWithSettings } from '../../types'
 
 type SelectSettings = { options: Record<string, any> | any[] }
 export type InternalSelectSettings = { keys: string[]; values: any[] }
 
-type SelectInput = ValueInputWithSettings<any, SelectSettings>
+type SelectInput = { value?: any } & SelectSettings
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>
@@ -20,7 +19,7 @@ export const format = (value: any, { values }: InternalSelectSettings) => {
 }
 
 export const normalize = (input: SelectInput) => {
-  let { value, options, ...settings } = input
+  let { value, options } = input
   let keys
   let values
 
@@ -39,5 +38,5 @@ export const normalize = (input: SelectInput) => {
   }
 
   if (!Object.values(options).includes(value)) (options as any)[String(value)] = value
-  return { value, settings: { keys, values, ...settings } }
+  return { value, settings: { keys, values } }
 }
