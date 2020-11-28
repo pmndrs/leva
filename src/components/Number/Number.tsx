@@ -33,7 +33,7 @@ function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   )
 }
 
-export function Number({ label, displayedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
+export function Number({ label, displayValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
   const { min, max, step } = settings
   const bind = useDragNumber({ value, step, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
@@ -44,7 +44,7 @@ export function Number({ label, displayedValue, value, onUpdate, onChange, setti
       </Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} min={min!} max={max!} onDrag={onUpdate} />}
-        <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
+        <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
       </RangeGrid>
     </Row>
   )
@@ -52,7 +52,7 @@ export function Number({ label, displayedValue, value, onUpdate, onChange, setti
 
 export function NumberInner({
   label,
-  displayedValue,
+  displayValue,
   value,
   onUpdate,
   onChange,
@@ -60,7 +60,7 @@ export function NumberInner({
 }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
-    <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange}>
+    <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
       <div title={label} {...bind()}>
         {label.charAt(0)}
       </div>

@@ -1,17 +1,28 @@
 // @ts-expect-error
 import v8n from 'v8n'
-// @ts-ignore
-import parse from 'color-parser'
+import tinycolor from 'tinycolor2'
 
-v8n.extend({ color: () => (value: any) => !!parse(value) })
-
-const number = v8n().number()
-
-const colorString = v8n().color()
-const colorObj = v8n().schema({ r: number, g: number, b: number, a: v8n().optional(number) })
-export const schema = (o: any) =>
-  v8n()
-    .passesAnyOf(colorString, colorObj)
-    .test(o)
+type Format = 'name' | 'hex' | 'hex8' | 'rgb'
 
 export type Color = string | { r: number; g: number; b: number; a?: number }
+export type ColorSettings = { format?: Format }
+
+const FORMATS = ['name', 'hex', 'hex8', 'rgb']
+
+v8n.extend({ color: () => (value: any) => FORMATS.includes(tinycolor(value).getFormat()) })
+// prettier-ignore
+export const schema = (o: any) => v8n().color().test(o)
+
+function convert(color: tinycolor.Instance, format: Format) {
+  return format === 'rgb' ? color.toRgb() : color.toHex8String()
+}
+
+export const sanitize = (v: any, { format }: ColorSettings) => convert(tinycolor(v), format!)
+export const format = (v: any) => convert(tinycolor(v), 'hex8')
+
+export const normalize = (value: Color, { format }: ColorSettings = {}) => {
+  const color = tinycolor(value)
+  const valueFormat = color.getFormat() as Format
+  format = format || valueFormat
+  return { value: convert(color, format), settings: { format } }
+}

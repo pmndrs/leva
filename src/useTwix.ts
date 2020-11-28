@@ -14,15 +14,17 @@ import spring from './components/Spring'
 import interval from './components/Interval'
 
 register(number, 'NUMBER')
+// @ts-expect-error
 register(color, 'COLOR')
 register(string, 'STRING')
 register(boolean, 'BOOLEAN')
 register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
+// @ts-expect-error
 register(interval, 'INTERVAL')
 
-// TODO fix name type
+// FIXME fix name type in useTwix
 export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {
   const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
   const schema = useRef(_name ? folder(_name, args) : [nameOrInput, ...args])

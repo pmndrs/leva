@@ -11,6 +11,7 @@ export const StyledFolder = styled.div<{ root: boolean }>`
     css`
       border-left-style: none;
       margin-top: 0;
+      border-radius: 0 0 root root;
     `}
 `
 

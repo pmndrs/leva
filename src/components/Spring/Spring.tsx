@@ -21,13 +21,13 @@ const Container = styled.div`
 
 const SpringPreviewAnimated = a(SpringPreview)
 
-export function Spring({ label, displayedValue, value, onUpdate, onChange, settings }: SpringProps) {
+export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
   const theme = useTheme()
   const canvas = useRef<HTMLCanvasElement>(null)
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
-  const springRef = useRef(displayedValue)
+  const springRef = useRef(displayValue)
 
-  const { tension, friction, mass = 1 } = displayedValue
+  const { tension, friction, mass = 1 } = displayValue
 
   const [spring, set] = useSpring(() => ({
     scaleX: 0.5,
@@ -37,7 +37,7 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
 
   const bind = useDrag(
     ({ movement: [x, y], axis, memo = [tension, friction] }) => {
-      // TODO fix steps
+      // FIXME spring fix steps on usedrag
       if (axis === 'x') onChange({ ...value, tension: memo[0] - x * 2 })
       else if (axis === 'y') onChange({ ...value, friction: memo[1] - y / 5 })
       return memo
@@ -100,7 +100,7 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
       <Row input>
         <Label>{label}</Label>
         <Container>
-          <PointCoordinates value={displayedValue} settings={settings} onUpdate={onUpdate} />
+          <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </>

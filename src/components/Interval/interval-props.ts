@@ -3,7 +3,7 @@ import v8n from 'v8n'
 import { clamp, orderKeys } from '../../utils'
 import { normalizeKeyValue } from '../Number/number-props'
 
-// TODO FIX TYPES
+// FIXME Interval typings
 
 export type Interval = { min: number; max: number; bounds: [number, number] }
 
@@ -15,7 +15,7 @@ export const schema = (o: any) =>
     .schema({ min: number, max: number })
     .test(o)
 
-export const sanitizer = ({ min, max }: Interval, { bounds: [MIN, MAX] }: IntervalSettings) => ({
+export const sanitize = ({ min, max }: Interval, { bounds: [MIN, MAX] }: IntervalSettings) => ({
   min: clamp(Number(min), MIN, Math.max(MIN, max)),
   max: clamp(Number(max), Math.min(MAX, min), MAX),
 })

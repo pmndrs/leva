@@ -9,10 +9,10 @@ export const schema = (o: any) =>
     .number()
     .test(o)
 
-export const validator = (v: string | number) => v !== '' && !isNaN(Number(v))
+export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
-export const formatter = (v: any, { pad = 0 }: NumberSettings = {}) => Number(v).toFixed(pad)
-export const sanitizer = (v: string, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>
+export const format = (v: any, { pad = 0 }: NumberSettings = {}) => Number(v).toFixed(pad)
+export const sanitize = (v: string, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>
   clamp(Number(v), min, max)
 
 export const normalize = (value: number, settings: NumberSettings = {}) => {

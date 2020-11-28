@@ -1,25 +1,30 @@
-import React, { useCallback, useState } from 'react'
-import { ColorChangeHandler, SketchPicker } from 'react-color'
+import React, { useState } from 'react'
+import { RgbaColorPicker, RgbaColor } from 'react-colorful'
+import tinycolor from 'tinycolor2'
 import { Overlay } from '../Misc'
-import { Color as ColorType } from './color-props'
+import { Color as ColorType, ColorSettings } from './color-props'
 import { TwixInputProps } from '../../types'
+import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
+import { Row, Label } from '../styles'
 
-const emptyArray: any = []
+type ColorProps = TwixInputProps<ColorType, ColorSettings>
 
-export function Color({ value, onUpdate }: TwixInputProps<ColorType>) {
-  const _onUpdate: ColorChangeHandler = useCallback(color => onUpdate(color.hex), [onUpdate])
+export function Color({ value, displayValue, label, onUpdate, settings }: ColorProps) {
   const [showPicker, setShowPicker] = useState(false)
-
-  // TODO fix value as any
+  const rgb = settings!.format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
   return (
-    <div>
-      <div onClick={() => setShowPicker(true)} style={{ height: 20, width: 20, background: value as any }} />
-      {showPicker && (
-        <div style={{ position: 'absolute', left: -50, zIndex: 100 }}>
-          <Overlay onClick={() => setShowPicker(false)} />
-          <SketchPicker presetColors={emptyArray} color={value} onChange={_onUpdate} />
-        </div>
-      )}
-    </div>
+    <Row input>
+      <Label>{label}</Label>
+      <PickerContainer>
+        <ColorPreview onClick={() => setShowPicker(true)} style={{ height: 20, width: 20, background: displayValue }} />
+        <span>{displayValue}</span>
+        {showPicker && (
+          <PickerWrapper>
+            <Overlay onClick={() => setShowPicker(false)} />
+            <RgbaColorPicker color={rgb} onChange={onUpdate} />
+          </PickerWrapper>
+        )}
+      </PickerContainer>
+    </Row>
   )
 }

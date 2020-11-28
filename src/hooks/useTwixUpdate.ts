@@ -3,20 +3,20 @@ import { Plugins } from '../register'
 import { dequal } from 'dequal'
 
 function sanitize<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { sanitizer } = Plugins[type]
-  if (sanitizer) return sanitizer(value, settings)
+  const { sanitize } = Plugins[type]
+  if (sanitize) return sanitize(value, settings)
   return value
 }
 
 function format<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { formatter } = Plugins[type]
-  if (formatter) return formatter(value, settings)
+  const { format } = Plugins[type]
+  if (format) return format(value, settings)
   return value
 }
 
 function validate<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { validator } = Plugins[type]
-  if (validator) return validator(value, settings)
+  const { validate } = Plugins[type]
+  if (validate) return validate(value, settings)
   return true
 }
 
@@ -56,5 +56,5 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
     if (!dequal(value, lastCorrectValue.current)) setFormat(value)
   }, [value, setFormat])
 
-  return { displayedValue: _value, onChange: _setValue, onUpdate }
+  return { displayValue: _value, onChange: _setValue, onUpdate }
 }
