@@ -35,10 +35,8 @@
   "dependencies": {
     "@welldone-software/why-did-you-render": "^6.0.0-rc.1",
     "@xstyled/styled-components": "^1.19.1",
-    "add": "^2.0.6",
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
-    "react": "^17.0.1",
     "react-colorful": "^4.4.3",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^8.1.0-beta.2",

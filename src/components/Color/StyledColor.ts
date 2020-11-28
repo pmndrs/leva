@@ -6,6 +6,7 @@ export const ColorPreview = styled.div`
   border-style: solid;
   border-width: 1px;
   border-color: input-border;
+  cursor: pointer;
   &:hover {
     border-color: input-hover-border;
   }
@@ -29,13 +30,14 @@ export const PickerContainer = styled.div`
 
 export const PickerWrapper = styled.div`
   position: absolute;
-  top: 22px;
+  bottom: 0;
   left: 0;
   z-index: 100;
 
   .react-colorful {
     width: 100px;
     height: 100px;
+    transform: translateY(100%);
     box-shadow: root;
     cursor: crosshair;
   }
