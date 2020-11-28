@@ -39,7 +39,6 @@
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
     "react": "^17.0.1",
-    "react-color": "^3.0.0-beta.3",
     "react-colorful": "^4.4.3",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^8.1.0-beta.2",
