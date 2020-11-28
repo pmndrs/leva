@@ -9,7 +9,7 @@ export const Root = styled.div`
   /* global styling */
   font-family: mono;
   font-size: root;
-  width: root;
+  width: root-width;
   background-color: root-bg;
   border-radius: root;
   box-shadow: root;

@@ -7,6 +7,7 @@ import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'
 import { useDrag } from 'react-use-gesture'
 import { invertedRange, range } from '../../utils'
+import { useThemeValue } from '../../hooks/useThemeValue'
 
 type NumberProps = TwixInputProps<number, NumberSettings>
 type RangeSliderProps = { value: number; min: number; max: number; onDrag: (v: number) => void }
@@ -16,11 +17,12 @@ const defaultSettings = { step: 1 }
 function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
+  const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
   const bind = useDrag(({ first, movement: [x], memo = value }) => {
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
-      rangeWidth.current = ref.current!.getBoundingClientRect().width - 12
+      rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
     }
     onDrag(memo + invertedRange(x / rangeWidth.current, 0, max - min))
     return memo
@@ -28,7 +30,7 @@ function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
 
   return (
     <Range ref={ref}>
-      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - 12px))` }} />
+      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
     </Range>
   )
 }
