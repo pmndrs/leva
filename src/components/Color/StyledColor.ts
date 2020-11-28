@@ -37,6 +37,7 @@ export const PickerWrapper = styled.div`
     width: 100px;
     height: 100px;
     box-shadow: root;
+    cursor: crosshair;
   }
 
   .react-colorful__saturation {
