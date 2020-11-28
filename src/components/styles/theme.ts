@@ -7,8 +7,8 @@ export const TwixTheme = {
     'root-border': '#c8b1e4',
     'folder-border': '#c8b1e4',
     'folder-title-bg': '#c8b1e4',
-    'boolean-bg': '#c8b1e4',
-    'boolean-checked-bg': '#a468ec',
+    primary: '#c8b1e4',
+    accent: '#a468ec',
     'input-border': '#e9dbf9',
     'input-hover-border': '#c8b1e4',
     'input-focus-border': '#9b72cf',
@@ -34,7 +34,9 @@ export const TwixTheme = {
     root: 11,
   },
   sizes: {
-    root: 280,
+    'root-width': 280,
+    'scrubber-width': 6,
+    'scrubber-height': 14,
   },
   shadows: {
     root: '0 0 40px #10002b44',
