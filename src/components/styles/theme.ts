@@ -14,7 +14,6 @@ export const TwixTheme = {
     'input-focus-border': '#9b72cf',
     'input-active-bg': '#e9dbf9',
     'select-bg': '#fff',
-    'image-drop-bg': '#c8b1e4',
     selection: '#c8b1e4',
   },
   radii: {
@@ -54,6 +53,7 @@ export const TwixTheme = {
   },
   transitions: {
     border: 'border-color 250ms ease',
-    background: 'background-color 250ms ease',
+    bg: 'background-color 250ms ease',
+    'border-bg': 'border-color, background-color 250ms ease',
   },
 }

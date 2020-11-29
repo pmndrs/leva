@@ -7,13 +7,13 @@ export const DropZone = styled.div<DropzoneRootProps>`
   border-width: 1px;
   border-color: input-border;
   border-radius: input;
-  transition: border, background;
+  transition: border-bg;
   outline: none;
   cursor: pointer;
   ${props =>
     props.isDragAccept &&
     css`
-      background-color: image-drop-bg;
+      background-color: input-active-bg;
       border-color: input-focus-border;
     `}
   &:hover {
@@ -60,7 +60,7 @@ export const Remove = styled.div`
     border-color: #ffffffff;
     background-color: accent;
   }
-  transition: border, background;
+  transition: border-bg;
   :after,
   :before {
     content: '';
