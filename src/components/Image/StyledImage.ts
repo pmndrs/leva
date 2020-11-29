@@ -48,8 +48,9 @@ export const Remove = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
+  margin: row-v row-h;
   height: 20px;
   width: 20px;
   border-radius: input;
