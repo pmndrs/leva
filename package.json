@@ -38,6 +38,7 @@
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
     "react-colorful": "^4.4.3",
+    "react-dropzone": "^11.2.4",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^8.1.0-beta.2",
     "styled-components": "^5.2.1",

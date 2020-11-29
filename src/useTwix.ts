@@ -12,10 +12,13 @@ import boolean from './components/Boolean'
 import point3d from './components/Point/Point3d'
 import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
+import image from './components/Image'
 import interval from './components/Interval'
 
 // @ts-expect-error
 register(select, 'SELECT')
+// @ts-expect-error
+register(image, 'IMAGE')
 register(number, 'NUMBER')
 // @ts-expect-error
 register(color, 'COLOR')
