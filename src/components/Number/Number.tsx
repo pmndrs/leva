@@ -5,7 +5,7 @@ import { NumberSettings } from './number-props'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 
@@ -41,7 +41,7 @@ export function Number({ label, displayValue, value, onUpdate, onChange, setting
   const hasRange = max !== Infinity && min !== -Infinity
   return (
     <Row input>
-      <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
+      <Label {...bind()} preventSelect>
         {label}
       </Label>
       <RangeGrid hasRange={hasRange}>

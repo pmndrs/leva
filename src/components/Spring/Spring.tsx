@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import styled from '@xstyled/styled-components'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '../../hooks'
 import { a, useSpring } from 'react-spring'
 import { PointCoordinates } from '../PointCoordinates'
 import { Row, Label } from '../styles'
@@ -36,15 +36,11 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
     immediate: k => k === 'opacity',
   }))
 
-  const bind = useDrag(
-    ({ movement: [x, y], axis, memo = [tension, friction] }) => {
-      // FIXME spring fix steps on usedrag
-      if (axis === 'x') onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step! })
-      else if (axis === 'y') onChange({ ...value, friction: memo[1] - Math.round(y) * fs!.step! })
-      return memo
-    },
-    { lockDirection: true }
-  )
+  const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
+    // FIXME spring fix steps on usedrag
+    onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step!, friction: memo[1] - Math.round(y) * fs!.step! })
+    return memo
+  })
 
   const updateSpring = useMemo(
     () =>

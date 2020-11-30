@@ -25,10 +25,10 @@ export const InnerLabel = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: ew-resize;
     text-transform: uppercase;
     opacity: 0.3;
     font-size: 0.8em;
+    cursor: ew-resize;
     user-select: none;
     &:hover {
       opacity: 0.8;

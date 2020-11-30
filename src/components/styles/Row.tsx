@@ -24,8 +24,14 @@ export const Row = styled.div<{ input?: boolean }>`
     `}
 `
 
-export const Label = styled.label`
+export const Label = styled.label<{ preventSelect: boolean }>`
   padding-left: row-h;
   color: label-text;
   font-weight: label;
+  ${prop =>
+    prop.preventSelect &&
+    css`
+      user-select: none;
+      cursor: ew-resize;
+    `}
 `

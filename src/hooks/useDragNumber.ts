@@ -1,4 +1,4 @@
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from './useDrag'
 
 type UseDragNumberProps = {
   value: number

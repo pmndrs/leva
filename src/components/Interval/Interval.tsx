@@ -5,7 +5,7 @@ import { Interval as IntervalType, IntervalSettings } from './interval-props'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
 import { Range, Scrubber } from '../Number'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 
