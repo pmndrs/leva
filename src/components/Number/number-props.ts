@@ -27,7 +27,7 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
     else if (Number.isFinite(max)) step = Math.abs(max! - value) / 400
     else step = getStep(value)
   }
-  const pad = Math.max(0, Math.log10(1 / step))
+  const pad = clamp(Math.log10(1 / step), 0, 2)
   return { value, settings: { step, pad, min: -Infinity, max: Infinity, ...settings } }
 }
 

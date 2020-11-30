@@ -28,6 +28,7 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
   const primaryColor = useThemeValue('color', 'primary')
 
   const { tension, friction, mass = 1 } = displayValue
+  const { tension: ts, friction: fs } = settings!
 
   const [spring, set] = useSpring(() => ({
     scaleX: 0.5,
@@ -38,8 +39,8 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
   const bind = useDrag(
     ({ movement: [x, y], axis, memo = [tension, friction] }) => {
       // FIXME spring fix steps on usedrag
-      if (axis === 'x') onChange({ ...value, tension: memo[0] - x * 2 })
-      else if (axis === 'y') onChange({ ...value, friction: memo[1] - y / 5 })
+      if (axis === 'x') onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step! })
+      else if (axis === 'y') onChange({ ...value, friction: memo[1] - Math.round(y) * fs!.step! })
       return memo
     },
     { lockDirection: true }

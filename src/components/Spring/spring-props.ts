@@ -22,7 +22,17 @@ export const schema = (o: any) =>
     })
     .test(o)
 
-export const normalize = ({ value, ...settings }: SpringInput) => {
+const defaultTensionSettings = { min: 1 }
+const defaultFrictionSettings = { min: 1 }
+const defaultMassSettings = { min: 0.1 }
+
+export const normalize = ({ value, ..._settings }: SpringInput) => {
+  _settings = _settings || {}
+  const settings = {
+    tension: { ...defaultTensionSettings, ..._settings.tension },
+    friction: { ...defaultFrictionSettings, ..._settings.friction },
+    mass: { ...defaultMassSettings, ..._settings.mass },
+  }
   const _value = orderKeys({ mass: 1, ...value }, ['tension', 'friction', 'mass'])
   return normalizeKeyValue(_value, settings)
 }
