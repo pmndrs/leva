@@ -22,7 +22,8 @@ export const sanitize = ({ min, max }: Interval, { bounds: [MIN, MAX] }: Interva
 })
 
 export const normalize = ({ value: { bounds, ..._value } }: IntervalInput) => {
-  // const _settings = { min: normalizeNumber(settings.min), max: normalizeNumber(settings.max) }
-  const { value, settings } = normalizeKeyValue(orderKeys(_value, ['min', 'max']), {})
+  const boundsSettings = { min: bounds[0], max: bounds[1] }
+  const _settings = { min: boundsSettings, max: boundsSettings }
+  let { value, settings } = normalizeKeyValue(orderKeys(_value, ['min', 'max']), _settings)
   return { value, settings: { ...settings, bounds } }
 }

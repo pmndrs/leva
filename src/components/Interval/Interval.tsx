@@ -52,6 +52,7 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
 export function Interval({ label, value, onUpdate, settings }: IntervalProps) {
   const { bounds, ..._settings } = settings!
   // FIXME fix value as any in Interval
+
   return (
     <Row input>
       <Label>{label}</Label>
