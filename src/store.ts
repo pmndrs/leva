@@ -113,6 +113,6 @@ export const store = {
   disposePaths,
 }
 
-// TODO remove this
+// TODO remove store from window
 // @ts-expect-error
 window.store = _store

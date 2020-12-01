@@ -1,15 +1,11 @@
 import React from 'react'
-import styled from '@xstyled/styled-components'
 import { Row } from '../styles'
+import { StyledButton } from './StyledButton'
 
 type ButtonProps = {
   name: string
   onClick: () => any
 }
-
-const StyledButton = styled.button`
-  width: 100%;
-`
 
 export function Button({ name, onClick }: ButtonProps) {
   return (

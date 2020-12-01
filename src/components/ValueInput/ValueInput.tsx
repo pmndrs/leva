@@ -22,6 +22,7 @@ export function ValueInput({ children, value, onUpdate, onChange, ...props }: Va
       <StyledInput
         type="text"
         {...props}
+        spellCheck="false"
         value={value}
         onChange={update(onChange)}
         onBlur={update(onUpdate)}

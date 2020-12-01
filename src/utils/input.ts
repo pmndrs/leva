@@ -9,14 +9,15 @@ export function normalizeInput<V, Settings extends object>(
   if (typeof input === 'object') {
     // only special inputs should have the type attribute
     if ('type' in input) return input
-    if ('value' in input) {
-      const { value, ...settings } = input
-      const type = getValueType(value, path)
+    // select uses options
+    if ('value' in input || 'options' in input || 'file' in input) {
+      const type = getValueType(input, path)
       if (!type) return null
-      return { type, ...normalize(type, value, settings) }
+      // @ts-expect-error
+      return { type, ...normalize(type, input) }
     }
   }
-  const type = getValueType(input, path)
+  const type = getValueType({ value: input }, path)
   if (!type) return null
-  return { type, ...normalize(type, input) }
+  return { type, ...normalize(type, { value: input }) }
 }

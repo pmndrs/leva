@@ -5,24 +5,34 @@ import { ValueInput } from './types'
 import { register } from './register'
 
 import number from './components/Number'
+import select from './components/Select'
 import color from './components/Color'
 import string from './components/String'
 import boolean from './components/Boolean'
-import point3d from './components/Point3d'
-import point2d from './components/Point2d'
+import point3d from './components/Point/Point3d'
+import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
+import image from './components/Image'
 import interval from './components/Interval'
 
+// @ts-expect-error
+register(select, 'SELECT')
+// @ts-expect-error
+register(image, 'IMAGE')
 register(number, 'NUMBER')
+// @ts-expect-error
 register(color, 'COLOR')
 register(string, 'STRING')
 register(boolean, 'BOOLEAN')
+// @ts-expect-error
 register(point3d, 'POINT3D')
+// @ts-expect-error
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
+// @ts-expect-error
 register(interval, 'INTERVAL')
 
-// TODO fix name type
+// FIXME fix name type in useTwix
 export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {
   const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
   const schema = useRef(_name ? folder(_name, args) : [nameOrInput, ...args])

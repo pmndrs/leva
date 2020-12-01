@@ -1,4 +1,4 @@
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from './useDrag'
 
 type UseDragNumberProps = {
   value: number
@@ -6,12 +6,13 @@ type UseDragNumberProps = {
   onDrag: (v: number) => void
 }
 
+const PRECISION = 100
+
 export function useDragNumber({ value, step = 1, onDrag }: UseDragNumberProps) {
-  return useDrag(
-    ({ movement: [x], memo = value }) => {
-      onDrag(memo + Math.round(x) * step!)
-      return memo
-    },
-    { axis: 'x' }
-  )
+  return useDrag(({ delta: [dx], movement: [, y], memo = value }) => {
+    const _step = y < -PRECISION ? 2 * step : y > PRECISION ? step / 2 : step
+    memo += Math.round(dx) * _step
+    onDrag(memo)
+    return memo
+  })
 }

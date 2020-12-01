@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
-import styled, { useTheme } from '@xstyled/styled-components'
-import { th } from '@xstyled/system'
-import { useDrag } from 'react-use-gesture'
+import styled from '@xstyled/styled-components'
+import { useDrag } from '../../hooks'
 import { a, useSpring } from 'react-spring'
 import { PointCoordinates } from '../PointCoordinates'
 import { Row, Label } from '../styles'
@@ -10,6 +9,7 @@ import { springFn } from './math'
 import { TwixInputProps } from '../../types'
 import { Spring as SpringType, SpringSettings } from './spring-props'
 import { debounce } from '../../utils'
+import { useThemeValue } from '../../hooks/useThemeValue'
 
 type SpringProps = TwixInputProps<SpringType & { mass: number }, SpringSettings>
 
@@ -21,13 +21,14 @@ const Container = styled.div`
 
 const SpringPreviewAnimated = a(SpringPreview)
 
-export function Spring({ label, displayedValue, value, onUpdate, onChange, settings }: SpringProps) {
-  const theme = useTheme()
+export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
   const canvas = useRef<HTMLCanvasElement>(null)
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
-  const springRef = useRef(displayedValue)
+  const springRef = useRef(displayValue)
+  const primaryColor = useThemeValue('color', 'primary')
 
-  const { tension, friction, mass = 1 } = displayedValue
+  const { tension, friction, mass = 1 } = displayValue
+  const { tension: ts, friction: fs } = settings!
 
   const [spring, set] = useSpring(() => ({
     scaleX: 0.5,
@@ -35,15 +36,11 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
     immediate: k => k === 'opacity',
   }))
 
-  const bind = useDrag(
-    ({ movement: [x, y], axis, memo = [tension, friction] }) => {
-      // TODO fix steps
-      if (axis === 'x') onChange({ ...value, tension: memo[0] - x * 2 })
-      else if (axis === 'y') onChange({ ...value, friction: memo[1] - y / 5 })
-      return memo
-    },
-    { lockDirection: true }
-  )
+  const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
+    // FIXME spring fix steps on usedrag
+    onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step!, friction: memo[1] - Math.round(y) * fs!.step! })
+    return memo
+  })
 
   const updateSpring = useMemo(
     () =>
@@ -70,9 +67,9 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
     for (let i = 0; i < width; i++) {
       _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
     }
-    _ctx.strokeStyle = th.color('folder-border')({ theme })
+    _ctx.strokeStyle = primaryColor
     _ctx.stroke()
-  }, [theme])
+  }, [primaryColor])
 
   useEffect(() => {
     springRef.current = { tension, friction, mass }
@@ -100,7 +97,7 @@ export function Spring({ label, displayedValue, value, onUpdate, onChange, setti
       <Row input>
         <Label>{label}</Label>
         <Container>
-          <PointCoordinates value={displayedValue} settings={settings} onUpdate={onUpdate} />
+          <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </>

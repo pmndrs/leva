@@ -18,15 +18,18 @@ export const Range = styled.div`
   align-items: center;
   height: 2px;
   border-radius: 1px;
-  background-color: folder-border;
+  background-color: primary;
   margin: 0 input;
 `
 
 export const Scrubber = styled.div`
   position: absolute;
-  width: 12px;
-  height: 14px;
-  border-radius: 2px;
-  background-color: boolean-checked-bg;
+  width: scrubber-width;
+  height: scrubber-height;
+  border-radius: input;
+  background-color: accent;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.8, 1);
+  }
 `

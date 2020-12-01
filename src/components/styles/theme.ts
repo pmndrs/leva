@@ -57,4 +57,9 @@ export const TwixTheme = {
     folder: 600,
     label: 600,
   },
+  transitions: {
+    border: 'border-color 250ms ease',
+    bg: 'background-color 250ms ease',
+    'border-bg': 'border-color, background-color 250ms ease',
+  },
 }

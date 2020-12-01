@@ -5,8 +5,9 @@ import { NumberSettings } from './number-props'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
+import { useThemeValue } from '../../hooks/useThemeValue'
 
 type NumberProps = TwixInputProps<number, NumberSettings>
 type RangeSliderProps = { value: number; min: number; max: number; onDrag: (v: number) => void }
@@ -16,11 +17,12 @@ const defaultSettings = { step: 1 }
 function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
+  const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
   const bind = useDrag(({ first, movement: [x], memo = value }) => {
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
-      rangeWidth.current = ref.current!.getBoundingClientRect().width - 12
+      rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
     }
     onDrag(memo + invertedRange(x / rangeWidth.current, 0, max - min))
     return memo
@@ -28,23 +30,23 @@ function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
 
   return (
     <Range ref={ref}>
-      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - 12px))` }} />
+      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
     </Range>
   )
 }
 
-export function Number({ label, displayedValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
+export function Number({ label, displayValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
   const { min, max, step } = settings
   const bind = useDragNumber({ value, step, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
   return (
     <Row input>
-      <Label {...bind()} style={{ cursor: 'ew-resize', userSelect: 'none' }}>
+      <Label {...bind()} preventSelect>
         {label}
       </Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} min={min!} max={max!} onDrag={onUpdate} />}
-        <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange} />
+        <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
       </RangeGrid>
     </Row>
   )
@@ -52,7 +54,7 @@ export function Number({ label, displayedValue, value, onUpdate, onChange, setti
 
 export function NumberInner({
   label,
-  displayedValue,
+  displayValue,
   value,
   onUpdate,
   onChange,
@@ -60,8 +62,8 @@ export function NumberInner({
 }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
-    <ValueInput value={displayedValue} onUpdate={onUpdate} onChange={onChange}>
-      <div title={label} {...bind()}>
+    <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
+      <div title={label.length > 1 ? label : ''} {...bind()}>
         {label.charAt(0)}
       </div>
     </ValueInput>

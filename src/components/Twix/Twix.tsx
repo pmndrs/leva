@@ -1,36 +1,20 @@
 import React, { useMemo } from 'react'
-import styled, { ThemeProvider } from '@xstyled/styled-components'
+import { ThemeProvider, createGlobalStyle } from '@xstyled/styled-components'
 import { useVisiblePaths } from '../../store'
 import { Folder } from './../Folder/'
 import { buildTree } from './tree'
+import { Root } from './StyledTwix'
 import { TwixTheme } from '../styles'
 
-const Root = styled.div`
-  /* position */
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
-  /* global styling */
-  font-family: mono;
-  font-size: root;
-  width: root;
-  overflow: hidden;
-  background-color: root-bg;
-  border-radius: root;
-  box-shadow: root;
-  border-style: solid;
-  border-width: root;
-  border-color: root-border;
-
-  &,
-  *,
-  *:after,
-  *:before {
-    box-sizing: border-box;
-  }
-  *::selection {
-    background-color: selection;
+const GlobalStyle = createGlobalStyle`
+  .twix__body__dragged {
+    user-select: none;
+    input {
+      user-select: none;
+    }
+    * {
+      cursor: ew-resize !important
+    }
   }
 `
 
@@ -41,6 +25,7 @@ export function Twix({ theme = TwixTheme }) {
   if (!('__root' in tree)) return null
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Root>
         <Folder root tree={tree.__root} />
       </Root>

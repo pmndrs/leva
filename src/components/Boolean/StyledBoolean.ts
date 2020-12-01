@@ -17,7 +17,7 @@ export const StyledInputWrapper = styled.div`
     cursor: pointer;
     height: 12px;
     width: 30px;
-    background-color: boolean-bg;
+    background-color: primary;
     border-radius: 20px;
     position: relative;
   }
@@ -35,7 +35,7 @@ export const StyledInputWrapper = styled.div`
   }
 
   input:checked + label {
-    background-color: boolean-checked-bg;
+    background-color: accent;
   }
 
   input:checked + label:after {
