@@ -1,24 +1,24 @@
 export const TwixTheme = {
   colors: {
-    'label-text': '#4B483A',
-    'input-text': '#4B483A',
-    'input-bg': "#AEA995",
+    'label-text': '#ddd',
+    'input-text': '#fff',
+    'input-bg': "#111",
     
     'folder-text': '#ddd',
     
-    'root-bg': '#C6C0A8',
-    'root-border': '#C6C0A8',
+    'root-bg': '#222',
+    'root-border': '#333',
 
-    'folder-border': '#4B483A',
-    'folder-title-bg': '#4B483A',
+    'folder-border': '#666',
+    'folder-title-bg': '#666',
     
     'boolean-bg': '#aaa',
     'boolean-checked-bg': 'white',
 
     'input-border': 'transparent',
     
-    'input-hover-border': '#4B483A',
-    'input-focus-border': '#4B483A',
+    'input-hover-border': '#c8b1e4',
+    'input-focus-border': '#9b72cf',
     
     'input-active-bg': 'transparent',
     
