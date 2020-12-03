@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { RgbaColorPicker, RgbaColor } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 import { Overlay } from '../Misc'
-import { Color as ColorType, ColorSettings } from './color-props'
+import { Color as ColorType, InternalColorSettings } from './color-props'
 import { TwixInputProps } from '../../types'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { Row, Label } from '../styles'
 
-type ColorProps = TwixInputProps<ColorType, ColorSettings>
+type ColorProps = TwixInputProps<ColorType, InternalColorSettings>
 
 export function Color({ value, displayValue, label, onUpdate, settings }: ColorProps) {
   const [showPicker, setShowPicker] = useState(false)
-  const rgb = settings!.format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
+  const rgb = settings.format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
   return (
     <Row input>
       <Label>{label}</Label>

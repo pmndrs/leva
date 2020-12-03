@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { ValueInput } from '../ValueInput'
 import { TwixInputProps } from '../../types'
-import { NumberSettings } from './number-props'
+import { InternalNumberSettings } from './number-props'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'
@@ -9,10 +9,8 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 
-type NumberProps = TwixInputProps<number, NumberSettings>
+type NumberProps = TwixInputProps<number, InternalNumberSettings>
 type RangeSliderProps = { value: number; min: number; max: number; onDrag: (v: number) => void }
-
-const defaultSettings = { step: 1 }
 
 function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -35,7 +33,7 @@ function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   )
 }
 
-export function Number({ label, displayValue, value, onUpdate, onChange, settings = defaultSettings }: NumberProps) {
+export function Number({ label, displayValue, value, onUpdate, onChange, settings }: NumberProps) {
   const { min, max, step } = settings
   const bind = useDragNumber({ value, step, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
@@ -52,14 +50,7 @@ export function Number({ label, displayValue, value, onUpdate, onChange, setting
   )
 }
 
-export function NumberInner({
-  label,
-  displayValue,
-  value,
-  onUpdate,
-  onChange,
-  settings = defaultSettings,
-}: NumberProps) {
+export function NumberInner({ label, displayValue, value, onUpdate, onChange, settings }: NumberProps) {
   const bind = useDragNumber({ value, step: settings.step, onDrag: onUpdate })
   return (
     <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>

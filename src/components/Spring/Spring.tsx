@@ -7,11 +7,11 @@ import { Row, Label } from '../styles'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
 import { TwixInputProps } from '../../types'
-import { Spring as SpringType, SpringSettings } from './spring-props'
+import { InternalSpring, InternalSpringSettings } from './spring-props'
 import { debounce } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 
-type SpringProps = TwixInputProps<SpringType & { mass: number }, SpringSettings>
+type SpringProps = TwixInputProps<InternalSpring, InternalSpringSettings>
 
 const Container = styled.div`
   display: grid;
@@ -37,7 +37,6 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
   }))
 
   const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
-    // FIXME spring fix steps on usedrag
     onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step!, friction: memo[1] - Math.round(y) * fs!.step! })
     return memo
   })

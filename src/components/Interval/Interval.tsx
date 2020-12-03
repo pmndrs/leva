@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../types'
-import { Interval as IntervalType, IntervalSettings } from './interval-props'
+import { InternalInterval, InternalIntervalSettings } from './interval-props'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
 import { Range, Scrubber } from '../Number'
@@ -9,8 +9,8 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 
-type IntervalProps = TwixInputProps<IntervalType, IntervalSettings>
-type IntervalSliderProps = { value: IntervalType; min: number; max: number; onDrag: (v: IntervalType) => void }
+type IntervalProps = TwixInputProps<InternalInterval, InternalIntervalSettings>
+type IntervalSliderProps = { value: InternalInterval; min: number; max: number; onDrag: (v: InternalInterval) => void }
 
 const Container = styled.div`
   display: grid;
@@ -29,7 +29,7 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   const rangeWidth = useRef<number>(0)
   const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
-  const bind = useDrag(({ first, movement: [x], args: [key], memo = value[key as keyof IntervalType] }) => {
+  const bind = useDrag(({ first, movement: [x], args: [key], memo = value[key as keyof InternalInterval] }) => {
     if (first) {
       rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
     }
@@ -51,7 +51,6 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
 
 export function Interval({ label, value, onUpdate, settings }: IntervalProps) {
   const { bounds, ..._settings } = settings!
-  // FIXME fix value as any in Interval
 
   return (
     <Row input>
@@ -61,7 +60,7 @@ export function Interval({ label, value, onUpdate, settings }: IntervalProps) {
           <IntervalSlider value={value} min={bounds[0]} max={bounds[1]} onDrag={onUpdate} />
         </Row>
         <Container>
-          <PointCoordinates value={value as any} settings={_settings} onUpdate={onUpdate} />
+          <PointCoordinates value={value} settings={_settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </Row>

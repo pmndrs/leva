@@ -3,10 +3,10 @@ import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../../types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
-import { Point3d as Point3dType, KEYS, Point3dSettings } from './point3d-props'
+import { Point3d as Point3dType, KEYS, InternalPoint3dSettings } from './point3d-props'
 import { mapArrayToKeys } from '../../../utils'
 
-type Point3dProps = TwixInputProps<Point3dType, Point3dSettings>
+type Point3dProps = TwixInputProps<Point3dType, InternalPoint3dSettings>
 
 const Container = styled.div`
   display: grid;

@@ -6,9 +6,9 @@ import { ValueInputWithSettings } from '../../types'
 type Format = 'name' | 'hex' | 'hex8' | 'rgb'
 
 export type Color = string | { r: number; g: number; b: number; a?: number }
-export type ColorSettings = { format?: Format }
+export type InternalColorSettings = { format: Format }
 
-type ColorInput = ValueInputWithSettings<Color, ColorSettings>
+type ColorInput = ValueInputWithSettings<Color>
 
 const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 
@@ -20,12 +20,11 @@ function convert(color: tinycolor.Instance, format: Format) {
   return format === 'rgb' ? color.toRgb() : color.toHex8String()
 }
 
-export const sanitize = (v: any, { format }: ColorSettings) => convert(tinycolor(v), format!)
+export const sanitize = (v: any, { format }: InternalColorSettings) => convert(tinycolor(v), format)
 export const format = (v: any) => convert(tinycolor(v), 'hex8')
 
-export const normalize = ({ value, format }: ColorInput) => {
+export const normalize = ({ value }: ColorInput) => {
   const color = tinycolor(value)
-  const valueFormat = color.getFormat() as Format
-  format = format || valueFormat
+  const format = color.getFormat() as Format
   return { value: convert(color, format), settings: { format } }
 }

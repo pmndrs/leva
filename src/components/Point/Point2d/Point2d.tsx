@@ -3,11 +3,11 @@ import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../../types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
-import { Point2d as Point2dType, Point2dSettings } from './point2d-props'
+import { Point2d as Point2dType, InternalPoint2dSettings } from './point2d-props'
 import { mapArrayToKeys } from '../../../utils'
 import { KEYS } from '../Point3d/point3d-props'
 
-type Point2dProps = TwixInputProps<Point2dType, Point2dSettings>
+type Point2dProps = TwixInputProps<Point2dType, InternalPoint2dSettings>
 
 const Container = styled.div`
   display: grid;

@@ -1,10 +1,10 @@
 // @ts-expect-error
 import v8n from 'v8n'
 
-type SelectSettings = { options: Record<string, any> | any[] }
-export type InternalSelectSettings = { keys: string[]; values: any[] }
+type SelectSettings = { options: Record<string, any> | unknown[] }
+export type InternalSelectSettings = { keys: string[]; values: unknown[] }
 
-type SelectInput = { value?: any } & SelectSettings
+type SelectInput = { value?: unknown } & SelectSettings
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>
