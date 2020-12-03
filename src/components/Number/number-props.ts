@@ -21,15 +21,15 @@ export const sanitize = (v: string, { min = -Infinity, max = Infinity }: NumberS
 export const normalize = ({ value, ...settings }: NumberInput) => {
   const { min, max } = settings
   let step = settings.step
-  let padSetp = getStep(value)
+  let padStep = getStep(value)
   if (!step) {
     if (Number.isFinite(min))
       if (Number.isFinite(max)) step = +(Math.abs(max! - min!) / 400).toPrecision(1)
       else step = +(Math.abs(value - min!) / 400).toPrecision(1)
     else if (Number.isFinite(max)) step = +(Math.abs(max! - value) / 400).toPrecision(1)
-    else step = padSetp
+    else step = padStep
   }
-  const pad = clamp(Math.log10(1 / padSetp), 0, 2)
+  const pad = clamp(Math.log10(1 / padStep), 0, 2)
   return { value, settings: { step, pad, min: -Infinity, max: Infinity, ...settings } }
 }
 
