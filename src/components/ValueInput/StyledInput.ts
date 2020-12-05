@@ -1,4 +1,5 @@
 import styled from '@xstyled/styled-components'
+import { th } from '@xstyled/system'
 
 export const StyledInput = styled.input`
   /* input reset */
@@ -7,9 +8,10 @@ export const StyledInput = styled.input`
   font-family: inherit;
   font-size: inherit;
   color: inherit;
-  padding: input;
+  padding: 0 input;
   width: 0;
   min-width: 0;
+  height: calc(${th.size('row-height')} - 2 * ${th.borderWidth('input')});
   flex: 1;
   /* input styling */
   border: none;

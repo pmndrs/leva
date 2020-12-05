@@ -38,9 +38,11 @@ export const TwixTheme = {
     'root-width': 280,
     'scrubber-width': 6,
     'scrubber-height': 14,
+    'row-height': 25,
   },
   shadows: {
-    root: '0 0 40px #10002b44',
+    root: '0 0 40px #00000033',
+    overlay: '0 4px 14px #00000066',
   },
   borderWidths: {
     input: 1,

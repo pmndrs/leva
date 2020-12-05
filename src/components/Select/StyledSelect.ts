@@ -6,13 +6,13 @@ export const StyledSelect = styled.select`
   display: block;
   font-family: inherit;
   font-size: inherit;
-  height: 100%;
+  height: row-height;
   background-color: select-bg;
   border-style: solid;
   border-width: 1px;
   border-color: input-border;
   border-radius: input;
-  padding: input;
+  padding: 0 input;
   cursor: pointer;
   transition: border;
   /* the triangle */
