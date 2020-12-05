@@ -20,6 +20,7 @@ function convert(color: tinycolor.Instance, format: Format) {
   return format === 'rgb' ? color.toRgb() : color.toHex8String()
 }
 
+export const validate = (v: any) => tinycolor(v).isValid()
 export const sanitize = (v: any, { format }: InternalColorSettings) => convert(tinycolor(v), format)
 export const format = (v: any) => convert(tinycolor(v), 'hex8')
 

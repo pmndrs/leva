@@ -1,4 +1,5 @@
 import styled from '@xstyled/styled-components'
+import { th } from '@xstyled/system'
 import 'react-colorful/dist/index.css'
 
 export const ColorPreview = styled.div`
@@ -7,6 +8,8 @@ export const ColorPreview = styled.div`
   border-width: 1px;
   border-color: input-border;
   cursor: pointer;
+  height: row-height;
+  width: row-height;
   &:hover {
     border-color: input-hover-border;
   }
@@ -18,7 +21,7 @@ export const ColorPreview = styled.div`
 export const PickerContainer = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: ${th.size('row-height')} auto;
   grid-column-gap: col-gap;
   align-items: center;
   > span {
@@ -38,7 +41,7 @@ export const PickerWrapper = styled.div`
     width: 100px;
     height: 100px;
     transform: translateY(100%);
-    box-shadow: root;
+    box-shadow: overlay;
     cursor: crosshair;
   }
 
