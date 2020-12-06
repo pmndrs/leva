@@ -3,9 +3,9 @@ import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../../types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
-import { Point2d as Point2dType, InternalPoint2dSettings } from './point2d-props'
+import { Point2d as Point2dType, InternalPoint2dSettings } from './point2d-plugin'
 import { mapArrayToKeys } from '../../../utils'
-import { KEYS } from '../Point3d/point3d-props'
+import { KEYS } from '../Point3d/point3d-plugin'
 
 type Point2dProps = TwixInputProps<Point2dType, InternalPoint2dSettings>
 

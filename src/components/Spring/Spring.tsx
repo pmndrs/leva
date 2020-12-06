@@ -7,7 +7,7 @@ import { Row, Label } from '../styles'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
 import { TwixInputProps } from '../../types'
-import { InternalSpring, InternalSpringSettings } from './spring-props'
+import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { debounce } from '../../utils'
 import { useThemeValue } from '../../hooks/useThemeValue'
 

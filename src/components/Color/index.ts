@@ -1,4 +1,4 @@
-import * as props from './color-props'
+import * as props from './color-plugin'
 import { Color } from './Color'
 
 const plugin = { ...props, component: Color }

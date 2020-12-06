@@ -3,7 +3,7 @@ import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../../types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
-import { Point3d as Point3dType, KEYS, InternalPoint3dSettings } from './point3d-props'
+import { Point3d as Point3dType, KEYS, InternalPoint3dSettings } from './point3d-plugin'
 import { mapArrayToKeys } from '../../../utils'
 
 type Point3dProps = TwixInputProps<Point3dType, InternalPoint3dSettings>

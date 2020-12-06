@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import styled from '@xstyled/styled-components'
 import { TwixInputProps } from '../../types'
-import { InternalInterval, InternalIntervalSettings } from './interval-props'
+import { InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
 import { Range, Scrubber } from '../Number'

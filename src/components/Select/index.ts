@@ -1,4 +1,4 @@
-import * as props from './select-props'
+import * as props from './select-plugin'
 import { Select } from './Select'
 
 const plugin = { ...props, component: Select }

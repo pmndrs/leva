@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useTwixUpdate } from '../../hooks'
 import { NumberInner } from '../Number'
-import { InternalNumberSettings } from '../Number/number-props'
+import { InternalNumberSettings } from '../Number/number-plugin'
 
 type CoordinateValue = Record<string, number>
 

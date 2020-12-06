@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { ValueInput } from '../ValueInput'
 import { TwixInputProps } from '../../types'
-import { InternalNumberSettings } from './number-props'
+import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'

@@ -2,7 +2,7 @@
 import v8n from 'v8n'
 import { ValueInputWithSettings } from '../../types'
 import { clamp, orderKeys } from '../../utils'
-import { InternalNumberSettings, normalizeKeyValue } from '../Number/number-props'
+import { InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
 
 type Interval = { min: number; max: number; bounds: [number, number] }
 export type InternalInterval = { min: number; max: number }

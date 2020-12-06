@@ -1,4 +1,4 @@
-import * as props from './spring-props'
+import * as props from './spring-plugin'
 import { Spring } from './Spring'
 
 const plugin = { ...props, component: Spring }
