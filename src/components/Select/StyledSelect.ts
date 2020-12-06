@@ -6,6 +6,7 @@ export const StyledSelect = styled.select`
   display: block;
   font-family: inherit;
   font-size: inherit;
+  color: inherit;
   height: row-height;
   background-color: select-bg;
   border-style: solid;
