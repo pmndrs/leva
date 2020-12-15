@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTwix, folder, button, Twix } from 'use-twix'
+import Scene3D from './Scene3D'
 
 function Comp1() {
   const t = useTwix(
@@ -65,14 +66,21 @@ export default function App() {
   const [c2, setC2] = React.useState(false)
   const [c1, setC1] = React.useState(false)
   return (
-    <div>
+    <>
       <Twix />
-      <Comp1 />
-      {/* {c2 && <Comp2 />}
+      <div style={{ display: 'flex' }}>
+        <div style={{ width: '50%' }}>
+          <Scene3D />
+        </div>
+        <div>
+          <Comp1 />
+          {/* {c2 && <Comp2 />}
       {c1 && <Comp1 />} */}
-      {/* <Comp3 /> */}
-      <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Comp2</button>
-      <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Last Comp1</button>
-    </div>
+          {/* <Comp3 /> */}
+          <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Comp2</button>
+          <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Last Comp1</button>
+        </div>
+      </div>
+    </>
   )
 }
