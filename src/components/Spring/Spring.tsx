@@ -9,7 +9,7 @@ import { springFn } from './math'
 import { TwixInputProps } from '../../types'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { debounce } from '../../utils'
-import { useThemeValue } from '../../hooks/useThemeValue'
+import { useThemeValue } from '../../hooks'
 
 type SpringProps = TwixInputProps<InternalSpring, InternalSpringSettings>
 

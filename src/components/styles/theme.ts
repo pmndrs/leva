@@ -42,10 +42,12 @@ export const TwixTheme = {
     'scrubber-width': 6,
     'scrubber-height': 14,
     'row-height': 25,
+    'joystick-width': 100,
+    'joystick-height': 100,
   },
   shadows: {
     root: '0 0 40px #00000033',
-    overlay: '0 4px 14px #00000066',
+    overlay: '0 4px 14px #00000033',
   },
   borderWidths: {
     input: 1,

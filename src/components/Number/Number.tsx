@@ -7,7 +7,7 @@ import { useDragNumber } from '../../hooks'
 import { Range, RangeGrid, Scrubber } from './StyledNumber'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useThemeValue } from '../../hooks/useThemeValue'
+import { useThemeValue } from '../../hooks'
 
 type NumberProps = TwixInputProps<number, InternalNumberSettings>
 type RangeSliderProps = { value: number; min: number; max: number; onDrag: (v: number) => void }

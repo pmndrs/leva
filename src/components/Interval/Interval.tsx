@@ -7,7 +7,7 @@ import { PointCoordinates } from '../PointCoordinates'
 import { Range, Scrubber } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useThemeValue } from '../../hooks/useThemeValue'
+import { useThemeValue } from '../../hooks'
 
 type IntervalProps = TwixInputProps<InternalInterval, InternalIntervalSettings>
 type IntervalSliderProps = { value: InternalInterval; min: number; max: number; onDrag: (v: InternalInterval) => void }

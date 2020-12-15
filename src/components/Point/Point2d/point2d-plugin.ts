@@ -3,7 +3,7 @@ import { NumberSettings, InternalNumberSettings } from '../../Number/number-plug
 import { ValueInputWithSettings } from '../../../types'
 
 type Point2dArray = [number, number, number]
-type Point2dObj = { x: number; y: number; z: number }
+type Point2dObj = { x: number; y: number }
 export type Point2d = Point2dObj | Point2dArray
 
 type Point2dSettings = { [key in keyof Point2dObj]?: NumberSettings }
