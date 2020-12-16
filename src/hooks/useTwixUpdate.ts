@@ -36,13 +36,16 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
   const setFormat = useCallback(v => _setValue(format(type, v, settings)), [type, settings])
 
   const onUpdate = useCallback(
-    (displayValue: any) => {
-      // if new value is equivalent to previous value do nothing
+    (displayValueOrFn: ((v: V) => any) | any) => {
+      const displayValue =
+        typeof displayValueOrFn === 'function' ? displayValueOrFn(lastCorrectValue.current) : displayValueOrFn
+
       if (!validate(type, displayValue, settings)) {
         setFormat(lastCorrectValue.current)
         return
       }
       const newValue = sanitize(type, displayValue, settings)
+      // if new value is equivalent to previous value do nothing
       if (dequal(newValue, lastCorrectValue.current)) return
 
       lastCorrectValue.current = newValue
@@ -56,5 +59,5 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
     if (!dequal(value, lastCorrectValue.current)) setFormat(value)
   }, [value, setFormat])
 
-  return { displayValue: _value, onChange: _setValue, onUpdate }
+  return { displayValue: _value, onChange: _setValue, onUpdate, valueRef: lastCorrectValue }
 }

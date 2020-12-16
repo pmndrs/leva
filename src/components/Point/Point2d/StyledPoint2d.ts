@@ -34,13 +34,13 @@ export const JoystickTrigger = styled.div`
   }
 `
 
-export const Joystick = styled.div`
+export const Joystick = styled.div<{ isOutOfBounds: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   width: joystick-width;
   height: joystick-height;
-  background-color: root-bg;
+  background-color: ${props => th.color(props.isOutOfBounds ? 'input-border' : 'root-bg')};
   border-radius: input;
   border-style: solid;
   border-width: 1px;
@@ -49,28 +49,39 @@ export const Joystick = styled.div`
   position: absolute;
   z-index: 100;
   overflow: hidden;
-  /*
-  bottom: -${th.space('col-gap')};
-  left: 0;
-  transform: translateY(100%);
-  */
-  :after, :before {
-    content: '';
-    position: absolute;
-    height: 1px;
-    background-color: primary;
-  }
-  :before {
-    width: joystick-width;
-  }
-  :after {
-    width: joystick-height;
-    transform: rotate(90deg);
-  }
+  transition: bg;
 
   > div {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: input-border;
+    background-color: root-bg;
+    width: 80%;
+    height: 80%;
+    :after,
+    :before {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      background-color: input-border;
+    }
+    :before {
+      width: 100%;
+      height: 1px;
+    }
+    :after {
+      height: 100%;
+      width: 1px;
+    }
+  }
+
+  > span {
     position: relative;
-    z-index: 10;
+    z-index: 100;
     width: 10px;
     height: 10px;
     background-color: accent;

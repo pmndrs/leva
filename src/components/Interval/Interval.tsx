@@ -10,7 +10,12 @@ import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks'
 
 type IntervalProps = TwixInputProps<InternalInterval, InternalIntervalSettings>
-type IntervalSliderProps = { value: InternalInterval; min: number; max: number; onDrag: (v: InternalInterval) => void }
+type IntervalSliderProps = {
+  value: InternalInterval
+  min: number
+  max: number
+  onDrag: (fn: (v: InternalInterval) => InternalInterval) => void
+}
 
 const Container = styled.div`
   display: grid;
@@ -29,12 +34,14 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   const rangeWidth = useRef<number>(0)
   const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
-  const bind = useDrag(({ first, movement: [x], args: [key], memo = value[key as keyof InternalInterval] }) => {
+  const bind = useDrag(({ first, delta: [dx], args: [key] }) => {
     if (first) {
       rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
     }
-    onDrag({ ...value, [key]: memo + invertedRange(x / rangeWidth.current, 0, max - min) })
-    return memo
+    onDrag(v => ({
+      ...v,
+      [key]: v[key as keyof InternalInterval] + invertedRange(dx / rangeWidth.current, 0, max - min),
+    }))
   })
 
   const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth}))`

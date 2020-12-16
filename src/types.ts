@@ -50,7 +50,7 @@ export type TwixInputProps<V, InternalSettings = {}> = {
   displayValue: any
   value: V
   onChange: React.Dispatch<any>
-  onUpdate: (value: any) => void
+  onUpdate: (v: any | ((_v: any) => any)) => void
   settings: InternalSettings
 }
 
