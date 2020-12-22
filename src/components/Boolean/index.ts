@@ -1,4 +1,4 @@
-import * as props from './boolean-props'
+import * as props from './boolean-plugin'
 import { Boolean } from './Boolean'
 
 const plugin = { ...props, component: Boolean }

@@ -10,11 +10,11 @@ export type FolderSettings = {
   collapsed?: boolean
 }
 
-export type ValueInputWithSettings<V extends unknown, Settings extends object = {}> = {
+export type ValueInputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
 
-export type ValueInput<V, Settings extends object = {}> = V | ValueInputWithSettings<V, Settings>
+export type ValueInput<V, Settings = {}> = V | ValueInputWithSettings<V, Settings>
 
 export type DataInput = {
   type: string
@@ -45,20 +45,20 @@ export type Tree = {
 
 export type V8N = { test: (o: any) => boolean }
 
-export type TwixInputProps<V, Settings extends object = {}> = {
+export type TwixInputProps<V, InternalSettings = {}> = {
   label: string
   displayValue: any
   value: V
   onChange: React.Dispatch<any>
-  onUpdate: (value: any) => void
-  settings?: Settings
+  onUpdate: (v: any | ((_v: any) => any)) => void
+  settings: InternalSettings
 }
 
-export type Plugin<V, Settings extends object> = {
+export type Plugin<Value, InternalValue, Settings, InternalSettings> = {
   schema: (value: any, settings?: Settings) => boolean
-  component: React.ComponentType<TwixInputProps<V, Settings>>
-  format?: (value: any, settings?: Settings) => any
-  validate?: (value: any, settings?: Settings) => boolean
-  sanitize?: (value: any, settings?: Settings) => V
-  normalize?: (input: ValueInputWithSettings<V, Settings>) => ValueInputWithSettings<V, Settings>
+  component: React.ComponentType<TwixInputProps<InternalValue, InternalSettings>>
+  format?: (value: any, settings: InternalSettings) => any
+  validate?: (value: any, settings: InternalSettings) => boolean
+  sanitize?: (value: any, settings: InternalSettings) => InternalValue
+  normalize?: (input: ValueInputWithSettings<Value, Settings>) => { value: InternalValue; settings: InternalSettings }
 }

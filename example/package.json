@@ -4,12 +4,16 @@
   "main": "./src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel serve index.html --no-cache",
+    "copy": "mkdir -p dist && cp -r static/* dist/",
+    "start": "yarn copy && parcel serve index.html --no-cache",
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "@react-three/drei": "^2.2.12",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-three-fiber": "^5.3.10",
+    "three": "^0.123.0"
   },
   "alias": {
     "use-twix": "../src",

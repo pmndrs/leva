@@ -1,4 +1,4 @@
-import * as props from './string-props'
+import * as props from './string-plugin'
 import { String } from './String'
 
 const plugin = { ...props, component: String }

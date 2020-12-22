@@ -1,4 +1,4 @@
-import * as props from './number-props'
+import * as props from './number-plugin'
 import { Number } from './Number'
 
 const plugin = { ...props, component: Number }

@@ -1,4 +1,4 @@
-import * as props from './image-props'
+import * as props from './image-plugin'
 import { Image } from './Image'
 
 const plugin = { ...props, component: Image }

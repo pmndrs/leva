@@ -1,11 +1,12 @@
 import styled, { css } from '@xstyled/styled-components'
+import { th } from '@xstyled/system'
 import { StyledContent } from '../Folder/StyledFolder'
 
 export const Row = styled.div<{ input?: boolean }>`
   position: relative;
   display: grid;
   grid-row-gap: row-v;
-  grid-template-rows: minmax(25px, max-content);
+  grid-template-rows: minmax(${th.size('row-height')}, max-content);
   align-items: center;
   ${StyledContent} > & {
     padding: 0 row-h;
@@ -24,7 +25,7 @@ export const Row = styled.div<{ input?: boolean }>`
     `}
 `
 
-export const Label = styled.label<{ preventSelect: boolean }>`
+export const Label = styled.label<{ preventSelect?: boolean }>`
   padding-left: row-h;
   color: label-text;
   font-weight: label;

@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
 import { TwixInputProps } from '../../types'
 
-type ImageProps = TwixInputProps<string>
+type ImageProps = TwixInputProps<string | undefined>
 
 export function Image({ label, value, onUpdate }: ImageProps) {
   const onDrop = useCallback(

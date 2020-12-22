@@ -1,18 +1,16 @@
 import { useDrag } from './useDrag'
+import { TwixInputProps } from '../types'
 
 type UseDragNumberProps = {
-  value: number
   step?: number
-  onDrag: (v: number) => void
+  onDrag: TwixInputProps<number>['onUpdate']
 }
 
 const PRECISION = 100
 
-export function useDragNumber({ value, step = 1, onDrag }: UseDragNumberProps) {
-  return useDrag(({ delta: [dx], movement: [, y], memo = value }) => {
+export function useDragNumber({ step = 1, onDrag }: UseDragNumberProps) {
+  return useDrag(({ delta: [dx], movement: [, y] }) => {
     const _step = y < -PRECISION ? 2 * step : y > PRECISION ? step / 2 : step
-    memo += Math.round(dx) * _step
-    onDrag(memo)
-    return memo
+    onDrag((v: number) => v + Math.round(dx) * _step)
   })
 }

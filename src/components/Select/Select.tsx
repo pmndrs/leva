@@ -1,7 +1,7 @@
 import React from 'react'
 import { TwixInputProps } from '../../types'
 import { Label, Row } from '../styles'
-import { InternalSelectSettings } from './select-props'
+import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
 
 type SelectProps = TwixInputProps<any, InternalSelectSettings>

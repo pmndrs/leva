@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react'
 import { useTwixUpdate } from '../../hooks'
 import { NumberInner } from '../Number'
-import { NumberSettings } from '../Number/number-props'
+import { InternalNumberSettings } from '../Number/number-plugin'
 
 type CoordinateValue = Record<string, number>
 
 type CoordinateProps<T extends CoordinateValue> = {
   value: T
-  settings?: NumberSettings
+  settings: InternalNumberSettings
   valueKey: keyof T
   onUpdate: (value: T) => void
 }
@@ -28,19 +28,15 @@ export function Coordinate<T extends CoordinateValue>({ value, valueKey, setting
   )
 }
 
-type PointSettings<T extends CoordinateValue> = { [key in keyof T]?: NumberSettings }
+type PointCoordinatesSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNumberSettings }
 
 type PointCoordinatesProps<T extends CoordinateValue> = {
   value: T
-  settings?: PointSettings<T>
+  settings: PointCoordinatesSettings<T>
   onUpdate: (value: T) => void
 }
 
-export function PointCoordinates<T extends CoordinateValue>({
-  value,
-  onUpdate,
-  settings = {},
-}: PointCoordinatesProps<T>) {
+export function PointCoordinates<T extends CoordinateValue>({ value, onUpdate, settings }: PointCoordinatesProps<T>) {
   return (
     <>
       {Object.keys(value).map(key => (

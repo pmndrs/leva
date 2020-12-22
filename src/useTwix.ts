@@ -15,21 +15,15 @@ import spring from './components/Spring'
 import image from './components/Image'
 import interval from './components/Interval'
 
-// @ts-expect-error
 register(select, 'SELECT')
-// @ts-expect-error
 register(image, 'IMAGE')
 register(number, 'NUMBER')
-// @ts-expect-error
 register(color, 'COLOR')
 register(string, 'STRING')
 register(boolean, 'BOOLEAN')
-// @ts-expect-error
 register(point3d, 'POINT3D')
-// @ts-expect-error
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
-// @ts-expect-error
 register(interval, 'INTERVAL')
 
 // FIXME fix name type in useTwix
