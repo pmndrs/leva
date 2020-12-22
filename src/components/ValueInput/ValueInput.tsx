@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
@@ -6,15 +6,24 @@ type ValueInputProps = {
   children?: React.ReactNode
   onUpdate: (value: string) => void
   onChange: (value: string) => void
+  onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<typeof StyledInput>
 
-export function ValueInput({ children, value, onUpdate, onChange, ...props }: ValueInputProps) {
-  const update = (fn: (value: string) => void) => (event: any) => {
-    const _value = event.target.value
-    fn(_value)
-  }
+export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, ...props }: ValueInputProps) {
+  const update = useCallback(
+    (fn: (value: string) => void) => (event: any) => {
+      const _value = event.target.value
+      fn(_value)
+    },
+    []
+  )
 
-  const onKeyPress = (e: React.KeyboardEvent) => e.key === 'Enter' && update(onUpdate)(e)
+  const onKeyPress = useCallback(
+    (e: React.KeyboardEvent) => {
+      e.key === 'Enter' && update(onUpdate)(e)
+    },
+    [update, onUpdate]
+  )
 
   return (
     <InputContainer>
@@ -27,6 +36,7 @@ export function ValueInput({ children, value, onUpdate, onChange, ...props }: Va
         onChange={update(onChange)}
         onBlur={update(onUpdate)}
         onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
       />
     </InputContainer>
   )
