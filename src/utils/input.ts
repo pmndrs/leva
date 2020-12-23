@@ -21,3 +21,5 @@ export function normalizeInput<V, Settings extends object>(
   if (!type) return null
   return { type, ...normalize(type, { value: input }) }
 }
+
+export const isInput = (key: string) => key.indexOf('_i-') === 0

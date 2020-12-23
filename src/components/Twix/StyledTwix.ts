@@ -1,4 +1,5 @@
 import styled from '@xstyled/styled-components'
+import { StyledTitle } from '../Folder/StyledFolder'
 
 export const Root = styled.div`
   /* position */
@@ -12,11 +13,7 @@ export const Root = styled.div`
   color: root-text;
   width: root-width;
   background-color: root-bg;
-  border-radius: root;
   box-shadow: root;
-  border-style: solid;
-  border-width: root;
-  border-color: root-border;
 
   &,
   *,
@@ -27,4 +24,11 @@ export const Root = styled.div`
   *::selection {
     background-color: selection;
   }
+`
+
+export const DragHandle = styled(StyledTitle)`
+  position: absolute;
+  width: 100%;
+  cursor: grab;
+  opacity: 0;
 `

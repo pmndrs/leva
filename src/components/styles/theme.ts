@@ -31,7 +31,7 @@ export const TwixTheme = {
   space: {
     input: 6,
     'folder-h': 6,
-    'folder-v': 6,
+    'folder-v': 3,
     'row-h': 3,
     'row-v': 3,
     'col-gap': 3,
@@ -56,7 +56,7 @@ export const TwixTheme = {
   },
   borderWidths: {
     input: 1,
-    root: 1,
+    root: 0,
     folder: 4,
   },
   fontWeights: {

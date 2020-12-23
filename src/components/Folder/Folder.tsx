@@ -1,14 +1,20 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { getFolderSettings } from '../../store'
-import { join } from '../../utils'
+import { join, isInput } from '../../utils'
 import { TwixWrapper } from '../TwixWrapper'
-import { StyledFolder, StyledTitle, StyledContent } from './StyledFolder'
+import { StyledFolder, StyledTitle, StyledWrapper, StyledContent } from './StyledFolder'
 import { useSpring, a } from 'react-spring'
 import { FolderSettings, Tree } from '../../types'
 
-type FolderProps = { name?: string; parent?: string; root?: boolean; tree: Tree } & FolderSettings
+type FolderProps = {
+  name?: string
+  parent?: string
+  root?: boolean
+  folderOnTop?: boolean
+  tree: Tree
+} & FolderSettings
 
-const isInput = (key: string) => key.indexOf('_i-') === 0
+const AnimatedWrapper = a(StyledWrapper)
 
 const createFolder = (key: string, parent: string = '', tree: Tree) => {
   const path = join(parent, key)
@@ -16,7 +22,7 @@ const createFolder = (key: string, parent: string = '', tree: Tree) => {
   return <Folder key={key} name={key} parent={path} tree={tree} {...settings} />
 }
 
-export function Folder({ name, parent, tree, root = false, collapsed = false }: FolderProps) {
+export function Folder({ name, parent, tree, root = false, folderOnTop = false, collapsed = false }: FolderProps) {
   const contentRef = useRef<HTMLDivElement>(null)
   const [toggled, setToggle] = useState(!collapsed)
   const firstRender = useRef(true)
@@ -37,20 +43,20 @@ export function Folder({ name, parent, tree, root = false, collapsed = false }: 
 
   return (
     <StyledFolder root={root}>
-      {name && (
+      {!folderOnTop && (
         <StyledTitle onClick={toggle}>
           <i style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }} />
           <div>{name}</div>
         </StyledTitle>
       )}
-      <a.div style={{ height }}>
+      <AnimatedWrapper root={root} style={{ height }}>
         <StyledContent ref={contentRef} root={root} toggled={toggled}>
           {Object.entries(tree).map(([key, value]) =>
             // @ts-expect-error
             isInput(key) ? <TwixWrapper {...value} /> : createFolder(key, parent, value as Tree)
           )}
         </StyledContent>
-      </a.div>
+      </AnimatedWrapper>
     </StyledFolder>
   )
 }
