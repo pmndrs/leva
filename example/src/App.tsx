@@ -4,6 +4,7 @@ import Scene3D from './Scene3D'
 
 function Comp1() {
   const t = useTwix(
+    // 'Test',
     { first: { value: 0, min: -10, max: 10 } },
     { file: { file: undefined } },
     { select: { options: ['x', 'y', ['x', 'y']] } },

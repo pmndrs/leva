@@ -2,17 +2,33 @@ import styled, { css } from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
 
 export const StyledFolder = styled.div<{ root: boolean }>`
-  border-left-style: solid;
-  border-left-width: folder;
-  border-left-color: folder-border;
   margin-top: folder-v;
+  & + & {
+    margin-top: calc(-${th.space('row-v')});
+  }
   ${props =>
     props.root &&
     css`
-      border-left-style: none;
       margin-top: 0;
-      border-radius: 0 0 root root;
+      > ${StyledTitle} {
+        border-radius: root root 0 0;
+      }
     `}
+`
+
+export const StyledWrapper = styled.div<{ root: boolean }>`
+  ${props =>
+    !props.root
+      ? css`
+          border-left-style: solid;
+          border-left-width: folder;
+          border-left-color: folder-border;
+        `
+      : css`
+          border-style: solid;
+          border-width: root;
+          border-color: root-border;
+        `}
 `
 
 export const StyledContent = styled.div<{ root: boolean; toggled: boolean }>`
@@ -30,7 +46,16 @@ export const StyledContent = styled.div<{ root: boolean; toggled: boolean }>`
     css`
       > ${StyledFolder} {
         margin-left: 0;
-        border-width: calc(${th.borderWidth('folder')} - ${th.borderWidth('root')});
+        &:first-of-type {
+          margin-top: -row-v;
+          > ${StyledTitle} {
+            border-radius: root root 0 0;
+          }
+        }
+
+        > ${StyledWrapper} {
+          border-width: calc(${th.borderWidth('folder')} - ${th.borderWidth('root')});
+        }
       }
     `}
 `
@@ -41,7 +66,8 @@ export const StyledTitle = styled.div`
   color: folder-text;
   font-weight: folder;
   background-color: folder-title-bg;
-  padding: row-v row-h row-v 0;
+  padding: row-v row-h row-v;
+  padding-left: ${th.borderWidth('folder')};
   user-select: none;
   cursor: pointer;
   > i {
