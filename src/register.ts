@@ -1,16 +1,15 @@
-import { warn, TwixErrors } from './utils/log'
 import { Plugin, ValueInputWithSettings } from './types'
+import { warn, TwixErrors } from './utils'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
 
 export const Plugins: Record<string, Omit<Plugin<any, any, any, any>, 'schema'>> = {}
 
-export function getValueType({ value, ...settings }: any, path: string) {
+export function getValueType({ value, ...settings }: any) {
   for (let checker of schemas) {
     const type = checker(value, settings)
     if (type) return type
   }
-  warn(TwixErrors.UNKNOWN_INPUT, path, value)
   return undefined
 }
 

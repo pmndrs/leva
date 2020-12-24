@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { warn, TwixErrors } from './utils/log'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
+import { warn, TwixErrors } from './utils/log'
 import { Data, FolderSettings, Folders } from './types'
 
 type State = { data: Data }
@@ -75,14 +75,14 @@ export function useInput(path: string) {
   }, shallow)
 }
 
+// possibly make this reactive
 const FOLDERS: Folders = {}
-
 export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
 
 // @ts-expect-error
 export const getDataFromSchema = schema => {
   const _data: any = {}
-  // @ts-expect-errorÒ
+  // @ts-expect-error
   schema.flat().forEach(item => {
     Object.entries(item).forEach(([path, value]: [string, any | FolderSettings]) => {
       const [key, base] = getKeyPath(path)
