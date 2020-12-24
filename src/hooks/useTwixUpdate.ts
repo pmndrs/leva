@@ -56,7 +56,10 @@ export function useTwixUpdate<V, Settings extends object>({ value, type, setting
   )
 
   useEffect(() => {
-    if (!dequal(value, lastCorrectValue.current)) setFormat(value)
+    if (!dequal(value, lastCorrectValue.current)) {
+      lastCorrectValue.current = value
+      setFormat(value)
+    }
   }, [value, setFormat])
 
   return { displayValue: _value, onChange: _setValue, onUpdate, valueRef: lastCorrectValue }
