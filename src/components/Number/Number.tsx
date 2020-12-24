@@ -17,12 +17,12 @@ function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   const rangeWidth = useRef<number>(0)
   const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
-  const bind = useDrag(({ first, movement: [x] }) => {
+  const bind = useDrag(({ first, delta: [dx] }) => {
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
       rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
     }
-    onDrag(v => v + invertedRange(x / rangeWidth.current, 0, max - min))
+    onDrag(v => v + invertedRange(dx / rangeWidth.current, 0, max - min))
   })
 
   return (
