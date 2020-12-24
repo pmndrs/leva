@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useTwixUpdate } from '../../hooks'
 import { NumberInner } from '../Number'
 import { InternalNumberSettings } from '../Number/number-plugin'
@@ -13,7 +13,7 @@ type CoordinateProps<T extends CoordinateValue> = {
 }
 
 export function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUpdate }: CoordinateProps<T>) {
-  const set = useCallback((v: number) => onUpdate({ ...value, [valueKey]: v }), [onUpdate, value, valueKey])
+  const set = (v: number) => onUpdate({ ...value, [valueKey]: v })
   const number = useTwixUpdate({ type: 'NUMBER', value: value[valueKey], set, settings })
 
   return (

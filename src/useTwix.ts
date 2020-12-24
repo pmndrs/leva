@@ -21,10 +21,10 @@ register(number, 'NUMBER')
 register(color, 'COLOR')
 register(string, 'STRING')
 register(boolean, 'BOOLEAN')
+register(interval, 'INTERVAL')
 register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
-register(interval, 'INTERVAL')
 
 // FIXME fix name type in useTwix
 export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {

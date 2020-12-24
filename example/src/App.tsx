@@ -8,7 +8,7 @@ function Comp1() {
     { first: { value: 0, min: -10, max: 10 } },
     { file: { file: undefined } },
     { select: { options: ['x', 'y', ['x', 'y']] } },
-    { interval: { min: -10, max: 10, bounds: [-100, 100] } },
+    { interval: { min: -100, max: 100, value: [-10, 10] } },
     { color: '#fff', number: { value: 1000, min: 3 } },
     { colorObj: { r: 1, g: 2, b: 3 } },
     folder(
