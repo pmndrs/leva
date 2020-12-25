@@ -9,6 +9,7 @@ export const StyledInputWrapper = styled.div`
     height: 0;
     width: 0;
     visibility: hidden;
+    margin: 0;
   }
 
   label {
