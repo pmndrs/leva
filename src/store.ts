@@ -12,13 +12,13 @@ const useStore = _store
 
 const getData = () => _store.getState().data
 
-// increments count for existing paths
-const setData = (data: Data) => {
+// increments or decrements counts for existing paths
+const setData = (data: Data, disposing: boolean = false) => {
   _store.setState(s => {
     const _data = s.data
     const mergedData = Object.entries(data).reduce((acc, [key, value]) => {
       const current = _data[key]
-      if (current) return { ...acc, [key]: { ...current, count: current.count! + 1 } }
+      if (current) return { ...acc, [key]: { ...current, count: current.count! + (disposing ? -1 : 1) } }
       return { ...acc, [key]: { ...value, count: 1 } }
     }, {})
     return { data: { ..._data, ...mergedData } }
@@ -97,13 +97,8 @@ export const getDataFromSchema = schema => {
 }
 
 const disposePaths = (paths: string[]) => {
-  const data = getData()
-  const _data: Data = {}
-  paths.forEach(path => {
-    const { count, ...current } = data[path]
-    _data[path] = { ...current, count: count! - 1 }
-  })
-  setData(_data)
+  const _data: Data = pick(getData(), paths)
+  setData(_data, true)
 }
 
 export const store = {
