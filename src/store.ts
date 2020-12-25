@@ -113,6 +113,8 @@ export const store = {
   disposePaths,
 }
 
-// TODO remove store from window
-// @ts-expect-error
-window.store = _store
+if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
+  // TODO remove store from window
+  // @ts-expect-error
+  window.__TWIX__STORE = _store
+}
