@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useLayoutEffect } from 'react'
+import ReactDOM from 'react-dom'
 import { ThemeProvider, createGlobalStyle } from '@xstyled/styled-components'
 
 import { useDrag } from 'react-use-gesture'
@@ -25,15 +26,24 @@ const GlobalStyle = createGlobalStyle`
 
 const AnimatedRoot = a(Root)
 
+let usedInTree = false
+let hookRenderCounts = 0
+let rootEl: HTMLDivElement | null
+
 export function Twix({ theme = TwixTheme }) {
   const paths = useVisiblePaths()
   const tree = useMemo(() => buildTree(paths), [paths])
   const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
   const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
 
+  useLayoutEffect(() => {
+    usedInTree = hookRenderCounts === 0
+  }, [])
+
   if (!('__root' in tree)) return null
   // we know there's a folder at the root of the root if the first
-  // key isn't an input
+  // key isn't an input. isFolderOnTop is used to show an dummy folder at
+  // the top of the pane.
   const isFolderOnTop = !isInput(Object.keys(tree.__root)[0])
 
   return (
@@ -45,4 +55,26 @@ export function Twix({ theme = TwixTheme }) {
       </AnimatedRoot>
     </ThemeProvider>
   )
+}
+
+export function useRenderRoot() {
+  useEffect(() => {
+    if (usedInTree) return
+    if (hookRenderCounts === 0) {
+      rootEl = document.createElement('div')
+      if (document.body) {
+        document.body.appendChild(rootEl)
+        ReactDOM.render(<Twix />, rootEl)
+      }
+    }
+    hookRenderCounts++
+    return () => {
+      if (usedInTree) return
+      hookRenderCounts--
+      if (hookRenderCounts === 0 && rootEl) {
+        rootEl.remove()
+        rootEl = null
+      }
+    }
+  }, [])
 }

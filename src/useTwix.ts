@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getDataFromSchema, useValuesForPath } from './store'
+import { useRenderRoot } from './components/Twix'
 import { folder } from './helpers/folder'
 import { ValueInput } from './types'
 import { register } from './register'
@@ -38,6 +39,8 @@ export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: Val
     store.setData(initialData)
     return () => store.disposePaths(paths)
   }, [paths, initialData])
+
+  useRenderRoot()
 
   return values
 }
