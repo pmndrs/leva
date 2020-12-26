@@ -1,0 +1,34 @@
+{
+  "projectName": "use-twix",
+  "projectOwner": "gsimone",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "gsimone",
+      "name": "Gianmarco",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1862172?v=4",
+      "profile": "https://twitter.com/ggsimm",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "dbismut",
+      "name": "David Bismut",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5003380?v=4",
+      "profile": "https://github.com/dbismut",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
