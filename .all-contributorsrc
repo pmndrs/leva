@@ -26,7 +26,8 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/5003380?v=4",
       "profile": "https://github.com/dbismut",
       "contributions": [
-        "code"
+        "code",
+        "ideas"
       ]
     },
     {
@@ -72,6 +73,24 @@
       "profile": "https://github.com/marcofugaro",
       "contributions": [
         "ideas"
+      ]
+    },
+    {
+      "login": "ivanross",
+      "name": "Ivan Rossi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15856208?v=4",
+      "profile": "https://github.com/ivanross",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "thephoenixofthevoid",
+      "name": "thephoenixofthevoid",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/49817252?v=4",
+      "profile": "https://github.com/thephoenixofthevoid",
+      "contributions": [
+        "bug"
       ]
     }
   ],
