@@ -1,51 +1,84 @@
 import { useRef } from 'react'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
-import { normalizeInput, pick, getKeyPath, FolderSettingsKey } from './utils'
+import { normalizeInput, pick, getKeyPath, join } from './utils'
 import { warn, TwixErrors } from './utils/log'
-import { Data, FolderSettings, Folders } from './types'
+import { Data, FolderSettings, Folders, SpecialInputTypes } from './types'
 
 type State = { data: Data }
 
+// zustand store
 const _store = create<State>(() => ({ data: {} }))
 const useStore = _store
 
+// shorthand to get zustand store data
 const getData = () => _store.getState().data
 
-// increments or decrements counts for existing paths
-const setData = (data: Data, disposing: boolean = false) => {
+/**
+ * Merges the data passed as an argument with the store data.
+ * If an input path from the data already exists in the store,
+ * the function doesn't update the data but increments count
+ * to keep track of how many components use that input key.
+ * @param newData the data to update
+ */
+function setData(newData: Data) {
   _store.setState(s => {
-    const _data = s.data
-    const mergedData = Object.entries(data).reduce((acc, [key, value]) => {
-      const current = _data[key]
-      if (current) return { ...acc, [key]: { ...current, count: current.count! + (disposing ? -1 : 1) } }
-      return { ...acc, [key]: { ...value, count: 1 } }
-    }, {})
-    return { data: { ..._data, ...mergedData } }
+    const data = s.data
+
+    Object.entries(newData).forEach(([path, value]) => {
+      const input = data[path]
+      // if an input already exists at the path, increment
+      // the reference count.
+      if (input) input.count++
+      // if not, create a path for the input.
+      else data[path] = { ...value, count: 1 }
+    })
+
+    // TODO not sure about direct mutation but since this
+    // returns a new object that should work and trigger
+    // a re-render.
+    return { data }
   })
 }
 
-const setValueAtPath = (path: string, value: any) => {
+/**
+ * Shorthand function to set the value of an input at a given path.
+ * @param path path of the input
+ * @param value new value of the input
+ */
+function setValueAtPath(path: string, value: any) {
   _store.setState(s => {
     const current = s.data[path]
     return { data: { ...s.data, [path]: { ...current, value } } }
   })
 }
 
-const getVisiblePaths = (data: Data) =>
-  Object.entries(data)
-    .map(([path, { count }]) => (count! > 0 ? path : undefined))
+/**
+ * For a given data structure, gets all paths for which inputs have
+ * a reference count superior to zero. This function is used by the
+ * root pane to only display the inputs that are consumed by mounted
+ * components.
+ * @param data
+ */
+function getVisiblePaths(data: Data) {
+  return Object.entries(data)
+    .map(([path, { count }]) => (count > 0 ? path : undefined))
     .filter(Boolean) as string[]
+}
 
+/**
+ * Hook used by the root component to get all visible inputs.
+ */
 export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shallow)
 
-const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) => {
+function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
   return Object.entries(pick(data, paths) as Data).reduce(
     // getValuesForPath is only called from paths that are inputs, so
     // they always have a value
     // @ts-expect-error
     (acc, [path, { value }]) => {
-      const key = getKeyPath(path)[0]
+      const [key] = getKeyPath(path)
+      // if a key already exists in the accumulator, prompt an error.
       if (acc[key] !== undefined) {
         if (shouldWarn) warn(TwixErrors.DUPLICATE_KEYS, key, path)
         return acc
@@ -56,7 +89,15 @@ const getValuesForPaths = (data: Data, paths: string[], shouldWarn: boolean) => 
   )
 }
 
-export const useValuesForPath = (paths: string[], initialData: Data) => {
+/**
+ * Hook that returns the values from the zustand store for the given paths.
+ * @param paths paths for which to return values
+ * @param initialData
+ */
+export function useValuesForPath(paths: string[], initialData: Data) {
+  // init is used to know when to prompt duplicate key errors to the user.
+  // We don't want to show the errors on every render, only when the hook
+  // is first used!
   const init = useRef(true)
 
   const valuesForPath = useStore(s => {
@@ -68,6 +109,10 @@ export const useValuesForPath = (paths: string[], initialData: Data) => {
   return valuesForPath
 }
 
+/**
+ * Return all input (value and settings) properties at a given path.
+ * @param path
+ */
 export function useInput(path: string) {
   return useStore(s => {
     const { count, ...input } = s.data[path]
@@ -79,26 +124,33 @@ export function useInput(path: string) {
 const FOLDERS: Folders = {}
 export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
 
-// @ts-expect-error
-export const getDataFromSchema = schema => {
-  const _data: any = {}
-  // @ts-expect-error
-  schema.flat().forEach(item => {
-    Object.entries(item).forEach(([path, value]: [string, any | FolderSettings]) => {
-      const [key, base] = getKeyPath(path)
-      if (key === FolderSettingsKey) FOLDERS[base!] = value as FolderSettings
-      else {
-        const input = normalizeInput(value, path)
-        if (input) _data[path] = input
-      }
-    })
+/**
+ * Extract the data from the schema and sets folder initial preferences.
+ * @param schema
+ */
+export function getDataFromSchema(schema: any, rootPath = '') {
+  const data: any = {}
+  Object.entries(schema).forEach(([path, value]: [string, any]) => {
+    // console.log({ key, value })
+    const newPath = join(rootPath, path)
+    if (value.type === SpecialInputTypes.FOLDER) {
+      Object.assign(data, getDataFromSchema(value.schema, newPath))
+      FOLDERS[newPath] = value.settings as FolderSettings
+    } else {
+      const input = normalizeInput(value, newPath)
+      if (input) data[newPath] = input
+    }
   })
-  return _data as Data
+
+  return data as Data
 }
 
-const disposePaths = (paths: string[]) => {
-  const _data: Data = pick(getData(), paths)
-  setData(_data, true)
+function disposePaths(paths: string[]) {
+  _store.setState(s => {
+    const data = s.data
+    paths.forEach(path => data[path].count--)
+    return { data }
+  })
 }
 
 export const store = {

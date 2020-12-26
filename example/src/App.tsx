@@ -3,30 +3,32 @@ import { useTwix, folder, button, Twix } from 'use-twix'
 import Scene3D from './Scene3D'
 
 function Comp1() {
-  const t = useTwix(
-    // 'Test',
-    { first: { value: 0, min: -10, max: 10 } },
-    { file: { file: undefined } },
-    { select: { options: ['x', 'y', ['x', 'y']] } },
-    { interval: { min: -100, max: 100, value: [-10, 10] } },
-    { color: '#fff', number: { value: 1000, min: 3 } },
-    { colorObj: { r: 1, g: 2, b: 3 } },
-    folder(
-      'folder',
-      { boolean: false, spring: { tension: 100, friction: 30 } },
-      folder(
-        { name: 'sub folder', collapsed: false },
-        { number: 5 },
-        button('Button 1', () => console.log('hello')),
-        folder('sub3', {
-          pos2d: { x: 3, y: 4 },
-          pos2dArr: [100, 200],
-          pos3d: { x: 0.3, y: 0.1, z: 0.5 },
-          pos3dArr: [10, 20, 4],
-        })
-      )
-    )
-  )
+  const t = useTwix({
+    first: { value: 0, min: -10, max: 10 },
+    file: { file: undefined },
+    select: { options: ['x', 'y', ['x', 'y']] },
+    interval: { min: -100, max: 100, value: [-10, 10] },
+    color: '#fff',
+    number: { value: 1000, min: 3 },
+    colorObj: { r: 1, g: 2, b: 3 },
+    folder2: folder({
+      boolean: false,
+      spring: { tension: 100, friction: 30 },
+      folder3: folder(
+        {
+          'Hello Button': button(() => console.log('hello')),
+          folder4: folder({
+            pos2d: { x: 3, y: 4 },
+            pos2dArr: [100, 200],
+            pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+            pos3dArr: [10, 20, 4],
+          }),
+        },
+        { collapsed: false }
+      ),
+    }),
+  })
+
   return (
     <div>
       <h1>Comp1</h1>
@@ -37,12 +39,11 @@ function Comp1() {
 }
 
 function Comp2() {
-  const t = useTwix(
-    'folder.sub folder',
-    { number: 4 },
-    { string: 'some string' },
-    button('Button 2', () => console.log('hello2'))
-  )
+  const t = useTwix('folder2.folder3', {
+    number: 4,
+    string: 'some string',
+    'Button 2': button(() => console.log('hello2')),
+  })
   return (
     <div>
       <h1>Comp2</h1>
@@ -73,8 +74,8 @@ export default function App() {
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
           {c1 && <Comp1 />}
-          {/* {c1 && <Comp1 />} */}
-          {/* <Comp3 /> */}
+          {c2 && <Comp1 />}
+          <Comp2 />
           <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
           <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>

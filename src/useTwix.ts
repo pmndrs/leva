@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef } from 'react'
 import { store, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './components/Twix'
 import { folder } from './helpers/folder'
-import { ValueInput } from './types'
 import { register } from './register'
 
 import number from './components/Number'
@@ -28,10 +27,11 @@ register(point2d, 'POINT2D')
 register(spring, 'SPRING')
 
 // FIXME fix name type in useTwix
-export function useTwix(nameOrInput: string | ValueInput<any, any>, ...args: ValueInput<any, any>[]) {
-  const _name = typeof nameOrInput === 'string' ? nameOrInput : undefined
-  const schema = useRef(_name ? folder(_name, ...args) : [nameOrInput, ...args])
-  const initialData = useMemo(() => getDataFromSchema(schema.current), [])
+// @ts-expect-error
+export function useTwix(nameOrSchema: string | any, schema?) {
+  const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
+  const _schema = useRef(_name ? { [_name]: folder(schema) } : nameOrSchema)
+  const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
   const paths = useMemo(() => Object.keys(initialData), [initialData])
   const values = useValuesForPath(paths, initialData)
 

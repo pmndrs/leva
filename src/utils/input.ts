@@ -10,7 +10,7 @@ export function normalizeInput<V, Settings extends object>(
   if (typeof input === 'object') {
     // only special inputs should have the type attribute
     if ('type' in input) return input
-    // select uses options
+
     const type = getValueType(input)
     // @ts-expect-error
     if (type) return { type, ...normalize(type, input) }

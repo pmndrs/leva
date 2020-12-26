@@ -1,5 +1,10 @@
 import { SpecialInputTypes, ButtonInput } from '../types'
 
-export function button(name: string, onClick: () => any): Record<string, ButtonInput> {
-  return { [name]: { type: SpecialInputTypes.BUTTON, name, onClick } }
+/**
+ *
+ * @param name button name
+ * @param onClick function that executes when the button is clicked
+ */
+export function button(onClick: () => any): ButtonInput {
+  return { type: SpecialInputTypes.BUTTON, onClick }
 }
