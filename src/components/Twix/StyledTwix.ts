@@ -1,17 +1,24 @@
-import styled from '@xstyled/styled-components'
+import styled, { css } from '@xstyled/styled-components'
 import { StyledTitle } from '../Folder/StyledFolder'
 
-export const Root = styled.div`
+export const Root = styled.div<{ fillParent: boolean }>`
   /* position */
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  ${props =>
+    !props.fillParent
+      ? css`
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: root-text;
+          width: root-width;
+        `
+      : css`
+          position: relative;
+          width: 100%;
+        `}
 
-  /* global styling */
   font-family: mono;
   font-size: root;
-  color: root-text;
-  width: root-width;
   background-color: root-bg;
   box-shadow: root;
 

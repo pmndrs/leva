@@ -39,6 +39,7 @@ export const TwixTheme = {
   },
   sizes: {
     'root-width': 280,
+    'twix-width': 160,
     'scrubber-width': 6,
     'scrubber-height': 14,
     'row-height': 25,

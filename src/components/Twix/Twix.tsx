@@ -28,7 +28,7 @@ const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
-export function Twix({ theme = TwixTheme }) {
+export function Twix({ theme = TwixTheme, fillParent = false }) {
   const paths = useVisiblePaths()
   const tree = useMemo(() => buildTree(paths), [paths])
   const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
@@ -47,7 +47,7 @@ export function Twix({ theme = TwixTheme }) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AnimatedRoot style={spring}>
+      <AnimatedRoot style={spring} fillParent={fillParent}>
         <DragHandle {...bind()}>twix</DragHandle>
         <Folder root tree={tree.__root} folderOnTop={isFolderOnTop} />
       </AnimatedRoot>

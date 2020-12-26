@@ -20,7 +20,7 @@ export const Row = styled.div<{ input?: boolean }>`
   ${props =>
     props.input &&
     css`
-      grid-template-columns: auto 160px;
+      grid-template-columns: auto ${th.size('twix-width')};
       grid-column-gap: col-gap;
     `}
 `
