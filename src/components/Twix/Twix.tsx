@@ -26,9 +26,7 @@ const GlobalStyle = createGlobalStyle`
 
 const AnimatedRoot = a(Root)
 
-let usedInTree = false
-let hookRenderCounts = 0
-let rootEl: HTMLDivElement | null
+let rootInitialized = false
 
 export function Twix({ theme = TwixTheme }) {
   const paths = useVisiblePaths()
@@ -37,7 +35,7 @@ export function Twix({ theme = TwixTheme }) {
   const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
 
   useLayoutEffect(() => {
-    usedInTree = hookRenderCounts === 0
+    rootInitialized = true
   }, [])
 
   if (!('__root' in tree)) return null
@@ -59,22 +57,13 @@ export function Twix({ theme = TwixTheme }) {
 
 export function useRenderRoot() {
   useEffect(() => {
-    if (usedInTree) return
-    if (hookRenderCounts === 0) {
-      rootEl = document.createElement('div')
+    if (!rootInitialized) {
+      const rootEl = document.createElement('div')
       if (document.body) {
         document.body.appendChild(rootEl)
         ReactDOM.render(<Twix />, rootEl)
       }
-    }
-    hookRenderCounts++
-    return () => {
-      if (usedInTree) return
-      hookRenderCounts--
-      if (hookRenderCounts === 0 && rootEl) {
-        rootEl.remove()
-        rootEl = null
-      }
+      rootInitialized = true
     }
   }, [])
 }
