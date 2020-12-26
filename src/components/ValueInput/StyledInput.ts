@@ -46,7 +46,8 @@ export const InputContainer = styled.div`
   border-width: input;
   border-color: input-border;
   color: input-text;
-  transition: border;
+  background-color: input-bg;
+  transition: border-color 250ms ease;
   &:hover {
     border-color: input-hover-border;
   }
