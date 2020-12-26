@@ -46,6 +46,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="http://twitter.com/ariaminaei"><img src="https://avatars3.githubusercontent.com/u/593118?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Aria</b></sub></a><br /><a href="#ideas-AriaMinaei" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/emmelleppi"><img src="https://avatars2.githubusercontent.com/u/39760175?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Marco Ludovico Perego</b></sub></a><br /><a href="#ideas-emmelleppi" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://github.com/marcofugaro"><img src="https://avatars3.githubusercontent.com/u/7217420?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Marco Fugaro</b></sub></a><br /><a href="#ideas-marcofugaro" title="Ideas, Planning, & Feedback">🤔</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://github.com/ivanross"><img src="https://avatars1.githubusercontent.com/u/15856208?v=4?s=80" width="80px;" alt=""/><br /><sub><b>Ivan Rossi</b></sub></a><br /><a href="https://github.com/gsimone/use-twix/issues?q=author%3Aivanross" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/thephoenixofthevoid"><img src="https://avatars2.githubusercontent.com/u/49817252?v=4?s=80" width="80px;" alt=""/><br /><sub><b>thephoenixofthevoid</b></sub></a><br /><a href="https://github.com/gsimone/use-twix/issues?q=author%3Athephoenixofthevoid" title="Bug reports">🐛</a></td>
   </tr>
