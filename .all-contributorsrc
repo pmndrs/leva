@@ -28,6 +28,51 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "iinfin",
+      "name": "Han",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/48106228?v=4",
+      "profile": "https://iinf.in/",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "AndrewPrifer",
+      "name": "Andrew Prifer",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2991360?v=4",
+      "profile": "https://github.com/AndrewPrifer",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "AriaMinaei",
+      "name": "Aria",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/593118?v=4",
+      "profile": "http://twitter.com/ariaminaei",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "emmelleppi",
+      "name": "Marco Ludovico Perego",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/39760175?v=4",
+      "profile": "https://github.com/emmelleppi",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "marcofugaro",
+      "name": "Marco Fugaro",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7217420?v=4",
+      "profile": "https://github.com/marcofugaro",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7

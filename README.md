@@ -1,5 +1,5 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 # useTwix
 
@@ -41,6 +41,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://twitter.com/ggsimm"><img src="https://avatars0.githubusercontent.com/u/1862172?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gianmarco</b></sub></a><br /><a href="#ideas-gsimone" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/gsimone/use-twix/commits?author=gsimone" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dbismut"><img src="https://avatars2.githubusercontent.com/u/5003380?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Bismut</b></sub></a><br /><a href="https://github.com/gsimone/use-twix/commits?author=dbismut" title="Code">💻</a></td>
+    <td align="center"><a href="https://iinf.in/"><img src="https://avatars0.githubusercontent.com/u/48106228?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Han</b></sub></a><br /><a href="#design-iinfin" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/AndrewPrifer"><img src="https://avatars1.githubusercontent.com/u/2991360?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrew Prifer</b></sub></a><br /><a href="#ideas-AndrewPrifer" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://twitter.com/ariaminaei"><img src="https://avatars3.githubusercontent.com/u/593118?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aria</b></sub></a><br /><a href="#ideas-AriaMinaei" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/emmelleppi"><img src="https://avatars2.githubusercontent.com/u/39760175?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marco Ludovico Perego</b></sub></a><br /><a href="#ideas-emmelleppi" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/marcofugaro"><img src="https://avatars3.githubusercontent.com/u/7217420?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marco Fugaro</b></sub></a><br /><a href="#ideas-marcofugaro" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
