@@ -22,7 +22,14 @@ const createFolder = (key: string, parent: string = '', tree: Tree) => {
   return <Folder key={key} name={key} parent={path} tree={tree} {...settings} />
 }
 
-export function Folder({ name, parent, tree, root = false, folderOnTop = false, collapsed = false }: FolderProps) {
+export function Folder({
+  name = 'Twix',
+  parent,
+  tree,
+  root = false,
+  folderOnTop = false,
+  collapsed = false,
+}: FolderProps) {
   const contentRef = useRef<HTMLDivElement>(null)
   const [toggled, setToggle] = useState(!collapsed)
   const firstRender = useRef(true)

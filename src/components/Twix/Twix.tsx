@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useLayoutEffect } from 'react'
+import React, { useMemo, useState, useEffect, useLayoutEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider, createGlobalStyle } from '@xstyled/styled-components'
 
@@ -9,7 +9,7 @@ import { buildTree } from './tree'
 import { Folder } from './../Folder/'
 import { isInput } from '../../utils'
 
-import { Root, DragHandle } from './StyledTwix'
+import { Root, DragHandle, StyledSearch } from './StyledTwix'
 import { TwixTheme } from '../styles'
 
 const GlobalStyle = createGlobalStyle`
@@ -28,9 +28,21 @@ const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
+type SearchProps = { value: string; onChange: (value: string) => void }
+
+export function Search({ value, onChange }: SearchProps) {
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)
+  return (
+    <StyledSearch>
+      <input value={value} placeholder="Search" onChange={_onChange} />
+    </StyledSearch>
+  )
+}
+
 export function Twix({ theme = TwixTheme, fillParent = false }) {
   const paths = useVisiblePaths()
-  const tree = useMemo(() => buildTree(paths), [paths])
+  const [filter, setFilter] = useState('')
+  const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
   const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
   const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
 
@@ -38,18 +50,20 @@ export function Twix({ theme = TwixTheme, fillParent = false }) {
     rootInitialized = true
   }, [])
 
-  if (!('__root' in tree)) return null
+  if (paths.length < 1) return null
   // we know there's a folder at the root of the root if the first
   // key isn't an input. isFolderOnTop is used to show an dummy folder at
   // the top of the pane.
-  const isFolderOnTop = !isInput(Object.keys(tree.__root)[0])
+  const keys = Object.keys(tree)
+  const isFolderOnTop = keys.length > 0 && !isInput(keys[0])
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <AnimatedRoot style={spring} fillParent={fillParent}>
         <DragHandle {...bind()}>twix</DragHandle>
-        <Folder root tree={tree.__root} folderOnTop={isFolderOnTop} />
+        <Search value={filter} onChange={setFilter} />
+        <Folder root tree={tree} folderOnTop={isFolderOnTop} />
       </AnimatedRoot>
     </ThemeProvider>
   )

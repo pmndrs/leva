@@ -69,7 +69,7 @@ export default function App() {
   const [c2, setC2] = React.useState(false)
   return (
     <>
-      {/* <Twix /> */}
+      <Twix />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>

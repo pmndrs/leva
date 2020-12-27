@@ -39,3 +39,34 @@ export const DragHandle = styled(StyledTitle)`
   cursor: grab;
   opacity: 0;
 `
+
+export const StyledSearch = styled(StyledTitle)`
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  padding: 0;
+
+  > input {
+    height: 19px;
+    padding: 0 row-h;
+    background-color: accent;
+    transition: bg;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: 10px;
+    text-align: right;
+    border-radius: root;
+    &:focus {
+      background-color: accent;
+    }
+    &[value=''] {
+      background-color: primary;
+    }
+    ::placeholder {
+      color: inherit;
+      opacity: 0.6;
+    }
+  }
+`

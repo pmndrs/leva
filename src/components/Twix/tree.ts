@@ -9,13 +9,15 @@ type RootTree = {
   }
 }
 
-export const buildTree = (paths: string[]) => {
+export const buildTree = (paths: string[], filter?: string) => {
   const tree = {}
   paths.forEach(path => {
     const [key, folderPath] = getKeyPath(path)
-    merge(tree, join('__root', folderPath), {
-      [`_i-${key}`]: { path, key, valueKey: key },
-    })
+    if (!filter || key.indexOf(filter) > -1) {
+      merge(tree, folderPath, {
+        [`_i-${key}`]: { path, key, valueKey: key },
+      })
+    }
   })
   return tree as RootTree
 }
