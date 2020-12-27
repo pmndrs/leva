@@ -1,27 +1,32 @@
 export const TwixTheme = {
   colors: {
-    primary: '#c8b1e4',
-    accent: '#a468ec',
-    'label-text': '#10002b',
-    'root-bg': '#f9f6ff',
-    'root-text': '#10002b',
-    'root-border': '#c8b1e4',
-    'folder-text': '#f9f6ff',
-    'folder-border': '#c8b1e4',
-    'folder-title-bg': '#c8b1e4',
-    'input-text': '#10002b',
-    'input-border': '#e9dbf9',
-    'input-hover-border': '#c8b1e4',
-    'input-focus-border': '#9b72cf',
-    'input-active-bg': '#e9dbf9',
-    'button-text': '#10002b',
-    'button-bg': '#fff',
-    'select-bg': '#fff',
+    'label-text': '#4B483A',
+    'input-text': '#4B483A',
+    'input-bg': "#AEA995",
+    
+    'folder-text': '#ddd',
+    
+    'root-bg': '#C6C0A8',
+    'root-border': '#C6C0A8',
+
+    'folder-border': '#4B483A',
+    'folder-title-bg': '#4B483A',
+    
+    'boolean-bg': '#aaa',
+    'boolean-checked-bg': 'white',
+
+    'input-border': 'transparent',
+    
+    'input-hover-border': '#4B483A',
+    'input-focus-border': '#4B483A',
+    
+    'input-active-bg': 'transparent',
+    
     selection: '#c8b1e4',
   },
   radii: {
     input: 2,
-    root: 2,
+    root: 6,
   },
   space: {
     input: 6,

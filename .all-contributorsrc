@@ -1,0 +1,98 @@
+{
+  "projectName": "use-twix",
+  "projectOwner": "gsimone",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 80,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "gsimone",
+      "name": "Gianmarco",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1862172?v=4",
+      "profile": "https://twitter.com/ggsimm",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "dbismut",
+      "name": "David Bismut",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/5003380?v=4",
+      "profile": "https://github.com/dbismut",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "iinfin",
+      "name": "Han",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/48106228?v=4",
+      "profile": "https://iinf.in/",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "AndrewPrifer",
+      "name": "Andrew Prifer",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2991360?v=4",
+      "profile": "https://github.com/AndrewPrifer",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "AriaMinaei",
+      "name": "Aria",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/593118?v=4",
+      "profile": "http://twitter.com/ariaminaei",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "emmelleppi",
+      "name": "Marco Ludovico Perego",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/39760175?v=4",
+      "profile": "https://github.com/emmelleppi",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "marcofugaro",
+      "name": "Marco Fugaro",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7217420?v=4",
+      "profile": "https://github.com/marcofugaro",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "ivanross",
+      "name": "Ivan Rossi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15856208?v=4",
+      "profile": "https://github.com/ivanross",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "thephoenixofthevoid",
+      "name": "thephoenixofthevoid",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/49817252?v=4",
+      "profile": "https://github.com/thephoenixofthevoid",
+      "contributions": [
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
