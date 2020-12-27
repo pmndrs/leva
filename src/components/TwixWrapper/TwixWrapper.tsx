@@ -19,7 +19,7 @@ export function TwixWrapper({ valueKey, path }: TwixWrapperProps) {
   if (type in SpecialInputTypes) {
     // @ts-expect-error
     const SpecialInputForType = specialComponents[type]
-    return <SpecialInputForType {...props} />
+    return <SpecialInputForType valueKey={valueKey} path={path} {...props} />
   }
 
   if (!(type in Plugins)) {

@@ -2,6 +2,7 @@ export enum SpecialInputTypes {
   SEPARATOR = 'SEPARATOR',
   BUTTON = 'BUTTON',
   MONITOR = 'MONITOR',
+  FOLDER = 'FOLDER',
 }
 
 export type Folders = Record<string, FolderSettings>
@@ -20,12 +21,11 @@ export type DataInput = {
   type: string
   value: unknown
   settings?: object
-  count?: number
+  count: number
 }
 
 export type ButtonInput = {
   type: SpecialInputTypes
-  name: string
   onClick: () => any
 }
 
@@ -36,7 +36,7 @@ export type SeparatorInput = {
 export type SpecialInputs = ButtonInput | SeparatorInput
 
 export type Data = {
-  [key: string]: DataInput | (SpecialInputs & { count?: number })
+  [key: string]: DataInput | (SpecialInputs & { count: number })
 }
 
 export type Tree = {
