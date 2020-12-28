@@ -1,36 +1,13 @@
-import React, { useRef, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { ValueInput } from '../ValueInput'
 import { TwixInputProps } from '../../types'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
-import { Range, RangeGrid, Scrubber } from './StyledNumber'
-import { useDrag } from '../../hooks'
-import { invertedRange, range } from '../../utils'
-import { useThemeValue } from '../../hooks'
+import { RangeGrid } from './StyledNumber'
+import { RangeSlider } from './RangeSlider'
 
 type NumberProps = TwixInputProps<number, InternalNumberSettings>
-type RangeSliderProps = { value: number; min: number; max: number; onDrag: (fn: (v: number) => number) => void }
-
-function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const rangeWidth = useRef<number>(0)
-  const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
-
-  const bind = useDrag(({ first, delta: [dx] }) => {
-    if (first) {
-      // rangeWidth is the width of the slider el minus the width of the scrubber el itself
-      rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
-    }
-    onDrag(v => v + invertedRange(dx / rangeWidth.current, 0, max - min))
-  })
-
-  return (
-    <Range ref={ref}>
-      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
-    </Range>
-  )
-}
 
 type NumberInputProps = {
   value: string
