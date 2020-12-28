@@ -4,7 +4,7 @@ import { TwixInputProps } from '../../types'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
-import { Range, Scrubber } from '../Number'
+import { Range, RangeWrapper, Scrubber } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks'
@@ -31,15 +31,23 @@ const Indicator = styled.div`
 
 function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const minScrubberRef = useRef<HTMLDivElement>(null)
+  const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
   const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
-  const bind = useDrag(({ first, delta: [dx], args: [key], memo = value }) => {
+  const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {
-      rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
+      const { width, left } = ref.current!.getBoundingClientRect()
+      rangeWidth.current = width - parseFloat(scrubberWidth)
+
+      const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current
+
+      memo.pos = invertedRange((x - left) / width - 0.5, 0, max - min)
+      memo.key = Math.abs(memo.pos - value.min) < Math.abs(memo.pos - value.max) ? 'min' : 'max'
+      if (targetIsScrub) memo.pos = value[memo.key as keyof InternalInterval]
     }
-    memo[key] += invertedRange(dx / rangeWidth.current, 0, max - min)
-    onDrag(memo)
+    onDrag({ ...value, [memo.key]: memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min) })
     return memo
   })
 
@@ -47,11 +55,13 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth}))`
 
   return (
-    <Range ref={ref}>
-      <Indicator style={{ left: minStyle, right: maxStyle }} />
-      <Scrubber {...bind('min')} style={{ left: minStyle }} />
-      <Scrubber {...bind('max')} style={{ right: maxStyle }} />
-    </Range>
+    <RangeWrapper ref={ref} {...bind()}>
+      <Range>
+        <Indicator style={{ left: minStyle, right: maxStyle }} />
+      </Range>
+      <Scrubber ref={minScrubberRef} style={{ left: minStyle }} />
+      <Scrubber ref={maxScrubberRef} style={{ right: maxStyle }} />
+    </RangeWrapper>
   )
 }
 

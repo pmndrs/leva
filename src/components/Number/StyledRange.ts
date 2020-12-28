@@ -2,12 +2,10 @@ import styled from '@xstyled/styled-components'
 
 export const Range = styled.div`
   position: relative;
-  display: flex;
-  align-items: center;
+  width: 100%;
   height: 2px;
-  border-radius: 1px;
+  border-radius: 50%;
   background-color: primary;
-  margin: 0 input;
 `
 
 export const Scrubber = styled.div`
@@ -17,7 +15,13 @@ export const Scrubber = styled.div`
   border-radius: input;
   background-color: accent;
   cursor: pointer;
-  &:hover {
-    transform: scale(1.8, 1);
-  }
+`
+
+export const RangeWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 input;
+  cursor: pointer;
 `

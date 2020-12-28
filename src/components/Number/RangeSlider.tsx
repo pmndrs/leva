@@ -1,27 +1,35 @@
 import React, { useRef } from 'react'
-import { Range, Scrubber } from './StyledRange'
+import { RangeWrapper, Range, Scrubber } from './StyledRange'
 import { invertedRange, range } from '../../utils'
 import { useThemeValue } from '../../hooks'
 import { useDrag } from '../../hooks'
 
-type RangeSliderProps = { value: number; min: number; max: number; onDrag: (fn: (v: number) => number) => void }
+type RangeSliderProps = { value: number; min: number; max: number; onDrag: (v: number) => void }
 
 export function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const scrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
   const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
 
-  const bind = useDrag(({ first, delta: [dx] }) => {
+  const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo }) => {
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
-      rangeWidth.current = ref.current!.getBoundingClientRect().width - parseFloat(scrubberWidth)
+      const { width, left } = ref.current!.getBoundingClientRect()
+      rangeWidth.current = width - parseFloat(scrubberWidth)
+
+      const targetIsScrub = event?.target === scrubberRef.current
+      // memo is the value where the user clicked on
+      memo = targetIsScrub ? value : invertedRange((x - left) / width - 0.5, 0, max - min)
     }
-    onDrag(v => v + invertedRange(dx / rangeWidth.current, 0, max - min))
+    onDrag(memo + invertedRange(mx / rangeWidth.current, 0, max - min))
+    return memo
   })
 
   return (
-    <Range ref={ref}>
-      <Scrubber {...bind()} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
-    </Range>
+    <RangeWrapper ref={ref} {...bind()}>
+      <Range />
+      <Scrubber ref={scrubberRef} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
+    </RangeWrapper>
   )
 }
