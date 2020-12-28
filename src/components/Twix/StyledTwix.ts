@@ -40,7 +40,7 @@ export const DragHandle = styled(StyledTitle)`
   opacity: 0;
 `
 
-export const StyledSearch = styled(StyledTitle)`
+export const StyledFilter = styled(StyledTitle)`
   position: absolute;
   right: 0;
   z-index: 10;

@@ -7,9 +7,9 @@ import { useSpring, a } from 'react-spring'
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { Folder } from './../Folder/'
-import { isInput } from '../../utils'
+import { isInput, debounce } from '../../utils'
 
-import { Root, DragHandle, StyledSearch } from './StyledTwix'
+import { Root, DragHandle, StyledFilter } from './StyledTwix'
 import { TwixTheme } from '../styles'
 
 const GlobalStyle = createGlobalStyle`
@@ -28,14 +28,22 @@ const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
-type SearchProps = { value: string; onChange: (value: string) => void }
+type FilterProps = { onChange: (value: string) => void }
 
-export function Search({ value, onChange }: SearchProps) {
-  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)
+export function Filter({ onChange }: FilterProps) {
+  const [value, set] = useState('')
+  const debouncedOnChange = useMemo<FilterProps['onChange']>(() => debounce(onChange, 250), [onChange])
+
+  const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value
+    set(v)
+    debouncedOnChange(v)
+  }
+
   return (
-    <StyledSearch>
-      <input value={value} placeholder="Search" onChange={_onChange} />
-    </StyledSearch>
+    <StyledFilter>
+      <input value={value} placeholder="Filter" onChange={_onChange} />
+    </StyledFilter>
   )
 }
 
@@ -62,7 +70,7 @@ export function Twix({ theme = TwixTheme, fillParent = false }) {
       <GlobalStyle />
       <AnimatedRoot style={spring} fillParent={fillParent}>
         <DragHandle {...bind()}>twix</DragHandle>
-        <Search value={filter} onChange={setFilter} />
+        <Filter onChange={setFilter} />
         <Folder root tree={tree} folderOnTop={isFolderOnTop} />
       </AnimatedRoot>
     </ThemeProvider>
