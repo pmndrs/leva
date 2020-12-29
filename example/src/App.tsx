@@ -1,13 +1,16 @@
 import React from 'react'
 import { useTwix, folder, button, monitor, Twix } from 'use-twix'
+import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
+
+const noise = new Noise(Math.random())
 
 function Comp1() {
   const ref = React.useRef(0)
   React.useEffect(() => {
     setInterval(() => {
       const t = Date.now()
-      ref.current = Math.cos(Math.cos(t / 100) * Math.sin(t / 10)) / Math.tan(t)
+      ref.current = noise.simplex2(t / 1000, t / 100)
     }, 100)
   }, [])
   const t = useTwix({
@@ -16,7 +19,7 @@ function Comp1() {
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
     color: '#fff',
-    refMonitor: monitor(ref),
+    refMonitor: monitor(ref, { graph: true }),
     number: { value: 1000, min: 3 },
     colorObj: { r: 1, g: 2, b: 3 },
     folder2: folder({

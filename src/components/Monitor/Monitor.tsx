@@ -3,11 +3,10 @@ import { Canvas } from './StyledMonitor'
 import { Row, Label } from '../styles'
 import { range } from '../../utils'
 import { useCanvas2d, useThemeValue } from '../../hooks'
+import { MonitorInput } from '../../types'
 
-type MonitorProps = {
-  valueKey: string
-  objectOrFn: React.MutableRefObject<any> | Function
-}
+type MonitorProps = { valueKey: string } & Omit<MonitorInput, 'type'>
+type ObjectProps = Pick<MonitorInput, 'objectOrFn'>
 
 const POINTS = 100
 
@@ -20,8 +19,7 @@ function push(arr: any[], val: any) {
   if (arr.length > POINTS) arr.shift()
 }
 
-export function Monitor({ objectOrFn, valueKey }: MonitorProps) {
-  // const [value, set] = useState(getValue(objectOrFn))
+function MonitorCanvas({ objectOrFn }: ObjectProps) {
   const accentColor = useThemeValue('color', 'accent')
   const points = useRef([])
   const min = useRef()
@@ -48,7 +46,6 @@ export function Monitor({ objectOrFn, valueKey }: MonitorProps) {
   useEffect(() => {
     const timeout = setInterval(() => {
       const val = getValue(objectOrFn)
-      // set(val)
       if (min.current === undefined || val < min.current!) min.current = val
       if (max.current === undefined || val > max.current!) max.current = val
       push(points.current, val)
@@ -57,11 +54,28 @@ export function Monitor({ objectOrFn, valueKey }: MonitorProps) {
     return () => clearInterval(timeout)
   }, [objectOrFn, drawPlot, canvas, ctx])
 
+  return <Canvas ref={canvas} />
+}
+
+const parse = (val: any) => (Number.isFinite(val) ? val.toPrecision(2) : val.toString())
+
+function MonitorLog({ objectOrFn }: ObjectProps) {
+  const [val, set] = useState(parse(getValue(objectOrFn)))
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      set(parse(getValue(objectOrFn)))
+    }, 30)
+    return () => clearInterval(timeout)
+  }, [objectOrFn])
+
+  return <div>{val}</div>
+}
+
+export function Monitor({ valueKey, objectOrFn, settings }: MonitorProps) {
   return (
     <Row input>
       <Label>{valueKey}</Label>
-      {/* <div>{value}</div> */}
-      <Canvas ref={canvas} />
+      {settings.graph ? <MonitorCanvas objectOrFn={objectOrFn} /> : <MonitorLog objectOrFn={objectOrFn} />}
     </Row>
   )
 }

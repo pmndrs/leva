@@ -1,5 +1,5 @@
 import { SpecialInputTypes, MonitorInput } from '../types'
 
-export function monitor(objectOrFn: React.MutableRefObject<any> | Fn): MonitorInput {
-  return { type: SpecialInputTypes.MONITOR, objectOrFn }
+export function monitor(objectOrFn: React.MutableRefObject<any> | Function, settings = { graph: false }): MonitorInput {
+  return { type: SpecialInputTypes.MONITOR, objectOrFn, settings }
 }

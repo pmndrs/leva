@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-three/drei": "^2.2.12",
+    "noisejs": "^2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-three-fiber": "^5.3.10",

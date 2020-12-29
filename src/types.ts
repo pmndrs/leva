@@ -32,6 +32,7 @@ export type ButtonInput = {
 export type MonitorInput = {
   type: SpecialInputTypes
   objectOrFn: React.MutableRefObject<any> | Function
+  settings: { graph: boolean }
 }
 
 export type SeparatorInput = {
