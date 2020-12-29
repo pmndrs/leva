@@ -11,6 +11,7 @@ export const Root = styled.div<{ fillParent: boolean }>`
           right: 10px;
           color: root-text;
           width: root-width;
+          z-index: 1000;
         `
       : css`
           position: relative;
