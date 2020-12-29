@@ -1,5 +1,10 @@
 import { SpecialInputTypes, MonitorInput } from '../types'
 
-export function monitor(objectOrFn: React.MutableRefObject<any> | Function, settings = { graph: false }): MonitorInput {
-  return { type: SpecialInputTypes.MONITOR, objectOrFn, settings }
+const defaultSettings = { graph: false, interval: 100 }
+
+export function monitor(
+  objectOrFn: React.MutableRefObject<any> | Function,
+  settings?: Partial<MonitorInput['settings']>
+): MonitorInput {
+  return { type: SpecialInputTypes.MONITOR, objectOrFn, settings: { ...defaultSettings, ...settings } }
 }
