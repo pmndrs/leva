@@ -7,17 +7,37 @@
 yarn add use-twix
 ```
 
-`useTwix` is a 
+`useTwix` is a:
 
 - 🧐 Smart defaults, your GUI will always pick the best input type for your data
 - 🤳 Mobile-ready, all inputs work perfectly on mobile
-- 💪 Type safety, `use-twix` is built from the ground up with typescript, all types are inferred from your cod 
+- 💪 Type safety, `use-twix` is built from the ground up with typescript, all types are inferred from your code. 
 
 `useTwix` isn't a component library.
 
+## Features
+* As-you-type filtering of inputs. 
+* You can modify number inputs by either dragging over the input label or inner label.
+* The lib automatically calculates the number input step based on the initial value magnitude and significant digits. 
+* Increase / decrease numbers with arrow keys, with alt (`±0.1`) and shift (`±10`) modifiers support.
+* Draggable pane.
+
+## Inputs
+* String
+* Boolean
+* Number
+* Range
+* Interval `[min,max]`
+* Point2d `[x,y]` or `{x,y}`
+* Point3d `[x,y,z]` or `{x,y,z}`
+* Color `#hex` and `{r,g,b,a}`
+* Select
+* Spring `{tension,friction,mass}`
+* Image
+
 ## Usage
 
-Simply call the use-twix hook from anywhere in your app.
+Simply call the `useTwix` hook from anywhere in your app.
 
 Your component will update whenever the values defined in the hook are changed!
 
