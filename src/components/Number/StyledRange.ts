@@ -4,7 +4,7 @@ export const Range = styled.div`
   position: relative;
   width: 100%;
   height: 2px;
-  border-radius: 50%;
+  border-radius: 1px;
   background-color: primary;
 `
 
