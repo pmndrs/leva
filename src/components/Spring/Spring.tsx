@@ -1,15 +1,14 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import styled from '@xstyled/styled-components'
-import { useDrag } from '../../hooks'
 import { a, useSpring } from 'react-spring'
 import { PointCoordinates } from '../PointCoordinates'
-import { Row, Label } from '../styles'
 import { Canvas, SpringPreview } from './StyledSpring'
-import { springFn } from './math'
-import { TwixInputProps } from '../../types'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
+import { springFn } from './math'
+import { Row, Label } from '../styles'
+import { TwixInputProps } from '../../types'
 import { debounce } from '../../utils'
-import { useThemeValue } from '../../hooks'
+import { useCanvas2d, useDrag, useThemeValue } from '../../hooks'
 
 type SpringProps = TwixInputProps<InternalSpring, InternalSpringSettings>
 
@@ -22,8 +21,6 @@ const Container = styled.div`
 const SpringPreviewAnimated = a(SpringPreview)
 
 export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
-  const canvas = useRef<HTMLCanvasElement>(null)
-  const ctx = useRef<CanvasRenderingContext2D | null>(null)
   const springRef = useRef(displayValue)
   const primaryColor = useThemeValue('color', 'primary')
 
@@ -55,37 +52,29 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
     [set, onUpdate]
   )
 
-  const drawSpring = useCallback(() => {
-    const { tension, friction, mass } = springRef.current
-    if (!ctx.current) ctx.current = canvas.current!.getContext('2d')
-    const _ctx = ctx.current!
-    const { width, height } = canvas.current!
-    const t = springFn(tension, friction, mass)
-    _ctx.clearRect(0, 0, width, height)
-    _ctx.beginPath()
-    for (let i = 0; i < width; i++) {
-      _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
-    }
-    _ctx.strokeStyle = primaryColor
-    _ctx.stroke()
-  }, [primaryColor])
+  const drawSpring = useCallback(
+    (_canvas: HTMLCanvasElement, _ctx: CanvasRenderingContext2D) => {
+      const { tension, friction, mass } = springRef.current
+      const { width, height } = _canvas
+      const t = springFn(tension, friction, mass)
+      _ctx.clearRect(0, 0, width, height)
+      _ctx.beginPath()
+      for (let i = 0; i < width; i++) {
+        _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
+      }
+      _ctx.strokeStyle = primaryColor
+      _ctx.stroke()
+    },
+    [primaryColor]
+  )
+
+  const [canvas, ctx] = useCanvas2d(drawSpring)
 
   useEffect(() => {
     springRef.current = { tension, friction, mass }
-    drawSpring()
+    drawSpring(canvas.current!, ctx.current!)
     updateSpring()
-  }, [drawSpring, updateSpring, tension, friction, mass])
-
-  useEffect(() => {
-    const handleCanvas = debounce(() => {
-      canvas.current!.width = canvas.current!.offsetWidth
-      canvas.current!.height = canvas.current!.offsetHeight
-      drawSpring()
-    }, 250)
-    window.addEventListener('resize', handleCanvas)
-    handleCanvas()
-    return () => window.removeEventListener('resize', handleCanvas)
-  }, [drawSpring])
+  }, [drawSpring, updateSpring, tension, friction, mass, canvas, ctx])
 
   return (
     <>
