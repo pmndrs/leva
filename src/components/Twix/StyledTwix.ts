@@ -63,7 +63,7 @@ export const StyledFilter = styled(StyledTitle)`
       background-color: accent;
     }
     &[value=''] {
-      background-color: primary;
+      background-color: transparent;
     }
     ::placeholder {
       color: inherit;

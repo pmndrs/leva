@@ -22,7 +22,7 @@ const SpringPreviewAnimated = a(SpringPreview)
 
 export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
   const springRef = useRef(displayValue)
-  const primaryColor = useThemeValue('color', 'primary')
+  const accentColor = useThemeValue('color', 'accent')
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
@@ -62,10 +62,10 @@ export function Spring({ label, displayValue, value, onUpdate, onChange, setting
       for (let i = 0; i < width; i++) {
         _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
       }
-      _ctx.strokeStyle = primaryColor
+      _ctx.strokeStyle = accentColor
       _ctx.stroke()
     },
-    [primaryColor]
+    [accentColor]
   )
 
   const [canvas, ctx] = useCanvas2d(drawSpring)

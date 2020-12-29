@@ -11,6 +11,7 @@ export const JoystickTrigger = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  background-color: input-bg;
   border-radius: input;
   border-style: solid;
   border-width: 1px;
@@ -59,7 +60,7 @@ export const Joystick = styled.div<{ isOutOfBounds: boolean }>`
     border-style: solid;
     border-width: 1px;
     border-color: input-border;
-    background-color: root-bg;
+    background-color: input-bg;
     width: 80%;
     height: 80%;
     :after,
