@@ -5,7 +5,7 @@ import Scene3D from './Scene3D'
 function Comp1() {
   const t = useTwix({
     first: { value: 0, min: -10, max: 10 },
-    file: { file: undefined },
+    image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
     color: '#fff',
@@ -32,7 +32,7 @@ function Comp1() {
   return (
     <div>
       <h1>Comp1</h1>
-      <img src={t.file} width="200" />
+      <img src={t.image} width="200" />
       <pre>{JSON.stringify(t, null, 2)}</pre>
     </div>
   )

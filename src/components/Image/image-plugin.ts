@@ -7,4 +7,4 @@ export const sanitize = (v: any) => {
   }
 }
 
-export const schema = (_o: any, s: any) => typeof s === 'object' && 'file' in s
+export const schema = (_o: any, s: any) => typeof s === 'object' && 'image' in s
