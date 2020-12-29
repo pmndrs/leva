@@ -20,6 +20,7 @@ const MonitorCanvas = forwardRef(function({ initialValue }: ObjectProps, ref) {
   const points = useRef([initialValue])
   const min = useRef(initialValue)
   const max = useRef(initialValue)
+  const raf = useRef<number | undefined>()
 
   const drawPlot = useCallback(
     (_canvas: HTMLCanvasElement, _ctx: CanvasRenderingContext2D) => {
@@ -46,11 +47,13 @@ const MonitorCanvas = forwardRef(function({ initialValue }: ObjectProps, ref) {
         if (min.current === undefined || val < min.current) min.current = val
         if (max.current === undefined || val > max.current) max.current = val
         push(points.current, val)
-        requestAnimationFrame(() => drawPlot(canvas.current!, ctx.current!))
+        raf.current = requestAnimationFrame(() => drawPlot(canvas.current!, ctx.current!))
       },
     }),
     [canvas, ctx, drawPlot]
   )
+
+  useEffect(() => () => cancelAnimationFrame(raf.current!), [])
 
   return <Canvas ref={canvas} />
 })
