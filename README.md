@@ -7,11 +7,11 @@
 yarn add use-twix
 ```
 
-`useTwix` is a:
+`useTwix` brings is a smart GUI for your React apps and your creative coding endeavors:
 
 - 🧐 Smart defaults, your GUI will always pick the best input type for your data
 - 🤳 Mobile-ready, all inputs work perfectly on mobile
-- 💪 Type safety, `use-twix` is built from the ground up with typescript, all types are inferred from your code. 
+- 💪 Type safety, `useTwix` is built from the ground up with typescript, all types are inferred from your code. 
 
 `useTwix` isn't a component library.
 
