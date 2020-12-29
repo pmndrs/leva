@@ -29,6 +29,11 @@ export type ButtonInput = {
   onClick: () => any
 }
 
+export type MonitorInput = {
+  type: SpecialInputTypes
+  objectOrFn: React.MutableRefObject<any> | Function
+}
+
 export type SeparatorInput = {
   type: SpecialInputTypes
 }

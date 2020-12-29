@@ -5,11 +5,13 @@ import { log, TwixErrors } from '../../utils/log'
 import { SpecialInputTypes } from '../../types'
 import { Plugins } from '../../register'
 import { Button } from '../Button'
+import { Monitor } from '../Monitor'
 
 type TwixWrapperProps = { valueKey: string; path: string }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
+  [SpecialInputTypes.MONITOR]: Monitor,
 }
 
 // TODO we can probably do better than this

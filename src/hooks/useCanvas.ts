@@ -9,8 +9,8 @@ export function useCanvas2d(
 
   useEffect(() => {
     const handleCanvas = debounce(() => {
-      canvas.current!.width = canvas.current!.offsetWidth
-      canvas.current!.height = canvas.current!.offsetHeight
+      canvas.current!.width = canvas.current!.offsetWidth * window.devicePixelRatio
+      canvas.current!.height = canvas.current!.offsetHeight * window.devicePixelRatio
       fn(canvas.current, ctx.current)
     }, 250)
     window.addEventListener('resize', handleCanvas)

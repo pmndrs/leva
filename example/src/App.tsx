@@ -1,14 +1,22 @@
 import React from 'react'
-import { useTwix, folder, button, Twix } from 'use-twix'
+import { useTwix, folder, button, monitor, Twix } from 'use-twix'
 import Scene3D from './Scene3D'
 
 function Comp1() {
+  const ref = React.useRef(0)
+  React.useEffect(() => {
+    setInterval(() => {
+      const t = Date.now()
+      ref.current = Math.cos(Math.cos(t / 100) * Math.sin(t / 10)) / Math.tan(t)
+    }, 100)
+  }, [])
   const t = useTwix({
     first: { value: 0, min: -10, max: 10 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
     color: '#fff',
+    refMonitor: monitor(ref),
     number: { value: 1000, min: 3 },
     colorObj: { r: 1, g: 2, b: 3 },
     folder2: folder({
