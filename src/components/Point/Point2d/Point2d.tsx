@@ -41,7 +41,7 @@ export function Point2d({ label, value, onUpdate, settings }: Point2dProps) {
         return Array.isArray(v) ? [v[0] + incX, v[1] + incY] : { x: v.x + incX, y: v.y + incY }
       })
     }, 16)
-  }, [onUpdate, stepX, stepY])
+  }, [x, w, y, h, onUpdate, stepX, stepY])
 
   const endOutOfBounds = useCallback(() => {
     clearTimeout(timeout.current)
