@@ -1,5 +1,5 @@
 import { Plugin, ValueInputWithSettings } from './types'
-import { warn, TwixErrors } from './utils'
+import { warn, TwixErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
 
