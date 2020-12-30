@@ -32,7 +32,7 @@ function Comp1() {
             pos2d: { x: 3, y: 4 },
             pos2dArr: [100, 200],
             pos3d: { x: 0.3, y: 0.1, z: 0.5 },
-            pos3dArr: [10, 20, 4],
+            pos3dArr: [Math.PI / 2, 20, 4],
           }),
         },
         { collapsed: false }
