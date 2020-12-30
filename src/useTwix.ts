@@ -31,7 +31,7 @@ export function useTwix(schema: Schema): any
 export function useTwix(name: string, schema: Schema, settings?: Partial<FolderSettings>): any
 export function useTwix(nameOrSchema: string | Schema, schema?: Schema, settings?: Partial<FolderSettings>) {
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
-  const _schema = useRef(_name ? { [_name]: folder(schema, settings) } : nameOrSchema)
+  const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
   const paths = useMemo(() => Object.keys(initialData), [initialData])
   const values = useValuesForPath(paths, initialData)
