@@ -24,4 +24,5 @@ export const RangeWrapper = styled.div`
   height: 100%;
   margin: 0 input;
   cursor: pointer;
+  touch-action: none;
 `

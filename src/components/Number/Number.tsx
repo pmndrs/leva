@@ -56,7 +56,7 @@ export function NumberInner({ label, displayValue, onUpdate, onChange, settings 
   const bind = useDragNumber({ step: settings.step, onDrag: onUpdate })
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      <div title={label.length > 1 ? label : ''} {...bind()}>
+      <div title={label.length > 1 ? label : ''} {...bind()} style={{ touchAction: 'none' }}>
         {label.charAt(0)}
       </div>
     </NumberInput>

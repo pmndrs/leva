@@ -39,6 +39,7 @@ export const DragHandle = styled(StyledTitle)`
   width: 100%;
   cursor: grab;
   opacity: 0;
+  touch-action: none;
 `
 
 export const StyledFilter = styled(StyledTitle)`

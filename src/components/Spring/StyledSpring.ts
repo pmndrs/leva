@@ -5,6 +5,7 @@ export const Canvas = styled.canvas`
   width: 100%;
   cursor: crosshair;
   display: block;
+  touch-action: none;
 `
 
 export const SpringPreview = styled.div`

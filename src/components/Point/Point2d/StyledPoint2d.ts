@@ -19,6 +19,7 @@ export const JoystickTrigger = styled.div`
   cursor: pointer;
   height: row-height;
   width: row-height;
+  touch-action: none;
   &:hover {
     border-color: input-hover-border;
   }

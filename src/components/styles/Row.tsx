@@ -29,6 +29,7 @@ export const Label = styled.label<{ preventSelect?: boolean }>`
   padding-left: row-h;
   color: label-text;
   font-weight: label;
+  touch-action: none;
   ${prop =>
     prop.preventSelect &&
     css`
