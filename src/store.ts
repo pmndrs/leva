@@ -122,7 +122,7 @@ export function useInput(path: string) {
 
 // possibly make this reactive
 const FOLDERS: Folders = {}
-export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[path] : null)
+export const getFolderSettings = (path: string) => FOLDERS[path]
 
 /**
  * Extract the data from the schema and sets folder initial preferences.
@@ -131,7 +131,6 @@ export const getFolderSettings = (path: string) => (path in FOLDERS ? FOLDERS[pa
 export function getDataFromSchema(schema: any, rootPath = '') {
   const data: any = {}
   Object.entries(schema).forEach(([path, value]: [string, any]) => {
-    // console.log({ key, value })
     const newPath = join(rootPath, path)
     if (value.type === SpecialInputTypes.FOLDER) {
       Object.assign(data, getDataFromSchema(value.schema, newPath))

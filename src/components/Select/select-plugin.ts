@@ -1,4 +1,3 @@
-// @ts-expect-error
 import v8n from 'v8n'
 
 type SelectSettings<U = unknown> = { options: Record<string, U> | U[] }

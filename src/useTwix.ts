@@ -3,6 +3,7 @@ import { store, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './components/Twix'
 import { folder } from './helpers/folder'
 import { register } from './register'
+import { FolderSettings, Schema } from './types'
 
 import number from './components/Number'
 import select from './components/Select'
@@ -26,11 +27,11 @@ register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
 
-// FIXME fix name type in useTwix
-// @ts-expect-error
-export function useTwix(nameOrSchema: string | any, schema?) {
+export function useTwix(schema: Schema): any
+export function useTwix(name: string, schema: Schema, settings?: Partial<FolderSettings>): any
+export function useTwix(nameOrSchema: string | Schema, schema?: Schema, settings?: Partial<FolderSettings>) {
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
-  const _schema = useRef(_name ? { [_name]: folder(schema) } : nameOrSchema)
+  const _schema = useRef(_name ? { [_name]: folder(schema, settings) } : nameOrSchema)
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
   const paths = useMemo(() => Object.keys(initialData), [initialData])
   const values = useValuesForPath(paths, initialData)
@@ -40,6 +41,7 @@ export function useTwix(nameOrSchema: string | any, schema?) {
     return () => store.disposePaths(paths)
   }, [paths, initialData])
 
+  // renders <Twix /> only if it's not manually rendered by the user
   useRenderRoot()
 
   return values

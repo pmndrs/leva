@@ -1,10 +1,10 @@
 import { normalize, getValueType } from '../register'
-import { ValueInput, SpecialInputs } from '../types'
+import { ValueInput, SpecialInput } from '../types'
 import { warn, TwixErrors } from './log'
 
 // returns a value in the form of { value, settings}
 export function normalizeInput<V, Settings extends object>(
-  input: ValueInput<V, Settings> | SpecialInputs,
+  input: ValueInput<V, Settings> | SpecialInput,
   path: string
 ) {
   if (typeof input === 'object') {

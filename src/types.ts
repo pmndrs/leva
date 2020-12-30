@@ -7,10 +7,6 @@ export enum SpecialInputTypes {
 
 export type Folders = Record<string, FolderSettings>
 
-export type FolderSettings = {
-  collapsed?: boolean
-}
-
 export type ValueInputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
@@ -29,27 +25,39 @@ export type ButtonInput = {
   onClick: () => any
 }
 
+export type MonitorSettings = { graph: boolean; interval: number }
+
 export type MonitorInput = {
   type: SpecialInputTypes
   objectOrFn: React.MutableRefObject<any> | Function
-  settings: { graph: boolean; interval: number }
+  settings: MonitorSettings
+}
+
+export type FolderSettings = { collapsed: boolean }
+
+export type FolderInput = {
+  type: SpecialInputTypes
+  schema: Schema
+  settings: FolderSettings
 }
 
 export type SeparatorInput = {
   type: SpecialInputTypes
 }
 
-export type SpecialInputs = ButtonInput | SeparatorInput
+export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
+
+export interface Schema {
+  [name: string]: SpecialInput | unknown
+}
 
 export type Data = {
-  [key: string]: DataInput | (SpecialInputs & { count: number })
+  [key: string]: DataInput | (SpecialInput & { count: number })
 }
 
 export type Tree = {
   [key: string]: JSX.Element | Tree
 }
-
-export type V8N = { test: (o: any) => boolean }
 
 export type TwixInputProps<V, InternalSettings = {}> = {
   label: string
@@ -66,5 +74,5 @@ export type Plugin<Value, InternalValue, Settings, InternalSettings> = {
   format?: (value: any, settings: InternalSettings) => any
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => InternalValue
-  normalize?: (input: ValueInputWithSettings<Value, Settings>) => { value: InternalValue; settings: InternalSettings }
+  normalize?: (input: ValueInputWithSettings<Value, Settings>) => { value: InternalValue; settings?: InternalSettings }
 }

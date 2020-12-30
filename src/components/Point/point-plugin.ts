@@ -1,4 +1,3 @@
-// @ts-expect-error
 import v8n from 'v8n'
 import { mapArrayToKeys, orderKeys } from '../../utils'
 import { normalizeKeyValue, NumberSettings, InternalNumberSettings } from '../Number/number-plugin'

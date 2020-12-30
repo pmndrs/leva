@@ -1,4 +1,3 @@
-// @ts-expect-error
 import v8n from 'v8n'
 import tc from 'tinycolor2'
 import { ValueInputWithSettings } from '../../types'
@@ -15,6 +14,7 @@ const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 
 v8n.extend({ color: () => (value: any) => FORMATS.includes(tc(value).getFormat()) })
 // prettier-ignore
+// @ts-expect-error
 export const schema = (o: any) => v8n().color().test(o)
 
 function convert(color: tc.Instance, { format, hasAlpha }: InternalColorSettings) {

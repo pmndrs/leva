@@ -1,3 +1,5 @@
+type ImageInput = { image: string }
+
 export const sanitize = (v: any) => {
   if (!v) return undefined
   try {
@@ -8,3 +10,7 @@ export const sanitize = (v: any) => {
 }
 
 export const schema = (_o: any, s: any) => typeof s === 'object' && 'image' in s
+
+export const normalize = ({ image }: ImageInput) => {
+  return { value: image }
+}

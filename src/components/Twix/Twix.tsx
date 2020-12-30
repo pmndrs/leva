@@ -47,7 +47,7 @@ export function Filter({ onChange }: FilterProps) {
   )
 }
 
-export function Twix({ theme = TwixTheme, fillParent = false }) {
+export function Twix({ theme = TwixTheme, fillParent = false, collapsed = false }) {
   const paths = useVisiblePaths()
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
@@ -71,7 +71,7 @@ export function Twix({ theme = TwixTheme, fillParent = false }) {
       <AnimatedRoot style={spring} fillParent={fillParent}>
         <DragHandle {...bind()}>twix</DragHandle>
         <Filter onChange={setFilter} />
-        <Folder root tree={tree} folderOnTop={isFolderOnTop} />
+        <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
       </AnimatedRoot>
     </ThemeProvider>
   )

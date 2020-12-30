@@ -1,4 +1,3 @@
-// @ts-expect-error
 import v8n from 'v8n'
 import { ValueInputWithSettings } from '../../types'
 import { orderKeys } from '../../utils'
