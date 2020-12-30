@@ -56,7 +56,7 @@ export type Data = {
 }
 
 export type Tree = {
-  [key: string]: JSX.Element | Tree
+  [key: string]: { __twixInput: true; valueKey: string; path: string } | Tree
 }
 
 export type TwixInputProps<V, InternalSettings = {}> = {

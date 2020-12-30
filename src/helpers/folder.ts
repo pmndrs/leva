@@ -1,8 +1,7 @@
-import { FolderSettings, SpecialInputTypes } from '../types'
+import { FolderSettings, Schema, SpecialInputTypes } from '../types'
 
 const defaultSettings = { collapsed: false }
 
-// @ts-expect-error
-export function folder(schema, settings?: Partial<FolderSettings>) {
+export function folder(schema: Schema, settings?: Partial<FolderSettings>) {
   return { type: SpecialInputTypes.FOLDER, schema, settings: { ...defaultSettings, ...settings } }
 }

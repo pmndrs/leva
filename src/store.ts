@@ -73,8 +73,10 @@ export const useVisiblePaths = () => useStore(s => getVisiblePaths(s.data), shal
 
 function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
   return Object.entries(pick(data, paths) as Data).reduce(
-    // getValuesForPath is only called from paths that are inputs, so
-    // they always have a value
+    // Typescript complaints that SpecialInput type doesn't have a value key.
+    // But getValuesForPath is only called from paths that are inputs,
+    // so they always have a value key.
+
     // @ts-expect-error
     (acc, [path, { value }]) => {
       const [key] = getKeyPath(path)

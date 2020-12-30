@@ -62,8 +62,8 @@ export function Twix({ theme = TwixTheme, fillParent = false, collapsed = false 
   // we know there's a folder at the root of the root if the first
   // key isn't an input. isFolderOnTop is used to show an dummy folder at
   // the top of the pane.
-  const keys = Object.keys(tree)
-  const isFolderOnTop = keys.length > 0 && !isInput(keys[0])
+  const values = Object.values(tree)
+  const isFolderOnTop = values.length > 0 && !isInput(values[0])
 
   return (
     <ThemeProvider theme={theme}>

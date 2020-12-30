@@ -59,8 +59,12 @@ export function Folder({
       <AnimatedWrapper root={root} style={{ height }}>
         <StyledContent ref={contentRef} root={root} toggled={toggled}>
           {Object.entries(tree).map(([key, value]) =>
-            // @ts-expect-error
-            isInput(key) ? <TwixWrapper {...value} /> : createFolder(key, parent, value as Tree)
+            isInput(value) ? (
+              // @ts-expect-error
+              <TwixWrapper key={value.path} valueKey={value.valueKey} path={value.path} />
+            ) : (
+              createFolder(key, parent, value as Tree)
+            )
           )}
         </StyledContent>
       </AnimatedWrapper>
