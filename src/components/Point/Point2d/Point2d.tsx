@@ -32,6 +32,8 @@ export function Point2d({ label, value, onUpdate, settings }: Point2dProps) {
   const startOutOfBounds = useCallback(() => {
     if (timeout.current) return
     setIsOutOfBounds(true)
+    if (outOfBoundsX.current) x.start(outOfBoundsX.current * w)
+    if (outOfBoundsY.current) y.start(outOfBoundsY.current * -h)
     timeout.current = setInterval(() => {
       onUpdate((v: Point2dType) => {
         const incX = stepX * outOfBoundsX.current * 3
