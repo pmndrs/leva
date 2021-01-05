@@ -1,5 +1,4 @@
 import styled from '@xstyled/styled-components'
-import { th } from '@xstyled/system'
 
 export const StyledButton = styled.button`
   display: block;
@@ -9,7 +8,6 @@ export const StyledButton = styled.button`
   font-weight: bold;
   appearance: none;
   margin-left: row-h; /* accounts for label margin */
-  width: calc(100% - ${th.space('row-h')});
   height: 100%;
   border-style: solid;
   border-radius: input;

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback, useRef, forwardRef, useImperat
 import { Canvas } from './StyledMonitor'
 import { Row, Label } from '../styles'
 import { range } from '../../utils'
-import { useCanvas2d, useThemeValue } from '../../hooks'
+import { useColor } from '@xstyled/styled-components'
+import { useCanvas2d } from '../../hooks'
 import { MonitorInput } from '../../types'
 
 type MonitorProps = { valueKey: string } & Omit<MonitorInput, 'type'>
@@ -16,7 +17,7 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function({ initialValue }: ObjectProps, ref) {
-  const accentColor = useThemeValue('color', 'accent')
+  const accentColor = useColor('accent')
   const points = useRef([initialValue])
   const min = useRef(initialValue)
   const max = useRef(initialValue)

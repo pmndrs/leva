@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
-import styled from '@xstyled/styled-components'
+import styled, { useColor } from '@xstyled/styled-components'
 import { a, useSpring } from 'react-spring'
 import { PointCoordinates } from '../PointCoordinates'
 import { Canvas, SpringPreview } from './StyledSpring'
@@ -8,7 +8,7 @@ import { springFn } from './math'
 import { Row, Label } from '../styles'
 import { TwixInputProps } from '../../types'
 import { debounce } from '../../utils'
-import { useCanvas2d, useDrag, useThemeValue } from '../../hooks'
+import { useCanvas2d, useDrag } from '../../hooks'
 
 type SpringProps = TwixInputProps<InternalSpring, InternalSpringSettings>
 
@@ -22,7 +22,7 @@ const SpringPreviewAnimated = a(SpringPreview)
 
 export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
   const springRef = useRef(displayValue)
-  const accentColor = useThemeValue('color', 'accent')
+  const accentColor = useColor('accent')
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!

@@ -1,6 +1,6 @@
 {
-  "name": "use-twix",
-  "version": "0.0.1",
+  "name": "leva",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -33,18 +33,18 @@
     "react-dom": ">= 16.8.0"
   },
   "dependencies": {
-    "@welldone-software/why-did-you-render": "^6.0.0-rc.1",
-    "@xstyled/styled-components": "^1.19.1",
+    "@welldone-software/why-did-you-render": "^6.0.5",
+    "@xstyled/styled-components": "^2.0.0",
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
-    "react-colorful": "^4.4.3",
+    "react-colorful": "^4.4.4",
     "react-dropzone": "^11.2.4",
     "react-spring": "^9.0.0-rc.3",
-    "react-use-gesture": "^9.0.0-beta.10",
+    "react-use-gesture": "^9.0.0-beta.11",
     "styled-components": "^5.2.1",
     "tinycolor2": "^1.4.2",
     "v8n": "^1.3.3",
-    "zustand": "^3.1.4"
+    "zustand": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -58,12 +58,12 @@
     "@types/react-dom": "^17.0.0",
     "@types/tinycolor2": "^1.4.2",
     "@types/xstyled__styled-components": "^1.19.1",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
     "babel-eslint": "^10.0.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.12.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.0",

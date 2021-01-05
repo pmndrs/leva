@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import styled from '@xstyled/styled-components'
+import styled, { useTh } from '@xstyled/styled-components'
 import { TwixInputProps } from '../../types'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
@@ -7,7 +7,6 @@ import { PointCoordinates } from '../PointCoordinates'
 import { Range, RangeWrapper, Scrubber } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useThemeValue } from '../../hooks'
 
 type IntervalProps = TwixInputProps<IntervalType, InternalIntervalSettings>
 type IntervalSliderProps = {
@@ -34,12 +33,12 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
-  const scrubberWidth: string = useThemeValue('size', 'scrubber-width')
+  const scrubberWidth = useTh('sizes.scrubber-width')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {
       const { width, left } = ref.current!.getBoundingClientRect()
-      rangeWidth.current = width - parseFloat(scrubberWidth)
+      rangeWidth.current = width - scrubberWidth
 
       const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current
 
@@ -51,8 +50,8 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
     return memo
   })
 
-  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth}))`
-  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth}))`
+  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth}px))`
+  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth}px))`
 
   return (
     <RangeWrapper ref={ref} {...bind()}>

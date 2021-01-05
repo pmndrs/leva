@@ -28,7 +28,7 @@ export const JoystickTrigger = styled.div`
     cursor: crosshair;
   }
   :after {
-    content: ' ';
+    content: '';
     background-color: accent;
     height: 4px;
     width: 4px;

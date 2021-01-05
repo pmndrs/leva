@@ -1,13 +1,13 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { useDrag } from 'react-use-gesture'
 import { useSpring, a, config } from 'react-spring'
+import { useTh } from '@xstyled/styled-components'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Point2d as Point2dType, InternalPoint2dSettings, KEYS } from './point2d-plugin'
 import { mapArrayToKeys, clamp } from '../../../utils'
 import { TwixInputProps } from '../../../types'
 import { Container, JoystickTrigger, Joystick } from './StyledPoint2d'
 import { Row, Label } from '../../styles'
-import { useThemeValue } from '../../../hooks'
 
 type Point2dProps = TwixInputProps<Point2dType, InternalPoint2dSettings>
 
@@ -26,8 +26,8 @@ export function Point2d({ label, value, onUpdate, settings }: Point2dProps) {
     y: { step: stepY },
   } = settings
 
-  const w = (parseInt(useThemeValue('size', 'joystick-width')) * 0.8) / 2
-  const h = (parseInt(useThemeValue('size', 'joystick-height')) * 0.8) / 2
+  const w = (useTh('sizes.joystick-width') * 0.8) / 2
+  const h = (useTh('sizes.joystick-height') * 0.8) / 2
 
   const startOutOfBounds = useCallback(() => {
     if (timeout.current) return
