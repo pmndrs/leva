@@ -20,7 +20,7 @@ export function RangeSlider({ value, min, max, onDrag }: RangeSliderProps) {
 
       const targetIsScrub = event?.target === scrubberRef.current
       // memo is the value where the user clicked on
-      memo = targetIsScrub ? value : invertedRange((x - left) / width - 0.5, 0, max - min)
+      memo = targetIsScrub ? value : invertedRange((x - left) / width, min, max)
     }
     onDrag(memo + invertedRange(mx / rangeWidth.current, 0, max - min))
     return memo

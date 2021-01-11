@@ -14,7 +14,7 @@ function Comp1() {
     }, 100)
   }, [])
   const t = useTwix({
-    first: { value: 0, min: -10, max: 10 },
+    first: { value: 40, min: 30, max: 90 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },

@@ -42,7 +42,7 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
 
       const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current
 
-      memo.pos = invertedRange((x - left) / width - 0.5, 0, max - min)
+      memo.pos = invertedRange((x - left) / width, min, max)
       memo.key = Math.abs(memo.pos - value.min) < Math.abs(memo.pos - value.max) ? 'min' : 'max'
       if (targetIsScrub) memo.pos = value[memo.key as keyof InternalInterval]
     }
