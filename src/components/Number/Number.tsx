@@ -36,8 +36,8 @@ function NumberInput({ children, value, onUpdate, onChange }: NumberInputProps) 
 }
 
 export function Number({ label, displayValue, value, onUpdate, onChange, settings }: NumberProps) {
-  const { min, max, step } = settings
-  const bind = useDragNumber({ step, onDrag: onUpdate })
+  const { min, max } = settings
+  const bind = useDragNumber({ settings, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
   return (
     <Row input>
@@ -45,7 +45,7 @@ export function Number({ label, displayValue, value, onUpdate, onChange, setting
         {label}
       </Label>
       <RangeGrid hasRange={hasRange}>
-        {hasRange && <RangeSlider value={value} min={min!} max={max!} onDrag={onUpdate} />}
+        {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
         <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
       </RangeGrid>
     </Row>
@@ -53,7 +53,7 @@ export function Number({ label, displayValue, value, onUpdate, onChange, setting
 }
 
 export function NumberInner({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
-  const bind = useDragNumber({ step: settings.step, onDrag: onUpdate })
+  const bind = useDragNumber({ settings, onDrag: onUpdate })
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
       <div title={label.length > 1 ? label : ''} {...bind()} style={{ touchAction: 'none' }}>

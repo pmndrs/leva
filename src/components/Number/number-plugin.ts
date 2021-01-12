@@ -3,7 +3,7 @@ import { ValueInputWithSettings } from '../../types'
 import { getStep, clamp } from '../../utils'
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
-export type InternalNumberSettings = { min: number; max: number; step: number; pad: number }
+export type InternalNumberSettings = { min: number; max: number; step: number; pad: number; initialValue: number }
 type NumberInput = ValueInputWithSettings<number, NumberSettings>
 
 export const schema = (o: any) =>
@@ -29,7 +29,15 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
     else step = padStep
   }
   const pad = clamp(Math.log10(1 / padStep), 0, 2)
-  return { value, settings: { step, pad, min: -Infinity, max: Infinity, ...settings } }
+  return { value, settings: { initialValue: value, step, pad, min: -Infinity, max: Infinity, ...settings } }
+}
+
+export const sanitizeStep = (
+  v: number,
+  { step, initialValue }: Pick<InternalNumberSettings, 'step' | 'initialValue'>
+) => {
+  const steps = Math.round((v - initialValue) / step)
+  return initialValue + steps * step!
 }
 
 export const normalizeKeyValue = <K extends object>(obj: K, settings: { [key in keyof K]?: NumberSettings }) => {

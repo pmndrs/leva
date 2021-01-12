@@ -4,17 +4,15 @@ import { LevaInputProps } from '../../types'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
-import { Range, RangeWrapper, Scrubber } from '../Number'
+import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 type IntervalSliderProps = {
   value: InternalInterval
-  min: number
-  max: number
   onDrag: (v: InternalInterval) => void
-}
+} & InternalIntervalSettings
 
 const Container = styled.div`
   display: grid;
@@ -28,7 +26,7 @@ const Indicator = styled.div`
   background-color: accent;
 `
 
-function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
+function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
@@ -46,7 +44,9 @@ function IntervalSlider({ value, min, max, onDrag }: IntervalSliderProps) {
       memo.key = Math.abs(memo.pos - value.min) < Math.abs(memo.pos - value.max) ? 'min' : 'max'
       if (targetIsScrub) memo.pos = value[memo.key as keyof InternalInterval]
     }
-    onDrag({ ...value, [memo.key]: memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min) })
+    const newValue = memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min)
+
+    onDrag({ ...value, [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
     return memo
   })
 
@@ -72,7 +72,7 @@ export function Interval({ label, displayValue, onUpdate, settings }: IntervalPr
       <Label>{label}</Label>
       <Row>
         <Row>
-          <IntervalSlider value={displayValue} min={bounds[0]} max={bounds[1]} onDrag={onUpdate} />
+          <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
         </Row>
         <Container>
           <PointCoordinates value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
