@@ -143,6 +143,7 @@ export function getDataFromSchema(schema: any, rootPath = '') {
     }
   })
 
+  store.setData(data)
   return data as Data
 }
 

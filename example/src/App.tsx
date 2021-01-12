@@ -78,6 +78,7 @@ function Comp3() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
+  const { checkbox } = useTwix({ checkbox: true })
   return (
     <>
       <Twix />

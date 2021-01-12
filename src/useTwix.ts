@@ -37,7 +37,6 @@ export function useTwix(nameOrSchema: string | Schema, schema?: Schema, settings
   const values = useValuesForPath(paths, initialData)
 
   useEffect(() => {
-    store.setData(initialData)
     return () => store.disposePaths(paths)
   }, [paths, initialData])
 
