@@ -27,7 +27,7 @@ type Props<V, Settings> = {
   set: (v: V) => void
 }
 
-export function useTwixUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
+export function useLevaUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
   // the last correct registered value
   const lastCorrectValue = useRef(value)
 

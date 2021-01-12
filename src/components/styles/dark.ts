@@ -1,27 +1,27 @@
-export const TwixTheme = {
+export const LevaTheme = {
   colors: {
     'label-text': '#ddd',
     'input-text': '#fff',
-    'input-bg': "#111",
-    
+    'input-bg': '#111',
+
     'folder-text': '#ddd',
-    
+
     'root-bg': '#222',
     'root-border': '#333',
 
     'folder-border': '#666',
     'folder-title-bg': '#666',
-    
+
     'boolean-bg': '#aaa',
     'boolean-checked-bg': 'white',
 
     'input-border': 'transparent',
-    
+
     'input-hover-border': '#c8b1e4',
     'input-focus-border': '#9b72cf',
-    
+
     'input-active-bg': 'transparent',
-    
+
     selection: '#c8b1e4',
   },
   radii: {

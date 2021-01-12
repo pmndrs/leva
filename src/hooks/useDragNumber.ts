@@ -1,9 +1,9 @@
 import { useDrag } from './useDrag'
-import { TwixInputProps } from '../types'
+import { LevaInputProps } from '../types'
 
 type UseDragNumberProps = {
   step?: number
-  onDrag: TwixInputProps<number>['onUpdate']
+  onDrag: LevaInputProps<number>['onUpdate']
 }
 
 const PRECISION = 100

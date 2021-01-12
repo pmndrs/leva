@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, join } from './utils'
-import { warn, TwixErrors } from './utils/log'
+import { warn, LevaErrors } from './utils/log'
 import { Data, FolderSettings, Folders, SpecialInputTypes } from './types'
 
 type State = { data: Data }
@@ -82,7 +82,7 @@ function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
       const [key] = getKeyPath(path)
       // if a key already exists in the accumulator, prompt an error.
       if (acc[key] !== undefined) {
-        if (shouldWarn) warn(TwixErrors.DUPLICATE_KEYS, key, path)
+        if (shouldWarn) warn(LevaErrors.DUPLICATE_KEYS, key, path)
         return acc
       }
       return { ...acc, [key]: value }
@@ -165,5 +165,5 @@ export const store = {
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // TODO remove store from window
   // @ts-expect-error
-  window.__TWIX__STORE = _store
+  window.__LEVA__STORE = _store
 }

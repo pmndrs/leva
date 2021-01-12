@@ -17,7 +17,7 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "use-twix": ["../src"]
-    },
+      "leva": ["../src"]
+    }
   }
 }

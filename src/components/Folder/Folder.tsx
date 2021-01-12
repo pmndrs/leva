@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { getFolderSettings } from '../../store'
 import { join, isInput } from '../../utils'
-import { TwixWrapper } from '../TwixWrapper'
+import { LevaWrapper } from '../LevaWrapper'
 import { StyledFolder, StyledTitle, StyledWrapper, StyledContent } from './StyledFolder'
 import { useSpring, a } from 'react-spring'
 import { FolderSettings, Tree } from '../../types'
@@ -23,7 +23,7 @@ const createFolder = (key: string, parent: string = '', tree: Tree) => {
 }
 
 export function Folder({
-  name = 'Twix',
+  name = 'Leva',
   parent,
   tree,
   root = false,
@@ -61,7 +61,7 @@ export function Folder({
           {Object.entries(tree).map(([key, value]) =>
             isInput(value) ? (
               // @ts-expect-error
-              <TwixWrapper key={value.path} valueKey={value.valueKey} path={value.path} />
+              <LevaWrapper key={value.path} valueKey={value.valueKey} path={value.path} />
             ) : (
               createFolder(key, parent, value as Tree)
             )

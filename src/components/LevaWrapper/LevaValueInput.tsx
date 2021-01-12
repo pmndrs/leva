@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
-import { useTwixUpdate } from '../../hooks/useTwixUpdate'
+import { useLevaUpdate } from '../../hooks/useLevaUpdate'
 import { store } from '../../store'
 
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 
-type TwixValueInputProps<V, Settings extends object> = {
-  as: React.ComponentType<TwixInputProps<V, Settings>>
+type LevaValueInputProps<V, Settings extends object> = {
+  as: React.ComponentType<LevaInputProps<V, Settings>>
   valueKey: string
   path: string
   type: string
@@ -13,17 +13,17 @@ type TwixValueInputProps<V, Settings extends object> = {
   settings: Settings
 }
 
-export function TwixValueInput<V, Settings extends object>({
+export function LevaValueInput<V, Settings extends object>({
   as: Input,
   valueKey,
   path,
   type,
   value,
   settings,
-}: TwixValueInputProps<V, Settings>) {
+}: LevaValueInputProps<V, Settings>) {
   const set = useCallback(value => store.setValueAtPath(path, value), [path])
 
-  const { displayValue, onChange, onUpdate } = useTwixUpdate({ type, value, settings, set })
+  const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
 
   return (
     <Input

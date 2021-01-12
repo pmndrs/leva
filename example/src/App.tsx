@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTwix, folder, button, monitor, Twix } from 'use-twix'
+import { useControls, folder, button, monitor, Leva } from 'leva'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 
@@ -13,7 +13,7 @@ function Comp1() {
       ref.current = noise.simplex2(t / 1000, t / 100)
     }, 100)
   }, [])
-  const t = useTwix({
+  const t = useControls({
     first: { value: 40, min: 30, max: 90 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
@@ -50,7 +50,7 @@ function Comp1() {
 }
 
 function Comp2() {
-  const t = useTwix('folder2.folder3', {
+  const t = useControls('folder2.folder3', {
     number: 4,
     string: 'some string',
     'Button 2': button(() => console.log('hello2')),
@@ -64,7 +64,7 @@ function Comp2() {
 }
 
 function Comp3() {
-  const t = useTwix({ file: { file: undefined } })
+  const t = useControls({ file: { file: undefined } })
 
   return (
     <div>
@@ -78,10 +78,10 @@ function Comp3() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
-  const { checkbox } = useTwix({ checkbox: true })
+  const { checkbox } = useControls({ checkbox: true })
   return (
     <>
-      <Twix />
+      <Leva />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>

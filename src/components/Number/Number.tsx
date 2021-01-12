@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react'
 import { ValueInput } from '../ValueInput'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 
-type NumberProps = TwixInputProps<number, InternalNumberSettings>
+type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
 type NumberInputProps = {
   value: string

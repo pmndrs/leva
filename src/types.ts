@@ -56,10 +56,10 @@ export type Data = {
 }
 
 export type Tree = {
-  [key: string]: { __twixInput: true; valueKey: string; path: string } | Tree
+  [key: string]: { __levaInput: true; valueKey: string; path: string } | Tree
 }
 
-export type TwixInputProps<V, InternalSettings = {}> = {
+export type LevaInputProps<V, InternalSettings = {}> = {
   label: string
   displayValue: any
   value: V
@@ -70,7 +70,7 @@ export type TwixInputProps<V, InternalSettings = {}> = {
 
 export type Plugin<Value, InternalValue, Settings, InternalSettings> = {
   schema: (value: any, settings?: Settings) => boolean
-  component: React.ComponentType<TwixInputProps<InternalValue, InternalSettings>>
+  component: React.ComponentType<LevaInputProps<InternalValue, InternalSettings>>
   format?: (value: any, settings: InternalSettings) => any
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => InternalValue

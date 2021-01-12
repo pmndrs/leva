@@ -1,9 +1,9 @@
 import React from 'react'
 import { ValueInput } from '../ValueInput'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { Label, Row } from '../styles'
 
-export function String({ label, displayValue, onUpdate, onChange }: TwixInputProps<string>) {
+export function String({ label, displayValue, onUpdate, onChange }: LevaInputProps<string>) {
   return (
     <Row input>
       <Label>{label}</Label>

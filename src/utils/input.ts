@@ -1,5 +1,5 @@
 import { normalize, getValueType } from '../register'
-import { warn, TwixErrors } from './log'
+import { warn, LevaErrors } from './log'
 
 // returns a value in the form of { value, settings}
 export function normalizeInput(input: any, path: string) {
@@ -11,8 +11,8 @@ export function normalizeInput(input: any, path: string) {
     if (type) return { type, ...normalize(type, input) }
   }
   const type = getValueType({ value: input })
-  if (!type) return warn(TwixErrors.UNKNOWN_INPUT, path, input)
+  if (!type) return warn(LevaErrors.UNKNOWN_INPUT, path, input)
   return { type, ...normalize(type, { value: input }) }
 }
 
-export const isInput = (v: object) => '__twixInput' in v
+export const isInput = (v: object) => '__levaInput' in v

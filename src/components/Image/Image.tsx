@@ -2,9 +2,9 @@ import React, { useCallback } from 'react'
 import { Label, Row } from '../styles'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 
-type ImageProps = TwixInputProps<string | undefined>
+type ImageProps = LevaInputProps<string | undefined>
 
 export function Image({ label, value, onUpdate }: ImageProps) {
   const onDrop = useCallback(

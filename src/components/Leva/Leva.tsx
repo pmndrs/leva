@@ -6,14 +6,14 @@ import { useDrag } from 'react-use-gesture'
 import { useSpring, a } from 'react-spring'
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
-import { Folder } from './../Folder/'
+import { Folder } from '../Folder'
 import { isInput, debounce } from '../../utils'
 
-import { Root, DragHandle, StyledFilter } from './StyledTwix'
-import { TwixTheme } from '../styles'
+import { Root, DragHandle, StyledFilter } from './StyledLeva'
+import { LevaTheme } from '../styles'
 
 const GlobalStyle = createGlobalStyle`
-  .twix__body__dragged {
+  .leva__body__dragged {
     user-select: none;
     input {
       user-select: none;
@@ -47,7 +47,7 @@ export function Filter({ onChange }: FilterProps) {
   )
 }
 
-export function Twix({ theme = TwixTheme, fillParent = false, collapsed = false }) {
+export function Leva({ theme = LevaTheme, fillParent = false, collapsed = false }) {
   const paths = useVisiblePaths()
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
@@ -69,7 +69,7 @@ export function Twix({ theme = TwixTheme, fillParent = false, collapsed = false 
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <AnimatedRoot style={spring} fillParent={fillParent}>
-        <DragHandle {...bind()}>twix</DragHandle>
+        <DragHandle {...bind()}>leva</DragHandle>
         <Filter onChange={setFilter} />
         <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
       </AnimatedRoot>
@@ -83,7 +83,7 @@ export function useRenderRoot() {
       const rootEl = document.createElement('div')
       if (document.body) {
         document.body.appendChild(rootEl)
-        ReactDOM.render(<Twix />, rootEl)
+        ReactDOM.render(<Leva />, rootEl)
       }
       rootInitialized = true
     }

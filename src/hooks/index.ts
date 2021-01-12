@@ -1,4 +1,4 @@
-export * from './useTwixUpdate'
+export * from './useLevaUpdate'
 export * from './useDeepMemo'
 export * from './useDeepCompareMemoize'
 export * from './useDrag'

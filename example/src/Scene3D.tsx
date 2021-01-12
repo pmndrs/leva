@@ -1,11 +1,11 @@
 import React, { Suspense, useRef } from 'react'
 import { Canvas } from 'react-three-fiber'
-import { useTwix } from 'use-twix'
+import { useControls } from 'leva'
 import { OrbitControls, ContactShadows, useCubeTexture, Octahedron } from '@react-three/drei'
 
 function Octa({ envMap }) {
   const mesh = useRef()
-  const { position } = useTwix('Oct', { position: [0, 0] })
+  const { position } = useControls('Oct', { position: [0, 0] })
 
   return (
     <Octahedron ref={mesh} args={[1, 6]} position={[...position, 0]}>

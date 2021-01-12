@@ -5,11 +5,11 @@ import { useTh } from '@xstyled/styled-components'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Point2d as Point2dType, InternalPoint2dSettings, KEYS } from './point2d-plugin'
 import { mapArrayToKeys, clamp } from '../../../utils'
-import { TwixInputProps } from '../../../types'
+import { LevaInputProps } from '../../../types'
 import { Container, JoystickTrigger, Joystick } from './StyledPoint2d'
 import { Row, Label } from '../../styles'
 
-type Point2dProps = TwixInputProps<Point2dType, InternalPoint2dSettings>
+type Point2dProps = LevaInputProps<Point2dType, InternalPoint2dSettings>
 
 export function Point2d({ label, value, onUpdate, settings }: Point2dProps) {
   const _value = mapArrayToKeys(value, KEYS)

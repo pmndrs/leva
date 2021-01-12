@@ -1,9 +1,9 @@
 import React from 'react'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { Label, Row } from '../styles'
 import { StyledInputWrapper } from './StyledBoolean'
 
-export function Boolean({ label, value, onUpdate }: TwixInputProps<boolean>) {
+export function Boolean({ label, value, onUpdate }: LevaInputProps<boolean>) {
   // htmlFor might raise a conflict if two booleans are labeled the same way
   return (
     <Row input>

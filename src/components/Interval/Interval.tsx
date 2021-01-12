@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styled, { useTh } from '@xstyled/styled-components'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
@@ -8,7 +8,7 @@ import { Range, RangeWrapper, Scrubber } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 
-type IntervalProps = TwixInputProps<IntervalType, InternalIntervalSettings>
+type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 type IntervalSliderProps = {
   value: InternalInterval
   min: number

@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
-import { TwixInputProps } from '../../../types'
+import { LevaInputProps } from '../../../types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
 import { Point3d as Point3dType, KEYS, InternalPoint3dSettings } from './point3d-plugin'
 import { mapArrayToKeys } from '../../../utils'
 
-type Point3dProps = TwixInputProps<Point3dType, InternalPoint3dSettings>
+type Point3dProps = LevaInputProps<Point3dType, InternalPoint3dSettings>
 
 const Container = styled.div`
   display: grid;

@@ -10,7 +10,7 @@ export const buildTree = (paths: string[], filter?: string): Tree => {
     const [key, folderPath] = getKeyPath(path)
     if (!_filter || key.toLowerCase().indexOf(_filter) > -1) {
       merge(tree, folderPath, {
-        [key]: { __twixInput: true, path, valueKey: key },
+        [key]: { __levaInput: true, path, valueKey: key },
       })
     }
   })

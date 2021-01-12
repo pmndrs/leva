@@ -17,7 +17,7 @@
     "three": "^0.123.0"
   },
   "alias": {
-    "use-twix": "../src",
+    "leva": "../src",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom/profiling"
   },

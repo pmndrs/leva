@@ -1,10 +1,10 @@
 import React from 'react'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { Label, Row } from '../styles'
 import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
 
-type SelectProps = TwixInputProps<any, InternalSelectSettings>
+type SelectProps = LevaInputProps<any, InternalSelectSettings>
 
 export function Select({ label, displayValue, onUpdate, settings }: SelectProps) {
   const { keys, values } = settings!

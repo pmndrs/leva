@@ -1,5 +1,5 @@
 import { Plugin, ValueInputWithSettings } from './types'
-import { warn, TwixErrors } from './utils/log'
+import { warn, LevaErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
 
@@ -26,7 +26,7 @@ export function register<
   InternalSettings extends object | undefined = undefined
 >({ schema, ...plugin }: Plugin<V, InternalValue, Settings, InternalSettings>, type: string) {
   if (type in Plugins) {
-    warn(TwixErrors.ALREADY_REGISTERED_TYPE, type)
+    warn(LevaErrors.ALREADY_REGISTERED_TYPE, type)
     return
   }
   schemas.push((value: any, settings?: any) => schema(value, settings) && type)

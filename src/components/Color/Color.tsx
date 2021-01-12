@@ -3,12 +3,12 @@ import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 import { Overlay } from '../Misc'
 import { Color as ColorType, InternalColorSettings } from './color-plugin'
-import { TwixInputProps } from '../../types'
+import { LevaInputProps } from '../../types'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Row, Label } from '../styles'
 
-type ColorProps = TwixInputProps<ColorType, InternalColorSettings>
+type ColorProps = LevaInputProps<ColorType, InternalColorSettings>
 
 export function Color({ value, displayValue, label, onChange, onUpdate, settings }: ColorProps) {
   const [showPicker, setShowPicker] = useState(false)

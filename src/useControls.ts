@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getDataFromSchema, useValuesForPath } from './store'
-import { useRenderRoot } from './components/Twix'
+import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
 import { register } from './register'
 import { FolderSettings, Schema } from './types'
@@ -27,9 +27,9 @@ register(point3d, 'POINT3D')
 register(point2d, 'POINT2D')
 register(spring, 'SPRING')
 
-export function useTwix(schema: Schema): any
-export function useTwix(name: string, schema: Schema, settings?: Partial<FolderSettings>): any
-export function useTwix(nameOrSchema: string | Schema, schema?: Schema, settings?: Partial<FolderSettings>) {
+export function useControls(schema: Schema): any
+export function useControls(name: string, schema: Schema, settings?: Partial<FolderSettings>): any
+export function useControls(nameOrSchema: string | Schema, schema?: Schema, settings?: Partial<FolderSettings>) {
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
   const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
@@ -40,7 +40,7 @@ export function useTwix(nameOrSchema: string | Schema, schema?: Schema, settings
     return () => store.disposePaths(paths)
   }, [paths, initialData])
 
-  // renders <Twix /> only if it's not manually rendered by the user
+  // renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
 
   return values
