@@ -25,6 +25,8 @@ const MonitorCanvas = forwardRef(function({ initialValue }: ObjectProps, ref) {
 
   const drawPlot = useCallback(
     (_canvas: HTMLCanvasElement, _ctx: CanvasRenderingContext2D) => {
+      // fixes unmount potential bug
+      if (!_canvas) return
       const { width, height } = _canvas
       _ctx.clearRect(0, 0, width, height)
       _ctx.beginPath()
@@ -76,7 +78,7 @@ export function Monitor({ valueKey, objectOrFn, settings }: MonitorProps) {
   const initialValue = useRef(getValue(objectOrFn))
 
   useEffect(() => {
-    const timeout = setInterval(() => ref.current.frame(getValue(objectOrFn)), settings.interval)
+    const timeout = setInterval(() => ref.current?.frame(getValue(objectOrFn)), settings.interval)
     return () => clearInterval(timeout)
   }, [objectOrFn, settings.interval])
 
