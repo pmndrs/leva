@@ -8,13 +8,14 @@ export const Row = styled.div<{ input?: boolean }>`
   grid-row-gap: row-v;
   grid-template-rows: minmax(${th.size('row-height')}, max-content);
   align-items: center;
+
   ${StyledContent} > & {
     padding: 0 row-h;
     :first-of-type {
-      padding-top: row-v;
+      margin-top: row-v;
     }
     :last-of-type {
-      padding-bottom: row-v;
+      margin-bottom: row-v;
     }
   }
   ${props =>
