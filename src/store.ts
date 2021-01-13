@@ -9,10 +9,21 @@ type State = { data: Data }
 
 // zustand store
 const _store = create<State>(() => ({ data: {} }))
+
+// possibly make this reactive
+const FOLDERS: Folders = {}
+const PATHS = new Set<string>()
+
+window.PATHS = PATHS
+
 const useStore = _store
 
 // shorthand to get zustand store data
 const getData = () => _store.getState().data
+
+function setPaths(newPaths: string[]) {
+  newPaths.forEach(p => PATHS.add(p))
+}
 
 /**
  * Merges the data passed as an argument with the store data.
@@ -48,8 +59,10 @@ function setData(newData: Data) {
  */
 function setValueAtPath(path: string, value: any) {
   _store.setState(s => {
-    const current = s.data[path]
-    return { data: { ...s.data, [path]: { ...current, value } } }
+    const data = s.data
+    //@ts-expect-error (we always update inputs with a value)
+    data[path].value = value
+    return { data }
   })
 }
 
@@ -61,9 +74,12 @@ function setValueAtPath(path: string, value: any) {
  * @param data
  */
 function getVisiblePaths(data: Data) {
-  return Object.entries(data)
-    .map(([path, { count }]) => (count > 0 ? path : undefined))
-    .filter(Boolean) as string[]
+  const visiblePaths: string[] = []
+  PATHS.forEach(path => {
+    if (data[path]?.count > 0) visiblePaths.push(path)
+  })
+
+  return visiblePaths
 }
 
 /**
@@ -122,8 +138,6 @@ export function useInput(path: string) {
   }, shallow)
 }
 
-// possibly make this reactive
-const FOLDERS: Folders = {}
 export const getFolderSettings = (path: string) => FOLDERS[path]
 
 /**
@@ -132,6 +146,7 @@ export const getFolderSettings = (path: string) => FOLDERS[path]
  */
 export function getDataFromSchema(schema: any, rootPath = '') {
   const data: any = {}
+  const paths: string[] = []
   Object.entries(schema).forEach(([path, value]: [string, any]) => {
     const newPath = join(rootPath, path)
     if (value.type === SpecialInputTypes.FOLDER) {
@@ -139,11 +154,19 @@ export function getDataFromSchema(schema: any, rootPath = '') {
       FOLDERS[newPath] = value.settings as FolderSettings
     } else {
       const input = normalizeInput(value, newPath)
-      if (input) data[newPath] = input
+      if (input) {
+        data[newPath] = input
+        paths.push(newPath)
+      }
     }
   })
-
   return data as Data
+}
+
+export function getPaths(initialData: Data) {
+  const paths = Object.keys(initialData)
+  setPaths(paths)
+  return paths
 }
 
 function disposePaths(paths: string[]) {

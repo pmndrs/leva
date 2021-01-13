@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store, getDataFromSchema, useValuesForPath } from './store'
+import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
 import { register } from './register'
@@ -33,7 +33,7 @@ export function useControls(nameOrSchema: string | Schema, schema?: Schema, sett
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
   const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
-  const paths = useMemo(() => Object.keys(initialData), [initialData])
+  const paths = useMemo(() => getPaths(initialData), [initialData])
   const values = useValuesForPath(paths, initialData)
 
   useEffect(() => {

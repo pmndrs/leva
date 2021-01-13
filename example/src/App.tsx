@@ -6,13 +6,14 @@ import Scene3D from './Scene3D'
 const noise = new Noise(Math.random())
 
 function Comp1() {
-  const ref = React.useRef(0)
+  const ref = React.useRef(4)
   React.useEffect(() => {
     setInterval(() => {
       const t = Date.now()
-      ref.current = noise.simplex2(t / 1000, t / 100)
+      ref.current = 2 * noise.simplex2(3 * t, t) + (3 * Math.sin(t)) / t
     }, 100)
   }, [])
+
   const t = useControls({
     first: { value: 40, min: 30, max: 90 },
     image: { image: undefined },
@@ -21,7 +22,6 @@ function Comp1() {
     color: '#ffffffff',
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
-    colorObj: { r: 1, g: 2, b: 3 },
     folder2: folder({
       boolean: false,
       spring: { tension: 100, friction: 30 },
@@ -38,6 +38,7 @@ function Comp1() {
         { collapsed: false }
       ),
     }),
+    colorObj: { r: 1, g: 2, b: 3 },
   })
 
   return (
