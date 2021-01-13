@@ -14,8 +14,6 @@ const _store = create<State>(() => ({ data: {} }))
 const FOLDERS: Folders = {}
 const PATHS = new Set<string>()
 
-window.PATHS = PATHS
-
 const useStore = _store
 
 // shorthand to get zustand store data

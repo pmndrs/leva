@@ -8,10 +8,12 @@ const noise = new Noise(Math.random())
 function Comp1() {
   const ref = React.useRef(4)
   React.useEffect(() => {
+    let x = 0
     setInterval(() => {
+      x += 0.1
       const t = Date.now()
-      ref.current = 2 * noise.simplex2(3 * t, t) + (3 * Math.sin(t)) / t
-    }, 100)
+      ref.current = 2 * noise.simplex2(3 * x + t, x) + (3 * Math.sin(x)) / x
+    }, 30)
   }, [])
 
   const t = useControls({
