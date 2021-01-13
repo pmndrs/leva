@@ -37,6 +37,9 @@ export function useControls(nameOrSchema: string | Schema, schema?: Schema, sett
   const values = useValuesForPath(paths, initialData)
 
   useEffect(() => {
+    // we need to compute these in useEffect for monitors to work
+    // but this breaks the order of keys
+    store.setData(initialData)
     return () => store.disposePaths(paths)
   }, [paths, initialData])
 

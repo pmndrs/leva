@@ -29,7 +29,7 @@ function setData(newData: Data) {
       const input = data[path]
       // if an input already exists at the path, increment
       // the reference count.
-      if (input) input.count++
+      if (!!input) input.count++
       // if not, create a path for the input.
       else data[path] = { ...value, count: 1 }
     })
@@ -143,7 +143,6 @@ export function getDataFromSchema(schema: any, rootPath = '') {
     }
   })
 
-  store.setData(data)
   return data as Data
 }
 
