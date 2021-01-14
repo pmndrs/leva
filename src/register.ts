@@ -32,3 +32,5 @@ export function register<
   schemas.push((value: any, settings?: any) => schema(value, settings) && type)
   Plugins[type] = plugin
 }
+
+

@@ -15,6 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
+    "test:types": "tsc --project tsconfig.json",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",

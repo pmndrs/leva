@@ -1,3 +1,5 @@
+import { Schema } from './public-api-types'
+
 export enum SpecialInputTypes {
   SEPARATOR = 'SEPARATOR',
   BUTTON = 'BUTTON',
@@ -21,35 +23,31 @@ export type DataInput = {
 }
 
 export type ButtonInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.BUTTON
   onClick: () => any
 }
 
 export type MonitorSettings = { graph: boolean; interval: number }
 
 export type MonitorInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.MONITOR
   objectOrFn: React.MutableRefObject<any> | Function
   settings: MonitorSettings
 }
 
 export type FolderSettings = { collapsed: boolean }
 
-export type FolderInput = {
-  type: SpecialInputTypes
-  schema: Schema
+export type FolderInput<S extends Schema = Schema> = {
+  type: SpecialInputTypes.FOLDER
+  schema: S
   settings: FolderSettings
 }
 
 export type SeparatorInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.SEPARATOR
 }
 
 export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
-
-export interface Schema {
-  [name: string]: SpecialInput | unknown
-}
 
 export type Data = {
   [key: string]: DataInput | (SpecialInput & { count: number })

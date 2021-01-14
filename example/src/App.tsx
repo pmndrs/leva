@@ -66,17 +66,20 @@ function Comp2() {
   )
 }
 
-function Comp3() {
-  const t = useControls({ file: { file: undefined } })
+/**
+ * Unused @todo remove
+ */
+// function Comp3() {
+//   const t = useControls({ file: { file: undefined } })
 
-  return (
-    <div>
-      <h1>Comp3</h1>
-      <pre>{JSON.stringify(t, null, 2)}</pre>
-      <img src={t.file} />
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <h1>Comp3</h1>
+//       <pre>{JSON.stringify(t, null, 2)}</pre>
+//       <img src={t.file} />
+//     </div>
+//   )
+// }
 
 export default function App() {
   const [c1, setC1] = React.useState(true)
