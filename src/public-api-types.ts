@@ -5,7 +5,7 @@
  * but the conditional types can't be broken up into separate modules, so I opted to just
  * write all of them here.
  */
-import { SpecialInput, FolderInput } from './types'
+import { SpecialInput, SpecialInputTypes, FolderSettings } from './types'
 
 type NumberInput = number | { value: number; min?: number; max?: number }
 
@@ -59,7 +59,7 @@ type SchemaItem =
   | SpringInput
   | BooleanInput
   | StringInput
-  | FolderInput<any>
+  | FolderOutput<any>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
@@ -114,13 +114,21 @@ export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>
 
 export type Schema = Record<string, SchemaItem>
 
-type Leaves<T, P extends string | number | symbol = ''> = {
-  0: T extends { schema: any } ? Join<T, 'schema', Leaves<T['schema']>> : never
+export type FolderOutput<S extends Schema = Schema> = {
+  type: SpecialInputTypes.FOLDER
+  schema: S
+  settings: FolderSettings
+  // this prop only exists in the types
+  ___flattenedSchema: SchemaToValues<S>
+}
+
+export type Leaves<T, P extends string | number | symbol = ''> = {
+  0: T extends { ___flattenedSchema: any } ? T['___flattenedSchema'] : never
   1: never
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
   4: ''
-}[T extends FolderInput<any>
+}[T extends FolderOutput<any>
   ? 0
   : T extends SpecialInput
   ? 1
