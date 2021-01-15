@@ -1,7 +1,7 @@
 /**
  * Type tests (run them with yarn test:types)
  */
-import { folder } from './helpers'
+import { folder, monitor } from './helpers'
 import { useControls } from './useControls'
 
 declare function expectType<T>(
@@ -209,6 +209,23 @@ declare function expectType<T>(
         a1: 1,
         b: folder({
           b1: { value: 10 },
+        }),
+      }),
+    })
+  )
+
+  expectType<{
+    // pos2d: { x: number; y: number }
+    pos2dArr: [number, number]
+  }>(
+    useControls({
+      folder2: folder({
+        folder3: folder({
+          folder4: folder({
+            // pos2d: { x: 3, y: 4 },
+            pos2dArr: [100, 200],
+            // pos3dArr: [Math.PI / 2, 20, 4],
+          }),
         }),
       }),
     })
