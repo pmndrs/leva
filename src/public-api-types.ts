@@ -37,6 +37,12 @@ type SpringInput = {
   mass?: number
 }
 
+type SpringOutput = {
+  tension: number
+  friction: number
+  mass: number
+}
+
 type BooleanInput = boolean
 
 type StringInput = string
@@ -57,16 +63,29 @@ type SchemaItem =
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
-type PrimitiveToValue<S> = S extends { r: number; g: number; b: number; a: number }
-  ? { r: number; g: number; b: number; a: number }
-  : S extends { r: number; g: number; b: number }
-  ? { r: number; g: number; b: number }
+type ColorObjectRGBA = {
+  r: number
+  g: number
+  b: number
+  a: number
+}
+
+type ColorObjectRGB = {
+  r: number
+  g: number
+  b: number
+}
+
+type PrimitiveToValue<S> = S extends ColorObjectRGBA
+  ? ColorObjectRGBA
+  : S extends ColorObjectRGB
+  ? ColorObjectRGB
   : S extends { options: Array<infer T> }
   ? T
   : S extends { options: Record<string, any> }
   ? string
   : S extends SpringInput
-  ? { tension: number; friction: number; mass: number }
+  ? SpringOutput
   : S extends { x: NumberInput; y: NumberInput; z: NumberInput }
   ? { x: number; y: number; z: number }
   : S extends { x: NumberInput; y: NumberInput }
