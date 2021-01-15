@@ -114,16 +114,16 @@ export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>
 
 export type Schema = Record<string, SchemaItem>
 
-export type FolderOutput<S extends Schema = Schema> = {
+export type FolderOutput<FlattenedSchema> = {
   type: SpecialInputTypes.FOLDER
-  schema: S
+  schema: Schema
   settings: FolderSettings
   // this prop only exists in the types
-  ___flattenedSchema: SchemaToValues<S>
+  ___flattenedSchema: FlattenedSchema
 }
 
 export type Leaves<T, P extends string | number | symbol = ''> = {
-  0: T extends { ___flattenedSchema: any } ? T['___flattenedSchema'] : never
+  0: T extends { ___flattenedSchema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
   1: never
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]

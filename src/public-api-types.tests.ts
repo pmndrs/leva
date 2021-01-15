@@ -218,16 +218,31 @@ declare function expectType<T>(
     })
   )
 
-  /**
-   * @TODO this case should pass but currently doesn't. Somehow providing
-   * an array for point2d or point3d inside a folder breaks our type inference.
-   */
   expectType<{
     pos2dArr: [number, number]
+    pos3dArr: [number, number, number]
   }>(
     useControls({
       someFolder: folder({
         pos2dArr: [100, 200],
+        innerFolder: folder({
+          pos3dArr: [0, 0, 0],
+        }),
+      }),
+    })
+  )
+
+  expectType<{
+    pos2dArr: [number, number]
+    pos3dArr: [number, number, string]
+  }>(
+    // @ts-expect-error
+    useControls({
+      someFolder: folder({
+        pos2dArr: [100, 200],
+        innerFolder: folder({
+          pos3dArr: [0, 0, 0],
+        }),
       }),
     })
   )
