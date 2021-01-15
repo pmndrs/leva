@@ -81,7 +81,9 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   : S extends ColorObjectRGB
   ? ColorObjectRGB
   : S extends { options: Array<infer T> }
-  ? T
+  ? S extends { value: infer V }
+    ? T | V
+    : T
   : S extends { options: Record<string, any> }
   ? string
   : S extends SpringInput

@@ -56,6 +56,10 @@ declare function expectType<T>(
   expectType<{ a: string }>(useControls({ a: { options: ['foo', 10] } }))
 
   expectType<{ a: string }>(useControls({ a: { options: { foo: 1, bar: true } } }))
+
+  expectType<{ a: number | string | string[] }>(useControls({ a: { value: 3, options: ['foo', ['foo', 'bar']] } }))
+  // @ts-expect-error
+  expectType<{ a: string | string[] }>(useControls({ a: { value: 3, options: ['foo', ['foo', 'bar']] } }))
 })()
 
 /**
