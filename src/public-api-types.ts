@@ -7,40 +7,38 @@
  */
 import { SpecialInput, SpecialInputTypes, FolderSettings } from './types'
 
-type NumberInput = number | { value: number; min?: number; max?: number }
+type InputWithSettings<T, K = null> = T | ({ value: T } & K)
 
-type Point2DInput = [NumberInput, NumberInput] | { x: NumberInput; y: NumberInput }
-type Point3DInput = [NumberInput, NumberInput, NumberInput] | { x: NumberInput; y: NumberInput; z: NumberInput }
+type NumberSettings = { min?: number; max?: number }
+type NumberInput = InputWithSettings<number, NumberSettings>
 
-type IntervalInput = {
-  value: [number, number]
-  min: number
-  max: number
-}
+type Point2DArray = [number, number]
+type Point2DObject = { x: number; y: number }
+type Point2D = Point2DArray | Point2DObject
+type Point2DSettings = { x?: NumberSettings; y?: NumberSettings }
+type Point2DInput = InputWithSettings<Point2D, Point2DSettings>
 
-type ImageInput = {
-  image: undefined
-}
+type Point3DArray = [number, number, number]
+type Point3DObject = { x: number; y: number; z: number }
+type Point3D = Point3DArray | Point3DObject
+type Point3DSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings }
+type Point3DInput = InputWithSettings<Point3D, Point3DSettings>
+
+type IntervalInput = { value: [number, number]; min: number; max: number }
+
+type ImageInput = { image: undefined | string }
 
 type SelectInput = { options: any[] | Record<string, any>; value?: any }
 
-type ColorInput = {
-  r: number
-  g: number
-  b: number
-  a?: number
-}
+type SelectWithValueInput<T, K> = { options: T[] | Record<string, T>; value: K }
+type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
+
+type ColorInput = { r: number; g: number; b: number; a?: number }
 
 type SpringInput = {
   tension: number
   friction: number
   mass?: number
-}
-
-type SpringOutput = {
-  tension: number
-  friction: number
-  mass: number
 }
 
 type BooleanInput = boolean
@@ -63,52 +61,40 @@ type SchemaItem =
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
-type ColorObjectRGBA = {
-  r: number
-  g: number
-  b: number
-  a: number
-}
-
-type ColorObjectRGB = {
-  r: number
-  g: number
-  b: number
-}
+type ColorObjectRGBA = { r: number; g: number; b: number; a: number }
+type ColorObjectRGB = { r: number; g: number; b: number }
 
 type PrimitiveToValue<S> = S extends ColorObjectRGBA
-  ? ColorObjectRGBA
+  ? { r: number; g: number; b: number; a: number }
   : S extends ColorObjectRGB
-  ? ColorObjectRGB
-  : S extends { options: Array<infer T> }
-  ? S extends { value: infer V }
-    ? T | V
-    : T
-  : S extends { options: Record<string, any> }
-  ? string
-  : S extends SpringInput
-  ? SpringOutput
-  : S extends { x: NumberInput; y: NumberInput; z: NumberInput }
-  ? { x: number; y: number; z: number }
-  : S extends { x: NumberInput; y: NumberInput }
-  ? { x: number; y: number }
-  : S extends [NumberInput, NumberInput, NumberInput]
-  ? [number, number, number]
-  : S extends [NumberInput, NumberInput]
-  ? [number, number]
-  : S extends NumberInput[]
-  ? number[]
-  : S extends { image: undefined | string }
+  ? { r: number; g: number; b: number }
+  : S extends ImageInput
   ? string | undefined
-  : S extends NumberInput
-  ? number
+  : S extends SpringInput
+  ? { tension: number; friction: number; mass: number }
+  : S extends SelectWithValueInput<infer T, infer K>
+  ? T | K
+  : S extends SelectWithoutValueInput<infer T>
+  ? T
   : S extends IntervalInput
   ? [number, number]
-  : S extends StringInput
+  : S extends Point3DObject
+  ? { x: number; y: number; z: number }
+  : S extends Point3DArray
+  ? [number, number, number]
+  : S extends Point2DObject
+  ? { x: number; y: number }
+  : S extends Point2DArray
+  ? [number, number]
+  : S extends { value: infer G }
+  ? PrimitiveToValue<G>
+  : S extends number
+  ? number
+  : S extends string
   ? string
   : S extends boolean
   ? boolean
-  : NotAPrimitiveType
+  : never
 
 export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>>
 

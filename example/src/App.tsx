@@ -43,6 +43,14 @@ function Comp1() {
     colorObj: { r: 1, g: 2, b: 3 },
   })
 
+  const f = folder({ pos: [100, 200] })
+  const t1 = useControls({ folder: f })
+  const t2 = useControls({ folder: folder({ pos: [100, 200] }) })
+
+  const t3 = useControls({ spring: { value: 3 } })
+
+  console.log(t1, t2, f)
+
   return (
     <div>
       <h1>Comp1</h1>

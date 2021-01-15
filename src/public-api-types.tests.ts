@@ -55,7 +55,7 @@ declare function expectType<T>(
   // @ts-expect-error
   expectType<{ a: string }>(useControls({ a: { options: ['foo', 10] } }))
 
-  expectType<{ a: string }>(useControls({ a: { options: { foo: 1, bar: true } } }))
+  expectType<{ a: boolean | number }>(useControls({ a: { options: { foo: 1, bar: true } } }))
 
   expectType<{ a: number | string | string[] }>(useControls({ a: { value: 3, options: ['foo', ['foo', 'bar']] } }))
   // @ts-expect-error
@@ -98,8 +98,7 @@ declare function expectType<T>(
  */
 ;(() => {
   expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10], min: 0, max: 20 } }))
-  // @ts-expect-error
-  expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10] } }))
+  // @note: we can possibly be a bit more strict on intervals
   // @ts-expect-error
   expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10], min: 0 } }))
   // @ts-expect-error
@@ -120,8 +119,7 @@ declare function expectType<T>(
     // @ts-expect-error
     expectType<{ a: { x: number; y: number } }>(useControls({ a: { x: 10, y: '10' } }))
 
-    expectType<{ a: { x: number; y: number } }>(useControls({ a: { x: { value: 10, min: 10 }, y: 10 } }))
-    expectType<{ a: { x: number; y: number } }>(useControls({ a: { x: { value: 10 }, y: 10 } }))
+    expectType<{ a: { x: number; y: number } }>(useControls({ a: { value: { x: 10, y: 10 } } }))
   })()
 
   /**
@@ -129,7 +127,7 @@ declare function expectType<T>(
    */
   ;(() => {
     expectType<{ a: [number, number] }>(useControls({ a: [0, 0] }))
-    expectType<{ a: [number, number] }>(useControls({ a: [0, { value: 0, min: 0 }] }))
+    expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 0] } }))
 
     // @ts-expect-error
     expectType<{ a: [number, number] }>(useControls({ a: [0, { value: '0' }] }))
@@ -150,10 +148,7 @@ declare function expectType<T>(
     // @ts-expect-error
     expectType<{ a: { x: number; y: number; z: number } }>(useControls({ a: { x: 10, y: '10', z: 0 } }))
 
-    expectType<{ a: { x: number; y: number; z: number } }>(
-      useControls({ a: { x: { value: 10, min: 10 }, y: 10, z: 10 } })
-    )
-    expectType<{ a: { x: number; y: number; z: number } }>(useControls({ a: { x: { value: 10 }, y: 10, z: 10 } }))
+    expectType<{ a: { x: number; y: number; z: number } }>(useControls({ a: { value: { x: 10, y: 10, z: 10 } } }))
   })()
 
   /**
@@ -161,10 +156,8 @@ declare function expectType<T>(
    */
   ;(() => {
     expectType<{ a: [number, number, number] }>(useControls({ a: [0, 0, 0] }))
-    expectType<{ a: [number, number, number] }>(useControls({ a: [0, 0, { value: 0, min: -5 }] }))
+    expectType<{ a: [number, number, number] }>(useControls({ a: { value: [0, 0, 0] } }))
 
-    // @ts-expect-error
-    expectType<{ a: [number, number, number] }>(useControls({ a: [0, { value: '0' }, 0] }))
     // @ts-expect-error
     expectType<{ a: [number, number, number] }>(useControls({ a: ['0', 0, 0] }))
   })()
