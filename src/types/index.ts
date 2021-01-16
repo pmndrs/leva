@@ -5,8 +5,6 @@ export enum SpecialInputTypes {
   FOLDER = 'FOLDER',
 }
 
-export type Folders = Record<string, FolderSettings>
-
 export type InputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings

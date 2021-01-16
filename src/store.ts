@@ -3,7 +3,7 @@ import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, join } from './utils'
 import { warn, LevaErrors } from './utils/log'
-import { Data, FolderSettings, Folders, SpecialInputTypes } from './types/'
+import { Data, FolderSettings, SpecialInputTypes } from './types/'
 
 type State = { data: Data }
 
@@ -11,7 +11,7 @@ type State = { data: Data }
 const _store = create<State>(() => ({ data: {} }))
 
 // possibly make this reactive
-const FOLDERS: Folders = {}
+const FOLDERS: Record<string, FolderSettings> = {}
 const PATHS = new Set<string>()
 
 const useStore = _store
