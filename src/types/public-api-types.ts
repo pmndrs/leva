@@ -8,37 +8,35 @@
 import { MergedInputWithSettings, SpecialInput, SpecialInputTypes, FolderSettings } from './'
 import { BeautifyUnionType, UnionToIntersection, Join } from './utils'
 
-type NumberSettings = { min?: number; max?: number }
+export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
-type Point2DArray = [number, number]
-type Point2DObject = { x: number; y: number }
-type Point2D = Point2DArray | Point2DObject
-type Point2DSettings = { x?: NumberSettings; y?: NumberSettings }
-type Point2DInput = MergedInputWithSettings<Point2D, Point2DSettings>
+export type Point2dArray = [number, number]
+export type Point2dObject = { x: number; y: number }
+export type Point2d = Point2dArray | Point2dObject
+export type Point2dSettings = { x?: NumberSettings; y?: NumberSettings }
+export type Point2dInput = MergedInputWithSettings<Point2d, Point2dSettings>
 
-type Point3DArray = [number, number, number]
-type Point3DObject = { x: number; y: number; z: number }
-type Point3D = Point3DArray | Point3DObject
-type Point3DSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings }
-type Point3DInput = MergedInputWithSettings<Point3D, Point3DSettings>
+export type Point3dArray = [number, number, number]
+export type Point3dObject = { x: number; y: number; z: number }
+export type Point3d = Point3dArray | Point3dObject
+export type Point3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings }
+export type Point3dInput = MergedInputWithSettings<Point3d, Point3dSettings>
 
-type IntervalInput = { value: [number, number]; min: number; max: number }
+export type IntervalInput = { value: [number, number]; min: number; max: number }
 
-type ImageInput = { image: undefined | string }
+export type ImageInput = { image: undefined | string }
 
 type SelectInput = { options: any[] | Record<string, any>; value?: any }
 
 type SelectWithValueInput<T, K> = { options: T[] | Record<string, T>; value: K }
 type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
 
-type ColorInput = { r: number; g: number; b: number; a?: number }
+export type ColorObjectInput = { r: number; g: number; b: number; a?: number }
 
-type SpringInput = {
-  tension: number
-  friction: number
-  mass?: number
-}
+export type Spring = { tension: number; friction: number; mass?: number }
+export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
+export type SpringInput = MergedInputWithSettings<Spring, SpringSettings>
 
 type BooleanInput = boolean
 
@@ -54,11 +52,11 @@ type SchemaItem =
   | NumberInput
   | IntervalInput
   | SpecialInput
-  | Point2DInput
-  | Point3DInput
+  | Point2dInput
+  | Point3dInput
   | ImageInput
   | SelectInput
-  | ColorInput
+  | ColorObjectInput
   | SpringInput
   | BooleanInput
   | StringInput
@@ -83,13 +81,13 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   ? T
   : S extends IntervalInput
   ? [number, number]
-  : S extends Point3DObject
+  : S extends Point3dObject
   ? { x: number; y: number; z: number }
-  : S extends Point3DArray
+  : S extends Point3dArray
   ? [number, number, number]
-  : S extends Point2DObject
+  : S extends Point2dObject
   ? { x: number; y: number }
-  : S extends Point2DArray
+  : S extends Point2dArray
   ? [number, number]
   : S extends { value: infer G }
   ? PrimitiveToValue<G>

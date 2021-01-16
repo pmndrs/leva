@@ -1,10 +1,9 @@
 import v8n from 'v8n'
 import { InputWithSettings } from '../../types/'
+import { Spring, SpringSettings } from '../../types/public-api-types'
 import { orderKeys } from '../../utils'
-import { NumberSettings, InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
+import { InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
 
-type Spring = { tension: number; friction: number; mass?: number }
-type SpringSettings = { [key in keyof Spring]?: NumberSettings }
 type SpringInput = InputWithSettings<Spring, SpringSettings>
 
 export type InternalSpring = { tension: number; friction: number; mass: number }

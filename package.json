@@ -27,7 +27,7 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "repository": "https://github.com/gsimone/controls.git",
+  "repository": "https://github.com/gsimone/leva.git",
   "license": "MIT",
   "peerDependencies": {
     "react": ">= 16.8.0",

@@ -1,8 +1,8 @@
 import v8n from 'v8n'
 import { InputWithSettings } from '../../types/'
+import { NumberSettings } from '../../types/public-api-types'
 import { getStep, clamp } from '../../utils'
 
-export type NumberSettings = { min?: number; max?: number; step?: number }
 export type InternalNumberSettings = { min: number; max: number; step: number; pad: number; initialValue: number }
 type NumberInput = InputWithSettings<number, NumberSettings>
 

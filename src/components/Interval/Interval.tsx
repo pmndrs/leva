@@ -9,6 +9,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
+
 type IntervalSliderProps = {
   value: InternalInterval
   onDrag: (v: InternalInterval) => void

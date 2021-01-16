@@ -1,4 +1,4 @@
-type ImageInput = { image: string }
+import { ImageInput } from '../../types/public-api-types'
 
 export const sanitize = (v: any) => {
   if (!v) return undefined

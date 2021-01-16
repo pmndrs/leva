@@ -2,10 +2,11 @@ import v8n from 'v8n'
 import tc from 'tinycolor2'
 import { InputWithSettings } from '../../types/'
 import { pick } from '../../utils'
+import { ColorObjectInput } from '../../types/public-api-types'
 
 type Format = 'hex' | 'rgb'
 
-export type Color = string | { r: number; g: number; b: number; a?: number }
+export type Color = string | ColorObjectInput
 export type InternalColorSettings = { format: Format; hasAlpha: boolean }
 
 type ColorInput = InputWithSettings<Color>

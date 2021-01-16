@@ -108,7 +108,7 @@ declare function expectType<T>(
 })()
 
 /**
- * point2d
+ * Point2d
  */
 ;(() => {
   /**
@@ -137,7 +137,7 @@ declare function expectType<T>(
 })()
 
 /**
- * point3d
+ * Point3d
  */
 ;(() => {
   /**

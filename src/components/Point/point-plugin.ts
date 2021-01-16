@@ -1,6 +1,7 @@
 import v8n from 'v8n'
+import { NumberSettings } from '../../types/public-api-types'
 import { mapArrayToKeys, orderKeys } from '../../utils'
-import { normalizeKeyValue, NumberSettings, InternalNumberSettings } from '../Number/number-plugin'
+import { normalizeKeyValue, InternalNumberSettings } from '../Number/number-plugin'
 
 export type Format = 'array' | 'object'
 
