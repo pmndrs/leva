@@ -1,8 +1,8 @@
 /**
  * Type tests (run them with yarn test:types)
  */
-import { folder } from './helpers'
-import { useControls } from './useControls'
+import { folder } from '../helpers'
+import { useControls } from '../useControls'
 
 declare function expectType<T>(
   v: T

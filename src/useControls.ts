@@ -3,7 +3,7 @@ import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
 import { register } from './register'
-import { FolderSettings } from './types'
+import { FolderSettings } from './types/'
 
 import number from './components/Number'
 import select from './components/Select'
@@ -15,7 +15,7 @@ import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
 import image from './components/Image'
 import interval from './components/Interval'
-import { Schema, SchemaToValues } from './public-api-types'
+import { Schema, SchemaToValues } from './types/public-api-types'
 
 register(select, 'SELECT')
 register(image, 'IMAGE')

@@ -3,7 +3,7 @@ import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, join } from './utils'
 import { warn, LevaErrors } from './utils/log'
-import { Data, FolderSettings, Folders, SpecialInputTypes } from './types'
+import { Data, FolderSettings, Folders, SpecialInputTypes } from './types/'
 
 type State = { data: Data }
 

@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import { InputWithSettings } from '../../types'
+import { InputWithSettings } from '../../types/'
 import { getStep, clamp } from '../../utils'
 
 export type NumberSettings = { min?: number; max?: number; step?: number }

@@ -1,7 +1,7 @@
 // @ts-expect-error
 import merge from 'merge-value'
 import { getKeyPath } from '../../utils'
-import { Tree } from '../../types'
+import { Tree } from '../../types/'
 
 export const buildTree = (paths: string[], filter?: string): Tree => {
   const tree = {}

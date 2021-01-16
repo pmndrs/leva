@@ -5,7 +5,7 @@ import { useTh } from '@xstyled/styled-components'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Point2d as Point2dType, InternalPoint2dSettings, KEYS } from './point2d-plugin'
 import { mapArrayToKeys, clamp } from '../../../utils'
-import { LevaInputProps } from '../../../types'
+import { LevaInputProps } from '../../../types/'
 import { Container, JoystickTrigger, Joystick } from './StyledPoint2d'
 import { Row, Label } from '../../styles'
 

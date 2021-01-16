@@ -1,6 +1,6 @@
 import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../point-plugin'
 import { NumberSettings, InternalNumberSettings } from '../../Number/number-plugin'
-import { InputWithSettings } from '../../../types'
+import { InputWithSettings } from '../../../types/'
 
 type Point2dArray = [number, number, number]
 type Point2dObj = { x: number; y: number }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ValueInput } from '../ValueInput'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 import { Label, Row } from '../styles'
 
 export function String({ label, displayValue, onUpdate, onChange }: LevaInputProps<string>) {

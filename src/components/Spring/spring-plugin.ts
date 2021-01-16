@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import { InputWithSettings } from '../../types'
+import { InputWithSettings } from '../../types/'
 import { orderKeys } from '../../utils'
 import { NumberSettings, InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
 

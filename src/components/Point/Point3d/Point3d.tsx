@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
-import { LevaInputProps } from '../../../types'
+import { LevaInputProps } from '../../../types/'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
 import { Point3d as Point3dType, KEYS, InternalPoint3dSettings } from './point3d-plugin'

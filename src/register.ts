@@ -1,4 +1,4 @@
-import { Plugin, InputWithSettings } from './types'
+import { Plugin, InputWithSettings } from './types/'
 import { warn, LevaErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []

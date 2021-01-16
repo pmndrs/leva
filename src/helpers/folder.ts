@@ -1,5 +1,5 @@
-import { FolderInput, Schema, SchemaToValues } from '../public-api-types'
-import { FolderSettings, SpecialInputTypes } from '../types'
+import { FolderInput, Schema, SchemaToValues } from '../types/public-api-types'
+import { FolderSettings, SpecialInputTypes } from '../types/'
 
 const defaultSettings = { collapsed: false }
 

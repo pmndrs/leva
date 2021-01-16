@@ -5,7 +5,8 @@
  * but the conditional types can't be broken up into separate modules, so I opted to just
  * write all of them here.
  */
-import { MergedInputWithSettings, SpecialInput, SpecialInputTypes, FolderSettings } from './types'
+import { MergedInputWithSettings, SpecialInput, SpecialInputTypes, FolderSettings } from './'
+import { BeautifyUnionType, UnionToIntersection, Join } from './utils'
 
 type NumberSettings = { min?: number; max?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
@@ -119,19 +120,3 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
     ? 3
     : 4
   : 2]
-
-// Utils from https://github.com/pmndrs/use-tweaks/blob/92561618abbf43c581fc5950fd35c0f8b21047cd/src/types.ts#L70
-
-/**
- * It does nothing but beautify union type
- *
- * ```
- * type A = { a: 'a' } & { b: 'b' } // { a: 'a' } & { b: 'b' }
- * type B = Id<{ a: 'a' } & { b: 'b' }> // { a: 'a', b: 'b' }
- * ```
- */
-type BeautifyUnionType<T> = T extends infer TT ? { [k in keyof TT]: TT[k] } : never
-
-type Join<T, K extends keyof T, P> = '' extends P ? { [i in K]: T[K] } : P
-
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never

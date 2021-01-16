@@ -1,6 +1,6 @@
 import v8n from 'v8n'
 import tc from 'tinycolor2'
-import { InputWithSettings } from '../../types'
+import { InputWithSettings } from '../../types/'
 import { pick } from '../../utils'
 
 type Format = 'hex' | 'rgb'

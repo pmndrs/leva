@@ -4,7 +4,7 @@ import { join, isInput } from '../../utils'
 import { LevaWrapper } from '../LevaWrapper'
 import { StyledFolder, StyledTitle, StyledWrapper, StyledContent } from './StyledFolder'
 import { useSpring, a } from 'react-spring'
-import { FolderSettings, Tree } from '../../types'
+import { FolderSettings, Tree } from '../../types/'
 
 type FolderProps = {
   name?: string

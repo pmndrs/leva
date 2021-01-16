@@ -6,7 +6,7 @@ import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { springFn } from './math'
 import { Row, Label } from '../styles'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 import { debounce } from '../../utils'
 import { useCanvas2d, useDrag } from '../../hooks'
 

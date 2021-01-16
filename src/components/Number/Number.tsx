@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { ValueInput } from '../ValueInput'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'

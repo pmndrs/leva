@@ -4,7 +4,7 @@ import { Row, Label } from '../styles'
 import { range } from '../../utils'
 import { useColor } from '@xstyled/styled-components'
 import { useCanvas2d } from '../../hooks'
-import { MonitorInput } from '../../types'
+import { MonitorInput } from '../../types/'
 
 type MonitorProps = { valueKey: string } & Omit<MonitorInput, 'type'>
 type ObjectProps = { initialValue: any }

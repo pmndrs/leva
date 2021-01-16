@@ -1,5 +1,5 @@
 import React from 'react'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 import { Label, Row } from '../styles'
 import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
