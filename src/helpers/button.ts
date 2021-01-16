@@ -1,4 +1,4 @@
-import { SpecialInputTypes, ButtonInput } from '../types'
+import { SpecialInputTypes, ButtonInput } from '../types/'
 
 /**
  *

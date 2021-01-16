@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { Label, Row } from '../styles'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 
 type ImageProps = LevaInputProps<string | undefined>
 

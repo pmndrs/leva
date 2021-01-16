@@ -18,6 +18,7 @@ function Comp1() {
 
   const t = useControls({
     first: { value: 40, min: 30, max: 90 },
+    // wrong: { something: 'else' },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
@@ -66,17 +67,20 @@ function Comp2() {
   )
 }
 
-function Comp3() {
-  const t = useControls({ file: { file: undefined } })
+/**
+ * Unused @todo remove
+ */
+// function Comp3() {
+//   const t = useControls({ file: { file: undefined } })
 
-  return (
-    <div>
-      <h1>Comp3</h1>
-      <pre>{JSON.stringify(t, null, 2)}</pre>
-      <img src={t.file} />
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <h1>Comp3</h1>
+//       <pre>{JSON.stringify(t, null, 2)}</pre>
+//       <img src={t.file} />
+//     </div>
+//   )
+// }
 
 export default function App() {
   const [c1, setC1] = React.useState(true)

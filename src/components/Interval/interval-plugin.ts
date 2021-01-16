@@ -1,19 +1,16 @@
 import v8n from 'v8n'
-import { ValueInputWithSettings } from '../../types'
+import { IntervalInput } from '../../types/public-api-types'
 import { clamp } from '../../utils'
 import { InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
 
-export type Interval = [number, number]
+export type Interval = IntervalInput['value']
 export type InternalInterval = { min: number; max: number }
 
-type Settings = { min: number; max: number }
 export type InternalIntervalSettings = {
   bounds: [number, number]
   min: InternalNumberSettings
   max: InternalNumberSettings
 }
-
-type IntervalInput = ValueInputWithSettings<Interval, Settings>
 
 const number = v8n().number()
 

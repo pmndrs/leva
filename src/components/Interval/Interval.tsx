@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styled, { useTh } from '@xstyled/styled-components'
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../styles'
 import { PointCoordinates } from '../PointCoordinates'
@@ -9,6 +9,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
+
 type IntervalSliderProps = {
   value: InternalInterval
   onDrag: (v: InternalInterval) => void

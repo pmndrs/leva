@@ -1,11 +1,6 @@
 import styled from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
 
-export const Container = styled.div`
-  display: grid;
-  grid-template-columns: ${th.size('row-height')} repeat(2, 1fr);
-  grid-column-gap: col-gap;
-`
 export const JoystickTrigger = styled.div`
   display: flex;
   justify-content: center;
@@ -36,7 +31,7 @@ export const JoystickTrigger = styled.div`
   }
 `
 
-export const Joystick = styled.div<{ isOutOfBounds: boolean }>`
+export const JoystickPlayground = styled.div<{ isOutOfBounds: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;

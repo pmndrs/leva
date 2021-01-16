@@ -15,6 +15,7 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
+    "test:types": "tsc --project tsconfig.json",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
@@ -26,7 +27,7 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "repository": "https://github.com/gsimone/controls.git",
+  "repository": "https://github.com/gsimone/leva.git",
   "license": "MIT",
   "peerDependencies": {
     "react": ">= 16.8.0",

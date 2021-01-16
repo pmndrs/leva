@@ -5,13 +5,11 @@ export enum SpecialInputTypes {
   FOLDER = 'FOLDER',
 }
 
-export type Folders = Record<string, FolderSettings>
-
-export type ValueInputWithSettings<V extends unknown, Settings = {}> = {
+export type InputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
 
-export type ValueInput<V, Settings = {}> = V | ValueInputWithSettings<V, Settings>
+export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V, Settings>
 
 export type DataInput = {
   type: string
@@ -21,35 +19,25 @@ export type DataInput = {
 }
 
 export type ButtonInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.BUTTON
   onClick: () => any
 }
 
 export type MonitorSettings = { graph: boolean; interval: number }
 
 export type MonitorInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.MONITOR
   objectOrFn: React.MutableRefObject<any> | Function
   settings: MonitorSettings
 }
 
 export type FolderSettings = { collapsed: boolean }
 
-export type FolderInput = {
-  type: SpecialInputTypes
-  schema: Schema
-  settings: FolderSettings
-}
-
 export type SeparatorInput = {
-  type: SpecialInputTypes
+  type: SpecialInputTypes.SEPARATOR
 }
 
 export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
-
-export interface Schema {
-  [name: string]: SpecialInput | unknown
-}
 
 export type Data = {
   [key: string]: DataInput | (SpecialInput & { count: number })
@@ -74,5 +62,5 @@ export type Plugin<Value, InternalValue, Settings, InternalSettings> = {
   format?: (value: any, settings: InternalSettings) => any
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => InternalValue
-  normalize?: (input: ValueInputWithSettings<Value, Settings>) => { value: InternalValue; settings?: InternalSettings }
+  normalize?: (input: InputWithSettings<Value, Settings>) => { value: InternalValue; settings?: InternalSettings }
 }

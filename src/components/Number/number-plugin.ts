@@ -1,10 +1,10 @@
 import v8n from 'v8n'
-import { ValueInputWithSettings } from '../../types'
+import { InputWithSettings } from '../../types/'
+import { NumberSettings } from '../../types/public-api-types'
 import { getStep, clamp } from '../../utils'
 
-export type NumberSettings = { min?: number; max?: number; step?: number }
 export type InternalNumberSettings = { min: number; max: number; step: number; pad: number; initialValue: number }
-type NumberInput = ValueInputWithSettings<number, NumberSettings>
+type NumberInput = InputWithSettings<number, NumberSettings>
 
 export const schema = (o: any) =>
   v8n()

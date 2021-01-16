@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useLevaUpdate } from '../../hooks/useLevaUpdate'
 import { store } from '../../store'
 
-import { LevaInputProps } from '../../types'
+import { LevaInputProps } from '../../types/'
 
 type LevaValueInputProps<V, Settings extends object> = {
   as: React.ComponentType<LevaInputProps<V, Settings>>
