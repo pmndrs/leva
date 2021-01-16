@@ -45,6 +45,12 @@ type BooleanInput = boolean
 
 type StringInput = string
 
+export type FolderInput<Schema> = {
+  type: SpecialInputTypes.FOLDER
+  schema: Schema
+  settings: FolderSettings
+}
+
 type SchemaItem =
   | NumberInput
   | IntervalInput
@@ -57,7 +63,7 @@ type SchemaItem =
   | SpringInput
   | BooleanInput
   | StringInput
-  | FolderOutput<any>
+  | FolderInput<any>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
@@ -94,27 +100,19 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   ? string
   : S extends boolean
   ? boolean
-  : never
+  : NotAPrimitiveType
 
 export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>>
 
 export type Schema = Record<string, SchemaItem>
 
-export type FolderOutput<FlattenedSchema> = {
-  type: SpecialInputTypes.FOLDER
-  schema: Schema
-  settings: FolderSettings
-  // this prop only exists in the types
-  ___flattenedSchema: FlattenedSchema
-}
-
 export type Leaves<T, P extends string | number | symbol = ''> = {
-  0: T extends { ___flattenedSchema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
+  0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
   1: never
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
   4: ''
-}[T extends FolderOutput<any>
+}[T extends FolderInput<any>
   ? 0
   : T extends SpecialInput
   ? 1
