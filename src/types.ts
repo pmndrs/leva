@@ -1,5 +1,3 @@
-import { Schema } from './public-api-types'
-
 export enum SpecialInputTypes {
   SEPARATOR = 'SEPARATOR',
   BUTTON = 'BUTTON',
@@ -9,11 +7,11 @@ export enum SpecialInputTypes {
 
 export type Folders = Record<string, FolderSettings>
 
-export type ValueInputWithSettings<V extends unknown, Settings = {}> = {
+export type InputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
 
-export type ValueInput<V, Settings = {}> = V | ValueInputWithSettings<V, Settings>
+export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V, Settings>
 
 export type DataInput = {
   type: string
@@ -36,12 +34,6 @@ export type MonitorInput = {
 }
 
 export type FolderSettings = { collapsed: boolean }
-
-export type FolderInput<S extends Schema = Schema> = {
-  type: SpecialInputTypes.FOLDER
-  schema: S
-  settings: FolderSettings
-}
 
 export type SeparatorInput = {
   type: SpecialInputTypes.SEPARATOR
@@ -72,5 +64,5 @@ export type Plugin<Value, InternalValue, Settings, InternalSettings> = {
   format?: (value: any, settings: InternalSettings) => any
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => InternalValue
-  normalize?: (input: ValueInputWithSettings<Value, Settings>) => { value: InternalValue; settings?: InternalSettings }
+  normalize?: (input: InputWithSettings<Value, Settings>) => { value: InternalValue; settings?: InternalSettings }
 }

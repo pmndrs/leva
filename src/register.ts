@@ -1,4 +1,4 @@
-import { Plugin, ValueInputWithSettings } from './types'
+import { Plugin, InputWithSettings } from './types'
 import { warn, LevaErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
@@ -13,7 +13,7 @@ export function getValueType({ value, ...settings }: any) {
   return undefined
 }
 
-export function normalize<V, Settings extends object = {}>(type: string, input: ValueInputWithSettings<V, Settings>) {
+export function normalize<V, Settings extends object = {}>(type: string, input: InputWithSettings<V, Settings>) {
   const { normalize: _normalize } = Plugins[type]
   if (_normalize) return _normalize(input)
   return input
@@ -32,5 +32,3 @@ export function register<
   schemas.push((value: any, settings?: any) => schema(value, settings) && type)
   Plugins[type] = plugin
 }
-
-

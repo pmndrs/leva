@@ -5,24 +5,22 @@
  * but the conditional types can't be broken up into separate modules, so I opted to just
  * write all of them here.
  */
-import { SpecialInput, SpecialInputTypes, FolderSettings } from './types'
-
-type InputWithSettings<T, K = null> = T | ({ value: T } & K)
+import { MergedInputWithSettings, SpecialInput, SpecialInputTypes, FolderSettings } from './types'
 
 type NumberSettings = { min?: number; max?: number }
-type NumberInput = InputWithSettings<number, NumberSettings>
+type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
 type Point2DArray = [number, number]
 type Point2DObject = { x: number; y: number }
 type Point2D = Point2DArray | Point2DObject
 type Point2DSettings = { x?: NumberSettings; y?: NumberSettings }
-type Point2DInput = InputWithSettings<Point2D, Point2DSettings>
+type Point2DInput = MergedInputWithSettings<Point2D, Point2DSettings>
 
 type Point3DArray = [number, number, number]
 type Point3DObject = { x: number; y: number; z: number }
 type Point3D = Point3DArray | Point3DObject
 type Point3DSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings }
-type Point3DInput = InputWithSettings<Point3D, Point3DSettings>
+type Point3DInput = MergedInputWithSettings<Point3D, Point3DSettings>
 
 type IntervalInput = { value: [number, number]; min: number; max: number }
 

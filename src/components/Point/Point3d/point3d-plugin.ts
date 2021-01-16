@@ -1,6 +1,6 @@
 import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../point-plugin'
 import { InternalNumberSettings, NumberSettings } from '../../Number/number-plugin'
-import { ValueInputWithSettings } from '../../../types'
+import { InputWithSettings } from '../../../types'
 
 type Point3dArray = [number, number, number]
 type Point3dObj = { x: number; y: number; z: number }
@@ -9,7 +9,7 @@ export type Point3d = Point3dObj | Point3dArray
 type Point3dSettings = { [key in keyof Point3dObj]?: NumberSettings }
 export type InternalPoint3dSettings = { [key in keyof Point3dObj]: InternalNumberSettings } & { format: Format }
 
-type Point3dInput = ValueInputWithSettings<Point3d, Point3dSettings>
+type Point3dInput = InputWithSettings<Point3d, Point3dSettings>
 
 export const KEYS: (keyof Point3dObj)[] = ['x', 'y', 'z']
 export const schema = getPointSchema(KEYS)
