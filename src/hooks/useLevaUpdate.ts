@@ -45,10 +45,18 @@ export function useLevaUpdate<V, Settings extends object>({ value, type, setting
         return
       }
       const newValue = sanitize(type, displayValue, settings)
+
+      /**
+       * @note I had to remove the check as sometimes the sanitized value
+       * doesn't match the input value. For example, if the minimum value of
+       * a number is 30, and the user inputs 15. Then the newValue will be sanitized
+       * to 30 and subsequent calls like 14, 0, etc. won't result in a render.
+       */
       // if new value is equivalent to previous value do nothing
-      if (dequal(newValue, lastCorrectValue.current)) return
+      // if (dequal(newValue, lastCorrectValue.current)) return
 
       lastCorrectValue.current = newValue
+
       setFormat(newValue)
       set(newValue)
     },
