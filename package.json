@@ -36,6 +36,7 @@
   "dependencies": {
     "@welldone-software/why-did-you-render": "^6.0.5",
     "@xstyled/styled-components": "^2.1.0",
+    "clipboard-polyfill": "^3.0.2",
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
     "react-colorful": "^4.4.4",

@@ -1,12 +1,28 @@
 import React from 'react'
+import { useInputContext } from '../../context'
 import { StyledLabel } from './StyledUI'
+import { writeText } from 'clipboard-polyfill/text'
+import { LevaErrors, warn } from '../../utils'
 
 export { Row } from './StyledUI'
 
 type LabelProps = React.ComponentProps<typeof StyledLabel>
 
 export function Label(props: LabelProps) {
-  return <StyledLabel {...props} />
+  const { value } = useInputContext()
+
+  const handleClick = () => {
+    if (value !== undefined) {
+      try {
+        writeText(JSON.stringify(value))
+      } catch {
+        warn(LevaErrors.CLIPBOARD_ERROR, value)
+      }
+    }
+    props.onClick && props.onClick()
+  }
+
+  return <StyledLabel onClick={() => handleClick()} {...props} />
 }
 
 type OverlayProps = { onClick: () => void }

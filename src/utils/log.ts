@@ -3,6 +3,7 @@ export enum LevaErrors {
   UNKNOWN_INPUT,
   DUPLICATE_KEYS,
   ALREADY_REGISTERED_TYPE,
+  CLIPBOARD_ERROR,
 }
 
 const ErrorList = {
@@ -16,6 +17,7 @@ const ErrorList = {
   [LevaErrors.ALREADY_REGISTERED_TYPE]: (type: string) => [
     `Type ${type} has already been registered. You can't register a component with the same type.`,
   ],
+  [LevaErrors.CLIPBOARD_ERROR]: (value: unknown) => [`Error copying the value`, value],
 }
 
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
