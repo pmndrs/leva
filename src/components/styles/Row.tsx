@@ -31,10 +31,4 @@ export const Label = styled.label<{ preventSelect?: boolean }>`
   color: label-text;
   font-weight: label;
   touch-action: none;
-  ${prop =>
-    prop.preventSelect &&
-    css`
-      user-select: none;
-      cursor: ew-resize;
-    `}
 `

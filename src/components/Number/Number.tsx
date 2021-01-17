@@ -35,18 +35,16 @@ function NumberInput({ children, value, onUpdate, onChange }: NumberInputProps) 
   )
 }
 
-export function Number({ label, displayValue, value, onUpdate, onChange, settings }: NumberProps) {
+export function Number(props: NumberProps) {
+  const { label, value, onUpdate, settings } = props
   const { min, max } = settings
-  const bind = useDragNumber({ settings, onDrag: onUpdate })
   const hasRange = max !== Infinity && min !== -Infinity
   return (
     <Row input>
-      <Label {...bind()} preventSelect>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
-        <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+        <NumberInner {...props} label="value" />
       </RangeGrid>
     </Row>
   )
