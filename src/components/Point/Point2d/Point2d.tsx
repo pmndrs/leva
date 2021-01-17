@@ -8,6 +8,7 @@ import { Point2d as Point2dType } from '../../../types/public-api-types'
 import { Row, Label } from '../../styles'
 import { Joystick } from './Joystick'
 import { mapArrayToKeys } from '../../../utils'
+import { useInputContext } from '../../../context'
 
 export type Point2dProps = LevaInputProps<Point2dType, InternalPoint2dSettings>
 
@@ -17,7 +18,8 @@ export const Container = styled.div`
   grid-column-gap: col-gap;
 `
 
-export function Point2d({ label, value, onUpdate, settings }: Point2dProps) {
+export function Point2d() {
+  const { label, value, onUpdate, settings } = useInputContext<Point2dProps>()
   const _value = mapArrayToKeys(value, KEYS)
   return (
     <Row input>

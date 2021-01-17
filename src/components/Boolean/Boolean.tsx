@@ -1,9 +1,12 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
+import { useInputContext } from '../../context'
 import { Label, Row } from '../styles'
 import { StyledInputWrapper } from './StyledBoolean'
 
-export function Boolean({ label, value, onUpdate }: LevaInputProps<boolean>) {
+export function Boolean() {
+  const { label, value, onUpdate } = useInputContext<LevaInputProps<boolean>>()
+
   // htmlFor might raise a conflict if two booleans are labeled the same way
   return (
     <Row input>

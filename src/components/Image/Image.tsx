@@ -3,10 +3,13 @@ import { Label, Row } from '../styles'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
+import { useInputContext } from '../../context'
 
 type ImageProps = LevaInputProps<string | undefined>
 
-export function Image({ label, value, onUpdate }: ImageProps) {
+export function Image() {
+  const { label, value, onUpdate } = useInputContext<ImageProps>()
+
   const onDrop = useCallback(
     acceptedFiles => {
       if (!acceptedFiles.length) return

@@ -9,6 +9,7 @@ import { Row, Label } from '../styles'
 import { LevaInputProps } from '../../types/'
 import { debounce } from '../../utils'
 import { useCanvas2d, useDrag } from '../../hooks'
+import { useInputContext } from '../../context'
 
 type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
 
@@ -20,7 +21,9 @@ const Container = styled.div`
 
 const SpringPreviewAnimated = a(SpringPreview)
 
-export function Spring({ label, displayValue, value, onUpdate, onChange, settings }: SpringProps) {
+export function Spring() {
+  const { label, displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
+
   const springRef = useRef(displayValue)
   const accentColor = useColor('accent')
 

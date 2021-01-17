@@ -6,6 +6,7 @@ import { PointCoordinates } from '../../PointCoordinates'
 import { Row, Label } from '../../styles'
 import { KEYS, InternalPoint3dSettings } from './point3d-plugin'
 import { mapArrayToKeys } from '../../../utils'
+import { useInputContext } from '../../../context'
 
 type Point3dProps = LevaInputProps<Point3dType, InternalPoint3dSettings>
 
@@ -15,7 +16,8 @@ const Container = styled.div`
   grid-column-gap: col-gap;
 `
 
-export function Point3d({ label, value, onUpdate, settings }: Point3dProps) {
+export function Point3d() {
+  const { label, value, onUpdate, settings } = useInputContext<Point3dProps>()
   const _value = mapArrayToKeys(value, KEYS)
   return (
     <Row input>

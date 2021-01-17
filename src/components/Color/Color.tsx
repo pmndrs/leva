@@ -7,10 +7,13 @@ import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Row, Label } from '../styles'
+import { useInputContext } from '../../context'
 
 type ColorProps = LevaInputProps<ColorType, InternalColorSettings>
 
-export function Color({ value, displayValue, label, onChange, onUpdate, settings }: ColorProps) {
+export function Color() {
+  const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
+
   const [showPicker, setShowPicker] = useState(false)
   const { format, hasAlpha } = settings
   const rgb = format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)

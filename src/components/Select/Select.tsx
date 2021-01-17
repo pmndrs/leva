@@ -1,12 +1,14 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
+import { useInputContext } from '../../context'
 import { Label, Row } from '../styles'
 import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
 
 type SelectProps = LevaInputProps<any, InternalSelectSettings>
 
-export function Select({ label, displayValue, onUpdate, settings }: SelectProps) {
+export function Select() {
+  const { label, displayValue, onUpdate, settings } = useInputContext<SelectProps>()
   const { keys, values } = settings!
   return (
     <Row input>

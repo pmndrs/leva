@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { InputContext } from '../../context'
 import { useLevaUpdate } from '../../hooks/useLevaUpdate'
 import { store } from '../../store'
 
@@ -26,13 +27,23 @@ export function LevaValueInput<V, Settings extends object>({
   const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
 
   return (
-    <Input
-      label={valueKey}
-      displayValue={displayValue}
-      value={value}
-      onChange={onChange}
-      onUpdate={onUpdate}
-      settings={settings}
-    />
+    <InputContext.Provider
+      value={{
+        label: valueKey,
+        displayValue: displayValue,
+        value: value,
+        onChange: onChange,
+        onUpdate: onUpdate,
+        settings: settings,
+      }}>
+      <Input
+        label={valueKey}
+        displayValue={displayValue}
+        value={value}
+        onChange={onChange}
+        onUpdate={onUpdate}
+        settings={settings}
+      />
+    </InputContext.Provider>
   )
 }

@@ -7,6 +7,7 @@ import { PointCoordinates } from '../PointCoordinates'
 import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
+import { useInputContext } from '../../context'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 
@@ -65,7 +66,9 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   )
 }
 
-export function Interval({ label, displayValue, onUpdate, settings }: IntervalProps) {
+export function Interval() {
+  const { label, displayValue, onUpdate, settings } = useInputContext<IntervalProps>()
+
   const { bounds, ..._settings } = settings
 
   return (

@@ -6,6 +6,7 @@ import { Label, Row } from '../styles'
 import { useDragNumber } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
+import { useInputContext } from '../../context'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
@@ -35,7 +36,19 @@ function NumberInput({ children, value, onUpdate, onChange }: NumberInputProps) 
   )
 }
 
-export function Number(props: NumberProps) {
+export function NumberInner({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
+  const bind = useDragNumber({ settings, onDrag: onUpdate })
+  return (
+    <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
+      <div title={label.length > 1 ? label : ''} {...bind()} style={{ touchAction: 'none' }}>
+        {label.charAt(0)}
+      </div>
+    </NumberInput>
+  )
+}
+
+export function Number() {
+  const props = useInputContext<NumberProps>()
   const { label, value, onUpdate, settings } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
@@ -47,16 +60,5 @@ export function Number(props: NumberProps) {
         <NumberInner {...props} label="value" />
       </RangeGrid>
     </Row>
-  )
-}
-
-export function NumberInner({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
-  const bind = useDragNumber({ settings, onDrag: onUpdate })
-  return (
-    <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      <div title={label.length > 1 ? label : ''} {...bind()} style={{ touchAction: 'none' }}>
-        {label.charAt(0)}
-      </div>
-    </NumberInput>
   )
 }
