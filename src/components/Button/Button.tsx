@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row } from '../styles'
+import { Row } from '../UI'
 import { StyledButton } from './StyledButton'
 
 type ButtonProps = {

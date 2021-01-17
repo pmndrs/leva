@@ -1,7 +1,7 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
-import { Label, Row } from '../styles'
+import { Label, Row } from '../UI'
 import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
 

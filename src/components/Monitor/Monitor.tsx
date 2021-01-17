@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef, forwardRef, useImperativeHandle } from 'react'
 import { Canvas } from './StyledMonitor'
-import { Row, Label } from '../styles'
+import { Label, Row } from '../UI'
 import { range } from '../../utils'
 import { useColor } from '@xstyled/styled-components'
 import { useCanvas2d } from '../../hooks'

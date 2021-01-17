@@ -1,5 +1,5 @@
 import styled, { css } from '@xstyled/styled-components'
-import { StyledTitle } from '../Folder/StyledFolder'
+import { StyledTitle } from '../components/Folder/StyledFolder'
 
 export const Root = styled.div<{ fillParent: boolean }>`
   /* position */

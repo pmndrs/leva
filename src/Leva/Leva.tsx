@@ -4,13 +4,13 @@ import { ThemeProvider, createGlobalStyle } from '@xstyled/styled-components'
 
 import { useDrag } from 'react-use-gesture'
 import { useSpring, a } from 'react-spring'
-import { useVisiblePaths } from '../../store'
+import { useVisiblePaths } from '../store'
 import { buildTree } from './tree'
-import { Folder } from '../Folder'
-import { isInput, debounce } from '../../utils'
+import { Folder } from '../components/Folder'
+import { isInput, debounce } from '../utils'
 
 import { Root, DragHandle, StyledFilter } from './StyledLeva'
-import { LevaTheme } from '../styles'
+import { LevaTheme } from '../components/styles'
 
 const GlobalStyle = createGlobalStyle`
   .leva__body__dragged {

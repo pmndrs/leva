@@ -1,7 +1,7 @@
 import React from 'react'
 import { ValueInput } from '../ValueInput'
 import { LevaInputProps } from '../../types/'
-import { Label, Row } from '../styles'
+import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
 
 export function String() {

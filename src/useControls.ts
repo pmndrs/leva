@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
-import { useRenderRoot } from './components/Leva'
+import { useRenderRoot } from './Leva'
 import { folder } from './helpers/folder'
 import { register } from './register'
 import { FolderSettings } from './types/'
