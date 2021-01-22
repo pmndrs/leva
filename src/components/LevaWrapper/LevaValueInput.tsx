@@ -3,10 +3,8 @@ import { InputContext } from '../../context'
 import { useLevaUpdate } from '../../hooks/useLevaUpdate'
 import { store } from '../../store'
 
-import { LevaInputProps } from '../../types/'
-
 type LevaValueInputProps<V, Settings extends object> = {
-  as: React.ComponentType<LevaInputProps<V, Settings>>
+  as: React.ComponentType
   valueKey: string
   path: string
   type: string
@@ -27,23 +25,8 @@ export function LevaValueInput<V, Settings extends object>({
   const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
 
   return (
-    <InputContext.Provider
-      value={{
-        label: valueKey,
-        displayValue: displayValue,
-        value: value,
-        onChange: onChange,
-        onUpdate: onUpdate,
-        settings: settings,
-      }}>
-      <Input
-        label={valueKey}
-        displayValue={displayValue}
-        value={value}
-        onChange={onChange}
-        onUpdate={onUpdate}
-        settings={settings}
-      />
+    <InputContext.Provider value={{ label: valueKey, displayValue, value, onChange, onUpdate, settings }}>
+      <Input />
     </InputContext.Provider>
   )
 }
