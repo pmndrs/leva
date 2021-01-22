@@ -32,8 +32,8 @@ export function useLevaUpdate<V, Settings extends object>({ value, type, setting
   const lastCorrectValue = useRef(value)
 
   // the value used by the panel vs the value
-  const [_value, _setValue] = useState(format(type, value, settings))
-  const setFormat = useCallback(v => _setValue(format(type, v, settings)), [type, settings])
+  const [displayValue, setDisplayValue] = useState(format(type, value, settings))
+  const setFormat = useCallback(v => setDisplayValue(format(type, v, settings)), [type, settings])
 
   const onUpdate = useCallback(
     (displayValueOrFn: ((v: V) => any) | any) => {
@@ -70,5 +70,5 @@ export function useLevaUpdate<V, Settings extends object>({ value, type, setting
     }
   }, [value, setFormat])
 
-  return { displayValue: _value, onChange: _setValue, onUpdate, valueRef: lastCorrectValue }
+  return { displayValue, onChange: setDisplayValue, onUpdate }
 }
