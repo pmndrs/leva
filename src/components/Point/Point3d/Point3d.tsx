@@ -1,14 +1,13 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
 import { LevaInputProps } from '../../../types/'
-import { Point3d as Point3dType } from '../../../types/public-api-types'
+import { Point3d as Point3dType, Point3dObject } from '../../../types/public-api-types'
 import { PointCoordinates } from '../../PointCoordinates'
 import { Label, Row } from '../../UI'
-import { KEYS, InternalPoint3dSettings } from './point3d-plugin'
-import { mapArrayToKeys } from '../../../utils'
+import { InternalPoint3dSettings } from './point3d-plugin'
 import { useInputContext } from '../../../context'
 
-type Point3dProps = LevaInputProps<Point3dType, InternalPoint3dSettings>
+type Point3dProps = LevaInputProps<Point3dType, InternalPoint3dSettings, Point3dObject>
 
 const Container = styled.div`
   display: grid;
@@ -17,13 +16,12 @@ const Container = styled.div`
 `
 
 export function Point3d() {
-  const { label, value, onUpdate, settings } = useInputContext<Point3dProps>()
-  const _value = mapArrayToKeys(value, KEYS)
+  const { label, displayValue, onUpdate, settings } = useInputContext<Point3dProps>()
   return (
     <Row input>
       <Label>{label}</Label>
       <Container>
-        <PointCoordinates value={_value} settings={settings} onUpdate={onUpdate} />
+        <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>
     </Row>
   )

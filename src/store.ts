@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import create from 'zustand'
 import shallow from 'zustand/shallow'
-import { normalizeInput, pick, getKeyPath, join } from './utils'
+import { normalizeInput, pick, getKeyPath, join, updateInput } from './utils'
 import { warn, LevaErrors } from './utils/log'
 import { Data, FolderSettings, SpecialInputTypes } from './types/'
 
@@ -59,7 +59,7 @@ function setValueAtPath(path: string, value: any) {
   _store.setState(s => {
     const data = s.data
     //@ts-expect-error (we always update inputs with a value)
-    data[path].value = value
+    updateInput(data[path], value)
     return { data }
   })
 }
