@@ -1,18 +1,17 @@
 import { useDrag } from './useDrag'
 import { LevaInputProps } from '../types/'
 import { InternalNumberSettings, sanitizeStep } from '../components/Number/number-plugin'
+import { ceil } from '../utils'
 
 type UseDragNumberProps = {
   settings: InternalNumberSettings
   onDrag: LevaInputProps<number>['onUpdate']
 }
 
-const PRECISION = 100
-
 export function useDragNumber({ settings, onDrag }: UseDragNumberProps) {
   const { step } = settings
-  return useDrag(({ delta: [dx], movement: [, y] }) => {
-    const _step = y < -PRECISION ? 2 * step : y > PRECISION ? step / 2 : step
-    onDrag((v: number) => sanitizeStep(v + Math.round(dx) * _step, settings))
+  return useDrag(({ delta: [dx], shiftKey }) => {
+    const _step = shiftKey ? step : step * 2
+    onDrag((v: number) => sanitizeStep(v + ceil(dx) * _step, settings))
   })
 }

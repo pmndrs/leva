@@ -47,9 +47,9 @@ export type Tree = {
   [key: string]: { __levaInput: true; valueKey: string; path: string } | Tree
 }
 
-export type LevaInputProps<V, InternalSettings = {}> = {
+export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
   label: string
-  displayValue: any
+  displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
   onUpdate: (v: any | ((_v: any) => any)) => void
