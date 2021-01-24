@@ -41,11 +41,18 @@ type SanitizeProps = {
   settings: object | undefined
 }
 
+type ValueErrorType = { message: string; previousValue: any }
+
+const ValueError = (function(this: ValueErrorType, message: string, value: any) {
+  this.message = 'LEVA: ' + message
+  this.previousValue = value
+} as unknown) as { new (message: string, value: any): ValueErrorType }
+
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue
 
   if (!validate(type, _newValue, settings)) {
-    throw value
+    throw new ValueError(`The value [${newValue}] did not result in a correct value.`, value)
   }
   const sanitizedNewValue = sanitize(type, _newValue, settings)
 
@@ -57,7 +64,10 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
      * to 30 and subsequent calls like 14, 0, etc. won't result in the component displaying
      * the value to be notified (ie there wouldn't be a new render)
      */
-    throw value
+    throw new ValueError(
+      `The value [${newValue}] did not result in a value update, which remained the same: [${value}].`,
+      value
+    )
   }
   return sanitizedNewValue
 }

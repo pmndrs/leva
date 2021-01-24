@@ -23,7 +23,7 @@ export function useLevaUpdate<V, Settings extends object>({ value, type, setting
     (updatedValue: any) => {
       try {
         set(updatedValue)
-      } catch (previousValue) {
+      } catch ({ previousValue }) {
         setFormat(previousValue)
       }
     },
