@@ -6,8 +6,6 @@ import { greenOrBlue } from './myPlugin'
 
 const noise = new Noise(Math.random())
 
-const b = greenOrBlue({ color: 'green', light: true, alpha: 0.5 })
-
 function Comp1() {
   const ref = React.useRef(4)
   React.useEffect(() => {
@@ -50,12 +48,13 @@ function Comp1() {
 
   console.log(t.colorObj)
   console.log(t.pos2d)
+
   console.log(t.myPlugin)
 
   return (
     <div>
       <h1>Comp1</h1>
-      <img src={t.image} width="200" />
+      <img src={t.image} width="200" alt="" />
       <pre>{JSON.stringify(t, null, 2)}</pre>
     </div>
   )
@@ -102,7 +101,7 @@ export default function App() {
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
-          {/* <Comp2 /> */}
+          <Comp2 />
           <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
           <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>

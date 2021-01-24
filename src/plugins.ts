@@ -19,12 +19,10 @@ export function normalize<V, Settings extends object = {}>(type: string, input: 
   return input
 }
 
-export function register<
-  Value,
-  Input,
-  Settings extends object = {},
-  InternalSettings extends object | undefined = undefined
->(type: string, { schema, ...plugin }: Plugin<Value, Input, Settings, InternalSettings>) {
+export function register<Input, Value, InternalSettings, Settings>(
+  type: string,
+  { schema, ...plugin }: Plugin<Input, Value, Settings, InternalSettings>
+) {
   if (type in Plugins) {
     warn(LevaErrors.ALREADY_REGISTERED_TYPE, type)
     return
@@ -37,9 +35,9 @@ export function register<
   Plugins[type] = plugin
 }
 
-export function createPlugin<Value, Input, Settings, InternalSettings>(
+export function createPlugin<Input, Value, Settings, InternalSettings>(
   type: string,
-  plugin: Omit<Plugin<Value, Input, Settings, InternalSettings>, 'schema'>
+  plugin: Omit<Plugin<Input, Value, Settings, InternalSettings>, 'schema'>
 ) {
   register(type, plugin)
   return (input: any) => ({ type, ...input } as Value & { __customInput: true })
