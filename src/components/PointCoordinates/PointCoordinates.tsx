@@ -16,7 +16,7 @@ type CoordinateProps<T extends CoordinateValue> = {
 function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUpdate }: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
 
-  const set = (newValue: any) => onUpdate({ ...value, [valueKey]: sanitizeValue({ ...args, newValue }) })
+  const set = (newValue: any) => onUpdate({ ...value, [valueKey]: sanitizeValue(args, newValue) })
 
   const number = useLevaUpdate({ ...args, set })
 

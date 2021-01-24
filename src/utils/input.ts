@@ -32,17 +32,16 @@ function validate<Settings extends object>(type: string, value: any, settings?: 
 
 export function updateInput(input: DataInput, newValue: any) {
   const { value, type, settings } = input
-  input.value = sanitizeValue({ type, value, newValue, settings })
+  input.value = sanitizeValue({ type, value, settings }, newValue)
 }
 
 type SanitizeProps = {
   type: string
   value: any
-  newValue: any
   settings: object | undefined
 }
 
-export function sanitizeValue({ type, value, newValue, settings }: SanitizeProps) {
+export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue
 
   if (!validate(type, _newValue, settings)) {
