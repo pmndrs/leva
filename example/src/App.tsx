@@ -2,8 +2,11 @@ import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
+import { greenOrBlue } from './myPlugin'
 
 const noise = new Noise(Math.random())
+
+const b = greenOrBlue({ color: 'green', light: true, alpha: 0.5 })
 
 function Comp1() {
   const ref = React.useRef(4)
@@ -18,6 +21,7 @@ function Comp1() {
 
   const t = useControls({
     first: { value: 40, min: 30, max: 90 },
+    myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
@@ -43,6 +47,10 @@ function Comp1() {
     }),
     colorObj: { r: 1, g: 2, b: 3 },
   })
+
+  console.log(t.colorObj)
+  console.log(t.pos2d)
+  console.log(t.myPlugin)
 
   return (
     <div>
@@ -85,7 +93,7 @@ function Comp2() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
-  const { checkbox } = useControls({ checkbox: true })
+  // useControls({ checkbox: true })
   return (
     <>
       <Leva />
@@ -94,7 +102,7 @@ export default function App() {
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
-          <Comp2 />
+          {/* <Comp2 /> */}
           <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
           <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>

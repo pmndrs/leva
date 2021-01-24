@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Plugins } from '../register'
+import { Plugins } from '../plugins'
 
 function format<Settings extends object>(type: string, value: any, settings?: Settings) {
   const { format } = Plugins[type]

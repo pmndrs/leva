@@ -1,4 +1,4 @@
-import { Plugin, InputWithSettings } from './types/'
+import { Plugin, InputWithSettings } from './types'
 import { warn, LevaErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
@@ -20,15 +20,27 @@ export function normalize<V, Settings extends object = {}>(type: string, input: 
 }
 
 export function register<
-  V,
-  InternalValue,
+  Value,
+  Input,
   Settings extends object = {},
   InternalSettings extends object | undefined = undefined
->({ schema, ...plugin }: Plugin<V, InternalValue, Settings, InternalSettings>, type: string) {
+>(type: string, { schema, ...plugin }: Plugin<Value, Input, Settings, InternalSettings>) {
   if (type in Plugins) {
     warn(LevaErrors.ALREADY_REGISTERED_TYPE, type)
     return
   }
-  schemas.push((value: any, settings?: any) => schema(value, settings) && type)
+
+  if (schema) {
+    schemas.push((value: any, settings?: any) => schema(value, settings) && type)
+  }
+
   Plugins[type] = plugin
+}
+
+export function createPlugin<Value, Input, Settings, InternalSettings>(
+  type: string,
+  plugin: Omit<Plugin<Value, Input, Settings, InternalSettings>, 'schema'>
+) {
+  register(type, plugin)
+  return (input: any) => ({ type, ...input } as Value & { __customInput: true })
 }

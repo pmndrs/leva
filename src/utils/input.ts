@@ -1,16 +1,23 @@
-import { normalize, getValueType, Plugins } from '../register'
-import { DataInput } from '../types'
+import { normalize, getValueType, Plugins } from '../plugins'
+import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'
 
 // returns a value in the form of { value, settings}
 export function normalizeInput(input: any, path: string) {
   if (typeof input === 'object') {
-    // only special inputs should have the type attribute
-    if ('type' in input) return input
+    if ('type' in input) {
+      // if it's a special input then we return it as it is
+      if (input.type in SpecialInputTypes) return input
+      // if type exists at this point, it must be a custom plugin
+      // defined by the user
+      const { type, ...rest } = input
+      return { type, ...normalize(type, rest) }
+    }
 
     const type = getValueType(input)
     if (type) return { type, ...normalize(type, input) }
   }
+
   const type = getValueType({ value: input })
   if (!type) return warn(LevaErrors.UNKNOWN_INPUT, path, input)
   return { type, ...normalize(type, { value: input }) }

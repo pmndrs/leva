@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './Leva'
 import { folder } from './helpers/folder'
-import { register } from './register'
+import { register } from './plugins'
 import { FolderSettings } from './types/'
 
 import number from './components/Number'
@@ -17,16 +17,16 @@ import image from './components/Image'
 import interval from './components/Interval'
 import { Schema, SchemaToValues } from './types/public-api-types'
 
-register(select, 'SELECT')
-register(image, 'IMAGE')
-register(number, 'NUMBER')
-register(color, 'COLOR')
-register(string, 'STRING')
-register(boolean, 'BOOLEAN')
-register(interval, 'INTERVAL')
-register(Point3d, 'Point3d')
-register(Point2d, 'Point2d')
-register(spring, 'SPRING')
+register('SELECT', select)
+register('IMAGE', image)
+register('NUMBER', number)
+register('COLOR', color)
+register('STRING', string)
+register('BOOLEAN', boolean)
+register('INTERVAL', interval)
+register('POINT3D', Point3d)
+register('POINT2D', Point2d)
+register('SPRING', spring)
 
 export function useControls<S extends Schema>(schema: S): SchemaToValues<S>
 export function useControls<S extends Schema>(

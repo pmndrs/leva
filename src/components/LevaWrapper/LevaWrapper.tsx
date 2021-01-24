@@ -3,7 +3,7 @@ import { useInput } from '../../store'
 import { LevaValueInput } from './LevaValueInput'
 import { log, LevaErrors } from '../../utils/log'
 import { SpecialInputTypes } from '../../types/'
-import { Plugins } from '../../register'
+import { Plugins } from '../../plugins'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
 

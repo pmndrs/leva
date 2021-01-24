@@ -101,20 +101,24 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
 
 export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>>
 
-export type Schema = Record<string, SchemaItem>
+type CustomInput<I> = I & { __customInput: true }
+export type Schema = Record<string, SchemaItem | CustomInput<unknown>>
 
 export type Leaves<T, P extends string | number | symbol = ''> = {
   0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
   1: never
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
-  4: ''
+  4: never
+  5: { [i in P]: T extends CustomInput<infer I> ? I : never } // CustomInput type
 }[T extends FolderInput<any>
   ? 0
   : T extends SpecialInput
   ? 1
   : PrimitiveToValue<T> extends NotAPrimitiveType
-  ? T extends object
+  ? T extends CustomInput<{}>
+    ? 5
+    : T extends object
     ? 3
     : 4
   : 2]

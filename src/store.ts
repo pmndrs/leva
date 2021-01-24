@@ -145,15 +145,15 @@ export const getFolderSettings = (path: string) => FOLDERS[path]
 export function getDataFromSchema(schema: any, rootPath = '') {
   const data: any = {}
   const paths: string[] = []
-  Object.entries(schema).forEach(([path, value]: [string, any]) => {
+  Object.entries(schema).forEach(([path, input]: [string, any]) => {
     const newPath = join(rootPath, path)
-    if (value.type === SpecialInputTypes.FOLDER) {
-      Object.assign(data, getDataFromSchema(value.schema, newPath))
-      FOLDERS[newPath] = value.settings as FolderSettings
+    if (input.type === SpecialInputTypes.FOLDER) {
+      Object.assign(data, getDataFromSchema(input.schema, newPath))
+      FOLDERS[newPath] = input.settings as FolderSettings
     } else {
-      const input = normalizeInput(value, newPath)
-      if (input) {
-        data[newPath] = input
+      const normalizedInput = normalizeInput(input, newPath)
+      if (normalizedInput) {
+        data[newPath] = normalizedInput
         paths.push(newPath)
       }
     }
