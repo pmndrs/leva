@@ -1,3 +1,4 @@
+import { dequal } from 'dequal'
 import { normalize, getValueType, Plugins } from '../plugins'
 import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'
@@ -63,7 +64,7 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
   }
   const sanitizedNewValue = sanitize(type, _newValue, settings)
 
-  if (sanitizedNewValue === value) {
+  if (dequal(sanitizedNewValue, value)) {
     /**
      * @note This makes the update function throw when the new value is the same
      * as the previous one. This can happen for example, if the minimum value of
