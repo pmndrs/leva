@@ -1,5 +1,5 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useControls, folder, button, monitor, Leva, store } from 'leva'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
@@ -93,10 +93,14 @@ export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
   // useControls({ checkbox: true })
+
+  useControls('test', { myTest: 1 })
+  
   return (
     <>
       <Leva />
       <div style={{ display: 'flex' }}>
+        <input type="text" onChange={(e) => store.setValueAtPath('test.myTest', e.target.value)}></input>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
           {c1 && <Comp1 />}

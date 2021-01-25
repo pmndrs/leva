@@ -58,6 +58,7 @@ function setData(newData: Data) {
 function setValueAtPath(path: string, value: any) {
   _store.setState(s => {
     const data = s.data
+    console.log(data, value)
     //@ts-expect-error (we always update inputs with a value)
     updateInput(data[path], value)
     return { data }
