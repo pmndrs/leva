@@ -35,10 +35,16 @@ export function register<Input, Value, InternalSettings, Settings>(
   Plugins[type] = plugin
 }
 
+const getUniqueType = () =>
+  '__CUSTOM__PLUGIN__' +
+  Math.random()
+    .toString(36)
+    .substr(2, 9)
+
 export function createPlugin<Input, Value, Settings, InternalSettings>(
-  type: string,
   plugin: Omit<Plugin<Input, Value, Settings, InternalSettings>, 'schema'>
 ) {
+  const type = getUniqueType()
   register(type, plugin)
   return (input: any) => ({ type, ...input } as Value & { __customInput: true })
 }

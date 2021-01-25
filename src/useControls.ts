@@ -10,8 +10,8 @@ import select from './components/Select'
 import color from './components/Color'
 import string from './components/String'
 import boolean from './components/Boolean'
-import Point3d from './components/Point/Point3d'
-import Point2d from './components/Point/Point2d'
+import point3d from './components/Point/Point3d'
+import point2d from './components/Point/Point2d'
 import spring from './components/Spring'
 import image from './components/Image'
 import interval from './components/Interval'
@@ -24,8 +24,8 @@ register('COLOR', color)
 register('STRING', string)
 register('BOOLEAN', boolean)
 register('INTERVAL', interval)
-register('POINT3D', Point3d)
-register('POINT2D', Point2d)
+register('POINT3D', point3d)
+register('POINT2D', point2d)
 register('SPRING', spring)
 
 export function useControls<S extends Schema>(schema: S): SchemaToValues<S>

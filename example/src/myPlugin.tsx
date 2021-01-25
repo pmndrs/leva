@@ -33,7 +33,7 @@ const sanitize = (v: string): GreenOrBlueType => {
 
 const format = (v: GreenOrBlueType) => (v.light ? 'light' : '') + v.color
 
-export const greenOrBlue = createPlugin('MYPLUGIN', {
+export const greenOrBlue = createPlugin({
   validate: v => ['green', 'blue', 'lightgreen', 'lightblue'].includes(v),
   sanitize,
   format,
