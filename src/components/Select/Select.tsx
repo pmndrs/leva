@@ -13,7 +13,7 @@ export function Select() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <StyledSelect value={displayValue} onChange={e => onUpdate(values[+e.target.value])}>
+      <StyledSelect value={displayValue} onChange={e => onUpdate(values[+e.currentTarget.value])}>
         {keys.map((key, index) => (
           <option key={key} value={index}>
             {key}

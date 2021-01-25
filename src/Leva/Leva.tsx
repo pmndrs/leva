@@ -35,7 +35,7 @@ export function Filter({ onChange }: FilterProps) {
   const debouncedOnChange = useMemo<FilterProps['onChange']>(() => debounce(onChange, 250), [onChange])
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const v = e.target.value
+    const v = e.currentTarget.value
     set(v)
     debouncedOnChange(v)
   }

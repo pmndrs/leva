@@ -12,7 +12,7 @@ export function Boolean() {
     <Row input>
       <Label htmlFor={label}>{label}</Label>
       <StyledInputWrapper>
-        <input id={label} type="checkbox" checked={value} onChange={e => onUpdate(e.target.checked)} />
+        <input id={label} type="checkbox" checked={value} onChange={e => onUpdate(e.currentTarget.checked)} />
         <label htmlFor={label} />
       </StyledInputWrapper>
     </Row>

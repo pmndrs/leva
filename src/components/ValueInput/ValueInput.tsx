@@ -12,15 +12,18 @@ type ValueInputProps = {
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, ...props }: ValueInputProps) {
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
-      const _value = event.target.value
+      const _value = event.currentTarget.value
       fn(_value)
     },
     []
   )
 
   const onKeyPress = useCallback(
-    (e: React.KeyboardEvent) => {
-      e.key === 'Enter' && update(onUpdate)(e)
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        update(onUpdate)(e)
+        // e.currentTarget.blur()
+      }
     },
     [update, onUpdate]
   )
