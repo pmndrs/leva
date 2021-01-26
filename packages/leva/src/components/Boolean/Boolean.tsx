@@ -1,6 +1,6 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
 
@@ -12,7 +12,7 @@ export function Boolean() {
     <Row input>
       <Label htmlFor={label}>{label}</Label>
       <StyledInputWrapper>
-        <input id={label} type="checkbox" checked={value} onChange={e => onUpdate(e.currentTarget.checked)} />
+        <input id={label} type="checkbox" checked={value} onChange={(e) => onUpdate(e.currentTarget.checked)} />
         <label htmlFor={label} />
       </StyledInputWrapper>
     </Row>

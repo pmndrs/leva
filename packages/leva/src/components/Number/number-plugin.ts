@@ -6,10 +6,7 @@ import { getStep, clamp } from '../../utils'
 export type InternalNumberSettings = { min: number; max: number; step: number; pad: number; initialValue: number }
 type NumberInput = InputWithSettings<number, NumberSettings>
 
-export const schema = (o: any) =>
-  v8n()
-    .number()
-    .test(o)
+export const schema = (o: any) => v8n().number().test(o)
 
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 

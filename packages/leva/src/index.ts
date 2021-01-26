@@ -1,6 +1,4 @@
-export { createPlugin } from './plugins'
-export { Leva } from './Leva'
-export { useInputContext } from './context'
+export { Leva } from './components/Leva'
 
 export * from './useControls'
-export * from './helpers/'
+export * from './helpers'

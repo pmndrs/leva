@@ -3,7 +3,7 @@ import { Label, Row } from '../UI'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
@@ -11,7 +11,7 @@ export function Image() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
 
   const onDrop = useCallback(
-    acceptedFiles => {
+    (acceptedFiles) => {
       if (!acceptedFiles.length) return
       onUpdate(acceptedFiles[0])
     },
@@ -19,7 +19,7 @@ export function Image() {
   )
 
   const clear = useCallback(
-    e => {
+    (e) => {
       e.stopPropagation()
       onUpdate(undefined)
     },

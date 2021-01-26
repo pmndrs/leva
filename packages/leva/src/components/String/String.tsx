@@ -2,7 +2,7 @@ import React from 'react'
 import { ValueInput } from '../ValueInput'
 import { LevaInputProps } from '../../types/'
 import { Label, Row } from '../UI'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 
 export function String() {
   const { label, displayValue, onUpdate, onChange } = useInputContext<LevaInputProps<string>>()

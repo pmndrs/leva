@@ -34,10 +34,6 @@ type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
 
 export type ColorObjectInput = { r: number; g: number; b: number; a?: number }
 
-export type Spring = { tension: number; friction: number; mass?: number }
-export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
-export type SpringInput = MergedInputWithSettings<Spring, SpringSettings>
-
 type BooleanInput = boolean
 
 type StringInput = string
@@ -57,7 +53,6 @@ type SchemaItem =
   | ImageInput
   | SelectInput
   | ColorObjectInput
-  | SpringInput
   | BooleanInput
   | StringInput
   | FolderInput<any>
@@ -73,8 +68,6 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   ? { r: number; g: number; b: number }
   : S extends ImageInput
   ? string | undefined
-  : S extends SpringInput
-  ? { tension: number; friction: number; mass: number }
   : S extends SelectWithValueInput<infer T, infer K>
   ? T | K
   : S extends SelectWithoutValueInput<infer T>

@@ -6,7 +6,7 @@ import { Label, Row } from '../UI'
 import { useDragNumber } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
 

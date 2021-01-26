@@ -5,7 +5,7 @@ import { Point3d as Point3dType, Point3dObject } from '../../../types/public-api
 import { PointCoordinates } from '../../PointCoordinates'
 import { Label, Row } from '../../UI'
 import { InternalPoint3dSettings } from './point3d-plugin'
-import { useInputContext } from '../../../context'
+import { useInputContext } from '../../../hooks'
 
 type Point3dProps = LevaInputProps<Point3dType, InternalPoint3dSettings, Point3dObject>
 

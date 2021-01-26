@@ -1,9 +1,9 @@
 import styled, { css } from '@xstyled/styled-components'
-import { StyledTitle } from '../components/Folder/StyledFolder'
+import { StyledTitle } from '../Folder/StyledFolder'
 
 export const Root = styled.div<{ fillParent: boolean }>`
   /* position */
-  ${props =>
+  ${(props) =>
     !props.fillParent
       ? css`
           position: absolute;

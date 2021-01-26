@@ -1,7 +1,3 @@
-import { createContext, useContext } from 'react'
+import { createContext } from 'react'
 
 export const InputContext = createContext({})
-
-export function useInputContext<T>() {
-  return useContext(InputContext) as T
-}

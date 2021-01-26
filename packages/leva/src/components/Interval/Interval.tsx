@@ -7,7 +7,7 @@ import { PointCoordinates } from '../PointCoordinates'
 import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 

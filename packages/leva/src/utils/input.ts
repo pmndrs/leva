@@ -1,5 +1,5 @@
 import { dequal } from 'dequal'
-import { normalize, getValueType, Plugins } from '../plugins'
+import { normalize, getValueType, Plugins } from '../plugin'
 import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'
 
@@ -12,7 +12,7 @@ export function normalizeInput(input: any, path: string) {
       // if type exists at this point, it must be a custom plugin
       // defined by the user
       const { type, ...rest } = input
-      return { type, ...normalize(type, rest) }
+      return { type, ...normalize(type, { value: rest }) }
     }
 
     const type = getValueType(input)
@@ -51,7 +51,7 @@ type SanitizeProps = {
 
 type ValueErrorType = { message: string; previousValue: any }
 
-const ValueError = (function(this: ValueErrorType, message: string, value: any) {
+const ValueError = (function (this: ValueErrorType, message: string, value: any) {
   this.message = 'LEVA: ' + message
   this.previousValue = value
 } as unknown) as { new (message: string, value: any): ValueErrorType }

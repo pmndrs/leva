@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Plugins } from '../plugins'
+import { Plugins } from '../plugin'
 
 function format<Settings extends object>(type: string, value: any, settings?: Settings) {
   const { format } = Plugins[type]
@@ -17,7 +17,7 @@ type Props<V, Settings> = {
 export function useLevaUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
   // the value used by the panel vs the value
   const [displayValue, setDisplayValue] = useState(format(type, value, settings))
-  const setFormat = useCallback(v => setDisplayValue(format(type, v, settings)), [type, settings])
+  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settings)), [type, settings])
 
   const onUpdate = useCallback(
     (updatedValue: any) => {

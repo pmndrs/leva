@@ -20,6 +20,7 @@
   },
   "alias": {
     "@leva/leva": "../packages/leva/src",
+    "@leva/spring": "../packages/spring/src",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom/profiling"
   },

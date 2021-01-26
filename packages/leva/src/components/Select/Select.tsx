@@ -1,6 +1,6 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 import { Label, Row } from '../UI'
 import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect } from './StyledSelect'
@@ -13,7 +13,7 @@ export function Select() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <StyledSelect value={displayValue} onChange={e => onUpdate(values[+e.currentTarget.value])}>
+      <StyledSelect value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
         {keys.map((key, index) => (
           <option key={key} value={index}>
             {key}

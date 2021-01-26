@@ -1,24 +1,13 @@
-import v8n from 'v8n'
-import { InputWithSettings } from '../../types/'
-import { Spring, SpringSettings } from '../../types/public-api-types'
-import { orderKeys } from '../../utils'
-import { InternalNumberSettings, normalizeKeyValue } from '../Number/number-plugin'
+import { InputWithSettings, NumberSettings, InternalNumberSettings } from '@leva/leva/plugins'
+import { orderKeys, normalizeKeyValue } from '@leva/leva/utilities'
+
+export type Spring = { tension: number; friction: number; mass?: number }
+export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
 
 type SpringInput = InputWithSettings<Spring, SpringSettings>
 
 export type InternalSpring = { tension: number; friction: number; mass: number }
 export type InternalSpringSettings = { [key in keyof InternalSpring]: InternalNumberSettings }
-
-const number = v8n().number()
-
-export const schema = (o: any) =>
-  v8n()
-    .schema({
-      tension: number,
-      friction: number,
-      mass: v8n().optional(number),
-    })
-    .test(o)
 
 const defaultTensionSettings = { min: 1 }
 const defaultFrictionSettings = { min: 1 }

@@ -164,19 +164,6 @@ declare function expectType<T>(
 })()
 
 /**
- * spring
- */
-;(() => {
-  expectType<{ a: { tension: number; friction: number; mass: number } }>(
-    useControls({ a: { tension: 10, friction: 10 } })
-  )
-
-  expectType<{ a: { tension: number; friction: number; mass: number } }>(
-    useControls({ a: { tension: 10, friction: 10, mass: 1 } })
-  )
-})()
-
-/**
  * folders
  */
 ;(() => {

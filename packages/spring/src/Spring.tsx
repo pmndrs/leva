@@ -1,15 +1,11 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import styled, { useColor } from '@xstyled/styled-components'
 import { a, useSpring } from 'react-spring'
-import { PointCoordinates } from '../PointCoordinates'
+import { useCanvas2d, useDrag, useInputContext, PointCoordinates, Label, Row, LevaInputProps } from '@leva/leva/plugins'
+import { debounce } from '@leva/leva/utilities'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { springFn } from './math'
-import { Label, Row } from '../UI'
-import { LevaInputProps } from '../../types/'
-import { debounce } from '../../utils'
-import { useCanvas2d, useDrag } from '../../hooks'
-import { useInputContext } from '../../context'
 
 type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
 
@@ -33,7 +29,7 @@ export function Spring() {
   const [spring, set] = useSpring(() => ({
     scaleX: 0.5,
     opacity: 0.2,
-    immediate: k => k === 'opacity',
+    immediate: (k) => k === 'opacity',
   }))
 
   const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {

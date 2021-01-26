@@ -6,7 +6,7 @@ import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay } from '../UI'
-import { useInputContext } from '../../context'
+import { useInputContext } from '../../hooks'
 
 type ColorProps = LevaInputProps<ColorType, InternalColorSettings>
 

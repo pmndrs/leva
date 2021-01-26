@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
-import { useRenderRoot } from './Leva'
+import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
-import { register } from './plugins'
+import { register } from './plugin'
 import { FolderSettings } from './types/'
 
 import number from './components/Number'
@@ -12,7 +12,6 @@ import string from './components/String'
 import boolean from './components/Boolean'
 import point3d from './components/Point/Point3d'
 import point2d from './components/Point/Point2d'
-import spring from './components/Spring'
 import image from './components/Image'
 import interval from './components/Interval'
 import { Schema, SchemaToValues } from './types/public-api-types'
@@ -26,7 +25,6 @@ register('BOOLEAN', boolean)
 register('INTERVAL', interval)
 register('POINT3D', point3d)
 register('POINT2D', point2d)
-register('SPRING', spring)
 
 export function useControls<S extends Schema>(schema: S): SchemaToValues<S>
 export function useControls<S extends Schema>(
