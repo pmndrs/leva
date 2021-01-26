@@ -1,5 +1,6 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useControls, folder, button, monitor, Leva } from '@leva/leva'
+import { spring } from '@leva/spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
@@ -29,7 +30,7 @@ function Comp1() {
     number: { value: 1000, min: 3 },
     folder2: folder({
       boolean: false,
-      spring: { tension: 100, friction: 30 },
+      spring: spring({ tension: 100, friction: 30 }),
       folder3: folder(
         {
           'Hello Button': button(() => console.log('hello')),
@@ -46,10 +47,10 @@ function Comp1() {
     colorObj: { r: 1, g: 2, b: 3 },
   })
 
-  console.log(t.colorObj)
-  console.log(t.pos2d)
-
-  console.log(t.myPlugin)
+  // console.log(t.colorObj)
+  // console.log(t.pos2d)
+  // console.log(t.spring)
+  // console.log(t.myPlugin)
 
   return (
     <div>
@@ -102,8 +103,8 @@ export default function App() {
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
           <Comp2 />
-          <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
-          <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
+          <button onClick={() => setC1((t) => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
+          <button onClick={() => setC2((t) => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>
       </div>
     </>

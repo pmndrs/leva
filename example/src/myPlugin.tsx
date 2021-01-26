@@ -1,10 +1,17 @@
 import React from 'react'
-import { createPlugin, useInputContext, Row, Label, ValueInput } from 'leva'
-import { LevaInputProps } from '../../src/types'
+import {
+  createPlugin,
+  InputWithSettings,
+  useInputContext,
+  LevaInputProps,
+  Row,
+  Label,
+  ValueInput,
+} from '@leva/leva/plugins'
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color: string; light: boolean }
-type GreenOrBlueInput = GreenOrBlueType & GreenOrBlueSettings
+type GreenOrBlueInput = InputWithSettings<GreenOrBlueType, GreenOrBlueSettings>
 
 type GreenOrBlueProps = LevaInputProps<GreenOrBlueType, GreenOrBlueSettings>
 
@@ -21,10 +28,10 @@ function GreenOrBlue() {
   )
 }
 
-const normalize = ({ alpha, ...value }: GreenOrBlueInput) => {
-  const settings: GreenOrBlueSettings = { alpha }
+const normalize = ({ value, ...settings }: GreenOrBlueInput) => {
   return { value, settings }
 }
+
 const sanitize = (v: string): GreenOrBlueType => {
   // @ts-ignore
   const [, isLight, color] = v.match(/(light)?(.*)/)
@@ -34,7 +41,7 @@ const sanitize = (v: string): GreenOrBlueType => {
 const format = (v: GreenOrBlueType) => (v.light ? 'light' : '') + v.color
 
 export const greenOrBlue = createPlugin({
-  validate: v => ['green', 'blue', 'lightgreen', 'lightblue'].includes(v),
+  validate: (v) => ['green', 'blue', 'lightgreen', 'lightblue'].includes(v),
   sanitize,
   format,
   normalize,

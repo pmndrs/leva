@@ -1,7 +1,8 @@
 {
   "name": "example",
   "version": "1.0.0",
-  "main": "./src/index.js",
+  "main": "./src/index.tsx",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "copy": "mkdir -p dist && cp -r static/* dist/",
@@ -10,14 +11,16 @@
   },
   "dependencies": {
     "@react-three/drei": "^2.2.12",
+    "leva": "^0.1.0",
     "noisejs": "^2.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
     "react-three-fiber": "^5.3.10",
     "three": "^0.123.0"
   },
   "alias": {
-    "leva": "../src",
+    "@leva/leva": "../packages/leva/src",
+    "@leva/spring": "../packages/spring/src",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom/profiling"
   },
