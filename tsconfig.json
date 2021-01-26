@@ -1,4 +1,5 @@
 {
+  "exclude": ["node_modules", "**/dist", "**/*.test*", "example"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "es2019"],
@@ -29,6 +30,5 @@
     "forceConsistentCasingInFileNames": true,
     // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
     "noEmit": true
-  },
-  "exclude": ["node_modules", "dist", "**/*.test*", "example"]
+  }
 }

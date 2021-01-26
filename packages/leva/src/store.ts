@@ -64,6 +64,10 @@ function setValueAtPath(path: string, value: any) {
   })
 }
 
+function getValueAtPath(path: string) {
+  return _store.getState().data[path]
+}
+
 /**
  * For a given data structure, gets all paths for which inputs have
  * a reference count superior to zero. This function is used by the
@@ -179,6 +183,7 @@ export const store = {
   getData,
   setData,
   setValueAtPath,
+  getValueAtPath,
   disposePaths,
 }
 
