@@ -1,0 +1,68 @@
+export const LevaTheme = {
+  colors: {
+    primary: '#ccc',
+    accent: '#333',
+    'label-text': '#333',
+    'root-bg': '#f2f2f2',
+    'root-text': '#333',
+    'root-border': '#ccc',
+    'folder-text': '#f9f6ff',
+    'folder-border': '#333',
+    'folder-title-bg': '#333',
+    'input-bg': '#fff',
+    'input-text': '#333',
+    'input-border': '#e5e5e5',
+    'input-hover-border': '#ccc',
+    'input-focus-border': '#666',
+    'input-active-bg': '#f2f2f2',
+    'button-text': '#333',
+    'button-bg': '#fff',
+    'select-bg': '#fff',
+    selection: '#ccc',
+  },
+  radii: {
+    input: 2,
+    root: 2,
+  },
+  space: {
+    input: 6,
+    'folder-h': 6,
+    'folder-v': 3,
+    'row-h': 3,
+    'row-v': 3,
+    'col-gap': 3,
+  },
+  fonts: {
+    mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
+  },
+  fontSizes: {
+    root: 11,
+  },
+  sizes: {
+    'root-width': 280,
+    'control-width': 160,
+    'scrubber-width': 6,
+    'scrubber-height': 14,
+    'row-height': 25,
+    'joystick-width': 100,
+    'joystick-height': 100,
+  },
+  shadows: {
+    root: '0 0 40px #00000033',
+    overlay: '0 4px 14px #00000033',
+  },
+  borderWidths: {
+    input: 1,
+    root: 0,
+    folder: 4,
+  },
+  fontWeights: {
+    folder: 600,
+    label: 600,
+  },
+  transitions: {
+    border: 'border-color 250ms ease',
+    bg: 'background-color 250ms ease',
+    'border-bg': 'border-color, background-color 250ms ease',
+  },
+}

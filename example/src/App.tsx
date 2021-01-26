@@ -1,5 +1,5 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useControls, folder, button, monitor, Leva } from '@leva/leva'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
@@ -102,8 +102,8 @@ export default function App() {
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
           <Comp2 />
-          <button onClick={() => setC1(t => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
-          <button onClick={() => setC2(t => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
+          <button onClick={() => setC1((t) => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
+          <button onClick={() => setC2((t) => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>
       </div>
     </>
