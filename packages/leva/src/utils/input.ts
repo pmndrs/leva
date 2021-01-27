@@ -58,7 +58,6 @@ const ValueError = (function (this: ValueErrorType, message: string, value: any)
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue
-
   if (!validate(type, _newValue, settings)) {
     throw new ValueError(`The value [${newValue}] did not result in a correct value.`, value)
   }
@@ -72,8 +71,9 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
      * to 30 and subsequent calls like 14, 0, etc. won't result in the component displaying
      * the value to be notified (ie there wouldn't be a new render)
      */
+
     throw new ValueError(
-      `The value [${newValue}] did not result in a value update, which remained the same: [${value}].`,
+      `The value [${newValue}] did not result in a value update, which remained the same: [${value}]. You can ignore this warning if this is the intended behavior.`,
       value
     )
   }
