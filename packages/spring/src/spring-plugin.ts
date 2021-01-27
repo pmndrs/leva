@@ -20,5 +20,6 @@ export const normalize = ({ value, ..._settings }: SpringInput) => {
     friction: { ...defaultFrictionSettings, ..._settings.friction },
     mass: { ...defaultMassSettings, ..._settings.mass },
   }
+
   return normalizeVector({ mass: 1, ...value }, settings, ['tension', 'friction', 'mass'])
 }

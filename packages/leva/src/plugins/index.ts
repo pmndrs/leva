@@ -3,7 +3,7 @@
 export { createPlugin } from '../plugin'
 export { Row, Label } from '../components/UI'
 export { ValueInput } from '../components/ValueInput'
-export { Vector } from '../components/Vector'
+export { Vector, getVectorPlugin } from '../components/Vector'
 export { useDrag, useDragNumber, useCanvas2d, useInputContext } from '../hooks/'
 
 // export types

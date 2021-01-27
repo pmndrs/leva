@@ -1,7 +1,7 @@
 import v8n from 'v8n'
 import { NumberSettings } from '../../types'
 import { mapArrayToKeys, orderKeys } from '../../utils'
-import { InternalNumberSettings } from '../Number/number-plugin'
+import { InternalNumberSettings, sanitize, validate } from '../Number/number-plugin'
 import { normalizeKeyedNumberInput } from './vector-utils'
 
 export type Format = 'array' | 'object'
@@ -36,8 +36,23 @@ function convert<K extends string, F extends Format>(value: VectorType<K>, forma
   return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as VectorArray, keys!)) as VectorType<K, F>
 }
 
-export const sanitizeVector = <K extends string>(value: any, { format }: InternalVectorSettings<K>, keys: K[]) => {
-  return convert(value, format, keys)
+export const validateVector = <K extends string>(value: VectorObj<K>) => {
+  console.log(
+    'validating',
+    value,
+    Object.values(value).every((v: any) => validate(v))
+  )
+  return Object.values(value).every((v: any) => validate(v))
+}
+
+export const sanitizeVector = <K extends string>(
+  value: VectorObj<K>,
+  settings: InternalVectorSettings<K>,
+  keys: K[]
+) => {
+  for (let key in value) value[key] = sanitize(value[key], settings[key])
+
+  return convert(value, settings.format, keys)
 }
 
 export const formatVector = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
@@ -53,9 +68,14 @@ export function normalizeVector<K extends string>(_value: VectorType<K>, _settin
   }
 }
 
-export function getVectorPlugin<K extends string>(keys: K[]) {
+export function getVectorPlugin<K extends string>(
+  keys: K[],
+  defaultSettings: VectorSettings<K> = {},
+  defaultValue: Partial<VectorObj<K>> = {}
+) {
   return {
     schema: getVectorSchema(keys),
+    validate: validateVector,
     normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, keys),
     format: (value: any) => formatVector(value, keys),
     sanitize: (value: any, settings: InternalVectorSettings<K>) => sanitizeVector(value, settings, keys),
