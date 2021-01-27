@@ -4,8 +4,8 @@
   "main": "dist/leva-leva.cjs.js",
   "license": "MIT",
   "peerDependencies": {
-    "react-dom": ">= 16.8.0",
-    "react": ">= 16.8.0"
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
   },
   "preconstruct": {
     "entrypoints": [
@@ -15,6 +15,7 @@
     ]
   },
   "dependencies": {
+    "@stitches/react": "^0.0.2",
     "@welldone-software/why-did-you-render": "^6.0.5",
     "@xstyled/styled-components": "^2.2.0",
     "@xstyled/system": "^2.2.0",
