@@ -6,43 +6,43 @@ import { normalizeKeyedNumberInput } from './vector-utils'
 
 export type Format = 'array' | 'object'
 
-export type PointArray = number[]
-export type PointObj<K extends string> = { [key in K]: number }
-export type Point<K extends string, F extends Format = Format> = F extends 'object' ? PointObj<K> : PointArray
+export type VectorArray = number[]
+export type VectorObj<K extends string> = { [key in K]: number }
+export type Vector<K extends string, F extends Format = Format> = F extends 'object' ? VectorObj<K> : VectorArray
 
-export type PointSettings<K extends string> = {
+export type VectorSettings<K extends string> = {
   [key in K]?: NumberSettings
 }
-export type InternalPointSettings<K extends string> = {
+export type InternalVectorSettings<K extends string> = {
   [key in K]: InternalNumberSettings
 } & { format: Format }
 
 // SCHEMA
 const number = v8n().number()
 
-export function getPointSchema(keys: string[]) {
+export function getVectorSchema(keys: string[]) {
   // prettier-ignore
-  const pointArray = v8n().array().length(keys.length).every.number()
+  const VectorArray = v8n().array().length(keys.length).every.number()
   const pointObj = v8n().schema(keys.reduce((acc, k) => ({ ...acc, [k]: number }), {}))
-  return (o: any) => v8n().passesAnyOf(pointArray, pointObj).test(o)
+  return (o: any) => v8n().passesAnyOf(VectorArray, pointObj).test(o)
 }
 
-export function getPointType<K extends string>(value: Point<K>): Format {
+export function getVectorType<K extends string>(value: Vector<K>): Format {
   return Array.isArray(value) ? 'array' : 'object'
 }
 
-function convert<K extends string, F extends Format>(value: Point<K>, format: F, keys?: K[]): Point<K, F> {
-  if (getPointType(value) === format) return value as Point<K, F>
-  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as PointArray, keys!)) as Point<K, F>
+function convert<K extends string, F extends Format>(value: Vector<K>, format: F, keys?: K[]): Vector<K, F> {
+  if (getVectorType(value) === format) return value as Vector<K, F>
+  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as VectorArray, keys!)) as Vector<K, F>
 }
 
-export const sanitizePoint = <K extends string>(value: any, { format }: InternalPointSettings<K>, keys: K[]) => {
+export const sanitizeVector = <K extends string>(value: any, { format }: InternalVectorSettings<K>, keys: K[]) => {
   return convert(value, format, keys)
 }
 
-export const formatPoint = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
+export const formatVector = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
 
-export function normalizePoint<K extends string>(_value: Point<K>, _settings: PointSettings<K> = {}, keys: K[]) {
+export function normalizeVector<K extends string>(_value: Vector<K>, _settings: VectorSettings<K> = {}, keys: K[]) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
   const value = convert(_value, 'object', keys)
   const { settings } = normalizeKeyedNumberInput(value, _settings as any)
@@ -53,11 +53,11 @@ export function normalizePoint<K extends string>(_value: Point<K>, _settings: Po
   }
 }
 
-export function getPointPlugin<K extends string>(keys: K[]) {
+export function getVectorPlugin<K extends string>(keys: K[]) {
   return {
-    schema: getPointSchema(keys),
-    normalize: ({ value, ...settings }: any) => normalizePoint(value, settings, keys),
-    format: (value: any) => formatPoint(value, keys),
-    sanitize: (value: any, settings: InternalPointSettings<K>) => sanitizePoint(value, settings, keys),
+    schema: getVectorSchema(keys),
+    normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, keys),
+    format: (value: any) => formatVector(value, keys),
+    sanitize: (value: any, settings: InternalVectorSettings<K>) => sanitizeVector(value, settings, keys),
   }
 }

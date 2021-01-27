@@ -1,4 +1,4 @@
-import { Format } from '../Vector/vector-plugin'
+import { Format } from '../Vector'
 import { InternalNumberSettings } from '../Number/number-plugin'
 import { Point2dObject } from '../../types'
 
