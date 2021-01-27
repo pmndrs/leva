@@ -68,11 +68,7 @@ export function normalizeVector<K extends string>(_value: VectorType<K>, _settin
   }
 }
 
-export function getVectorPlugin<K extends string>(
-  keys: K[],
-  defaultSettings: VectorSettings<K> = {},
-  defaultValue: Partial<VectorObj<K>> = {}
-) {
+export function getVectorPlugin<K extends string>(keys: K[]) {
   return {
     schema: getVectorSchema(keys),
     validate: validateVector,
