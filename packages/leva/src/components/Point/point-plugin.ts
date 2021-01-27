@@ -1,7 +1,7 @@
 import v8n from 'v8n'
 import { NumberSettings } from '../../types/public-api-types'
 import { mapArrayToKeys, orderKeys } from '../../utils'
-import { normalizeKeyValue, InternalNumberSettings } from '../Number/number-plugin'
+import { normalizeKeyedNumberInput, InternalNumberSettings } from '../Number/number-plugin'
 
 export type Format = 'array' | 'object'
 
@@ -23,10 +23,7 @@ export function getPointSchema(keys: string[]) {
   // prettier-ignore
   const pointArray = v8n().array().length(keys.length).every.number()
   const pointObj = v8n().schema(keys.reduce((acc, k) => ({ ...acc, [k]: number }), {}))
-  return (o: any) =>
-    v8n()
-      .passesAnyOf(pointArray, pointObj)
-      .test(o)
+  return (o: any) => v8n().passesAnyOf(pointArray, pointObj).test(o)
 }
 
 export function getPointType<K extends string>(value: Point<K>): Format {
@@ -45,7 +42,7 @@ export const formatPoint = <K extends string>(v: any, keys: K[]) => convert(v, '
 export function normalizePoint<K extends string>(_value: Point<K>, _settings: PointSettings<K> = {}, keys: K[]) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
   const value = convert(_value, 'object', keys)
-  const { settings } = normalizeKeyValue(value, _settings as any)
+  const { settings } = normalizeKeyedNumberInput(value, _settings as any)
 
   return {
     value: format === 'array' ? _value : orderKeys(value, keys as any),

@@ -11,6 +11,7 @@ export const schema = (o: any) => v8n().number().test(o)
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
 export const format = (v: any, { pad = 0 }: InternalNumberSettings) => Number(v).toFixed(pad)
+
 export const sanitize = (v: string, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>
   clamp(Number(v), min, max)
 
@@ -37,10 +38,15 @@ export const sanitizeStep = (
   return initialValue + steps * step!
 }
 
-export const normalizeKeyValue = <K extends object>(obj: K, settings: { [key in keyof K]?: NumberSettings }) => {
-  const _settings = {} as { [key in keyof K]: InternalNumberSettings }
-  Object.entries(obj).forEach(([key, value]) => {
-    _settings[key as keyof K] = normalize({ value, ...settings[key as keyof K] }).settings
+export const normalizeKeyedNumberInput = <V extends Record<string, number>>(
+  value: V,
+  settings: { [key in keyof V]?: NumberSettings }
+) => {
+  const _settings = {} as { [key in keyof V]: InternalNumberSettings }
+
+  Object.entries(value).forEach(([key, v]) => {
+    _settings[key as keyof V] = normalize({ value: v, ...settings[key as keyof V] }).settings
   })
-  return { value: obj, settings: _settings }
+
+  return { value, settings: _settings }
 }
