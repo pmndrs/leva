@@ -1,7 +1,7 @@
-import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../point-plugin'
-import { InternalNumberSettings } from '../../Number/number-plugin'
-import { InputWithSettings } from '../../../types/'
-import { Point2d, Point2dObject, Point2dSettings } from '../../../types/public-api-types'
+import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../Point/point-plugin'
+import { InternalNumberSettings } from '../Number/number-plugin'
+import { InputWithSettings } from '../../types'
+import { Point2d, Point2dObject, Point2dSettings } from '../../types/public-api-types'
 
 export type InternalPoint2dSettings = { [key in keyof Point2dObject]: InternalNumberSettings } & { format: Format }
 type Point2dInput = InputWithSettings<Point2d, Point2dSettings>

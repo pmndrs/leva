@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
-import { PointCoordinates } from '../../PointCoordinates'
+import { PointCoordinates } from '../PointCoordinates'
 import { InternalPoint2dSettings } from './point2d-plugin'
-import { LevaInputProps } from '../../../types/'
-import { Point2d as Point2dType, Point2dObject } from '../../../types/public-api-types'
-import { Label, Row } from '../../UI'
+import { LevaInputProps } from '../../types'
+import { Point2d as Point2dType, Point2dObject } from '../../types/public-api-types'
+import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
-import { useInputContext } from '../../../hooks'
+import { useInputContext } from '../../hooks'
 
 export type Point2dProps = LevaInputProps<Point2dType, InternalPoint2dSettings, Point2dObject>
 

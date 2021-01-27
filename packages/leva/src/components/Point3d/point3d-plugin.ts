@@ -1,7 +1,7 @@
-import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../point-plugin'
-import { InternalNumberSettings } from '../../Number/number-plugin'
-import { InputWithSettings } from '../../../types/'
-import { Point3d, Point3dObject, Point3dSettings } from '../../../types/public-api-types'
+import { getPointSchema, sanitizePoint, formatPoint, normalizePoint, Format } from '../Point/point-plugin'
+import { InternalNumberSettings } from '../Number/number-plugin'
+import { InputWithSettings } from '../../types'
+import { Point3d, Point3dObject, Point3dSettings } from '../../types/public-api-types'
 
 export type InternalPoint3dSettings = { [key in keyof Point3dObject]: InternalNumberSettings } & { format: Format }
 
