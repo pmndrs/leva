@@ -1,7 +1,5 @@
 // used as entrypoint
 
-console.log('hello')
-
 export { createPlugin } from '../plugin'
 export { Row, Label } from '../components/UI'
 export { ValueInput } from '../components/ValueInput'
