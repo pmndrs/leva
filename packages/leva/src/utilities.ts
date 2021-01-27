@@ -1,3 +1,4 @@
 // used as entrypoint
 export { debounce, clamp, pad, orderKeys } from './utils'
-export { normalizeKeyedNumberInput } from './components/Number/number-plugin'
+export { normalizePoint } from './components/Point/point-plugin'
+export { normalizeKeyedNumberInput } from './components/Point/point-utils'

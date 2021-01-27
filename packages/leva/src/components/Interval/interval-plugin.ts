@@ -1,7 +1,8 @@
 import v8n from 'v8n'
 import { IntervalInput } from '../../types/public-api-types'
 import { clamp } from '../../utils'
-import { InternalNumberSettings, normalizeKeyedNumberInput } from '../Number/number-plugin'
+import { InternalNumberSettings } from '../Number/number-plugin'
+import { normalizeKeyedNumberInput } from '../Point/point-utils'
 
 export type Interval = IntervalInput['value']
 export type InternalInterval = { min: number; max: number }

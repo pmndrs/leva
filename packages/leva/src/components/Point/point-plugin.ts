@@ -1,7 +1,8 @@
 import v8n from 'v8n'
 import { NumberSettings } from '../../types/public-api-types'
 import { mapArrayToKeys, orderKeys } from '../../utils'
-import { normalizeKeyedNumberInput, InternalNumberSettings } from '../Number/number-plugin'
+import { InternalNumberSettings } from '../Number/number-plugin'
+import { normalizeKeyedNumberInput } from './point-utils'
 
 export type Format = 'array' | 'object'
 
@@ -30,14 +31,16 @@ export function getPointType<K extends string>(value: Point<K>): Format {
   return Array.isArray(value) ? 'array' : 'object'
 }
 
-function convert<K extends string, F extends Format>(value: Point<K>, format: F, keys: K[]): Point<K, F> {
+function convert<K extends string, F extends Format>(value: Point<K>, format: F, keys?: K[]): Point<K, F> {
   if (getPointType(value) === format) return value as Point<K, F>
-  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as PointArray, keys)) as Point<K, F>
+  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as PointArray, keys!)) as Point<K, F>
 }
 
-export const sanitizePoint = <K extends string>(v: any, { format }: InternalPointSettings<K>, keys: K[]) =>
-  convert(v, format, keys)
-export const formatPoint = <K extends string>(v: any, keys: K[]) => convert(v, 'object', keys)
+export const sanitizePoint = <K extends string>(value: any, { format }: InternalPointSettings<K>, keys: K[]) => {
+  return convert(value, format, keys)
+}
+
+export const formatPoint = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
 
 export function normalizePoint<K extends string>(_value: Point<K>, _settings: PointSettings<K> = {}, keys: K[]) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'

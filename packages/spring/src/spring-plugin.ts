@@ -1,5 +1,5 @@
 import { InputWithSettings, NumberSettings, InternalNumberSettings } from '@leva/leva/plugins'
-import { orderKeys, normalizeKeyedNumberInput } from '@leva/leva/utilities'
+import { normalizePoint } from '@leva/leva/utilities'
 
 export type Spring = { tension: number; friction: number; mass?: number }
 export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
@@ -20,6 +20,5 @@ export const normalize = ({ value, ..._settings }: SpringInput) => {
     friction: { ...defaultFrictionSettings, ..._settings.friction },
     mass: { ...defaultMassSettings, ..._settings.mass },
   }
-  const _value = orderKeys({ mass: 1, ...value }, ['tension', 'friction', 'mass'])
-  return normalizeKeyedNumberInput(_value, settings)
+  return normalizePoint({ mass: 1, ...value }, settings, ['tension', 'friction', 'mass'])
 }
