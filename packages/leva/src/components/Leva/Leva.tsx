@@ -10,7 +10,7 @@ import { Folder } from '../Folder'
 import { isInput, debounce } from '../../utils'
 
 import { Root, DragHandle, StyledFilter } from './StyledLeva'
-import { LevaTheme } from '../styles'
+import { LevaTheme } from '../../styles'
 
 const GlobalStyle = createGlobalStyle`
   .leva__body__dragged {
