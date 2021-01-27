@@ -1,13 +1,15 @@
-import styled, { css } from '@xstyled/styled-components'
+import { styled } from '../../styles/stitched'
 
-export const RangeGrid = styled.div<{ hasRange: boolean }>`
-  ${props =>
-    props.hasRange &&
-    css`
-      position: relative;
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      grid-column-gap: col-gap;
-      align-items: center;
-    `}
-`
+export const RangeGrid = styled('div', {
+  variants: {
+    hasRange: {
+      true: {
+        position: 'relative',
+        display: 'grid',
+        gridTemplateColumns: '3fr 2fr',
+        gridColumnGap: '$colGap',
+        alignItems: 'center',
+      },
+    },
+  },
+})
