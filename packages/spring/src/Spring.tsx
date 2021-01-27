@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
-import { useInputContext, PointCoordinates, Label, Row } from '@leva/leva/plugins'
+import { useInputContext, Vector, Label, Row } from '@leva/leva/plugins'
 import { SpringCanvas, SpringProps } from './SpringCanvas'
 
 const Container = styled.div`
@@ -20,7 +20,7 @@ export function Spring() {
       <Row input>
         <Label>{label}</Label>
         <Container>
-          <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
+          <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </>

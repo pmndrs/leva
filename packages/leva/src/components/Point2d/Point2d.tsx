@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
 import { th } from '@xstyled/system'
-import { PointCoordinates } from '../PointCoordinates'
+import { Vector } from '../Vector'
 import { InternalPoint2dSettings } from './point2d-plugin'
-import { LevaInputProps } from '../../types'
-import { Point2d as Point2dType, Point2dObject } from '../../types/public-api-types'
+import { LevaInputProps, Point2d as Point2dType, Point2dObject } from '../../types'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../hooks'
@@ -24,7 +23,7 @@ export function Point2d() {
       <Label>{label}</Label>
       <Container>
         <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />
-        <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
+        <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>
     </Row>
   )

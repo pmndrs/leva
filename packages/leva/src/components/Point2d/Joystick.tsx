@@ -3,9 +3,9 @@ import { useTh } from '@xstyled/styled-components'
 import { useDrag } from 'react-use-gesture'
 import { useSpring, a, config } from 'react-spring'
 import { clamp } from '../../utils'
-import { Point2d as Point2dType, Point2dObject } from '../../types/public-api-types'
+import { Point2d as Point2dType, Point2dObject } from '../../types'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
-import { Point2dProps } from '.'
+import { Point2dProps } from './Point2d'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
 

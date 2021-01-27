@@ -3,7 +3,7 @@ import styled, { useTh } from '@xstyled/styled-components'
 import { LevaInputProps } from '../../types/'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
-import { PointCoordinates } from '../PointCoordinates'
+import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
@@ -79,7 +79,7 @@ export function Interval() {
           <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
         </Row>
         <Container>
-          <PointCoordinates value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
+          <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
         </Container>
       </Row>
     </Row>

@@ -1,8 +1,8 @@
 import v8n from 'v8n'
-import { NumberSettings } from '../../types/public-api-types'
+import { NumberSettings } from '../../types'
 import { mapArrayToKeys, orderKeys } from '../../utils'
 import { InternalNumberSettings } from '../Number/number-plugin'
-import { normalizeKeyedNumberInput } from './point-utils'
+import { normalizeKeyedNumberInput } from './vector-utils'
 
 export type Format = 'array' | 'object'
 

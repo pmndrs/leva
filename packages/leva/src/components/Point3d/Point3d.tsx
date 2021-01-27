@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from '@xstyled/styled-components'
-import { LevaInputProps } from '../../types'
-import { Point3d as Point3dType, Point3dObject } from '../../types/public-api-types'
-import { PointCoordinates } from '../PointCoordinates'
+import { LevaInputProps, Point3d as Point3dType, Point3dObject } from '../../types'
+import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { InternalPoint3dSettings } from './point3d-plugin'
 import { useInputContext } from '../../hooks'
@@ -21,7 +20,7 @@ export function Point3d() {
     <Row input>
       <Label>{label}</Label>
       <Container>
-        <PointCoordinates value={displayValue} settings={settings} onUpdate={onUpdate} />
+        <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>
     </Row>
   )

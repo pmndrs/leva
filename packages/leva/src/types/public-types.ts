@@ -1,12 +1,41 @@
 /**
  * Types exposed through the public API
- *
- * @note I wanted to use the types in the *-plugin.ts files and just assemble them here,
- * but the conditional types can't be broken up into separate modules, so I opted to just
- * write all of them here.
  */
-import { MergedInputWithSettings, SpecialInput, SpecialInputTypes, FolderSettings } from './'
 import { BeautifyUnionType, UnionToIntersection, Join } from './utils'
+
+export type InputWithSettings<V extends unknown, Settings = {}> = {
+  value: V
+} & Settings
+
+export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V, Settings>
+
+export enum SpecialInputTypes {
+  SEPARATOR = 'SEPARATOR',
+  BUTTON = 'BUTTON',
+  MONITOR = 'MONITOR',
+  FOLDER = 'FOLDER',
+}
+
+export type ButtonInput = {
+  type: SpecialInputTypes.BUTTON
+  onClick: () => any
+}
+
+export type MonitorSettings = { graph: boolean; interval: number }
+
+export type MonitorInput = {
+  type: SpecialInputTypes.MONITOR
+  objectOrFn: React.MutableRefObject<any> | Function
+  settings: MonitorSettings
+}
+
+export type FolderSettings = { collapsed: boolean }
+
+export type SeparatorInput = {
+  type: SpecialInputTypes.SEPARATOR
+}
+
+export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>

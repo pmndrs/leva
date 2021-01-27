@@ -14,7 +14,8 @@
   "scripts": {
     "postinstall": "preconstruct dev",
     "build": "preconstruct build",
-    "validate": "preconstruct validate"
+    "validate": "preconstruct validate",
+    "tsc": "tsc --noEmit"
   },
   "repository": "https://github.com/gsimone/leva.git",
   "devDependencies": {

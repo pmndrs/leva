@@ -1,6 +1,6 @@
-import { Format } from '../Point/point-plugin'
+import { Format } from '../Vector/vector-plugin'
 import { InternalNumberSettings } from '../Number/number-plugin'
-import { Point3dObject } from '../../types/public-api-types'
+import { Point3dObject } from '../../types'
 
 export type InternalPoint3dSettings = { [key in keyof Point3dObject]: InternalNumberSettings } & { format: Format }
 

@@ -3,10 +3,9 @@ import { ValueInput } from '../ValueInput'
 import { LevaInputProps } from '../../types/'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../UI'
-import { useDragNumber } from '../../hooks'
+import { useDragNumber, useInputContext } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
-import { useInputContext } from '../../hooks'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
 

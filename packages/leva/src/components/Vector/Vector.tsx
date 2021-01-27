@@ -32,18 +32,18 @@ function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUp
   )
 }
 
-type PointCoordinatesSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNumberSettings }
+type VectorSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNumberSettings }
 
-type PointCoordinatesProps<T extends CoordinateValue> = {
+type VectorProps<T extends CoordinateValue> = {
   value: T
-  settings: PointCoordinatesSettings<T>
+  settings: VectorSettings<T>
   onUpdate: (value: T) => void
 }
 
-export function PointCoordinates<T extends CoordinateValue>({ value, onUpdate, settings }: PointCoordinatesProps<T>) {
+export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }: VectorProps<T>) {
   return (
     <>
-      {Object.keys(value).map(key => (
+      {Object.keys(value).map((key) => (
         <Coordinate key={key} valueKey={key} value={value} settings={settings[key]} onUpdate={onUpdate} />
       ))}
     </>
