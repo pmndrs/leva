@@ -1,7 +1,8 @@
-import * as props from './point3d-plugin'
 import { Point3d } from './Point3d'
+import { KEYS } from '../Point3d/point3d-plugin'
+import { getPointPlugin } from '../Point/point-plugin'
 
-const plugin = { ...props, component: Point3d }
+const plugin = { ...getPointPlugin(KEYS), component: Point3d }
 
 export * from './Point3d'
 export default plugin

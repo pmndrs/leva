@@ -52,3 +52,12 @@ export function normalizePoint<K extends string>(_value: Point<K>, _settings: Po
     settings: { ...settings, format },
   }
 }
+
+export function getPointPlugin<K extends string>(keys: K[]) {
+  return {
+    schema: getPointSchema(keys),
+    normalize: ({ value, ...settings }: any) => normalizePoint(value, settings, keys),
+    format: (value: any) => formatPoint(value, keys),
+    sanitize: (value: any, settings: InternalPointSettings<K>) => sanitizePoint(value, settings, keys),
+  }
+}
