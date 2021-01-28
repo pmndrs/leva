@@ -4,7 +4,7 @@ export const StyledInputWrapper = styled('div', {
   position: 'relative',
   height: '100%',
   display: 'flex',
-  padding: 'input',
+  padding: '$input',
 
   input: {
     height: 0,
@@ -21,6 +21,7 @@ export const StyledInputWrapper = styled('div', {
     width: '30px',
     backgroundColor: '$primary',
     borderRadius: '20px',
+  },
 
   'label::after': {
     content: '""',

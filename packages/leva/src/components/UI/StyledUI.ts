@@ -1,34 +1,32 @@
-import styled, { css } from '@xstyled/styled-components'
-import { th } from '@xstyled/system'
+import { styled } from '../../styles/stitches.config'
 import { StyledContent } from '../Folder/StyledFolder'
 
-export const Row = styled.div<{ input?: boolean }>`
-  position: relative;
-  display: grid;
-  grid-row-gap: row-v;
-  grid-template-rows: minmax(${th.size('row-height')}, max-content);
-  align-items: center;
+export const Row = styled('div', {
+  position: 'relative',
+  display: 'grid',
+  gridRowGap: '$rowV',
+  gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
+  alignItems: 'center',
 
-  ${StyledContent} > & {
-    padding: 0 row-h;
-    :first-of-type {
-      margin-top: row-v;
-    }
-    :last-of-type {
-      margin-bottom: row-v;
-    }
-  }
-  ${props =>
-    props.input &&
-    css`
-      grid-template-columns: auto ${th.size('control-width')};
-      grid-column-gap: col-gap;
-    `}
-`
+  [`${StyledContent} > &`]: {
+    padding: '0 $rowH',
+    ':first-of-type': { marginTop: '$rowV' },
+    ':last-of-type': { marginBottom: '$rowV' },
+  },
 
-export const StyledLabel = styled.label<{ preventSelect?: boolean }>`
-  padding-left: row-h;
-  color: label-text;
-  font-weight: label;
-  touch-action: none;
-`
+  variants: {
+    input: {
+      true: {
+        gridTemplateColumns: 'auto var(--sizes-controlWidth)',
+        gridColumnGap: '$colGap',
+      },
+    },
+  },
+})
+
+export const StyledLabel = styled('label', {
+  paddingLeft: '$rowH',
+  color: '$labelText',
+  fontWeight: '$label',
+  touchAction: 'none',
+})
