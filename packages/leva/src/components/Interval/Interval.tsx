@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import styled, { useTh } from '@xstyled/styled-components'
+import { useTh } from '@xstyled/styled-components'
 import { LevaInputProps } from '../../types/'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
@@ -8,6 +8,7 @@ import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../hooks'
+import { styled } from '../../styles/stitches.config'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 
@@ -16,17 +17,17 @@ type IntervalSliderProps = {
   onDrag: (v: InternalInterval) => void
 } & InternalIntervalSettings
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: col-gap;
-`
+const Container = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gridColumnGap: '$colGap',
+})
 
-const Indicator = styled.div`
-  position: absolute;
-  height: 100%;
-  background-color: accent;
-`
+const Indicator = styled('div', {
+  position: 'absolute',
+  height: '100%',
+  backgroundColor: '$accent',
+})
 
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
   const ref = useRef<HTMLDivElement>(null)

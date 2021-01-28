@@ -17,7 +17,7 @@ export const StyledTitle = styled('div', {
     backgroundColor: '$folderText',
     marginRight: '4px',
     transition: 'transform 300ms ease',
-    '&:after': {
+    '::after': {
       content: '""',
       display: 'block',
       position: 'relative',

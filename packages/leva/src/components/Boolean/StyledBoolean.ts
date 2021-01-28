@@ -21,7 +21,6 @@ export const StyledInputWrapper = styled('div', {
     width: '30px',
     backgroundColor: '$primary',
     borderRadius: '20px',
-  },
 
   'label::after': {
     content: '""',

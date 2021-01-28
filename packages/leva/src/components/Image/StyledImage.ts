@@ -57,8 +57,9 @@ export const Remove = styled('div', {
   borderRadius: '$input',
   backgroundColor: '$primary',
   border: '1px solid #ffffff99',
-  '&:hover': { borderColor: '#ffffffff', backgroundColor: '$accent' },
+  ':hover': { borderColor: '#ffffffff', backgroundColor: '$accent' },
   transition: '$borderBg',
+
   '::after, ::before': {
     content: '""',
     position: 'absolute',
@@ -67,6 +68,7 @@ export const Remove = styled('div', {
     borderRadius: '1px',
     backgroundColor: '#fff',
   },
-  ':after': { transform: 'rotate(45deg)' },
-  ':before': { transform: 'rotate(-45deg)' },
+
+  '::after': { transform: 'rotate(45deg)' },
+  '::before': { transform: 'rotate(-45deg)' },
 })
