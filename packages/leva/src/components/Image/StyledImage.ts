@@ -1,79 +1,72 @@
-import styled, { css } from '@xstyled/styled-components'
-import { DropzoneRootProps } from 'react-dropzone'
+import { styled } from '../../styles/stitches.config'
 
-export const DropZone = styled.div<DropzoneRootProps>`
-  height: 100%;
-  border-style: solid;
-  border-width: 1px;
-  border-color: input-border;
-  border-radius: input;
-  transition: border-bg;
-  outline: none;
-  cursor: pointer;
-  ${props =>
-    props.isDragAccept &&
-    css`
-      background-color: input-active-bg;
-      border-color: input-focus-border;
-    `}
-  &:hover {
-    border-color: input-hover-border;
-  }
-`
+export const DropZone = styled('div', {
+  height: '100%',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  borderColor: '$inputBorder',
+  borderRadius: '$input',
+  transition: '$borderBg',
+  outline: 'none',
+  cursor: 'pointer',
+  '&:hover': {
+    borderColor: '$inputHoverBorder',
+  },
+  variants: {
+    isDragAccept: {
+      true: {
+        backgroundColor: '$inputActiveBg',
+        borderColor: '$inputFocusBorder',
+      },
+    },
+  },
+})
 
-export const Preview = styled.div`
-  position: relative;
-  width: 100%;
-  > img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-`
+export const Preview = styled('div', {
+  position: 'relative',
+  width: '100%',
+  '> img': {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+  },
+})
 
-export const Instructions = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  opacity: 0.4;
-  font-size: 0.8em;
-  height: 100%;
-  padding: row-v row-h;
-`
+export const Instructions = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
+  opacity: 0.4,
+  fontSize: '0.8em',
+  height: '100%',
+  padding: '$rowV $rowH',
+})
 
-export const Remove = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  right: 0;
-  margin: row-v row-h;
-  height: 20px;
-  width: 20px;
-  border-radius: input;
-  background-color: primary;
-  border: 1px solid #ffffff99;
-  &:hover {
-    border-color: #ffffffff;
-    background-color: accent;
-  }
-  transition: border-bg;
-  :after,
-  :before {
-    content: '';
-    position: absolute;
-    height: 2px;
-    width: 10px;
-    border-radius: 1px;
-    background-color: #fff;
-  }
-  :after {
-    transform: rotate(45deg);
-  }
-  :before {
-    transform: rotate(-45deg);
-  }
-`
+export const Remove = styled('div', {
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  top: '0',
+  right: '0',
+  margin: '$rowV $rowH',
+  height: '20px',
+  width: '20px',
+  borderRadius: '$input',
+  backgroundColor: '$primary',
+  border: '1px solid #ffffff99',
+  '&:hover': { borderColor: '#ffffffff', backgroundColor: '$accent' },
+  transition: '$borderBg',
+  '::after, ::before': {
+    content: '""',
+    position: 'absolute',
+    height: '2px',
+    width: '10px',
+    borderRadius: '1px',
+    backgroundColor: '#fff',
+  },
+  ':after': { transform: 'rotate(45deg)' },
+  ':before': { transform: 'rotate(-45deg)' },
+})
