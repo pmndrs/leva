@@ -4,6 +4,7 @@ import { a, useSpring } from 'react-spring'
 
 import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from '@leva/leva/plugins'
 import { debounce } from '@leva/leva/utilities'
+
 import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { springFn } from './math'
@@ -73,7 +74,7 @@ export function SpringCanvas() {
   return (
     <>
       <Canvas {...bind()} ref={canvas} />
-      <SpringPreviewAnimated style={spring} />
+      <SpringPreviewAnimated style={spring as any} />
     </>
   )
 }
