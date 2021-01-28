@@ -1519,23 +1519,17 @@
     webpack "^4.44.1"
     webpack-bundle-analyzer "^3.9.0"
 
-"@stitches/core@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.0.2.tgz#027b965cd3745ee113094279766d6e7ad777bb3e"
-  integrity sha512-fvwZcUbb/cqV52+g+nGbwo8NbLt+Zpz7TSik+EwjtJd5Y3cpPOK0UZ+3hvMLlvqIPIzzcQULgrVuU08XkTdPfw==
-  dependencies:
-    "@types/node" "^13.11.1"
-    tslib "^1.11.1"
+"@stitches/core@^0.0.3-canary.4":
+  version "0.0.3-canary.4"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.0.3-canary.4.tgz#47f5bcf250f5a010218e76510af4ba52e066de6c"
+  integrity sha512-VlDwtJfhWvxItU8ai5i0UQcNx7MRUIMpy2i6ufUVxcINXkrFZDTBxfahdgKQIT5oS3kT0LbUySctRDEMbt79YA==
 
-"@stitches/react@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.0.2.tgz#5cc246212b0c65df34cc2dac3320782340b518ea"
-  integrity sha512-ftd00ioQZ/gCxoR5AYVySPxVlK2J7UMc4Q0cK9IRJ+xEGBnKV+p+03E3jQt+be6k7BfRiSIlLEVHrbTN3jgqfA==
+"@stitches/react@^0.0.3-canary.4":
+  version "0.0.3-canary.4"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.0.3-canary.4.tgz#a482ef65ee26607840b690910b177eb8a5c68d97"
+  integrity sha512-t9IotrA7nC3kM50yPgDumIwYUB9FhuEjuta2kEzUs8LTi5q8cvkG+9JOZAWDmTl/V5DImui8pv/5OMNKlG4bfg==
   dependencies:
-    "@stitches/core" "^0.0.2"
-    "@types/node" "^13.11.1"
-    "@types/react-test-renderer" "^16.9.3"
-    tslib "^1.11.1"
+    "@stitches/core" "^0.0.3-canary.4"
 
 "@storybook/addon-actions@6.1.15":
   version "6.1.15"
@@ -2358,11 +2352,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.22.tgz#0d29f382472c4ccf3bd96ff0ce47daf5b7b84b18"
   integrity sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
 
-"@types/node@^13.11.1":
-  version "13.13.40"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.40.tgz#f655ef327362cc83912f2e69336ddc62a24a9f88"
-  integrity sha512-eKaRo87lu1yAXrzEJl0zcJxfUMDT5/mZalFyOkT44rnQps41eS2pfWzbaulSPpQLFNy29bFqn+Y5lOTL8ATlEQ==
-
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
@@ -2432,13 +2421,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-test-renderer@^16.9.3":
-  version "16.9.4"
-  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.4.tgz#377ccf51ea25c656b08aa474fb8194661009b865"
-  integrity sha512-ZcnGz4O5I6C/gA7V8SInBDrUdhUwjc9C4n3hyeciwTc0oGYi0efYxxD0M0ASiN5SZzCBGGwb9tGtIk7270BqsQ==
-  dependencies:
-    "@types/react" "^16"
-
 "@types/react-textarea-autosize@^4.3.3":
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/@types/react-textarea-autosize/-/react-textarea-autosize-4.3.5.tgz#6c4d2753fa1864c98c0b2b517f67bb1f6e4c46de"
@@ -2450,14 +2432,6 @@
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
   integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@^16":
-  version "16.14.2"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.2.tgz#85dcc0947d0645349923c04ccef6018a1ab7538c"
-  integrity sha512-BzzcAlyDxXl2nANlabtT4thtvbbnhee8hMmH/CcJrISDBVcJS1iOsP1f0OAgSdGE0MsY9tqcrb9YoZcOFv9dbQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"

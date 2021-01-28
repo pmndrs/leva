@@ -15,7 +15,7 @@
     ]
   },
   "dependencies": {
-    "@stitches/react": "^0.0.2",
+    "@stitches/react": "^0.0.3-canary.4",
     "@welldone-software/why-did-you-render": "^6.0.5",
     "@xstyled/styled-components": "^2.2.0",
     "@xstyled/system": "^2.2.0",

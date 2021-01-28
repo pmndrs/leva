@@ -47,15 +47,17 @@ export const StyledFolder = styled('div', {
 })
 
 export const StyledWrapper = styled('div', {
-  borderLeftStyle: 'solid',
-  borderLeftWidth: '$folder',
-  borderLeftColor: '$folderBorder',
   variants: {
     root: {
       true: {
         borderStyle: 'solid',
         borderWidth: '$root',
         borderColor: '$rootBorder',
+      },
+      false: {
+        borderLeftStyle: 'solid',
+        borderLeftWidth: '$folder',
+        borderLeftColor: '$folderBorder',
       },
     },
   },
@@ -69,13 +71,15 @@ export const StyledContent = styled('div', {
   [`& > ${StyledFolder}`]: {
     marginLeft: '$folderH',
   },
-  opacity: 0,
-  transitionDelay: 0,
   variants: {
     toggled: {
       true: {
         opacity: 1,
         transitionDelay: '250ms',
+      },
+      false: {
+        opacity: 0,
+        transitionDelay: '0ms',
       },
     },
     root: {
