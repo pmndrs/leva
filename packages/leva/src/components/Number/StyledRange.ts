@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitched'
+import { styled } from '../../styles/stitches.config'
 
 export const Range = styled('div', {
   position: 'relative',

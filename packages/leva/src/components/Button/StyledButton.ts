@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitched'
+import { styled } from '../../styles/stitches.config'
 
 export const StyledButton = styled('button', {
   display: 'block',
