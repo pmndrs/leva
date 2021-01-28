@@ -21,7 +21,7 @@ export const { styled, css } = createStyled({
       $buttonText: '#333',
       $buttonBg: '#fff',
       $selectBg: '#fff',
-      selection: '#ccc',
+      $selection: '#ccc',
     },
     radii: {
       $input: '2px',

@@ -1,75 +1,74 @@
-import styled, { css } from '@xstyled/styled-components'
+import { styled } from '../../styles/stitches.config'
 import { StyledTitle } from '../Folder/StyledFolder'
 
-export const Root = styled.div<{ fillParent: boolean }>`
+export const Root = styled('div', {
   /* position */
-  ${(props) =>
-    !props.fillParent
-      ? css`
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          color: root-text;
-          width: root-width;
-          border-radius: root;
-          z-index: 1000;
-        `
-      : css`
-          position: relative;
-          width: 100%;
-        `}
+  fontFamily: '$mono',
+  fontSize: '$root',
+  backgroundColor: '$rootBg',
+  boxShadow: '$root',
 
-  font-family: mono;
-  font-size: root;
-  background-color: root-bg;
-  box-shadow: root;
+  variants: {
+    fillParent: {
+      false: {
+        position: 'absolute',
+        top: '10px',
+        right: '10px',
+        color: '$rootText',
+        width: '$rootWidth',
+        borderRadius: '$root',
+        zIndex: 1000,
+      },
+      true: {
+        position: 'relative',
+        width: '100%',
+      },
+    },
+  },
 
-  &,
-  *,
-  *:after,
-  *:before {
-    box-sizing: border-box;
-  }
-  *::selection {
-    background-color: selection;
-  }
-`
+  '&,*,*:after,*:before': {
+    boxSizing: 'border-box',
+  },
 
-export const DragHandle = styled(StyledTitle)`
-  position: absolute;
-  width: 100%;
-  cursor: grab;
-  opacity: 0;
-  touch-action: none;
-`
+  '*::selection': {
+    backgroundColor: '$selection',
+  },
+})
 
-export const StyledFilter = styled(StyledTitle)`
-  position: absolute;
-  right: 0;
-  z-index: 10;
-  padding: 0;
+export const DragHandle = styled(StyledTitle, {
+  position: 'absolute',
+  width: '100%',
+  cursor: 'grab',
+  opacity: 0,
+  touchAction: 'none',
+})
 
-  > input {
-    height: 19px;
-    padding: 0 row-h;
-    background-color: accent;
-    transition: bg;
-    border: none;
-    outline: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: 10px;
-    text-align: right;
-    border-radius: root;
-    &:focus {
-      background-color: accent;
-    }
-    &[value=''] {
-      background-color: transparent;
-    }
-    ::placeholder {
-      color: inherit;
-      opacity: 0.6;
-    }
-  }
-`
+export const StyledFilter = styled(StyledTitle, {
+  position: 'absolute',
+  right: 0,
+  zIndex: 10,
+  padding: 0,
+  '> input': {
+    height: '19px',
+    padding: '0 $rowH',
+    backgroundColor: '$accent',
+    transition: '$bg',
+    border: 'none',
+    outline: 'none',
+    color: 'inherit',
+    fontFamily: 'inherit',
+    fontSize: '10px',
+    textAlign: 'right',
+    borderRadius: '$root',
+    '&:focus': {
+      backgroundColor: '$accent',
+    },
+    '&[value=""]': {
+      backgroundColor: 'transparent',
+    },
+    '::placeholder': {
+      color: 'inherit',
+      opacity: 0.6,
+    },
+  },
+})
