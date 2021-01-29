@@ -1,28 +1,28 @@
-import styled from '@xstyled/styled-components'
+import { styled } from '../../styles'
 
-export const Range = styled.div`
-  position: relative;
-  width: 100%;
-  height: 2px;
-  border-radius: 1px;
-  background-color: primary;
-`
+export const Range = styled('div', {
+  position: 'relative',
+  width: '100%',
+  height: '2px',
+  borderRadius: '1px',
+  backgroundColor: '$primary',
+})
 
-export const Scrubber = styled.div`
-  position: absolute;
-  width: scrubber-width;
-  height: scrubber-height;
-  border-radius: input;
-  background-color: accent;
-  cursor: pointer;
-`
+export const Scrubber = styled('div', {
+  position: 'absolute',
+  width: '$scrubberWidth',
+  height: '$scrubberHeight',
+  borderRadius: '$input',
+  backgroundColor: '$accent',
+  cursor: 'pointer',
+})
 
-export const RangeWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  margin: 0 input;
-  cursor: pointer;
-  touch-action: none;
-`
+export const RangeWrapper = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  height: '100%',
+  margin: '0 $input',
+  cursor: 'pointer',
+  touchAction: 'none',
+})

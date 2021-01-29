@@ -1,87 +1,101 @@
-import styled from '@xstyled/styled-components'
-import { th } from '@xstyled/system'
+import { styled } from '../../styles'
 
-export const JoystickTrigger = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: input-bg;
-  border-radius: input;
-  border-style: solid;
-  border-width: 1px;
-  border-color: input-border;
-  cursor: pointer;
-  height: row-height;
-  width: row-height;
-  touch-action: none;
-  &:hover {
-    border-color: input-hover-border;
-  }
-  &:active {
-    border-color: input-focus-border;
-    cursor: crosshair;
-  }
-  :after {
-    content: '';
-    background-color: accent;
-    height: 4px;
-    width: 4px;
-    border-radius: 2px;
-  }
-`
+export const JoystickTrigger = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'relative',
+  backgroundColor: '$inputBg',
+  borderRadius: '$input',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  borderColor: '$inputBorder',
+  cursor: 'pointer',
+  height: '$rowHeight',
+  width: '$rowHeight',
+  touchAction: 'none',
 
-export const JoystickPlayground = styled.div<{ isOutOfBounds: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: joystick-width;
-  height: joystick-height;
-  background-color: ${props => th.color(props.isOutOfBounds ? 'input-border' : 'root-bg')};
-  border-radius: input;
-  border-style: solid;
-  border-width: 1px;
-  border-color: input-border;
-  box-shadow: overlay;
-  position: absolute;
-  z-index: 100;
-  overflow: hidden;
-  transition: bg;
+  ':hover': {
+    borderColor: '$inputHoverBorder',
+  },
 
-  > div {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-style: solid;
-    border-width: 1px;
-    border-color: input-border;
-    background-color: input-bg;
-    width: 80%;
-    height: 80%;
-    :after,
-    :before {
-      content: '';
-      position: absolute;
-      z-index: 10;
-      background-color: input-border;
-    }
-    :before {
-      width: 100%;
-      height: 1px;
-    }
-    :after {
-      height: 100%;
-      width: 1px;
-    }
-  }
+  ':active': {
+    borderColor: '$inputFocusBorder',
+    cursor: 'crosshair',
+  },
 
-  > span {
-    position: relative;
-    z-index: 100;
-    width: 10px;
-    height: 10px;
-    background-color: accent;
-    border-radius: 50%;
-  }
-`
+  '::after': {
+    content: '""',
+    backgroundColor: '$accent',
+    height: '4px',
+    width: '4px',
+    borderRadius: '2px',
+  },
+})
+
+export const JoystickPlayground = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '$joystickWidth',
+  height: '$joystickHeight',
+  borderRadius: '$input',
+  borderStyle: 'solid',
+  borderWidth: '1px',
+  borderColor: '$inputBorder',
+  boxShadow: '$overlay',
+  position: 'absolute',
+  zIndex: 100,
+  overflow: 'hidden',
+  transition: '$bg',
+
+  variants: {
+    isOutOfBounds: {
+      true: {
+        backgroundColor: '$inputBorder',
+      },
+      false: {
+        backgroundColor: '$rootBg',
+      },
+    },
+  },
+
+  '> div': {
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: '$inputBorder',
+    backgroundColor: '$inputBg',
+    width: '80%',
+    height: '80%',
+
+    '::after,::before': {
+      content: '""',
+      position: 'absolute',
+      zindex: 10,
+      backgroundColor: '$inputBorder',
+    },
+
+    '::before': {
+      width: '100%',
+      height: '1px',
+    },
+
+    '::after': {
+      height: '100%',
+      width: '1px',
+    },
+  },
+
+  '> span': {
+    position: 'relative',
+    zindex: 100,
+    width: '10px',
+    height: '10px',
+    backgroundColor: '$accent',
+    borderRadius: '50%',
+  },
+})
