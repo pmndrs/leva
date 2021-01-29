@@ -6,7 +6,7 @@
   "peerDependencies": {
     "react-dom": ">= 16.8.0",
     "react": ">= 16.8.0",
-    "@leva/leva": ">=1.0.0"
+    "leva": ">=1.0.0"
   },
   "dependencies": {
     "react-spring": "^9.0.0-rc.3"

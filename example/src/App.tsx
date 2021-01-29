@@ -1,5 +1,5 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from '@leva/leva'
+import { useControls, folder, button, monitor, Leva } from 'leva'
 import { spring } from '@leva/spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
