@@ -23,7 +23,6 @@
     "merge-value": "^1.0.0",
     "react-colorful": "^4.4.4",
     "react-dropzone": "^11.2.4",
-    "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^9.0.0",
     "styled-components": "^5.2.1",
     "tinycolor2": "^1.4.2",

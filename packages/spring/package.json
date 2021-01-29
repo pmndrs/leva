@@ -4,12 +4,14 @@
   "main": "dist/leva-spring.cjs.js",
   "license": "MIT",
   "peerDependencies": {
-    "react-dom": ">= 16.8.0",
-    "react": ">= 16.8.0",
+    "@leva/leva": ">=1.0.0",
     "@xstyled/styled-components": "^2.2.0",
-    "@leva/leva": ">=1.0.0"
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0"
   },
   "dependencies": {
-    "react-spring": "^9.0.0-rc.3"
+    "@xstyled/styled-components": "^2.2.0",
+    "react-spring": "^9.0.0-rc.3",
+    "styled-components": "^4.0.0 || ^5.0.0"
   }
 }

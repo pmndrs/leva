@@ -16,7 +16,9 @@ export const StyledFolder = styled.div<{ root: boolean }>`
     `}
 `
 
-export const StyledWrapper = styled.div<{ root: boolean }>`
+export const StyledWrapper = styled.div<{ root: boolean, isCollapsed: boolean }>`
+  height: ${props => props.isCollapsed ? "0px" : "auto"}
+
   ${props =>
     !props.root
       ? css`
@@ -31,16 +33,16 @@ export const StyledWrapper = styled.div<{ root: boolean }>`
         `}
 `
 
-export const StyledContent = styled.div<{ root: boolean; toggled: boolean }>`
+export const StyledContent = styled.div<{ root: boolean; isVisible: boolean }>`
   padding-top: row-v;
   display: grid;
   grid-row-gap: row-v;
-  opacity: ${props => (props.toggled ? 1 : 0)};
-  transition: opacity 250ms ease;
-  transition-delay: ${props => (props.toggled ? '250ms' : 0)};
+  opacity: ${props => (props.isVisible ? 1 : 0)};
+  
   > ${StyledFolder} {
     margin-left: folder-h;
   }
+
   ${props =>
     props.root &&
     css`

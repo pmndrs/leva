@@ -13,6 +13,7 @@ export const Root = styled.div<{ fillParent: boolean }>`
           width: root-width;
           border-radius: root;
           z-index: 1000;
+          will-change: transform;
         `
       : css`
           position: relative;

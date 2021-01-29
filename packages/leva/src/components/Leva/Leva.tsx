@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import { ThemeProvider, createGlobalStyle } from '@xstyled/styled-components'
 
 import { useDrag } from 'react-use-gesture'
-import { useSpring, a } from 'react-spring'
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { Folder } from '../Folder'
@@ -11,6 +10,7 @@ import { isInput, debounce } from '../../utils'
 
 import { Root, DragHandle, StyledFilter } from './StyledLeva'
 import { LevaTheme } from '../../styles'
+import { useRefTransform } from '../../helpers/useRefTransform'
 
 const GlobalStyle = createGlobalStyle`
   .leva__body__dragged {
@@ -24,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
@@ -51,7 +50,9 @@ export function Leva({ theme = LevaTheme, fillParent = false, collapsed = false 
   const paths = useVisiblePaths()
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
-  const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
+
+  const [ref, set] = useRefTransform()
+  
   const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
 
   useLayoutEffect(() => {
@@ -68,11 +69,11 @@ export function Leva({ theme = LevaTheme, fillParent = false, collapsed = false 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <AnimatedRoot style={spring} fillParent={fillParent}>
+      <Root ref={ref} fillParent={fillParent}>
         <DragHandle {...bind()}>leva</DragHandle>
         <Filter onChange={setFilter} />
         <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
-      </AnimatedRoot>
+      </Root>
     </ThemeProvider>
   )
 }
