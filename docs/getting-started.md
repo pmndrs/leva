@@ -2,12 +2,48 @@
 
 ## Install
 
-@TODO
+```bash
+npm install leva
+```
 
 ## Basics
 
-@TODO
+To use Leva, simply import `useControls` and use it anywhere in your app:
+
+```jsx
+import { useControls } from 'leva'
+
+function MyComponent() {
+  const { myValue } = useControls({ myValue: 10 })
+  return myValue
+}
+
+function AnotherComponent() {
+  const { anotherValue } = useControls({ anotherValue: "alive!!" })
+
+  return <div>Hey, I'm {anotherValue}</div>
+}
+
+function UnmountedComponent() {
+  const { barValue } = useControls({ barValue: false })
+
+  return barValue ? <div>Hello!</div> : null
+}
+
+function MyApp() {
+  
+  return (
+    <>
+      <MyComponent />
+      <AnotherComponent />
+    </>
+  )
+
+}
+```
+
+Note that since `UnmountedComponent` is not mounted anywhere in our application, the control declared there will not be added to the GUI!
 
 ## Gotchas
 
-@TODO
+- The order of the controls depends on mounting order, in our case `myValue` will be first.
