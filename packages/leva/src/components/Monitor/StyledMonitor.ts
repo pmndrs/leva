@@ -1,9 +1,9 @@
-import styled from '@xstyled/styled-components'
+import { styled } from '../../styles'
 
-export const Canvas = styled.canvas`
-  height: 60px;
-  width: 100%;
-  display: block;
-  background-color: input-border;
-  border-radius: input;
-`
+export const Canvas = styled('canvas', {
+  height: '60px',
+  width: '100%',
+  display: 'block',
+  backgroundColor: '$inputBorder',
+  borderRadius: '$input',
+})

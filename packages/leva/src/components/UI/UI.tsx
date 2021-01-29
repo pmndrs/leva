@@ -11,7 +11,7 @@ type LabelProps = React.ComponentProps<typeof StyledLabel>
 export function Label(props: LabelProps) {
   const { value } = useInputContext()
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLLabelElement, MouseEvent>) => {
     if (value !== undefined) {
       try {
         writeText(JSON.stringify(value))
@@ -19,10 +19,10 @@ export function Label(props: LabelProps) {
         warn(LevaErrors.CLIPBOARD_ERROR, value)
       }
     }
-    props.onClick && props.onClick()
+    props.onClick && props.onClick(event)
   }
 
-  return <StyledLabel onClick={() => handleClick()} {...props} />
+  return <StyledLabel onClick={handleClick} {...props} />
 }
 
 type OverlayProps = { onClick: () => void }
