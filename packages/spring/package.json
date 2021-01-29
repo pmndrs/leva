@@ -6,7 +6,6 @@
   "peerDependencies": {
     "react-dom": ">= 16.8.0",
     "react": ">= 16.8.0",
-    "@xstyled/styled-components": "^2.2.0",
     "@leva/leva": ">=1.0.0"
   },
   "dependencies": {

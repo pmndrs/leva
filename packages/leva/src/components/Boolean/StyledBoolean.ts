@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitches.config'
+import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',

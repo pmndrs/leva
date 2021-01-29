@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { useTh } from '@xstyled/styled-components'
 import { useDrag } from 'react-use-gesture'
 import { useSpring, a, config } from 'react-spring'
 import { clamp } from '../../utils'
 import { Point2d as Point2dType, Point2dObject } from '../../types'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Point2dProps } from './Point2d'
+import { useTh } from '../../styles'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
 
@@ -23,8 +23,11 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     y: { step: stepY },
   } = settings
 
-  const w = (useTh('sizes.joystick-width') * 0.8) / 2
-  const h = (useTh('sizes.joystick-height') * 0.8) / 2
+  const wpx = useTh('sizes', '$joystickWidth')
+  const hpx = useTh('sizes', '$joystickHeight')
+
+  const w = (parseFloat(wpx) * 0.8) / 2
+  const h = (parseFloat(hpx) * 0.8) / 2
 
   const startOutOfBounds = useCallback(() => {
     if (timeout.current) return

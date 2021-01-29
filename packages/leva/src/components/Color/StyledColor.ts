@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitches.config'
+import { styled } from '../../styles'
 import 'react-colorful/dist/index.css'
 
 export const ColorPreview = styled('div', {

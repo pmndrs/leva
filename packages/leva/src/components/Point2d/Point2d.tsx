@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '../../styles/stitches.config'
+import { styled } from '../../styles'
 import { Vector } from '../Vector'
 import { InternalPoint2dSettings } from './point2d-plugin'
 import { LevaInputProps, Point2d as Point2dType, Point2dObject } from '../../types'

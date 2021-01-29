@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
-import { useColor } from '@xstyled/styled-components'
 import { a, useSpring } from 'react-spring'
 
 import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from '@leva/leva/plugins'
 import { debounce } from '@leva/leva/utilities'
+import { useTh } from '@leva/leva/plugins'
 
 import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
@@ -17,7 +17,7 @@ export function SpringCanvas() {
   const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useColor('accent')
+  const accentColor = useTh('colors', '$accent')
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!

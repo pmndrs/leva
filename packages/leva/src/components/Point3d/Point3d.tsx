@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '../../styles/stitches.config'
+import { styled } from '../../styles'
 import { LevaInputProps, Point3d as Point3dType, Point3dObject } from '../../types'
 import { Vector } from '../Vector'
 import { Label, Row } from '../UI'

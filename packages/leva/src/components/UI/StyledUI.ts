@@ -1,4 +1,4 @@
-import { styled } from '../../styles/stitches.config'
+import { styled } from '../../styles'
 import { StyledContent } from '../Folder/StyledFolder'
 
 export const Row = styled('div', {
