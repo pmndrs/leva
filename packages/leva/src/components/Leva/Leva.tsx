@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useLayoutEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useDrag } from 'react-use-gesture'
 import { useSpring, a } from 'react-spring'
