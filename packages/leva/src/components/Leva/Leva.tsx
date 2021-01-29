@@ -33,8 +33,8 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
   const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
 
-  // TODO check if using useLayoutEffect is necessary
-  useLayoutEffect(() => {
+  // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
+  useEffect(() => {
     rootInitialized = true
   }, [])
 
