@@ -9,7 +9,7 @@ export function useTransform<T extends HTMLElement>(): [
 
   const set = useCallback((point: { x?: number; y?: number }) => {
     Object.assign(local.current, point)
-    ref.current!.style.transform = `translate3d(${local.current.x}px, ${local.current.y}px, 0)`
+    if (ref.current) ref.current.style.transform = `translate3d(${local.current.x}px, ${local.current.y}px, 0)`
   }, [])
 
   return [ref, set]
