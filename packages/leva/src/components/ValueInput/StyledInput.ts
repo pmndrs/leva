@@ -47,7 +47,7 @@ export const InputContainer = styled('div', {
   borderColor: '$inputBorder',
   color: '$inputText',
   backgroundColor: '$inputBg',
-  transition: 'border-color 250ms ease',
+  transition: '$border',
   '&:hover': {
     borderColor: '$inputHoverBorder',
   },
