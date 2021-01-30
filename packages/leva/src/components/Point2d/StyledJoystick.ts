@@ -5,22 +5,16 @@ export const JoystickTrigger = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
-  backgroundColor: '$inputBg',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
+  backgroundColor: '$elevation3',
+  borderRadius: '$sm',
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
   touchAction: 'none',
 
-  ':hover': {
-    borderColor: '$inputHoverBorder',
-  },
+  ':hover': {},
 
   ':active': {
-    borderColor: '$inputFocusBorder',
     cursor: 'crosshair',
   },
 
@@ -39,60 +33,34 @@ export const JoystickPlayground = styled('div', {
   justifyContent: 'center',
   width: '$joystickWidth',
   height: '$joystickHeight',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
+  borderRadius: '$lg',
   boxShadow: '$overlay',
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',
   transition: '$bg',
+  backgroundColor: '$elevation3',
 
-  variants: {
-    isOutOfBounds: {
-      true: {
-        backgroundColor: '$inputBorder',
-      },
-      false: {
-        backgroundColor: '$rootBg',
-      },
-    },
+  '::after,::before': {
+    content: '""',
+    position: 'absolute',
+    zindex: 10,
+    backgroundColor: '$textDeEmphasized',
   },
 
-  '> div': {
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderStyle: 'solid',
-    borderWidth: '1px',
-    borderColor: '$inputBorder',
-    backgroundColor: '$inputBg',
-    width: '80%',
-    height: '80%',
+  '::before': {
+    width: '100%',
+    height: '1px',
+  },
 
-    '::after,::before': {
-      content: '""',
-      position: 'absolute',
-      zindex: 10,
-      backgroundColor: '$inputBorder',
-    },
-
-    '::before': {
-      width: '100%',
-      height: '1px',
-    },
-
-    '::after': {
-      height: '100%',
-      width: '1px',
-    },
+  '::after': {
+    height: '100%',
+    width: '1px',
   },
 
   '> span': {
     position: 'relative',
-    zindex: 100,
+    zIndex: 100,
     width: '10px',
     height: '10px',
     backgroundColor: '$accent',

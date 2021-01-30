@@ -16,7 +16,7 @@ export function Filter({ onChange }: FilterProps) {
 
   return (
     <StyledFilter>
-      <input value={value} placeholder="Filter" onChange={_onChange} />
+      <input value={value} placeholder="Press CMD+SHIFT+L to filter" onChange={_onChange} />
     </StyledFilter>
   )
 }

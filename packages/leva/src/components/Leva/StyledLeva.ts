@@ -3,9 +3,10 @@ import { StyledTitle } from '../Folder/StyledFolder'
 
 export const Root = styled('div', {
   /* position */
+  position: 'relative',
   fontFamily: '$mono',
   fontSize: '$root',
-  backgroundColor: '$rootBg',
+  backgroundColor: '$elevation1',
   boxShadow: '$root',
 
   variants: {
@@ -16,7 +17,7 @@ export const Root = styled('div', {
         right: '10px',
         color: '$rootText',
         width: '$rootWidth',
-        borderRadius: '$root',
+        borderRadius: '$lg',
         zIndex: 1000,
       },
       true: {
@@ -30,9 +31,9 @@ export const Root = styled('div', {
     boxSizing: 'border-box',
   },
 
-  '*::selection': {
-    backgroundColor: '$selection',
-  },
+  // '*::selection': {
+  //   backgroundColor: '$elevation1',
+  // },
 })
 
 export const DragHandle = styled(StyledTitle, {
@@ -46,12 +47,14 @@ export const DragHandle = styled(StyledTitle, {
 export const StyledFilter = styled(StyledTitle, {
   position: 'absolute',
   right: 0,
+  left: '60px',
   zIndex: 10,
   padding: 0,
   '> input': {
-    height: '19px',
+    height: '43px',
+    width: '100%',
     padding: '0 $rowH',
-    backgroundColor: '$accent',
+    backgroundColor: 'transparent',
     transition: '$bg',
     border: 'none',
     outline: 'none',
@@ -60,12 +63,7 @@ export const StyledFilter = styled(StyledTitle, {
     fontSize: '10px',
     textAlign: 'right',
     borderRadius: '$root',
-    '&:focus': {
-      backgroundColor: '$accent',
-    },
-    '&[value=""]': {
-      backgroundColor: 'transparent',
-    },
+    '&:focus': {},
     '::placeholder': {
       color: 'inherit',
       opacity: 0.6,

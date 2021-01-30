@@ -4,15 +4,17 @@ export const Range = styled('div', {
   position: 'relative',
   width: '100%',
   height: '2px',
-  borderRadius: '1px',
-  backgroundColor: '$primary',
+  borderRadius: '$xs',
+  backgroundColor: '$elevation1',
 })
 
 export const Scrubber = styled('div', {
   position: 'absolute',
   width: '$scrubberWidth',
   height: '$scrubberHeight',
-  borderRadius: '$input',
+  borderRadius: '$xs',
+  boxShadow: '0 0 0 2px $elevation2',
+  borderColor: '$elevation2',
   backgroundColor: '$accent',
   cursor: 'pointer',
 })

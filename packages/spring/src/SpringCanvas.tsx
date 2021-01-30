@@ -17,7 +17,7 @@ export function SpringCanvas() {
   const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useTh('colors', '$accent')
+  const accentColor = useTh('colors', '$textEmphasized')
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
@@ -58,6 +58,7 @@ export function SpringCanvas() {
         _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
       }
       _ctx.strokeStyle = accentColor
+      _ctx.lineWidth = 2
       _ctx.stroke()
     },
     [accentColor]

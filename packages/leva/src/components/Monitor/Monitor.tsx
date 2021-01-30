@@ -17,7 +17,7 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
-  const accentColor = useTh('colors', '$accent')
+  const accentColor = useTh('colors', '$textEmphasized')
   const points = useRef([initialValue])
   const min = useRef(initialValue)
   const max = useRef(initialValue)
@@ -36,6 +36,7 @@ const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
         _ctx.lineTo(interval * i, p * height * 0.9)
       }
       _ctx.strokeStyle = accentColor
+      _ctx.lineWidth = 2
       _ctx.stroke()
     },
     [accentColor]

@@ -2,7 +2,7 @@ import { styled } from '../../styles'
 
 export const StyledInput = styled('input', {
   /* input reset */
-  background: 'none',
+  background: 'transparent',
   appearance: 'none',
   fontFamily: 'inherit',
   fontSize: 'inherit',
@@ -10,7 +10,7 @@ export const StyledInput = styled('input', {
   padding: '0 $input',
   width: 0,
   minWidth: 0,
-  height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
+  height: '$rowHeight',
   flex: 1,
   /* input styling */
   border: 'none',
@@ -40,20 +40,10 @@ export const InnerLabel = styled('div', {
 export const InputContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '$input',
-  borderColor: '$inputBorder',
-  color: '$inputText',
-  backgroundColor: '$inputBg',
+  borderRadius: '$sm',
+  borderStyle: 'none',
+  color: '$textEmphasized',
+  backgroundColor: '$elevation3',
   transition: 'border-color 250ms ease',
-  '&:hover': {
-    borderColor: '$inputHoverBorder',
-  },
-  '&:focus-within': {
-    borderColor: '$inputFocusBorder',
-  },
-  '&:active': {
-    backgroundColor: '$inputActiveBg',
-  },
+  '&:active': {},
 })

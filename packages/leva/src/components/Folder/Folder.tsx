@@ -33,7 +33,7 @@ export function Folder({
   const contentRef = useRef<HTMLDivElement>(null)
   const [toggled, setToggle] = useState(!collapsed)
   const firstRender = useRef(true)
-  const toggle = useCallback(() => setToggle(t => !t), [])
+  const toggle = useCallback(() => setToggle((t) => !t), [])
 
   const [{ height }, set] = useSpring(() => ({ height: collapsed ? 0 : 'auto' }))
 
@@ -51,8 +51,21 @@ export function Folder({
   return (
     <StyledFolder root={root}>
       {!folderOnTop && (
-        <StyledTitle onClick={toggle}>
-          <i style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }} />
+        <StyledTitle onClick={toggle} root={root}>
+          <svg
+            style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }}
+            width="9"
+            height="5"
+            viewBox="0 0 9 5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M3.82733 4.38848C4.20875 4.73523 4.79125 4.73523 5.17267 4.38848L8.08606 1.73994C8.76239 1.1251 8.32743 0 7.41339 0H1.58661C0.672575 0 0.237605 1.1251 0.913934 1.73994L3.82733 4.38848Z"
+              fill="#383C4A"
+            />
+          </svg>
           <div>{name}</div>
         </StyledTitle>
       )}

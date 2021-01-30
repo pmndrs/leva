@@ -26,7 +26,7 @@ export const Row = styled('div', {
 
 export const StyledLabel = styled('label', {
   paddingLeft: '$rowH',
-  color: '$labelText',
+  color: '$text',
   fontWeight: '$label',
   touchAction: 'none',
 })

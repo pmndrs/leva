@@ -96,7 +96,7 @@ export default function App() {
   // useControls({ checkbox: true })
   return (
     <>
-      <Leva theme={{ colors: { $rootBg: 'coral' } }} />
+      <Leva />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>

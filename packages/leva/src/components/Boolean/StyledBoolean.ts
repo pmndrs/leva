@@ -17,9 +17,9 @@ export const StyledInputWrapper = styled('div', {
     position: 'relative',
     display: 'block',
     cursor: 'pointer',
-    height: '12px',
+    height: '16px',
     width: '30px',
-    backgroundColor: '$primary',
+    backgroundColor: '$elevation1',
     borderRadius: '20px',
   },
 
@@ -28,15 +28,15 @@ export const StyledInputWrapper = styled('div', {
     position: 'absolute',
     top: '2px',
     left: '2px',
-    width: '8px',
-    height: '8px',
-    backgroundColor: '$rootBg',
-    borderRadius: '4px',
+    width: '12px',
+    height: '12px',
+    backgroundColor: '$accent',
+    borderRadius: '10000px',
     transition: '0.3s',
   },
 
   'input:checked + label': {
-    backgroundColor: '$accent',
+    backgroundColor: '$elevation3',
   },
 
   'input:checked + label::after': {

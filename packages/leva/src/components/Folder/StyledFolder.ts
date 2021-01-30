@@ -3,30 +3,19 @@ import { styled } from '../../styles'
 export const StyledTitle = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  color: '$folderText',
-  fontWeight: '$folder',
-  backgroundColor: '$folderTitleBg',
-  padding: '$rowV $rowH $rowV',
+  color: '$textEmphasized',
   paddingLeft: 'var(--borderWidths-folder)',
   userSelect: 'none',
   cursor: 'pointer',
-  '& > i': {
-    height: '10px',
-    width: '10px',
-    borderRadius: '5px',
-    backgroundColor: '$folderText',
+  '& > svg': {
     marginRight: '4px',
     transition: 'transform 300ms ease',
-    '::after': {
-      content: '""',
-      display: 'block',
-      position: 'relative',
-      left: '2px',
-      top: '4px',
-      borderRadius: '1px',
-      height: '2px',
-      width: '6px',
-      backgroundColor: '$folderTitleBg',
+  },
+  variants: {
+    root: {
+      true: {
+        height: '43px',
+      },
     },
   },
 })
@@ -38,26 +27,30 @@ export const StyledFolder = styled('div', {
     root: {
       true: {
         marginTop: 0,
-        [`& > ${StyledTitle}`]: {
-          borderRadius: '$root $root 0 0',
-        },
       },
     },
   },
 })
 
 export const StyledWrapper = styled('div', {
+  position: 'relative',
+  background: '$elevation2',
+
   variants: {
     root: {
       true: {
-        borderStyle: 'solid',
-        borderWidth: '$root',
-        borderColor: '$rootBorder',
+        borderRadius: '$lg',
       },
       false: {
-        borderLeftStyle: 'solid',
-        borderLeftWidth: '$folder',
-        borderLeftColor: '$folderBorder',
+        '::after': {
+          content: '""',
+          position: 'absolute',
+          left: 8,
+          top: 0,
+          width: '1px',
+          height: '100%',
+          background: '$elevation1',
+        },
       },
     },
   },
@@ -88,9 +81,6 @@ export const StyledContent = styled('div', {
           marginLeft: 0,
           '&:first-of-type': {
             marginTop: '-$rowV',
-            [`> ${StyledTitle}`]: {
-              borderRadius: '$root $root 0 0',
-            },
           },
 
           [`& > ${StyledWrapper}`]: {
