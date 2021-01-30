@@ -1,7 +1,7 @@
 {
-  "name": "@leva/leva",
+  "name": "leva",
   "version": "0.0.1",
-  "main": "dist/leva-leva.cjs.js",
+  "main": "dist/leva.cjs.js",
   "license": "MIT",
   "peerDependencies": {
     "react": ">= 16.8.0",

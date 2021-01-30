@@ -1,5 +1,5 @@
 import React from 'react'
-import { useInputContext, Vector, Label, Row, styled } from '@leva/leva/plugins'
+import { useInputContext, Vector, Label, Row, styled } from 'leva/plugins'
 import { SpringCanvas, SpringProps } from './SpringCanvas'
 
 const Container = styled('div', {
