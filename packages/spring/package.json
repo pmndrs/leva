@@ -1,5 +1,5 @@
 {
-  "name": "@leva/spring",
+  "name": "@leva-ui/spring",
   "version": "0.0.1",
   "main": "dist/leva-spring.cjs.js",
   "license": "MIT",
