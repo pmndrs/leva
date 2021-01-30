@@ -3,13 +3,13 @@ import { ITokensDefinition } from '@stitches/core'
 
 const scales = {
   colors: {
-    $gray900: '#191C20',
-    $gray800: '#2A2D38',
+    $gray900: '#181C20',
+    $gray800: '#292D39',
     $gray700: '#383C4A',
     $grey600: '#54575F',
-    $gray500: '#8D92A2',
+    $gray500: '#8C92A4',
     $gray50: '#FEFEFE',
-    $blue500: '#2D79FF',
+    $blue500: '#007BFF',
   },
   radii: {
     $xs: '2px',
