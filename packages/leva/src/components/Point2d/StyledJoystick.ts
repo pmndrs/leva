@@ -15,7 +15,7 @@ export const JoystickTrigger = styled('div', {
   ':hover': {},
 
   ':active': {
-    cursor: 'crosshair',
+    cursor: 'none',
   },
 
   '::after': {
