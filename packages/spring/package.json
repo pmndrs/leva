@@ -1,7 +1,7 @@
 {
-  "name": "@leva-ui/spring",
+  "name": "@leva-ui/plugin-spring",
   "version": "0.0.1",
-  "main": "dist/leva-spring.cjs.js",
+  "main": "dist/leva-ui-plugin-spring.cjs.js",
   "license": "MIT",
   "peerDependencies": {
     "react-dom": ">= 16.8.0",

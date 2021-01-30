@@ -19,7 +19,7 @@
   },
   "alias": {
     "leva": "../packages/leva/src",
-    "@leva-ui/spring": "../packages/spring/src",
+    "@leva-ui/plugin-spring": "../packages/spring/src",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom/profiling"
   },
