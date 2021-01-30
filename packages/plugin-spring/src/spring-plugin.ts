@@ -1,5 +1,5 @@
-import { InputWithSettings, NumberSettings, InternalNumberSettings } from '@leva/leva/plugins'
-import { normalizeVector } from '@leva/leva/utilities'
+import { InputWithSettings, NumberSettings, InternalNumberSettings } from 'leva/plugins'
+import { normalizeVector } from 'leva/utilities'
 
 export type Spring = { tension: number; friction: number; mass?: number }
 export type SpringSettings = { [key in keyof Spring]?: NumberSettings }

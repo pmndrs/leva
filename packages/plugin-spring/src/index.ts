@@ -1,4 +1,4 @@
-import { createPlugin } from '@leva/leva/plugins'
+import { createPlugin } from 'leva/plugins'
 import { Spring } from './Spring'
 import { normalize } from './spring-plugin'
 
