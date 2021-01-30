@@ -50,7 +50,7 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
       <AnimatedRoot className={themeCss} style={spring} fillParent={fillParent}>
         <DragHandle {...bind()}>leva</DragHandle>
         <Filter onChange={setFilter} />
-        <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
+        <Folder isRoot tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
       </AnimatedRoot>
     </ThemeContext.Provider>
   )

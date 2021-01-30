@@ -35,7 +35,7 @@ export const StyledFolder = styled('div', {
   marginTop: '$folderV',
   '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
   variants: {
-    root: {
+    isRoot: {
       true: {
         marginTop: 0,
         [`& > ${StyledTitle}`]: {
@@ -47,8 +47,9 @@ export const StyledFolder = styled('div', {
 })
 
 export const StyledWrapper = styled('div', {
+  transition: 'height 350ms ease',
   variants: {
-    root: {
+    isRoot: {
       true: {
         borderStyle: 'solid',
         borderWidth: '$root',
@@ -82,7 +83,7 @@ export const StyledContent = styled('div', {
         transitionDelay: '0ms',
       },
     },
-    root: {
+    isRoot: {
       true: {
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
