@@ -29,7 +29,7 @@ function NumberInput({ children, value, onUpdate, onChange }: NumberInputProps) 
     [onUpdate]
   )
   return (
-    <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown}>
+    <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown} isNumber>
       {children}
     </ValueInput>
   )

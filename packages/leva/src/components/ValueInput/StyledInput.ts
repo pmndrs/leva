@@ -11,11 +11,19 @@ export const StyledInput = styled('input', {
   backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
-  height: '$rowHeight',
+  height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
   flex: 1,
   /* input styling */
   border: 'none',
   outline: 'none',
+
+  variants: {
+    isNumber: {
+      true: {
+        textAlign: 'right',
+      },
+    },
+  },
 })
 
 export const InnerLabel = styled('div', {
@@ -42,9 +50,15 @@ export const InputContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   borderRadius: '$sm',
-  borderStyle: 'none',
+  border: '$input solid transparent',
   color: '$textEmphasized',
   backgroundColor: '$elevation3',
-  transition: 'border-color 250ms ease',
-  '&:active': {},
+  transition: '$borderBg',
+  '&:active': {
+    borderColor: '$accent',
+    backgroundColor: '$elevation1',
+  },
+  '&:focus-within': {
+    borderColor: '$accent',
+  },
 })

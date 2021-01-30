@@ -6,7 +6,7 @@ const scales = {
     $gray900: '#181C20',
     $gray800: '#292D39',
     $gray700: '#383C4A',
-    $grey600: '#54575F',
+    $grey600: '#535760',
     $gray500: '#8C92A4',
     $gray50: '#FEFEFE',
     $blue500: '#007BFF',
@@ -37,8 +37,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $folderH: '12px',
     $folderV: '16px',
     $rowH: '10px',
-    $rowV: '8px',
-    $colGap: '7px',
+    $rowV: '4px',
+    $colGap: '4px',
   },
   fonts: {
     $mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
@@ -56,7 +56,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $joystickHeight: '100px',
   },
   shadows: {
-    $root: '0 0 40px #00000033',
+    $root: '0 0 9px 0 rgba(53,49,49,0.50);',
     $overlay: '0 4px 14px #00000033',
   },
   borderWidths: {
