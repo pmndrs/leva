@@ -29,16 +29,18 @@ export const Folder = React.memo(
     const toggle = useCallback(() => setToggle((t) => !t), [])
 
     useEffect(() => {
-      let timeout: number
-      const ref = wrapperRef.current!
-      const fixHeight = () => toggled && ref.style.removeProperty('height')
-      ref.addEventListener('transitionend', fixHeight, { once: true })
-
       // prevents first animation
       if (firstRender.current) {
         firstRender.current = false
         return
       }
+
+      let timeout: number
+      const ref = wrapperRef.current!
+
+      const fixHeight = () => toggled && ref.style.removeProperty('height')
+
+      ref.addEventListener('transitionend', fixHeight, { once: true })
 
       const { height } = contentRef.current!.getBoundingClientRect()
       if (toggled) ref.style.height = height + 'px'
