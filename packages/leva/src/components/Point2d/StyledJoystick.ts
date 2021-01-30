@@ -41,6 +41,12 @@ export const JoystickPlayground = styled('div', {
   transition: '$bg',
   backgroundColor: '$elevation3',
 
+  variants: {
+    isOutOfBounds: {
+      true: {},
+    },
+  },
+
   '::after,::before': {
     content: '""',
     position: 'absolute',
