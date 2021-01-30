@@ -8,6 +8,7 @@ export const StyledInput = styled('input', {
   fontSize: 'inherit',
   color: 'inherit',
   padding: '0 $input',
+  backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
   height: '$rowHeight',

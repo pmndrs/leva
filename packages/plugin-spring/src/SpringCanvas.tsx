@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
 
-import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from '@leva/leva/plugins'
-import { debounce } from '@leva/leva/utilities'
-import { useTh } from '@leva/leva/plugins'
+import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
+import { debounce } from 'leva/utilities'
+import { useTh } from 'leva/plugins'
 
 import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'

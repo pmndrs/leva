@@ -7,7 +7,7 @@ import {
   Row,
   Label,
   ValueInput,
-} from '@leva/leva/plugins'
+} from 'leva/plugins'
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color: string; light: boolean }

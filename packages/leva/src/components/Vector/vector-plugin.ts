@@ -37,11 +37,6 @@ function convert<K extends string, F extends Format>(value: VectorType<K>, forma
 }
 
 export const validateVector = <K extends string>(value: VectorObj<K>) => {
-  console.log(
-    'validating',
-    value,
-    Object.values(value).every((v: any) => validate(v))
-  )
   return Object.values(value).every((v: any) => validate(v))
 }
 

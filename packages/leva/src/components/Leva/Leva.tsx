@@ -1,21 +1,18 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useDrag } from 'react-use-gesture'
-import { useSpring, a } from 'react-spring'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { Folder } from '../Folder'
 import { Filter } from './Filter'
 
-import { useDeepMemo } from '../../hooks'
+import { useDeepMemo, useTransform } from '../../hooks'
 import { isInput } from '../../utils'
 
 import { Root, DragHandle } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
 import { ThemeContext } from '../../context'
-
-const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
@@ -30,8 +27,8 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   const { mergedTheme, themeCss } = useDeepMemo(() => mergeTheme(theme), [theme])
 
   // drag
-  const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
-  const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
+  const [rootRef, set] = useTransform<HTMLDivElement>()
+  const bind = useDrag(({ offset: [x, y] }) => set({ x, y }))
 
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
@@ -47,12 +44,11 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <AnimatedRoot className={themeCss} style={spring} fillParent={fillParent}>
+      <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
         <DragHandle {...bind()}>leva</DragHandle>
         <Filter onChange={setFilter} />
-
-        <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
-      </AnimatedRoot>
+        <Folder isRoot tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
+      </Root>
     </ThemeContext.Provider>
   )
 }

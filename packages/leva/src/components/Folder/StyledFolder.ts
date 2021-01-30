@@ -12,7 +12,7 @@ export const StyledTitle = styled('div', {
     transition: 'transform 300ms ease',
   },
   variants: {
-    root: {
+    isRoot: {
       true: {
         height: '43px',
       },
@@ -24,7 +24,7 @@ export const StyledFolder = styled('div', {
   marginTop: '$folderV',
   '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
   variants: {
-    root: {
+    isRoot: {
       true: {
         marginTop: 0,
       },
@@ -35,9 +35,9 @@ export const StyledFolder = styled('div', {
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
-
+  transition: 'height 350ms ease',
   variants: {
-    root: {
+    isRoot: {
       true: {
         borderRadius: '$lg',
       },
@@ -75,7 +75,7 @@ export const StyledContent = styled('div', {
         transitionDelay: '0ms',
       },
     },
-    root: {
+    isRoot: {
       true: {
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from '@leva/leva'
-import { spring } from '@leva/spring'
+import { useControls, folder, button, monitor, Leva } from 'leva'
+import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
