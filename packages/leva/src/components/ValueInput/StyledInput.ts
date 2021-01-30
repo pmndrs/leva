@@ -8,6 +8,7 @@ export const StyledInput = styled('input', {
   fontSize: 'inherit',
   color: 'inherit',
   padding: '0 $input',
+  backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
   height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
@@ -46,7 +47,7 @@ export const InputContainer = styled('div', {
   borderColor: '$inputBorder',
   color: '$inputText',
   backgroundColor: '$inputBg',
-  transition: 'border-color 250ms ease',
+  transition: '$border',
   '&:hover': {
     borderColor: '$inputHoverBorder',
   },
