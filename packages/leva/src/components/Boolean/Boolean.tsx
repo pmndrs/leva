@@ -7,10 +7,9 @@ import { StyledInputWrapper } from './StyledBoolean'
 export function Boolean() {
   const { label, value, onUpdate } = useInputContext<LevaInputProps<boolean>>()
 
-  // htmlFor might raise a conflict if two booleans are labeled the same way
   return (
     <Row input>
-      <Label htmlFor={label}>{label}</Label>
+      <Label>{label}</Label>
       <StyledInputWrapper>
         <input id={label} type="checkbox" checked={value} onChange={(e) => onUpdate(e.currentTarget.checked)} />
         <label htmlFor={label} />
