@@ -11,6 +11,7 @@ export const StyledInput = styled('input', {
   backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
+  // calc accounts for the container borders
   height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
   flex: 1,
   /* input styling */
@@ -57,6 +58,9 @@ export const InputContainer = styled('div', {
   '&:active': {
     borderColor: '$accent',
     backgroundColor: '$elevation1',
+  },
+  '&:hover': {
+    borderColor: '$accent2',
   },
   '&:focus-within': {
     borderColor: '$accent',

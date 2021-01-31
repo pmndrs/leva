@@ -14,6 +14,11 @@ export const StyledButton = styled('button', {
   backgroundColor: '$accent',
   transition: '$borderBg',
   cursor: 'pointer',
-  '&:hover': {},
-  '&:active': {},
+  '&:hover': {
+    border: '$input solid $accent3',
+  },
+  '&:active': {
+    border: '$input solid $accent3',
+    backgroundColor: '$accent2',
+  },
 })
