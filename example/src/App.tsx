@@ -19,15 +19,15 @@ function Comp1() {
   }, [])
 
   const t = useControls({
-    // firstsuperlonglabel: { value: 40, min: 30, max: 90 },
-    // myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
-    // // wrong: { something: 'else' },
-    // image: { image: undefined },
-    // select: { options: ['x', 'y', ['x', 'y']] },
-    // interval: { min: -100, max: 100, value: [-10, 10] },
-    // color: '#ffffffff',
-    // refMonitor: monitor(ref, { graph: true, interval: 30 }),
-    // number: { value: 1000, min: 3 },
+    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
+    myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
+    // wrong: { something: 'else' },
+    image: { image: undefined },
+    select: { options: ['x', 'y', ['x', 'y']] },
+    interval: { min: -100, max: 100, value: [-10, 10] },
+    color: '#ffffffff',
+    refMonitor: monitor(ref, { graph: true, interval: 30 }),
+    number: { value: 1000, min: 3 },
     folder2: folder({
       boolean: false,
       spring: spring({ tension: 100, friction: 30 }),
