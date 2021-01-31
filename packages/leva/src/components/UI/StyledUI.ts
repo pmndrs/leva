@@ -30,6 +30,7 @@ export const CopyLabelContainer = styled('div', {
   alignItems: 'center',
   height: '100%',
   cursor: 'pointer',
+  overflow: 'hidden',
 
   '> label': {
     cursor: 'pointer',
@@ -51,4 +52,6 @@ export const StyledLabel = styled('label', {
   paddingLeft: '$rowH',
   color: '$text',
   fontWeight: '$label',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
 })

@@ -59,6 +59,7 @@ export const StyledWrapper = styled('div', {
 export const StyledContent = styled('div', {
   paddingTop: '$rowV',
   display: 'grid',
+  gridTemplateColumns: '100%',
   gridRowGap: '$rowV',
   transition: 'opacity 250ms ease',
   [`& > ${StyledFolder}`]: {

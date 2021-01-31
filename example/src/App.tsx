@@ -19,7 +19,7 @@ function Comp1() {
   }, [])
 
   const t = useControls({
-    first: { value: 40, min: 30, max: 90 },
+    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },

@@ -12,7 +12,7 @@ export const Root = styled('div', {
   variants: {
     fillParent: {
       false: {
-        position: 'absolute',
+        position: 'fixed',
         top: '10px',
         right: '10px',
         color: '$rootText',
