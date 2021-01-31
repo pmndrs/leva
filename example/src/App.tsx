@@ -44,6 +44,9 @@ function Comp1() {
         { collapsed: false }
       ),
     }),
+    folder5: folder({
+      boolean2: false,
+    }),
     colorObj: { r: 1, g: 2, b: 3 },
   })
 

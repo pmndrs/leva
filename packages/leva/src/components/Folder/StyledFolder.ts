@@ -24,7 +24,6 @@ export const StyledTitle = styled('div', {
 })
 
 export const StyledFolder = styled('div', {
-  '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
   variants: {
     isRoot: {
       true: {
