@@ -59,7 +59,7 @@ export const Folder = React.memo(
         {!folderOnTop && (
           <StyledTitle onClick={toggle} isRoot={isRoot}>
             <svg
-              style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }}
+              style={{ transform: `rotate(${toggled ? 0 : -90}deg)` }}
               width="9"
               height="5"
               viewBox="0 0 9 5"
