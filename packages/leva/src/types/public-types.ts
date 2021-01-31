@@ -73,10 +73,11 @@ export type FolderInput<Schema> = {
   settings: FolderSettings
 }
 
-type SchemaItem =
+export type CustomInput<Value> = Value & { __customInput: true }
+
+export type SchemaItem =
   | NumberInput
   | IntervalInput
-  | SpecialInput
   | Point2dInput
   | Point3dInput
   | ImageInput
@@ -84,7 +85,11 @@ type SchemaItem =
   | ColorObjectInput
   | BooleanInput
   | StringInput
+  | SpecialInput
+  | CustomInput<any>
   | FolderInput<any>
+
+export type Schema = Record<string, SchemaItem>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
@@ -122,9 +127,6 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   : NotAPrimitiveType
 
 export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>>
-
-type CustomInput<I> = I & { __customInput: true }
-export type Schema = Record<string, SchemaItem | CustomInput<unknown>>
 
 export type Leaves<T, P extends string | number | symbol = ''> = {
   0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never

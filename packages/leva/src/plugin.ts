@@ -1,4 +1,4 @@
-import { Plugin, InputWithSettings } from './types'
+import { Plugin, InputWithSettings, CustomInput } from './types'
 import { warn, LevaErrors } from './utils/log'
 
 const schemas: ((v: any, settings?: any) => false | string)[] = []
@@ -35,16 +35,12 @@ export function register<Input, Value, InternalSettings, Settings>(
   Plugins[type] = plugin
 }
 
-const getUniqueType = () =>
-  '__CUSTOM__PLUGIN__' +
-  Math.random()
-    .toString(36)
-    .substr(2, 9)
+const getUniqueType = () => '__CUSTOM__PLUGIN__' + Math.random().toString(36).substr(2, 9)
 
 export function createPlugin<Input, Value, Settings, InternalSettings>(
   plugin: Omit<Plugin<Input, Value, Settings, InternalSettings>, 'schema'>
 ) {
   const type = getUniqueType()
   register(type, plugin)
-  return (input: any) => ({ type, ...input } as Value & { __customInput: true })
+  return (input: any) => ({ type, ...input } as CustomInput<Value>)
 }
