@@ -86,8 +86,8 @@ export type SchemaItem =
   | BooleanInput
   | StringInput
   | SpecialInput
-  | CustomInput<any>
-  | FolderInput<any>
+  | FolderInput<unknown>
+  | CustomInput<unknown>
 
 export type Schema = Record<string, SchemaItem>
 
