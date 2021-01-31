@@ -18,6 +18,7 @@ export function SpringCanvas() {
 
   const springRef = useRef(displayValue)
   const accentColor = useTh('colors', '$textEmphasized')
+  const fillColor = useTh('colors', '$elevation1')
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
@@ -54,14 +55,18 @@ export function SpringCanvas() {
       const t = springFn(tension, friction, mass)
       _ctx.clearRect(0, 0, width, height)
       _ctx.beginPath()
+      _ctx.strokeStyle = accentColor
+      _ctx.fillStyle = fillColor
+      _ctx.lineWidth = 2
       for (let i = 0; i < width; i++) {
         _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
       }
-      _ctx.strokeStyle = accentColor
-      _ctx.lineWidth = 2
       _ctx.stroke()
+      _ctx.lineTo(width - 1, height)
+      _ctx.lineTo(0, height)
+      _ctx.fill()
     },
-    [accentColor]
+    [accentColor, fillColor]
   )
 
   const [canvas, ctx] = useCanvas2d(drawSpring)
