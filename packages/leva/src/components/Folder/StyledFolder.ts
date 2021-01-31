@@ -16,12 +16,14 @@ export const StyledTitle = styled('div', {
       true: {
         height: '43px',
       },
+      false: {
+        paddingTop: '$folderV',
+      },
     },
   },
 })
 
 export const StyledFolder = styled('div', {
-  marginTop: '$folderV',
   '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
   variants: {
     isRoot: {
@@ -39,7 +41,7 @@ export const StyledWrapper = styled('div', {
   variants: {
     isRoot: {
       true: {
-        borderRadius: '$lg',
+        borderRadius: '0 0 $lg $lg',
       },
       false: {
         '::after': {
@@ -81,9 +83,6 @@ export const StyledContent = styled('div', {
         paddingBottom: 'calc(2 * var(--space-rowV))',
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
-          '&:first-of-type': {
-            marginTop: '-$rowV',
-          },
 
           [`& > ${StyledWrapper}`]: {
             borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',

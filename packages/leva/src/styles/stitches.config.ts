@@ -39,7 +39,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   space: {
     $input: '8px',
     $folderH: '12px',
-    $folderV: '16px',
+    $folderV: '8px',
     $rowH: '10px',
     $rowV: '4px',
     $colGap: '4px',

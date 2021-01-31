@@ -36,18 +36,22 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   }, [])
 
   if (paths.length < 1) return null
-  // we know there's a folder at the root of the root if the first
-  // key isn't an input. isFolderOnTop is used to show an dummy folder at
-  // the top of the pane.
-  const values = Object.values(tree)
-  const isFolderOnTop = values.length > 0 && !isInput(values[0])
+
+  /**
+   * @todo remove
+   * we know there's a folder at the root of the root if the first
+   * key isn't an input. isFolderOnTop is used to show an dummy folder at
+   * the top of the pane.
+   */
+  // const values = Object.values(tree)
+  // const isFolderOnTop = values.length > 0 && !isInput(values[0])
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
       <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
         <DragHandle {...bind()}>leva</DragHandle>
         <Filter onChange={setFilter} />
-        <Folder isRoot tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
+        <Folder isRoot name="Leva" tree={tree} collapsed={collapsed} />
       </Root>
     </ThemeContext.Provider>
   )
