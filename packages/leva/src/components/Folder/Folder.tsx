@@ -33,7 +33,7 @@ export const Folder = React.memo(({ name, parent, tree, isRoot = false, collapse
       firstRender.current = false
       return
     }
-    console.log('toggle')
+
     let timeout: number
     const ref = wrapperRef.current!
 
