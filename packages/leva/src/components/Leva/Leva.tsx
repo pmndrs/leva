@@ -8,7 +8,6 @@ import { Folder } from '../Folder'
 import { Filter } from './Filter'
 
 import { useDeepMemo, useTransform } from '../../hooks'
-import { isInput } from '../../utils'
 
 import { Root, DragHandle } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
