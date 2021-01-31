@@ -10,6 +10,8 @@ const scales = {
     $gray500: '#8C92A4',
     $gray50: '#FEFEFE',
     $blue500: '#007BFF',
+    $blue400: '#0066DC',
+    $blue100: '#3C93FF',
   },
   radii: {
     $xs: '2px',
@@ -25,6 +27,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $elevation2: scales.colors.$gray900,
     $elevation3: scales.colors.$gray700,
     $accent: scales.colors.$blue500,
+    $accent2: scales.colors.$blue400,
+    $accent3: scales.colors.$blue100,
     $text: scales.colors.$gray500,
     $textEmphasized: scales.colors.$gray50,
     $textDeEmphasized: scales.colors.$grey600,
