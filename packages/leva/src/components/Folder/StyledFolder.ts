@@ -36,6 +36,7 @@ export const StyledFolder = styled('div', {
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
+  overflow: 'hidden',
   transition: 'height 350ms ease',
   variants: {
     isRoot: {
