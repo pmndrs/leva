@@ -7,8 +7,11 @@ export const ColorPreview = styled('div', {
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
+  border: '$input solid $elevation3',
   '&:hover': {},
-  '&:active': {},
+  '&:active': {
+    borderColor: '$accent',
+  },
 })
 
 export const PickerContainer = styled('div', {
