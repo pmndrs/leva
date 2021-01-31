@@ -77,6 +77,7 @@ export const StyledContent = styled('div', {
     },
     isRoot: {
       true: {
+        paddingBottom: 'calc(2 * var(--space-rowV))',
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
           '&:first-of-type': {
