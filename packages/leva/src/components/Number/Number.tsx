@@ -35,12 +35,12 @@ function NumberInput({ children, value, onUpdate, onChange }: NumberInputProps) 
   )
 }
 
-export function NumberInner({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
+export function NumberInner({ valueKey, displayValue, onUpdate, onChange, settings }: Omit<NumberProps, 'label'>) {
   const bind = useDragNumber({ settings, onDrag: onUpdate })
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      <div title={label.length > 1 ? label : ''} {...bind()} style={{ touchAction: 'none' }}>
-        {label.charAt(0)}
+      <div title={valueKey.length > 1 ? valueKey : ''} {...bind()} style={{ touchAction: 'none' }}>
+        {valueKey.charAt(0)}
       </div>
     </NumberInput>
   )
@@ -56,7 +56,7 @@ export function Number() {
       <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
-        <NumberInner {...props} label="value" />
+        <NumberInner {...props} valueKey="value" />
       </RangeGrid>
     </Row>
   )

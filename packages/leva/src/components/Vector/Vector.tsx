@@ -22,6 +22,7 @@ function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUp
 
   return (
     <NumberInner
+      valueKey={valueKey as string}
       label={valueKey as string}
       value={value[valueKey]}
       displayValue={number.displayValue}
