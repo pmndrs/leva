@@ -7,6 +7,7 @@ export const Row = styled('div', {
   gridRowGap: '$rowV',
   gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
   alignItems: 'center',
+  color: '$text',
 
   [`${StyledContent} > &`]: {
     padding: '0 $rowH',
@@ -24,16 +25,29 @@ export const Row = styled('div', {
   },
 })
 
+export const CopyLabelContainer = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  height: '100%',
+  cursor: 'pointer',
+
+  '> label': {
+    cursor: 'pointer',
+  },
+
+  '> svg': {
+    opacity: 0,
+    marginLeft: '$colGap',
+    width: 12,
+    height: 12,
+  },
+  '&:hover > svg': {
+    opacity: 1,
+  },
+})
+
 export const StyledLabel = styled('label', {
   paddingLeft: '$rowH',
   color: '$text',
   fontWeight: '$label',
-  touchAction: 'none',
-  variants: {
-    copyClipboard: {
-      true: {
-        cursor: 'pointer',
-      },
-    },
-  },
 })
