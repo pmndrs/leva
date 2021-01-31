@@ -39,9 +39,9 @@ export const CopyLabelContainer = styled('div', {
   '> svg': {
     opacity: 0,
     marginLeft: '$colGap',
-    width: 13,
-    minWidth: 13,
-    height: 13,
+    width: 15,
+    minWidth: 15,
+    height: 15,
   },
   '&:hover > svg': {
     opacity: 1,
