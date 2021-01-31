@@ -75,7 +75,7 @@ export type FolderInput<Schema> = {
 
 export type CustomInput<Value> = Value & { __customInput: true }
 
-export type SchemaItem =
+type SchemaItem =
   | NumberInput
   | IntervalInput
   | Point2dInput
