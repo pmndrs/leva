@@ -29,4 +29,11 @@ export const StyledLabel = styled('label', {
   color: '$text',
   fontWeight: '$label',
   touchAction: 'none',
+  variants: {
+    copyClipboard: {
+      true: {
+        cursor: 'pointer',
+      },
+    },
+  },
 })
