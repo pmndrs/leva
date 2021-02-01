@@ -32,7 +32,7 @@ export const Root = styled('div', {
   },
 
   '*::selection': {
-    backgroundColor: '$elevation1',
+    backgroundColor: '$accent',
   },
 })
 
