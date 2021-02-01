@@ -10,6 +10,7 @@ export const StyledWrapper = styled('div', {
         borderRadius: '$lg',
       },
       false: {
+        paddingLeft: '$rowH',
         '::after': {
           content: '""',
           position: 'absolute',
@@ -39,6 +40,7 @@ export const StyledTitle = styled('div', {
   cursor: 'pointer',
   paddingTop: '$folderV',
   '> svg': {
+    cursor: 'pointer',
     marginRight: '4px',
     transition: 'transform 350ms ease, fill 250ms ease',
     fill: '$elevation3',
@@ -64,14 +66,11 @@ export const StyledFolder = styled('div', {
 })
 
 export const StyledContent = styled('div', {
-  paddingTop: '$rowV',
+  position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
   gridRowGap: '$rowV',
   transition: 'opacity 250ms ease',
-  [`& > ${StyledFolder}`]: {
-    marginLeft: '$folderH',
-  },
   variants: {
     toggled: {
       true: {
@@ -85,7 +84,7 @@ export const StyledContent = styled('div', {
     },
     isRoot: {
       true: {
-        paddingBottom: 'calc(2 * var(--space-rowV))',
+        padding: 'calc(2 * var(--space-rowV)) 0',
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
 

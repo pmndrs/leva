@@ -8,9 +8,9 @@ export const Row = styled('div', {
   gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
   alignItems: 'center',
   color: '$text',
+  paddingRight: '$rowH',
 
   [`${StyledContent} > &`]: {
-    padding: '0 $rowH',
     ':first-of-type': { marginTop: '$rowV' },
     ':last-of-type': { marginBottom: '$rowV' },
   },

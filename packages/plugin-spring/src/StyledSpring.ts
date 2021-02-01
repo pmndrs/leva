@@ -4,6 +4,7 @@ export const Canvas = styled('canvas', {
   marginLeft: '$rowH',
   height: '80px',
   width: '100%',
+  paddingRight: '$rowH',
   cursor: 'crosshair',
   display: 'block',
   touchAction: 'none',
