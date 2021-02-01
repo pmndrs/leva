@@ -33,40 +33,56 @@ export const JoystickPlayground = styled('div', {
   justifyContent: 'center',
   width: '$joystickWidth',
   height: '$joystickHeight',
-  borderRadius: '$lg',
+  borderRadius: '$sm',
   boxShadow: '$overlay',
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',
   transition: '$bg',
-  backgroundColor: '$elevation3',
 
   variants: {
     isOutOfBounds: {
-      true: {},
+      true: {
+        backgroundColor: '$elevation1',
+      },
+      false: {
+        backgroundColor: '$elevation3',
+      },
     },
   },
-
-  '::after,::before': {
-    content: '""',
+  '> div': {
     position: 'absolute',
-    zindex: 10,
-    backgroundColor: '$textDeEmphasized',
-  },
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: '$textDeEmphasized',
+    backgroundColor: '$elevation3',
+    width: '80%',
+    height: '80%',
 
-  '::before': {
-    width: '100%',
-    height: '1px',
-  },
+    '::after,::before': {
+      content: '""',
+      position: 'absolute',
+      zindex: 10,
+      backgroundColor: '$textDeEmphasized',
+    },
 
-  '::after': {
-    height: '100%',
-    width: '1px',
+    '::before': {
+      width: '100%',
+      height: '1px',
+    },
+
+    '::after': {
+      height: '100%',
+      width: '1px',
+    },
   },
 
   '> span': {
     position: 'relative',
-    zIndex: 100,
+    zindex: 100,
     width: '10px',
     height: '10px',
     backgroundColor: '$accent',
