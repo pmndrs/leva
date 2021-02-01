@@ -18,6 +18,7 @@ export const StyledWrapper = styled('div', {
           width: '1px',
           height: '100%',
           backgroundColor: '$elevation1',
+          transition: '$bg',
         },
       },
     },
@@ -39,7 +40,7 @@ export const StyledTitle = styled('div', {
   paddingTop: '$folderV',
   '> svg': {
     marginRight: '4px',
-    transition: 'transform 300ms ease',
+    transition: 'transform 350ms ease, fill 250ms ease',
     fill: '$elevation3',
   },
 })
