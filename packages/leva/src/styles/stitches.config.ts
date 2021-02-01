@@ -53,7 +53,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   sizes: {
     $rootWidth: '280px',
     $controlWidth: '160px',
-    $scrubberWidth: '16px',
+    $scrubberWidth: '8px',
     $scrubberHeight: '16px',
     $rowHeight: '24px',
     $joystickWidth: '100px',

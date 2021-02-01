@@ -28,3 +28,9 @@ export const RangeWrapper = styled('div', {
   cursor: 'pointer',
   touchAction: 'none',
 })
+
+export const Indicator = styled('div', {
+  position: 'absolute',
+  height: '100%',
+  backgroundColor: '$accent',
+})

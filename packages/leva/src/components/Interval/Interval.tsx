@@ -3,7 +3,7 @@ import { LevaInputProps } from '../../types/'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
-import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
+import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../hooks'
@@ -20,12 +20,6 @@ const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
   gridColumnGap: '$colGap',
-})
-
-const Indicator = styled('div', {
-  position: 'absolute',
-  height: '100%',
-  backgroundColor: '$accent',
 })
 
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
