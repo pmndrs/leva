@@ -71,7 +71,7 @@ export const Folder = React.memo(
     return (
       <StyledFolder isRoot={isRoot}>
         {Title}
-        <StyledWrapper ref={wrapperRef} isRoot={isRoot}>
+        <StyledWrapper ref={wrapperRef} isRoot={isRoot} toggled={toggled}>
           <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
             {Object.entries(tree).map(([key, value]) =>
               isInput(value) ? (
