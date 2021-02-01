@@ -8,13 +8,14 @@ export const StyledWrapper = styled('div', {
     isRoot: {
       true: {
         borderRadius: '$lg',
+        padding: '0 $rowH',
       },
       false: {
         paddingLeft: '$rowH',
         '::after': {
           content: '""',
           position: 'absolute',
-          left: 8,
+          left: 0,
           top: 0,
           width: '1px',
           height: '100%',
@@ -35,13 +36,13 @@ export const StyledTitle = styled('div', {
   display: 'flex',
   alignItems: 'center',
   color: '$textEmphasized',
-  paddingLeft: 'var(--borderWidths-folder)',
   userSelect: 'none',
   cursor: 'pointer',
   paddingTop: '$folderV',
   '> svg': {
+    marginLeft: -4,
+    marginRight: 4,
     cursor: 'pointer',
-    marginRight: '4px',
     transition: 'transform 350ms ease, fill 250ms ease',
     fill: '$elevation3',
   },
@@ -87,7 +88,6 @@ export const StyledContent = styled('div', {
         padding: 'calc(2 * var(--space-rowV)) 0',
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
-
           [`& > ${StyledWrapper}`]: {
             borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',
           },

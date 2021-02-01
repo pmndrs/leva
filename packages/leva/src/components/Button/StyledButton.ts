@@ -6,7 +6,6 @@ export const StyledButton = styled('button', {
   fontSize: 'inherit',
   color: '$textEmphasized',
   appearance: 'none',
-  marginLeft: '$rowH' /* accounts for label margin */,
   height: '$rowHeight',
   borderStyle: 'none',
   borderRadius: '$sm',

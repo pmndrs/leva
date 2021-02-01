@@ -1,10 +1,8 @@
 import { styled } from 'leva/plugins'
 
 export const Canvas = styled('canvas', {
-  marginLeft: '$rowH',
   height: '80px',
   width: '100%',
-  paddingRight: '$rowH',
   cursor: 'crosshair',
   display: 'block',
   touchAction: 'none',
@@ -13,7 +11,6 @@ export const Canvas = styled('canvas', {
 export const SpringPreview = styled('div', {
   position: 'relative',
   top: '-2px',
-  marginLeft: '$rowH',
   backgroundColor: '$accent',
   width: '100%',
   height: '2px',

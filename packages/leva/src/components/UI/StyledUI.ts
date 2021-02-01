@@ -8,7 +8,6 @@ export const Row = styled('div', {
   gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
   alignItems: 'center',
   color: '$text',
-  paddingRight: '$rowH',
 
   [`${StyledContent} > &`]: {
     ':first-of-type': { marginTop: '$rowV' },
@@ -53,7 +52,6 @@ export const CopyLabelContainer = styled('div', {
 })
 
 export const StyledLabel = styled('label', {
-  paddingLeft: '$rowH',
   color: '$text',
   fontWeight: '$label',
   overflow: 'hidden',
