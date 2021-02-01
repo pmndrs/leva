@@ -7,7 +7,7 @@ export const StyledWrapper = styled('div', {
   variants: {
     isRoot: {
       true: {
-        borderRadius: '0 0 $lg $lg',
+        borderRadius: '$lg',
       },
       false: {
         '::after': {
