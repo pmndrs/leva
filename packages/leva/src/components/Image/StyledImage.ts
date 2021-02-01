@@ -1,8 +1,12 @@
 import { styled } from '../../styles'
 
 export const DropZone = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center',
   overflow: 'hidden',
-  height: '$rowHeight',
+  minHeight: '$rowHeight',
   background: '$elevation3',
   color: '$text',
   borderRadius: '$sm',
@@ -29,10 +33,6 @@ export const Preview = styled('div', {
 })
 
 export const Instructions = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
   fontSize: '0.8em',
   height: '100%',
   padding: '$rowV $rowH',
@@ -50,10 +50,11 @@ export const Remove = styled('div', {
   width: '20px',
   borderRadius: '$sm',
   backgroundColor: '$elevation3',
-  ':hover': { backgroundColor: '$accent' },
   transition: '$borderBg',
 
-  '::after, ::before': {
+  ':hover': { backgroundColor: '$accent' },
+
+  '::after,::before': {
     content: '""',
     position: 'absolute',
     height: '2px',
