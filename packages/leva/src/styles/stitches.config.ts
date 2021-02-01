@@ -5,7 +5,7 @@ const scales = {
   colors: {
     $gray900: '#181C20',
     $gray800: '#292D39',
-    $gray700: '#383C4A',
+    $gray700: '#373C4B',
     $grey600: '#535760',
     $gray500: '#8C92A4',
     $gray50: '#FEFEFE',

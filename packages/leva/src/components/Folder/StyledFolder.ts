@@ -1,30 +1,5 @@
 import { styled } from '../../styles'
 
-export const StyledTitle = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  color: '$textEmphasized',
-  paddingLeft: 'var(--borderWidths-folder)',
-  userSelect: 'none',
-  cursor: 'pointer',
-  paddingTop: '$folderV',
-
-  '& > svg': {
-    marginRight: '4px',
-    transition: 'transform 300ms ease',
-  },
-})
-
-export const StyledFolder = styled('div', {
-  variants: {
-    isRoot: {
-      true: {
-        marginTop: 0,
-      },
-    },
-  },
-})
-
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
@@ -42,13 +17,46 @@ export const StyledWrapper = styled('div', {
           top: 0,
           width: '1px',
           height: '100%',
-          background: '$elevation1',
+          backgroundColor: '$elevation1',
         },
       },
     },
     toggled: {
       false: {
         overflow: 'hidden',
+      },
+    },
+  },
+})
+
+export const StyledTitle = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  color: '$textEmphasized',
+  paddingLeft: 'var(--borderWidths-folder)',
+  userSelect: 'none',
+  cursor: 'pointer',
+  paddingTop: '$folderV',
+  '> svg': {
+    marginRight: '4px',
+    transition: 'transform 300ms ease',
+    fill: '$elevation3',
+  },
+})
+
+export const StyledFolder = styled('div', {
+  ':hover': {
+    [`> ${StyledTitle} > svg`]: {
+      fill: '$textDeEmphasized',
+    },
+    [`> ${StyledWrapper}::after`]: {
+      backgroundColor: '$textDeEmphasized',
+    },
+  },
+  variants: {
+    isRoot: {
+      true: {
+        marginTop: 0,
       },
     },
   },

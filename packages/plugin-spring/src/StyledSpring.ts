@@ -15,7 +15,7 @@ export const SpringPreview = styled('div', {
   marginLeft: '$rowH',
   backgroundColor: '$accent',
   width: '100%',
-  height: '3px',
+  height: '2px',
   opacity: '0.2',
   borderRadius: '1px',
   transition: 'opacity 350ms ease',

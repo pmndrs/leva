@@ -40,7 +40,7 @@ export function SpringCanvas() {
         const { tension, friction, mass } = springRef.current
         onUpdate(springRef.current)
         set({
-          from: { scaleX: 0, opacity: 0.7 },
+          from: { scaleX: 0, opacity: 0.9 },
           to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
           config: { friction, tension, mass },
         })
