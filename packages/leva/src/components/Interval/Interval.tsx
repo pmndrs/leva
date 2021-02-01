@@ -54,8 +54,8 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
       <Range>
         <Indicator style={{ left: minStyle, right: maxStyle }} />
       </Range>
-      <Scrubber ref={minScrubberRef} style={{ left: minStyle }} />
-      <Scrubber ref={maxScrubberRef} style={{ right: maxStyle }} />
+      <Scrubber position="left" ref={minScrubberRef} style={{ left: minStyle }} />
+      <Scrubber position="right" ref={maxScrubberRef} style={{ right: maxStyle }} />
     </RangeWrapper>
   )
 }
