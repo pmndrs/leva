@@ -31,42 +31,49 @@ export const Root = styled('div', {
     boxSizing: 'border-box',
   },
 
-  // '*::selection': {
-  //   backgroundColor: '$elevation1',
-  // },
+  '*::selection': {
+    backgroundColor: '$elevation1',
+  },
 })
 
 export const DragHandle = styled(StyledTitle, {
   position: 'absolute',
   width: '100%',
-  cursor: 'grab',
   opacity: 0,
   touchAction: 'none',
 })
 
-export const StyledFilter = styled(StyledTitle, {
-  position: 'absolute',
-  right: 0,
-  left: '60px',
-  zIndex: 10,
-  padding: 0,
-  '> input': {
-    height: '43px',
-    width: '100%',
-    padding: '0 $rowH',
-    backgroundColor: 'transparent',
-    transition: '$bg',
-    border: 'none',
-    outline: 'none',
+export const StyledTitleWithFilter = styled(StyledTitle, {
+  display: 'flex',
+  alignItems: 'center',
+  height: '43px',
+  padding: '0 $rowH 0 0',
+  cursor: 'grab',
+})
+
+export const StyledFilterInput = styled('input', {
+  height: '100%',
+  flex: 1,
+  padding: '0 $rowH',
+  backgroundColor: 'transparent',
+  transition: '$bg',
+  border: 'none',
+  outline: 'none',
+  color: 'inherit',
+  fontFamily: 'inherit',
+  fontSize: '10px',
+  borderRadius: '$root',
+  '&:focus': {},
+  '::placeholder': {
     color: 'inherit',
-    fontFamily: 'inherit',
-    fontSize: '10px',
-    textAlign: 'right',
-    borderRadius: '$root',
-    '&:focus': {},
-    '::placeholder': {
-      color: 'inherit',
-      opacity: 0.6,
-    },
+    opacity: 0.6,
+  },
+})
+
+export const Logo = styled('div', {
+  '> svg': {
+    fill: '$accent',
+    height: 8,
+    width: 64,
   },
 })

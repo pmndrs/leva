@@ -1,15 +1,14 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { useDrag } from 'react-use-gesture'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { Folder } from '../Folder'
-import { Filter } from './Filter'
+import { TitleWithFilter } from './Filter'
 
 import { useDeepMemo, useTransform } from '../../hooks'
 
-import { Root, DragHandle } from './StyledLeva'
+import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
 import { ThemeContext } from '../../context'
 
@@ -27,7 +26,6 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   // drag
   const [rootRef, set] = useTransform<HTMLDivElement>()
-  const bind = useDrag(({ offset: [x, y] }) => set({ x, y }))
 
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
@@ -48,9 +46,13 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   return (
     <ThemeContext.Provider value={mergedTheme}>
       <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
-        <DragHandle {...bind()}>leva</DragHandle>
-        <Filter onChange={setFilter} />
-        <Folder isRoot name="Leva" tree={tree} collapsed={collapsed} />
+        <Folder
+          isRoot
+          name="Leva"
+          tree={tree}
+          collapsed={collapsed}
+          TitleComponent={(props) => <TitleWithFilter onDrag={set} setFilter={setFilter} {...props} />}
+        />
       </Root>
     </ThemeContext.Provider>
   )

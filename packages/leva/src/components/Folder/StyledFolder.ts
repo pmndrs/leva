@@ -7,19 +7,11 @@ export const StyledTitle = styled('div', {
   paddingLeft: 'var(--borderWidths-folder)',
   userSelect: 'none',
   cursor: 'pointer',
+  paddingTop: '$folderV',
+
   '& > svg': {
     marginRight: '4px',
     transition: 'transform 300ms ease',
-  },
-  variants: {
-    isRoot: {
-      true: {
-        height: '43px',
-      },
-      false: {
-        paddingTop: '$folderV',
-      },
-    },
   },
 })
 
