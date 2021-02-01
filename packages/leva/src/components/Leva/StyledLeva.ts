@@ -86,6 +86,7 @@ export const Icon = styled('i', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  userSelect: 'none',
   '> svg': {
     fill: '$textDeEmphasized',
     transition: 'transform 350ms ease, fill 250ms ease',
