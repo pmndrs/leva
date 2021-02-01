@@ -2,9 +2,9 @@ import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',
-  height: '100%',
   display: 'flex',
-  padding: '$input',
+  alignItems: 'center',
+  height: '$rowHeight',
 
   input: {
     height: 0,
@@ -15,36 +15,28 @@ export const StyledInputWrapper = styled('div', {
 
   label: {
     position: 'relative',
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     cursor: 'pointer',
-    height: '16px',
-    width: '30px',
-    backgroundColor: '$elevation1',
-    borderRadius: '20px',
-  },
-
-  'label::after': {
-    content: '""',
-    position: 'absolute',
-    top: '2px',
-    left: '2px',
-    width: '12px',
-    height: '12px',
+    height: 'calc(var(--sizes-rowHeight) - 8px)',
+    width: 'calc(var(--sizes-rowHeight) - 8px)',
     backgroundColor: '$accent',
-    borderRadius: '10000px',
-    transition: '0.3s',
+    borderRadius: '$sm',
   },
 
-  'input:checked + label': {
-    backgroundColor: '$elevation3',
+  'label:active': {
+    backgroundColor: '$accent2',
   },
 
-  'input:checked + label::after': {
-    left: 'calc(100% - 2px)',
-    transform: 'translateX(-100%)',
+  'label > svg': {
+    display: 'none',
+    width: '90%',
+    height: '90%',
+    stroke: '$textEmphasized',
   },
 
-  'label:active::after': {
-    width: '12px',
+  'input:checked + label > svg': {
+    display: 'block',
   },
 })
