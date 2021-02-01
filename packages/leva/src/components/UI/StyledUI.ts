@@ -26,6 +26,7 @@ export const Row = styled('div', {
 })
 
 export const CopyLabelContainer = styled('div', {
+  position: 'relative',
   display: 'flex',
   alignItems: 'center',
   height: '100%',
@@ -37,11 +38,14 @@ export const CopyLabelContainer = styled('div', {
   },
 
   '> svg': {
+    position: 'absolute',
+    right: 4,
     opacity: 0,
     marginLeft: '$colGap',
     width: 15,
     minWidth: 15,
     height: 15,
+    backgroundColor: '$elevation2',
   },
   '&:hover > svg': {
     opacity: 1,
