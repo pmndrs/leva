@@ -56,11 +56,11 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
 
   return (
     <>
-      <StyledTitleWithFilter {...bind()}>
+      <StyledTitleWithFilter>
         <Icon active={!toggled} onClick={() => toggle()}>
           <Chevron toggled={toggled} width={12} height={8} />
         </Icon>
-        <Drag>
+        <Drag {...bind()}>
           <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
             <circle cx="2" cy="2" r="2" />
             <circle cx="14" cy="2" r="2" />
