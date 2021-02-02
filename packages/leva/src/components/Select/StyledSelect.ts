@@ -27,6 +27,6 @@ export const StyledSelect = styled('select', {
   cursor: 'pointer',
   transition: 'border',
   '&:hover': {
-    borderColor: '$inputHoverBorder',
+    boxShadow: 'inset 0 0 0 1px $accent2',
   },
 })
