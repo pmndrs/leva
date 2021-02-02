@@ -51,10 +51,9 @@ export const Icon = styled('i', {
   alignItems: 'center',
   justifyContent: 'center',
   userSelect: 'none',
+  cursor: 'pointer',
   '> svg': {
     fill: '$textDeEmphasized',
-    transition: 'transform 350ms ease, fill 250ms ease',
-    cursor: 'pointer',
   },
   ':hover > svg': {
     fill: '$textEmphasized',

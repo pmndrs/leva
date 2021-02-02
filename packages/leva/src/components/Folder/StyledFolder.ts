@@ -43,7 +43,6 @@ export const StyledTitle = styled('div', {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    transition: 'transform 350ms ease, fill 250ms ease',
     fill: '$elevation3',
   },
 })
