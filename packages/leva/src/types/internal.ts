@@ -1,4 +1,4 @@
-import { InputWithSettings, SpecialInput } from './public-types'
+import { InputWithSettings, SpecialInput, RenderFn } from './public-types'
 
 export type DataInput = {
   type: string
@@ -8,7 +8,7 @@ export type DataInput = {
 }
 
 export type Data = {
-  [key: string]: DataInput | (SpecialInput & { count: number })
+  [key: string]: (DataInput | (SpecialInput & { count: number })) & { render?: RenderFn }
 }
 
 export type Tree = {

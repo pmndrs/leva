@@ -3,6 +3,8 @@
  */
 import { BeautifyUnionType, UnionToIntersection, Join } from './utils'
 
+export type RenderFn = (get: (key: string) => any) => boolean
+
 export type InputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
@@ -29,7 +31,7 @@ export type MonitorInput = {
   settings: MonitorSettings
 }
 
-export type FolderSettings = { collapsed: boolean }
+export type FolderSettings = { collapsed: boolean; render?: RenderFn }
 
 export type SeparatorInput = {
   type: SpecialInputTypes.SEPARATOR
@@ -77,6 +79,8 @@ export type CustomInput<Value> = Value & { __customInput: true }
 
 type SchemaItem =
   | NumberInput
+  | MergedInputWithSettings<boolean>
+  | MergedInputWithSettings<string>
   | IntervalInput
   | Point2dInput
   | Point3dInput
@@ -89,7 +93,7 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
-export type Schema = Record<string, SchemaItem>
+export type Schema = Record<string, SchemaItem & { render?: RenderFn }>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
