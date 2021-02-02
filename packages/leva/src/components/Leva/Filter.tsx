@@ -21,7 +21,7 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
     <StyledFilterInput
       ref={ref}
       value={value}
-      placeholder="Press CMD+SHIFT+L to filter"
+      placeholder="[Open this filter field with CMD+SHIFT+L]"
       onPointerDown={(e) => e.stopPropagation()}
       onChange={_onChange}
     />

@@ -40,7 +40,7 @@ export const StyledFilterInput = styled('input', {
   borderRadius: '$root',
   '&:focus': {},
   '::placeholder': {
-    color: '$textDeEmphasized',
+    color: '$text',
   },
 })
 
