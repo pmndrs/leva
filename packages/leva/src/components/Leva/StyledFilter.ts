@@ -54,6 +54,7 @@ export const Icon = styled('i', {
   cursor: 'pointer',
   '> svg': {
     fill: '$textDeEmphasized',
+    transition: 'transform 350ms ease, fill 250ms ease',
   },
   ':hover > svg': {
     fill: '$textEmphasized',
@@ -62,13 +63,14 @@ export const Icon = styled('i', {
 })
 
 export const Drag = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  flex: 1,
   '> svg': {
     fill: '$textDeEmphasized',
-    height: 8,
-    width: 64,
     transition: 'fill 250ms ease',
   },
-  [`${StyledTitleWithFilter}:hover & > svg`]: {
-    fill: '$accent',
+  ':hover > svg': {
+    fill: '$textEmphasized',
   },
 })

@@ -80,6 +80,7 @@ export const StyledContent = styled('div', {
       false: {
         opacity: 0,
         transitionDelay: '0ms',
+        pointerEvents: 'none',
       },
     },
     isRoot: {

@@ -42,13 +42,7 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
     else inputRef.current?.blur()
   }, [filterShown])
 
-  const bind = useDrag(
-    ({ tap, offset: [x, y] }) => {
-      if (tap) toggle()
-      else onDrag({ x, y })
-    },
-    { filterTaps: true }
-  )
+  const bind = useDrag(({ offset: [x, y] }) => onDrag({ x, y }), { filterTaps: true })
 
   useEffect(() => {
     const handleShortcut = (event: KeyboardEvent) => {
@@ -63,11 +57,11 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
   return (
     <>
       <StyledTitleWithFilter {...bind()}>
-        <Icon active={!toggled}>
+        <Icon active={!toggled} onClick={() => toggle()}>
           <Chevron toggled={toggled} />
         </Icon>
         <Drag>
-          <svg width="28" height="14" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
+          <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
             <circle cx="2" cy="2" r="2" />
             <circle cx="14" cy="2" r="2" />
             <circle cx="26" cy="2" r="2" />
@@ -76,7 +70,7 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
             <circle cx="26" cy="12" r="2" />
           </svg>
         </Drag>
-        <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)} onPointerDown={(e) => e.stopPropagation()}>
+        <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)}>
           <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 20 20">
             <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />
             <path
