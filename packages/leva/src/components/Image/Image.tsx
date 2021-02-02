@@ -3,13 +3,10 @@ import { Label, Row } from '../UI'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
-export function ImageComponent() {
-  const { label, value, onUpdate } = useInputContext<ImageProps>()
-
+export function ImageComponent({ label, value, valueKey, onUpdate }: ImageProps) {
   const onDrop = useCallback(
     (acceptedFiles) => {
       if (!acceptedFiles.length) return
@@ -30,7 +27,9 @@ export function ImageComponent() {
 
   return (
     <Row input>
-      <Label>{label}</Label>
+      <Label value={value} valueKey={valueKey}>
+        {label}
+      </Label>
       <DropZone {...getRootProps({ isDragAccept })}>
         <input {...getInputProps()} />
         {value ? (

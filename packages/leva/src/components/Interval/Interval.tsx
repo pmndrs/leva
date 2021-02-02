@@ -6,7 +6,6 @@ import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useInputContext } from '../../hooks'
 import { styled, useTh } from '../../styles'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
@@ -61,14 +60,14 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   )
 }
 
-export function IntervalComponent() {
-  const { label, displayValue, onUpdate, settings } = useInputContext<IntervalProps>()
-
+export function IntervalComponent({ label, value, valueKey, displayValue, onUpdate, settings }: IntervalProps) {
   const { bounds, ..._settings } = settings
 
   return (
     <Row input>
-      <Label>{label}</Label>
+      <Label value={value} valueKey={valueKey}>
+        {label}
+      </Label>
       <Row>
         <Row>
           <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
