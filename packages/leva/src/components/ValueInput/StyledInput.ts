@@ -55,10 +55,6 @@ export const InputContainer = styled('div', {
   color: '$textEmphasized',
   backgroundColor: '$elevation3',
   transition: '$borderBg',
-  '&:active': {
-    borderColor: '$accent',
-    backgroundColor: '$elevation1',
-  },
   '&:hover': {
     borderColor: '$accent2',
   },
