@@ -13,10 +13,19 @@ export const DropZone = styled('div', {
   transition: '$borderBg',
   outline: 'none',
   cursor: 'pointer',
-  '&:hover': {},
+  '&:hover': {
+    border: '$input solid $accent3',
+  },
+  '&:active': {
+    border: '$input solid $accent3',
+    backgroundColor: '$elevation1',
+  },
   variants: {
     isDragAccept: {
-      true: {},
+      true: {
+        border: '$input solid $accent3',
+        backgroundColor: '$elevation1',
+      },
     },
   },
 })
