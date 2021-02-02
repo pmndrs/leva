@@ -5,7 +5,7 @@ type ValueInputProps = {
   value: string
   children?: React.ReactNode
   isNumber?: boolean
-  onUpdate: (value: string) => void
+  onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<typeof StyledInput>
@@ -52,5 +52,24 @@ export function ValueInput({
         onKeyDown={onKeyDown}
       />
     </InputContainer>
+  )
+}
+
+export function NumberInput({ children, value, onUpdate, onChange }: ValueInputProps) {
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      const dir = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0
+      if (dir) {
+        event.preventDefault()
+        const step = event.altKey ? 0.1 : event.shiftKey ? 10 : 1
+        onUpdate((v: number) => v + dir * step)
+      }
+    },
+    [onUpdate]
+  )
+  return (
+    <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown} isNumber>
+      {children}
+    </ValueInput>
   )
 }
