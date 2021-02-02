@@ -26,11 +26,19 @@ export const StyledInputWrapper = styled('div', {
     borderRadius: '$sm',
   },
 
-  'input:focus + label': {
+  'input:focus + label, label:hover': {
     border: '$input solid $accent',
   },
 
-  'label:active': {
+  'input:focus:checked + label, input:checked + label:hover': {
+    border: '$input solid $text',
+  },
+
+  'input + label:active': {
+    backgroundColor: '$elevation1',
+  },
+
+  'input:checked + label:active': {
     backgroundColor: '$accent2',
   },
 
