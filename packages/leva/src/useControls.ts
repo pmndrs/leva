@@ -15,6 +15,11 @@ import point2d from './components/Point2d'
 import image from './components/Image'
 import interval from './components/Interval'
 
+/**
+ * Register all the primitive inputs.
+ * @note could potentially be done elsewhere.
+ */
+
 register('SELECT', select)
 register('IMAGE', image)
 register('NUMBER', number)

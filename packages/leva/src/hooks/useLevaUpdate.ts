@@ -1,11 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { Plugins } from '../plugin'
-
-function format<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { format } = Plugins[type]
-  if (format) return format(value, settings)
-  return value
-}
+import { format } from '../plugin'
 
 type Props<V, Settings> = {
   type: string
