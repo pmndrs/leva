@@ -1,13 +1,13 @@
 import React from 'react'
 import { useInput } from '../../store'
-import { LevaValueInput } from './LevaValueInput'
+import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
-import { SpecialInputTypes } from '../../types/'
+import { SpecialInputTypes } from '../../types'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
 
-type LevaWrapperProps = { valueKey: string; path: string }
+type ControlProps = { valueKey: string; path: string }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
@@ -15,7 +15,7 @@ const specialComponents = {
 }
 
 // TODO we can probably do better than this
-export function LevaWrapper({ valueKey, path }: LevaWrapperProps) {
+export function Control({ valueKey, path }: ControlProps) {
   const { type, ...props } = useInput(path)
 
   if (type in SpecialInputTypes) {
@@ -32,5 +32,5 @@ export function LevaWrapper({ valueKey, path }: LevaWrapperProps) {
   const Input = Plugins[type].component
 
   // @ts-expect-error
-  return <LevaValueInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
+  return <ControlInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
 }

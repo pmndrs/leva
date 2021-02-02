@@ -4,7 +4,7 @@ import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
 import { getFolderSettings } from '../../store'
 import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
-import { LevaWrapper } from '../LevaWrapper'
+import { Control } from '../Control'
 import { FolderSettings, Tree } from '../../types/'
 
 type FolderProps = {
@@ -77,7 +77,7 @@ export const Folder = React.memo(
             {Object.entries(tree).map(([key, value]) =>
               isInput(value) ? (
                 // @ts-expect-error
-                <LevaWrapper key={value.path} valueKey={value.valueKey} path={value.path} />
+                <Control key={value.path} valueKey={value.valueKey} path={value.path} />
               ) : (
                 createFolder(key, parent, value as Tree)
               )
