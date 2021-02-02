@@ -3,6 +3,7 @@ import { styled } from '../../styles'
 
 // TODO remove as any when this is corrected by stitches
 const Svg = styled('svg', {
+  fill: 'currentColor',
   transition: 'transform 350ms ease, fill 250ms ease',
 }) as any
 
