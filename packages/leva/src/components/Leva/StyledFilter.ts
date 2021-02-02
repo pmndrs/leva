@@ -10,7 +10,7 @@ export const DragHandle = styled(StyledTitle, {
 
 export const StyledTitleWithFilter = styled('div', {
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'stretch',
   justifyContent: 'space-between',
   height: '43px',
   cursor: 'grab',
@@ -27,6 +27,7 @@ export const FilterWrapper = styled('div', {
 })
 
 export const StyledFilterInput = styled('input', {
+  position: 'relative',
   height: 30,
   width: '100%',
   padding: '0 $rowH',
@@ -46,7 +47,6 @@ export const StyledFilterInput = styled('input', {
 
 export const Icon = styled('i', {
   width: 40,
-  height: '100%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -65,6 +65,7 @@ export const Icon = styled('i', {
 export const Drag = styled('div', {
   display: 'flex',
   justifyContent: 'center',
+  alignItems: 'center',
   flex: 1,
   '> svg': {
     fill: '$textDeEmphasized',
