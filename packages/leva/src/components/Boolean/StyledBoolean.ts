@@ -9,7 +9,7 @@ export const StyledInputWrapper = styled('div', {
   input: {
     height: 0,
     width: 0,
-    visibility: 'hidden',
+    opactiy: 0,
     margin: 0,
   },
 
@@ -21,8 +21,12 @@ export const StyledInputWrapper = styled('div', {
     cursor: 'pointer',
     height: 'calc(var(--sizes-rowHeight) - 8px)',
     width: 'calc(var(--sizes-rowHeight) - 8px)',
-    backgroundColor: '$accent',
+    backgroundColor: '$elevation3',
     borderRadius: '$sm',
+  },
+
+  'input:focus + label': {
+    border: '$input solid $accent',
   },
 
   'label:active': {
@@ -35,6 +39,10 @@ export const StyledInputWrapper = styled('div', {
     height: '90%',
     stroke: '$textEmphasized',
   },
+
+  'input:checked + label': {
+    backgroundColor: '$accent',
+  }
 
   'input:checked + label > svg': {
     display: 'block',
