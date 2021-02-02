@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { FolderTitle, FolderTitleProps } from './FolderTitle'
 import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
-import { getFolderSettings } from '../../store'
+import { getFolderSettings, store } from '../../store'
 import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
@@ -24,7 +24,7 @@ const SubFolder = ({ name, parent, tree }: Pick<FolderProps, 'name' | 'parent' |
 }
 
 export const Folder = React.memo(
-  ({ name, parent, tree, isRoot = false, collapsed = false, TitleComponent }: FolderProps) => {
+  ({ name, parent, tree, isRoot = false, collapsed = false, render, TitleComponent }: FolderProps) => {
     const { wrapperRef, contentRef, toggle, toggled } = useToggle(!collapsed)
 
     const Title = useMemo(() => {
@@ -34,6 +34,11 @@ export const Folder = React.memo(
         <FolderTitle name={name!} toggled={toggled} toggle={toggle} />
       )
     }, [TitleComponent, name, toggle, toggled])
+
+    const shouldRender = !render || render(store.getValueAtPath)
+
+    // don't render the folder
+    if (!shouldRender) return null
 
     return (
       <StyledFolder isRoot={isRoot}>

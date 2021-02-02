@@ -64,7 +64,8 @@ function setValueAtPath(path: string, value: any) {
 }
 
 function getValueAtPath(path: string) {
-  return _store.getState().data[path]
+  //@ts-expect-error
+  return _store.getState().data[path].value
 }
 
 /**
@@ -76,7 +77,9 @@ function getValueAtPath(path: string) {
  * @param data
  */
 function getVisiblePaths(data: Data) {
-  return Object.keys(data).filter((path) => data[path].count > 0)
+  return Object.keys(data).filter(
+    (path) => data[path].count > 0 && (!data[path].render || data[path].render!(getValueAtPath))
+  )
 }
 
 /**
@@ -170,10 +173,20 @@ export function getDataFromSchema(schema: any, rootPath = '') {
       FOLDERS[newPath] = input.settings as FolderSettings
     } else {
       // If the input is not a folder, we normalize the input.
-      const normalizedInput = normalizeInput(input, newPath)
+
+      let _render = undefined
+      let _input = input
+
+      if (typeof input === 'object' && 'render' in input) {
+        const { render, ...rest } = input
+        _input = rest
+        _render = render
+      }
+      const normalizedInput = normalizeInput(_input, newPath)
       // normalizeInput can return false if the input is not recognized.
       if (normalizedInput) {
         data[newPath] = normalizedInput
+        if (typeof _render === 'function') data[newPath].render = _render
         paths.push(newPath)
       }
     }

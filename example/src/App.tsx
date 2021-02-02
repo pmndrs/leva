@@ -25,25 +25,28 @@ function Comp1() {
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
-    color: '#ffffffff',
+    boolean: false,
+    color: { value: '#ffffffff', render: (get) => get('boolean') },
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
-    folder2: folder({
-      boolean: false,
-      spring: spring({ tension: 100, friction: 30 }),
-      folder3: folder(
-        {
-          'Hello Button': button(() => console.log('hello')),
-          folder4: folder({
-            pos2d: { x: 3, y: 4 },
-            pos2dArr: [100, 200],
-            pos3d: { x: 0.3, y: 0.1, z: 0.5 },
-            pos3dArr: [Math.PI / 2, 20, 4],
-          }),
-        },
-        { collapsed: false }
-      ),
-    }),
+    folder2: folder(
+      {
+        spring: spring({ tension: 100, friction: 30 }),
+        folder3: folder(
+          {
+            'Hello Button': button(() => console.log('hello')),
+            folder4: folder({
+              pos2d: { value: { x: 3, y: 4 } },
+              pos2dArr: [100, 200],
+              pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+              pos3dArr: [Math.PI / 2, 20, 4],
+            }),
+          },
+          { collapsed: false }
+        ),
+      },
+      { render: (get) => get('boolean') }
+    ),
     folder5: folder({
       boolean2: false,
     }),
