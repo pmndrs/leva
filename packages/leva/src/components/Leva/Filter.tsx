@@ -1,15 +1,15 @@
-import React, { useMemo, useState, useEffect, useRef, useImperativeHandle } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { useDrag } from 'react-use-gesture'
 import { debounce } from '../../utils'
 import { FolderTitleProps } from '../Folder'
-import { StyledFilterInput, StyledTitleWithFilter, Drag, Icon, FilterWrapper } from './StyledLeva'
+import { Chevron } from '../UI'
+import { StyledFilterInput, StyledTitleWithFilter, Drag, Icon, FilterWrapper } from './StyledFilter'
 
 type FilterProps = { setFilter: (value: string) => void }
 
-const FilterInput = React.forwardRef(({ setFilter }: FilterProps, ref) => {
+const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter }, ref) => {
   const [value, set] = useState('')
   const debouncedOnChange = useMemo<FilterProps['setFilter']>(() => debounce(setFilter, 250), [setFilter])
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.currentTarget.value
@@ -17,14 +17,9 @@ const FilterInput = React.forwardRef(({ setFilter }: FilterProps, ref) => {
     debouncedOnChange(v)
   }
 
-  useImperativeHandle(ref, () => ({
-    focus: () => inputRef.current!.focus(),
-    blur: () => inputRef.current!.blur(),
-  }))
-
   return (
     <StyledFilterInput
-      ref={inputRef}
+      ref={ref}
       value={value}
       placeholder="Press CMD+SHIFT+L to filter"
       onPointerDown={(e) => e.stopPropagation()}
@@ -68,15 +63,8 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
   return (
     <>
       <StyledTitleWithFilter {...bind()}>
-        <Icon>
-          <svg
-            width="9"
-            height="5"
-            viewBox="0 0 9 5"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ transform: `rotate(${toggled ? 0 : -90}deg)` }}>
-            <path d="M3.8 4.4c.4.3 1 .3 1.4 0L8 1.7A1 1 0 007.4 0H1.6a1 1 0 00-.7 1.7l3 2.7z" />
-          </svg>
+        <Icon active={!toggled}>
+          <Chevron toggled={toggled} />
         </Icon>
         <Drag>
           <svg width="28" height="14" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +76,8 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
             <circle cx="26" cy="12" r="2" />
           </svg>
         </Drag>
-        <Icon onClick={() => setShowFilter((f) => !f)} onPointerDown={(e) => e.stopPropagation()}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 20 20" fill="currentColor">
+        <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)} onPointerDown={(e) => e.stopPropagation()}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 20 20">
             <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />
             <path
               fillRule="evenodd"
