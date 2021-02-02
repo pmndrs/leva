@@ -1,10 +1,11 @@
-import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { FolderTitle, FolderTitleProps } from './FolderTitle'
 import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
 import { getFolderSettings } from '../../store'
 import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
+import { useToggle } from '../../hooks'
 import { FolderSettings, Tree } from '../../types/'
 
 type FolderProps = {
@@ -16,58 +17,23 @@ type FolderProps = {
   tree: Tree
 } & FolderSettings
 
-const createFolder = (key: string, parent: string = '', tree: Tree) => {
-  const path = join(parent, key)
+const SubFolder = ({ name, parent, tree }: Pick<FolderProps, 'name' | 'parent' | 'tree'>) => {
+  const path = join(parent, name)
   const settings = getFolderSettings(path)
-  return <Folder key={key} name={key} parent={path} tree={tree} {...settings} />
+  return <Folder name={name} parent={path} tree={tree} {...settings} />
 }
 
 export const Folder = React.memo(
   ({ name, parent, tree, isRoot = false, collapsed = false, TitleComponent }: FolderProps) => {
-    const contentRef = useRef<HTMLDivElement>(null)
-    const wrapperRef = useRef<HTMLDivElement>(null)
-    const firstRender = useRef(true)
+    const { wrapperRef, contentRef, toggle, toggled } = useToggle(!collapsed)
 
-    const [toggled, setToggle] = useState(!collapsed)
-    const toggle = useCallback(() => setToggle((t) => !t), [])
-
-    const Title = useMemo(
-      () =>
-        TitleComponent ? (
-          TitleComponent({ name, toggle, toggled })
-        ) : (
-          <FolderTitle name={name!} toggled={toggled} toggle={toggle} />
-        ),
-
-      [TitleComponent, name, toggle, toggled]
-    )
-
-    useEffect(() => {
-      // prevents first animation
-      if (firstRender.current) {
-        firstRender.current = false
-        return
-      }
-
-      let timeout: number
-      const ref = wrapperRef.current!
-
-      const fixHeight = () => toggled && ref.style.removeProperty('height')
-
-      ref.addEventListener('transitionend', fixHeight, { once: true })
-
-      const { height } = contentRef.current!.getBoundingClientRect()
-      if (toggled) ref.style.height = height + 'px'
-      else {
-        ref.style.height = height + 'px'
-        timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
-      }
-
-      return () => {
-        ref.removeEventListener('transitionend', fixHeight)
-        clearTimeout(timeout)
-      }
-    }, [toggled])
+    const Title = useMemo(() => {
+      return TitleComponent ? (
+        TitleComponent({ name, toggle, toggled })
+      ) : (
+        <FolderTitle name={name!} toggled={toggled} toggle={toggle} />
+      )
+    }, [TitleComponent, name, toggle, toggled])
 
     return (
       <StyledFolder isRoot={isRoot}>
@@ -79,7 +45,7 @@ export const Folder = React.memo(
                 // @ts-expect-error
                 <Control key={value.path} valueKey={value.valueKey} path={value.path} />
               ) : (
-                createFolder(key, parent, value as Tree)
+                <SubFolder key={key} name={key} parent={parent} tree={value as Tree} />
               )
             )}
           </StyledContent>
