@@ -18,6 +18,7 @@ export const StyledInputWrapper = styled('div', {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    userSelect: 'none',
     cursor: 'pointer',
     height: 'calc(var(--sizes-rowHeight) - 8px)',
     width: 'calc(var(--sizes-rowHeight) - 8px)',
