@@ -7,7 +7,7 @@ import { StyledSelect, SelectContainer } from './StyledSelect'
 
 type SelectProps = LevaInputProps<any, InternalSelectSettings>
 
-export function Select() {
+export function SelectComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<SelectProps>()
   const { keys, values } = settings!
   return (

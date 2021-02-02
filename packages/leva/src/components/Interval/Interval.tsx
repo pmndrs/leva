@@ -61,7 +61,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   )
 }
 
-export function Interval() {
+export function IntervalComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<IntervalProps>()
 
   const { bounds, ..._settings } = settings

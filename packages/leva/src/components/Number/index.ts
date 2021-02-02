@@ -1,9 +1,9 @@
 import * as props from './number-plugin'
-import { Number } from './Number'
+import { NumberComponent } from './Number'
 
 const { sanitizeStep, ...rest } = props
 
-const plugin = { ...rest, component: Number }
+const plugin = { ...rest, component: NumberComponent }
 
 export * from './Number'
 export * from './StyledNumber'

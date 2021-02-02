@@ -4,7 +4,7 @@ import { useInputContext } from '../../hooks'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
 
-export function Boolean() {
+export function BooleanComponent() {
   const { label, value, onUpdate } = useInputContext<LevaInputProps<boolean>>()
 
   return (

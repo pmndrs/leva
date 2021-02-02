@@ -20,7 +20,7 @@ export function NumberInner({ valueKey, displayValue, onUpdate, onChange, settin
   )
 }
 
-export function Number() {
+export function NumberComponent() {
   const props = useInputContext<NumberProps>()
   const { label, value, onUpdate, settings } = props
   const { min, max } = settings
