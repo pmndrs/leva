@@ -2,13 +2,13 @@ import React from 'react'
 import { ValueInput } from '../ValueInput'
 import { LevaInputProps } from '../../types/'
 import { Label, Row } from '../UI'
+import { useInputContext } from '../../hooks'
 
-export function StringComponent({ value, valueKey, label, displayValue, onUpdate, onChange }: LevaInputProps<string>) {
+export function StringComponent() {
+  const { label, displayValue, onUpdate, onChange } = useInputContext<LevaInputProps<string>>()
   return (
     <Row input>
-      <Label value={value} valueKey={valueKey}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )

@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react'
+import { InputContext } from '../../context'
 import { useLevaUpdate } from '../../hooks/useLevaUpdate'
 import { store } from '../../store'
-import { LevaInputProps } from '../../types'
 
 type ControlInputProps<V, Settings extends object> = {
-  as: React.ComponentType<LevaInputProps<V, Settings>>
+  as: React.ComponentType
   valueKey: string
   path: string
   type: string
@@ -24,5 +24,9 @@ export function ControlInput<V, Settings extends object>({
 
   const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
 
-  return <Input {...{ valueKey, label: valueKey, displayValue, value, onChange, onUpdate, settings }} />
+  return (
+    <InputContext.Provider value={{ valueKey, label: valueKey, displayValue, value, onChange, onUpdate, settings }}>
+      <Input />
+    </InputContext.Provider>
+  )
 }

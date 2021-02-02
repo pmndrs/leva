@@ -6,7 +6,7 @@ import { normalizeKeyedNumberInput } from './vector-utils'
 
 export type Format = 'array' | 'object'
 
-export type VectorArray = any
+export type VectorArray = number[]
 export type VectorObj<K extends string> = { [key in K]: number }
 export type VectorType<K extends string, F extends Format = Format> = F extends 'object' ? VectorObj<K> : VectorArray
 

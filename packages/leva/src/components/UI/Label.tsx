@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
+import { useInputContext } from '../../hooks'
 import { StyledLabel, CopyLabelContainer } from './StyledUI'
 import { writeText } from 'clipboard-polyfill/text'
 import { LevaErrors, warn } from '../../utils'
 
-type LabelProps = React.ComponentProps<typeof StyledLabel> & {
-  valueKey?: string
-  value?: any
-}
+type LabelProps = React.ComponentProps<typeof StyledLabel>
 
-function LabelWithCopy({ value, valueKey, ...props }: LabelProps) {
+function LabelWithCopy(props: LabelProps) {
+  const { value, valueKey } = useInputContext()
   const [copied, setCopied] = useState(false)
 
   const handleClick = async () => {
     try {
-      await writeText(JSON.stringify({ [valueKey!]: value }))
+      await writeText(JSON.stringify({ [valueKey]: value }))
       setCopied(true)
     } catch {
-      warn(LevaErrors.CLIPBOARD_ERROR, { [valueKey!]: value })
+      warn(LevaErrors.CLIPBOARD_ERROR, { [valueKey]: value })
     }
   }
 
@@ -46,6 +45,8 @@ function LabelWithCopy({ value, valueKey, ...props }: LabelProps) {
 }
 
 export function Label(props: LabelProps) {
-  const copyClipboard = props.valueKey !== undefined
+  const { valueKey } = useInputContext()
+  const copyClipboard = valueKey !== undefined
+
   return copyClipboard ? <LabelWithCopy {...props} /> : <StyledLabel {...props} />
 }

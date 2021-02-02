@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
 
-import { LevaInputProps, useCanvas2d, useDrag } from 'leva/plugins'
+import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
 import { debounce } from 'leva/utilities'
 import { useTh } from 'leva/plugins'
 
@@ -13,7 +13,9 @@ const SpringPreviewAnimated = a(SpringPreview)
 
 export type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
 
-export function SpringCanvas({ displayValue, value, onUpdate, onChange, settings }: SpringProps) {
+export function SpringCanvas() {
+  const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
+
   const springRef = useRef(displayValue)
   const accentColor = useTh('colors', '$textEmphasized')
   const fillColor = useTh('colors', '$elevation1')

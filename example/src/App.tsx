@@ -51,7 +51,7 @@ function Comp1() {
   })
 
   // console.log(t.colorObj)
-  // console.log(t.pos2dArr)
+  // console.log(t.pos2d)
   // console.log(t.spring)
   // console.log(t.myPlugin)
 

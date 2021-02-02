@@ -3,7 +3,7 @@ import { NumberInput } from '../ValueInput'
 import { LevaInputProps } from '../../types/'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../UI'
-import { useDragNumber } from '../../hooks'
+import { useDragNumber, useInputContext } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 
@@ -20,15 +20,14 @@ export function Number({ valueKey, displayValue, onUpdate, onChange, settings }:
   )
 }
 
-export function NumberComponent(props: NumberProps) {
-  const { label, value, valueKey, onUpdate, settings } = props
+export function NumberComponent() {
+  const props = useInputContext<NumberProps>()
+  const { label, value, onUpdate, settings } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
   return (
     <Row input>
-      <Label value={value} valueKey={valueKey}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
         <Number {...props} valueKey="value" />

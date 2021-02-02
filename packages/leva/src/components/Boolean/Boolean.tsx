@@ -1,14 +1,15 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
+import { useInputContext } from '../../hooks'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
 
-export function BooleanComponent({ label, value, valueKey, onUpdate }: LevaInputProps<boolean>) {
+export function BooleanComponent() {
+  const { label, value, onUpdate } = useInputContext<LevaInputProps<boolean>>()
+
   return (
     <Row input>
-      <Label value={value} valueKey={valueKey}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       <StyledInputWrapper>
         <input id={label} type="checkbox" checked={value} onChange={(e) => onUpdate(e.currentTarget.checked)} />
         <label htmlFor={label}>

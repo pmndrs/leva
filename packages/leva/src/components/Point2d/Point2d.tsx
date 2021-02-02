@@ -5,6 +5,7 @@ import { InternalPoint2dSettings } from './point2d-plugin'
 import { LevaInputProps, Point2d, Point2dObject } from '../../types'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
+import { useInputContext } from '../../hooks'
 
 export type Point2dProps = LevaInputProps<Point2d, InternalPoint2dSettings, Point2dObject>
 
@@ -14,12 +15,11 @@ export const Container = styled('div', {
   gridColumnGap: '$colGap',
 })
 
-export function Point2dComponent({ value, valueKey, label, displayValue, onUpdate, settings }: Point2dProps) {
+export function Point2dComponent() {
+  const { label, displayValue, onUpdate, settings } = useInputContext<Point2dProps>()
   return (
     <Row input>
-      <Label value={value} valueKey={valueKey}>
-        {label}
-      </Label>
+      <Label>{label}</Label>
       <Container>
         <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />
         <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />

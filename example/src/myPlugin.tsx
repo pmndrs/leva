@@ -1,5 +1,13 @@
 import React from 'react'
-import { createPlugin, InputWithSettings, LevaInputProps, Row, Label, ValueInput } from 'leva/plugins'
+import {
+  createPlugin,
+  InputWithSettings,
+  useInputContext,
+  LevaInputProps,
+  Row,
+  Label,
+  ValueInput,
+} from 'leva/plugins'
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color: string; light: boolean }
@@ -7,15 +15,14 @@ type GreenOrBlueInput = InputWithSettings<GreenOrBlueType, GreenOrBlueSettings>
 
 type GreenOrBlueProps = LevaInputProps<GreenOrBlueType, GreenOrBlueSettings>
 
-function GreenOrBlue(props: GreenOrBlueProps) {
-  const { value, valueKey, label, displayValue, onUpdate, onChange, settings } = props
+function GreenOrBlue() {
+  const props = useInputContext<GreenOrBlueProps>()
+  const { label, displayValue, onUpdate, onChange, settings } = props
   const background = displayValue
 
   return (
     <Row input>
-      <Label value={value} valueKey={valueKey} style={{ background, opacity: settings.alpha }}>
-        {label}
-      </Label>
+      <Label style={{ background, opacity: settings.alpha }}>{label}</Label>
       <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
