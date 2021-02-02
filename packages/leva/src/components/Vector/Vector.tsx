@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLevaUpdate } from '../../hooks'
 import { sanitizeValue } from '../../utils'
-import { NumberInner } from '../Number'
+import { Number } from '../Number'
 import { InternalNumberSettings } from '../Number/number-plugin'
 
 type CoordinateValue = Record<string, number>
@@ -21,7 +21,7 @@ function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUp
   const number = useLevaUpdate({ ...args, set })
 
   return (
-    <NumberInner
+    <Number
       valueKey={valueKey as string}
       value={value[valueKey]}
       displayValue={number.displayValue}

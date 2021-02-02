@@ -9,7 +9,7 @@ import { RangeSlider } from './RangeSlider'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
-export function NumberInner({ valueKey, displayValue, onUpdate, onChange, settings }: Omit<NumberProps, 'label'>) {
+export function Number({ valueKey, displayValue, onUpdate, onChange, settings }: Omit<NumberProps, 'label'>) {
   const bind = useDragNumber({ settings, onDrag: onUpdate })
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
@@ -30,7 +30,7 @@ export function NumberComponent() {
       <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
-        <NumberInner {...props} valueKey="value" />
+        <Number {...props} valueKey="value" />
       </RangeGrid>
     </Row>
   )
