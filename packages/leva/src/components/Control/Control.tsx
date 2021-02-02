@@ -14,8 +14,7 @@ const specialComponents = {
   [SpecialInputTypes.MONITOR]: Monitor,
 }
 
-// TODO we can probably do better than this
-export function Control({ valueKey, path }: ControlProps) {
+export const Control = React.memo(({ valueKey, path }: ControlProps) => {
   const { type, ...props } = useInput(path)
   const set = useCallback((value) => store.setValueAtPath(path, value), [path])
 
@@ -32,4 +31,4 @@ export function Control({ valueKey, path }: ControlProps) {
 
   // @ts-expect-error
   return <ControlInput type={type} valueKey={valueKey} path={path} {...props} setValue={set} />
-}
+})
