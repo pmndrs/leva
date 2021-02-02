@@ -27,15 +27,15 @@ export const StyledInputWrapper = styled('div', {
   },
 
   'input:focus + label, label:hover': {
-    border: '$input solid $accent',
+    border: '$input solid $accent3',
   },
 
   'input:focus:checked + label, input:checked + label:hover': {
-    border: '$input solid $text',
+    border: '$input solid accent3',
   },
 
   'input + label:active': {
-    backgroundColor: '$elevation1',
+    backgroundColor: '$accent2',
   },
 
   'input:checked + label:active': {
