@@ -12,16 +12,11 @@ const _store = create<State>(() => ({ data: {} }))
 
 // possibly make this reactive
 const FOLDERS: Record<string, FolderSettings> = {}
-const PATHS = new Set<string>()
 
 const useStore = _store
 
 // shorthand to get zustand store data
 const getData = () => _store.getState().data
-
-function setPaths(newPaths: string[]) {
-  newPaths.forEach((p) => PATHS.add(p))
-}
 
 /**
  * Merges the data passed as an argument with the store data.
@@ -76,12 +71,7 @@ function getValueAtPath(path: string) {
  * @param data
  */
 function getVisiblePaths(data: Data) {
-  const visiblePaths: string[] = []
-  PATHS.forEach((path) => {
-    if (data[path]?.count > 0) visiblePaths.push(path)
-  })
-
-  return visiblePaths
+  return Object.keys(data).filter((path) => data[path].count > 0)
 }
 
 /**
@@ -163,12 +153,6 @@ export function getDataFromSchema(schema: any, rootPath = '') {
     }
   })
   return data as Data
-}
-
-export function getPaths(initialData: Data) {
-  const paths = Object.keys(initialData)
-  setPaths(paths)
-  return paths
 }
 
 function disposePaths(paths: string[]) {

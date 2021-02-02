@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store, getPaths, getDataFromSchema, useValuesForPath } from './store'
+import { store, getDataFromSchema, useValuesForPath } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
 import { register } from './plugin'
@@ -31,25 +31,60 @@ export function useControls<S extends Schema>(
   schema: S,
   settings?: Partial<FolderSettings>
 ): SchemaToValues<S>
+
+/**
+ * Main hook of Leva. Pass an optional name and an input schema.
+ *
+ * @param nameOrSchema
+ * @param schema
+ * @param settings
+ */
 export function useControls<S extends Schema>(
   nameOrSchema: string | S,
   schema?: S,
   settings?: Partial<FolderSettings>
 ): SchemaToValues<S> {
+  // _name and _schema are used to parse arguments
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
   const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
+
+  /**
+   * Parses the schema to extract the inputs initial data.
+   *
+   * This initial data will be used to initialize the store.
+   *
+   * Note that getDataFromSchema recursively
+   * parses the schema inside nested folder.
+   */
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
-  const paths = useMemo(() => getPaths(initialData), [initialData])
+
+  // Extracts the paths from the initialData.
+  const paths = useMemo(() => Object.keys(initialData), [initialData])
+
+  /**
+   * Reactive hook returning the values from the store at given paths.
+   * Essentially it flattens the keys of a nested structure.
+   * For example { "folder.subfolder.valueKey": value } becomes { valueKey: value }
+   *
+   * initalData is going to be returned on the first render. Subsequent renders
+   * will call the store data.
+   * */
   const values = useValuesForPath(paths, initialData)
 
   useEffect(() => {
-    // we need to compute these in useEffect for monitors to work
-    // but this breaks the order of keys
+    // We initialize the store with the initialData in useEffect.
+    // Note that doing this while rendering would makes things easier
+    // and remove the need for initializing useValuesForPath but it
+    // breaks the rendering cycle for some reason.
+
+    // Old comment that I left, I have no idea what I meant 🤷‍♂️:
+    // > we need to compute these in useEffect for monitors to work
+    // > but this breaks the order of keys
     store.setData(initialData)
     return () => store.disposePaths(paths)
   }, [paths, initialData])
 
-  // renders <Leva /> only if it's not manually rendered by the user
+  // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
 
   return values as any
