@@ -1,28 +1,25 @@
-import React, { useCallback } from 'react'
+import React from 'react'
+import { Plugins } from '../../plugin'
 import { InputContext } from '../../context'
-import { useLevaUpdate } from '../../hooks/useLevaUpdate'
-import { store } from '../../store'
+import { useValue } from '../../hooks/useValue'
 
 type ControlInputProps<V, Settings extends object> = {
-  as: React.ComponentType
-  valueKey: string
-  path: string
   type: string
+  valueKey: string
   value: V
   settings: Settings
+  setValue: (value: any) => void
 }
 
 export function ControlInput<V, Settings extends object>({
-  as: Input,
-  valueKey,
-  path,
   type,
+  valueKey,
   value,
   settings,
+  setValue,
 }: ControlInputProps<V, Settings>) {
-  const set = useCallback((value) => store.setValueAtPath(path, value), [path])
-
-  const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
+  const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
+  const Input = Plugins[type].component
 
   return (
     <InputContext.Provider value={{ valueKey, label: valueKey, displayValue, value, onChange, onUpdate, settings }}>

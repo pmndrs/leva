@@ -1,11 +1,11 @@
-import React from 'react'
-import { useInput } from '../../store'
+import React, { useCallback } from 'react'
+import { store, useInput } from '../../store'
 import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
-import { SpecialInputTypes } from '../../types'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
+import { SpecialInputTypes } from '../../types'
 
 type ControlProps = { valueKey: string; path: string }
 
@@ -17,6 +17,7 @@ const specialComponents = {
 // TODO we can probably do better than this
 export function Control({ valueKey, path }: ControlProps) {
   const { type, ...props } = useInput(path)
+  const set = useCallback((value) => store.setValueAtPath(path, value), [path])
 
   if (type in SpecialInputTypes) {
     // @ts-expect-error
@@ -29,8 +30,6 @@ export function Control({ valueKey, path }: ControlProps) {
     return null
   }
 
-  const Input = Plugins[type].component
-
   // @ts-expect-error
-  return <ControlInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
+  return <ControlInput type={type} valueKey={valueKey} path={path} {...props} setValue={set} />
 }

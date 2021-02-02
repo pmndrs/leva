@@ -1,4 +1,4 @@
-export * from './useLevaUpdate'
+export * from './useValue'
 export * from './useDeepMemo'
 export * from './useDeepCompareMemoize'
 export * from './useDrag'

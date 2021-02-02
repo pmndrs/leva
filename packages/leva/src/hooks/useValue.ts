@@ -5,10 +5,10 @@ type Props<V, Settings> = {
   type: string
   value: V
   settings?: Settings
-  set: (v: V) => void
+  setValue: (v: V) => void
 }
 
-export function useLevaUpdate<V, Settings extends object>({ value, type, settings, set }: Props<V, Settings>) {
+export function useValue<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
   // the value used by the panel vs the value
   const [displayValue, setDisplayValue] = useState(format(type, value, settings))
   const setFormat = useCallback((v) => setDisplayValue(format(type, v, settings)), [type, settings])
@@ -16,12 +16,12 @@ export function useLevaUpdate<V, Settings extends object>({ value, type, setting
   const onUpdate = useCallback(
     (updatedValue: any) => {
       try {
-        set(updatedValue)
+        setValue(updatedValue)
       } catch ({ previousValue }) {
         setFormat(previousValue)
       }
     },
-    [setFormat, set]
+    [setFormat, setValue]
   )
 
   useEffect(() => {
