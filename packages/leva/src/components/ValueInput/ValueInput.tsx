@@ -4,12 +4,21 @@ import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 type ValueInputProps = {
   value: string
   children?: React.ReactNode
+  isNumber?: boolean
   onUpdate: (value: string) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<typeof StyledInput>
 
-export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, ...props }: ValueInputProps) {
+export function ValueInput({
+  children,
+  value,
+  onUpdate,
+  onChange,
+  onKeyDown,
+  isNumber = false,
+  ...props
+}: ValueInputProps) {
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
@@ -32,6 +41,7 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, ...
     <InputContainer>
       {children && <InnerLabel>{children}</InnerLabel>}
       <StyledInput
+        isNumber={isNumber}
         type="text"
         {...props}
         spellCheck="false"

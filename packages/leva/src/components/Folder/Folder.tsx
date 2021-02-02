@@ -1,15 +1,17 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react'
+import { FolderTitle, FolderTitleProps } from './FolderTitle'
+import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
 import { getFolderSettings } from '../../store'
 import { join, isInput } from '../../utils'
 import { LevaWrapper } from '../LevaWrapper'
-import { StyledFolder, StyledTitle, StyledWrapper, StyledContent } from './StyledFolder'
 import { FolderSettings, Tree } from '../../types/'
 
 type FolderProps = {
   name?: string
   parent?: string
   isRoot?: boolean
-  folderOnTop?: boolean
+  TitleComponent?: (props: FolderTitleProps) => JSX.Element
+  // folderOnTop?: boolean
   tree: Tree
 } & FolderSettings
 
@@ -20,13 +22,24 @@ const createFolder = (key: string, parent: string = '', tree: Tree) => {
 }
 
 export const Folder = React.memo(
-  ({ name = 'Leva', parent, tree, isRoot = false, folderOnTop = false, collapsed = false }: FolderProps) => {
+  ({ name, parent, tree, isRoot = false, collapsed = false, TitleComponent }: FolderProps) => {
     const contentRef = useRef<HTMLDivElement>(null)
     const wrapperRef = useRef<HTMLDivElement>(null)
     const firstRender = useRef(true)
 
     const [toggled, setToggle] = useState(!collapsed)
     const toggle = useCallback(() => setToggle((t) => !t), [])
+
+    const Title = useMemo(
+      () =>
+        TitleComponent ? (
+          TitleComponent({ name, toggle, toggled })
+        ) : (
+          <FolderTitle name={name!} toggled={toggled} toggle={toggle} />
+        ),
+
+      [TitleComponent, name, toggle, toggled]
+    )
 
     useEffect(() => {
       // prevents first animation
@@ -57,13 +70,8 @@ export const Folder = React.memo(
 
     return (
       <StyledFolder isRoot={isRoot}>
-        {!folderOnTop && (
-          <StyledTitle onClick={toggle}>
-            <i style={{ transform: `rotate(${toggled ? -90 : 0}deg)` }} />
-            <div>{name}</div>
-          </StyledTitle>
-        )}
-        <StyledWrapper ref={wrapperRef} isRoot={isRoot}>
+        {Title}
+        <StyledWrapper ref={wrapperRef} isRoot={isRoot} toggled={toggled}>
           <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
             {Object.entries(tree).map(([key, value]) =>
               isInput(value) ? (

@@ -1,77 +1,76 @@
 import { styled } from '../../styles'
 
-export const StyledTitle = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  color: '$folderText',
-  fontWeight: '$folder',
-  backgroundColor: '$folderTitleBg',
-  padding: '$rowV $rowH $rowV',
-  paddingLeft: 'var(--borderWidths-folder)',
-  userSelect: 'none',
-  cursor: 'pointer',
-  '& > i': {
-    height: '10px',
-    width: '10px',
-    borderRadius: '5px',
-    backgroundColor: '$folderText',
-    marginRight: '4px',
-    transition: 'transform 300ms ease',
-    '::after': {
-      content: '""',
-      display: 'block',
-      position: 'relative',
-      left: '2px',
-      top: '4px',
-      borderRadius: '1px',
-      height: '2px',
-      width: '6px',
-      backgroundColor: '$folderTitleBg',
-    },
-  },
-})
-
-export const StyledFolder = styled('div', {
-  marginTop: '$folderV',
-  '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
-  variants: {
-    isRoot: {
-      true: {
-        marginTop: 0,
-        [`& > ${StyledTitle}`]: {
-          borderRadius: '$root $root 0 0',
-        },
-      },
-    },
-  },
-})
-
 export const StyledWrapper = styled('div', {
+  position: 'relative',
+  background: '$elevation2',
   transition: 'height 350ms ease',
   variants: {
     isRoot: {
       true: {
-        borderStyle: 'solid',
-        borderWidth: '$root',
-        borderColor: '$rootBorder',
+        borderRadius: '$lg',
+        padding: '0 $rowH',
       },
       false: {
-        borderLeftStyle: 'solid',
-        borderLeftWidth: '$folder',
-        borderLeftColor: '$folderBorder',
+        paddingLeft: '$rowH',
+        '::after': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width: '1px',
+          height: '100%',
+          backgroundColor: '$elevation1',
+          transition: '$bg',
+        },
+      },
+    },
+    toggled: {
+      false: {
+        overflow: 'hidden',
+      },
+    },
+  },
+})
+
+export const StyledTitle = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  color: '$textEmphasized',
+  userSelect: 'none',
+  cursor: 'pointer',
+  paddingTop: '$folderV',
+  '> svg': {
+    marginLeft: -4,
+    marginRight: 4,
+    cursor: 'pointer',
+    fill: '$elevation3',
+  },
+})
+
+export const StyledFolder = styled('div', {
+  ':hover': {
+    [`> ${StyledTitle} > svg`]: {
+      fill: '$textDeEmphasized',
+    },
+    [`> ${StyledWrapper}::after`]: {
+      backgroundColor: '$textDeEmphasized',
+    },
+  },
+  variants: {
+    isRoot: {
+      true: {
+        marginTop: 0,
       },
     },
   },
 })
 
 export const StyledContent = styled('div', {
-  paddingTop: '$rowV',
+  position: 'relative',
   display: 'grid',
+  gridTemplateColumns: '100%',
   gridRowGap: '$rowV',
   transition: 'opacity 250ms ease',
-  [`& > ${StyledFolder}`]: {
-    marginLeft: '$folderH',
-  },
   variants: {
     toggled: {
       true: {
@@ -81,19 +80,14 @@ export const StyledContent = styled('div', {
       false: {
         opacity: 0,
         transitionDelay: '0ms',
+        pointerEvents: 'none',
       },
     },
     isRoot: {
       true: {
+        padding: 'calc(2 * var(--space-rowV)) 0',
         [`& > ${StyledFolder}`]: {
           marginLeft: 0,
-          '&:first-of-type': {
-            marginTop: '-$rowV',
-            [`> ${StyledTitle}`]: {
-              borderRadius: '$root $root 0 0',
-            },
-          },
-
           [`& > ${StyledWrapper}`]: {
             borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',
           },

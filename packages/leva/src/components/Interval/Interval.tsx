@@ -3,7 +3,7 @@ import { LevaInputProps } from '../../types/'
 import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
-import { Range, RangeWrapper, Scrubber, sanitizeStep } from '../Number'
+import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../hooks'
@@ -22,12 +22,6 @@ const Container = styled('div', {
   gridColumnGap: '$colGap',
 })
 
-const Indicator = styled('div', {
-  position: 'absolute',
-  height: '100%',
-  backgroundColor: '$accent',
-})
-
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const minScrubberRef = useRef<HTMLDivElement>(null)
@@ -43,7 +37,8 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
       const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current
 
       memo.pos = invertedRange((x - left) / width, min, max)
-      memo.key = Math.abs(memo.pos - value.min) < Math.abs(memo.pos - value.max) ? 'min' : 'max'
+      const delta = Math.abs(memo.pos - value.min) - Math.abs(memo.pos - value.max)
+      memo.key = delta < 0 || (delta === 0 && memo.pos <= value.min) ? 'min' : 'max'
       if (targetIsScrub) memo.pos = value[memo.key as keyof InternalInterval]
     }
     const newValue = memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min)
@@ -60,8 +55,8 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
       <Range>
         <Indicator style={{ left: minStyle, right: maxStyle }} />
       </Range>
-      <Scrubber ref={minScrubberRef} style={{ left: minStyle }} />
-      <Scrubber ref={maxScrubberRef} style={{ right: maxStyle }} />
+      <Scrubber position="left" ref={minScrubberRef} style={{ left: minStyle }} />
+      <Scrubber position="right" ref={maxScrubberRef} style={{ right: maxStyle }} />
     </RangeWrapper>
   )
 }

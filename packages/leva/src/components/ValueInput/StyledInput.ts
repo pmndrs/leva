@@ -2,7 +2,7 @@ import { styled } from '../../styles'
 
 export const StyledInput = styled('input', {
   /* input reset */
-  background: 'none',
+  background: 'transparent',
   appearance: 'none',
   fontFamily: 'inherit',
   fontSize: 'inherit',
@@ -11,11 +11,20 @@ export const StyledInput = styled('input', {
   backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
+  // calc accounts for the container borders
   height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
   flex: 1,
   /* input styling */
   border: 'none',
   outline: 'none',
+
+  variants: {
+    isNumber: {
+      true: {
+        textAlign: 'right',
+      },
+    },
+  },
 })
 
 export const InnerLabel = styled('div', {
@@ -41,20 +50,19 @@ export const InnerLabel = styled('div', {
 export const InputContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '$input',
-  borderColor: '$inputBorder',
-  color: '$inputText',
-  backgroundColor: '$inputBg',
-  transition: '$border',
+  borderRadius: '$sm',
+  border: '$input solid transparent',
+  color: '$textEmphasized',
+  backgroundColor: '$elevation3',
+  transition: '$borderBg',
+  '&:active': {
+    borderColor: '$accent',
+    backgroundColor: '$elevation1',
+  },
   '&:hover': {
-    borderColor: '$inputHoverBorder',
+    borderColor: '$accent2',
   },
   '&:focus-within': {
-    borderColor: '$inputFocusBorder',
-  },
-  '&:active': {
-    backgroundColor: '$inputActiveBg',
+    borderColor: '$accent',
   },
 })

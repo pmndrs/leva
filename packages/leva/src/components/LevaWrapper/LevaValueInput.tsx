@@ -20,12 +20,12 @@ export function LevaValueInput<V, Settings extends object>({
   value,
   settings,
 }: LevaValueInputProps<V, Settings>) {
-  const set = useCallback(value => store.setValueAtPath(path, value), [path])
+  const set = useCallback((value) => store.setValueAtPath(path, value), [path])
 
   const { displayValue, onChange, onUpdate } = useLevaUpdate({ type, value, settings, set })
 
   return (
-    <InputContext.Provider value={{ label: valueKey, displayValue, value, onChange, onUpdate, settings }}>
+    <InputContext.Provider value={{ valueKey, label: valueKey, displayValue, value, onChange, onUpdate, settings }}>
       <Input />
     </InputContext.Provider>
   )

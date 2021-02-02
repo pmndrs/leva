@@ -16,6 +16,7 @@ export type Tree = {
 }
 
 export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
+  valueKey: string
   label: string
   displayValue: DisplayValue
   value: V

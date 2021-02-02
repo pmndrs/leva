@@ -2,49 +2,49 @@ import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',
-  height: '100%',
   display: 'flex',
-  padding: '$input',
+  alignItems: 'center',
+  height: '$rowHeight',
 
   input: {
     height: 0,
     width: 0,
-    visibility: 'hidden',
+    opactiy: 0,
     margin: 0,
   },
 
   label: {
     position: 'relative',
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     cursor: 'pointer',
-    height: '12px',
-    width: '30px',
-    backgroundColor: '$primary',
-    borderRadius: '20px',
+    height: 'calc(var(--sizes-rowHeight) - 8px)',
+    width: 'calc(var(--sizes-rowHeight) - 8px)',
+    backgroundColor: '$elevation3',
+    borderRadius: '$sm',
   },
 
-  'label::after': {
-    content: '""',
-    position: 'absolute',
-    top: '2px',
-    left: '2px',
-    width: '8px',
-    height: '8px',
-    backgroundColor: '$rootBg',
-    borderRadius: '4px',
-    transition: '0.3s',
+  'input:focus + label': {
+    border: '$input solid $accent',
+  },
+
+  'label:active': {
+    backgroundColor: '$accent2',
+  },
+
+  'label > svg': {
+    display: 'none',
+    width: '90%',
+    height: '90%',
+    stroke: '$textEmphasized',
   },
 
   'input:checked + label': {
     backgroundColor: '$accent',
   },
 
-  'input:checked + label::after': {
-    left: 'calc(100% - 2px)',
-    transform: 'translateX(-100%)',
-  },
-
-  'label:active::after': {
-    width: '12px',
+  'input:checked + label > svg': {
+    display: 'block',
   },
 })

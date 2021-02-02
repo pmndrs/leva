@@ -19,7 +19,7 @@ function Comp1() {
   }, [])
 
   const t = useControls({
-    first: { value: 40, min: 30, max: 90 },
+    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
@@ -43,6 +43,9 @@ function Comp1() {
         },
         { collapsed: false }
       ),
+    }),
+    folder5: folder({
+      boolean2: false,
     }),
     colorObj: { r: 1, g: 2, b: 3 },
   })
@@ -96,7 +99,7 @@ export default function App() {
   // useControls({ checkbox: true })
   return (
     <>
-      <Leva theme={{ colors: { $rootBg: 'coral' } }} />
+      <Leva />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>

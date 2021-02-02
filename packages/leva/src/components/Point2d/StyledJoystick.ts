@@ -5,23 +5,17 @@ export const JoystickTrigger = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
-  backgroundColor: '$inputBg',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
+  backgroundColor: '$elevation3',
+  borderRadius: '$sm',
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
   touchAction: 'none',
 
-  ':hover': {
-    borderColor: '$inputHoverBorder',
-  },
+  ':hover': {},
 
   ':active': {
-    borderColor: '$inputFocusBorder',
-    cursor: 'crosshair',
+    cursor: 'none',
   },
 
   '::after': {
@@ -39,10 +33,7 @@ export const JoystickPlayground = styled('div', {
   justifyContent: 'center',
   width: '$joystickWidth',
   height: '$joystickHeight',
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
+  borderRadius: '$sm',
   boxShadow: '$overlay',
   position: 'absolute',
   zIndex: 100,
@@ -52,14 +43,13 @@ export const JoystickPlayground = styled('div', {
   variants: {
     isOutOfBounds: {
       true: {
-        backgroundColor: '$inputBorder',
+        backgroundColor: '$elevation1',
       },
       false: {
-        backgroundColor: '$rootBg',
+        backgroundColor: '$elevation3',
       },
     },
   },
-
   '> div': {
     position: 'absolute',
     display: 'flex',
@@ -67,8 +57,8 @@ export const JoystickPlayground = styled('div', {
     justifyContent: 'center',
     borderStyle: 'solid',
     borderWidth: '1px',
-    borderColor: '$inputBorder',
-    backgroundColor: '$inputBg',
+    borderColor: '$textDeEmphasized',
+    backgroundColor: '$elevation3',
     width: '80%',
     height: '80%',
 
@@ -76,7 +66,7 @@ export const JoystickPlayground = styled('div', {
       content: '""',
       position: 'absolute',
       zindex: 10,
-      backgroundColor: '$inputBorder',
+      backgroundColor: '$textDeEmphasized',
     },
 
     '::before': {

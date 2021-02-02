@@ -17,7 +17,9 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
-  const accentColor = useTh('colors', '$accent')
+  const accentColor = useTh('colors', '$textEmphasized')
+  const fillColor = useTh('colors', '$elevation1')
+
   const points = useRef([initialValue])
   const min = useRef(initialValue)
   const max = useRef(initialValue)
@@ -30,15 +32,21 @@ const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
       const { width, height } = _canvas
       _ctx.clearRect(0, 0, width, height)
       _ctx.beginPath()
+      _ctx.strokeStyle = accentColor
+      _ctx.fillStyle = fillColor
+      _ctx.lineWidth = 2
       const interval = width / POINTS
       for (let i = 0; i < points.current.length; i++) {
         const p = range(points.current[i], min.current!, max.current!)
         _ctx.lineTo(interval * i, p * height * 0.9)
       }
-      _ctx.strokeStyle = accentColor
       _ctx.stroke()
+      _ctx.lineTo(interval * (points.current.length + 1), height)
+      _ctx.lineTo(0, height)
+      _ctx.lineTo(0, 0)
+      _ctx.fill()
     },
-    [accentColor]
+    [accentColor, fillColor]
   )
 
   const [canvas, ctx] = useCanvas2d(drawPlot)

@@ -7,13 +7,16 @@ import { StyledInputWrapper } from './StyledBoolean'
 export function Boolean() {
   const { label, value, onUpdate } = useInputContext<LevaInputProps<boolean>>()
 
-  // htmlFor might raise a conflict if two booleans are labeled the same way
   return (
     <Row input>
-      <Label htmlFor={label}>{label}</Label>
+      <Label>{label}</Label>
       <StyledInputWrapper>
         <input id={label} type="checkbox" checked={value} onChange={(e) => onUpdate(e.currentTarget.checked)} />
-        <label htmlFor={label} />
+        <label htmlFor={label}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </label>
       </StyledInputWrapper>
     </Row>
   )
