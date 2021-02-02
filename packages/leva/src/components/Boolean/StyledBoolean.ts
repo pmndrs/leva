@@ -42,7 +42,7 @@ export const StyledInputWrapper = styled('div', {
 
   'input:checked + label': {
     backgroundColor: '$accent',
-  }
+  },
 
   'input:checked + label > svg': {
     display: 'block',
