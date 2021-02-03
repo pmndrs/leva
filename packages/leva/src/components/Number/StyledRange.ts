@@ -37,8 +37,7 @@ export const Scrubber = styled('div', {
 
 export const RangeWrapper = styled('div', {
   position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   height: '100%',
   margin: '0 $rowGap',
   cursor: 'pointer',

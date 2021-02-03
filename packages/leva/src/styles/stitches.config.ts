@@ -109,6 +109,15 @@ export const { styled, css } = createStyled({
   tokens: getDefaultTheme(),
   utils: {
     ...utils,
+    $flex: () => ({
+      display: 'flex',
+      alignItems: 'center',
+    }),
+    $flexCenter: () => ({
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }),
     $reset: () => ({
       outline: 'none',
       fontSize: 'inherit',

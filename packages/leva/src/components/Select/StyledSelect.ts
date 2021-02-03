@@ -1,9 +1,7 @@
 import { styled } from '../../styles'
 
 export const SelectContainer = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   position: 'relative',
   '> svg': {
     pointerEvents: 'none',

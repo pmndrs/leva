@@ -30,9 +30,6 @@ export const Row = styled('div', {
 
 export const CopyLabelContainer = styled('div', {
   position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  height: '100%',
   cursor: 'pointer',
   overflow: 'hidden',
 
@@ -56,7 +53,7 @@ export const CopyLabelContainer = styled('div', {
 })
 
 export const StyledLabel = styled('label', {
-  // color: '$highlight2',
+  height: '100%',
   fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',

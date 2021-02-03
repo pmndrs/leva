@@ -15,12 +15,10 @@ export const StyledInput = styled('input', {
 export const InnerLabel = styled('div', {
   height: '100%',
   '& > :first-of-type': {
+    $flexCenter: '',
     width: '14px',
     height: '100%',
     marginRight: '-$sm',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     textTransform: 'uppercase',
     fontSize: '0.8em',
     cursor: 'ew-resize',
@@ -31,8 +29,7 @@ export const InnerLabel = styled('div', {
 })
 
 export const InputContainer = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   borderRadius: '$sm',
   color: 'inherit',
   backgroundColor: '$elevation3',

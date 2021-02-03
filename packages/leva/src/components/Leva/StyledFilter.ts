@@ -43,10 +43,8 @@ export const StyledFilterInput = styled('input', {
 })
 
 export const Icon = styled('i', {
+  $flexCenter: '',
   width: 40,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {
@@ -60,9 +58,7 @@ export const Icon = styled('i', {
 })
 
 export const Drag = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  $flexCenter: '',
   flex: 1,
   '> svg': {
     fill: '$highlight1',

@@ -1,9 +1,7 @@
 import { styled } from '../../styles'
 
 export const DropZone = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   textAlign: 'center',
   overflow: 'hidden',
   minHeight: '$rowHeight',
@@ -46,9 +44,7 @@ export const Instructions = styled('div', {
 
 export const Remove = styled('div', {
   position: 'absolute',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   top: '0',
   right: '0',
   margin: '$rowGap $md',

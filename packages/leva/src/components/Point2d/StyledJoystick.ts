@@ -1,9 +1,7 @@
 import { styled } from '../../styles'
 
 export const JoystickTrigger = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  $flexCenter: '',
   position: 'relative',
   backgroundColor: '$elevation3',
   borderRadius: '$sm',
@@ -25,9 +23,7 @@ export const JoystickTrigger = styled('div', {
 })
 
 export const JoystickPlayground = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   width: '$joystickWidth',
   height: '$joystickHeight',
   borderRadius: '$sm',
@@ -44,9 +40,7 @@ export const JoystickPlayground = styled('div', {
   },
   '> div': {
     position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    $flexCenter: '',
     borderStyle: 'solid',
     borderWidth: '1px',
     borderColor: '$highlight1',

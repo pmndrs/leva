@@ -1,4 +1,3 @@
-import { transition } from '@xstyled/styled-components'
 import { styled } from '../../styles'
 
 export const StyledFolder = styled('div', {})
@@ -33,8 +32,7 @@ export const StyledWrapper = styled('div', {
 })
 
 export const StyledTitle = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   color: '$highlight3',
   userSelect: 'none',
   cursor: 'pointer',

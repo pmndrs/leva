@@ -2,8 +2,7 @@ import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   height: '$rowHeight',
 
   input: {
@@ -15,9 +14,7 @@ export const StyledInputWrapper = styled('div', {
 
   label: {
     position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    $flexCenter: '',
     userSelect: 'none',
     cursor: 'pointer',
     height: '$checkboxSize',
