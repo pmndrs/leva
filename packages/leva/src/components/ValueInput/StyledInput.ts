@@ -46,7 +46,6 @@ export const InputContainer = styled('div', {
   borderRadius: '$sm',
   color: '$highlight3',
   backgroundColor: '$elevation3',
-  transition: '$borderBg',
   hover: '',
   focusWithinState: '',
 })

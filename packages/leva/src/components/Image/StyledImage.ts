@@ -10,7 +10,6 @@ export const DropZone = styled('div', {
   background: '$elevation3',
   color: '$highlight2',
   borderRadius: '$sm',
-  transition: '$borderBg',
   outline: 'none',
   userSelect: 'none',
   cursor: 'pointer',
@@ -56,7 +55,6 @@ export const Remove = styled('div', {
   width: '20px',
   borderRadius: '$sm',
   backgroundColor: '$elevation3',
-  transition: '$borderBg',
   hover: 'none $accent1',
 
   '::after,::before': {

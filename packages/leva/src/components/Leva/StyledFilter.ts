@@ -32,7 +32,6 @@ export const StyledFilterInput = styled('input', {
   width: '100%',
   padding: '0 $rowH',
   backgroundColor: 'transparent',
-  transition: '$bg',
   border: 'none',
   outline: 'none',
   color: '$highlight3',

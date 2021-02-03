@@ -25,7 +25,6 @@ export const StyledSelect = styled('select', {
   borderRadius: '$sm',
   padding: '0 $input',
   cursor: 'pointer',
-  transition: 'border',
   hover: '',
   focus: '',
 })

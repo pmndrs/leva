@@ -74,11 +74,6 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   fontWeights: {
     $highlight2: '600',
   },
-  transitions: {
-    $border: 'border-color 250ms ease',
-    $bg: 'background-color 250ms ease',
-    $borderBg: 'border-color, background-color 250ms ease',
-  },
 })
 
 type Options = { key: string; borderColor: string; backgroundColor?: string; inset?: boolean }

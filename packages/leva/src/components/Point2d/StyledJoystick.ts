@@ -35,7 +35,6 @@ export const JoystickPlayground = styled('div', {
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',
-  transition: '$bg',
 
   variants: {
     isOutOfBounds: {

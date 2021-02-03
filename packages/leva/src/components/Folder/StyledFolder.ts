@@ -20,7 +20,6 @@ export const StyledWrapper = styled('div', {
           width: '1px',
           height: '100%',
           backgroundColor: '$elevation1',
-          transition: '$bg',
         },
       },
     },
