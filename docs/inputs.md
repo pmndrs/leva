@@ -21,9 +21,10 @@ A Number input with an additional range slider. It will be used when you provide
 
 ```jsx
 const { myNumber } = useControls({ myNumber: {
+  value: 4,
   min: 0,
   max: 10,
-  value: 4
+  step: 1
 } })
 ```
 
@@ -36,11 +37,11 @@ A color picker. Color format is inferred by the object used:
 ```jsx
 const colors = useControls({
   myFooColor: "#fff",
-  myBarColor: { r: 200, b: 125, g: 106 }
+  myBarColor: { r: 200, b: 125, g: 106, a: 0.4 }
 })
 ```
 
-In the example, `myFooColor` will create an Hesadecimal field while `myBarColor` will expose all 3 values in separate r g and b numerical fields.
+In the example, `myFooColor` will create an Hexadecimal field while `myBarColor` will expose return 4 values in separate r, g, b and a numerical fields.
 
 ### Boolean
 
@@ -75,7 +76,7 @@ All rules from Number type also apply.
 
 @todo
 
-### Vector2
-### Vector3
+### Point2d
+### Point3d
 
 @todo
