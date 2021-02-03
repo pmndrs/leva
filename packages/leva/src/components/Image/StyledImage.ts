@@ -12,18 +12,15 @@ export const DropZone = styled('div', {
   borderRadius: '$sm',
   transition: '$borderBg',
   outline: 'none',
+  userSelect: 'none',
   cursor: 'pointer',
-  '&:hover': {
-    border: '$input solid $accent2',
-  },
-  '&:active': {
-    border: '$input solid $accent2',
-    backgroundColor: '$elevation1',
-  },
+  hover: '',
+  focusWithinState: '',
+  active: '$accent1 $elevation1',
   variants: {
     isDragAccept: {
       true: {
-        border: '$input solid $accent2',
+        border: '$input solid $accent1',
         backgroundColor: '$elevation1',
       },
     },
@@ -60,8 +57,7 @@ export const Remove = styled('div', {
   borderRadius: '$sm',
   backgroundColor: '$elevation3',
   transition: '$borderBg',
-
-  ':hover': { backgroundColor: '$accent1' },
+  hover: 'none $accent1',
 
   '::after,::before': {
     content: '""',

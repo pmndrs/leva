@@ -11,16 +11,13 @@ export const JoystickTrigger = styled('div', {
   height: '$rowHeight',
   width: '$rowHeight',
   touchAction: 'none',
+  hover: '',
 
-  ':hover': {},
-
-  ':active': {
-    cursor: 'none',
-  },
+  ':active': { cursor: 'none' },
 
   '::after': {
     content: '""',
-    backgroundColor: '$accent1',
+    backgroundColor: '$accent2',
     height: '4px',
     width: '4px',
     borderRadius: '2px',
@@ -85,7 +82,7 @@ export const JoystickPlayground = styled('div', {
     zindex: 100,
     width: '10px',
     height: '10px',
-    backgroundColor: '$accent1',
+    backgroundColor: '$accent2',
     borderRadius: '50%',
   },
 })

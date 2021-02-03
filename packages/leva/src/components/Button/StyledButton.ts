@@ -10,14 +10,10 @@ export const StyledButton = styled('button', {
   borderStyle: 'none',
   borderRadius: '$sm',
   outline: 'none',
-  backgroundColor: '$accent1',
+  backgroundColor: '$accent2',
   transition: '$borderBg',
   cursor: 'pointer',
-  '&:hover': {
-    border: '$input solid $accent3',
-  },
-  '&:active': {
-    border: '$input solid $accent3',
-    backgroundColor: '$accent2',
-  },
+  hover: '$accent3',
+  active: '$accent3 $accent1',
+  focus: '',
 })

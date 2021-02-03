@@ -14,17 +14,12 @@ export const StyledInput = styled('input', {
   // calc accounts for the container borders
   height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
   flex: 1,
+
   /* input styling */
   border: 'none',
   outline: 'none',
 
-  variants: {
-    isNumber: {
-      true: {
-        textAlign: 'right',
-      },
-    },
-  },
+  variants: { isNumber: { true: { textAlign: 'right' } } },
 })
 
 export const InnerLabel = styled('div', {
@@ -37,13 +32,11 @@ export const InnerLabel = styled('div', {
     alignItems: 'center',
     justifyContent: 'center',
     textTransform: 'uppercase',
-    opacity: '0.3',
     fontSize: '0.8em',
     cursor: 'ew-resize',
     userSelect: 'none',
-    '&:hover': {
-      opacity: 0.8,
-    },
+    opacity: '0.3',
+    '&:hover': { opacity: 0.8 },
   },
 })
 
@@ -51,14 +44,9 @@ export const InputContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   borderRadius: '$sm',
-  border: '$input solid transparent',
   color: '$highlight3',
   backgroundColor: '$elevation3',
   transition: '$borderBg',
-  '&:hover': {
-    borderColor: '$accent2',
-  },
-  '&:focus-within': {
-    borderColor: '$accent1',
-  },
+  hover: '',
+  focusWithinState: '',
 })

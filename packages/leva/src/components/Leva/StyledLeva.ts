@@ -31,6 +31,6 @@ export const Root = styled('div', {
   },
 
   '*::selection': {
-    backgroundColor: '$accent1',
+    backgroundColor: '$accent2',
   },
 })

@@ -24,22 +24,21 @@ export const StyledInputWrapper = styled('div', {
     width: 'calc(var(--sizes-rowHeight) - 8px)',
     backgroundColor: '$elevation3',
     borderRadius: '$sm',
+    hover: '',
   },
 
-  'input:focus + label, label:hover': {
-    border: '$input solid $accent3',
-  },
+  'input:focus + label': { focusStyle: '' },
 
   'input:focus:checked + label, input:checked + label:hover': {
-    border: '$input solid accent3',
+    borderStyle: '$accent3',
   },
 
   'input + label:active': {
-    backgroundColor: '$accent2',
+    backgroundColor: '$accent1',
   },
 
   'input:checked + label:active': {
-    backgroundColor: '$accent2',
+    backgroundColor: '$accent1',
   },
 
   'label > svg': {
@@ -50,7 +49,7 @@ export const StyledInputWrapper = styled('div', {
   },
 
   'input:checked + label': {
-    backgroundColor: '$accent1',
+    backgroundColor: '$accent2',
   },
 
   'input:checked + label > svg': {

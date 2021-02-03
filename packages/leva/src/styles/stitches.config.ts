@@ -23,11 +23,11 @@ const scales = {
 export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   colors: {
     ...scales.colors,
-    $elevation1: scales.colors.$gray800,
-    $elevation2: scales.colors.$gray900,
-    $elevation3: scales.colors.$gray700,
-    $accent1: scales.colors.$blue500,
-    $accent2: scales.colors.$blue400,
+    $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
+    $elevation2: scales.colors.$gray900, // bg color of the rows (main panel color)
+    $elevation3: scales.colors.$gray700, // bg color of the inputs
+    $accent1: scales.colors.$blue400,
+    $accent2: scales.colors.$blue500,
     $accent3: scales.colors.$blue100,
     $highlight1: scales.colors.$grey600,
     $highlight2: scales.colors.$gray500,
@@ -66,6 +66,9 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $input: '1px',
     $root: '0px',
     $folder: '4px',
+    $focus: '1px',
+    $hover: '1px',
+    $active: '1px',
   },
   fontWeights: {
     $highlight2: '600',
@@ -77,8 +80,40 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   },
 })
 
+type Options = { key: string; borderColor: string; backgroundColor?: string; inset?: boolean }
+
+function createStateClass(value: string, config: any, options: Options) {
+  const [borderColor, bgColor] = value.split(' ')
+  const css: any = {}
+  if (borderColor !== 'none') {
+    css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 ${config.tokens.borderWidths[options.key]} ${
+      (borderColor && borderColor !== 'default') || options.borderColor
+    }`
+  }
+
+  if (bgColor) {
+    css.backgroundColor = bgColor || options.backgroundColor
+  }
+  return css
+}
+
+const utils = {
+  focusStyle: (value: any, config: any) => createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
+  hoverStyle: (value: any, config: any) =>
+    createStateClass(value, config, { key: '$hover', borderColor: '$accent1', inset: true }),
+  activeStyle: (value: any, config: any) =>
+    createStateClass(value, config, { key: '$active', borderColor: '$accent1', inset: true }),
+}
+
 export const { styled, css } = createStyled({
   tokens: getDefaultTheme(),
+  utils: {
+    ...utils,
+    focus: (value, config) => ({ ':focus': utils.focusStyle(value, config) }),
+    focusWithin: (value, config) => ({ ':focus-within': utils.focusStyle(value, config) }),
+    hover: (value, config) => ({ ':hover': utils.hoverStyle(value, config) }),
+    active: (value, config) => ({ ':active': utils.activeStyle(value, config) }),
+  },
 })
 
 export const globalStyles = css.global({

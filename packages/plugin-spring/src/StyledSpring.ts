@@ -11,7 +11,7 @@ export const Canvas = styled('canvas', {
 export const SpringPreview = styled('div', {
   position: 'relative',
   top: '-2px',
-  backgroundColor: '$accent1',
+  backgroundColor: '$accent2',
   width: '100%',
   height: '2px',
   opacity: '0.2',
