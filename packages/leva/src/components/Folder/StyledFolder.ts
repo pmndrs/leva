@@ -1,5 +1,7 @@
 import { styled } from '../../styles'
 
+export const StyledFolder = styled('div', {})
+
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
@@ -8,7 +10,6 @@ export const StyledWrapper = styled('div', {
     isRoot: {
       true: {
         borderRadius: '$lg',
-        padding: '0 $md',
       },
       false: {
         paddingLeft: '$md',
@@ -24,16 +25,8 @@ export const StyledWrapper = styled('div', {
       },
     },
     toggled: {
-      false: {
-        overflow: 'hidden',
-      },
+      false: { overflow: 'hidden' },
     },
-  },
-})
-
-export const StyledFolder = styled('div', {
-  variants: {
-    isRoot: { true: { marginTop: 0 } },
   },
 })
 
@@ -43,6 +36,7 @@ export const StyledTitle = styled('div', {
   color: '$highlight3',
   userSelect: 'none',
   cursor: 'pointer',
+  marginTop: '$rowGap',
   height: '$folderHeight',
   fontWeight: '$folder',
   '> svg': {
@@ -62,6 +56,9 @@ export const StyledTitle = styled('div', {
   },
   [`${StyledFolder}:hover > & > svg`]: {
     fill: '$highlight1',
+  },
+  variants: {
+    toggled: { false: { '> svg': { fill: '$highlight1' } } },
   },
 })
 
@@ -85,12 +82,20 @@ export const StyledContent = styled('div', {
     },
     isRoot: {
       true: {
-        padding: 'calc(2 * var(--space-rowV)) 0',
-        [`& > ${StyledFolder}`]: {
-          marginLeft: 0,
-          [`& > ${StyledWrapper}`]: {
-            borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',
-          },
+        '& > div': {
+          paddingLeft: '$md',
+          paddingRight: '$md',
+        },
+        '& > div:first-of-type': {
+          paddingTop: '$sm',
+        },
+        '& > div:last-of-type': {
+          paddingBottom: '$sm',
+        },
+        [`> ${StyledFolder}:not(:first-of-type)`]: {
+          paddingTop: '$md',
+          marginTop: '$md',
+          borderTop: '1px solid $elevation1',
         },
       },
     },

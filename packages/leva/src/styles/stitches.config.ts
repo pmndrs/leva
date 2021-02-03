@@ -25,8 +25,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     ...scales.colors,
     $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
     $elevation2: scales.colors.$gray900, // bg color of the rows (main panel color)
-    // $elevation3: scales.colors.$gray700, // bg color of the inputs
-    $elevation3: scales.colors.$gray900,
+    $elevation3: scales.colors.$gray700, // bg color of the inputs
+    // $elevation3: scales.colors.$gray900,
     $accent1: scales.colors.$blue400,
     $accent2: scales.colors.$blue500,
     $accent3: scales.colors.$blue100,
@@ -38,8 +38,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   space: {
     $sm: '6px',
     $md: '10px',
-    $rowGap: '4px',
-    $colGap: '4px',
+    $rowGap: '7px',
+    $colGap: '5px',
   },
   fonts: {
     $mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,

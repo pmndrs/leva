@@ -19,6 +19,9 @@ function Comp1() {
   }, [])
 
   const t = useControls({
+    folder5: folder({
+      boolean2: false,
+    }),
     firstsuperlonglabel: { value: 40, min: 30, max: 90 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
@@ -47,9 +50,7 @@ function Comp1() {
       },
       { render: (get) => get('boolean') }
     ),
-    folder5: folder({
-      boolean2: false,
-    }),
+
     colorObj: { r: 1, g: 2, b: 3 },
   })
 
