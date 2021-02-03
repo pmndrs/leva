@@ -6,6 +6,7 @@ export const StyledInputWrapper = styled('div', {
   height: '$rowHeight',
 
   input: {
+    $reset: '',
     height: 0,
     width: 0,
     opactiy: 0,
