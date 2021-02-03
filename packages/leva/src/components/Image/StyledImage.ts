@@ -8,7 +8,7 @@ export const DropZone = styled('div', {
   overflow: 'hidden',
   minHeight: '$rowHeight',
   background: '$elevation3',
-  color: '$highlight2',
+  color: 'inherit',
   borderRadius: '$sm',
   outline: 'none',
   userSelect: 'none',

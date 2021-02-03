@@ -68,6 +68,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $focus: '1px',
     $hover: '1px',
     $active: '1px',
+    $folder: '1px',
   },
   fontWeights: {
     $label: 'normal',

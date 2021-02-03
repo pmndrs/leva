@@ -1,3 +1,4 @@
+import { transition } from '@xstyled/styled-components'
 import { styled } from '../../styles'
 
 export const StyledFolder = styled('div', {})
@@ -18,9 +19,10 @@ export const StyledWrapper = styled('div', {
           position: 'absolute',
           left: 0,
           top: 0,
-          width: '1px',
+          width: 'var(--borderWidths-folder)',
           height: '100%',
           backgroundColor: '$elevation1',
+          transform: 'translateX(-50%)',
         },
       },
     },
@@ -95,7 +97,7 @@ export const StyledContent = styled('div', {
         [`> ${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$md',
           marginTop: '$md',
-          borderTop: '1px solid $elevation1',
+          borderTop: '$folder solid $elevation1',
         },
       },
     },
