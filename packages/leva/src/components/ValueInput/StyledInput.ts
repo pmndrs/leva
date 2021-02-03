@@ -35,8 +35,8 @@ export const InputContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   borderRadius: '$sm',
-  color: '$highlight3',
+  color: 'inherit',
   backgroundColor: '$elevation3',
+  $inputStyle: '$elevation1',
   $hover: '',
-  $focusWithin: '',
 })

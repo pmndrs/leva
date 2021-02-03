@@ -25,7 +25,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     ...scales.colors,
     $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
     $elevation2: scales.colors.$gray900, // bg color of the rows (main panel color)
-    $elevation3: scales.colors.$gray700, // bg color of the inputs
+    // $elevation3: scales.colors.$gray700, // bg color of the inputs
+    $elevation3: 'transparent',
     $accent1: scales.colors.$blue400,
     $accent2: scales.colors.$blue500,
     $accent3: scales.colors.$blue100,

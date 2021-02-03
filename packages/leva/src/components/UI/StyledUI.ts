@@ -22,6 +22,10 @@ export const Row = styled('div', {
       },
     },
   },
+
+  ':hover, :focus-within': {
+    color: '$highlight3',
+  },
 })
 
 export const CopyLabelContainer = styled('div', {
@@ -52,7 +56,7 @@ export const CopyLabelContainer = styled('div', {
 })
 
 export const StyledLabel = styled('label', {
-  color: '$highlight2',
+  // color: '$highlight2',
   fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
