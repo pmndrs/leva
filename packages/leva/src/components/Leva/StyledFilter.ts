@@ -59,6 +59,7 @@ export const Icon = styled('i', {
 
 export const Drag = styled('div', {
   $flexCenter: '',
+  touchAction: 'none',
   flex: 1,
   '> svg': {
     fill: '$highlight1',
