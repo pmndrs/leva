@@ -6,7 +6,7 @@ export const Root = styled('div', {
   fontFamily: '$mono',
   fontSize: '$root',
   backgroundColor: '$elevation1',
-  boxShadow: '$root',
+  boxShadow: '$elevation1',
 
   variants: {
     fillParent: {

@@ -31,19 +31,15 @@ export const JoystickPlayground = styled('div', {
   width: '$joystickWidth',
   height: '$joystickHeight',
   borderRadius: '$sm',
-  boxShadow: '$overlay',
+  boxShadow: '$elevation2',
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',
 
   variants: {
     isOutOfBounds: {
-      true: {
-        backgroundColor: '$elevation1',
-      },
-      false: {
-        backgroundColor: '$elevation3',
-      },
+      true: { backgroundColor: '$elevation1' },
+      false: { backgroundColor: '$elevation3' },
     },
   },
   '> div': {

@@ -31,13 +31,19 @@ export const StyledWrapper = styled('div', {
   },
 })
 
+export const StyledFolder = styled('div', {
+  variants: {
+    isRoot: { true: { marginTop: 0 } },
+  },
+})
+
 export const StyledTitle = styled('div', {
   display: 'flex',
   alignItems: 'center',
   color: '$highlight3',
   userSelect: 'none',
   cursor: 'pointer',
-  paddingTop: '$folderV',
+  height: '$folderHeight',
   fontWeight: '$folder',
   '> svg': {
     marginLeft: -4,
@@ -45,23 +51,17 @@ export const StyledTitle = styled('div', {
     cursor: 'pointer',
     fill: '$elevation3',
   },
-})
-
-export const StyledFolder = styled('div', {
-  ':hover': {
-    [`> ${StyledTitle} > svg`]: {
-      fill: '$highlight1',
-    },
-    [`> ${StyledWrapper}::after`]: {
-      backgroundColor: '$highlight1',
-    },
+  ':hover > svg': {
+    fill: '$highlight2',
   },
-  variants: {
-    isRoot: {
-      true: {
-        marginTop: 0,
-      },
-    },
+  [`:hover + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight2',
+  },
+  [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight1',
+  },
+  [`${StyledFolder}:hover > & > svg`]: {
+    fill: '$highlight1',
   },
 })
 

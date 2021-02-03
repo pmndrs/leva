@@ -35,7 +35,7 @@ export const PickerWrapper = styled('div', {
     width: '100px',
     height: '100px',
     transform: 'translateY(100%)',
-    boxShadow: '$overlay',
+    boxShadow: '$elevation2',
     cursor: 'crosshair',
   },
 
