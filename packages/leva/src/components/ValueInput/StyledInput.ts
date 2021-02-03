@@ -11,10 +11,6 @@ export const StyledInput = styled('input', {
   height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
   flex: 1,
 
-  /* input styling */
-  border: 'none',
-  outline: 'none',
-
   variants: { isNumber: { true: { textAlign: 'right' } } },
 })
 

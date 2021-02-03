@@ -20,7 +20,7 @@ export const DropZone = styled('div', {
   variants: {
     isDragAccept: {
       true: {
-        border: '$input solid $accent1',
+        $inputStyle: '$accent1',
         backgroundColor: '$elevation1',
       },
     },
