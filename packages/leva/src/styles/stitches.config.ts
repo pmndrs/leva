@@ -26,12 +26,12 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $elevation1: scales.colors.$gray800,
     $elevation2: scales.colors.$gray900,
     $elevation3: scales.colors.$gray700,
-    $accent: scales.colors.$blue500,
+    $accent1: scales.colors.$blue500,
     $accent2: scales.colors.$blue400,
     $accent3: scales.colors.$blue100,
-    $text: scales.colors.$gray500,
-    $textEmphasized: scales.colors.$gray50,
-    $textDeEmphasized: scales.colors.$grey600,
+    $highlight1: scales.colors.$grey600,
+    $highlight2: scales.colors.$gray500,
+    $highlight3: scales.colors.$gray50,
   },
   radii: {
     ...scales.radii,
@@ -68,7 +68,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $folder: '4px',
   },
   fontWeights: {
-    $text: '600',
+    $highlight2: '600',
   },
   transitions: {
     $border: 'border-color 250ms ease',

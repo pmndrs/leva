@@ -52,13 +52,13 @@ export const InputContainer = styled('div', {
   alignItems: 'center',
   borderRadius: '$sm',
   border: '$input solid transparent',
-  color: '$textEmphasized',
+  color: '$highlight3',
   backgroundColor: '$elevation3',
   transition: '$borderBg',
   '&:hover': {
     borderColor: '$accent2',
   },
   '&:focus-within': {
-    borderColor: '$accent',
+    borderColor: '$accent1',
   },
 })

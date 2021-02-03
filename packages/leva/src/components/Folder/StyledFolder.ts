@@ -35,7 +35,7 @@ export const StyledWrapper = styled('div', {
 export const StyledTitle = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  color: '$textEmphasized',
+  color: '$highlight3',
   userSelect: 'none',
   cursor: 'pointer',
   paddingTop: '$folderV',
@@ -50,10 +50,10 @@ export const StyledTitle = styled('div', {
 export const StyledFolder = styled('div', {
   ':hover': {
     [`> ${StyledTitle} > svg`]: {
-      fill: '$textDeEmphasized',
+      fill: '$highlight1',
     },
     [`> ${StyledWrapper}::after`]: {
-      backgroundColor: '$textDeEmphasized',
+      backgroundColor: '$highlight1',
     },
   },
   variants: {

@@ -14,7 +14,7 @@ export const Scrubber = styled('div', {
   height: '$scrubberHeight',
   borderRadius: '$xs',
   boxShadow: '0 0 0 2px $elevation2',
-  backgroundColor: '$accent',
+  backgroundColor: '$accent1',
   cursor: 'pointer',
   variants: {
     position: {
@@ -45,5 +45,5 @@ export const RangeWrapper = styled('div', {
 export const Indicator = styled('div', {
   position: 'absolute',
   height: '100%',
-  backgroundColor: '$accent',
+  backgroundColor: '$accent1',
 })

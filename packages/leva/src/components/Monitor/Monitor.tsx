@@ -17,7 +17,7 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
-  const accentColor = useTh('colors', '$textEmphasized')
+  const accentColor = useTh('colors', '$highlight3')
   const fillColor = useTh('colors', '$elevation1')
 
   const points = useRef([initialValue])

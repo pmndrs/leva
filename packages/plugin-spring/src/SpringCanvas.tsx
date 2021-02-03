@@ -17,7 +17,7 @@ export function SpringCanvas() {
   const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useTh('colors', '$textEmphasized')
+  const accentColor = useTh('colors', '$highlight3')
   const fillColor = useTh('colors', '$elevation1')
 
   const { tension, friction, mass = 1 } = displayValue

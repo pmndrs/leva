@@ -10,7 +10,7 @@ export const ColorPreview = styled('div', {
   border: '$input solid $elevation3',
   '&:hover': {},
   '&:active': {
-    borderColor: '$accent',
+    borderColor: '$accent1',
   },
 })
 

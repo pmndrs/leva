@@ -20,7 +20,7 @@ export const JoystickTrigger = styled('div', {
 
   '::after': {
     content: '""',
-    backgroundColor: '$accent',
+    backgroundColor: '$accent1',
     height: '4px',
     width: '4px',
     borderRadius: '2px',
@@ -57,7 +57,7 @@ export const JoystickPlayground = styled('div', {
     justifyContent: 'center',
     borderStyle: 'solid',
     borderWidth: '1px',
-    borderColor: '$textDeEmphasized',
+    borderColor: '$highlight1',
     backgroundColor: '$elevation3',
     width: '80%',
     height: '80%',
@@ -66,7 +66,7 @@ export const JoystickPlayground = styled('div', {
       content: '""',
       position: 'absolute',
       zindex: 10,
-      backgroundColor: '$textDeEmphasized',
+      backgroundColor: '$highlight1',
     },
 
     '::before': {
@@ -85,7 +85,7 @@ export const JoystickPlayground = styled('div', {
     zindex: 100,
     width: '10px',
     height: '10px',
-    backgroundColor: '$accent',
+    backgroundColor: '$accent1',
     borderRadius: '50%',
   },
 })

@@ -35,13 +35,13 @@ export const StyledFilterInput = styled('input', {
   transition: '$bg',
   border: 'none',
   outline: 'none',
-  color: '$textEmphasized',
+  color: '$highlight3',
   fontFamily: 'inherit',
   fontSize: '10px',
   borderRadius: '$root',
   '&:focus': {},
   '::placeholder': {
-    color: '$text',
+    color: '$highlight2',
   },
 })
 
@@ -53,13 +53,13 @@ export const Icon = styled('i', {
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {
-    fill: '$textDeEmphasized',
+    fill: '$highlight1',
     transition: 'transform 350ms ease, fill 250ms ease',
   },
   ':hover > svg': {
-    fill: '$textEmphasized',
+    fill: '$highlight3',
   },
-  variants: { active: { true: { '> svg': { fill: '$text' } } } },
+  variants: { active: { true: { '> svg': { fill: '$highlight2' } } } },
 })
 
 export const Drag = styled('div', {
@@ -68,10 +68,10 @@ export const Drag = styled('div', {
   alignItems: 'center',
   flex: 1,
   '> svg': {
-    fill: '$textDeEmphasized',
+    fill: '$highlight1',
     transition: 'fill 250ms ease',
   },
   ':hover > svg': {
-    fill: '$textEmphasized',
+    fill: '$highlight3',
   },
 })

@@ -20,7 +20,7 @@ export const StyledSelect = styled('select', {
   fontSize: 'inherit',
   height: '$rowHeight',
   backgroundColor: '$elevation3',
-  color: '$textEmphasized',
+  color: '$highlight3',
   borderStyle: 'none',
   borderRadius: '$sm',
   padding: '0 $input',
