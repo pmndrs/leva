@@ -4,6 +4,7 @@ export const SelectContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'relative',
   '> svg': {
     pointerEvents: 'none',
     position: 'absolute',
@@ -16,7 +17,7 @@ export const StyledSelect = styled('select', {
   $reset: '',
   height: '$rowHeight',
   backgroundColor: '$elevation3',
-  color: '$highlight3',
+  color: 'inherit',
   borderStyle: 'none',
   borderRadius: '$sm',
   padding: '0 $sm',
