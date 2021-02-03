@@ -1,7 +1,7 @@
 import * as props from './image-plugin'
-import { Image } from './Image'
+import { ImageComponent } from './Image'
 
-const plugin = { ...props, component: Image }
+const plugin = { ...props, component: ImageComponent }
 
 export * from './Image'
 export default plugin

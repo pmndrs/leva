@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef, forwardRef, useImperativeHandle } from 'react'
+import React, { useState, useEffect, useCallback, useMemo, useRef, forwardRef, useImperativeHandle } from 'react'
+import tc from 'tinycolor2'
 import { Canvas } from './StyledMonitor'
 import { Label, Row } from '../UI'
 import { range } from '../../utils'
@@ -17,7 +18,13 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
-  const accentColor = useTh('colors', '$accent')
+  const accentColor = useTh('colors', '$highlight3')
+  const fillColor = useTh('colors', '$highlight1')
+
+  const [gradientTop, gradientBottom] = useMemo(() => {
+    return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
+  }, [fillColor])
+
   const points = useRef([initialValue])
   const min = useRef(initialValue)
   const max = useRef(initialValue)
@@ -35,10 +42,21 @@ const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
         const p = range(points.current[i], min.current!, max.current!)
         _ctx.lineTo(interval * i, p * height * 0.9)
       }
+
+      const gradient = _ctx.createLinearGradient(0, 0, 0, height)
+      gradient.addColorStop(0.0, gradientTop)
+      gradient.addColorStop(1.0, gradientBottom)
+      _ctx.fillStyle = gradient
       _ctx.strokeStyle = accentColor
+      _ctx.lineWidth = 2
+
       _ctx.stroke()
+      _ctx.lineTo(interval * (points.current.length + 1), height)
+      _ctx.lineTo(0, height)
+      _ctx.lineTo(0, 0)
+      _ctx.fill()
     },
-    [accentColor]
+    [accentColor, gradientTop, gradientBottom]
   )
 
   const [canvas, ctx] = useCanvas2d(drawPlot)
@@ -84,7 +102,7 @@ export function Monitor({ valueKey, objectOrFn, settings }: MonitorProps) {
 
   return (
     <Row input>
-      <Label>{valueKey}</Label>
+      <Label align="top">{valueKey}</Label>
       {settings.graph ? (
         <MonitorCanvas ref={ref} initialValue={initialValue.current} />
       ) : (

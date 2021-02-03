@@ -54,10 +54,10 @@ export const LevaTheme = {
   borderWidths: {
     input: 1,
     root: 0,
-    folder: 4,
+    $highlight3: 4,
   },
   fontWeights: {
-    folder: 600,
+    $highlight3: 600,
     label: 600,
   },
   transitions: {

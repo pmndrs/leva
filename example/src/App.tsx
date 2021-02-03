@@ -1,6 +1,6 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from '@leva/leva'
-import { spring } from '@leva/spring'
+import { useControls, folder, button, monitor, Leva } from 'leva'
+import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
@@ -19,31 +19,38 @@ function Comp1() {
   }, [])
 
   const t = useControls({
-    first: { value: 40, min: 30, max: 90 },
+    folder5: folder({
+      boolean2: false,
+    }),
+    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
-    color: '#ffffffff',
+    boolean: true,
+    color: { value: '#ffffffff', render: (get) => get('boolean') },
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
-    folder2: folder({
-      boolean: false,
-      spring: spring({ tension: 100, friction: 30 }),
-      folder3: folder(
-        {
-          'Hello Button': button(() => console.log('hello')),
-          folder4: folder({
-            pos2d: { x: 3, y: 4 },
-            pos2dArr: [100, 200],
-            pos3d: { x: 0.3, y: 0.1, z: 0.5 },
-            pos3dArr: [Math.PI / 2, 20, 4],
-          }),
-        },
-        { collapsed: false }
-      ),
-    }),
+    folder2: folder(
+      {
+        spring: spring({ tension: 100, friction: 30 }),
+        folder3: folder(
+          {
+            'Hello Button': button(() => console.log('hello')),
+            folder4: folder({
+              pos2d: { value: { x: 3, y: 4 } },
+              pos2dArr: [100, 200],
+              pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+              pos3dArr: [Math.PI / 2, 20, 4],
+            }),
+          },
+          { collapsed: false }
+        ),
+      },
+      { render: (get) => get('boolean') }
+    ),
+
     colorObj: { r: 1, g: 2, b: 3 },
   })
 
@@ -96,7 +103,7 @@ export default function App() {
   // useControls({ checkbox: true })
   return (
     <>
-      <Leva theme={{ colors: { $rootBg: 'coral' } }} />
+      <Leva />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>

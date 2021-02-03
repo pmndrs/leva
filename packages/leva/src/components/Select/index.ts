@@ -1,7 +1,7 @@
 import * as props from './select-plugin'
-import { Select } from './Select'
+import { SelectComponent } from './Select'
 
-const plugin = { ...props, component: Select }
+const plugin = { ...props, component: SelectComponent }
 
 export * from './Select'
 export default plugin

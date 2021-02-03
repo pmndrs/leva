@@ -7,7 +7,7 @@ import { useInputContext } from '../../hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
-export function Image() {
+export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
 
   const onDrop = useCallback(

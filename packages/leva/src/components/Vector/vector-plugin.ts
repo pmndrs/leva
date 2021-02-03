@@ -10,6 +10,8 @@ export type VectorArray = number[]
 export type VectorObj<K extends string> = { [key in K]: number }
 export type VectorType<K extends string, F extends Format = Format> = F extends 'object' ? VectorObj<K> : VectorArray
 
+type FormatFromValue<Value> = Value extends number[] ? 'array' : Value extends Record<string, number> ? 'object' : never
+
 export type VectorSettings<K extends string> = {
   [key in K]?: NumberSettings
 }
@@ -37,11 +39,6 @@ function convert<K extends string, F extends Format>(value: VectorType<K>, forma
 }
 
 export const validateVector = <K extends string>(value: VectorObj<K>) => {
-  console.log(
-    'validating',
-    value,
-    Object.values(value).every((v: any) => validate(v))
-  )
   return Object.values(value).every((v: any) => validate(v))
 }
 
@@ -57,13 +54,17 @@ export const sanitizeVector = <K extends string>(
 
 export const formatVector = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
 
-export function normalizeVector<K extends string>(_value: VectorType<K>, _settings: VectorSettings<K> = {}, keys: K[]) {
+export function normalizeVector<K extends string, Value extends VectorType<K>>(
+  _value: Value,
+  _settings: VectorSettings<K> = {},
+  keys: K[]
+) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
   const value = convert(_value, 'object', keys)
   const { settings } = normalizeKeyedNumberInput(value, _settings as any)
 
   return {
-    value: format === 'array' ? _value : orderKeys(value, keys as any),
+    value: (format === 'array' ? _value : orderKeys(value, keys as any)) as VectorType<K, FormatFromValue<Value>>,
     settings: { ...settings, format },
   }
 }

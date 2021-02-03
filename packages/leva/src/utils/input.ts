@@ -1,41 +1,38 @@
 import { dequal } from 'dequal'
-import { normalize, getValueType, Plugins } from '../plugin'
+import { getValueType, normalize, sanitize, validate } from '../plugin'
 import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'
 
-// returns a value in the form of { value, settings}
+/**
+ * This function is used to normalize the way an input is stored in the store.
+ * Returns a value in the form of { type, value, settings} by doing different
+ * checks depending on the input structure.
+ *
+ * @param input
+ * @param path
+ */
 export function normalizeInput(input: any, path: string) {
   if (typeof input === 'object') {
     if ('type' in input) {
-      // if it's a special input then we return it as it is
+      // If the input is a special input then we return it as it is.
       if (input.type in SpecialInputTypes) return input
-      // if type exists at this point, it must be a custom plugin
-      // defined by the user
+
+      // If the type key exists at this point, it must be a custom plugin
+      // defined by the user.
       const { type, ...rest } = input
       return { type, ...normalize(type, { value: rest }) }
     }
-
     const type = getValueType(input)
     if (type) return { type, ...normalize(type, input) }
   }
 
   const type = getValueType({ value: input })
+
+  // At this point, if type is null we'll have to warn the user that its input
+  // is not recognized.
   if (!type) return warn(LevaErrors.UNKNOWN_INPUT, path, input)
+
   return { type, ...normalize(type, { value: input }) }
-}
-
-export const isInput = (v: object) => '__levaInput' in v
-
-function sanitize<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { sanitize } = Plugins[type]
-  if (sanitize) return sanitize(value, settings)
-  return value
-}
-
-function validate<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { validate } = Plugins[type]
-  if (validate) return validate(value, settings)
-  return true
 }
 
 export function updateInput(input: DataInput, newValue: any) {

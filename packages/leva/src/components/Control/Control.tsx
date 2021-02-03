@@ -1,22 +1,22 @@
-import React from 'react'
-import { useInput } from '../../store'
-import { LevaValueInput } from './LevaValueInput'
+import React, { useCallback } from 'react'
+import { store, useInput } from '../../store'
+import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
-import { SpecialInputTypes } from '../../types/'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
+import { SpecialInputTypes } from '../../types'
 
-type LevaWrapperProps = { valueKey: string; path: string }
+type ControlProps = { valueKey: string; path: string }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
   [SpecialInputTypes.MONITOR]: Monitor,
 }
 
-// TODO we can probably do better than this
-export function LevaWrapper({ valueKey, path }: LevaWrapperProps) {
+export const Control = React.memo(({ valueKey, path }: ControlProps) => {
   const { type, ...props } = useInput(path)
+  const set = useCallback((value) => store.setValueAtPath(path, value), [path])
 
   if (type in SpecialInputTypes) {
     // @ts-expect-error
@@ -29,8 +29,6 @@ export function LevaWrapper({ valueKey, path }: LevaWrapperProps) {
     return null
   }
 
-  const Input = Plugins[type].component
-
   // @ts-expect-error
-  return <LevaValueInput as={Input} type={type} valueKey={valueKey} path={path} {...props} />
-}
+  return <ControlInput type={type} valueKey={valueKey} path={path} {...props} setValue={set} />
+})

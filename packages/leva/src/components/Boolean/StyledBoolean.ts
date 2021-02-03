@@ -2,49 +2,55 @@ import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',
-  height: '100%',
-  display: 'flex',
-  padding: '$input',
+  $flex: '',
+  height: '$rowHeight',
 
   input: {
+    $reset: '',
     height: 0,
     width: 0,
-    visibility: 'hidden',
+    opactiy: 0,
     margin: 0,
   },
 
   label: {
     position: 'relative',
-    display: 'block',
+    $flexCenter: '',
+    userSelect: 'none',
     cursor: 'pointer',
-    height: '12px',
-    width: '30px',
-    backgroundColor: '$primary',
-    borderRadius: '20px',
+    height: '$checkboxSize',
+    width: '$checkboxSize',
+    backgroundColor: '$elevation3',
+    borderRadius: '$sm',
+    $hover: '',
   },
 
-  'label::after': {
-    content: '""',
-    position: 'absolute',
-    top: '2px',
-    left: '2px',
-    width: '8px',
-    height: '8px',
-    backgroundColor: '$rootBg',
-    borderRadius: '4px',
-    transition: '0.3s',
+  'input:focus + label': { $focusStyle: '' },
+
+  'input:focus:checked + label, input:checked + label:hover': {
+    $hoverStyle: '$accent3',
+  },
+
+  'input + label:active': {
+    backgroundColor: '$accent1',
+  },
+
+  'input:checked + label:active': {
+    backgroundColor: '$accent1',
+  },
+
+  'label > svg': {
+    display: 'none',
+    width: '90%',
+    height: '90%',
+    stroke: '$highlight3',
   },
 
   'input:checked + label': {
-    backgroundColor: '$accent',
+    backgroundColor: '$accent2',
   },
 
-  'input:checked + label::after': {
-    left: 'calc(100% - 2px)',
-    transform: 'translateX(-100%)',
-  },
-
-  'label:active::after': {
-    width: '12px',
+  'input:checked + label > svg': {
+    display: 'block',
   },
 })

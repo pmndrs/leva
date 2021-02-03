@@ -3,6 +3,8 @@ import merge from 'merge-value'
 import { getKeyPath } from '../../utils'
 import { Tree } from '../../types'
 
+export const isInput = (v: object) => '__levaInput' in v
+
 export const buildTree = (paths: string[], filter?: string): Tree => {
   const tree = {}
   const _filter = filter ? filter.toLowerCase() : null

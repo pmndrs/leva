@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
 
-import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from '@leva/leva/plugins'
-import { debounce } from '@leva/leva/utilities'
-import { useTh } from '@leva/leva/plugins'
+import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
+import { debounce, tinycolor2 as tc } from 'leva/utilities'
+import { useTh } from 'leva/plugins'
 
 import { Canvas, SpringPreview } from './StyledSpring'
 import { InternalSpring, InternalSpringSettings } from './spring-plugin'
@@ -17,7 +17,12 @@ export function SpringCanvas() {
   const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useTh('colors', '$accent')
+  const accentColor = useTh('colors', '$highlight3')
+  const fillColor = useTh('colors', '$highlight1')
+
+  const [gradientTop, gradientBottom] = useMemo(() => {
+    return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
+  }, [fillColor])
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
@@ -39,7 +44,7 @@ export function SpringCanvas() {
         const { tension, friction, mass } = springRef.current
         onUpdate(springRef.current)
         set({
-          from: { scaleX: 0, opacity: 0.7 },
+          from: { scaleX: 0, opacity: 0.9 },
           to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
           config: { friction, tension, mass },
         })
@@ -54,13 +59,26 @@ export function SpringCanvas() {
       const t = springFn(tension, friction, mass)
       _ctx.clearRect(0, 0, width, height)
       _ctx.beginPath()
+      let max = 0
       for (let i = 0; i < width; i++) {
-        _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
+        const v = (t(i * 8) * height) / 2
+        max = Math.max(max, v)
+        _ctx.lineTo(i, height - v)
       }
+
+      const gradient = _ctx.createLinearGradient(0, max, 0, height)
+      gradient.addColorStop(0.0, gradientTop)
+      gradient.addColorStop(1.0, gradientBottom)
+      _ctx.fillStyle = gradient
       _ctx.strokeStyle = accentColor
+      _ctx.lineWidth = 2
+
       _ctx.stroke()
+      _ctx.lineTo(width - 1, height)
+      _ctx.lineTo(0, height)
+      _ctx.fill()
     },
-    [accentColor]
+    [accentColor, gradientTop, gradientBottom]
   )
 
   const [canvas, ctx] = useCanvas2d(drawSpring)

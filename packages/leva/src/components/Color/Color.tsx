@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
-import { Color as ColorType, InternalColorSettings } from './color-plugin'
+import { Color, InternalColorSettings } from './color-plugin'
 import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay } from '../UI'
 import { useInputContext } from '../../hooks'
 
-type ColorProps = LevaInputProps<ColorType, InternalColorSettings>
+type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
-export function Color() {
+export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
 
   const [showPicker, setShowPicker] = useState(false)

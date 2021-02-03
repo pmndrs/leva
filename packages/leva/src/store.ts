@@ -10,24 +10,23 @@ type State = { data: Data }
 // zustand store
 const _store = create<State>(() => ({ data: {} }))
 
-// possibly make this reactive
+/**
+ * FOLDERS will hold the folder settings for the pane.
+ * @note possibly make this reactive
+ */
 const FOLDERS: Record<string, FolderSettings> = {}
-const PATHS = new Set<string>()
 
 const useStore = _store
 
-// shorthand to get zustand store data
+// Shorthand to get zustand store data
 const getData = () => _store.getState().data
-
-function setPaths(newPaths: string[]) {
-  newPaths.forEach((p) => PATHS.add(p))
-}
 
 /**
  * Merges the data passed as an argument with the store data.
  * If an input path from the data already exists in the store,
  * the function doesn't update the data but increments count
  * to keep track of how many components use that input key.
+ *
  * @param newData the data to update
  */
 function setData(newData: Data) {
@@ -43,15 +42,15 @@ function setData(newData: Data) {
       else data[path] = { ...value, count: 1 }
     })
 
-    // TODO not sure about direct mutation but since this
-    // returns a new object that should work and trigger
-    // a re-render.
+    // Since we're returning a new object, direct mutation of data
+    // Should trigger a re-render so we're good!
     return { data }
   })
 }
 
 /**
  * Shorthand function to set the value of an input at a given path.
+ *
  * @param path path of the input
  * @param value new value of the input
  */
@@ -65,7 +64,8 @@ function setValueAtPath(path: string, value: any) {
 }
 
 function getValueAtPath(path: string) {
-  return _store.getState().data[path]
+  //@ts-expect-error
+  return _store.getState().data[path].value
 }
 
 /**
@@ -73,15 +73,13 @@ function getValueAtPath(path: string) {
  * a reference count superior to zero. This function is used by the
  * root pane to only display the inputs that are consumed by mounted
  * components.
+ *
  * @param data
  */
 function getVisiblePaths(data: Data) {
-  const visiblePaths: string[] = []
-  PATHS.forEach((path) => {
-    if (data[path]?.count > 0) visiblePaths.push(path)
-  })
-
-  return visiblePaths
+  return Object.keys(data).filter(
+    (path) => data[path].count > 0 && (!data[path].render || data[path].render!(getValueAtPath))
+  )
 }
 
 /**
@@ -89,6 +87,14 @@ function getVisiblePaths(data: Data) {
  */
 export const useVisiblePaths = () => useStore((s) => getVisiblePaths(s.data), shallow)
 
+/**
+ * Takes a data object with { [path.key]: value } and returns { [key]: value }.
+ * Also warns when two similar keys are being used by the user.
+ *
+ * @param data
+ * @param paths
+ * @param shouldWarn
+ */
 function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
   return Object.entries(pick(data, paths) as Data).reduce(
     // Typescript complaints that SpecialInput type doesn't have a value key.
@@ -131,6 +137,7 @@ export function useValuesForPath(paths: string[], initialData: Data) {
 
 /**
  * Return all input (value and settings) properties at a given path.
+ *
  * @param path
  */
 export function useInput(path: string) {
@@ -143,34 +150,58 @@ export function useInput(path: string) {
 export const getFolderSettings = (path: string) => FOLDERS[path]
 
 /**
- * Extract the data from the schema and sets folder initial preferences.
+ * Recursively extract the data from the schema, sets folder initial
+ * preferences and normalize the inputs (normalizing an input means parsing the
+ * input object, identify its type and normalize its settings).
+ *
  * @param schema
+ * @param rootPath used for recursivity
  */
 export function getDataFromSchema(schema: any, rootPath = '') {
   const data: any = {}
   const paths: string[] = []
+
   Object.entries(schema).forEach(([path, input]: [string, any]) => {
     const newPath = join(rootPath, path)
+
+    // If the input is a folder, then we recursively parse its schema and assign
+    // it to the current data.
     if (input.type === SpecialInputTypes.FOLDER) {
       Object.assign(data, getDataFromSchema(input.schema, newPath))
+
+      // Sets folder preferences
       FOLDERS[newPath] = input.settings as FolderSettings
     } else {
-      const normalizedInput = normalizeInput(input, newPath)
+      // If the input is not a folder, we normalize the input.
+
+      let _render = undefined
+      let _input = input
+
+      if (typeof input === 'object' && 'render' in input) {
+        const { render, ...rest } = input
+        _input = rest
+        _render = render
+      }
+      const normalizedInput = normalizeInput(_input, newPath)
+      // normalizeInput can return false if the input is not recognized.
       if (normalizedInput) {
         data[newPath] = normalizedInput
+        if (typeof _render === 'function') data[newPath].render = _render
         paths.push(newPath)
       }
     }
   })
+
   return data as Data
 }
 
-export function getPaths(initialData: Data) {
-  const paths = Object.keys(initialData)
-  setPaths(paths)
-  return paths
-}
-
+/**
+ * When the useControls hook unmmounts, it will call this function that will
+ * decrease the count of all the inputs. When an input count reaches 0, it
+ * should no longer be displayed in the panel.
+ *
+ * @param paths
+ */
 function disposePaths(paths: string[]) {
   _store.setState((s) => {
     const data = s.data

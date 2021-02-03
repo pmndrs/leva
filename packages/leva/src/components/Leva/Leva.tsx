@@ -1,21 +1,16 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { useDrag } from 'react-use-gesture'
-import { useSpring, a } from 'react-spring'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { Folder } from '../Folder'
-import { Filter } from './Filter'
+import { TitleWithFilter } from './Filter'
 
-import { useDeepMemo } from '../../hooks'
-import { isInput } from '../../utils'
+import { useDeepMemo, useTransform } from '../../hooks'
 
-import { Root, DragHandle } from './StyledLeva'
+import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
 import { ThemeContext } from '../../context'
-
-const AnimatedRoot = a(Root)
 
 let rootInitialized = false
 
@@ -30,8 +25,7 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   const { mergedTheme, themeCss } = useDeepMemo(() => mergeTheme(theme), [theme])
 
   // drag
-  const [spring, set] = useSpring(() => ({ x: 0, y: 0 }))
-  const bind = useDrag(({ offset: [x, y] }) => set({ x, y, immediate: true }))
+  const [rootRef, set] = useTransform<HTMLDivElement>()
 
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
@@ -39,19 +33,27 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   }, [])
 
   if (paths.length < 1) return null
-  // we know there's a folder at the root of the root if the first
-  // key isn't an input. isFolderOnTop is used to show an dummy folder at
-  // the top of the pane.
-  const values = Object.values(tree)
-  const isFolderOnTop = values.length > 0 && !isInput(values[0])
+
+  /**
+   * @todo remove
+   * we know there's a folder at the root of the root if the first
+   * key isn't an input. isFolderOnTop is used to show an dummy folder at
+   * the top of the pane.
+   */
+  // const values = Object.values(tree)
+  // const isFolderOnTop = values.length > 0 && !isInput(values[0])
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <AnimatedRoot className={themeCss} style={spring} fillParent={fillParent}>
-        <DragHandle {...bind()}>leva</DragHandle>
-        <Filter onChange={setFilter} />
-        <Folder root tree={tree} folderOnTop={isFolderOnTop} collapsed={collapsed} />
-      </AnimatedRoot>
+      <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
+        <Folder
+          isRoot
+          name="Leva"
+          tree={tree}
+          collapsed={collapsed}
+          TitleComponent={(props) => <TitleWithFilter onDrag={set} setFilter={setFilter} {...props} />}
+        />
+      </Root>
     </ThemeContext.Provider>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { RangeWrapper, Range, Scrubber } from './StyledRange'
+import { RangeWrapper, Range, Scrubber, Indicator } from './StyledRange'
 import { InternalNumberSettings, sanitizeStep } from './number-plugin'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
@@ -28,10 +28,14 @@ export function RangeSlider({ value, min, max, onDrag, step, initialValue }: Ran
     return memo
   })
 
+  const pos = range(value, min, max)
+
   return (
     <RangeWrapper ref={ref} {...bind()}>
-      <Range />
-      <Scrubber ref={scrubberRef} style={{ left: `calc(${range(value, min, max)} * (100% - ${scrubberWidth}))` }} />
+      <Range>
+        <Indicator style={{ left: 0, right: `calc(${1 - pos} * (100% - ${scrubberWidth}))` }} />
+      </Range>
+      <Scrubber ref={scrubberRef} style={{ left: `calc(${pos} * (100% - ${scrubberWidth}))` }} />
     </RangeWrapper>
   )
 }

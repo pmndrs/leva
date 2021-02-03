@@ -1,4 +1,4 @@
-import { styled } from '@leva/leva/plugins'
+import { styled } from 'leva/plugins'
 
 export const Canvas = styled('canvas', {
   height: '80px',
@@ -11,7 +11,7 @@ export const Canvas = styled('canvas', {
 export const SpringPreview = styled('div', {
   position: 'relative',
   top: '-2px',
-  backgroundColor: '$folderBorder',
+  backgroundColor: '$accent2',
   width: '100%',
   height: '2px',
   opacity: '0.2',

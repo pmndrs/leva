@@ -21,7 +21,8 @@ yarn add leva
 * The lib automatically calculates the number input step based on the initial value magnitude and significant digits. 
 * Increase / decrease numbers with arrow keys, with alt (`±0.1`) and shift (`±10`) modifiers support.
 * Draggable pane.
-* Supports copy paste.
+* Supports copying values.
+* Supports conditional rendering of inputs.
 
 ## Inputs
 * String

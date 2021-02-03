@@ -2,19 +2,13 @@ import { styled } from '../../styles'
 import 'react-colorful/dist/index.css'
 
 export const ColorPreview = styled('div', {
-  borderRadius: '$input',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
+  boxSizing: 'border-box',
+  borderRadius: '$sm',
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
-  '&:hover': {
-    borderColor: '$inputHoverBorder',
-  },
-  '&:active': {
-    borderColor: '$inputFocusBorder',
-  },
+  $inputStyle: '',
+  $hover: '',
 })
 
 export const PickerContainer = styled('div', {
@@ -27,7 +21,7 @@ export const PickerContainer = styled('div', {
   '& > span': {
     fontSize: '0.95em',
     opacity: '0.8',
-    padding: '0 $rowH',
+    padding: '0 $md',
   },
 })
 
@@ -41,12 +35,12 @@ export const PickerWrapper = styled('div', {
     width: '100px',
     height: '100px',
     transform: 'translateY(100%)',
-    boxShadow: '$overlay',
+    boxShadow: '$elevation2',
     cursor: 'crosshair',
   },
 
   '.react-colorful__saturation': {
-    borderRadius: '$input $input 0 0',
+    borderRadius: '$sm $sm 0 0',
   },
 
   '.react-colorful__alpha, .react-colorful__hue': {
@@ -54,7 +48,7 @@ export const PickerWrapper = styled('div', {
   },
 
   '.react-colorful__last-control': {
-    borderRadius: '0 0 $input $input',
+    borderRadius: '0 0 $sm $sm',
   },
 
   '.react-colorful__pointer': {

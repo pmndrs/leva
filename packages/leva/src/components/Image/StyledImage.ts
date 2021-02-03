@@ -1,22 +1,25 @@
 import { styled } from '../../styles'
 
 export const DropZone = styled('div', {
-  height: '100%',
-  borderStyle: 'solid',
-  borderWidth: '1px',
-  borderColor: '$inputBorder',
-  borderRadius: '$input',
-  transition: '$borderBg',
+  $flexCenter: '',
+  textAlign: 'center',
+  overflow: 'hidden',
+  minHeight: '$rowHeight',
+  background: '$elevation3',
+  color: 'inherit',
+  borderRadius: '$sm',
   outline: 'none',
+  userSelect: 'none',
   cursor: 'pointer',
-  '&:hover': {
-    borderColor: '$inputHoverBorder',
-  },
+  $hover: '',
+  $focusWithin: '',
+  $active: '$accent1 $elevation1',
+  $inputStyle: '',
   variants: {
     isDragAccept: {
       true: {
-        backgroundColor: '$inputActiveBg',
-        borderColor: '$inputFocusBorder',
+        $inputStyle: '$accent1',
+        backgroundColor: '$elevation1',
       },
     },
   },
@@ -34,39 +37,30 @@ export const Preview = styled('div', {
 })
 
 export const Instructions = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  textAlign: 'center',
-  opacity: 0.4,
   fontSize: '0.8em',
   height: '100%',
-  padding: '$rowV $rowH',
+  padding: '$rowGap $md',
 })
 
 export const Remove = styled('div', {
   position: 'absolute',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   top: '0',
   right: '0',
-  margin: '$rowV $rowH',
+  margin: '$rowGap $md',
   height: '20px',
   width: '20px',
-  borderRadius: '$input',
-  backgroundColor: '$primary',
-  border: '1px solid #ffffff99',
-  ':hover': { borderColor: '#ffffffff', backgroundColor: '$accent' },
-  transition: '$borderBg',
+  borderRadius: '$sm',
+  backgroundColor: '$elevation3',
+  hover: 'none $accent1',
 
-  '::after, ::before': {
+  '::after,::before': {
     content: '""',
     position: 'absolute',
     height: '2px',
     width: '10px',
     borderRadius: '1px',
-    backgroundColor: '#fff',
+    backgroundColor: '$highlight3',
   },
 
   '::after': { transform: 'rotate(45deg)' },

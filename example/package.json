@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@react-three/drei": "^2.2.12",
-    "leva": "^0.1.0",
     "noisejs": "^2.1.0",
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",
@@ -19,8 +18,8 @@
     "three": "^0.123.0"
   },
   "alias": {
-    "@leva/leva": "../packages/leva/src",
-    "@leva/spring": "../packages/spring/src",
+    "leva": "../packages/leva/src",
+    "@leva-ui/plugin-spring": "../packages/plugin-spring/src",
     "react": "../node_modules/react",
     "react-dom": "../node_modules/react-dom/profiling"
   },

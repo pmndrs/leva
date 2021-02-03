@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { useDrag } from 'react-use-gesture'
-import { useSpring, a, config } from 'react-spring'
 import { clamp } from '../../utils'
 import { Point2d as Point2dType, Point2dObject } from '../../types'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Point2dProps } from './Point2d'
 import { useTh } from '../../styles'
+import { useTransform } from '../../hooks'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
 
@@ -14,9 +14,10 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const outOfBoundsX = useRef(0)
   const outOfBoundsY = useRef(0)
 
-  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0, config: config.stiff }))
   const [showJoystick, setShowJoystick] = useState(false)
   const [isOutOfBounds, setIsOutOfBounds] = useState(false)
+
+  const [spanRef, set] = useTransform<HTMLSpanElement>()
 
   const {
     x: { step: stepX },
@@ -32,8 +33,8 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const startOutOfBounds = useCallback(() => {
     if (timeout.current) return
     setIsOutOfBounds(true)
-    if (outOfBoundsX.current) x.start(outOfBoundsX.current * w)
-    if (outOfBoundsY.current) y.start(outOfBoundsY.current * -h)
+    if (outOfBoundsX.current) set({ x: outOfBoundsX.current * w })
+    if (outOfBoundsY.current) set({ y: outOfBoundsY.current * -h })
     timeout.current = window.setInterval(() => {
       onUpdate((v: Point2dType) => {
         const incX = stepX * outOfBoundsX.current * 3
@@ -41,7 +42,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
         return Array.isArray(v) ? [v[0] + incX, v[1] + incY] : { x: v.x + incX, y: v.y + incY }
       })
     }, 16)
-  }, [x, w, y, h, onUpdate, stepX, stepY])
+  }, [w, h, onUpdate, set, stepX, stepY])
 
   const endOutOfBounds = useCallback(() => {
     window.clearTimeout(timeout.current)
@@ -66,11 +67,11 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     if (active) {
       if (!outOfBoundsX.current) {
         newX += dx * stepX
-        x.start(_x)
+        set({ x: _x })
       }
       if (!outOfBoundsY.current) {
         newY -= dy * stepY
-        y.start(_y)
+        set({ y: _y })
       }
       if (outOfBoundsX.current || outOfBoundsY.current) startOutOfBounds()
       else endOutOfBounds()
@@ -89,7 +90,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
       {showJoystick && (
         <JoystickPlayground isOutOfBounds={isOutOfBounds}>
           <div />
-          <a.span style={{ x, y }} />
+          <span ref={spanRef} />
         </JoystickPlayground>
       )}
     </JoystickTrigger>

@@ -1,76 +1,73 @@
 import { styled } from '../../styles'
 
-export const StyledTitle = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  color: '$folderText',
-  fontWeight: '$folder',
-  backgroundColor: '$folderTitleBg',
-  padding: '$rowV $rowH $rowV',
-  paddingLeft: 'var(--borderWidths-folder)',
-  userSelect: 'none',
-  cursor: 'pointer',
-  '& > i': {
-    height: '10px',
-    width: '10px',
-    borderRadius: '5px',
-    backgroundColor: '$folderText',
-    marginRight: '4px',
-    transition: 'transform 300ms ease',
-    '::after': {
-      content: '""',
-      display: 'block',
-      position: 'relative',
-      left: '2px',
-      top: '4px',
-      borderRadius: '1px',
-      height: '2px',
-      width: '6px',
-      backgroundColor: '$folderTitleBg',
-    },
-  },
-})
+export const StyledFolder = styled('div', {})
 
-export const StyledFolder = styled('div', {
-  marginTop: '$folderV',
-  '& + &': { marginTop: 'calc(-var(--spaces-rowV))' },
+export const StyledWrapper = styled('div', {
+  position: 'relative',
+  background: '$elevation2',
+  transition: 'height 350ms ease',
   variants: {
-    root: {
+    isRoot: {
       true: {
-        marginTop: 0,
-        [`& > ${StyledTitle}`]: {
-          borderRadius: '$root $root 0 0',
+        borderRadius: '$lg',
+      },
+      false: {
+        paddingLeft: '$md',
+        '::after': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width: 'var(--borderWidths-folder)',
+          height: '100%',
+          backgroundColor: '$elevation1',
+          transform: 'translateX(-50%)',
         },
       },
     },
+    toggled: {
+      false: { overflow: 'hidden' },
+    },
   },
 })
 
-export const StyledWrapper = styled('div', {
+export const StyledTitle = styled('div', {
+  $flex: '',
+  color: '$highlight3',
+  userSelect: 'none',
+  cursor: 'pointer',
+  marginTop: '$rowGap',
+  height: '$folderHeight',
+  fontWeight: '$folder',
+  '> svg': {
+    marginLeft: -4,
+    marginRight: 4,
+    cursor: 'pointer',
+    fill: '$highlight1',
+  },
+  ':hover > svg': {
+    fill: '$highlight2',
+  },
+  [`:hover + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight2',
+  },
+  [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight1',
+  },
+  [`${StyledFolder}:hover > & > svg`]: {
+    fill: '$highlight1',
+  },
   variants: {
-    root: {
-      true: {
-        borderStyle: 'solid',
-        borderWidth: '$root',
-        borderColor: '$rootBorder',
-      },
-      false: {
-        borderLeftStyle: 'solid',
-        borderLeftWidth: '$folder',
-        borderLeftColor: '$folderBorder',
-      },
-    },
+    toggled: { false: {} },
   },
 })
 
 export const StyledContent = styled('div', {
-  paddingTop: '$rowV',
+  position: 'relative',
   display: 'grid',
-  gridRowGap: '$rowV',
+  gridTemplateColumns: '100%',
+  gridRowGap: '$rowGap',
   transition: 'opacity 250ms ease',
-  [`& > ${StyledFolder}`]: {
-    marginLeft: '$folderH',
-  },
   variants: {
     toggled: {
       true: {
@@ -80,22 +77,25 @@ export const StyledContent = styled('div', {
       false: {
         opacity: 0,
         transitionDelay: '0ms',
+        pointerEvents: 'none',
       },
     },
-    root: {
+    isRoot: {
       true: {
-        [`& > ${StyledFolder}`]: {
-          marginLeft: 0,
-          '&:first-of-type': {
-            marginTop: '-$rowV',
-            [`> ${StyledTitle}`]: {
-              borderRadius: '$root $root 0 0',
-            },
-          },
-
-          [`& > ${StyledWrapper}`]: {
-            borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',
-          },
+        '& > div': {
+          paddingLeft: '$md',
+          paddingRight: '$md',
+        },
+        '& > div:first-of-type': {
+          paddingTop: '$sm',
+        },
+        '& > div:last-of-type': {
+          paddingBottom: '$sm',
+        },
+        [`> ${StyledFolder}:not(:first-of-type)`]: {
+          paddingTop: '$md',
+          marginTop: '$md',
+          borderTop: '$folder solid $elevation1',
         },
       },
     },
