@@ -39,4 +39,5 @@ export const InputContainer = styled('div', {
   backgroundColor: '$elevation3',
   $inputStyle: '$elevation1',
   $hover: '',
+  $focusWithin: '',
 })
