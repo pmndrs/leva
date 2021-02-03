@@ -40,7 +40,7 @@ export const RangeWrapper = styled('div', {
   display: 'flex',
   alignItems: 'center',
   height: '100%',
-  margin: '0 $input',
+  margin: '0 $rowGap',
   cursor: 'pointer',
   touchAction: 'none',
 })

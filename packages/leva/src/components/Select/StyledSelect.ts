@@ -19,7 +19,7 @@ export const StyledSelect = styled('select', {
   color: '$highlight3',
   borderStyle: 'none',
   borderRadius: '$sm',
-  padding: '0 $input',
+  padding: '0 $sm',
   cursor: 'pointer',
   $hover: '',
   $focus: '',

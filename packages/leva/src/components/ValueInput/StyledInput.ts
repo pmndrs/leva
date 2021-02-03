@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const StyledInput = styled('input', {
   /* input reset */
   $reset: '',
-  padding: '0 $input',
+  padding: '0 $sm',
   backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
@@ -19,7 +19,7 @@ export const InnerLabel = styled('div', {
   '& > :first-of-type': {
     width: '14px',
     height: '100%',
-    marginRight: '-$input',
+    marginRight: '-$sm',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
