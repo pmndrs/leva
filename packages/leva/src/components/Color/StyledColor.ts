@@ -7,7 +7,7 @@ export const ColorPreview = styled('div', {
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
-  border: '$input solid $elevation3',
+  $inputStyle: '',
   $hover: '',
 })
 

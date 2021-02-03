@@ -16,6 +16,9 @@ export const Scrubber = styled('div', {
   boxShadow: '0 0 0 2px $elevation2',
   backgroundColor: '$accent2',
   cursor: 'pointer',
+  ':active': {
+    backgroundColor: '$accent1',
+  },
   variants: {
     position: {
       left: {

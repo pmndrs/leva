@@ -94,6 +94,8 @@ function createStateClass(value: string, config: any, options: Options) {
 }
 
 const utils = {
+  $inputStyle: (value: any, config: any) =>
+    createStateClass(value, config, { key: '$input', borderColor: '$highlight1', inset: true }),
   $focusStyle: (value: any, config: any) => createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
   $hoverStyle: (value: any, config: any) =>
     createStateClass(value, config, { key: '$hover', borderColor: '$accent1', inset: true }),

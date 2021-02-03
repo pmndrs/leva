@@ -16,6 +16,7 @@ export const DropZone = styled('div', {
   $hover: '',
   $focusWithin: '',
   $active: '$accent1 $elevation1',
+  $inputStyle: '',
   variants: {
     isDragAccept: {
       true: {
