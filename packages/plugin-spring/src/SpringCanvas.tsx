@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
-import tc from 'tinycolor2'
 
 import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
-import { debounce } from 'leva/utilities'
+import { debounce, tinycolor2 as tc } from 'leva/utilities'
 import { useTh } from 'leva/plugins'
 
 import { Canvas, SpringPreview } from './StyledSpring'
