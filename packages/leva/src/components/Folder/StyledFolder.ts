@@ -43,7 +43,7 @@ export const StyledTitle = styled('div', {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$elevation1',
+    fill: '$highlight1',
   },
   ':hover > svg': {
     fill: '$highlight2',
@@ -58,7 +58,7 @@ export const StyledTitle = styled('div', {
     fill: '$highlight1',
   },
   variants: {
-    toggled: { false: { '> svg': { fill: '$highlight1' } } },
+    toggled: { false: {} },
   },
 })
 
