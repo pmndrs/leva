@@ -55,6 +55,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $scrubberWidth: '8px',
     $scrubberHeight: '16px',
     $rowHeight: '24px',
+    $checkboxSize: '16px',
     $joystickWidth: '100px',
     $joystickHeight: '100px',
   },
