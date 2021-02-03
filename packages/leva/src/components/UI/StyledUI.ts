@@ -53,14 +53,13 @@ export const CopyLabelContainer = styled('div', {
 })
 
 export const StyledLabel = styled('label', {
-  $flex: '',
-  height: '100%',
   fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   variants: {
     align: {
       top: {
+        height: '100%',
         alignItems: 'flex-start',
         paddingTop: '$sm',
       },
