@@ -4,7 +4,6 @@ export const StyledInput = styled('input', {
   /* input reset */
   $reset: '',
   padding: '0 $sm',
-  backgroundColor: 'transparent',
   width: 0,
   minWidth: 0,
   // calc accounts for the container borders

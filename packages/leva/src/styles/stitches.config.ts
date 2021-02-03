@@ -115,7 +115,7 @@ export const { styled, css } = createStyled({
       appearance: 'none',
       fontFamily: 'inherit',
       border: 'none',
-      background: 'none',
+      backgroundColor: 'transparent',
     }),
     $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
     $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),
