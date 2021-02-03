@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
+import tc from 'tinycolor2'
 
 import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
 import { debounce } from 'leva/utilities'
@@ -18,7 +19,11 @@ export function SpringCanvas() {
 
   const springRef = useRef(displayValue)
   const accentColor = useTh('colors', '$highlight3')
-  const fillColor = useTh('colors', '$elevation1')
+  const fillColor = useTh('colors', '$highlight1')
+
+  const [gradientTop, gradientBottom] = useMemo(() => {
+    return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
+  }, [fillColor])
 
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
@@ -55,18 +60,26 @@ export function SpringCanvas() {
       const t = springFn(tension, friction, mass)
       _ctx.clearRect(0, 0, width, height)
       _ctx.beginPath()
-      _ctx.strokeStyle = accentColor
-      _ctx.fillStyle = fillColor
-      _ctx.lineWidth = 2
+      let max = 0
       for (let i = 0; i < width; i++) {
-        _ctx.lineTo(i, height - (t(i * 8) * height) / 2)
+        const v = (t(i * 8) * height) / 2
+        max = Math.max(max, v)
+        _ctx.lineTo(i, height - v)
       }
+
+      const gradient = _ctx.createLinearGradient(0, max, 0, height)
+      gradient.addColorStop(0.0, gradientTop)
+      gradient.addColorStop(1.0, gradientBottom)
+      _ctx.fillStyle = gradient
+      _ctx.strokeStyle = accentColor
+      _ctx.lineWidth = 2
+
       _ctx.stroke()
       _ctx.lineTo(width - 1, height)
       _ctx.lineTo(0, height)
       _ctx.fill()
     },
-    [accentColor, fillColor]
+    [accentColor, gradientTop, gradientBottom]
   )
 
   const [canvas, ctx] = useCanvas2d(drawSpring)

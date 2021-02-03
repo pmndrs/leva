@@ -39,7 +39,6 @@ export const RangeWrapper = styled('div', {
   position: 'relative',
   $flex: '',
   height: '100%',
-  margin: '0 $rowGap',
   cursor: 'pointer',
   touchAction: 'none',
 })

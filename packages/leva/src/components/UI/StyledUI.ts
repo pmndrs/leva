@@ -58,4 +58,12 @@ export const StyledLabel = styled('label', {
   fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  variants: {
+    align: {
+      top: {
+        alignItems: 'flex-start',
+        paddingTop: '$sm',
+      },
+    },
+  },
 })
