@@ -39,7 +39,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $sm: '6px',
     $md: '10px',
     $rowGap: '7px',
-    $colGap: '5px',
+    $colGap: '7px',
   },
   fonts: {
     $mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
