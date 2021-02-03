@@ -12,7 +12,7 @@ function LabelWithCopy(props: LabelProps) {
 
   const handleClick = async () => {
     try {
-      await writeText(JSON.stringify({ [valueKey]: value }))
+      await writeText(JSON.stringify({ [valueKey]: value || '' }))
       setCopied(true)
     } catch {
       warn(LevaErrors.CLIPBOARD_ERROR, { [valueKey]: value })
