@@ -27,51 +27,44 @@ export const FilterWrapper = styled('div', {
 })
 
 export const StyledFilterInput = styled('input', {
+  $reset: '',
   position: 'relative',
   height: 30,
   width: '100%',
-  padding: '0 $rowH',
+  padding: '0 $md',
   backgroundColor: 'transparent',
-  transition: '$bg',
-  border: 'none',
-  outline: 'none',
-  color: '$textEmphasized',
-  fontFamily: 'inherit',
+  color: '$highlight3',
   fontSize: '10px',
   borderRadius: '$root',
   '&:focus': {},
   '::placeholder': {
-    color: '$text',
+    color: '$highlight2',
   },
 })
 
 export const Icon = styled('i', {
+  $flexCenter: '',
   width: 40,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {
-    fill: '$textDeEmphasized',
+    fill: '$highlight1',
     transition: 'transform 350ms ease, fill 250ms ease',
   },
   ':hover > svg': {
-    fill: '$textEmphasized',
+    fill: '$highlight3',
   },
-  variants: { active: { true: { '> svg': { fill: '$text' } } } },
+  variants: { active: { true: { '> svg': { fill: '$highlight2' } } } },
 })
 
 export const Drag = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  $flexCenter: '',
   flex: 1,
   '> svg': {
-    fill: '$textDeEmphasized',
+    fill: '$highlight1',
     transition: 'fill 250ms ease',
   },
   ':hover > svg': {
-    fill: '$textEmphasized',
+    fill: '$highlight3',
   },
 })

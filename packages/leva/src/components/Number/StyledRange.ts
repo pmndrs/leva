@@ -14,8 +14,11 @@ export const Scrubber = styled('div', {
   height: '$scrubberHeight',
   borderRadius: '$xs',
   boxShadow: '0 0 0 2px $elevation2',
-  backgroundColor: '$accent',
+  backgroundColor: '$accent2',
   cursor: 'pointer',
+  ':active': {
+    backgroundColor: '$accent1',
+  },
   variants: {
     position: {
       left: {
@@ -34,10 +37,8 @@ export const Scrubber = styled('div', {
 
 export const RangeWrapper = styled('div', {
   position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   height: '100%',
-  margin: '0 $input',
   cursor: 'pointer',
   touchAction: 'none',
 })
@@ -45,5 +46,5 @@ export const RangeWrapper = styled('div', {
 export const Indicator = styled('div', {
   position: 'absolute',
   height: '100%',
-  backgroundColor: '$accent',
+  backgroundColor: '$accent2',
 })

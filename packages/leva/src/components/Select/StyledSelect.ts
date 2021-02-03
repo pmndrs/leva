@@ -1,32 +1,25 @@
 import { styled } from '../../styles'
 
 export const SelectContainer = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
+  position: 'relative',
   '> svg': {
     pointerEvents: 'none',
     position: 'absolute',
-    right: '$rowH',
+    right: '$md',
   },
 })
 
 export const StyledSelect = styled('select', {
   width: '100%',
-  appearance: 'none',
-  outline: 'none',
-  display: 'block',
-  fontFamily: 'inherit',
-  fontSize: 'inherit',
+  $reset: '',
   height: '$rowHeight',
   backgroundColor: '$elevation3',
-  color: '$textEmphasized',
+  color: 'inherit',
   borderStyle: 'none',
   borderRadius: '$sm',
-  padding: '0 $input',
+  padding: '0 $sm',
   cursor: 'pointer',
-  transition: 'border',
-  '&:hover': {
-    boxShadow: 'inset 0 0 0 1px $accent2',
-  },
+  $hover: '',
+  $focus: '',
 })

@@ -1,5 +1,7 @@
 import { styled } from '../../styles'
 
+export const StyledFolder = styled('div', {})
+
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
@@ -8,60 +10,55 @@ export const StyledWrapper = styled('div', {
     isRoot: {
       true: {
         borderRadius: '$lg',
-        padding: '0 $rowH',
       },
       false: {
-        paddingLeft: '$rowH',
+        paddingLeft: '$md',
         '::after': {
           content: '""',
           position: 'absolute',
           left: 0,
           top: 0,
-          width: '1px',
+          width: 'var(--borderWidths-folder)',
           height: '100%',
           backgroundColor: '$elevation1',
-          transition: '$bg',
+          transform: 'translateX(-50%)',
         },
       },
     },
     toggled: {
-      false: {
-        overflow: 'hidden',
-      },
+      false: { overflow: 'hidden' },
     },
   },
 })
 
 export const StyledTitle = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  color: '$textEmphasized',
+  $flex: '',
+  color: '$highlight3',
   userSelect: 'none',
   cursor: 'pointer',
-  paddingTop: '$folderV',
+  marginTop: '$rowGap',
+  height: '$folderHeight',
+  fontWeight: '$folder',
   '> svg': {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$elevation3',
+    fill: '$highlight1',
   },
-})
-
-export const StyledFolder = styled('div', {
-  ':hover': {
-    [`> ${StyledTitle} > svg`]: {
-      fill: '$textDeEmphasized',
-    },
-    [`> ${StyledWrapper}::after`]: {
-      backgroundColor: '$textDeEmphasized',
-    },
+  ':hover > svg': {
+    fill: '$highlight2',
+  },
+  [`:hover + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight2',
+  },
+  [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
+    backgroundColor: '$highlight1',
+  },
+  [`${StyledFolder}:hover > & > svg`]: {
+    fill: '$highlight1',
   },
   variants: {
-    isRoot: {
-      true: {
-        marginTop: 0,
-      },
-    },
+    toggled: { false: {} },
   },
 })
 
@@ -69,7 +66,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  gridRowGap: '$rowV',
+  gridRowGap: '$rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {
@@ -85,12 +82,20 @@ export const StyledContent = styled('div', {
     },
     isRoot: {
       true: {
-        padding: 'calc(2 * var(--space-rowV)) 0',
-        [`& > ${StyledFolder}`]: {
-          marginLeft: 0,
-          [`& > ${StyledWrapper}`]: {
-            borderWidth: 'calc(var(--borderWidths-folder) - var(--borderWidths-root))',
-          },
+        '& > div': {
+          paddingLeft: '$md',
+          paddingRight: '$md',
+        },
+        '& > div:first-of-type': {
+          paddingTop: '$sm',
+        },
+        '& > div:last-of-type': {
+          paddingBottom: '$sm',
+        },
+        [`> ${StyledFolder}:not(:first-of-type)`]: {
+          paddingTop: '$md',
+          marginTop: '$md',
+          borderTop: '$folder solid $elevation1',
         },
       },
     },

@@ -7,11 +7,8 @@ export const ColorPreview = styled('div', {
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
-  border: '$input solid $elevation3',
-  '&:hover': {},
-  '&:active': {
-    borderColor: '$accent',
-  },
+  $inputStyle: '',
+  $hover: '',
 })
 
 export const PickerContainer = styled('div', {
@@ -24,7 +21,7 @@ export const PickerContainer = styled('div', {
   '& > span': {
     fontSize: '0.95em',
     opacity: '0.8',
-    padding: '0 $rowH',
+    padding: '0 $md',
   },
 })
 
@@ -38,7 +35,7 @@ export const PickerWrapper = styled('div', {
     width: '100px',
     height: '100px',
     transform: 'translateY(100%)',
-    boxShadow: '$overlay',
+    boxShadow: '$elevation2',
     cursor: 'crosshair',
   },
 

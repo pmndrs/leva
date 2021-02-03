@@ -4,14 +4,14 @@ import { StyledContent } from '../Folder/StyledFolder'
 export const Row = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridRowGap: '$rowV',
+  gridRowGap: '$rowGap',
   gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
   alignItems: 'center',
-  color: '$text',
+  color: '$highlight2',
 
   [`${StyledContent} > &`]: {
-    ':first-of-type': { marginTop: '$rowV' },
-    ':last-of-type': { marginBottom: '$rowV' },
+    ':first-of-type': { marginTop: '$rowGap' },
+    ':last-of-type': { marginBottom: '$rowGap' },
   },
 
   variants: {
@@ -22,13 +22,16 @@ export const Row = styled('div', {
       },
     },
   },
+
+  ':hover, :focus-within': {
+    color: '$highlight3',
+  },
 })
 
 export const CopyLabelContainer = styled('div', {
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
+  $flex: '',
   height: '100%',
+  position: 'relative',
   cursor: 'pointer',
   overflow: 'hidden',
 
@@ -37,9 +40,7 @@ export const CopyLabelContainer = styled('div', {
   },
 
   '> svg': {
-    position: 'absolute',
-    right: 4,
-    opacity: 0,
+    display: 'none',
     marginLeft: '$colGap',
     width: 15,
     minWidth: 15,
@@ -47,13 +48,21 @@ export const CopyLabelContainer = styled('div', {
     backgroundColor: '$elevation2',
   },
   '&:hover > svg': {
-    opacity: 1,
+    display: 'block',
   },
 })
 
 export const StyledLabel = styled('label', {
-  color: '$text',
   fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  variants: {
+    align: {
+      top: {
+        height: '100%',
+        alignItems: 'flex-start',
+        paddingTop: '$sm',
+      },
+    },
+  },
 })

@@ -1,9 +1,7 @@
 import { styled } from '../../styles'
 
 export const JoystickTrigger = styled('div', {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  $flexCenter: '',
   position: 'relative',
   backgroundColor: '$elevation3',
   borderRadius: '$sm',
@@ -11,16 +9,13 @@ export const JoystickTrigger = styled('div', {
   height: '$rowHeight',
   width: '$rowHeight',
   touchAction: 'none',
+  $hover: '',
 
-  ':hover': {},
-
-  ':active': {
-    cursor: 'none',
-  },
+  ':active': { cursor: 'none' },
 
   '::after': {
     content: '""',
-    backgroundColor: '$accent',
+    backgroundColor: '$accent2',
     height: '4px',
     width: '4px',
     borderRadius: '2px',
@@ -28,36 +23,27 @@ export const JoystickTrigger = styled('div', {
 })
 
 export const JoystickPlayground = styled('div', {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  $flexCenter: '',
   width: '$joystickWidth',
   height: '$joystickHeight',
   borderRadius: '$sm',
-  boxShadow: '$overlay',
+  boxShadow: '$elevation2',
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',
-  transition: '$bg',
 
   variants: {
     isOutOfBounds: {
-      true: {
-        backgroundColor: '$elevation1',
-      },
-      false: {
-        backgroundColor: '$elevation3',
-      },
+      true: { backgroundColor: '$elevation1' },
+      false: { backgroundColor: '$elevation3' },
     },
   },
   '> div': {
     position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    $flexCenter: '',
     borderStyle: 'solid',
     borderWidth: '1px',
-    borderColor: '$textDeEmphasized',
+    borderColor: '$highlight1',
     backgroundColor: '$elevation3',
     width: '80%',
     height: '80%',
@@ -66,7 +52,7 @@ export const JoystickPlayground = styled('div', {
       content: '""',
       position: 'absolute',
       zindex: 10,
-      backgroundColor: '$textDeEmphasized',
+      backgroundColor: '$highlight1',
     },
 
     '::before': {
@@ -85,7 +71,7 @@ export const JoystickPlayground = styled('div', {
     zindex: 100,
     width: '10px',
     height: '10px',
-    backgroundColor: '$accent',
+    backgroundColor: '$accent2',
     borderRadius: '50%',
   },
 })
