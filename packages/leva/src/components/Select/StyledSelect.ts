@@ -7,7 +7,7 @@ export const SelectContainer = styled('div', {
   '> svg': {
     pointerEvents: 'none',
     position: 'absolute',
-    right: '$rowH',
+    right: '$md',
   },
 })
 

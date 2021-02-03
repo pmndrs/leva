@@ -31,7 +31,7 @@ export const StyledFilterInput = styled('input', {
   position: 'relative',
   height: 30,
   width: '100%',
-  padding: '0 $rowH',
+  padding: '0 $md',
   backgroundColor: 'transparent',
   color: '$highlight3',
   fontSize: '10px',

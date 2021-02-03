@@ -8,10 +8,10 @@ export const StyledWrapper = styled('div', {
     isRoot: {
       true: {
         borderRadius: '$lg',
-        padding: '0 $rowH',
+        padding: '0 $md',
       },
       false: {
-        paddingLeft: '$rowH',
+        paddingLeft: '$md',
         '::after': {
           content: '""',
           position: 'absolute',
@@ -69,7 +69,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  gridRowGap: '$rowV',
+  gridRowGap: '$rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {

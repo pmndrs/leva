@@ -36,8 +36,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
   radii: { ...scales.radii },
   space: {
     $input: '8px',
-    $rowH: '10px',
-    $rowV: '4px',
+    $md: '10px',
+    $rowGap: '4px',
     $colGap: '4px',
   },
   fonts: {

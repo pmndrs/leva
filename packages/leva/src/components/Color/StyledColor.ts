@@ -21,7 +21,7 @@ export const PickerContainer = styled('div', {
   '& > span': {
     fontSize: '0.95em',
     opacity: '0.8',
-    padding: '0 $rowH',
+    padding: '0 $md',
   },
 })
 

@@ -4,14 +4,14 @@ import { StyledContent } from '../Folder/StyledFolder'
 export const Row = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridRowGap: '$rowV',
+  gridRowGap: '$rowGap',
   gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
   alignItems: 'center',
   color: '$highlight2',
 
   [`${StyledContent} > &`]: {
-    ':first-of-type': { marginTop: '$rowV' },
-    ':last-of-type': { marginBottom: '$rowV' },
+    ':first-of-type': { marginTop: '$rowGap' },
+    ':last-of-type': { marginBottom: '$rowGap' },
   },
 
   variants: {

@@ -41,7 +41,7 @@ export const Preview = styled('div', {
 export const Instructions = styled('div', {
   fontSize: '0.8em',
   height: '100%',
-  padding: '$rowV $rowH',
+  padding: '$rowGap $md',
 })
 
 export const Remove = styled('div', {
@@ -51,7 +51,7 @@ export const Remove = styled('div', {
   justifyContent: 'center',
   top: '0',
   right: '0',
-  margin: '$rowV $rowH',
+  margin: '$rowGap $md',
   height: '20px',
   width: '20px',
   borderRadius: '$sm',
