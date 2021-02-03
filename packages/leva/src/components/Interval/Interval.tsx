@@ -67,16 +67,17 @@ export function IntervalComponent() {
   const { bounds, ..._settings } = settings
 
   return (
-    <Row input>
-      <Label>{label}</Label>
-      <Row>
-        <Row>
-          <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
-        </Row>
+    <>
+      <Row input>
+        <Label>{label}</Label>
+        <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
+      </Row>
+      <Row input>
+        <span />
         <Container>
           <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
         </Container>
       </Row>
-    </Row>
+    </>
   )
 }
