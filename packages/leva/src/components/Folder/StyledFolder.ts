@@ -49,7 +49,7 @@ export const StyledTitle = styled('div', {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$elevation3',
+    fill: '$elevation1',
   },
   ':hover > svg': {
     fill: '$highlight2',

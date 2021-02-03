@@ -6,8 +6,7 @@ export const StyledInput = styled('input', {
   padding: '0 $sm',
   width: 0,
   minWidth: 0,
-  // calc accounts for the container borders
-  height: 'calc(var(--sizes-rowHeight) - 2 * var(--borderWidths-input))',
+  height: '$rowHeight',
   flex: 1,
 
   variants: { isNumber: { true: { textAlign: 'right' } } },
