@@ -24,13 +24,13 @@ export const StyledInputWrapper = styled('div', {
     width: '$checkboxSize',
     backgroundColor: '$elevation3',
     borderRadius: '$sm',
-    hover: '',
+    $hover: '',
   },
 
-  'input:focus + label': { focusStyle: '' },
+  'input:focus + label': { $focusStyle: '' },
 
   'input:focus:checked + label, input:checked + label:hover': {
-    borderStyle: '$accent3',
+    $hoverStyle: '$accent3',
   },
 
   'input + label:active': {

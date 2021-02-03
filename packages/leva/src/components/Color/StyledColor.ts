@@ -8,7 +8,7 @@ export const ColorPreview = styled('div', {
   height: '$rowHeight',
   width: '$rowHeight',
   border: '$input solid $elevation3',
-  hover: '',
+  $hover: '',
 })
 
 export const PickerContainer = styled('div', {

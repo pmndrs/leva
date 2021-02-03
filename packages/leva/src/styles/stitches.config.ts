@@ -72,7 +72,9 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $active: '1px',
   },
   fontWeights: {
-    $highlight2: '600',
+    $label: 'normal',
+    $folder: 'normal',
+    $button: 'normal',
   },
 })
 
@@ -83,21 +85,22 @@ function createStateClass(value: string, config: any, options: Options) {
   const css: any = {}
   if (borderColor !== 'none') {
     css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 ${config.tokens.borderWidths[options.key]} ${
-      (borderColor && borderColor !== 'default') || options.borderColor
+      (borderColor !== 'default' && borderColor) || options.borderColor
     }`
   }
 
   if (bgColor) {
     css.backgroundColor = bgColor || options.backgroundColor
   }
+
   return css
 }
 
 const utils = {
-  focusStyle: (value: any, config: any) => createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
-  hoverStyle: (value: any, config: any) =>
+  $focusStyle: (value: any, config: any) => createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
+  $hoverStyle: (value: any, config: any) =>
     createStateClass(value, config, { key: '$hover', borderColor: '$accent1', inset: true }),
-  activeStyle: (value: any, config: any) =>
+  $activeStyle: (value: any, config: any) =>
     createStateClass(value, config, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
@@ -105,21 +108,27 @@ export const { styled, css } = createStyled({
   tokens: getDefaultTheme(),
   utils: {
     ...utils,
-    focus: (value, config) => ({ ':focus': utils.focusStyle(value, config) }),
-    focusWithin: (value, config) => ({ ':focus-within': utils.focusStyle(value, config) }),
-    hover: (value, config) => ({ ':hover': utils.hoverStyle(value, config) }),
-    active: (value, config) => ({ ':active': utils.activeStyle(value, config) }),
+    $reset: () => ({
+      outline: 'none',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      color: 'inherit',
+      appearance: 'none',
+      fontFamily: 'inherit',
+      border: 'none',
+      background: 'none',
+    }),
+    $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
+    $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),
+    $hover: (value, config) => ({ ':hover': utils.$hoverStyle(value, config) }),
+    $active: (value, config) => ({ ':active': utils.$activeStyle(value, config) }),
   },
 })
 
 export const globalStyles = css.global({
   '.leva__body__dragged': {
     userSelect: 'none',
-    input: {
-      userSelect: 'none',
-    },
-    '*': {
-      cursor: 'ew-resize !important',
-    },
+    input: { userSelect: 'none' },
+    '*': { cursor: 'ew-resize !important' },
   },
 })

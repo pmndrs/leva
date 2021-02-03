@@ -38,6 +38,7 @@ export const StyledTitle = styled('div', {
   userSelect: 'none',
   cursor: 'pointer',
   paddingTop: '$folderV',
+  fontWeight: '$folder',
   '> svg': {
     marginLeft: -4,
     marginRight: 4,

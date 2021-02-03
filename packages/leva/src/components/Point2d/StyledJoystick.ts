@@ -11,7 +11,7 @@ export const JoystickTrigger = styled('div', {
   height: '$rowHeight',
   width: '$rowHeight',
   touchAction: 'none',
-  hover: '',
+  $hover: '',
 
   ':active': { cursor: 'none' },
 

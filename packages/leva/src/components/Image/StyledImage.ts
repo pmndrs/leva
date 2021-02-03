@@ -13,9 +13,9 @@ export const DropZone = styled('div', {
   outline: 'none',
   userSelect: 'none',
   cursor: 'pointer',
-  hover: '',
-  focusWithinState: '',
-  active: '$accent1 $elevation1',
+  $hover: '',
+  $focusWithin: '',
+  $active: '$accent1 $elevation1',
   variants: {
     isDragAccept: {
       true: {

@@ -13,11 +13,7 @@ export const SelectContainer = styled('div', {
 
 export const StyledSelect = styled('select', {
   width: '100%',
-  appearance: 'none',
-  outline: 'none',
-  display: 'block',
-  fontFamily: 'inherit',
-  fontSize: 'inherit',
+  $reset: '',
   height: '$rowHeight',
   backgroundColor: '$elevation3',
   color: '$highlight3',
@@ -25,6 +21,6 @@ export const StyledSelect = styled('select', {
   borderRadius: '$sm',
   padding: '0 $input',
   cursor: 'pointer',
-  hover: '',
-  focus: '',
+  $hover: '',
+  $focus: '',
 })

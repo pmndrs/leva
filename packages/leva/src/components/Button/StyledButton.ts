@@ -2,17 +2,15 @@ import { styled } from '../../styles'
 
 export const StyledButton = styled('button', {
   display: 'block',
-  fontFamily: 'inherit',
-  fontSize: 'inherit',
+  $reset: '',
+  fontWeight: '$button',
   color: '$highlight3',
-  appearance: 'none',
   height: '$rowHeight',
   borderStyle: 'none',
   borderRadius: '$sm',
-  outline: 'none',
   backgroundColor: '$accent2',
   cursor: 'pointer',
-  hover: '$accent3',
-  active: '$accent3 $accent1',
-  focus: '',
+  $hover: '$accent3',
+  $active: '$accent3 $accent1',
+  $focus: '',
 })

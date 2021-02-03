@@ -27,15 +27,13 @@ export const FilterWrapper = styled('div', {
 })
 
 export const StyledFilterInput = styled('input', {
+  $reset: '',
   position: 'relative',
   height: 30,
   width: '100%',
   padding: '0 $rowH',
   backgroundColor: 'transparent',
-  border: 'none',
-  outline: 'none',
   color: '$highlight3',
-  fontFamily: 'inherit',
   fontSize: '10px',
   borderRadius: '$root',
   '&:focus': {},

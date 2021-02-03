@@ -2,11 +2,7 @@ import { styled } from '../../styles'
 
 export const StyledInput = styled('input', {
   /* input reset */
-  background: 'transparent',
-  appearance: 'none',
-  fontFamily: 'inherit',
-  fontSize: 'inherit',
-  color: 'inherit',
+  $reset: '',
   padding: '0 $input',
   backgroundColor: 'transparent',
   width: 0,
@@ -46,6 +42,6 @@ export const InputContainer = styled('div', {
   borderRadius: '$sm',
   color: '$highlight3',
   backgroundColor: '$elevation3',
-  hover: '',
-  focusWithinState: '',
+  $hover: '',
+  $focusWithin: '',
 })
