@@ -100,7 +100,7 @@ function Comp2() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
-  // useControls({ checkbox: true })
+  useControls({ checkbox: true })
   return (
     <>
       <Leva />

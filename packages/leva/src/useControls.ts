@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store, getDataFromSchema, useValuesForPath } from './store'
+import { store, getDataFromSchema, useValuesForPath, orderPathFromData } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers/folder'
 import { register } from './plugin'
@@ -63,8 +63,8 @@ export function useControls<S extends Schema>(
    */
   const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
 
-  // Extracts the paths from the initialData.
-  const paths = useMemo(() => Object.keys(initialData), [initialData])
+  // Extracts the paths from the initialData and ensures order of paths.
+  const paths = useMemo(() => orderPathFromData(initialData), [initialData])
 
   /**
    * Reactive hook returning the values from the store at given paths.

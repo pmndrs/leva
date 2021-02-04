@@ -11,15 +11,26 @@ type State = { data: Data }
 const _store = create<State>(() => ({ data: {} }))
 
 /**
- * FOLDERS will hold the folder settings for the pane.
+ * Folders will hold the folder settings for the pane.
  * @note possibly make this reactive
  */
-const FOLDERS: Record<string, FolderSettings> = {}
+const Folders: Record<string, FolderSettings> = {}
+
+/**
+ * OrderedPaths will hold all the paths in a parent -> children order.
+ * This will ensure we can display the controls in a predictable order.
+ */
+const OrderedPaths = new Set<string>()
 
 const useStore = _store
 
 // Shorthand to get zustand store data
 const getData = () => _store.getState().data
+
+// adds paths to OrderedPaths
+function setOrderedPaths(newPaths: string[]) {
+  newPaths.forEach((p) => OrderedPaths.add(p))
+}
 
 /**
  * Merges the data passed as an argument with the store data.
@@ -77,9 +88,18 @@ function getValueAtPath(path: string) {
  * @param data
  */
 function getVisiblePaths(data: Data) {
-  return Object.keys(data).filter(
-    (path) => data[path].count > 0 && (!data[path].render || data[path].render!(getValueAtPath))
-  )
+  const visiblePaths: string[] = []
+  OrderedPaths.forEach((path) => {
+    if (data[path]?.count > 0 && (!data[path].render || data[path].render!(getValueAtPath))) visiblePaths.push(path)
+  })
+
+  return visiblePaths
+}
+
+export function orderPathFromData(initialData: Data) {
+  const paths = Object.keys(initialData)
+  setOrderedPaths(paths)
+  return paths
 }
 
 /**
@@ -147,7 +167,7 @@ export function useInput(path: string) {
   }, shallow)
 }
 
-export const getFolderSettings = (path: string) => FOLDERS[path]
+export const getFolderSettings = (path: string) => Folders[path]
 
 /**
  * Recursively extract the data from the schema, sets folder initial
@@ -170,7 +190,7 @@ export function getDataFromSchema(schema: any, rootPath = '') {
       Object.assign(data, getDataFromSchema(input.schema, newPath))
 
       // Sets folder preferences
-      FOLDERS[newPath] = input.settings as FolderSettings
+      Folders[newPath] = input.settings as FolderSettings
     } else {
       // If the input is not a folder, we normalize the input.
 
