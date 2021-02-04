@@ -57,6 +57,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $checkboxSize: '16px',
     $joystickWidth: '100px',
     $joystickHeight: '100px',
+    $colorWidgetWidth: '100%',
+    $colorWidgetHeight: '100px',
   },
   shadows: {
     $elevation1: '0 0 9px 0 rgba(53,49,49,0.50);',
