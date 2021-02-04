@@ -31,13 +31,13 @@ function Comp1() {
     boolean: true,
     color: { value: '#ffffffff', render: (get) => get('boolean') },
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
-    number: { value: 1000, min: 3 },
+    // number: { value: 1000, min: 3 },
     folder2: folder(
       {
         spring: spring({ tension: 100, friction: 30 }),
         folder3: folder(
           {
-            'Hello Button': button(() => console.log('hello')),
+            // 'Hello Button': button(() => console.log('hello')),
             folder4: folder({
               pos2d: { value: { x: 3, y: 4 } },
               pos2dArr: [100, 200],
@@ -51,7 +51,7 @@ function Comp1() {
       { render: (get) => get('boolean') }
     ),
 
-    colorObj: { r: 1, g: 2, b: 3 },
+    // colorObj: { r: 1, g: 2, b: 3 },
   })
 
   // console.log(t.colorObj)
@@ -100,7 +100,7 @@ function Comp2() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
-  useControls({ checkbox: true })
+  // useControls({ checkbox: true })
   return (
     <>
       <Leva />
