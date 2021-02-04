@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
-import { Wrapper } from '../Folder'
+import { TreeWrapper } from '../Folder'
 
 import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
 import { ThemeContext, WrapperSetOverflowContext } from '../../context'
-import { StyledFolder } from '../Folder/StyledFolder'
 import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
@@ -63,10 +62,8 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
     <ThemeContext.Provider value={mergedTheme}>
       <WrapperSetOverflowContext.Provider value={show}>
         <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
-          <StyledFolder isRoot>
-            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
-            <Wrapper ref={wrapperRef} isRoot tree={tree} toggled={toggled} />
-          </StyledFolder>
+          <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+          <TreeWrapper ref={wrapperRef} isRoot tree={tree} toggled={toggled} />
         </Root>
       </WrapperSetOverflowContext.Provider>
     </ThemeContext.Provider>

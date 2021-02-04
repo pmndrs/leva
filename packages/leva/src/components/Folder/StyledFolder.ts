@@ -1,16 +1,6 @@
 import { styled } from '../../styles'
 
-export const StyledFolder = styled('div', {
-  variants: {
-    isRoot: {
-      true: {
-        borderRadius: '$lg',
-        backgroundColor: '$elevation1',
-        boxShadow: '$level1',
-      },
-    },
-  },
-})
+export const StyledFolder = styled('div', {})
 
 export const StyledWrapper = styled('div', {
   position: 'relative',

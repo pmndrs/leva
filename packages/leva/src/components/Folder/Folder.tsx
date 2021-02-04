@@ -24,15 +24,15 @@ const Folder = ({ name, render, collapsed = false, parent, tree }: FolderProps &
   return (
     <StyledFolder style={{ display: shouldRender ? 'block' : 'none' }}>
       <FolderTitle name={name!} toggled={toggled} toggle={() => setToggle((t) => !t)} />
-      <Wrapper parent={parent} tree={tree} toggled={toggled} />
+      <TreeWrapper parent={parent} tree={tree} toggled={toggled} />
     </StyledFolder>
   )
 }
 
-type WrapperProps = { isRoot?: boolean; parent?: string; tree: Tree; toggled: boolean }
+type TreeWrapperProps = { isRoot?: boolean; parent?: string; tree: Tree; toggled: boolean }
 
-export const Wrapper = React.memo(
-  React.forwardRef<HTMLDivElement, WrapperProps>(({ isRoot = false, parent, tree, toggled }, ref) => {
+export const TreeWrapper = React.memo(
+  React.forwardRef<HTMLDivElement, TreeWrapperProps>(({ isRoot = false, parent, tree, toggled }, ref) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     return (
       <StyledWrapper ref={mergeRefs([ref, wrapperRef])} isRoot={isRoot} toggled={toggled}>
