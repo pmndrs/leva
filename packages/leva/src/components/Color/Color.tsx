@@ -8,13 +8,13 @@ import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay } from '../UI'
 import { useInputContext } from '../../hooks'
 import { useTh } from '../../styles'
-import { useShowWrapper } from '../../context'
+import { useSetWrapperOverFlow } from '../../context'
 
 type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
 export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
-  const showWrapper = useShowWrapper()
+  const showWrapper = useSetWrapperOverFlow()
 
   const pickerRef = useRef<HTMLDivElement>(null)
   const colorPickerHeight = useTh('sizes', '$colorPickerHeight')

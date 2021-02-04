@@ -9,7 +9,7 @@ import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
-import { ThemeContext, WrapperShowContext } from '../../context'
+import { ThemeContext, WrapperSetOverflowContext } from '../../context'
 import { StyledFolder } from '../Folder/StyledFolder'
 import { TitleWithFilter } from './Filter'
 
@@ -61,14 +61,14 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <WrapperShowContext.Provider value={show}>
+      <WrapperSetOverflowContext.Provider value={show}>
         <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
           <StyledFolder isRoot>
             <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
             <Wrapper ref={wrapperRef} isRoot tree={tree} toggled={toggled} />
           </StyledFolder>
         </Root>
-      </WrapperShowContext.Provider>
+      </WrapperSetOverflowContext.Provider>
     </ThemeContext.Provider>
   )
 }
