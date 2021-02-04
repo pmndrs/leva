@@ -46,7 +46,7 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
   )
 })
 
-type TitleWithFilterProps = FilterProps &
+export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
     onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
   }

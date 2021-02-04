@@ -51,7 +51,7 @@ function Comp1() {
       { render: (get) => get('boolean') }
     ),
 
-    // colorObj: { r: 1, g: 2, b: 3 },
+    colorObj: { r: 1, g: 2, b: 3 },
   })
 
   // console.log(t.colorObj)

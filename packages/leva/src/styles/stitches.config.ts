@@ -57,8 +57,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $checkboxSize: '16px',
     $joystickWidth: '100px',
     $joystickHeight: '100px',
-    $colorWidgetWidth: '100%',
-    $colorWidgetHeight: '100px',
+    $colorPickerWidth: '100%',
+    $colorPickerHeight: '100px',
   },
   shadows: {
     $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
@@ -138,7 +138,7 @@ export const { styled, css } = createStyled({
 })
 
 export const globalStyles = css.global({
-  '.leva__body__dragged': {
+  '.leva__panel__dragged': {
     userSelect: 'none',
     input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },

@@ -1,16 +1,17 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useRef, useMemo, useState, useEffect, useCallback } from 'react'
 import ReactDOM from 'react-dom'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
-import { Folder } from '../Folder'
-import { TitleWithFilter } from './Filter'
+import { Wrapper } from '../Folder'
 
 import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
-import { ThemeContext } from '../../context'
+import { ThemeContext, WrapperShowContext } from '../../context'
+import { StyledFolder } from '../Folder/StyledFolder'
+import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
 
@@ -26,6 +27,21 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   // drag
   const [rootRef, set] = useTransform<HTMLDivElement>()
+
+  // collapsible
+  const [toggled, setToggle] = useState(!collapsed)
+
+  // show, hide
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  const show = useCallback(
+    (flag: boolean) => {
+      if (flag) {
+        if (rootRef.current!.offsetHeight < window.innerHeight - 100) wrapperRef.current!.style.overflowY = 'visible'
+      } else wrapperRef.current!.style.removeProperty('overflow-y')
+    },
+    [rootRef]
+  )
 
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
@@ -45,15 +61,14 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
-        <Folder
-          isRoot
-          name="Leva"
-          tree={tree}
-          collapsed={collapsed}
-          TitleComponent={(props) => <TitleWithFilter onDrag={set} setFilter={setFilter} {...props} />}
-        />
-      </Root>
+      <WrapperShowContext.Provider value={show}>
+        <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
+          <StyledFolder isRoot>
+            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+            <Wrapper ref={wrapperRef} isRoot tree={tree} toggled={toggled} />
+          </StyledFolder>
+        </Root>
+      </WrapperShowContext.Provider>
     </ThemeContext.Provider>
   )
 }

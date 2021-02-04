@@ -30,16 +30,31 @@ export const PickerContainer = styled('div', {
 
 export const PickerWrapper = styled('div', {
   position: 'absolute',
-  bottom: -3,
   left: 0,
   zIndex: 100,
-  width: '$colorWidgetWidth',
-  height: '$colorWidgetHeight',
+  width: '$colorPickerWidth',
+  height: '$colorPickerHeight',
+
+  variants: {
+    direction: {
+      up: {
+        top: -3,
+        '.react-colorful': {
+          transform: 'translateY(-100%)',
+        },
+      },
+      down: {
+        bottom: -3,
+        '.react-colorful': {
+          transform: 'translateY(100%)',
+        },
+      },
+    },
+  },
 
   '.react-colorful': {
     width: '100%',
     height: '100%',
-    transform: 'translateY(100%)',
     boxShadow: '$level2',
     cursor: 'crosshair',
   },

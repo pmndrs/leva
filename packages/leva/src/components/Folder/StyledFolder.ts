@@ -19,10 +19,9 @@ export const StyledWrapper = styled('div', {
   variants: {
     isRoot: {
       true: {
-        // position: 'static',
         borderRadius: '$lg',
-        // overflowY: 'auto',
-        // maxHeight: '500px',
+        overflowY: 'auto',
+        maxHeight: 'calc(100vh - 20px - 43px)',
       },
       false: {
         paddingLeft: '$md',

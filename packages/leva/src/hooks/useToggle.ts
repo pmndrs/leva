@@ -1,9 +1,6 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useRef, useEffect } from 'react'
 
-export function useToggle(initalState: boolean) {
-  const [toggled, setToggle] = useState(initalState)
-  const toggle = useCallback(() => setToggle((t) => !t), [])
-
+export function useToggle(toggled: boolean) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const firstRender = useRef(true)
@@ -35,5 +32,5 @@ export function useToggle(initalState: boolean) {
     }
   }, [toggled])
 
-  return { wrapperRef, contentRef, toggled, toggle }
+  return { wrapperRef, contentRef }
 }
