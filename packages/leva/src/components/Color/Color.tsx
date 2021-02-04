@@ -21,7 +21,7 @@ export function ColorComponent() {
     <Row input>
       <Label>{label}</Label>
       <PickerContainer>
-        <ColorPreview onClick={() => setShowPicker(true)} style={{ background: displayValue }} />
+        <ColorPreview active={showPicker} onClick={() => setShowPicker(true)} style={{ background: displayValue }} />
         <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
         {showPicker && (
           <PickerWrapper>

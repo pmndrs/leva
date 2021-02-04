@@ -9,6 +9,9 @@ export const ColorPreview = styled('div', {
   width: '$rowHeight',
   $inputStyle: '',
   $hover: '',
+  variants: {
+    active: { true: { $inputStyle: '$accent1' } },
+  },
 })
 
 export const PickerContainer = styled('div', {
