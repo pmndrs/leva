@@ -14,7 +14,7 @@ type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
 export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
-  const showWrapper = useSetWrapperOverFlow()
+  const setWrapperOverflow = useSetWrapperOverFlow()
 
   const pickerRef = useRef<HTMLDivElement>(null)
   const colorPickerHeight = useTh('sizes', '$colorPickerHeight')
@@ -27,12 +27,12 @@ export function ColorComponent() {
   const showPicker = () => {
     const { bottom } = pickerRef.current!.getBoundingClientRect()
     const direction = bottom + parseFloat(colorPickerHeight) > window.innerHeight - 40 ? 'up' : 'down'
-    showWrapper(true)
+    setWrapperOverflow(true)
     setPickerStatus(direction)
   }
 
   const hidePicker = () => {
-    showWrapper(false)
+    setWrapperOverflow(false)
     setPickerStatus('hidden')
   }
 
@@ -47,10 +47,12 @@ export function ColorComponent() {
         />
         <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
         {pickerStatus !== 'hidden' && (
-          <PickerWrapper direction={pickerStatus}>
+          <>
             <Overlay onClick={() => hidePicker()} />
-            <ColorPicker color={rgb} onChange={onUpdate} />
-          </PickerWrapper>
+            <PickerWrapper direction={pickerStatus}>
+              <ColorPicker color={rgb} onChange={onUpdate} />
+            </PickerWrapper>
+          </>
         )}
       </PickerContainer>
     </Row>

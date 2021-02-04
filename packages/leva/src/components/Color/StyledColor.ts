@@ -39,15 +39,11 @@ export const PickerWrapper = styled('div', {
     direction: {
       up: {
         top: -3,
-        '.react-colorful': {
-          transform: 'translateY(-100%)',
-        },
+        transform: 'translateY(-100%)',
       },
       down: {
         bottom: -3,
-        '.react-colorful': {
-          transform: 'translateY(100%)',
-        },
+        transform: 'translateY(100%)',
       },
     },
   },
