@@ -61,8 +61,8 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $colorWidgetHeight: '100px',
   },
   shadows: {
-    $elevation1: '0 0 9px 0 rgba(53,49,49,0.50);',
-    $elevation2: '0 4px 14px #00000033',
+    $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
+    $level2: '0 4px 14px #00000033',
   },
   borderWidths: {
     $root: '0px',

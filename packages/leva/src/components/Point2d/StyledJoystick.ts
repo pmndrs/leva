@@ -27,7 +27,7 @@ export const JoystickPlayground = styled('div', {
   width: '$joystickWidth',
   height: '$joystickHeight',
   borderRadius: '$sm',
-  boxShadow: '$elevation2',
+  boxShadow: '$level2',
   position: 'absolute',
   zIndex: 100,
   overflow: 'hidden',

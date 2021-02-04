@@ -38,7 +38,7 @@ export const Folder = React.memo(
     const shouldRender = !render || render(store.getValueAtPath)
 
     return (
-      <StyledFolder style={{ display: shouldRender ? 'block' : 'none' }}>
+      <StyledFolder style={{ display: shouldRender ? 'block' : 'none' }} isRoot={isRoot}>
         {Title}
         <StyledWrapper ref={wrapperRef} isRoot={isRoot} toggled={toggled}>
           <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>

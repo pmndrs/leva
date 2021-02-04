@@ -5,8 +5,7 @@ export const Root = styled('div', {
   position: 'relative',
   fontFamily: '$mono',
   fontSize: '$root',
-  backgroundColor: '$elevation1',
-  boxShadow: '$elevation1',
+  color: '$rootText',
 
   variants: {
     fillParent: {
@@ -14,9 +13,7 @@ export const Root = styled('div', {
         position: 'fixed',
         top: '10px',
         right: '10px',
-        color: '$rootText',
         width: '$rootWidth',
-        borderRadius: '$lg',
         zIndex: 1000,
       },
       true: {

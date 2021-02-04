@@ -40,7 +40,7 @@ export const PickerWrapper = styled('div', {
     width: '100%',
     height: '100%',
     transform: 'translateY(100%)',
-    boxShadow: '$elevation2',
+    boxShadow: '$level2',
     cursor: 'crosshair',
   },
 
