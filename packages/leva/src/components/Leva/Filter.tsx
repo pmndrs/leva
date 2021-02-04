@@ -99,7 +99,7 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
           </svg>
         </Icon>
       </StyledTitleWithFilter>
-      <FilterWrapper toggled={!filterShown}>
+      <FilterWrapper toggled={filterShown}>
         <FilterInput ref={inputRef} setFilter={setFilter} />
       </FilterWrapper>
     </>
