@@ -2,7 +2,7 @@
   "sandboxes": [
     "/sandboxes/leva-minimal",
     "/sandboxes/leva-busy",
-    "/sandboxes/leva-scrolly",
+    "/sandboxes/leva-scroll",
     "/sandboxes/leva-plugin-spring"
   ]
 }

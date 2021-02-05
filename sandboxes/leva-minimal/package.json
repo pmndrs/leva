@@ -1,8 +1,5 @@
 {
   "name": "leva-minimal",
-  "version": "1.0.0",
-  "description": "This sandbox has been generated!",
-  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "leva": "*",
