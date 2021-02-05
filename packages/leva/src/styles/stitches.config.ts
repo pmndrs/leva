@@ -59,6 +59,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $joystickHeight: '100px',
     $colorPickerWidth: '160px',
     $colorPickerHeight: '100px',
+    $monitorHeight: '60px',
   },
   shadows: {
     $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
