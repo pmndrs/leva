@@ -8,8 +8,7 @@ export const JoystickTrigger = styled('div', {
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
-  userSelect: 'none',
-  touchAction: 'none',
+  $draggable: '',
   $hover: '',
 
   ':active': { cursor: 'none' },
@@ -32,8 +31,7 @@ export const JoystickPlayground = styled('div', {
   position: 'fixed',
   zIndex: 10000,
   overflow: 'hidden',
-  touchAction: 'none',
-  userSelect: 'none',
+  $draggable: '',
   transform: 'translate(-50%, -50%)',
 
   variants: {

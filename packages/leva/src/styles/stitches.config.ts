@@ -130,6 +130,11 @@ export const { styled, css } = createStyled({
       border: 'none',
       backgroundColor: 'transparent',
     }),
+    $draggable: () => ({
+      touchAction: 'none',
+      userSelect: 'none',
+      WebKitUserDrag: 'none',
+    }),
     $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
     $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),
     $hover: (value, config) => ({ ':hover': utils.$hoverStyle(value, config) }),

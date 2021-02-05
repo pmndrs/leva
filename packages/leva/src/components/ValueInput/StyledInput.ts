@@ -21,8 +21,6 @@ export const InnerLabel = styled('div', {
     marginRight: '-$sm',
     textTransform: 'uppercase',
     fontSize: '0.8em',
-    cursor: 'ew-resize',
-    userSelect: 'none',
     opacity: '0.3',
     '&:hover': { opacity: 0.8 },
   },
