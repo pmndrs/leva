@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
 
-      <Leva />
+      <Leva hideTitleBar />
     
       <div className="App">
         <pre>{JSON.stringify(data, null, "  ")}</pre>
