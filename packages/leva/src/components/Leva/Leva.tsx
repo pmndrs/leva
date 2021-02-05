@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom'
 
 import { useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
-import { Folder } from '../Folder'
-import { TitleWithFilter } from './Filter'
+import { TreeWrapper } from '../Folder'
 
 import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
 import { ThemeContext } from '../../context'
+import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
 
@@ -26,6 +26,9 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   // drag
   const [rootRef, set] = useTransform<HTMLDivElement>()
+
+  // collapsible
+  const [toggled, setToggle] = useState(!collapsed)
 
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
@@ -46,13 +49,8 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   return (
     <ThemeContext.Provider value={mergedTheme}>
       <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
-        <Folder
-          isRoot
-          name="Leva"
-          tree={tree}
-          collapsed={collapsed}
-          TitleComponent={(props) => <TitleWithFilter onDrag={set} setFilter={setFilter} {...props} />}
-        />
+        <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+        <TreeWrapper isRoot tree={tree} toggled={toggled} />
       </Root>
     </ThemeContext.Provider>
   )

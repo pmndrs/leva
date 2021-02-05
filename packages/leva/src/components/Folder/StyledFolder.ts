@@ -1,16 +1,6 @@
 import { styled } from '../../styles'
 
-export const StyledFolder = styled('div', {
-  variants: {
-    isRoot: {
-      true: {
-        borderRadius: '$lg',
-        backgroundColor: '$elevation1',
-        boxShadow: '$level1',
-      },
-    },
-  },
-})
+export const StyledFolder = styled('div', {})
 
 export const StyledWrapper = styled('div', {
   position: 'relative',
@@ -19,10 +9,9 @@ export const StyledWrapper = styled('div', {
   variants: {
     isRoot: {
       true: {
-        // position: 'static',
         borderRadius: '$lg',
-        // overflowY: 'auto',
-        // maxHeight: '500px',
+        overflowY: 'auto',
+        maxHeight: 'calc(100vh - 20px - 43px)',
       },
       false: {
         paddingLeft: '$md',

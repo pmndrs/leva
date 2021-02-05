@@ -29,17 +29,15 @@ export const PickerContainer = styled('div', {
 })
 
 export const PickerWrapper = styled('div', {
-  position: 'absolute',
-  bottom: -3,
+  position: 'fixed',
   left: 0,
-  zIndex: 100,
-  width: '$colorWidgetWidth',
-  height: '$colorWidgetHeight',
+  zIndex: 10000,
+  width: '$colorPickerWidth',
+  height: '$colorPickerHeight',
 
   '.react-colorful': {
     width: '100%',
     height: '100%',
-    transform: 'translateY(100%)',
     boxShadow: '$level2',
     cursor: 'crosshair',
   },
