@@ -20,6 +20,7 @@ const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
   gridColumnGap: '$colGap',
+  gridColumnStart: 2,
 })
 
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
@@ -73,7 +74,6 @@ export function IntervalComponent() {
         <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
       </Row>
       <Row input>
-        <span />
         <Container>
           <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
         </Container>

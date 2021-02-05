@@ -14,7 +14,7 @@ import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
 
-export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
+export function Leva({ theme = {}, fillParent = false, collapsed = false, oneLineLabels = false }) {
   // data
   const paths = useVisiblePaths()
   const [filter, setFilter] = useState('')
@@ -48,7 +48,7 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
+      <Root ref={rootRef} className={themeCss} fillParent={fillParent} oneLineLabels={oneLineLabels}>
         <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         <TreeWrapper isRoot tree={tree} toggled={toggled} />
       </Root>
