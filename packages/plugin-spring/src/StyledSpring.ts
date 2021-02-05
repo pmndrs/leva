@@ -5,7 +5,7 @@ export const Canvas = styled('canvas', {
   width: '100%',
   cursor: 'crosshair',
   display: 'block',
-  touchAction: 'none',
+  $draggable: '',
 })
 
 export const SpringPreview = styled('div', {

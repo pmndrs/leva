@@ -1,7 +1,7 @@
 import { styled } from '../../styles'
 import { StyledContent } from '../Folder/StyledFolder'
 
-export const Row = styled('div', {
+export const StyledRow = styled('div', {
   position: 'relative',
   display: 'grid',
   gridRowGap: '$rowGap',
@@ -14,18 +14,14 @@ export const Row = styled('div', {
     ':last-of-type': { marginBottom: '$rowGap' },
   },
 
-  variants: {
-    input: {
-      true: {
-        gridTemplateColumns: 'auto var(--sizes-controlWidth)',
-        gridColumnGap: '$colGap',
-      },
-    },
-  },
-
   ':hover, :focus-within': {
     color: '$highlight3',
   },
+})
+
+export const StyledInputRow = styled(StyledRow, {
+  gridTemplateColumns: 'auto var(--sizes-controlWidth)',
+  gridColumnGap: '$colGap',
 })
 
 export const CopyLabelContainer = styled('div', {

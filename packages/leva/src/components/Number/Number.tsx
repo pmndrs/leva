@@ -4,7 +4,7 @@ import { LevaInputProps } from '../../types/'
 import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../UI'
 import { useDragNumber, useInputContext } from '../../hooks'
-import { RangeGrid } from './StyledNumber'
+import { RangeGrid, InnerNumberLabel } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
@@ -13,9 +13,9 @@ export function Number({ valueKey, displayValue, onUpdate, onChange, settings }:
   const bind = useDragNumber({ settings, onDrag: onUpdate })
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      <div title={valueKey.length > 1 ? valueKey : ''} {...bind()} style={{ touchAction: 'none' }}>
+      <InnerNumberLabel title={valueKey.length > 1 ? valueKey : ''} {...bind()}>
         {valueKey.charAt(0)}
-      </div>
+      </InnerNumberLabel>
     </NumberInput>
   )
 }

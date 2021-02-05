@@ -10,6 +10,8 @@ export const StyledWrapper = styled('div', {
     isRoot: {
       true: {
         borderRadius: '$lg',
+        overflowY: 'auto',
+        maxHeight: 'calc(100vh - 20px - 43px)',
       },
       false: {
         paddingLeft: '$md',

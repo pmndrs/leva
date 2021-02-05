@@ -57,10 +57,13 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $checkboxSize: '16px',
     $joystickWidth: '100px',
     $joystickHeight: '100px',
+    $colorPickerWidth: '160px',
+    $colorPickerHeight: '100px',
+    $monitorHeight: '60px',
   },
   shadows: {
-    $elevation1: '0 0 9px 0 rgba(53,49,49,0.50);',
-    $elevation2: '0 4px 14px #00000033',
+    $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
+    $level2: '0 4px 14px #00000033',
   },
   borderWidths: {
     $root: '0px',
@@ -128,6 +131,11 @@ export const { styled, css } = createStyled({
       border: 'none',
       backgroundColor: 'transparent',
     }),
+    $draggable: () => ({
+      touchAction: 'none',
+      userSelect: 'none',
+      WebKitUserDrag: 'none',
+    }),
     $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
     $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),
     $hover: (value, config) => ({ ':hover': utils.$hoverStyle(value, config) }),
@@ -136,7 +144,7 @@ export const { styled, css } = createStyled({
 })
 
 export const globalStyles = css.global({
-  '.leva__body__dragged': {
+  '.leva__panel__dragged': {
     userSelect: 'none',
     input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },

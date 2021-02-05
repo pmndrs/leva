@@ -10,25 +10,43 @@ type FilterProps = { setFilter: (value: string) => void }
 const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter }, ref) => {
   const [value, set] = useState('')
   const debouncedOnChange = useMemo<FilterProps['setFilter']>(() => debounce(setFilter, 250), [setFilter])
+  const clear = () => {
+    setFilter('')
+    set('')
+  }
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.currentTarget.value
     set(v)
-    debouncedOnChange(v)
   }
 
+  useEffect(() => {
+    debouncedOnChange(value)
+  }, [value, debouncedOnChange])
+
   return (
-    <StyledFilterInput
-      ref={ref}
-      value={value}
-      placeholder="[Open this filter field with CMD+SHIFT+L]"
-      onPointerDown={(e) => e.stopPropagation()}
-      onChange={_onChange}
-    />
+    <>
+      <StyledFilterInput
+        ref={ref}
+        value={value}
+        placeholder="[Open filter with CMD+SHIFT+L]"
+        onPointerDown={(e) => e.stopPropagation()}
+        onChange={_onChange}
+      />
+      <Icon onClick={() => clear()} style={{ visibility: value ? 'visible' : 'hidden' }}>
+        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fillRule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </Icon>
+    </>
   )
 })
 
-type TitleWithFilterProps = FilterProps &
+export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
     onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
   }

@@ -9,6 +9,9 @@ export const ColorPreview = styled('div', {
   width: '$rowHeight',
   $inputStyle: '',
   $hover: '',
+  variants: {
+    active: { true: { $inputStyle: '$accent1' } },
+  },
 })
 
 export const PickerContainer = styled('div', {
@@ -26,16 +29,16 @@ export const PickerContainer = styled('div', {
 })
 
 export const PickerWrapper = styled('div', {
-  position: 'absolute',
-  bottom: 0,
+  position: 'fixed',
   left: 0,
-  zIndex: 100,
+  zIndex: 10000,
+  width: '$colorPickerWidth',
+  height: '$colorPickerHeight',
 
   '.react-colorful': {
-    width: '100px',
-    height: '100px',
-    transform: 'translateY(100%)',
-    boxShadow: '$elevation2',
+    width: '100%',
+    height: '100%',
+    boxShadow: '$level2',
     cursor: 'crosshair',
   },
 
