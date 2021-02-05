@@ -100,10 +100,10 @@ function Comp2() {
 export default function App() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
-  const { oneLineLabels } = useControls({ oneLineLabels: false })
+  const { oneLineLabels, hideTitleBar } = useControls({ oneLineLabels: false, hideTitleBar: false })
   return (
     <>
-      <Leva oneLineLabels={oneLineLabels} />
+      <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
