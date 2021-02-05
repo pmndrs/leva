@@ -3,7 +3,7 @@ import create from 'zustand'
 import shallow from 'zustand/shallow'
 import { normalizeInput, pick, getKeyPath, join, updateInput } from './utils'
 import { warn, LevaErrors } from './utils/log'
-import { Data, FolderSettings, SpecialInputTypes } from './types/'
+import { Data, DataItem, FolderSettings, SpecialInputTypes } from './types/'
 
 type State = { data: Data }
 
@@ -160,7 +160,7 @@ export function useValuesForPath(paths: string[], initialData: Data) {
  *
  * @param path
  */
-export function useInput(path: string) {
+export function getInput(path: string): DataItem {
   return useStore((s) => {
     const { count, ...input } = s.data[path]
     return input
@@ -236,6 +236,7 @@ export const store = {
   setValueAtPath,
   getValueAtPath,
   disposePaths,
+  getInput,
 }
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {

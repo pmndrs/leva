@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { FolderTitle } from './FolderTitle'
 import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
-import { getFolderSettings, store } from '../../store'
+import { getFolderSettings } from '../../store'
 import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { useToggle } from '../../hooks'
 import { FolderSettings, Tree } from '../../types/'
+import { useStoreContext } from '../../context'
 
 type FolderProps = { name?: string; parent?: string; tree: Tree }
 
@@ -17,7 +18,8 @@ const SubFolder = ({ name, parent, tree }: FolderProps) => {
 }
 
 const Folder = ({ name, render, collapsed = false, parent, tree }: FolderProps & FolderSettings) => {
-  const shouldRender = !render || render(store.getValueAtPath)
+  const { getValue } = useStoreContext()
+  const shouldRender = !render || render(getValue)
   const [toggled, setToggle] = useState(!collapsed)
 
   return (

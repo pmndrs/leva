@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
-import { useVisiblePaths } from '../../store'
+import { store, useVisiblePaths } from '../../store'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -9,7 +9,7 @@ import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
-import { ThemeContext } from '../../context'
+import { ThemeContext, StoreContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
@@ -36,6 +36,12 @@ export function Leva({
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
 
+  // store
+  const storeContextValue = useMemo(
+    () => ({ getValue: store.getValueAtPath, setValue: store.setValueAtPath, getInput: store.getInput }),
+    []
+  )
+
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
     rootInitialized = true
@@ -50,7 +56,9 @@ export function Leva({
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
-        <TreeWrapper isRoot tree={tree} toggled={toggled} />
+        <StoreContext.Provider value={storeContextValue}>
+          <TreeWrapper isRoot tree={tree} toggled={toggled} />
+        </StoreContext.Provider>
       </Root>
     </ThemeContext.Provider>
   )

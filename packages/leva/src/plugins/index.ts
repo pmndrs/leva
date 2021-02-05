@@ -4,8 +4,8 @@ export { createPlugin } from '../plugin'
 export { Row, Label } from '../components/UI'
 export { ValueInput } from '../components/ValueInput'
 export { Vector, getVectorPlugin } from '../components/Vector'
-export { useDrag, useDragNumber, useCanvas2d, useInputContext } from '../hooks/'
-
+export { useDrag, useDragNumber, useCanvas2d } from '../hooks/'
+export { useInputContext } from '../context'
 // export styling utilities
 export { styled, useTh } from '../styles'
 

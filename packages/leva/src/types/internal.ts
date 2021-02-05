@@ -4,11 +4,12 @@ export type DataInput = {
   type: string
   value: unknown
   settings?: object
-  count: number
 }
 
+export type DataItem = (DataInput | SpecialInput) & { render?: RenderFn }
+
 export type Data = {
-  [key: string]: (DataInput | (SpecialInput & { count: number })) & { render?: RenderFn }
+  [key: string]: DataItem & { count: number }
 }
 
 export type Tree = {
