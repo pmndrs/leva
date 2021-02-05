@@ -1,4 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+// @ts-expect-error
+import { Portal } from 'react-portal'
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
 import { Point2d as Point2dType, Point2dObject } from '../../types'
@@ -14,10 +16,21 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const outOfBoundsX = useRef(0)
   const outOfBoundsY = useRef(0)
 
-  const [showJoystick, setShowJoystick] = useState(false)
+  const [joystickShown, setShowJoystick] = useState(false)
   const [isOutOfBounds, setIsOutOfBounds] = useState(false)
 
   const [spanRef, set] = useTransform<HTMLSpanElement>()
+
+  const joystickeRef = useRef<HTMLDivElement>(null)
+  const playgroundRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (joystickShown) {
+      const { top, left, width, height } = joystickeRef.current!.getBoundingClientRect()
+      playgroundRef.current!.style.left = left + width / 2 + 'px'
+      playgroundRef.current!.style.top = top + height / 2 + 'px'
+    }
+  }, [joystickShown])
 
   const {
     x: { step: stepX },
@@ -52,8 +65,8 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
 
   useEffect(() => () => window.clearTimeout(timeout.current), [])
 
-  const bind = useDrag(({ active, delta: [dx, dy], movement: [mx, my] }) => {
-    setShowJoystick(active)
+  const bind = useDrag(({ first, active, delta: [dx, dy], movement: [mx, my] }) => {
+    if (first) setShowJoystick(true)
 
     const _x = clamp(mx, -w, w)
     const _y = clamp(my, -h, h)
@@ -78,6 +91,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
 
       onUpdate({ x: newX, y: newY })
     } else {
+      setShowJoystick(false)
       outOfBoundsX.current = 0
       outOfBoundsY.current = 0
       set({ x: 0, y: 0 })
@@ -86,12 +100,14 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   })
 
   return (
-    <JoystickTrigger {...bind()}>
-      {showJoystick && (
-        <JoystickPlayground isOutOfBounds={isOutOfBounds}>
-          <div />
-          <span ref={spanRef} />
-        </JoystickPlayground>
+    <JoystickTrigger ref={joystickeRef} {...bind()}>
+      {joystickShown && (
+        <Portal>
+          <JoystickPlayground ref={playgroundRef} isOutOfBounds={isOutOfBounds}>
+            <div />
+            <span ref={spanRef} />
+          </JoystickPlayground>
+        </Portal>
       )}
     </JoystickTrigger>
   )
