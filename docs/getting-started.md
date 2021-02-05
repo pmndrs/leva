@@ -46,4 +46,4 @@ Note that since `UnmountedComponent` is not mounted anywhere in our application,
 
 ## Gotchas
 
-- The order of the controls depends on mounting order, in our case `myValue` will be first.
+- The order of the controls depends on hooks call order, in our case `myValue` will be first.

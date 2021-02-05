@@ -7,7 +7,9 @@
 A single numerical input.
 
 ```jsx
-const { myNumber } = useControls({ myNumber: 4 })
+const { myNumber } = useControls({ 
+  myNumber: 4
+})
 ```
 
 - Increase / decrease numbers with arrow keys, with alt (±0.1) and shift (±10) modifiers support.
@@ -21,11 +23,12 @@ A Number input with an additional range slider. It will be used when you provide
 
 ```jsx
 const { myNumber } = useControls({ myNumber: {
-  value: 4,
-  min: 0,
-  max: 10,
-  step: 1
-} })
+    value: 4,
+    min: 0,
+    max: 10,
+    step: 1
+  } 
+})
 ```
 
 All rules from Number type also apply.
