@@ -1,12 +1,11 @@
 {
-  "name": "leva-busy",
+  "name": "leva-plugin-spring",
   "version": "1.0.0",
-  "description": "This sandbox has been generated!",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "leva": "https://pkg.csb.dev/gsimone/leva/commit/d40fd5be/leva",
-    "noisejs": "2.1.0",
+    "leva": "*",
+    "@leva-ui/plugin-spring": "*",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-scripts": "3.4.3"
