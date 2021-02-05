@@ -1,4 +1,5 @@
 import { styled } from '../../styles'
+import { StyledInputRow } from '../UI/StyledUI'
 
 export const Root = styled('div', {
   /* position */
@@ -22,6 +23,18 @@ export const Root = styled('div', {
       true: {
         position: 'relative',
         width: '100%',
+      },
+    },
+    oneLineLabels: {
+      true: {
+        [`${StyledInputRow}`]: {
+          gridTemplateColumns: 'auto',
+          gridAutoColumns: 'minmax(max-content, 1fr);',
+          gridAutoRows: 'minmax(var(--sizes-rowHeight), auto)',
+          gridRowGap: 0,
+          gridColumnGap: 0,
+          marginTop: '$rowGap',
+        },
       },
     },
   },

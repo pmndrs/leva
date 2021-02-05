@@ -62,7 +62,7 @@ export function SpringCanvas() {
       let max = 0
       for (let i = 0; i < width; i++) {
         const v = (t(i * 8) * height) / 2
-        max = Math.max(max, v)
+        if (Number.isFinite(v)) max = Math.max(max, v)
         _ctx.lineTo(i, height - v)
       }
 

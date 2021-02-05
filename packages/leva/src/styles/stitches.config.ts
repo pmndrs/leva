@@ -59,6 +59,7 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $joystickHeight: '100px',
     $colorPickerWidth: '160px',
     $colorPickerHeight: '100px',
+    $monitorHeight: '60px',
   },
   shadows: {
     $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
@@ -129,6 +130,11 @@ export const { styled, css } = createStyled({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
+    }),
+    $draggable: () => ({
+      touchAction: 'none',
+      userSelect: 'none',
+      WebKitUserDrag: 'none',
     }),
     $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
     $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),

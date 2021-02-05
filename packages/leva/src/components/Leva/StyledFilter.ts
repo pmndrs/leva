@@ -58,7 +58,7 @@ export const StyledFilterInput = styled('input', {
 
 export const Drag = styled('div', {
   $flexCenter: '',
-  touchAction: 'none',
+  $draggable: '',
   flex: 1,
   '> svg': {
     fill: '$highlight1',
