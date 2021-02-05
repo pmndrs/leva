@@ -29,24 +29,11 @@ export const PickerContainer = styled('div', {
 })
 
 export const PickerWrapper = styled('div', {
-  position: 'absolute',
+  position: 'fixed',
   left: 0,
-  zIndex: 100,
+  zIndex: 10000,
   width: '$colorPickerWidth',
   height: '$colorPickerHeight',
-
-  variants: {
-    direction: {
-      up: {
-        top: -3,
-        transform: 'translateY(-100%)',
-      },
-      down: {
-        bottom: -3,
-        transform: 'translateY(100%)',
-      },
-    },
-  },
 
   '.react-colorful': {
     width: '100%',

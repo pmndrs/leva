@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState, useEffect, useCallback } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 
 import { useVisiblePaths } from '../../store'
@@ -9,7 +9,7 @@ import { useDeepMemo, useTransform } from '../../hooks'
 
 import { Root } from './StyledLeva'
 import { mergeTheme, globalStyles } from '../../styles'
-import { ThemeContext, WrapperSetOverflowContext } from '../../context'
+import { ThemeContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 
 let rootInitialized = false
@@ -30,18 +30,6 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
 
-  // show, hide
-  const wrapperRef = useRef<HTMLDivElement>(null)
-
-  const show = useCallback(
-    (flag: boolean) => {
-      if (flag) {
-        if (rootRef.current!.offsetHeight < window.innerHeight - 100) wrapperRef.current!.style.overflowY = 'visible'
-      } else wrapperRef.current!.style.removeProperty('overflow-y')
-    },
-    [rootRef]
-  )
-
   // TODO check if using useEffect is the right hook (we used useLayoutEffect before)
   useEffect(() => {
     rootInitialized = true
@@ -60,12 +48,10 @@ export function Leva({ theme = {}, fillParent = false, collapsed = false }) {
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <WrapperSetOverflowContext.Provider value={show}>
-        <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
-          <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
-          <TreeWrapper ref={wrapperRef} isRoot tree={tree} toggled={toggled} />
-        </Root>
-      </WrapperSetOverflowContext.Provider>
+      <Root ref={rootRef} className={themeCss} fillParent={fillParent}>
+        <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+        <TreeWrapper isRoot tree={tree} toggled={toggled} />
+      </Root>
     </ThemeContext.Provider>
   )
 }
