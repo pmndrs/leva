@@ -1,5 +1,5 @@
 import React from "react";
-import { useControls, folder, button, monitor } from "leva";
+import { useControls, folder, button, monitor, Leva } from "leva";
 import { Noise } from "noisejs";
 import "./styles.css";
 
@@ -39,8 +39,14 @@ export default function App() {
   });
 
   return (
-    <div className="App">
-      <pre>{JSON.stringify(data, null, "  ")}</pre>
-    </div>
+    <>
+
+      <Leva oneLineLabels />
+    
+      <div className="App">
+        <pre>{JSON.stringify(data, null, "  ")}</pre>
+      </div>
+
+    </>
   );
 }
