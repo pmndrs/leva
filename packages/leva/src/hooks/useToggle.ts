@@ -15,13 +15,19 @@ export function useToggle(toggled: boolean) {
     let timeout: number
     const ref = wrapperRef.current!
 
-    const fixHeight = () => toggled && ref.style.removeProperty('height')
+    const fixHeight = () => {
+      if (toggled) {
+        ref.style.removeProperty('height')
+        contentRef.current!.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+    }
 
     ref.addEventListener('transitionend', fixHeight, { once: true })
 
     const { height } = contentRef.current!.getBoundingClientRect()
-    if (toggled) ref.style.height = height + 'px'
-    else {
+    if (toggled) {
+      ref.style.height = height + 'px'
+    } else {
       ref.style.height = height + 'px'
       timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
     }
