@@ -46,7 +46,7 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
         <StoreContext.Provider value={store}>
-          <TreeWrapper isRoot tree={tree} toggled={toggled} />
+          <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
         </StoreContext.Provider>
       </StyledRoot>
     </ThemeContext.Provider>

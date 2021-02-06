@@ -7,12 +7,14 @@ export const StyledWrapper = styled('div', {
   background: '$elevation2',
   transition: 'height 350ms ease',
   variants: {
-    isRoot: {
+    detached: {
       true: {
         borderRadius: '$lg',
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 20px - 43px)',
       },
+    },
+    isRoot: {
       false: {
         paddingLeft: '$md',
         '::after': {

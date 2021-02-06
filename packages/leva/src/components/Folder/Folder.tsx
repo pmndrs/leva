@@ -30,22 +30,24 @@ const Folder = ({ name, render, collapsed = false, parent, tree }: FolderProps &
   )
 }
 
-type TreeWrapperProps = { isRoot?: boolean; parent?: string; tree: Tree; toggled: boolean }
+type TreeWrapperProps = { isRoot?: boolean; detached?: boolean; parent?: string; tree: Tree; toggled: boolean }
 
-export const TreeWrapper = React.memo(({ isRoot = false, parent, tree, toggled }: TreeWrapperProps) => {
-  const { wrapperRef, contentRef } = useToggle(toggled)
-  return (
-    <StyledWrapper ref={wrapperRef} isRoot={isRoot} toggled={toggled}>
-      <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
-        {Object.entries(tree).map(([key, value]) =>
-          isInput(value) ? (
-            // @ts-expect-error
-            <Control key={value.path} valueKey={value.valueKey} path={value.path} />
-          ) : (
-            <SubFolder key={key} name={key} parent={parent} tree={value as Tree} />
-          )
-        )}
-      </StyledContent>
-    </StyledWrapper>
-  )
-})
+export const TreeWrapper = React.memo(
+  ({ isRoot = false, detached = false, parent, tree, toggled }: TreeWrapperProps) => {
+    const { wrapperRef, contentRef } = useToggle(toggled)
+    return (
+      <StyledWrapper ref={wrapperRef} isRoot={isRoot} detached={detached} toggled={toggled}>
+        <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
+          {Object.entries(tree).map(([key, value]) =>
+            isInput(value) ? (
+              // @ts-expect-error
+              <Control key={value.path} valueKey={value.valueKey} path={value.path} />
+            ) : (
+              <SubFolder key={key} name={key} parent={parent} tree={value as Tree} />
+            )
+          )}
+        </StyledContent>
+      </StyledWrapper>
+    )
+  }
+)
