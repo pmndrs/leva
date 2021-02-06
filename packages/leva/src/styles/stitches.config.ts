@@ -1,5 +1,4 @@
 import { createStyled } from '@stitches/react'
-import { ITokensDefinition } from '@stitches/core'
 
 const scales = {
   colors: {
@@ -20,7 +19,7 @@ const scales = {
   },
 }
 
-export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
+export const getDefaultTheme = () => ({
   colors: {
     ...scales.colors,
     $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
@@ -79,6 +78,9 @@ export const getDefaultTheme = (): NonNullable<ITokensDefinition> => ({
     $button: 'normal',
   },
 })
+
+type FullTheme = ReturnType<typeof getDefaultTheme>
+export type LevaCustomTheme = Partial<{ [k in keyof FullTheme]: Partial<FullTheme[k]> }>
 
 type Options = { key: string; borderColor: string; backgroundColor?: string; inset?: boolean }
 

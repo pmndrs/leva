@@ -1,7 +1,7 @@
 import { styled } from '../../styles'
 import { StyledInputRow } from '../UI/StyledUI'
 
-export const Root = styled('div', {
+export const StyledRoot = styled('div', {
   /* position */
   position: 'relative',
   fontFamily: '$mono',
