@@ -15,6 +15,7 @@ import point3d from './components/Point3d'
 import point2d from './components/Point2d'
 import image from './components/Image'
 import interval from './components/Interval'
+import { useStoreContext } from './context'
 
 /**
  * Register all the primitive inputs.
@@ -69,11 +70,9 @@ export function usePanel<S extends Schema>(
   schema?: S,
   settings?: Partial<FolderSettings>
 ): [SchemaToValues<S>, StoreType] {
+  // const parentStore = useStoreContext()
   const store = useMemo(() => new Store(), [])
   const values = useRootControls(store, nameOrSchema, schema, settings)
-  // Renders <Leva /> only if it's not manually rendered by the user
-  useRenderRoot()
-
   return [values as any, store]
 }
 
@@ -86,7 +85,6 @@ function useRootControls<S extends Schema>(
   // _name and _schema are used to parse arguments
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
   const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
-
   /**
    * Parses the schema to extract the inputs initial data.
    *
