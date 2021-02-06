@@ -1,5 +1,5 @@
 export { Leva, LevaPanel } from './components/Leva'
-
+export { LevaStoreProvider } from './context'
 export * from './useControls'
 export * from './helpers'
 export { globalStore as store } from './store'

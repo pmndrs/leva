@@ -1,5 +1,5 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useControls, folder, button, monitor, Leva, usePanel, LevaPanel, LevaStoreProvider } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
@@ -97,15 +97,16 @@ function Comp2() {
 //   )
 // }
 
-export default function App() {
+export function App1() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
   const { oneLineLabels, hideTitleBar } = useControls({ oneLineLabels: false, hideTitleBar: false })
+  // useControls({ color: '#ffffff' })
   return (
     <>
       <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
+        {/* <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div> */}
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
@@ -115,5 +116,31 @@ export default function App() {
         </div>
       </div>
     </>
+  )
+}
+
+function MyComponent() {
+  usePanel({ point: [0, 0] })
+  return null
+}
+
+export function App2() {
+  const [, store1] = usePanel({ color: '#fff' })
+  const [, store2] = usePanel({ boolean: true })
+  return (
+    <div
+      style={{
+        display: 'grid',
+        width: 300,
+        gridRowGap: 10,
+        padding: 10,
+        background: '#fff',
+      }}>
+      <LevaPanel store={store1} />
+      <LevaPanel store={store2} />
+      <LevaStoreProvider store={store1}>
+        <MyComponent />
+      </LevaStoreProvider>
+    </div>
   )
 }

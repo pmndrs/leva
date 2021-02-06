@@ -1,7 +1,8 @@
 import React from 'react'
+import { useStoreContext } from '../../context'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
-type LevaPanelProps = Partial<LevaRootProps> & { store: LevaRootProps['store'] }
+type LevaPanelProps = Partial<LevaRootProps>
 
 // uses custom store
 export function LevaPanel({
@@ -12,9 +13,10 @@ export function LevaPanel({
   oneLineLabels = false,
   hideTitleBar = true,
 }: LevaPanelProps) {
+  const parentStore = useStoreContext()!
   return (
     <LevaRoot
-      store={store}
+      store={store || parentStore}
       theme={theme}
       fillParent={fillParent}
       oneLineLabels={oneLineLabels}

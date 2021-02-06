@@ -70,8 +70,8 @@ export function usePanel<S extends Schema>(
   schema?: S,
   settings?: Partial<FolderSettings>
 ): [SchemaToValues<S>, StoreType] {
-  // const parentStore = useStoreContext()
-  const store = useMemo(() => new Store(), [])
+  const parentStore = useStoreContext()
+  const store = useMemo(() => parentStore || new Store(), [parentStore])
   const values = useRootControls(store, nameOrSchema, schema, settings)
   return [values as any, store]
 }
