@@ -47,7 +47,7 @@ export const sanitizeVector = <K extends string>(
   settings: InternalVectorSettings<K>,
   keys: K[]
 ) => {
-  for (let key in value) value[key] = sanitize(value[key], settings[key])
+  for (let key in value) value[key] = sanitize(value[key], settings[key]) as number
 
   return convert(value, settings.format, keys)
 }

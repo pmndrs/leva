@@ -28,7 +28,7 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
 
   // theme
   globalStyles()
-  const { mergedTheme, themeCss } = useDeepMemo(() => mergeTheme(theme), [theme])
+  const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
 
   // drag
   const [rootRef, set] = useTransform<HTMLDivElement>()
@@ -40,8 +40,8 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
   if (paths.length < 1) return null
 
   return (
-    <ThemeContext.Provider value={mergedTheme}>
-      <StyledRoot ref={rootRef} className={themeCss} detached={detached} oneLineLabels={oneLineLabels}>
+    <ThemeContext.Provider value={themeContext}>
+      <StyledRoot ref={rootRef} className={themeContext.className} detached={detached} oneLineLabels={oneLineLabels}>
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}

@@ -1,14 +1,11 @@
 import React, { useRef, useState, useLayoutEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
-// @ts-expect-error
-import { Portal } from 'react-portal'
-
 import { Color, InternalColorSettings } from './color-plugin'
 import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
-import { Label, Row, Overlay } from '../UI'
+import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { useTh } from '../../styles'
 

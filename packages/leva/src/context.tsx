@@ -8,7 +8,9 @@ export function useInputContext<T>() {
   return useContext(InputContext) as T
 }
 
-export const ThemeContext = createContext<NonNullable<ITokensDefinition>>({})
+type ThemeContextProps = { theme: NonNullable<ITokensDefinition>; className: string }
+
+export const ThemeContext = createContext<ThemeContextProps | null>(null)
 
 export const StoreContext = createContext<StoreType | null>(null)
 

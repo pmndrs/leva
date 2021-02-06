@@ -1,13 +1,12 @@
 import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
-// @ts-expect-error
-import { Portal } from 'react-portal'
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
-import { Point2d as Point2dType, Point2dObject } from '../../types'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Point2dProps } from './Point2d'
 import { useTh } from '../../styles'
+import { Portal } from '../UI'
 import { useTransform } from '../../hooks'
+import { Point2d as Point2dType, Point2dObject } from '../../types'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
 
