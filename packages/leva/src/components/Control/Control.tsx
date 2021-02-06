@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
-import { store, useInput } from '../../store'
 import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
+import { useStoreContext } from '../../context'
+import { useInput } from '../../hooks'
 import { SpecialInputTypes } from '../../types'
 
 type ControlProps = { valueKey: string; path: string }
@@ -15,8 +16,10 @@ const specialComponents = {
 }
 
 export const Control = React.memo(({ valueKey, path }: ControlProps) => {
-  const { type, ...props } = useInput(path)
-  const set = useCallback((value) => store.setValueAtPath(path, value), [path])
+  const store = useStoreContext()
+  const { type, ...props } = useInput(store, path)
+
+  const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
 
   if (type in SpecialInputTypes) {
     // @ts-expect-error

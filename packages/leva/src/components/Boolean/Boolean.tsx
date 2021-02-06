@@ -1,6 +1,6 @@
 import React from 'react'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../hooks'
+import { useInputContext } from '../../context'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
 

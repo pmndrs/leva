@@ -6,7 +6,7 @@ import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
-import { useInputContext } from '../../hooks'
+import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
 
 type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>

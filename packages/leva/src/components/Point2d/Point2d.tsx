@@ -5,7 +5,7 @@ import { InternalPoint2dSettings } from './point2d-plugin'
 import { LevaInputProps, Point2d, Point2dObject } from '../../types'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
-import { useInputContext } from '../../hooks'
+import { useInputContext } from '../../context'
 
 export type Point2dProps = LevaInputProps<Point2d, InternalPoint2dSettings, Point2dObject>
 

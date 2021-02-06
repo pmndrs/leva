@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
 // @ts-expect-error
 import { Portal } from 'react-portal'
 import { useDrag } from 'react-use-gesture'
@@ -24,7 +24,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const joystickeRef = useRef<HTMLDivElement>(null)
   const playgroundRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (joystickShown) {
       const { top, left, width, height } = joystickeRef.current!.getBoundingClientRect()
       playgroundRef.current!.style.left = left + width / 2 + 'px'
