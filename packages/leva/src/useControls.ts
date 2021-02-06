@@ -32,15 +32,14 @@ register('INTERVAL', interval)
 register('POINT3D', point3d)
 register('POINT2D', point2d)
 
+type Settings = Partial<FolderSettings>
+
 export function useControls<S extends Schema>(schema: S): SchemaToValues<S>
-export function useControls<S extends Schema>(
-  name: string,
-  schema: S,
-  settings?: Partial<FolderSettings>
-): SchemaToValues<S>
+export function useControls<S extends Schema>(name: string, schema: S, settings?: Settings): SchemaToValues<S>
 
 /**
- * Main hook of Leva. Pass an optional name and an input schema.
+ * Main hook of Leva. Pass an optional name and an input schema. Uses the global
+ * store.
  *
  * @param nameOrSchema
  * @param schema
@@ -49,7 +48,7 @@ export function useControls<S extends Schema>(
 export function useControls<S extends Schema>(
   nameOrSchema: string | S,
   schema?: S,
-  settings?: Partial<FolderSettings>
+  settings?: Settings
 ): SchemaToValues<S> {
   const values = useRootControls(globalStore, nameOrSchema, schema, settings)
   // Renders <Leva /> only if it's not manually rendered by the user
@@ -59,19 +58,39 @@ export function useControls<S extends Schema>(
 }
 
 export function usePanel<S extends Schema>(schema: S): [SchemaToValues<S>, StoreType]
-export function usePanel<S extends Schema>(
-  name: string,
-  schema: S,
-  settings?: Partial<FolderSettings>
-): [SchemaToValues<S>, StoreType]
+export function usePanel<S extends Schema>(name: string, schema: S, settings?: Settings): [SchemaToValues<S>, StoreType]
 
+/**
+ * Behaves like the main hook but uses its own store.
+ *
+ */
 export function usePanel<S extends Schema>(
   nameOrSchema: string | S,
   schema?: S,
-  settings?: Partial<FolderSettings>
+  settings?: Settings
 ): [SchemaToValues<S>, StoreType] {
-  const parentStore = useStoreContext()
-  const store = useMemo(() => parentStore || new Store(), [parentStore])
+  const store = useMemo(() => new Store(), [])
+  const values = useRootControls(store, nameOrSchema, schema, settings)
+  return [values as any, store]
+}
+
+export function usePanelControls<S extends Schema>(schema: S): [SchemaToValues<S>, StoreType]
+export function usePanelControls<S extends Schema>(
+  name: string,
+  schema: S,
+  settings?: Settings
+): [SchemaToValues<S>, StoreType]
+
+/**
+ * Behaves like the main hook but uses its own store.
+ *
+ */
+export function usePanelControls<S extends Schema>(
+  nameOrSchema: string | S,
+  schema?: S,
+  settings?: Settings
+): [SchemaToValues<S>, StoreType] {
+  const store = useStoreContext()
   const values = useRootControls(store, nameOrSchema, schema, settings)
   return [values as any, store]
 }
@@ -80,7 +99,7 @@ function useRootControls<S extends Schema>(
   store: StoreType,
   nameOrSchema: string | S,
   schema?: S,
-  settings?: Partial<FolderSettings>
+  settings?: Settings
 ): SchemaToValues<S> {
   // _name and _schema are used to parse arguments
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
