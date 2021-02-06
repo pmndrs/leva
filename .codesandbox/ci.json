@@ -3,6 +3,7 @@
     "/sandboxes/leva-minimal",
     "/sandboxes/leva-busy",
     "/sandboxes/leva-scroll",
-    "/sandboxes/leva-plugin-spring"
+    "/sandboxes/leva-plugin-spring",
+    "/sandboxes/leva-advanced-panels"
   ]
 }
