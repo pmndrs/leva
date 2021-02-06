@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 import { ITokensDefinition } from '@stitches/core'
-import { Store, StoreType } from './store'
+import { StoreType } from './store'
 
 export const InputContext = createContext({})
 
