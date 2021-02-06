@@ -1,8 +1,8 @@
 <a href=""><img src="https://raw.githubusercontent.com/gsimone/leva/docs/hero.png" /></a>
 
 <div align="center">
-    <img src="https://badgen.net/npm/v/leva" alt="NPM Version" />
-  <img src="https://badgen.net/bundlephobia/minzip/leva" alt="minzipped size"/>
+    <img src="https://badgen.net/npm/v/leva?labelColor=181C20&color=181C20" alt="NPM Version" />
+  <img src="https://badgen.net/bundlephobia/minzip/leva?labelColor=181C20&color=181C20" alt="minzipped size"/>
     <img src="https://github.com/gsimone/leva/workflows/CI/badge.svg" alt="Build Status" />
 </a>
 </div>
