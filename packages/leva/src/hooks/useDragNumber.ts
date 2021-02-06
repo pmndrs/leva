@@ -12,6 +12,6 @@ export function useDragNumber({ settings, onDrag }: UseDragNumberProps) {
   const { step } = settings
   return useDrag(({ delta: [dx], shiftKey }) => {
     const _step = shiftKey ? step : step * 2
-    onDrag((v: number) => sanitizeStep(v + ceil(dx) * _step, settings))
+    onDrag((v: any) => sanitizeStep(parseFloat(v) + ceil(dx) * _step, settings))
   })
 }

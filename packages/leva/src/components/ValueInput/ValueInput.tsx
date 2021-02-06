@@ -62,7 +62,7 @@ export function NumberInput({ children, value, onUpdate, onChange }: ValueInputP
       if (dir) {
         event.preventDefault()
         const step = event.altKey ? 0.1 : event.shiftKey ? 10 : 1
-        onUpdate((v: number) => v + dir * step)
+        onUpdate((v: any) => parseFloat(v) + dir * step)
       }
     },
     [onUpdate]
