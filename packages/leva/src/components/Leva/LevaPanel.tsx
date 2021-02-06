@@ -8,7 +8,7 @@ type LevaPanelProps = Partial<LevaRootProps>
 export function LevaPanel({
   store,
   theme = {},
-  fillParent = true,
+  detatched = false,
   collapsed = false,
   oneLineLabels = false,
   hideTitleBar = true,
@@ -18,7 +18,7 @@ export function LevaPanel({
     <LevaRoot
       store={store || parentStore}
       theme={theme}
-      fillParent={fillParent}
+      detatched={detatched}
       oneLineLabels={oneLineLabels}
       hideTitleBar={hideTitleBar}
       collapsed={collapsed}

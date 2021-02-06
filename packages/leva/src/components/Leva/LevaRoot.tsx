@@ -14,13 +14,13 @@ import { TitleWithFilter } from './Filter'
 export type LevaRootProps = {
   theme: LevaCustomTheme
   store: StoreType
-  fillParent: boolean
+  detatched: boolean
   collapsed: boolean
   oneLineLabels: boolean
   hideTitleBar: boolean
 }
 
-export function LevaRoot({ theme = {}, store, fillParent, collapsed, oneLineLabels, hideTitleBar }: LevaRootProps) {
+export function LevaRoot({ theme = {}, store, detatched, collapsed, oneLineLabels, hideTitleBar }: LevaRootProps) {
   // data
   const paths = useVisiblePaths(store)
   const [filter, setFilter] = useState('')
@@ -41,7 +41,7 @@ export function LevaRoot({ theme = {}, store, fillParent, collapsed, oneLineLabe
 
   return (
     <ThemeContext.Provider value={mergedTheme}>
-      <StyledRoot ref={rootRef} className={themeCss} fillParent={fillParent} oneLineLabels={oneLineLabels}>
+      <StyledRoot ref={rootRef} className={themeCss} detatched={detatched} oneLineLabels={oneLineLabels}>
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
