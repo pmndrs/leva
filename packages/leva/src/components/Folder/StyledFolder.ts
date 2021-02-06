@@ -24,7 +24,7 @@ export const StyledWrapper = styled('div', {
           top: 0,
           width: 'var(--borderWidths-folder)',
           height: '100%',
-          backgroundColor: '$elevation1',
+          backgroundColor: '$elevation3',
           transform: 'translateX(-50%)',
         },
       },
