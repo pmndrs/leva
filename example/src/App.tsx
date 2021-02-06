@@ -147,10 +147,115 @@ export function App2() {
         background: '#fff',
       }}>
       <LevaPanel store={store1} />
-      <LevaPanel store={store2} detatched />
+      <LevaPanel store={store2} detached />
       <LevaStoreProvider store={store1}>
         <MyComponent />
       </LevaStoreProvider>
     </div>
+  )
+}
+
+export function App3() {
+  const [colors, colorStore] = usePanel({
+    colors: folder({
+      $elevation1: 3,
+      $elevation2: '#181C20',
+      $elevation3: '#373C4B',
+      $accent1: '#0066DC',
+      $accent2: '#007BFF',
+      $accent3: '#3C93FF',
+      $highlight1: '#535760',
+      $highlight2: '#8C92A4',
+      $highlight3: '#FEFEFE',
+    }),
+  })
+  const [radii, radiiStore] = usePanel({
+    radii: folder({
+      $xs: '2px',
+      $sm: '3px',
+      $lg: '10px',
+    }),
+  })
+
+  const [space, spaceStore] = usePanel({
+    space: folder({
+      $sm: '6px',
+      $md: '10px',
+      $rowGap: '7px',
+      $colGap: '7px',
+    }),
+  })
+  const [fontSizes, fontSizesStore] = usePanel({
+    fontSizes: folder({
+      $root: '11px',
+    }),
+  })
+  const [sizes, sizesStore] = usePanel({
+    sizes: folder({
+      $rootWidth: '280px',
+      $controlWidth: '160px',
+      $scrubberWidth: '8px',
+      $scrubberHeight: '16px',
+      $rowHeight: '24px',
+      $folderHeight: '20px',
+      $checkboxSize: '16px',
+      $joystickWidth: '100px',
+      $joystickHeight: '100px',
+      $colorPickerWidth: '160px',
+      $colorPickerHeight: '100px',
+      $monitorHeight: '60px',
+    }),
+  })
+  const [borderWidths, borderStore] = usePanel({
+    borderWidths: folder({
+      $root: '0px',
+      $input: '1px',
+      $focus: '1px',
+      $hover: '1px',
+      $active: '1px',
+      $folder: '1px',
+    }),
+  })
+  const [fontWeights, weightsStore] = usePanel({
+    fontWeights: folder({
+      $label: { value: 'normal', options: ['bold', 'light'] },
+      $folder: { value: 'normal', options: ['bold', 'light'] },
+      $button: { value: 'normal', options: ['bold', 'light'] },
+    }),
+  })
+
+  const theme = {
+    colors,
+    radii,
+    space,
+    fontSizes,
+    sizes,
+    borderWidths,
+    fontWeights,
+  }
+
+  return (
+    <>
+      <Leva theme={theme} />
+      <div
+        style={{
+          display: 'grid',
+          width: 300,
+          gridRowGap: 10,
+          padding: 10,
+          background: '#fff',
+          maxHeight: '90vh',
+          overflow: 'auto',
+        }}>
+        <LevaPanel store={colorStore} />
+        <LevaPanel store={radiiStore} />
+        <LevaPanel store={spaceStore} />
+        <LevaPanel store={fontSizesStore} />
+        <LevaPanel store={sizesStore} />
+        <LevaPanel store={borderStore} />
+        <LevaPanel store={weightsStore} />
+      </div>
+      <Comp1 />
+    </>
   )
 }

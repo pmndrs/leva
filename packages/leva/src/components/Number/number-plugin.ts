@@ -20,8 +20,10 @@ export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
   return suffix ? f + suffix : f
 }
 
-export const sanitize = (v: string | number, { min = -Infinity, max = Infinity }: NumberSettings = {}) =>
-  clamp(parseFloat(v as string), min, max)
+export const sanitize = (v: string | number, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
+  const f = clamp(parseFloat(v as string), min, max)
+  return suffix ? f + suffix : f
+}
 
 export const normalize = ({ value, ...settings }: NumberInput) => {
   const { min, max } = settings
@@ -45,7 +47,7 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
 
   const pad = clamp(Math.log10(1 / padStep), 0, 2)
   return {
-    value: _value,
+    value,
     settings: { initialValue: _value, step, pad, min: -Infinity, max: Infinity, suffix, ...settings },
   }
 }
