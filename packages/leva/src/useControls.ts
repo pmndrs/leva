@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store } from './store'
+import { globalStore, Store, StoreType } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers'
 import { useValuesForPath } from './hooks'
@@ -50,6 +50,39 @@ export function useControls<S extends Schema>(
   schema?: S,
   settings?: Partial<FolderSettings>
 ): SchemaToValues<S> {
+  const values = useRootControls(globalStore, nameOrSchema, schema, settings)
+  // Renders <Leva /> only if it's not manually rendered by the user
+  useRenderRoot()
+
+  return values as any
+}
+
+export function usePanel<S extends Schema>(schema: S): [SchemaToValues<S>, StoreType]
+export function usePanel<S extends Schema>(
+  name: string,
+  schema: S,
+  settings?: Partial<FolderSettings>
+): [SchemaToValues<S>, StoreType]
+
+export function usePanel<S extends Schema>(
+  nameOrSchema: string | S,
+  schema?: S,
+  settings?: Partial<FolderSettings>
+): [SchemaToValues<S>, StoreType] {
+  const store = useMemo(() => new Store(), [])
+  const values = useRootControls(store, nameOrSchema, schema, settings)
+  // Renders <Leva /> only if it's not manually rendered by the user
+  useRenderRoot()
+
+  return [values as any, store]
+}
+
+function useRootControls<S extends Schema>(
+  store: StoreType,
+  nameOrSchema: string | S,
+  schema?: S,
+  settings?: Partial<FolderSettings>
+): SchemaToValues<S> {
   // _name and _schema are used to parse arguments
   const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
   const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
@@ -62,10 +95,10 @@ export function useControls<S extends Schema>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const initialData = useMemo(() => store.getDataFromSchema(_schema.current), [])
+  const initialData = useMemo(() => store.getDataFromSchema(_schema.current), [store])
 
   // Extracts the paths from the initialData and ensures order of paths.
-  const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData])
+  const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData, store])
 
   /**
    * Reactive hook returning the values from the store at given paths.
@@ -88,10 +121,7 @@ export function useControls<S extends Schema>(
     // > but this breaks the order of keys
     store.setData(initialData)
     return () => store.disposePaths(paths)
-  }, [paths, initialData])
-
-  // Renders <Leva /> only if it's not manually rendered by the user
-  useRenderRoot()
+  }, [store, paths, initialData])
 
   return values as any
 }

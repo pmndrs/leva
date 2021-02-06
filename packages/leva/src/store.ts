@@ -19,7 +19,7 @@ export type StoreType = {
   getDataFromSchema: (schema: any, rootPath?: string) => Data
 }
 
-const Store = (function (this: StoreType) {
+export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
   this.useStore = store
   /**
@@ -181,10 +181,10 @@ const Store = (function (this: StoreType) {
   }
 } as any) as { new (): StoreType }
 
-export const store = new Store()
+export const globalStore = new Store()
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // TODO remove store from window
   // @ts-expect-error
-  window.__LEVA__STORE = store
+  window.__LEVA__STORE = globalStore
 }
