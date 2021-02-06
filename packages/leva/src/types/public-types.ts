@@ -1,7 +1,7 @@
 /**
  * Types exposed through the public API
  */
-import { BeautifyUnionType, UnionToIntersection, Join } from './utils'
+import { BeautifyUnionType, UnionToIntersection, Join, Leaf } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
@@ -137,7 +137,7 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
   1: never
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
-  4: never
+  4: Leaf
   5: { [i in P]: T extends CustomInput<infer I> ? I : never } // CustomInput type
 }[T extends FolderInput<any>
   ? 0
