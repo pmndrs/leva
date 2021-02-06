@@ -158,7 +158,7 @@ export function App2() {
 export function App3() {
   const [colors, colorStore] = usePanel({
     colors: folder({
-      $elevation1: '#292D39',
+      $elevation1: 3,
       $elevation2: '#181C20',
       $elevation3: '#373C4B',
       $accent1: '#0066DC',
@@ -208,7 +208,7 @@ export function App3() {
   })
   const [borderWidths, borderStore] = usePanel({
     borderWidths: folder({
-      $root: '0',
+      $root: '0px',
       $input: '1px',
       $focus: '1px',
       $hover: '1px',
