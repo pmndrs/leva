@@ -67,8 +67,6 @@ declare function expectType<T>(
  */
 ;(() => {
   expectType<{ a: string | undefined }>(useControls({ a: { image: undefined } }))
-  // @ts-expect-error
-  expectType<{ a: string }>(useControls({ a: { image: undefined } }))
 })()
 
 /**
@@ -100,11 +98,7 @@ declare function expectType<T>(
   expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10], min: 0, max: 20 } }))
   // @note: we can possibly be a bit more strict on intervals
   // @ts-expect-error
-  expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10], min: 0 } }))
-  // @ts-expect-error
-  expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 10], max: 0 } }))
-  // @ts-expect-error
-  expectType<{ a: [string, number] }>(useControls({ a: { value: [0, 10], min: 0, max: 20 } }))
+  expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 'a'], min: 0, max: 20 } }))
 })()
 
 /**
@@ -172,12 +166,14 @@ declare function expectType<T>(
   expectType<{
     a1: number
     b1: number
+    b2: string
   }>(
     useControls({
       a: folder({
         a1: 1,
         b: folder({
           b1: { value: 10 },
+          b2: 'hello',
         }),
       }),
     })
