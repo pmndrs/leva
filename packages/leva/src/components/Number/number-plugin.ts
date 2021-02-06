@@ -7,11 +7,11 @@ export type InternalNumberSettings = {
   step: number
   pad: number
   initialValue: number
-  suffix: string
+  suffix?: string
 }
-type NumberInput = InputWithSettings<number, NumberSettings>
+type NumberInput = InputWithSettings<number | string, NumberSettings>
 
-export const schema = (o: any) => parseFloat(o)
+export const schema = (o: any) => !isNaN(parseFloat(o))
 
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
