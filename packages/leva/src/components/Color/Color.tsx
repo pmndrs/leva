@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useLayoutEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 // @ts-expect-error
@@ -14,6 +14,10 @@ import { useTh } from '../../styles'
 
 type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
+function convertToRgb(value: Color, format: string) {
+  return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
+}
+
 export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
 
@@ -22,13 +26,19 @@ export function ColorComponent() {
   const colorPickerHeight = useTh('sizes', '$colorPickerHeight')
 
   const [pickerDirection, setPickerDirection] = useState<'up' | 'down' | false>(false)
+  /**
+   * @note we're using initialRgb instead of binding
+   * const rgb = format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
+   * to the ColorPicker as we were doing before
+   */
+  const [initialRgb, setInitialRgb] = useState(() => convertToRgb(value, format))
   const { format, hasAlpha } = settings
-  const rgb = format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
   const ColorPicker = hasAlpha ? RgbaColorPicker : RgbColorPicker
 
   const showPicker = () => {
     const { bottom } = pickerRef.current!.getBoundingClientRect()
     const direction = bottom + parseFloat(colorPickerHeight) > window.innerHeight - 40 ? 'up' : 'down'
+    setInitialRgb(convertToRgb(value, format))
     setPickerDirection(direction)
   }
 
@@ -36,7 +46,7 @@ export function ColorComponent() {
     setPickerDirection(false)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pickerDirection) {
       const bounds = pickerRef.current!.getBoundingClientRect()
       wrapperRef.current!.style.left = bounds.left + 'px'
@@ -55,7 +65,7 @@ export function ColorComponent() {
           <Portal>
             <Overlay onClick={() => hidePicker()} />
             <PickerWrapper ref={wrapperRef}>
-              <ColorPicker color={rgb} onChange={onUpdate} />
+              <ColorPicker color={initialRgb} onChange={onUpdate} />
             </PickerWrapper>
           </Portal>
         )}
