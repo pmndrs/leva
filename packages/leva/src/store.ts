@@ -161,7 +161,7 @@ export function useValuesForPath(paths: string[], initialData: Data) {
  * @param path
  */
 export function getInput(path: string): DataItem {
-  return useStore((s) => {
+  return _store((s) => {
     const { count, ...input } = s.data[path]
     return input
   }, shallow)
