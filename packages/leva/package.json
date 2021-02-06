@@ -7,6 +7,9 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
+  "scripts": {
+    "prebuild": "cp ../../README.md README.md"
+  },
   "preconstruct": {
     "entrypoints": [
       "index.ts",
