@@ -7,15 +7,15 @@ type State = { data: Data }
 
 export type StoreType = {
   useStore: UseStore<State>
-  disposePaths: (paths: string[]) => void
-  getData: () => Data
+  orderPathsFromData: (initialData: Data) => string[]
   setOrderedPaths: (newPaths: string[]) => void
+  disposePaths: (paths: string[]) => void
+  getVisiblePaths: (data: Data) => string[]
+  getFolderSettings: (path: string) => FolderSettings
+  getData: () => Data
   setData: (newData: Data) => void
   setValueAtPath: (path: string, value: any) => void
   getValueAtPath: (path: string) => any
-  orderPathsFromData: (initialData: Data) => string[]
-  getFolderSettings: (path: string) => FolderSettings
-  getVisiblePaths: (data: Data) => string[]
   getDataFromSchema: (schema: any, rootPath?: string) => Data
 }
 
@@ -33,6 +33,36 @@ const Store = (function (this: StoreType) {
    * This will ensure we can display the controls in a predictable order.
    */
   const orderedPaths = new Set<String>()
+
+  /**
+   * For a given data structure, gets all paths for which inputs have
+   * a reference count superior to zero. This function is used by the
+   * root pane to only display the inputs that are consumed by mounted
+   * components.
+   *
+   * @param data
+   */
+  this.getVisiblePaths = (data) => {
+    const visiblePaths: string[] = []
+    orderedPaths.forEach((path: any) => {
+      if (data[path]?.count > 0 && (!data[path].render || data[path].render!(this.getValueAtPath)))
+        visiblePaths.push(path)
+    })
+
+    return visiblePaths
+  }
+
+  this.orderPathsFromData = (initialData) => {
+    const paths = Object.keys(initialData)
+    this.setOrderedPaths(paths)
+    return paths
+  }
+
+  // adds paths to OrderedPaths
+  this.setOrderedPaths = (newPaths) => {
+    newPaths.forEach((p) => orderedPaths.add(p))
+  }
+
   /**
    * When the useControls hook unmmounts, it will call this function that will
    * decrease the count of all the inputs. When an input count reaches 0, it
@@ -48,14 +78,13 @@ const Store = (function (this: StoreType) {
     })
   }
 
+  this.getFolderSettings = (path) => {
+    return folders[path]
+  }
+
   // Shorthand to get zustand store data
   this.getData = () => {
     return store.getState().data
-  }
-
-  // adds paths to OrderedPaths
-  this.setOrderedPaths = (newPaths) => {
-    newPaths.forEach((p) => orderedPaths.add(p))
   }
 
   /**
@@ -103,34 +132,6 @@ const Store = (function (this: StoreType) {
   this.getValueAtPath = (path) => {
     //@ts-expect-error
     return store.getState().data[path].value
-  }
-
-  this.orderPathsFromData = (initialData) => {
-    const paths = Object.keys(initialData)
-    this.setOrderedPaths(paths)
-    return paths
-  }
-
-  this.getFolderSettings = (path) => {
-    return folders[path]
-  }
-
-  /**
-   * For a given data structure, gets all paths for which inputs have
-   * a reference count superior to zero. This function is used by the
-   * root pane to only display the inputs that are consumed by mounted
-   * components.
-   *
-   * @param data
-   */
-  this.getVisiblePaths = (data) => {
-    const visiblePaths: string[] = []
-    orderedPaths.forEach((path: any) => {
-      if (data[path]?.count > 0 && (!data[path].render || data[path].render!(this.getValueAtPath)))
-        visiblePaths.push(path)
-    })
-
-    return visiblePaths
   }
 
   /**
