@@ -7,12 +7,12 @@
 </a>
 </div>
 <br />
-<div align="center"><strong>A GUI you are going to love.</strong></div>
-<div align="center"> Lightweight, customizable and beautiful by default.</div>
+<div align="center"><strong>A GUI you are going to lava.</strong></div>
+<div align="center"> Customizable, extensible and beautiful by default.</div>
 <br />
-
+<div align="center">
 <a href="https://docs.pmnd.rs/leva">Documentation</a> 
-
+</div>
 <br />
 <div align="center">
   <sub>by <a href="https://twitter.com/pmndrs">Poimandres</a></sub>
