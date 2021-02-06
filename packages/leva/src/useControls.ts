@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react'
-import { store, getDataFromSchema, useValuesForPath, orderPathFromData } from './store'
+import { store } from './store'
 import { useRenderRoot } from './components/Leva'
-import { folder } from './helpers/folder'
+import { folder } from './helpers'
+import { useValuesForPath } from './hooks'
 import { register } from './plugin'
 import { FolderSettings, Schema, SchemaToValues } from './types/'
 
@@ -61,10 +62,10 @@ export function useControls<S extends Schema>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const initialData = useMemo(() => getDataFromSchema(_schema.current), [])
+  const initialData = useMemo(() => store.getDataFromSchema(_schema.current), [])
 
   // Extracts the paths from the initialData and ensures order of paths.
-  const paths = useMemo(() => orderPathFromData(initialData), [initialData])
+  const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData])
 
   /**
    * Reactive hook returning the values from the store at given paths.
@@ -74,7 +75,7 @@ export function useControls<S extends Schema>(
    * initalData is going to be returned on the first render. Subsequent renders
    * will call the store data.
    * */
-  const values = useValuesForPath(paths, initialData)
+  const values = useValuesForPath(store, paths, initialData)
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
