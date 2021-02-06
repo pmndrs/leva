@@ -21,7 +21,7 @@ const scales = {
 
 export const getDefaultTheme = () => ({
   colors: {
-    ...scales.colors,
+    // ...scales.colors,
     $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
     $elevation2: scales.colors.$gray900, // bg color of the rows (main panel color)
     $elevation3: scales.colors.$gray700, // bg color of the inputs
