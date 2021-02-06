@@ -147,7 +147,7 @@ export function App2() {
         background: '#fff',
       }}>
       <LevaPanel store={store1} />
-      <LevaPanel store={store2} />
+      <LevaPanel store={store2} detatched />
       <LevaStoreProvider store={store1}>
         <MyComponent />
       </LevaStoreProvider>
