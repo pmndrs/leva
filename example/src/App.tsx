@@ -65,10 +65,10 @@ function Comp1() {
     colorObj: { r: 1, g: 2, b: 3 },
   })
 
-  console.log(t.colorObj)
-  console.log(t.pos2d)
-  console.log(t.string)
-  console.log(t.myPlugin)
+  // console.log(t.colorObj)
+  // console.log(t.pos2d)
+  // console.log(t.string)
+  // console.log(t.myPlugin)
 
   return (
     <div>
