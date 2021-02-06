@@ -1,6 +1,6 @@
 {
   "name": "leva",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "main": "dist/leva.cjs.js",
   "license": "MIT",
   "peerDependencies": {
@@ -10,6 +10,7 @@
   "scripts": {
     "prebuild": "cp ../../README.md README.md"
   },
+  
   "preconstruct": {
     "entrypoints": [
       "index.ts",

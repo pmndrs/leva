@@ -15,11 +15,31 @@
     "postinstall": "preconstruct dev",
     "build": "preconstruct build",
     "validate": "preconstruct validate",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "size": "yarn size-limit"
   },
+  "size-limit": [
+    {
+      "name": "Leva",
+     "limit": "3s",
+      "path": "packages/leva/dist/leva.*.prod.js"
+    },
+    {
+      "name": "Leva Plugin Spring",
+      "limit": "3s",
+       "path": "packages/plugin-spring/dist/leva-ui-plugin-spring.*.prod.js"
+     }
+  ],
   "repository": "https://github.com/gsimone/leva.git",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
   "devDependencies": {
+    "@size-limit/preset-big-lib": "^4.9.2",
+    "size-limit": "^4.9.2",
     "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
     "@preconstruct/cli": "^2.0.1",
