@@ -3,7 +3,7 @@ import { Label, Row } from '../UI'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, Preview, Instructions, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
-import { useInputContext } from '../../hooks'
+import { useInputContext } from '../../context'
 
 type ImageProps = LevaInputProps<string | undefined>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useInputContext } from '../../hooks'
+import { useInputContext } from '../../context'
 import { StyledLabel, CopyLabelContainer } from './StyledUI'
 import { writeText } from 'clipboard-polyfill/text'
 import { LevaErrors, warn } from '../../utils'
