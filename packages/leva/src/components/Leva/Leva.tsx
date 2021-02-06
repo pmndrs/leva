@@ -10,7 +10,7 @@ type LevaProps = Omit<Partial<LevaRootProps>, 'store'>
 // uses global store
 export function Leva({
   theme = {},
-  detatched = true,
+  detached = true,
   collapsed = false,
   oneLineLabels = false,
   hideTitleBar = false,
@@ -23,7 +23,7 @@ export function Leva({
     <LevaRoot
       store={globalStore}
       theme={theme}
-      detatched={detatched}
+      detached={detached}
       oneLineLabels={oneLineLabels}
       hideTitleBar={hideTitleBar}
       collapsed={collapsed}

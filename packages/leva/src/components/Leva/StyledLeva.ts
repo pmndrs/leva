@@ -10,7 +10,7 @@ export const StyledRoot = styled('div', {
   backgroundColor: '$elevation1',
 
   variants: {
-    detatched: {
+    detached: {
       true: {
         position: 'fixed',
         top: '10px',
