@@ -12,7 +12,14 @@ type ColorInput = InputWithSettings<Color>
 
 const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 
-v8n.extend({ color: () => (value: any) => FORMATS.includes(tc(value).getFormat()) })
+v8n.extend({
+  color: () => (value: any) => {
+    const c = tc(value)
+    const format = c.getFormat()
+    // we don't want to handle "rgba(0,0,0,1)"
+    return FORMATS.includes(format) && !(format === 'rgb' && typeof value === 'string')
+  },
+})
 // prettier-ignore
 // @ts-expect-error
 export const schema = (o: any) => v8n().color().test(o)
