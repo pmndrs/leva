@@ -1,7 +1,24 @@
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-# leva 🌋
+<h1>🌋 Leva 🌋</h1>
+
+<div align="center">
+    <img src="https://badgen.net/npm/v/leva" alt="NPM Version" />
+  <img src="https://badgen.net/bundlephobia/minzip/leva" alt="minzipped size"/>
+    <img src="https://github.com/gsimone/leva/workflows/CI/badge.svg" alt="Build Status" />
+</a>
+</div>
+<br />
+<div align="center"><strong>A GUI you are going to love.</strong></div>
+<div align="center"> Lightweight, customizable and beautiful by default.</div>
+<br />
+
+<a href="https://docs.pmnd.rs/leva">Documentation</a> 
+
+<br />
+<div align="center">
+  <sub>by <a href="https://twitter.com/pmndrs">Poimandres</a></sub>
+</div>
+
+<br />
 
 ```bash
 yarn add leva
