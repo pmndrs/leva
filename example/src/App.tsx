@@ -49,6 +49,7 @@ function Comp1() {
           {
             // 'Hello Button': button(() => console.log('hello')),
             folder4: folder({
+              string: 'hello',
               pos2d: { value: { x: 3, y: 4 } },
               pos2dArr: [100, 200],
               pos3d: { x: 0.3, y: 0.1, z: 0.5 },
@@ -66,7 +67,7 @@ function Comp1() {
 
   // console.log(t.colorObj)
   // console.log(t.pos2d)
-  // console.log(t.spring)
+  // console.log(t.string)
   // console.log(t.myPlugin)
 
   return (
@@ -158,7 +159,7 @@ export function App2() {
 export function App3() {
   const [colors, colorStore] = usePanel({
     colors: folder({
-      $elevation1: 3,
+      $elevation1: '#292D39',
       $elevation2: '#181C20',
       $elevation3: '#373C4B',
       $accent1: '#0066DC',
