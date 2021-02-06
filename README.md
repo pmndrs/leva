@@ -20,17 +20,38 @@
 
 <br />
 
+## Features
+
+- ⭐️ Beautiful by default
+- 🎚 More than 12 different kinds of inputs available
+- 🧐 Smart input type recognition
+- 🔌 Easy-to-make plugins
+- ✅ Keyboard accessible
+- ⚡️ No setup necessary
+
+### Installation
+
 ```bash
 yarn add leva
 ```
 
-`useControls` brings is a smart GUI for your React apps and your creative coding endeavors:
+### Getting started
 
-- 🧐 Smart defaults, your GUI will always pick the best input type for your data
-- 🤳 Mobile-ready, all inputs work perfectly on mobile
-- 💪 Type safety, `useControls` is built from the ground up with typescript, all types are inferred from your code. 
+Simply call the `useControls` hook from anywhere in your app:
 
-`useControls` isn't a component library.
+```
+import { useControls } from "leva"
+
+function MyComponent() {
+  const { name } = useControls({ name: "World" })
+  
+  return <div>Hey {name}, hello!</div>
+}
+```
+
+<!-- ### Documentation
+
+Find the full API reference on the [official documentation](https://docs.pmnd.rs/leva)
 
 ## Features
 * As-you-type filtering of inputs. 
@@ -67,7 +88,7 @@ function MyComponent() {
   const { myValue } = useControls({ myValue: 10 })
   return myValue
 }
-```
+``` -->
 
 ## Contributors ✨
 
