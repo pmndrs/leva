@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/gsimone/leva/docs/hero.svg" />
+<img src="https://raw.githubusercontent.com/gsimone/leva/docs/hero.png" />
 
 <div align="center">
     <img src="https://badgen.net/npm/v/leva" alt="NPM Version" />
