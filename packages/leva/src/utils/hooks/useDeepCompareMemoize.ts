@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import { dequal } from 'dequal'
+import shallow from 'zustand/shallow'
 
 export function useDeepCompareMemoize(value: any) {
   const ref = useRef()
 
-  if (!dequal(value, ref.current)) {
+  if (!shallow(value, ref.current)) {
     ref.current = value
   }
 
