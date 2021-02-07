@@ -11,7 +11,7 @@ export type InternalNumberSettings = {
 }
 type NumberInput = InputWithSettings<number | string, NumberSettings>
 
-export const schema = (o: any) => !isNaN(parseFloat(o))
+export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
