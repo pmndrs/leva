@@ -47,7 +47,7 @@ function Comp1() {
         spring: spring({ tension: 100, friction: 30 }),
         folder3: folder(
           {
-            // 'Hello Button': button(() => console.log('hello')),
+            'Hello Button': button(() => console.log('hello')),
             folder4: folder({
               string: 'hello',
               pos2d: { value: { x: 3, y: 4 } },

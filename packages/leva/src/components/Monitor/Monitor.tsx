@@ -7,7 +7,7 @@ import { useCanvas2d } from '../../utils/hooks'
 import { MonitorInput } from '../../types/'
 import { useTh } from '../../styles'
 
-type MonitorProps = { valueKey: string } & Omit<MonitorInput, 'type'>
+type MonitorProps = { label: string } & Omit<MonitorInput, 'type'>
 type ObjectProps = { initialValue: any }
 
 const POINTS = 100
@@ -91,7 +91,7 @@ function getValue(o: React.MutableRefObject<any> | Function) {
   return typeof o === 'function' ? o() : o.current
 }
 
-export function Monitor({ valueKey, objectOrFn, settings }: MonitorProps) {
+export function Monitor({ label, objectOrFn, settings }: MonitorProps) {
   const ref = useRef<any>()
   const initialValue = useRef(getValue(objectOrFn))
 
@@ -102,7 +102,7 @@ export function Monitor({ valueKey, objectOrFn, settings }: MonitorProps) {
 
   return (
     <Row input>
-      <Label align="top">{valueKey}</Label>
+      <Label align="top">{label}</Label>
       {settings.graph ? (
         <MonitorCanvas ref={ref} initialValue={initialValue.current} />
       ) : (

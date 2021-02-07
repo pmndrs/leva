@@ -1,4 +1,4 @@
-import { pick, getKeyPath } from './utils'
+import { pick } from './utils'
 import { warn, LevaErrors } from './utils/log'
 
 import { Data } from './types'
@@ -18,8 +18,7 @@ export function getValuesForPaths(data: Data, paths: string[], shouldWarn: boole
     // so they always have a value key.
 
     // @ts-expect-error
-    (acc, [path, { value }]) => {
-      const [key] = getKeyPath(path)
+    (acc, [path, { value, key }]) => {
       // if a key already exists in the accumulator, prompt an error.
       if (acc[key] !== undefined) {
         if (shouldWarn) warn(LevaErrors.DUPLICATE_KEYS, key, path)

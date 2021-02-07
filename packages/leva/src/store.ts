@@ -171,6 +171,7 @@ export const Store = (function (this: StoreType) {
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
+          data[newPath].key = path
           if (typeof _render === 'function') data[newPath].render = _render
           paths.push(newPath)
         }

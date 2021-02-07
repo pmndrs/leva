@@ -9,15 +9,14 @@ export type DataInput = {
 export type DataItem = (DataInput | SpecialInput) & { render?: RenderFn }
 
 export type Data = {
-  [key: string]: DataItem & { count: number }
+  [key: string]: DataItem & { count: number; key: string }
 }
 
 export type Tree = {
-  [key: string]: { __levaInput: true; valueKey: string; path: string } | Tree
+  [key: string]: { __levaInput: true; path: string } | Tree
 }
 
 export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
-  valueKey: string
   label: string
   displayValue: DisplayValue
   value: V
