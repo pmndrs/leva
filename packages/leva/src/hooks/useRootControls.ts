@@ -1,69 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
-import { globalStore, Store, StoreType } from './store'
-import { useRenderRoot } from './components/Leva'
-import { folder } from './helpers'
-import { useValuesForPath } from './utils/hooks'
-import { FolderSettings, Schema, SchemaToValues } from './types/'
-import { useStoreContext } from './context'
+import { StoreType } from '../store'
+import { folder } from '../helpers'
+import { useValuesForPath } from '../utils/hooks'
+import { Schema, SchemaToValues, FolderSettings } from '../types'
 
-type Settings = Partial<FolderSettings>
-
-export function useControls<S extends Schema>(schema: S): SchemaToValues<S>
-export function useControls<S extends Schema>(name: string, schema: S, settings?: Settings): SchemaToValues<S>
-
-/**
- * Main hook of Leva. Pass an optional name and an input schema. Uses the global
- * store.
- *
- * @param nameOrSchema
- * @param schema
- * @param settings
- */
-export function useControls<S extends Schema>(
-  nameOrSchema: string | S,
-  schema?: S,
-  settings?: Settings
-): SchemaToValues<S> {
-  const values = useRootControls(globalStore, nameOrSchema, schema, settings)
-  // Renders <Leva /> only if it's not manually rendered by the user
-  useRenderRoot()
-
-  return values as any
-}
-
-export function usePanel<S extends Schema>(schema: S): [SchemaToValues<S>, StoreType]
-export function usePanel<S extends Schema>(name: string, schema: S, settings?: Settings): [SchemaToValues<S>, StoreType]
-
-/**
- * Behaves like the main hook but uses its own store.
- *
- */
-export function usePanel<S extends Schema>(
-  nameOrSchema: string | S,
-  schema?: S,
-  settings?: Settings
-): [SchemaToValues<S>, StoreType] {
-  const store = useMemo(() => new Store(), [])
-  const values = useRootControls(store, nameOrSchema, schema, settings)
-  return [values as any, store]
-}
-
-export function usePanelControls<S extends Schema>(schema: S): SchemaToValues<S>
-export function usePanelControls<S extends Schema>(name: string, schema: S, settings?: Settings): SchemaToValues<S>
-
-/**
- * Behaves like the main hook but uses its own store.
- *
- */
-export function usePanelControls<S extends Schema>(
-  nameOrSchema: string | S,
-  schema?: S,
-  settings?: Settings
-): SchemaToValues<S> {
-  const store = useStoreContext()
-  const values = useRootControls(store, nameOrSchema, schema, settings)
-  return values as any
-}
+export type Settings = Partial<FolderSettings>
 
 function parseArgs<S extends Schema>(
   nameOrSchema: string | S,
@@ -79,7 +20,7 @@ function parseArgs<S extends Schema>(
   }
 }
 
-function useRootControls<S extends Schema>(
+export function useRootControls<S extends Schema>(
   store: StoreType,
   nameOrSchema: string | S,
   schemaOrSettings?: S,
