@@ -1,7 +1,7 @@
 import { useDrag } from './useDrag'
-import { LevaInputProps } from '../types/'
-import { InternalNumberSettings, sanitizeStep } from '../components/Number/number-plugin'
-import { ceil } from '../utils'
+import { LevaInputProps } from '../../types'
+import { InternalNumberSettings, sanitizeStep } from '../../components/Number/number-plugin'
+import { ceil } from '../../utils'
 
 type UseDragNumberProps = {
   settings: InternalNumberSettings

@@ -5,7 +5,7 @@ import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Point2dProps } from './Point2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
-import { useTransform } from '../../hooks'
+import { useTransform } from '../../utils/hooks'
 import { Point2d as Point2dType, Point2dObject } from '../../types'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>

@@ -5,7 +5,7 @@ import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
 import { useStoreContext } from '../../context'
-import { useInput } from '../../hooks'
+import { useInput } from '../../utils/hooks'
 import { SpecialInputTypes } from '../../types'
 
 type ControlProps = { valueKey: string; path: string }

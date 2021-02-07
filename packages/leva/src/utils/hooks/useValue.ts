@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import { format } from '../plugin'
+import { format } from '../../plugin'
 
 type Props<V, Settings> = {
   type: string

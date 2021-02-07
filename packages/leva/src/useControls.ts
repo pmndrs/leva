@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { globalStore, Store, StoreType } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers'
-import { useValuesForPath } from './hooks'
+import { useValuesForPath } from './utils/hooks'
 import { FolderSettings, Schema, SchemaToValues } from './types/'
 import { useStoreContext } from './context'
 

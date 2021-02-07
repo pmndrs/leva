@@ -1,5 +1,5 @@
 import shallow from 'zustand/shallow'
-import { StoreType } from '../store'
+import { StoreType } from '../../store'
 
 /**
  * Return all input (value and settings) properties at a given path.

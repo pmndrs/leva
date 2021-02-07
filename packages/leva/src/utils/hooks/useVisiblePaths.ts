@@ -1,4 +1,4 @@
-import { StoreType } from '../store'
+import { StoreType } from '../../store'
 import shallow from 'zustand/shallow'
 
 /**
