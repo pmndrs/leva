@@ -51,7 +51,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
       onUpdate((v: Point2dType) => {
         const incX = stepX * outOfBoundsX.current * 3
         const incY = stepY * outOfBoundsY.current * 3
-        return Array.isArray(v) ? [v[0] + incX, v[1] + incY] : { x: v.x + incX, y: v.y + incY }
+        return Array.isArray(v) ? { x: v[0] + incX, y: v[1] + incY } : { x: v.x + incX, y: v.y + incY }
       })
     }, 16)
   }, [w, h, onUpdate, set, stepX, stepY])

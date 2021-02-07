@@ -52,7 +52,9 @@ export const sanitizeVector = <K extends string>(
   return convert(value, settings.format, keys)
 }
 
-export const formatVector = <K extends string>(value: any, keys: K[]) => convert(value, 'object', keys)
+export const formatVector = <K extends string>(value: any, keys: K[]) => {
+  return convert(value, 'object', keys)
+}
 
 export function normalizeVector<K extends string, Value extends VectorType<K>>(
   _value: Value,
