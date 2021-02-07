@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { globalStore, Store, StoreType } from './store'
 import { useRenderRoot } from './components/Leva'
 import { folder } from './helpers'
@@ -65,15 +65,28 @@ export function usePanelControls<S extends Schema>(
   return values as any
 }
 
+function parseArgs<S extends Schema>(
+  nameOrSchema: string | S,
+  schemaOrSettings: S | Settings = {},
+  settingsOrUndefined?: Settings
+): { schema: Schema; settings?: Settings } {
+  if (typeof nameOrSchema === 'string') {
+    return { schema: { [nameOrSchema]: folder(schemaOrSettings as S, settingsOrUndefined) } }
+  } else {
+    const settings = schemaOrSettings as Settings
+    const schema = nameOrSchema as S
+    return { schema, settings }
+  }
+}
+
 function useRootControls<S extends Schema>(
   store: StoreType,
   nameOrSchema: string | S,
-  schema?: S,
-  settings?: Settings
+  schemaOrSettings?: S,
+  settingsOrUndefined?: Settings
 ): SchemaToValues<S> {
-  // _name and _schema are used to parse arguments
-  const _name = typeof nameOrSchema === 'string' ? nameOrSchema : undefined
-  const _schema = useRef(_name ? { [_name]: folder(schema!, settings) } : nameOrSchema)
+  const [{ schema }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined))
+
   /**
    * Parses the schema to extract the inputs initial data.
    *
@@ -82,7 +95,7 @@ function useRootControls<S extends Schema>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const initialData = useMemo(() => store.getDataFromSchema(_schema.current), [store])
+  const initialData = useMemo(() => store.getDataFromSchema(schema), [store, schema])
 
   // Extracts the paths from the initialData and ensures order of paths.
   const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData, store])
