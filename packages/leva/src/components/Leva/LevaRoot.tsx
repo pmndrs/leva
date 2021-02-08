@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 
-import { StoreType } from '../../store'
+import { globalStore, StoreType } from '../../store'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -13,7 +13,7 @@ import { TitleWithFilter } from './Filter'
 
 export type LevaRootProps = {
   theme: LevaCustomTheme
-  store: StoreType
+  store?: StoreType | null
   detached: boolean
   collapsed: boolean
   oneLineLabels: boolean
@@ -22,7 +22,8 @@ export type LevaRootProps = {
 
 export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels, hideTitleBar }: LevaRootProps) {
   // data
-  const paths = useVisiblePaths(store)
+  const _store = store || globalStore
+  const paths = useVisiblePaths(_store)
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
 
@@ -45,7 +46,7 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
-        <StoreContext.Provider value={store}>
+        <StoreContext.Provider value={_store}>
           <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
         </StoreContext.Provider>
       </StyledRoot>
