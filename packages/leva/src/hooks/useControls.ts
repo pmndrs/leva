@@ -1,10 +1,10 @@
 import { globalStore } from '../store'
-import { useRootControls, Settings } from './useRootControls'
+import { useRootControls, HookSettings, FolderSettings } from './useRootControls'
 import { useRenderRoot } from '../components/Leva'
 import { Schema, SchemaToValues } from '../types'
 
-export function useControls<S extends Schema>(schema: S): SchemaToValues<S>
-export function useControls<S extends Schema>(name: string, schema: S, settings?: Settings): SchemaToValues<S>
+export function useControls<S extends Schema>(schema: S, settings?: HookSettings): SchemaToValues<S>
+export function useControls<S extends Schema>(name: string, schema: S, settings?: FolderSettings): SchemaToValues<S>
 
 /**
  * Main hook of Leva. Pass an optional name and an input schema. Uses the global
@@ -16,10 +16,10 @@ export function useControls<S extends Schema>(name: string, schema: S, settings?
  */
 export function useControls<S extends Schema>(
   nameOrSchema: string | S,
-  schema?: S,
-  settings?: Settings
+  schemaOrSettings?: S | HookSettings,
+  settingsOrUndefined?: FolderSettings
 ): SchemaToValues<S> {
-  const values = useRootControls(globalStore, nameOrSchema, schema, settings)
+  const values = useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
 

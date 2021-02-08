@@ -16,7 +16,7 @@ export type StoreType = {
   setData: (newData: Data) => void
   setValueAtPath: (path: string, value: any) => void
   getValueAtPath: (path: string) => any
-  getDataFromSchema: (schema: any) => Data
+  getDataFromSchema: (schema: any, suffix?: '') => Data
 }
 
 export const Store = (function (this: StoreType) {
@@ -142,23 +142,23 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string) => {
+  const _getDataFromSchema = (schema: any, rootPath: string, suffix: string) => {
     const data: any = {}
     const paths: string[] = []
 
     Object.entries(schema).forEach(([path, input]: [string, any]) => {
-      const newPath = join(rootPath, path)
+      let newPath = join(rootPath, path)
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
       if (input.type === SpecialInputTypes.FOLDER) {
-        Object.assign(data, _getDataFromSchema(input.schema, newPath))
+        Object.assign(data, _getDataFromSchema(input.schema, newPath, suffix))
 
         // Sets folder preferences
         folders[newPath] = input.settings as FolderSettings
       } else {
         // If the input is not a folder, we normalize the input.
-
+        newPath += suffix
         let _render = undefined
         let _input = input
 
@@ -181,8 +181,8 @@ export const Store = (function (this: StoreType) {
     return data
   }
 
-  this.getDataFromSchema = (schema) => {
-    return _getDataFromSchema(schema, '')
+  this.getDataFromSchema = (schema, suffix = '') => {
+    return _getDataFromSchema(schema, '', suffix)
   }
 } as any) as { new (): StoreType }
 
