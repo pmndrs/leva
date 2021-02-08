@@ -14,11 +14,7 @@ export function useControls<S extends Schema>(name: string, schema: S, settings?
  * @param schema
  * @param settings
  */
-export function useControls<S extends Schema>(
-  nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings,
-  settingsOrUndefined?: FolderSettings
-): SchemaToValues<S> {
+export function useControls(nameOrSchema: any, schemaOrSettings?: any, settingsOrUndefined?: any) {
   const values = useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()

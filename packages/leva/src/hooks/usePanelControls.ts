@@ -13,11 +13,7 @@ export function usePanelControls<S extends Schema>(
  * Behaves like the main hook but uses its own store.
  *
  */
-export function usePanelControls<S extends Schema>(
-  nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings,
-  settingsOrUndefined?: FolderSettings
-): SchemaToValues<S> {
+export function usePanelControls(nameOrSchema: any, schemaOrSettings?: any, settingsOrUndefined?: any) {
   const store = useStoreContext()
   const values = useRootControls(store, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   return values as any

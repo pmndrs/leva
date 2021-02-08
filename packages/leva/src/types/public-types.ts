@@ -93,7 +93,9 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
-export type Schema = Record<string, SchemaItem & { render?: RenderFn }>
+type SchemaItemWithRender = SchemaItem & { render?: RenderFn }
+
+export type Schema = Record<string, SchemaItemWithRender>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
