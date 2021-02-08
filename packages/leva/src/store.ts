@@ -13,9 +13,11 @@ export type StoreType = {
   getVisiblePaths: (data: Data) => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
-  setData: (newData: Data) => void
+  addData: (newData: Data) => void
   setValueAtPath: (path: string, value: any) => void
-  getValueAtPath: (path: string) => any
+  // TODO possibly better type this
+  set: (values: Record<string, any>) => void
+  get: (path: string) => any
   getDataFromSchema: (schema: any, suffix?: '') => Data
 }
 
@@ -45,8 +47,7 @@ export const Store = (function (this: StoreType) {
   this.getVisiblePaths = (data) => {
     const visiblePaths: string[] = []
     orderedPaths.forEach((path: any) => {
-      if (data[path]?.count > 0 && (!data[path].render || data[path].render!(this.getValueAtPath)))
-        visiblePaths.push(path)
+      if (data[path]?.count > 0 && (!data[path].render || data[path].render!(this.get))) visiblePaths.push(path)
     })
 
     return visiblePaths
@@ -100,7 +101,7 @@ export const Store = (function (this: StoreType) {
    *
    * @param newData the data to update
    */
-  this.setData = (newData) => {
+  this.addData = (newData) => {
     store.setState((s) => {
       const data = s.data
 
@@ -134,7 +135,20 @@ export const Store = (function (this: StoreType) {
     })
   }
 
-  this.getValueAtPath = (path) => {
+  this.set = (values) => {
+    store.setState((s) => {
+      const data = s.data
+      Object.entries(values).forEach(([path, value]) => {
+        try {
+          //@ts-expect-error (we always update inputs with a value)
+          updateInput(data[path], value)
+        } catch {}
+      })
+      return { data }
+    })
+  }
+
+  this.get = (path) => {
     //@ts-expect-error
     return store.getState().data[path].value
   }

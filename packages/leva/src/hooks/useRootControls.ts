@@ -3,12 +3,13 @@ import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
+import { getKeyPath } from '../utils'
 
 export type HookSettings = {}
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
-    ? [SchemaToValues<S>, (path: string, value: any) => void]
+    ? [SchemaToValues<S>, (value: Partial<SchemaToValues<S>>) => void]
     : SchemaToValues<S>
   : never
 
@@ -37,6 +38,9 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
   schemaOrSettings?: F | HookSettings
 ): HookReturnType<F> {
+  // We compute this only once for performance reaasons;
+  // This might cause problems if a state variable is used in the render
+  // function.
   const [{ schema, schemaIsFunction }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings))
 
   /**
@@ -52,6 +56,10 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   // Extracts the paths from the initialData and ensures order of paths.
   const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData, store])
 
+  const mappedPaths = useMemo(() => paths.reduce((acc, p) => Object.assign(acc, { [getKeyPath(p)[0]]: p }), {}), [
+    paths,
+  ])
+
   /**
    * Reactive hook returning the values from the store at given paths.
    * Essentially it flattens the keys of a nested structure.
@@ -62,7 +70,14 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
    * */
   const values = useValuesForPath(store, paths, initialData)
 
-  const set = useCallback((path: string, value: any) => store.setValueAtPath(path, value), [store])
+  const set = useCallback(
+    (values: Record<string, any>) => {
+      // @ts-ignore
+      const _values = Object.entries(values).reduce((acc, [p, v]) => Object.assign(acc, { [mappedPaths[p]]: v }), {})
+      store.set(_values)
+    },
+    [store, mappedPaths]
+  )
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
@@ -70,7 +85,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
     // things easier and remove the need for initializing useValuesForPath but
     // it breaks the ref from Monitor.
 
-    store.setData(initialData)
+    store.addData(initialData)
     return () => store.disposePaths(paths)
   }, [store, paths, initialData])
 

@@ -1,10 +1,23 @@
 import React from 'react'
 import { useControls } from 'leva'
+import { useDrag } from 'react-use-gesture'
 
 function Box({ index }) {
-  const [c] = useControls(() => ({ boxNumber: 30, boxColor: '#fff' }))
-  console.log('rendering box', index, c)
-  return <div style={{ margin: 10, height: c.boxNumber, width: c.boxNumber, background: c.boxColor }} />
+  const [{ position, color }, set] = useControls('folder', () => ({ position: [50, 50], color: '#fff' }))
+  const bind = useDrag(({ movement }) => set({ position: movement }), { initial: () => position })
+
+  return (
+    <div
+      {...bind()}
+      style={{
+        margin: 10,
+        height: 100,
+        width: 100,
+        background: color,
+        transform: `translate(${position[0]}px, ${position[1]}px)`,
+      }}
+    />
+  )
 }
 
 export default function App() {
@@ -15,9 +28,9 @@ export default function App() {
   return (
     <>
       {show1 && <Box index={1} />}
-      {show2 && <Box index={2} />}
-      <button onClick={() => set1((t) => !t)}>{show1 ? 'hide' : 'show'} controls box1</button>
-      <button onClick={() => set2((t) => !t)}>{show2 ? 'hide' : 'show'} controls box2</button>
+      {/* {show2 && <Box index={2} />} */}
+      {/* <button onClick={() => set1((t) => !t)}>{show1 ? 'hide' : 'show'} controls box1</button>
+      <button onClick={() => set2((t) => !t)}>{show2 ? 'hide' : 'show'} controls box2</button> */}
     </>
   )
 }

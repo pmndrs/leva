@@ -19,7 +19,7 @@ const SubFolder = ({ name, parent, tree }: FolderProps) => {
 
 const Folder = ({ name, render, collapsed = false, parent, tree }: FolderProps & FolderSettings) => {
   const store = useStoreContext()
-  const shouldRender = !render || render(store.getValueAtPath)
+  const shouldRender = !render || render(store.get)
   const [toggled, setToggle] = useState(!collapsed)
 
   return (
