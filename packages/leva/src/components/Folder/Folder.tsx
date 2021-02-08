@@ -5,27 +5,21 @@ import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { useToggle } from '../../utils/hooks'
-import { FolderSettings, Tree } from '../../types/'
+import { Tree } from '../../types/'
 import { useStoreContext } from '../../context'
 
-type FolderProps = { name?: string; parent?: string; tree: Tree }
+type FolderProps = { name: string; path?: string; tree: Tree }
 
-const SubFolder = ({ name, parent, tree }: FolderProps) => {
+const Folder = ({ name, path, tree }: FolderProps) => {
   const store = useStoreContext()
-  const path = join(parent, name)
-  const settings = store.getFolderSettings(path)
-  return <Folder name={name} parent={path} tree={tree} {...settings} />
-}
-
-const Folder = ({ name, render, collapsed = false, parent, tree }: FolderProps & FolderSettings) => {
-  const store = useStoreContext()
+  const { collapsed, render } = store.getFolderSettings(join(path, name))
   const shouldRender = !render || render(store.get)
   const [toggled, setToggle] = useState(!collapsed)
 
   return (
     <StyledFolder style={{ display: shouldRender ? 'block' : 'none' }}>
       <FolderTitle name={name!} toggled={toggled} toggle={() => setToggle((t) => !t)} />
-      <TreeWrapper parent={parent} tree={tree} toggled={toggled} />
+      <TreeWrapper parent={path} tree={tree} toggled={toggled} />
     </StyledFolder>
   )
 }
@@ -43,7 +37,7 @@ export const TreeWrapper = React.memo(
               // @ts-expect-error
               <Control key={value.path} valueKey={value.valueKey} path={value.path} />
             ) : (
-              <SubFolder key={key} name={key} parent={parent} tree={value as Tree} />
+              <Folder key={key} name={key} path={parent} tree={value as Tree} />
             )
           )}
         </StyledContent>

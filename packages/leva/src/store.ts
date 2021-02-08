@@ -85,7 +85,7 @@ export const Store = (function (this: StoreType) {
   }
 
   this.getFolderSettings = (path) => {
-    return folders[path]
+    return folders[path] || {}
   }
 
   // Shorthand to get zustand store data
