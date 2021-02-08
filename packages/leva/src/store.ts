@@ -74,10 +74,11 @@ export const Store = (function (this: StoreType) {
     store.setState((s) => {
       const data = s.data
       paths.forEach((path) => {
-        if (removeOnDispose) {
-          delete data[path]
-          orderedPaths.delete(path)
-        } else data[path].count--
+        if (path in data)
+          if (removeOnDispose) {
+            delete data[path]
+            orderedPaths.delete(path)
+          } else data[path].count--
       })
       return { data }
     })

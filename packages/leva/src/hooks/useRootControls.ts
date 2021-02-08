@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState, useCallback } from 'react'
+import { useEffect, useMemo, useRef, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
 import { uid } from '../utils'
 
-export type HookSettings = { unique?: boolean }
+export type HookSettings = { unique?: boolean; show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
@@ -17,20 +17,21 @@ function parseArgs(
   nameOrSchema: string | SchemaOrFn,
   schemaOrSettings?: SchemaOrFn | HookSettings,
   settingsOrUndefined?: HookSettings
-): { schema: Schema; settings: HookSettings; schemaIsFunction: boolean } {
+): { schema: SchemaOrFn; settings: HookSettings; name?: string } {
   if (typeof nameOrSchema === 'string') {
-    const schemaIsFunction = typeof schemaOrSettings === 'function'
-    // @ts-ignore
-    const schema = schemaIsFunction ? schemaOrSettings() : schemaOrSettings
-    const settings = settingsOrUndefined || {}
-    return { schema: { [nameOrSchema]: folder(schema) }, settings, schemaIsFunction }
+    const settings = { show: true, ...settingsOrUndefined }
+    return { schema: schemaOrSettings as SchemaOrFn, settings, name: nameOrSchema }
   } else {
-    const schemaIsFunction = typeof nameOrSchema === 'function'
-    // @ts-ignore
-    const schema = schemaIsFunction ? nameOrSchema() : nameOrSchema
-    const settings = (schemaOrSettings as HookSettings) || {}
-    return { schema, settings, schemaIsFunction }
+    const settings = { show: true, ...schemaOrSettings }
+    return { schema: nameOrSchema as SchemaOrFn, settings }
   }
+}
+
+// { [nameOrSchema]: folder(schema) }
+
+function returnSchema(schema: SchemaOrFn, name: string | undefined) {
+  const _schema = typeof schema === 'function' ? schema() : schema
+  return name ? { [name]: folder(_schema) } : _schema
 }
 
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
@@ -39,13 +40,22 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   schemaOrSettings?: F | HookSettings,
   settingsOrUndefined?: HookSettings
 ): HookReturnType<F> {
-  // We compute this only once for performance reaasons;
+  // We compute this only once for performance reasons;
   // This might cause problems if a state variable is used in the render
   // function.
-  const [{ schema, settings, schemaIsFunction }] = useState(() =>
-    parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined)
-  )
-  const id = useMemo(() => (settings.unique ? uid() : undefined), [settings])
+  const { name, schema, settings } = useMemo(() => parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined), [
+    nameOrSchema,
+    schemaOrSettings,
+    settingsOrUndefined,
+  ])
+
+  const schemaIsFunction = typeof schema === 'function'
+
+  const _schema = useRef(returnSchema(schema, name))
+  const firstRender = useRef(true)
+
+  const id = useMemo(() => (settings.unique ? uid() : undefined), [settings.unique])
+  const unique = !!id
 
   /**
    * Parses the schema to extract the inputs initial data.
@@ -55,7 +65,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(schema, id), [store, schema, id])
+  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema.current, id), [store, id])
 
   // Extracts the paths from the initialData and ensures order of paths.
   const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])
@@ -80,14 +90,20 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   )
 
   useEffect(() => {
+    return () => store.disposePaths(paths, unique)
+  }, [unique, store, paths])
+
+  useEffect(() => {
     // We initialize the store with the initialData in useEffect.
     // Note that doing this while rendering (ie in useMemo) would make
     // things easier and remove the need for initializing useValuesForPath but
     // it breaks the ref from Monitor.
 
-    store.addData(initialData)
-    return () => store.disposePaths(paths, !!id)
-  }, [store, paths, initialData, id])
+    // TODO optimize this
+    if (settings.show || firstRender.current) store.addData(initialData)
+    if (!settings.show) store.disposePaths(paths)
+    firstRender.current = false
+  }, [settings.show, store, paths, initialData])
 
   if (schemaIsFunction) return [values, set] as any
   return values as any
