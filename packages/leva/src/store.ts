@@ -52,15 +52,15 @@ export const Store = (function (this: StoreType) {
     return visiblePaths
   }
 
+  // adds paths to OrderedPaths
+  this.setOrderedPaths = (newPaths) => {
+    newPaths.forEach((p) => orderedPaths.add(p))
+  }
+
   this.orderPathsFromData = (initialData) => {
     const paths = Object.keys(initialData)
     this.setOrderedPaths(paths)
     return paths
-  }
-
-  // adds paths to OrderedPaths
-  this.setOrderedPaths = (newPaths) => {
-    newPaths.forEach((p) => orderedPaths.add(p))
   }
 
   /**

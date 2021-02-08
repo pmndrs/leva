@@ -25,7 +25,7 @@ const number = v8n().number()
 export function getVectorSchema(keys: string[]) {
   // prettier-ignore
   const VectorArray = v8n().array().length(keys.length).every.number()
-  const pointObj = v8n().schema(keys.reduce((acc, k) => ({ ...acc, [k]: number }), {}))
+  const pointObj = v8n().schema(keys.reduce((acc, k) => Object.assign(acc, { [k]: number }), {}))
   return (o: any) => v8n().passesAnyOf(VectorArray, pointObj).test(o)
 }
 

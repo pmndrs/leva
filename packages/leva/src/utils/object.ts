@@ -8,7 +8,7 @@ export function pick<K extends string, T extends { [k in K]: unknown }>(object: 
 }
 
 export function orderKeys<O extends object>(obj: O, keys: (keyof O)[]) {
-  return keys.reduce((acc, k) => ({ ...acc, [k]: obj[k] }), {} as O)
+  return keys.reduce((acc, k) => Object.assign(acc, { [k]: obj[k] }), {} as O)
 }
 
 export function mapArrayToKeys<K extends string>(
@@ -16,5 +16,5 @@ export function mapArrayToKeys<K extends string>(
   keys: K[]
 ): { [key in K]: number } {
   if (!Array.isArray(value)) return value // in if value is already an object
-  return value.reduce((acc, v, i) => ({ ...acc, [keys[i]]: v }), {}) as { [k in K]: number }
+  return value.reduce((acc, v, i) => Object.assign(acc, { [keys[i]]: v }), {} as { [k in K]: number })
 }

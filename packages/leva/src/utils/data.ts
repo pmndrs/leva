@@ -1,7 +1,7 @@
-import { pick } from './utils'
-import { warn, LevaErrors } from './utils/log'
+import { pick } from '.'
+import { warn, LevaErrors } from './log'
 
-import { Data } from './types'
+import { Data } from '../types'
 
 /**
  * Takes a data object with { [path.key]: value } and returns { [key]: value }.
@@ -12,7 +12,7 @@ import { Data } from './types'
  * @param shouldWarn
  */
 export function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
-  return Object.entries(pick(data, paths) as Data).reduce(
+  return Object.entries(pick(data, paths)).reduce(
     // Typescript complaints that SpecialInput type doesn't have a value key.
     // But getValuesForPath is only called from paths that are inputs,
     // so they always have a value key.
@@ -24,7 +24,8 @@ export function getValuesForPaths(data: Data, paths: string[], shouldWarn: boole
         if (shouldWarn) warn(LevaErrors.DUPLICATE_KEYS, key, path)
         return acc
       }
-      return { ...acc, [key]: value }
+      acc[key] = value
+      return acc
     },
     {} as { [path: string]: any }
   )

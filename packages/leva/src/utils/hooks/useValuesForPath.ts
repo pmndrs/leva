@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import shallow from 'zustand/shallow'
-import { getValuesForPaths } from '../../data'
+import { getValuesForPaths } from '../data'
 import { StoreType } from '../../store'
 import { Data } from '../../types'
 
