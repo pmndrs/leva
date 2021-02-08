@@ -8,9 +8,10 @@ import { Schema } from '../types'
  */
 export function usePanelControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings
+  schemaOrSettings?: F | HookSettings,
+  settingsOrUndefined?: HookSettings
 ) {
   const store = useStoreContext()
-  const values = useRootControls(store, nameOrSchema, schemaOrSettings)
+  const values = useRootControls(store, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   return values
 }

@@ -7,7 +7,7 @@ type State = { data: Data }
 
 export type StoreType = {
   useStore: UseStore<State>
-  orderPathsFromData: (initialData: Data) => string[]
+  orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[], removeOnDispose?: boolean) => void
   getVisiblePaths: (data: Data) => string[]
@@ -18,7 +18,7 @@ export type StoreType = {
   // TODO possibly better type this
   set: (values: Record<string, any>) => void
   get: (path: string) => any
-  getDataFromSchema: (schema: any, suffix?: '') => Data
+  getDataFromSchema: (schema: any, suffix?: string) => [Data, Record<string, string>]
 }
 
 export const Store = (function (this: StoreType) {
@@ -58,8 +58,7 @@ export const Store = (function (this: StoreType) {
     newPaths.forEach((p) => orderedPaths.add(p))
   }
 
-  this.orderPathsFromData = (initialData) => {
-    const paths = Object.keys(initialData)
+  this.orderPaths = (paths) => {
     this.setOrderedPaths(paths)
     return paths
   }
@@ -161,9 +160,9 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string, suffix: string) => {
+  const _getDataFromSchema = (schema: any, rootPath: string, suffix: string): [Data, Record<string, string>] => {
     const data: any = {}
-    const paths: string[] = []
+    const mappedPaths: Record<string, string> = {}
 
     Object.entries(schema).forEach(([path, input]: [string, any]) => {
       let newPath = join(rootPath, path)
@@ -171,7 +170,9 @@ export const Store = (function (this: StoreType) {
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
       if (input.type === SpecialInputTypes.FOLDER) {
-        Object.assign(data, _getDataFromSchema(input.schema, newPath, suffix))
+        const [newData, newPaths] = _getDataFromSchema(input.schema, newPath, suffix)
+        Object.assign(data, newData)
+        Object.assign(mappedPaths, newPaths)
 
         // Sets folder preferences
         folders[newPath] = input.settings as FolderSettings
@@ -192,12 +193,12 @@ export const Store = (function (this: StoreType) {
           data[newPath] = normalizedInput
           data[newPath].key = path
           if (typeof _render === 'function') data[newPath].render = _render
-          paths.push(newPath)
+          mappedPaths[path] = newPath
         }
       }
     })
 
-    return data
+    return [data, mappedPaths]
   }
 
   this.getDataFromSchema = (schema, suffix = '') => {

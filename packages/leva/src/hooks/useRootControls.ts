@@ -3,9 +3,9 @@ import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
-import { getKeyPath } from '../utils'
+import { uid } from '../utils'
 
-export type HookSettings = {}
+export type HookSettings = { unique?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
@@ -15,18 +15,20 @@ export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
 
 function parseArgs(
   nameOrSchema: string | SchemaOrFn,
-  schemaOrSettings?: SchemaOrFn | HookSettings
+  schemaOrSettings?: SchemaOrFn | HookSettings,
+  settingsOrUndefined?: HookSettings
 ): { schema: Schema; settings: HookSettings; schemaIsFunction: boolean } {
   if (typeof nameOrSchema === 'string') {
     const schemaIsFunction = typeof schemaOrSettings === 'function'
     // @ts-ignore
     const schema = schemaIsFunction ? schemaOrSettings() : schemaOrSettings
-    return { schema: { [nameOrSchema]: folder(schema) }, settings: {}, schemaIsFunction }
+    const settings = settingsOrUndefined || {}
+    return { schema: { [nameOrSchema]: folder(schema) }, settings, schemaIsFunction }
   } else {
     const schemaIsFunction = typeof nameOrSchema === 'function'
     // @ts-ignore
     const schema = schemaIsFunction ? nameOrSchema() : nameOrSchema
-    const settings = schemaOrSettings as HookSettings
+    const settings = (schemaOrSettings as HookSettings) || {}
     return { schema, settings, schemaIsFunction }
   }
 }
@@ -34,12 +36,16 @@ function parseArgs(
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   store: StoreType,
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings
+  schemaOrSettings?: F | HookSettings,
+  settingsOrUndefined?: HookSettings
 ): HookReturnType<F> {
   // We compute this only once for performance reaasons;
   // This might cause problems if a state variable is used in the render
   // function.
-  const [{ schema, schemaIsFunction }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings))
+  const [{ schema, settings, schemaIsFunction }] = useState(() =>
+    parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined)
+  )
+  const id = useMemo(() => (settings.unique ? uid() : undefined), [settings])
 
   /**
    * Parses the schema to extract the inputs initial data.
@@ -49,14 +55,10 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const initialData = useMemo(() => store.getDataFromSchema(schema), [store, schema])
+  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(schema, id), [store, schema, id])
 
   // Extracts the paths from the initialData and ensures order of paths.
-  const paths = useMemo(() => store.orderPathsFromData(initialData), [initialData, store])
-
-  const mappedPaths = useMemo(() => paths.reduce((acc, p) => Object.assign(acc, { [getKeyPath(p)[0]]: p }), {}), [
-    paths,
-  ])
+  const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])
 
   /**
    * Reactive hook returning the values from the store at given paths.

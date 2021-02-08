@@ -18,9 +18,10 @@ export function usePanel<S extends Schema, F extends SchemaOrFn<S>>(
  */
 export function usePanel<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings
+  schemaOrSettings?: F | HookSettings,
+  settingsOrUndefined?: HookSettings
 ) {
   const store = useMemo(() => new Store(), [])
-  const values = useRootControls(store, nameOrSchema, schemaOrSettings)
+  const values = useRootControls(store, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   return [values, store]
 }

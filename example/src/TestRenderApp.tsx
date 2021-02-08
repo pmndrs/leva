@@ -3,7 +3,9 @@ import { useControls } from 'leva'
 import { useDrag } from 'react-use-gesture'
 
 function Box({ index }) {
-  const [{ position, color }, set] = useControls('folder', () => ({ position: [50, 50], color: '#fff' }))
+  const [{ position, color }, set] = useControls('folder' + index, () => ({ position: [50, 50], color: '#fff' }), {
+    unique: true,
+  })
   const bind = useDrag(({ movement }) => set({ position: movement }), { initial: () => position })
 
   return (
@@ -28,7 +30,7 @@ export default function App() {
   return (
     <>
       {show1 && <Box index={1} />}
-      {/* {show2 && <Box index={2} />} */}
+      {show2 && <Box index={2} />}
       {/* <button onClick={() => set1((t) => !t)}>{show1 ? 'hide' : 'show'} controls box1</button>
       <button onClick={() => set2((t) => !t)}>{show2 ? 'hide' : 'show'} controls box2</button> */}
     </>

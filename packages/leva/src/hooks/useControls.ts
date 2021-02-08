@@ -13,9 +13,10 @@ import { Schema } from '../types'
  */
 export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings
+  schemaOrSettings?: F | HookSettings,
+  settingsOrUndefined?: HookSettings
 ) {
-  const values = useRootControls(globalStore, nameOrSchema, schemaOrSettings)
+  const values = useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
 
