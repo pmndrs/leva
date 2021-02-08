@@ -2,7 +2,7 @@ import React from 'react'
 import { useControls } from 'leva'
 
 function Box({ index }) {
-  const c = useControls('folder', { boxNumber: 30, boxColor: '#fff' })
+  const [c] = useControls(() => ({ boxNumber: 30, boxColor: '#fff' }))
   console.log('rendering box', index, c)
   return <div style={{ margin: 10, height: c.boxNumber, width: c.boxNumber, background: c.boxColor }} />
 }

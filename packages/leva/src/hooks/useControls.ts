@@ -1,10 +1,13 @@
 import { globalStore } from '../store'
-import { useRootControls, HookSettings } from './useRootControls'
+import { useRootControls, HookSettings, SchemaOrFn, HookReturnType } from './useRootControls'
 import { useRenderRoot } from '../components/Leva'
-import { Schema, SchemaToValues } from '../types'
+import { Schema } from '../types'
 
-export function useControls<S extends Schema>(schema: S, settings?: HookSettings): SchemaToValues<S>
-export function useControls<S extends Schema>(name: string, schema: S): SchemaToValues<S>
+export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
+  schema: F,
+  settings?: HookSettings
+): HookReturnType<F>
+export function useControls<S extends Schema, F extends SchemaOrFn<S>>(name: string, schema: F): HookReturnType<F>
 
 /**
  * Main hook of Leva. Pass an optional name and an input schema. Uses the global

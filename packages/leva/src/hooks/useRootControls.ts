@@ -1,30 +1,43 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
 
 export type HookSettings = {}
+export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
+export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
+  ? F extends Function
+    ? [SchemaToValues<S>, (path: string, value: any) => void]
+    : SchemaToValues<S>
+  : never
 
-function parseArgs<S extends Schema>(
-  nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings
-): { schema: Schema; settings?: HookSettings } {
+function parseArgs(
+  nameOrSchema: string | SchemaOrFn,
+  schemaOrSettings?: SchemaOrFn | HookSettings
+): { schema: Schema; settings: HookSettings; schemaIsFunction: boolean } {
   if (typeof nameOrSchema === 'string') {
-    return { schema: { [nameOrSchema]: folder(schemaOrSettings as S) } }
+    const schemaIsFunction = typeof schemaOrSettings === 'function'
+    // @ts-ignore
+    const schema = schemaIsFunction ? schemaOrSettings() : schemaOrSettings
+    return { schema: { [nameOrSchema]: folder(schema) }, settings: {}, schemaIsFunction }
   } else {
+    const schemaIsFunction = typeof nameOrSchema === 'function'
+    // @ts-ignore
+    const schema = schemaIsFunction ? nameOrSchema() : nameOrSchema
     const settings = schemaOrSettings as HookSettings
-    const schema = nameOrSchema as S
-    return { schema, settings }
+    return { schema, settings, schemaIsFunction }
   }
 }
 
-export function useRootControls<S extends Schema>(
+export type K<S extends Schema> = () => S
+
+export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   store: StoreType,
-  nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings
-): SchemaToValues<S> {
-  const [{ schema }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings))
+  nameOrSchema: string | F,
+  schemaOrSettings?: F | HookSettings
+): HookReturnType<F> {
+  const [{ schema, schemaIsFunction }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings))
 
   /**
    * Parses the schema to extract the inputs initial data.
@@ -49,6 +62,8 @@ export function useRootControls<S extends Schema>(
    * */
   const values = useValuesForPath(store, paths, initialData)
 
+  const set = useCallback((path: string, value: any) => store.setValueAtPath(path, value), [store])
+
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
     // Note that doing this while rendering (ie in useMemo) would make
@@ -59,5 +74,6 @@ export function useRootControls<S extends Schema>(
     return () => store.disposePaths(paths)
   }, [store, paths, initialData])
 
+  if (schemaIsFunction) return [values, set] as any
   return values as any
 }
