@@ -2,19 +2,20 @@ import { useEffect, useMemo, useState } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
-import { Schema, SchemaToValues, FolderSettings } from '../types'
+import { Schema, SchemaToValues, FolderSettings as FS } from '../types'
 
-export type Settings = Partial<FolderSettings>
+export type FolderSettings = Partial<FS>
+export type HookSettings = {}
 
 function parseArgs<S extends Schema>(
   nameOrSchema: string | S,
-  schemaOrSettings: S | Settings = {},
-  settingsOrUndefined?: Settings
-): { schema: Schema; settings?: Settings } {
+  schemaOrSettings?: S | HookSettings,
+  settingsOrUndefined?: FolderSettings
+): { schema: Schema; settings?: HookSettings } {
   if (typeof nameOrSchema === 'string') {
     return { schema: { [nameOrSchema]: folder(schemaOrSettings as S, settingsOrUndefined) } }
   } else {
-    const settings = schemaOrSettings as Settings
+    const settings = schemaOrSettings as HookSettings
     const schema = nameOrSchema as S
     return { schema, settings }
   }
@@ -23,8 +24,8 @@ function parseArgs<S extends Schema>(
 export function useRootControls<S extends Schema>(
   store: StoreType,
   nameOrSchema: string | S,
-  schemaOrSettings?: S,
-  settingsOrUndefined?: Settings
+  schemaOrSettings?: S | HookSettings,
+  settingsOrUndefined?: FolderSettings
 ): SchemaToValues<S> {
   const [{ schema }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined))
 
