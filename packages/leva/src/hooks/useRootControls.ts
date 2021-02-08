@@ -31,8 +31,6 @@ function parseArgs(
   }
 }
 
-export type K<S extends Schema> = () => S
-
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
   store: StoreType,
   nameOrSchema: string | F,
