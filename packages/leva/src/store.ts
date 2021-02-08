@@ -9,7 +9,7 @@ export type StoreType = {
   useStore: UseStore<State>
   orderPathsFromData: (initialData: Data) => string[]
   setOrderedPaths: (newPaths: string[]) => void
-  disposePaths: (paths: string[]) => void
+  disposePaths: (paths: string[], removeOnDispose?: boolean) => void
   getVisiblePaths: (data: Data) => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
@@ -70,10 +70,15 @@ export const Store = (function (this: StoreType) {
    *
    * @param paths
    */
-  this.disposePaths = (paths) => {
+  this.disposePaths = (paths, removeOnDispose = false) => {
     store.setState((s) => {
       const data = s.data
-      paths.forEach((path) => data[path].count--)
+      paths.forEach((path) => {
+        if (removeOnDispose) {
+          delete data[path]
+          orderedPaths.delete(path)
+        } else data[path].count--
+      })
       return { data }
     })
   }

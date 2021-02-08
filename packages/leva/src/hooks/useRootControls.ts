@@ -54,13 +54,10 @@ export function useRootControls<S extends Schema>(
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
-    // Note that doing this while rendering would makes things easier
-    // and remove the need for initializing useValuesForPath but it
-    // breaks the rendering cycle for some reason.
+    // Note that doing this while rendering (ie in useMemo) would make
+    // things easier and remove the need for initializing useValuesForPath but
+    // it breaks the ref from Monitor.
 
-    // Old comment that I left, I have no idea what I meant 🤷‍♂️:
-    // > we need to compute these in useEffect for monitors to work
-    // > but this breaks the order of keys
     store.setData(initialData)
     return () => store.disposePaths(paths)
   }, [store, paths, initialData])
