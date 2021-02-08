@@ -117,7 +117,7 @@ export function App1() {
     <>
       <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
-        {/* <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div> */}
+        <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
