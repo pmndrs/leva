@@ -86,8 +86,8 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
     // it breaks the ref from Monitor.
 
     store.addData(initialData)
-    return () => store.disposePaths(paths)
-  }, [store, paths, initialData])
+    return () => store.disposePaths(paths, !!id)
+  }, [store, paths, initialData, id])
 
   if (schemaIsFunction) return [values, set] as any
   return values as any
