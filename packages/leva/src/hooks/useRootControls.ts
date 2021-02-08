@@ -2,18 +2,16 @@ import { useEffect, useMemo, useState } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
-import { Schema, SchemaToValues, FolderSettings as FS } from '../types'
+import { Schema, SchemaToValues } from '../types'
 
-export type FolderSettings = Partial<FS>
 export type HookSettings = {}
 
 function parseArgs<S extends Schema>(
   nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings,
-  settingsOrUndefined?: FolderSettings
+  schemaOrSettings?: S | HookSettings
 ): { schema: Schema; settings?: HookSettings } {
   if (typeof nameOrSchema === 'string') {
-    return { schema: { [nameOrSchema]: folder(schemaOrSettings as S, settingsOrUndefined) } }
+    return { schema: { [nameOrSchema]: folder(schemaOrSettings as S) } }
   } else {
     const settings = schemaOrSettings as HookSettings
     const schema = nameOrSchema as S
@@ -24,10 +22,9 @@ function parseArgs<S extends Schema>(
 export function useRootControls<S extends Schema>(
   store: StoreType,
   nameOrSchema: string | S,
-  schemaOrSettings?: S | HookSettings,
-  settingsOrUndefined?: FolderSettings
+  schemaOrSettings?: S | HookSettings
 ): SchemaToValues<S> {
-  const [{ schema }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined))
+  const [{ schema }] = useState(() => parseArgs(nameOrSchema, schemaOrSettings))
 
   /**
    * Parses the schema to extract the inputs initial data.
