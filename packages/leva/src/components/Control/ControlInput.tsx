@@ -27,3 +27,5 @@ export function ControlInput<V, Settings extends object>({
     </InputContext.Provider>
   )
 }
+
+ControlInput.whyDidYouRender = true
