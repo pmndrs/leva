@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import shallow from 'zustand/shallow'
 import { useStoreContext } from '../../context'
 import { Data, DataItem } from '../../types'
@@ -15,14 +15,18 @@ type Input = Omit<DataItem, 'count'>
  *
  * @param path
  */
-export const useInput = (path: string): [Input | null, (value: any) => void] => {
+export const useInput = (path: string): [Input, (value: any) => void] => {
   const store = useStoreContext()
-  const [state, setState] = useState<Input | null>(null)
+  const [state, setState] = useState<Input>(getInputAtPath(store.getData(), path))
+  const firstRender = useRef(true)
 
   const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
 
   useEffect(() => {
-    setState(getInputAtPath(store.getData(), path))
+    if (!firstRender.current) {
+      setState(getInputAtPath(store.getData(), path))
+      firstRender.current = false
+    }
     const unsub = store.useStore.subscribe(setState, (s) => getInputAtPath(s.data, path), shallow)
     return () => unsub()
   }, [store, set, path])
