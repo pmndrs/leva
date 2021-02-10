@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 
-import { globalStore, StoreType } from '../../store'
+import { StoreType } from '../../store'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -20,10 +20,22 @@ export type LevaRootProps = {
   hideTitleBar: boolean
 }
 
-export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels, hideTitleBar }: LevaRootProps) {
-  // data
-  const _store = store || globalStore
-  const paths = useVisiblePaths(_store)
+export function LevaRoot({ store, ...props }: LevaRootProps) {
+  // const [_store, set] = useState(null)
+
+  // React.useEffect(() => {
+  //   set(null)
+  //   setTimeout(() => set(store), 0)
+  // }, [store])
+
+  if (!store) return null
+  return <LevaCore store={store} {...props} />
+}
+
+type LevaCoreProps = LevaRootProps & { store: StoreType }
+
+function LevaCore({ store, theme = {}, detached, collapsed, oneLineLabels, hideTitleBar }: LevaCoreProps) {
+  const paths = useVisiblePaths(store)
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
 
@@ -37,7 +49,7 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
 
-  // this generally happens on first render.
+  // this generally happens on first render because the store is initialized in useEffect.
   if (paths.length < 1) return null
 
   return (
@@ -46,7 +58,7 @@ export function LevaRoot({ theme = {}, store, detached, collapsed, oneLineLabels
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
-        <StoreContext.Provider value={_store}>
+        <StoreContext.Provider value={store}>
           <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
         </StoreContext.Provider>
       </StyledRoot>

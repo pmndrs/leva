@@ -115,7 +115,7 @@ export function App1() {
   // useControls({ color: '#ffffff' })
   return (
     <>
-      <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
+      <Leva theme={{ colors: { $accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
