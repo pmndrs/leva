@@ -12,9 +12,12 @@ export type VectorType<K extends string, F extends Format = Format> = F extends 
 
 type FormatFromValue<Value> = Value extends number[] ? 'array' : Value extends Record<string, number> ? 'object' : never
 
-export type VectorSettings<K extends string> = {
-  [key in K]?: NumberSettings
-}
+export type VectorSettings<K extends string> =
+  | {
+      [key in K]?: NumberSettings
+    }
+  | NumberSettings
+
 export type InternalVectorSettings<K extends string> = {
   [key in K]: InternalNumberSettings
 } & { format: Format }
@@ -57,6 +60,8 @@ export const formatVector = <K extends string>(value: any, keys: K[]) => {
   return convert(value, 'object', keys)
 }
 
+const isNumberSettings = (o?: object) => o && ('step' in o || 'min' in o || 'max' in o)
+
 export function normalizeVector<K extends string, Value extends VectorType<K>>(
   _value: Value,
   _settings: VectorSettings<K> = {},
@@ -64,10 +69,19 @@ export function normalizeVector<K extends string, Value extends VectorType<K>>(
 ) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
   const value = convert(_value, 'object', keys)
-  const { settings } = normalizeKeyedNumberInput(value, _settings as any)
+
+  // vector can accept either { value: { x, y }, { x: settings, y: settings } }
+  // or { value: { x, y }, { settings } } where settings will apply to both keys
+  // merged settings will recognize a unified settings and dispatch it to all keys
+
+  const mergedSettings = isNumberSettings(_settings)
+    ? keys.reduce((acc, k) => Object.assign(acc, { [k]: _settings }), {})
+    : _settings
+
+  const { settings } = normalizeKeyedNumberInput(value, mergedSettings as any)
 
   return {
-    value: (format === 'array' ? _value : orderKeys(value, keys as any)) as VectorType<K, FormatFromValue<Value>>,
+    value: (format === 'array' ? _value : orderKeys(value, keys)) as VectorType<K, FormatFromValue<Value>>,
     settings: { ...settings, format },
   }
 }
@@ -75,8 +89,8 @@ export function normalizeVector<K extends string, Value extends VectorType<K>>(
 export function getVectorPlugin<K extends string>(keys: K[]) {
   return {
     schema: getVectorSchema(keys),
-    validate: validateVector,
     normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, keys),
+    validate: validateVector,
     format: (value: any) => formatVector(value, keys),
     sanitize: (value: any, settings: InternalVectorSettings<K>) => sanitizeVector(value, settings, keys),
   }
