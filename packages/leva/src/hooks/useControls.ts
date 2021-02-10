@@ -16,9 +16,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   schemaOrSettings?: F | HookSettings,
   settingsOrUndefined?: HookSettings
 ) {
-  const values = useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
-
-  return values
+  return useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
 }

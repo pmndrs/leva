@@ -3,7 +3,7 @@ import { LevaPanel, usePanel } from 'leva'
 import { useDrag } from 'react-use-gesture'
 
 function Box({ index, selected, onClick }) {
-  const [[{ position, color }, set], store] = usePanel(() => ({
+  const [{ position, color }, store, set] = usePanel(() => ({
     position: [50 * index, 50],
     color: '#fff',
   }))

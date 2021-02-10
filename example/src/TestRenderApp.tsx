@@ -3,7 +3,7 @@ import { useControls } from 'leva'
 import { useDrag } from 'react-use-gesture'
 
 function Box({ index, selected, onClick }) {
-  const [{ position, color }, set] = useControls(() => ({ position: [50, 50], color: '#fff' }), {
+  const [{ position, color }, store, set] = useControls(() => ({ position: [50, 50], color: '#fff' }), {
     unique: true,
     show: selected,
   })
