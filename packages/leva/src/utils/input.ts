@@ -1,4 +1,4 @@
-import { dequal } from 'dequal'
+import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize, validate } from '../plugin'
 import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Plugins } from '../../plugin'
 import { InputContext } from '../../context'
-import { useValue } from '../../hooks/useValue'
+import { useValue } from '../../utils/hooks'
 
 type ControlInputProps<V, Settings extends object> = {
   type: string
-  valueKey: string
+  label: string
   value: V
   settings: Settings
   setValue: (value: any) => void
@@ -13,7 +13,7 @@ type ControlInputProps<V, Settings extends object> = {
 
 export function ControlInput<V, Settings extends object>({
   type,
-  valueKey,
+  label,
   value,
   settings,
   setValue,
@@ -22,7 +22,7 @@ export function ControlInput<V, Settings extends object>({
   const Input = Plugins[type].component
 
   return (
-    <InputContext.Provider value={{ valueKey, label: valueKey, displayValue, value, onChange, onUpdate, settings }}>
+    <InputContext.Provider value={{ label, displayValue, value, onChange, onUpdate, settings }}>
       <Input />
     </InputContext.Provider>
   )

@@ -3,14 +3,14 @@ import { Row } from '../UI'
 import { StyledButton } from './StyledButton'
 
 type ButtonProps = {
-  valueKey: string
+  label: string
   onClick: () => any
 }
 
-export function Button({ onClick, valueKey }: ButtonProps) {
+export function Button({ onClick, label }: ButtonProps) {
   return (
     <Row>
-      <StyledButton onClick={() => onClick()}>{valueKey}</StyledButton>
+      <StyledButton onClick={() => onClick()}>{label}</StyledButton>
     </Row>
   )
 }

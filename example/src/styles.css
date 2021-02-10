@@ -4,3 +4,17 @@ body {
   padding: 20px;
   background-color: #ecd5ff;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.box {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+
+.box.selected {
+  border: 1px solid #00b8ff;
+}

@@ -25,7 +25,7 @@ const number = v8n().number()
 export function getVectorSchema(keys: string[]) {
   // prettier-ignore
   const VectorArray = v8n().array().length(keys.length).every.number()
-  const pointObj = v8n().schema(keys.reduce((acc, k) => ({ ...acc, [k]: number }), {}))
+  const pointObj = v8n().schema(keys.reduce((acc, k) => Object.assign(acc, { [k]: number }), {}))
   return (o: any) => v8n().passesAnyOf(VectorArray, pointObj).test(o)
 }
 
@@ -47,9 +47,10 @@ export const sanitizeVector = <K extends string>(
   settings: InternalVectorSettings<K>,
   keys: K[]
 ) => {
-  for (let key in value) value[key] = sanitize(value[key], settings[key]) as number
+  const _value = convert(value, 'object', keys)
+  for (let key in _value) _value[key] = sanitize(_value[key], settings[key]) as number
 
-  return convert(value, settings.format, keys)
+  return convert(_value, settings.format, keys)
 }
 
 export const formatVector = <K extends string>(value: any, keys: K[]) => {

@@ -13,7 +13,7 @@ export function LevaPanel({
   oneLineLabels = false,
   hideTitleBar,
 }: LevaPanelProps) {
-  const parentStore = useStoreContext()!
+  const parentStore = useStoreContext()
   return (
     <LevaRoot
       store={store || parentStore}

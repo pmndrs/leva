@@ -6,9 +6,9 @@ import {
   monitor,
   Leva,
   usePanel,
+  usePanelControls,
   LevaPanel,
   LevaStoreProvider,
-  usePanelControls,
 } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
@@ -47,7 +47,7 @@ function Comp1() {
         spring: spring({ tension: 100, friction: 30 }),
         folder3: folder(
           {
-            // 'Hello Button': button(() => console.log('hello')),
+            'Hello Button': button(() => console.log('hello')),
             folder4: folder({
               string: 'hello',
               pos2d: { value: { x: 3, y: 4 } },
@@ -115,9 +115,9 @@ export function App1() {
   // useControls({ color: '#ffffff' })
   return (
     <>
-      <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
+      <Leva theme={{ colors: { $accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
-        {/* <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div> */}
+        <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
@@ -136,8 +136,8 @@ function MyComponent() {
 }
 
 export function App2() {
-  const [, store1] = usePanel({ color: '#fff' })
-  const [, store2] = usePanel({ boolean: true })
+  const [, store1] = usePanel(() => ({ color: '#fff' }))
+  const [, store2] = usePanel(() => ({ boolean: true }))
   return (
     <div
       style={{
@@ -157,7 +157,7 @@ export function App2() {
 }
 
 export function App3() {
-  const [colors, colorStore] = usePanel({
+  const [colors, colorStore] = usePanel(() => ({
     colors: folder({
       $elevation1: '#292D39',
       $elevation2: '#181C20',
@@ -169,29 +169,32 @@ export function App3() {
       $highlight2: '#8C92A4',
       $highlight3: '#FEFEFE',
     }),
-  })
-  const [radii, radiiStore] = usePanel({
+  }))
+
+  const [radii, radiiStore] = usePanel(() => ({
     radii: folder({
       $xs: '2px',
       $sm: '3px',
       $lg: '10px',
     }),
-  })
+  }))
 
-  const [space, spaceStore] = usePanel({
+  const [space, spaceStore] = usePanel(() => ({
     space: folder({
       $sm: '6px',
       $md: '10px',
       $rowGap: '7px',
       $colGap: '7px',
     }),
-  })
-  const [fontSizes, fontSizesStore] = usePanel({
+  }))
+
+  const [fontSizes, fontSizesStore] = usePanel(() => ({
     fontSizes: folder({
       $root: '11px',
     }),
-  })
-  const [sizes, sizesStore] = usePanel({
+  }))
+
+  const [sizes, sizesStore] = usePanel(() => ({
     sizes: folder({
       $rootWidth: '280px',
       $controlWidth: '160px',
@@ -206,8 +209,9 @@ export function App3() {
       $colorPickerHeight: '100px',
       $monitorHeight: '60px',
     }),
-  })
-  const [borderWidths, borderStore] = usePanel({
+  }))
+
+  const [borderWidths, borderStore] = usePanel(() => ({
     borderWidths: folder({
       $root: '0px',
       $input: '1px',
@@ -216,14 +220,15 @@ export function App3() {
       $active: '1px',
       $folder: '1px',
     }),
-  })
-  const [fontWeights, weightsStore] = usePanel({
+  }))
+
+  const [fontWeights, weightsStore] = usePanel(() => ({
     fontWeights: folder({
       $label: { value: 'normal', options: ['bold', 'light'] },
       $folder: { value: 'normal', options: ['bold', 'light'] },
       $button: { value: 'normal', options: ['bold', 'light'] },
     }),
-  })
+  }))
 
   const theme = {
     colors,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useValue } from '../../hooks'
+import { useValue } from '../../utils/hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
 import { InternalNumberSettings } from '../Number/number-plugin'
@@ -22,7 +22,7 @@ function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUp
 
   return (
     <Number
-      valueKey={valueKey as string}
+      label={valueKey as string}
       value={value[valueKey]}
       displayValue={number.displayValue}
       onUpdate={number.onUpdate}

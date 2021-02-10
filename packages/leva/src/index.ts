@@ -26,6 +26,6 @@ register('POINT2D', point2d)
 
 export { Leva, LevaPanel } from './components/Leva'
 export { LevaStoreProvider } from './context'
-export * from './useControls'
+export * from './hooks'
 export * from './helpers'
 export { globalStore as store } from './store'
