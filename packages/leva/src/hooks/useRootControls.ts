@@ -1,16 +1,20 @@
 import { useEffect, useMemo, useRef, useCallback, useState } from 'react'
-import { Store, StoreType } from '../store'
+import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
 import { uid } from '../utils'
-import { useStoreContext } from '../context'
 
 export type HookSettings = { unique?: boolean; show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
-export type HookReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
+
+type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
+
+export type HookReturnType<F extends SchemaOrFn, ReturnStore = false> = F extends SchemaOrFn<infer S>
   ? F extends Function
-    ? [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
+    ? FunctionReturnType<S>
+    : ReturnStore extends true
+    ? FunctionReturnType<S>
     : SchemaToValues<S>
   : never
 
@@ -35,12 +39,13 @@ function returnSchema(schema: SchemaOrFn, name: string | undefined) {
   return name ? { [name]: folder(_schema) } : _schema
 }
 
-export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
-  store: StoreType | null,
+export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT extends boolean = false>(
+  store: StoreType,
   nameOrSchema: string | F,
   schemaOrSettings?: F | HookSettings,
-  settingsOrUndefined?: HookSettings
-): HookReturnType<F> {
+  settingsOrUndefined?: HookSettings,
+  returnStore?: RT
+): HookReturnType<F, RT> {
   // We compute this only once for performance reasons;
   // This might cause problems if a state variable is used in the render
   // function.
@@ -52,18 +57,10 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
 
   const schemaIsFunction = typeof schema === 'function'
 
-  const parentStore = useStoreContext()
-
-  // _store will hold the actual store. The logic is:
-  // 1. If the hook is provided a store, use that one.
-  // 2. If the hook is provided a function schema or if there's no parent store then provide a new store
-  // 3. Otherwise use the parentStore
-  const [_store] = useState(() => store || (schemaIsFunction || !parentStore ? new Store() : parentStore))
-
   const _schema = useRef(returnSchema(schema, name))
   const firstRender = useRef(true)
 
-  const id = useMemo(() => (settings.unique ? uid() : undefined), [settings.unique])
+  const [id] = useState(() => (settings.unique ? uid() : undefined))
   const unique = !!id
 
   /**
@@ -74,10 +71,10 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const [initialData, mappedPaths] = useMemo(() => _store.getDataFromSchema(_schema.current, id), [_store, id])
+  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema.current, id), [store, id])
 
   // Extracts the paths from the initialData and ensures order of paths.
-  const paths = useMemo(() => _store.orderPaths(Object.values(mappedPaths)), [mappedPaths, _store])
+  const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])
 
   /**
    * Reactive hook returning the values from the store at given paths.
@@ -87,20 +84,20 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
    * initalData is going to be returned on the first render. Subsequent renders
    * will call the store data.
    * */
-  const values = useValuesForPath(_store, paths, initialData)
+  const values = useValuesForPath(store, paths, initialData)
 
   const set = useCallback(
     (values: Record<string, any>) => {
       // @ts-ignore
       const _values = Object.entries(values).reduce((acc, [p, v]) => Object.assign(acc, { [mappedPaths[p]]: v }), {})
-      _store.set(_values)
+      store.set(_values)
     },
-    [_store, mappedPaths]
+    [store, mappedPaths]
   )
 
   useEffect(() => {
-    return () => _store.disposePaths(paths, unique)
-  }, [unique, _store, paths])
+    return () => store.disposePaths(paths, unique)
+  }, [unique, store, paths])
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
@@ -109,11 +106,11 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>>(
     // it breaks the ref from Monitor.
 
     // TODO optimize this
-    if (settings.show || firstRender.current) _store.addData(initialData)
-    if (!settings.show) _store.disposePaths(paths)
+    if (settings.show || firstRender.current) store.addData(initialData)
+    if (!settings.show) store.disposePaths(paths)
     firstRender.current = false
-  }, [settings.show, _store, paths, initialData])
+  }, [settings.show, store, paths, initialData])
 
-  if (schemaIsFunction) return [values, _store, set] as any
+  if (schemaIsFunction || returnStore) return [values, store, set] as any
   return values as any
 }

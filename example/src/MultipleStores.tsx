@@ -3,10 +3,11 @@ import { LevaPanel, usePanel } from 'leva'
 import { useDrag } from 'react-use-gesture'
 
 function Box({ index, selected, onClick }) {
-  const [{ position, color }, store, set] = usePanel(() => ({
+  const [{ position, color }, store, set] = usePanel({
     position: [50 * index, 50],
     color: '#fff',
-  }))
+  })
+
   const bind = useDrag(
     ({ first, movement }) => {
       if (first) onClick([index, store])

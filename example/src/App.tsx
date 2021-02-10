@@ -1,5 +1,15 @@
 import React from 'react'
-import { useControls, folder, button, monitor, Leva, usePanel, LevaPanel, LevaStoreProvider } from 'leva'
+import {
+  useControls,
+  folder,
+  button,
+  monitor,
+  Leva,
+  usePanel,
+  usePanelControls,
+  LevaPanel,
+  LevaStoreProvider,
+} from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
@@ -121,7 +131,7 @@ export function App1() {
 }
 
 function MyComponent() {
-  usePanel({ point: [0, 0] })
+  usePanelControls({ point: [0, 0] })
   return null
 }
 
