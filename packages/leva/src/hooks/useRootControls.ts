@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useRef, useCallback, useState } from 'react'
+import { useEffect, useMemo, useRef, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
-import { uid } from '../utils'
 
-export type HookSettings = { unique?: boolean; show?: boolean }
+export type HookSettings = { show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
@@ -60,9 +59,6 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
   const _schema = useRef(returnSchema(schema, name))
   const firstRender = useRef(true)
 
-  const [id] = useState(() => (settings.unique ? uid() : undefined))
-  const unique = !!id
-
   /**
    * Parses the schema to extract the inputs initial data.
    *
@@ -71,7 +67,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema.current, id), [store, id])
+  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema.current), [store])
 
   // Extracts the paths from the initialData and ensures order of paths.
   const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])
@@ -96,8 +92,8 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
   )
 
   useEffect(() => {
-    return () => store.disposePaths(paths, unique)
-  }, [unique, store, paths])
+    return () => store.disposePaths(paths)
+  }, [store, paths])
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
