@@ -17,8 +17,6 @@ const specialComponents = {
 export const Control = React.memo(({ path }: ControlProps) => {
   const [input, set] = useInput(path)
 
-  if (!input) return null
-
   const { type, key, ...props } = input
 
   if (type in SpecialInputTypes) {
