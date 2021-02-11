@@ -4,7 +4,7 @@ import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
 import { Schema, SchemaToValues } from '../types'
 
-export type HookSettings = { show?: boolean }
+// export type HookSettings = { show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
@@ -19,15 +19,15 @@ export type HookReturnType<F extends SchemaOrFn, ReturnStore = false> = F extend
 
 function parseArgs(
   nameOrSchema: string | SchemaOrFn,
-  schemaOrSettings?: SchemaOrFn | HookSettings,
-  settingsOrUndefined?: HookSettings
-): { schema: SchemaOrFn; settings: HookSettings; name?: string } {
+  schemaOrUndefined?: SchemaOrFn
+  // settingsOrUndefined?: HookSettings
+): { schema: SchemaOrFn; name?: string } {
   if (typeof nameOrSchema === 'string') {
-    const settings = { show: true, ...settingsOrUndefined }
-    return { schema: schemaOrSettings as SchemaOrFn, settings, name: nameOrSchema }
+    // const settings = { show: true, ...settingsOrUndefined }
+    return { schema: schemaOrUndefined as SchemaOrFn, name: nameOrSchema }
   } else {
-    const settings = { show: true, ...schemaOrSettings }
-    return { schema: nameOrSchema as SchemaOrFn, settings }
+    // const settings = { show: true, ...schemaOrUndefined }
+    return { schema: nameOrSchema as SchemaOrFn }
   }
 }
 
@@ -41,23 +41,17 @@ function returnSchema(schema: SchemaOrFn, name: string | undefined) {
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT extends boolean = false>(
   store: StoreType,
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings,
-  settingsOrUndefined?: HookSettings,
+  schemaOrUndefined?: F,
   returnStore?: RT
 ): HookReturnType<F, RT> {
   // We compute this only once for performance reasons;
   // This might cause problems if a state variable is used in the render
   // function.
-  const { name, schema, settings } = useMemo(() => parseArgs(nameOrSchema, schemaOrSettings, settingsOrUndefined), [
-    nameOrSchema,
-    schemaOrSettings,
-    settingsOrUndefined,
-  ])
+  const { name, schema } = useMemo(() => parseArgs(nameOrSchema, schemaOrUndefined), [nameOrSchema, schemaOrUndefined])
 
   const schemaIsFunction = typeof schema === 'function'
 
   const _schema = useRef(returnSchema(schema, name))
-  const firstRender = useRef(true)
 
   /**
    * Parses the schema to extract the inputs initial data.
@@ -92,9 +86,20 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
   )
 
   useEffect(() => {
+    // We initialize the store with the initialData in useEffect.
+    // Note that doing this while rendering (ie in useMemo) would make
+    // things easier and remove the need for initializing useValuesForPath but
+    // it breaks the ref from Monitor.
+    store.addData(initialData)
     return () => store.disposePaths(paths)
-  }, [store, paths])
+  }, [store, paths, initialData])
 
+  /**
+   * @note The below used the settings.show api to conditionnally render the hook.
+   * Removed for now,
+   */
+
+  /* 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
     // Note that doing this while rendering (ie in useMemo) would make
@@ -106,6 +111,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
     if (!settings.show) store.disposePaths(paths)
     firstRender.current = false
   }, [settings.show, store, paths, initialData])
+  */
 
   if (schemaIsFunction || returnStore) return [values, store, set] as any
   return values as any

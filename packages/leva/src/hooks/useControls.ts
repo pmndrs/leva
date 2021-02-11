@@ -1,5 +1,5 @@
 import { globalStore } from '../store'
-import { useRootControls, HookSettings, SchemaOrFn } from './useRootControls'
+import { useRootControls, SchemaOrFn } from './useRootControls'
 import { useRenderRoot } from '../components/Leva'
 import { Schema } from '../types'
 
@@ -13,10 +13,9 @@ import { Schema } from '../types'
  */
 export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrSettings?: F | HookSettings,
-  settingsOrUndefined?: HookSettings
+  schemaOrUndefined?: F
 ) {
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
-  return useRootControls(globalStore, nameOrSchema, schemaOrSettings, settingsOrUndefined)
+  return useRootControls(globalStore, nameOrSchema, schemaOrUndefined)
 }
