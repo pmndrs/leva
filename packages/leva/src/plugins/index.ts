@@ -1,10 +1,10 @@
 // used as entrypoint
 
 export { createPlugin } from '../plugin'
-export { Row, Label } from '../components/UI'
+export { Row, Label, Portal } from '../components/UI'
 export { ValueInput } from '../components/ValueInput'
 export { Vector, getVectorPlugin } from '../components/Vector'
-export { useDrag, useDragNumber, useCanvas2d } from '../hooks/'
+export { useDrag, useDragNumber, useCanvas2d } from '../utils/hooks'
 export { useInputContext } from '../context'
 // export styling utilities
 export { styled, useTh } from '../styles'

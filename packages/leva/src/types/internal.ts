@@ -1,23 +1,26 @@
 import { InputWithSettings, SpecialInput, RenderFn } from './public-types'
 
+type Decorators = {
+  count: number
+  key: string
+  render?: RenderFn
+}
+
 export type DataInput = {
   type: string
   value: unknown
   settings?: object
-}
+} & Decorators
 
-export type DataItem = (DataInput | SpecialInput) & { render?: RenderFn }
+export type DataItem = DataInput | (SpecialInput & Decorators)
 
-export type Data = {
-  [key: string]: DataItem & { count: number }
-}
+export type Data = Record<string, DataItem>
 
 export type Tree = {
-  [key: string]: { __levaInput: true; valueKey: string; path: string } | Tree
+  [key: string]: { __levaInput: true; path: string } | Tree
 }
 
 export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
-  valueKey: string
   label: string
   displayValue: DisplayValue
   value: V

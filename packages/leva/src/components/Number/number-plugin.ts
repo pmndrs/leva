@@ -11,7 +11,7 @@ export type InternalNumberSettings = {
 }
 type NumberInput = InputWithSettings<number | string, NumberSettings>
 
-export const schema = (o: any) => !isNaN(parseFloat(o))
+export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
@@ -35,8 +35,8 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
     if (match) suffix = match[0]
   }
 
-  let step = settings.step
   let padStep = getStep(_value)
+  let step = settings.step
   if (!step) {
     if (Number.isFinite(min))
       if (Number.isFinite(max)) step = +(Math.abs(max! - min!) / 400).toPrecision(1)

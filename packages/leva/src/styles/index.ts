@@ -6,16 +6,16 @@ import { ThemeContext } from '../context'
 import { warn, LevaErrors } from '../utils'
 
 export function mergeTheme(newTheme: Partial<{}>) {
-  const mergedTheme = getDefaultTheme()
+  const theme = getDefaultTheme()
   Object.keys(newTheme!).forEach((key) => {
     // @ts-ignore
-    Object.assign(mergedTheme![key], newTheme![key])
+    Object.assign(theme![key], newTheme![key])
   })
-  return { mergedTheme, themeCss: css.theme(newTheme) }
+  return { theme, className: css.theme(newTheme) }
 }
 
 export function useTh(category: keyof ITokensDefinition, key: string) {
-  const theme = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)!
   if (!(category in theme!) || !(key in theme![category]!)) {
     warn(LevaErrors.THEME_ERROR, category, key)
     return ''

@@ -1,13 +1,12 @@
 import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
-// @ts-expect-error
-import { Portal } from 'react-portal'
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
-import { Point2d as Point2dType, Point2dObject } from '../../types'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Point2dProps } from './Point2d'
 import { useTh } from '../../styles'
-import { useTransform } from '../../hooks'
+import { Portal } from '../UI'
+import { multiplyStep, useTransform } from '../../utils/hooks'
+import { Point2d as Point2dType, Point2dObject } from '../../types'
 
 type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
 
@@ -15,6 +14,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
   const outOfBoundsX = useRef(0)
   const outOfBoundsY = useRef(0)
+  const stepMultiplier = useRef(1)
 
   const [joystickShown, setShowJoystick] = useState(false)
   const [isOutOfBounds, setIsOutOfBounds] = useState(false)
@@ -50,9 +50,9 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     if (outOfBoundsY.current) set({ y: outOfBoundsY.current * -h })
     timeout.current = window.setInterval(() => {
       onUpdate((v: Point2dType) => {
-        const incX = stepX * outOfBoundsX.current * 3
-        const incY = stepY * outOfBoundsY.current * 3
-        return Array.isArray(v) ? [v[0] + incX, v[1] + incY] : { x: v.x + incX, y: v.y + incY }
+        const incX = stepX * outOfBoundsX.current * stepMultiplier.current
+        const incY = stepY * outOfBoundsY.current * stepMultiplier.current
+        return Array.isArray(v) ? { x: v[0] + incX, y: v[1] + incY } : { x: v.x + incX, y: v.y + incY }
       })
     }, 16)
   }, [w, h, onUpdate, set, stepX, stepY])
@@ -63,7 +63,18 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     setIsOutOfBounds(false)
   }, [])
 
-  useEffect(() => () => window.clearTimeout(timeout.current), [])
+  useEffect(() => {
+    function setStepMultiplier(event: KeyboardEvent) {
+      stepMultiplier.current = multiplyStep(event)
+    }
+    window.addEventListener('keydown', setStepMultiplier)
+    window.addEventListener('keyup', setStepMultiplier)
+    return () => {
+      window.clearTimeout(timeout.current)
+      window.removeEventListener('keydown', setStepMultiplier)
+      window.removeEventListener('keyup', setStepMultiplier)
+    }
+  }, [])
 
   const bind = useDrag(({ first, active, delta: [dx, dy], movement: [mx, my] }) => {
     if (first) setShowJoystick(true)
@@ -79,11 +90,11 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
 
     if (active) {
       if (!outOfBoundsX.current) {
-        newX += dx * stepX
+        newX += dx * stepX * stepMultiplier.current
         set({ x: _x })
       }
       if (!outOfBoundsY.current) {
-        newY -= dy * stepY
+        newY -= dy * stepY * stepMultiplier.current
         set({ y: _y })
       }
       if (outOfBoundsX.current || outOfBoundsY.current) startOutOfBounds()

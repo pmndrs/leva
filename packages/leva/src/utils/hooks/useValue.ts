@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect } from 'react'
-import { format } from '../plugin'
+import { dequal } from 'dequal/lite'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { format } from '../../plugin'
 
 type Props<V, Settings> = {
   type: string
@@ -11,6 +12,7 @@ type Props<V, Settings> = {
 export function useValue<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
   // the value used by the panel vs the value
   const [displayValue, setDisplayValue] = useState(format(type, value, settings))
+  const previousValueRef = useRef(value)
   const setFormat = useCallback((v) => setDisplayValue(format(type, v, settings)), [type, settings])
 
   const onUpdate = useCallback(
@@ -25,7 +27,10 @@ export function useValue<V, Settings extends object>({ value, type, settings, se
   )
 
   useEffect(() => {
-    setFormat(value)
+    if (!dequal(value, previousValueRef.current)) {
+      setFormat(value)
+    }
+    previousValueRef.current = value
   }, [value, setFormat])
 
   return { displayValue, onChange: setDisplayValue, onUpdate }

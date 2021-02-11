@@ -12,8 +12,11 @@ export function getStep(number: number) {
   const significantDigits = Math.floor(Math.log(n) / log10) + 1
   const numberLog = Math.floor(Math.log10(Math.abs(number)))
   const step = Math.pow(10, numberLog - significantDigits)
-  return Math.max(step / 10, 0.001)
+  return Math.max(step, 0.001)
 }
 
 export const range = (v: number, min: number, max: number) => (v - min) / (max - min)
 export const invertedRange = (p: number, min: number, max: number) => p * (max - min) + min
+
+// from https://gist.github.com/gordonbrander/2230317
+export const uid = () => '_' + Math.random().toString(36).substr(2, 9)

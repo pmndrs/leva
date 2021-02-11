@@ -4,7 +4,7 @@ import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } 
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
-import { useDrag } from '../../hooks'
+import { useDrag } from '../../utils/hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'

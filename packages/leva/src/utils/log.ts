@@ -27,6 +27,7 @@ const ErrorList = {
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
   //@ts-expect-error
   const [message, ...rest] = ErrorList[errorType](...args)
+  // eslint-disable-next-line no-console
   console[fn]('LEVA: ' + message, ...rest)
 }
 

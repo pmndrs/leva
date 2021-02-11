@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { dequal } from 'dequal'
+import { dequal } from 'dequal/lite'
 
 export function useDeepCompareMemoize(value: any) {
   const ref = useRef()

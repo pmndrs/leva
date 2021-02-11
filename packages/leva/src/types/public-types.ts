@@ -45,13 +45,13 @@ type NumberInput = MergedInputWithSettings<number, NumberSettings>
 export type Point2dArray = [number, number]
 export type Point2dObject = { x: number; y: number }
 export type Point2d = Point2dArray | Point2dObject
-export type Point2dSettings = { x?: NumberSettings; y?: NumberSettings }
+export type Point2dSettings = { x?: NumberSettings; y?: NumberSettings } | NumberSettings
 export type Point2dInput = MergedInputWithSettings<Point2d, Point2dSettings>
 
 export type Point3dArray = [number, number, number]
 export type Point3dObject = { x: number; y: number; z: number }
 export type Point3d = Point3dArray | Point3dObject
-export type Point3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings }
+export type Point3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings } | NumberSettings
 export type Point3dInput = MergedInputWithSettings<Point3d, Point3dSettings>
 
 export type IntervalInput = { value: [number, number]; min: number; max: number }
@@ -93,7 +93,9 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
-export type Schema = Record<string, SchemaItem & { render?: RenderFn }>
+type SchemaItemWithRender = SchemaItem & { render?: RenderFn }
+
+export type Schema = Record<string, SchemaItemWithRender>
 
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
