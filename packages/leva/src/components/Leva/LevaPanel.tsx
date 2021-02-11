@@ -12,6 +12,7 @@ export function LevaPanel({
   collapsed = false,
   oneLineLabels = false,
   hideTitleBar,
+  hidden = false,
 }: LevaPanelProps) {
   const parentStore = useStoreContext()
   const _store = store === undefined ? parentStore : store
@@ -23,6 +24,7 @@ export function LevaPanel({
       oneLineLabels={oneLineLabels}
       hideTitleBar={hideTitleBar ?? !detached}
       collapsed={collapsed}
+      hidden={hidden}
     />
   )
 }

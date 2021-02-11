@@ -14,6 +14,7 @@ export function Leva({
   collapsed = false,
   oneLineLabels = false,
   hideTitleBar = false,
+  hidden = false,
 }: LevaProps) {
   useEffect(() => {
     rootInitialized = true
@@ -27,6 +28,7 @@ export function Leva({
       oneLineLabels={oneLineLabels}
       hideTitleBar={hideTitleBar}
       collapsed={collapsed}
+      hidden={hidden}
     />
   )
 }
