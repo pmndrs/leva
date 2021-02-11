@@ -1,6 +1,6 @@
 import { useRootControls, SchemaOrFn } from './useRootControls'
 import { useStoreContext } from '../context'
-import { Schema } from '../types'
+import { FolderSettings, Schema } from '../types'
 
 /**
  * Behaves like the main hook but uses its own store.
@@ -8,9 +8,10 @@ import { Schema } from '../types'
  */
 export function usePanelControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrUndefined?: F
+  schemaOrUndefined?: F,
+  folderSettingsOrUndefined?: FolderSettings
 ) {
   const store = useStoreContext()
   // the true flag indicates that we want the hook to return the set function and the store
-  return useRootControls(store, nameOrSchema, schemaOrUndefined)
+  return useRootControls(store, nameOrSchema, schemaOrUndefined, folderSettingsOrUndefined)
 }

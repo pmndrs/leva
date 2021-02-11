@@ -1,7 +1,7 @@
 import { globalStore } from '../store'
 import { useRootControls, SchemaOrFn } from './useRootControls'
 import { useRenderRoot } from '../components/Leva'
-import { Schema } from '../types'
+import { FolderSettings, Schema } from '../types'
 
 /**
  * Main hook of Leva. Pass an optional name and an input schema. Uses the global
@@ -13,9 +13,10 @@ import { Schema } from '../types'
  */
 export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrUndefined?: F
+  schemaOrUndefined?: F,
+  folderSettingsOrUndefined?: FolderSettings
 ) {
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
-  return useRootControls(globalStore, nameOrSchema, schemaOrUndefined)
+  return useRootControls(globalStore, nameOrSchema, schemaOrUndefined, folderSettingsOrUndefined)
 }

@@ -21,13 +21,6 @@ export type LevaRootProps = {
 }
 
 export function LevaRoot({ store, ...props }: LevaRootProps) {
-  // const [_store, set] = useState(null)
-
-  // React.useEffect(() => {
-  //   set(null)
-  //   setTimeout(() => set(store), 0)
-  // }, [store])
-
   if (!store) return null
   return <LevaCore store={store} {...props} />
 }

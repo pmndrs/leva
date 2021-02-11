@@ -14,9 +14,10 @@ export function LevaPanel({
   hideTitleBar,
 }: LevaPanelProps) {
   const parentStore = useStoreContext()
+  const _store = store === undefined ? parentStore : store
   return (
     <LevaRoot
-      store={store || parentStore}
+      store={_store}
       theme={theme}
       detached={detached}
       oneLineLabels={oneLineLabels}
