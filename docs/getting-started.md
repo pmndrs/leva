@@ -47,3 +47,12 @@ Note that since `UnmountedComponent` is not mounted anywhere in our application,
 ## Gotchas
 
 - The order of the controls depends on hooks call order, in our case `myValue` will be first.
+- @todo explain caching
+
+
+### Other hooks / Components
+
+- usePanel -> returns a new store
+- useRootpanel -> uses the store in context
+- LevaStoreProvider -> provides a store in context
+- LevaPanel -> you can provide your own store generally from usePanel or consume the hook in context
