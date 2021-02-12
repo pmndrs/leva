@@ -9,12 +9,12 @@ export const StyledRow = styled('div', {
   alignItems: 'center',
   color: '$highlight2',
 
-  [`${StyledContent} > &`]: {
-    ':first-of-type': { marginTop: '$rowGap' },
-    ':last-of-type': { marginBottom: '$rowGap' },
+  [`.${StyledContent} > &`]: {
+    '&:first-of-type': { marginTop: '$rowGap' },
+    '&:last-of-type': { marginBottom: '$rowGap' },
   },
 
-  ':hover, :focus-within': {
+  '&:hover,&:focus-within': {
     color: '$highlight3',
   },
 })

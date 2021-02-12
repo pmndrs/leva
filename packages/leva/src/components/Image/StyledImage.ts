@@ -48,21 +48,21 @@ export const Remove = styled('div', {
   top: '0',
   right: '0',
   margin: '$rowGap $md',
-  height: '20px',
-  width: '20px',
+  height: 20,
+  width: 20,
   borderRadius: '$sm',
   backgroundColor: '$elevation3',
   hover: 'none $accent1',
 
-  '::after,::before': {
+  '&::after,&::before': {
     content: '""',
     position: 'absolute',
-    height: '2px',
-    width: '10px',
-    borderRadius: '1px',
+    height: 2,
+    width: 10,
+    borderRadius: 1,
     backgroundColor: '$highlight3',
   },
 
-  '::after': { transform: 'rotate(45deg)' },
-  '::before': { transform: 'rotate(-45deg)' },
+  '&::after': { transform: 'rotate(45deg)' },
+  '&::before': { transform: 'rotate(-45deg)' },
 })

@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { App1 as App } from './App'
-// import App from './TestRenderApp'
-import App from './MultipleStores'
+import { App3 as App } from './App'
+// import App from './MultipleStores'
 import './styles.css'
 
 // if (process.env.NODE_ENV === 'development') {

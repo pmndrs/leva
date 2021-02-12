@@ -11,9 +11,9 @@ export const JoystickTrigger = styled('div', {
   $draggable: '',
   $hover: '',
 
-  ':active': { cursor: 'none' },
+  '&:active': { cursor: 'none' },
 
-  '::after': {
+  '&::after': {
     content: '""',
     backgroundColor: '$accent2',
     height: '4px',
@@ -50,19 +50,19 @@ export const JoystickPlayground = styled('div', {
     width: '80%',
     height: '80%',
 
-    '::after,::before': {
+    '&::after,&::before': {
       content: '""',
       position: 'absolute',
       zindex: 10,
       backgroundColor: '$highlight1',
     },
 
-    '::before': {
+    '&::before': {
       width: '100%',
       height: '1px',
     },
 
-    '::after': {
+    '&::after': {
       height: '100%',
       width: '1px',
     },

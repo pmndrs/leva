@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
-import { ITokensDefinition } from '@stitches/core'
 import { StoreType } from './store'
+import { FullTheme } from './styles'
 
 export const InputContext = createContext({})
 
@@ -8,7 +8,7 @@ export function useInputContext<T>() {
   return useContext(InputContext) as T
 }
 
-type ThemeContextProps = { theme: NonNullable<ITokensDefinition>; className: string }
+type ThemeContextProps = { theme: FullTheme; className: string }
 
 export const ThemeContext = createContext<ThemeContextProps | null>(null)
 

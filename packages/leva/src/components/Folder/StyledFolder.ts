@@ -13,11 +13,13 @@ export const StyledWrapper = styled('div', {
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 20px - 43px)',
       },
+      false: {},
     },
     isRoot: {
+      true: {},
       false: {
         paddingLeft: '$md',
-        '::after': {
+        '&::after': {
           content: '""',
           position: 'absolute',
           left: 0,
@@ -30,6 +32,7 @@ export const StyledWrapper = styled('div', {
       },
     },
     toggled: {
+      true: {},
       false: { overflow: 'hidden' },
     },
   },
@@ -49,16 +52,16 @@ export const StyledTitle = styled('div', {
     cursor: 'pointer',
     fill: '$highlight1',
   },
-  ':hover > svg': {
+  '&:hover > svg': {
     fill: '$highlight2',
   },
-  [`:hover + ${StyledWrapper}::after`]: {
+  [`&:hover + .${StyledWrapper}::after`]: {
     backgroundColor: '$highlight2',
   },
-  [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
+  [`.${StyledFolder}:hover > & + .${StyledWrapper}::after`]: {
     backgroundColor: '$highlight1',
   },
-  [`${StyledFolder}:hover > & > svg`]: {
+  [`.${StyledFolder}:hover > & > svg`]: {
     fill: '$highlight1',
   },
   variants: {
@@ -96,12 +99,13 @@ export const StyledContent = styled('div', {
         '& > div:last-of-type': {
           paddingBottom: '$sm',
         },
-        [`> ${StyledFolder}:not(:first-of-type)`]: {
+        [`> .${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$md',
           marginTop: '$md',
           borderTop: '$folder solid $elevation1',
         },
       },
+      false: {},
     },
   },
 })

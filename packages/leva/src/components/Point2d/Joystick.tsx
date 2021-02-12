@@ -37,8 +37,8 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     y: { step: stepY },
   } = settings
 
-  const wpx = useTh('sizes', '$joystickWidth')
-  const hpx = useTh('sizes', '$joystickHeight')
+  const wpx = useTh('sizes', 'joystickWidth')
+  const hpx = useTh('sizes', 'joystickHeight')
 
   const w = (parseFloat(wpx) * 0.8) / 2
   const h = (parseFloat(hpx) * 0.8) / 2
