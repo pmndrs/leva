@@ -16,7 +16,7 @@ export function Portal({ children }) {
   const { className } = useContext(ThemeContext)!
   return (
     <P>
-      <div className={(className as any).className}>{children}</div>
+      <div className={className}>{children}</div>
     </P>
   )
 }

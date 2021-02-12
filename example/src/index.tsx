@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App3 as App } from './App'
+import { App1 as App } from './App'
 // import App from './MultipleStores'
 import './styles.css'
 

@@ -10,7 +10,7 @@ export function mergeTheme(newTheme: Partial<{}>) {
     // @ts-ignore
     Object.assign(defaultTheme![key], newTheme![key])
   })
-  return { theme: defaultTheme, className: theme(newTheme) }
+  return { theme: defaultTheme, className: theme(newTheme).className }
 }
 
 export function useTh<C extends keyof FullTheme>(category: C, key: keyof FullTheme[C]) {

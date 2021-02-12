@@ -27,6 +27,7 @@ export const StyledRoot = styled('div', {
     },
     oneLineLabels: {
       // TODO remove when fixed
+      // @ts-expect-error
       true: {
         [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
