@@ -49,6 +49,21 @@ Note that since `UnmountedComponent` is not mounted anywhere in our application,
 - The order of the controls depends on hooks call order, in our case `myValue` will be first.
 - @todo explain caching
 
+### The render prop
+
+```jsx
+useControls({
+  check: false,
+  myNumber: 4
+  color: { value: '#ffffffff', render: (get) => get('check') && get('myNumber') > 5 },
+})
+```
+
+The `color` input will show in the pane only if `check` is `true` and `myNumber` is strictly greater than `5`.
+
+### Folders
+
+// TODO
 
 ### Other hooks / Components
 
