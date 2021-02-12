@@ -16,9 +16,9 @@ export const JoystickTrigger = styled('div', {
   '&::after': {
     content: '""',
     backgroundColor: '$accent2',
-    height: '4px',
-    width: '4px',
-    borderRadius: '2px',
+    height: 4,
+    width: 4,
+    borderRadius: 2,
   },
 })
 
@@ -44,7 +44,7 @@ export const JoystickPlayground = styled('div', {
     position: 'absolute',
     $flexCenter: '',
     borderStyle: 'solid',
-    borderWidth: '1px',
+    borderWidth: 1,
     borderColor: '$highlight1',
     backgroundColor: '$elevation3',
     width: '80%',
@@ -59,20 +59,20 @@ export const JoystickPlayground = styled('div', {
 
     '&::before': {
       width: '100%',
-      height: '1px',
+      height: 1,
     },
 
     '&::after': {
       height: '100%',
-      width: '1px',
+      width: 1,
     },
   },
 
   '> span': {
     position: 'relative',
     zindex: 100,
-    width: '10px',
-    height: '10px',
+    width: 10,
+    height: 10,
     backgroundColor: '$accent2',
     borderRadius: '50%',
   },

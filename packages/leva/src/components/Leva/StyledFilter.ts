@@ -19,7 +19,7 @@ export const StyledTitleWithFilter = styled('div', {
   display: 'flex',
   alignItems: 'stretch',
   justifyContent: 'space-between',
-  height: '43px',
+  height: 43,
   cursor: 'grab',
 })
 
@@ -32,7 +32,7 @@ export const FilterWrapper = styled('div', {
   color: '$highlight3',
   paddingLeft: '$md',
 
-  [`> .${Icon}`]: {
+  [`> ${Icon}`]: {
     height: 30,
   },
 

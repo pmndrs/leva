@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const Range = styled('div', {
   position: 'relative',
   width: '100%',
-  height: '2px',
+  height: 2,
   borderRadius: '$xs',
   backgroundColor: '$elevation1',
 })

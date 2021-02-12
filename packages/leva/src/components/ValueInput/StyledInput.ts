@@ -16,12 +16,12 @@ export const InnerLabel = styled('div', {
   height: '100%',
   '& > :first-of-type': {
     $flexCenter: '',
-    width: '14px',
+    width: 14,
     height: '100%',
     marginRight: '-$sm',
     textTransform: 'uppercase',
     fontSize: '0.8em',
-    opacity: '0.3',
+    opacity: 0.3,
     '&:hover': { opacity: 0.8 },
   },
 })

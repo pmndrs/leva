@@ -26,8 +26,9 @@ export const StyledRoot = styled('div', {
       },
     },
     oneLineLabels: {
+      // TODO remove when fixed
       true: {
-        [`.${StyledInputRow}`]: {
+        [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
           gridAutoColumns: 'minmax(max-content, 1fr)',
           gridAutoRows: 'minmax(var(--sizes-rowHeight), auto)',

@@ -9,7 +9,7 @@ export const StyledRow = styled('div', {
   alignItems: 'center',
   color: '$highlight2',
 
-  [`.${StyledContent} > &`]: {
+  [`${StyledContent} > &`]: {
     '&:first-of-type': { marginTop: '$rowGap' },
     '&:last-of-type': { marginBottom: '$rowGap' },
   },

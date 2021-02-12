@@ -55,13 +55,13 @@ export const StyledTitle = styled('div', {
   '&:hover > svg': {
     fill: '$highlight2',
   },
-  [`&:hover + .${StyledWrapper}::after`]: {
+  [`&:hover + ${StyledWrapper}::after`]: {
     backgroundColor: '$highlight2',
   },
-  [`.${StyledFolder}:hover > & + .${StyledWrapper}::after`]: {
+  [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
     backgroundColor: '$highlight1',
   },
-  [`.${StyledFolder}:hover > & > svg`]: {
+  [`${StyledFolder}:hover > & > svg`]: {
     fill: '$highlight1',
   },
   variants: {
@@ -99,7 +99,7 @@ export const StyledContent = styled('div', {
         '& > div:last-of-type': {
           paddingBottom: '$sm',
         },
-        [`> .${StyledFolder}:not(:first-of-type)`]: {
+        [`> ${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$md',
           marginTop: '$md',
           borderTop: '$folder solid $elevation1',

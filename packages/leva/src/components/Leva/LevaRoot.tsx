@@ -44,9 +44,15 @@ function LevaCore({ store, theme = {}, detached, collapsed, oneLineLabels, hideT
   // this generally happens on first render because the store is initialized in useEffect.
   if (paths.length < 1) return null
 
+  // TODO remove oneLineLabels as any
+
   return (
     <ThemeContext.Provider value={themeContext}>
-      <StyledRoot ref={rootRef} className={themeContext.className} detached={detached} oneLineLabels={oneLineLabels}>
+      <StyledRoot
+        ref={rootRef}
+        className={themeContext.className}
+        detached={detached}
+        oneLineLabels={oneLineLabels as any}>
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
         )}
