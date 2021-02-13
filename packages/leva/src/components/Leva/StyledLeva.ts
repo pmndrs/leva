@@ -26,18 +26,15 @@ export const StyledRoot = styled('div', {
       },
     },
     oneLineLabels: {
-      // TODO remove when fixed
-      // @ts-expect-error
       true: {
         [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
           gridAutoColumns: 'minmax(max-content, 1fr)',
-          gridAutoRows: 'minmax(var(--sizes-rowHeight), auto)',
+          gridAutoRows: 'minmax($sizes$rowHeight), auto)',
           gridRowGap: 0,
           gridColumnGap: 0,
           marginTop: '$rowGap',
         },
-        false: {},
       },
     },
   },

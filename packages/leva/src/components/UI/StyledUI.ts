@@ -5,7 +5,7 @@ export const StyledRow = styled('div', {
   position: 'relative',
   display: 'grid',
   gridRowGap: '$rowGap',
-  gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
+  gridTemplateRows: 'minmax($sizes$rowHeight, max-content)',
   alignItems: 'center',
   color: '$highlight2',
 
@@ -20,7 +20,7 @@ export const StyledRow = styled('div', {
 })
 
 export const StyledInputRow = styled(StyledRow, {
-  gridTemplateColumns: 'auto var(--sizes-controlWidth)',
+  gridTemplateColumns: 'auto $sizes$controlWidth',
   gridColumnGap: '$colGap',
 })
 

@@ -12,7 +12,11 @@ export const getDefaultTheme = () => ({
     highlight2: '#8C92A4',
     highlight3: '#FEFEFE',
   },
-  radii: { xs: '2px', sm: '3px', lg: '10px' },
+  radii: {
+    xs: '2px',
+    sm: '3px',
+    lg: '10px',
+  },
   space: {
     sm: '6px',
     md: '10px',
@@ -63,11 +67,11 @@ export type LevaCustomTheme = Partial<{ [k in keyof FullTheme]: Partial<FullThem
 
 type Options = { key: string; borderColor: string; backgroundColor?: string; inset?: boolean }
 
-function createStateClass(value: string, config: any, options: Options) {
+function createStateClass(value: string, options: Options) {
   const [borderColor, bgColor] = value.split(' ')
   const css: any = {}
   if (borderColor !== 'none') {
-    css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 ${config.theme.borderWidths[options.key]} ${
+    css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 $borderWidths${[options.key]} $colors${
       (borderColor !== 'default' && borderColor) || options.borderColor
     }`
   }
@@ -80,14 +84,11 @@ function createStateClass(value: string, config: any, options: Options) {
 }
 
 const utils = {
-  $inputStyle: (config: any) => (value: any) =>
-    createStateClass(value, config, { key: '$input', borderColor: '$highlight1', inset: true }),
-  $focusStyle: (config: any) => (value: any) =>
-    createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
-  $hoverStyle: (config: any) => (value: any) =>
-    createStateClass(value, config, { key: '$hover', borderColor: '$accent1', inset: true }),
-  $activeStyle: (config: any) => (value: any) =>
-    createStateClass(value, config, { key: '$active', borderColor: '$accent1', inset: true }),
+  $inputStyle: () => (value: any) =>
+    createStateClass(value, { key: '$input', borderColor: '$highlight1', inset: true }),
+  $focusStyle: () => (value: any) => createStateClass(value, { key: '$focus', borderColor: '$accent2' }),
+  $hoverStyle: () => (value: any) => createStateClass(value, { key: '$hover', borderColor: '$accent1', inset: true }),
+  $activeStyle: () => (value: any) => createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
 export const { styled, css, theme, global } = createStyled({
@@ -118,10 +119,10 @@ export const { styled, css, theme, global } = createStyled({
       userSelect: 'none',
       WebKitUserDrag: 'none',
     }),
-    $focus: (config) => (value) => ({ '&:focus': utils.$focusStyle(config)(value) }),
-    $focusWithin: (config) => (value) => ({ '&:focus-within': utils.$focusStyle(config)(value) }),
-    $hover: (config) => (value) => ({ '&:hover': utils.$hoverStyle(config)(value) }),
-    $active: (config) => (value) => ({ '&:active': utils.$activeStyle(config)(value) }),
+    $focus: () => (value) => ({ '&:focus': utils.$focusStyle()(value) }),
+    $focusWithin: () => (value) => ({ '&:focus-within': utils.$focusStyle()(value) }),
+    $hover: () => (value) => ({ '&:hover': utils.$hoverStyle()(value) }),
+    $active: () => (value) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
 

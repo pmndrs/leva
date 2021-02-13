@@ -16,8 +16,7 @@ export const ColorPreview = styled('div', {
 export const PickerContainer = styled('div', {
   position: 'relative',
   display: 'grid',
-  // Stitches creates human readable css vars 🤟
-  gridTemplateColumns: 'var(--sizes-rowHeight) auto',
+  gridTemplateColumns: '$sizes$rowHeight auto',
   gridColumnGap: '$colGap',
   alignItems: 'center',
   '& > span': {

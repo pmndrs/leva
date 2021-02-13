@@ -24,7 +24,7 @@ export const StyledWrapper = styled('div', {
           position: 'absolute',
           left: 0,
           top: 0,
-          width: 'var(--borderWidths-folder)',
+          width: '$borderWidths$folder',
           height: '100%',
           backgroundColor: '$elevation3',
           transform: 'translateX(-50%)',
@@ -102,7 +102,7 @@ export const StyledContent = styled('div', {
         [`> ${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$md',
           marginTop: '$md',
-          borderTop: '$folder solid $elevation1',
+          borderTop: '$borderWidths$folder solid $colors$elevation1',
         },
       },
       false: {},
