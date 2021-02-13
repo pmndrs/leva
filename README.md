@@ -32,10 +32,10 @@
 ### Installation
 
 ```bash
-yarn add leva
+npm i leva
 ```
 
-### Getting started
+### Quick start
 
 Simply call the `useControls` hook from anywhere in your app:
 
@@ -43,52 +43,22 @@ Simply call the `useControls` hook from anywhere in your app:
 import { useControls } from "leva"
 
 function MyComponent() {
-  const { name } = useControls({ name: "World" })
+  const { name, aNumber } = useControls({ name: "World", aNumber: 0 })
   
-  return <div>Hey {name}, hello!</div>
+  return <div>Hey {name}, hello! {aNumber}</div>
 }
 ```
 
-<!-- ### Documentation
+### Documentation
 
-Find the full API reference on the [official documentation](https://docs.pmnd.rs/leva)
+- [Getting Started](docs/getting-started.md)
+- [Inputs](docs/inputs.md)
+- [Configuration](docs/configuration.md)
+- [Styling](docs/styling.md)
 
-## Features
-* As-you-type filtering of inputs. 
-* You can modify number inputs by either dragging over the input label or inner label.
-* The lib automatically calculates the number input step based on the initial value magnitude and significant digits. 
-* Increase / decrease numbers with arrow keys, with alt (`±0.1`) and shift (`±10`) modifiers support.
-* Draggable pane.
-* Supports copying values.
-* Supports conditional rendering of inputs.
+- [Advanced: Controlled Inputs](docs/advanced/controlled-inputs.md)
+- [Advanced: Creating Plugins](docs/advanced/creating-plugins.md)
 
-## Inputs
-* String
-* Boolean
-* Number
-* Range
-* Interval `[min,max]`
-* Point2d `[x,y]` or `{x,y}`
-* Point3d `[x,y,z]` or `{x,y,z}`
-* Color `#hex` and `{r,g,b,a}`
-* Select
-* Spring `{tension,friction,mass}`
-* Image
-
-## Usage
-
-Simply call the `useControls` hook from anywhere in your app.
-
-Your component will update whenever the values defined in the hook are changed!
-
-```jsx
-import { useControls } from 'leva'
-
-function MyComponent() {
-  const { myValue } = useControls({ myValue: 10 })
-  return myValue
-}
-``` -->
 
 ## Contributors ✨
 

@@ -3,7 +3,7 @@
 ## Install
 
 ```bash
-npm install leva
+npm i leva
 ```
 
 ## Basics
@@ -44,12 +44,13 @@ function MyApp() {
 
 Note that since `UnmountedComponent` is not mounted anywhere in our application, the control declared there will not be added to the GUI!
 
-## Gotchas
+💡 The order of the controls depends on hooks call order, in our case `myValue` will be first.
 
-- The order of the controls depends on hooks call order, in our case `myValue` will be first.
-- @todo explain caching
+## Input types
 
-### The render prop
+Leva will automagically use the best input type for your values, all the rules can be found in the [Inputs page](docs/inputs.md)
+
+## Conditionally showing fields
 
 ```jsx
 useControls({
@@ -61,13 +62,6 @@ useControls({
 
 The `color` input will show in the pane only if `check` is `true` and `myNumber` is strictly greater than `5`.
 
-### Folders
+## Folders
 
 // TODO
-
-### Other hooks / Components
-
-- usePanel -> returns a new store
-- useRootpanel -> uses the store in context
-- LevaStoreProvider -> provides a store in context
-- LevaPanel -> you can provide your own store generally from usePanel or consume the hook in context
