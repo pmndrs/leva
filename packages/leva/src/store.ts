@@ -10,6 +10,7 @@ export type StoreType = {
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[], removeOnDispose?: boolean) => void
+  dispose: () => void
   getVisiblePaths: (data: Data) => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
@@ -23,6 +24,7 @@ export type StoreType = {
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
+
   this.useStore = store
   /**
    * Folders will hold the folder settings for the pane.
@@ -81,6 +83,12 @@ export const Store = (function (this: StoreType) {
           } else data[path].count--
       })
       return { data }
+    })
+  }
+
+  this.dispose = () => {
+    store.setState(() => {
+      return { data: {}}
     })
   }
 

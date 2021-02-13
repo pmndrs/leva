@@ -16,19 +16,21 @@
     "build": "preconstruct build",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
-    "size": "yarn size-limit"
+    "size": "yarn size-limit",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "size-limit": [
     {
       "name": "Leva",
-     "limit": "3s",
+      "limit": "3s",
       "path": "packages/leva/dist/leva.*.prod.js"
     },
     {
       "name": "Leva Plugin Spring",
       "limit": "3s",
-       "path": "packages/plugin-spring/dist/leva-ui-plugin-spring.*.prod.js"
-     }
+      "path": "packages/plugin-spring/dist/leva-ui-plugin-spring.*.prod.js"
+    }
   ],
   "repository": "https://github.com/gsimone/leva.git",
   "peerDependencies": {
@@ -36,18 +38,16 @@
     "react-dom": ">=16.8.0"
   },
   "devDependencies": {
-    "@size-limit/preset-big-lib": "^4.9.2",
-    "size-limit": "^4.9.2",
-    "@babel/preset-env": "^7.12.13",
     "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.12.16",
     "@preconstruct/cli": "^2.0.4",
+    "@size-limit/preset-big-lib": "^4.9.2",
     "@size-limit/preset-small-lib": "^4.9.2",
+    "@storybook/addon-actions": "^6.1.17",
     "@storybook/addon-essentials": "^6.1.17",
-    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-links": "^6.1.17",
-    "@storybook/addons": "^6.1.17",
     "@storybook/react": "^6.1.17",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
@@ -56,6 +56,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.0",
     "@typescript-eslint/parser": "^4.15.0",
     "babel-eslint": "^10.0.0",
+    "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.20.0",
     "eslint-config-react-app": "^6.0.0",
@@ -67,6 +68,7 @@
     "husky": "^5.0.9",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "size-limit": "^4.9.2",
     "tslib": "^2.1.0",
     "typescript": "^4.1.5"
   },
@@ -77,5 +79,6 @@
     "jsxBracketSameLine": true,
     "tabWidth": 2,
     "printWidth": 120
-  }
+  },
+  "dependencies": {}
 }
