@@ -1,11 +1,14 @@
 {
   "name": "leva",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "main": "dist/leva.cjs.js",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
+  },
+  "scripts": {
+    "prebuild": "cp ../../README.md README.md"
   },
   "preconstruct": {
     "entrypoints": [

@@ -9,6 +9,7 @@
   "imageSize": 80,
   "commit": true,
   "commitConvention": "none",
+  "contributorsSortAlphabetically": true,
   "contributors": [
     {
       "login": "gsimone",
@@ -45,7 +46,8 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/2991360?v=4",
       "profile": "https://github.com/AndrewPrifer",
       "contributions": [
-        "ideas"
+        "ideas",
+        "code"
       ]
     },
     {
@@ -91,6 +93,15 @@
       "profile": "https://github.com/thephoenixofthevoid",
       "contributions": [
         "bug"
+      ]
+    },
+    {
+      "login": "clementcassajus",
+      "name": "clementcassajus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13033639?v=4",
+      "profile": "https://github.com/clementcassajus",
+      "contributions": [
+        "design"
       ]
     }
   ],
