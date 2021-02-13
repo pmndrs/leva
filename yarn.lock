@@ -10217,7 +10217,7 @@ react-use-gesture@^9.0.2:
   resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.2.tgz#e6871938bffb5275a7d374e5daa27cf9602adaf3"
   integrity sha512-9UxZsnExGH7RHQAbNj08Qnlo4OKYQrXJ203EBOfNLw1dAusTH+PZNlLqmK21hY00O9Kf1q2n85U2JWczobuzcw==
 
-react@^16.13.1, react@^16.8.3:
+react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
