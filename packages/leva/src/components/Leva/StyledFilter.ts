@@ -9,17 +9,17 @@ export const Icon = styled('i', {
     fill: '$highlight1',
     transition: 'transform 350ms ease, fill 250ms ease',
   },
-  ':hover > svg': {
+  '&:hover > svg': {
     fill: '$highlight3',
   },
-  variants: { active: { true: { '> svg': { fill: '$highlight2' } } } },
+  variants: { active: { true: { '> svg': { fill: '$highlight2' } }, false: {} } },
 })
 
 export const StyledTitleWithFilter = styled('div', {
   display: 'flex',
   alignItems: 'stretch',
   justifyContent: 'space-between',
-  height: '43px',
+  height: 43,
   cursor: 'grab',
 })
 
@@ -51,7 +51,7 @@ export const StyledFilterInput = styled('input', {
   fontSize: '10px',
   borderRadius: '$root',
   '&:focus': {},
-  '::placeholder': {
+  '&::placeholder': {
     color: '$highlight2',
   },
 })
@@ -64,7 +64,7 @@ export const Drag = styled('div', {
     fill: '$highlight1',
     transition: 'fill 250ms ease',
   },
-  ':hover > svg': {
+  '&:hover > svg': {
     fill: '$highlight3',
   },
 })

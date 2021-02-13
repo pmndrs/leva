@@ -1,94 +1,77 @@
-import { createStyled } from '@stitches/react'
-
-const scales = {
-  colors: {
-    $gray900: '#181C20',
-    $gray800: '#292D39',
-    $gray700: '#373C4B',
-    $grey600: '#535760',
-    $gray500: '#8C92A4',
-    $gray50: '#FEFEFE',
-    $blue500: '#007BFF',
-    $blue400: '#0066DC',
-    $blue100: '#3C93FF',
-  },
-  radii: {
-    $xs: '2px',
-    $sm: '3px',
-    $lg: '10px',
-  },
-}
+import createCss from '@stitches/react'
 
 export const getDefaultTheme = () => ({
   colors: {
-    // ...scales.colors,
-    $elevation1: scales.colors.$gray800, // bg color of the root panel (main title bar)
-    $elevation2: scales.colors.$gray900, // bg color of the rows (main panel color)
-    $elevation3: scales.colors.$gray700, // bg color of the inputs
-    // $elevation3: scales.colors.$gray900,
-    $accent1: scales.colors.$blue400,
-    $accent2: scales.colors.$blue500,
-    $accent3: scales.colors.$blue100,
-    $highlight1: scales.colors.$grey600,
-    $highlight2: scales.colors.$gray500,
-    $highlight3: scales.colors.$gray50,
+    elevation1: '#292D39', // bg color of the root panel (main title bar)
+    elevation2: '#181C20', // bg color of the rows (main panel color)
+    elevation3: '#373C4B', // bg color of the inputs
+    accent1: '#0066DC',
+    accent2: '#007BFF',
+    accent3: '#3C93FF',
+    highlight1: '#535760',
+    highlight2: '#8C92A4',
+    highlight3: '#FEFEFE',
   },
-  radii: { ...scales.radii },
+  radii: {
+    xs: '2px',
+    sm: '3px',
+    lg: '10px',
+  },
   space: {
-    $sm: '6px',
-    $md: '10px',
-    $rowGap: '7px',
-    $colGap: '7px',
+    sm: '6px',
+    md: '10px',
+    rowGap: '7px',
+    colGap: '7px',
   },
   fonts: {
-    $mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
+    mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
   },
   fontSizes: {
-    $root: '11px',
+    root: '11px',
   },
   sizes: {
-    $rootWidth: '280px',
-    $controlWidth: '160px',
-    $scrubberWidth: '8px',
-    $scrubberHeight: '16px',
-    $rowHeight: '24px',
-    $folderHeight: '20px',
-    $checkboxSize: '16px',
-    $joystickWidth: '100px',
-    $joystickHeight: '100px',
-    $colorPickerWidth: '160px',
-    $colorPickerHeight: '100px',
-    $monitorHeight: '60px',
+    rootWidth: '280px',
+    controlWidth: '160px',
+    scrubberWidth: '8px',
+    scrubberHeight: '16px',
+    rowHeight: '24px',
+    folderHeight: '20px',
+    checkboxSize: '16px',
+    joystickWidth: '100px',
+    joystickHeight: '100px',
+    colorPickerWidth: '160px',
+    colorPickerHeight: '100px',
+    monitorHeight: '60px',
   },
   shadows: {
-    $level1: '0 0 9px 0 rgba(53,49,49,0.50)',
-    $level2: '0 4px 14px #00000033',
+    level1: '0 0 9px 0 rgba(53,49,49,0.50)',
+    level2: '0 4px 14px #00000033',
   },
   borderWidths: {
-    $root: '0px',
-    $input: '1px',
-    $focus: '1px',
-    $hover: '1px',
-    $active: '1px',
-    $folder: '1px',
+    root: '0px',
+    input: '1px',
+    focus: '1px',
+    hover: '1px',
+    active: '1px',
+    folder: '1px',
   },
   fontWeights: {
-    $label: 'normal',
-    $folder: 'normal',
-    $button: 'normal',
+    label: 'normal',
+    folder: 'normal',
+    button: 'normal',
   },
 })
 
-type FullTheme = ReturnType<typeof getDefaultTheme>
+export type FullTheme = ReturnType<typeof getDefaultTheme>
 export type LevaCustomTheme = Partial<{ [k in keyof FullTheme]: Partial<FullTheme[k]> }>
 
 type Options = { key: string; borderColor: string; backgroundColor?: string; inset?: boolean }
 
-function createStateClass(value: string, config: any, options: Options) {
+function createStateClass(value: string, options: Options) {
   const [borderColor, bgColor] = value.split(' ')
   const css: any = {}
   if (borderColor !== 'none') {
-    css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 ${config.tokens.borderWidths[options.key]} ${
+    css.boxShadow = `${options.inset ? 'inset ' : ''}0 0 0 $borderWidths${[options.key]} $colors${
       (borderColor !== 'default' && borderColor) || options.borderColor
     }`
   }
@@ -101,54 +84,56 @@ function createStateClass(value: string, config: any, options: Options) {
 }
 
 const utils = {
-  $inputStyle: (value: any, config: any) =>
-    createStateClass(value, config, { key: '$input', borderColor: '$highlight1', inset: true }),
-  $focusStyle: (value: any, config: any) => createStateClass(value, config, { key: '$focus', borderColor: '$accent2' }),
-  $hoverStyle: (value: any, config: any) =>
-    createStateClass(value, config, { key: '$hover', borderColor: '$accent1', inset: true }),
-  $activeStyle: (value: any, config: any) =>
-    createStateClass(value, config, { key: '$active', borderColor: '$accent1', inset: true }),
+  $inputStyle: () => (value: any) =>
+    createStateClass(value, { key: '$input', borderColor: '$highlight1', inset: true }),
+  $focusStyle: () => (value: any) => createStateClass(value, { key: '$focus', borderColor: '$accent2' }),
+  $hoverStyle: () => (value: any) => createStateClass(value, { key: '$hover', borderColor: '$accent1', inset: true }),
+  $activeStyle: () => (value: any) => createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const { styled, css } = createStyled({
-  tokens: getDefaultTheme(),
+export const { styled, css, theme, global } = createCss({
+  theme: getDefaultTheme(),
   utils: {
     ...utils,
-    $flex: () => ({
+    $flex: () => () => ({
       display: 'flex',
       alignItems: 'center',
     }),
-    $flexCenter: () => ({
+    $flexCenter: () => () => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }),
-    $reset: () => ({
+    $reset: () => () => ({
       outline: 'none',
       fontSize: 'inherit',
       fontWeight: 'inherit',
       color: 'inherit',
-      appearance: 'none',
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
+      WebkitAppearance: 'none',
+      appearance: 'none',
     }),
-    $draggable: () => ({
+    $draggable: () => () => ({
       touchAction: 'none',
+      WebkitUserSelect: 'none',
+      WebkitUserDrag: 'none',
       userSelect: 'none',
-      WebKitUserDrag: 'none',
     }),
-    $focus: (value, config) => ({ ':focus': utils.$focusStyle(value, config) }),
-    $focusWithin: (value, config) => ({ ':focus-within': utils.$focusStyle(value, config) }),
-    $hover: (value, config) => ({ ':hover': utils.$hoverStyle(value, config) }),
-    $active: (value, config) => ({ ':active': utils.$activeStyle(value, config) }),
+    $focus: () => (value) => ({ '&:focus': utils.$focusStyle()(value) }),
+    $focusWithin: () => (value) => ({ '&:focus-within': utils.$focusStyle()(value) }),
+    $hover: () => (value) => ({ '&:hover': utils.$hoverStyle()(value) }),
+    $active: () => (value) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
 
-export const globalStyles = css.global({
+const globalStyles = global({
   '.leva__panel__dragged': {
     userSelect: 'none',
     input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })
+
+globalStyles()

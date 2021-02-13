@@ -39,7 +39,7 @@ npm i leva
 
 Simply call the `useControls` hook from anywhere in your app:
 
-```
+```jsx
 import { useControls } from "leva"
 
 function MyComponent() {

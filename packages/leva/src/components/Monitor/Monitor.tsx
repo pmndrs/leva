@@ -18,8 +18,8 @@ function push(arr: any[], val: any) {
 }
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
-  const accentColor = useTh('colors', '$highlight3')
-  const fillColor = useTh('colors', '$highlight1')
+  const accentColor = useTh('colors', 'highlight3')
+  const fillColor = useTh('colors', 'highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
     return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]

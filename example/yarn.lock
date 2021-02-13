@@ -968,6 +968,18 @@
     utility-types "^3.10.0"
     zustand "^3.0.3"
 
+"@stitches/core@^0.1.0-canary.1":
+  version "0.1.0-canary.1"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0-canary.1.tgz#8a87a5f4984659852e85db193a1f32eb328409e0"
+  integrity sha512-6vVcGL4L334dIMzOL+4v0nTjPNy+IZ5g4KCVoDa0XZMbl/glWXKHkkIDg9tQ0R3gTkPSZHY+s/uS4fO8HZWR4w==
+
+"@stitches/react@^0.1.0-canary.1":
+  version "0.1.0-canary.1"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.1.tgz#2f19c3ab8eb309d806c4be82636597298d81dff5"
+  integrity sha512-PzwrK+pCziPD42oO8xQ0xdZPzTJTEnKNYZBcwmcRnmVzx9yZLKGCIF5BScnQq9zgR8wNd+mMXzPk3kTAhKpTkQ==
+  dependencies:
+    "@stitches/core" "^0.1.0-canary.1"
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"

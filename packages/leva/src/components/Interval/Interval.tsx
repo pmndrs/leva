@@ -19,7 +19,7 @@ type IntervalSliderProps = {
 const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
   gridColumnStart: 2,
 })
 
@@ -28,7 +28,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
-  const scrubberWidth = useTh('sizes', '$scrubberWidth')
+  const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {

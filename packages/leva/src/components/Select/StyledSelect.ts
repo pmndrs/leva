@@ -11,8 +11,8 @@ export const SelectContainer = styled('div', {
 })
 
 export const StyledSelect = styled('select', {
-  width: '100%',
   $reset: '',
+  width: '100%',
   height: '$rowHeight',
   backgroundColor: '$elevation3',
   color: 'inherit',

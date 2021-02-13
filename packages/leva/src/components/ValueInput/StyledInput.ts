@@ -9,20 +9,23 @@ export const StyledInput = styled('input', {
   height: '$rowHeight',
   flex: 1,
 
-  variants: { isNumber: { true: { textAlign: 'right' } } },
+  variants: { levaType: { number: { textAlign: 'right' } } },
 })
 
 export const InnerLabel = styled('div', {
   height: '100%',
   '& > :first-of-type': {
     $flexCenter: '',
-    width: '14px',
+    width: 14,
     height: '100%',
     marginRight: '-$sm',
     textTransform: 'uppercase',
     fontSize: '0.8em',
-    opacity: '0.3',
+    opacity: 0.3,
     '&:hover': { opacity: 0.8 },
+  },
+  [`& + ${StyledInput}`]: {
+    paddingLeft: 0,
   },
 })
 

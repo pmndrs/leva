@@ -29,10 +29,10 @@ export const StyledRoot = styled('div', {
       true: {
         [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
-          gridAutoColumns: 'minmax(max-content, 1fr);',
-          gridAutoRows: 'minmax(var(--sizes-rowHeight), auto)',
-          gridRowGap: 0,
-          gridColumnGap: 0,
+          gridAutoColumns: 'minmax(max-content, 1fr)',
+          gridAutoRows: 'minmax($sizes$rowHeight), auto)',
+          rowGap: 0,
+          columnGap: 0,
           marginTop: '$rowGap',
         },
       },

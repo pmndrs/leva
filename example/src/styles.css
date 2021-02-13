@@ -1,7 +1,6 @@
 body {
   font-family: system-ui;
   margin: 0;
-  padding: 20px;
   background-color: #ecd5ff;
 }
 
@@ -9,12 +8,81 @@ body {
   box-sizing: border-box;
 }
 
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: stretch;
+}
+
+.panel {
+  position: relative;
+  width: 300px;
+  background: #181c20;
+  padding-top: 30px;
+  z-index: 1000;
+}
+
+.canvas {
+  flex: 1;
+  display: flex;
+  outline: none;
+  background: #f9f9f9;
+}
+
 .box {
-  margin: 10px;
+  position: absolute;
   height: 100px;
   width: 100px;
+  outline: none;
+  touch-action: none;
 }
 
 .box.selected {
-  border: 1px solid #00b8ff;
+  border: 1px solid #00ffe7;
+  z-index: 100;
+}
+
+.handle {
+  position: absolute;
+  display: block;
+  background: red;
+  opacity: 0;
+  z-index: 10;
+}
+
+.handle.position {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.handle.left {
+  left: -5px;
+}
+
+.handle.right {
+  right: -5px;
+}
+
+.handle.top {
+  top: -5px;
+}
+
+.handle.bottom {
+  bottom: -5px;
+}
+
+.handle.left,
+.handle.right {
+  width: 10px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.handle.top,
+.handle.bottom {
+  width: 100%;
+  height: 10px;
+  cursor: ns-resize;
 }

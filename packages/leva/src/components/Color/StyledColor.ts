@@ -9,20 +9,19 @@ export const ColorPreview = styled('div', {
   $inputStyle: '',
   $hover: '',
   variants: {
-    active: { true: { $inputStyle: '$accent1' } },
+    active: { true: { $inputStyle: '$accent1' }, false: {} },
   },
 })
 
 export const PickerContainer = styled('div', {
   position: 'relative',
   display: 'grid',
-  // Stitches creates human readable css vars 🤟
-  gridTemplateColumns: 'var(--sizes-rowHeight) auto',
-  gridColumnGap: '$colGap',
+  gridTemplateColumns: '$sizes$rowHeight auto',
+  columnGap: '$colGap',
   alignItems: 'center',
   '& > span': {
     fontSize: '0.95em',
-    opacity: '0.8',
+    opacity: 0.8,
     padding: '0 $md',
   },
 })
@@ -46,7 +45,7 @@ export const PickerWrapper = styled('div', {
   },
 
   '.react-colorful__alpha, .react-colorful__hue': {
-    height: '10px',
+    height: 10,
   },
 
   '.react-colorful__last-control': {
@@ -54,7 +53,7 @@ export const PickerWrapper = styled('div', {
   },
 
   '.react-colorful__pointer': {
-    height: '12px',
-    width: '12px',
+    height: 12,
+    width: 12,
   },
 })

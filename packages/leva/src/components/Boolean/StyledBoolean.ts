@@ -9,7 +9,7 @@ export const StyledInputWrapper = styled('div', {
     $reset: '',
     height: 0,
     width: 0,
-    opactiy: 0,
+    opacity: 0,
     margin: 0,
   },
 

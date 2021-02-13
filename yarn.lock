@@ -7,7 +7,7 @@
   resolved "https://registry.yarnpkg.com/@alloc/types/-/types-1.3.0.tgz#904245b8d3260a4b7d8a801c12501968f64fac08"
   integrity sha512-mH7LiFiq9g6rX2tvt1LtwsclfG5hnsmtIfkZiauAGrm1AwXhoRS0sF2WrN9JGN7eV5vFXqNaB0eXZ3IvMsVi9g==
 
-"@babel/code-frame@7.12.11":
+"@babel/code-frame@7.12.11", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.5.5":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
   integrity sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==
@@ -21,7 +21,7 @@
   dependencies:
     "@babel/highlight" "^7.8.3"
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.5.5":
+"@babel/code-frame@^7.12.13":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
   integrity sha512-HV1Cm0Q3ZrpCR93tkWOYiuYIgLxZXZFVG2VgK+MBWjUqZTundupbfx2aXarXuw5Ko5aMcjtJgbSs4vUGBS5v6g==
@@ -1560,17 +1560,17 @@
     webpack "^4.44.1"
     webpack-bundle-analyzer "^4.4.0"
 
-"@stitches/core@^0.0.3-canary.4":
-  version "0.0.3-canary.4"
-  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.0.3-canary.4.tgz#47f5bcf250f5a010218e76510af4ba52e066de6c"
-  integrity sha512-VlDwtJfhWvxItU8ai5i0UQcNx7MRUIMpy2i6ufUVxcINXkrFZDTBxfahdgKQIT5oS3kT0LbUySctRDEMbt79YA==
+"@stitches/core@^0.1.0-canary.1":
+  version "0.1.0-canary.1"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0-canary.1.tgz#8a87a5f4984659852e85db193a1f32eb328409e0"
+  integrity sha512-6vVcGL4L334dIMzOL+4v0nTjPNy+IZ5g4KCVoDa0XZMbl/glWXKHkkIDg9tQ0R3gTkPSZHY+s/uS4fO8HZWR4w==
 
-"@stitches/react@^0.0.3-canary.4":
-  version "0.0.3-canary.4"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.0.3-canary.4.tgz#a482ef65ee26607840b690910b177eb8a5c68d97"
-  integrity sha512-t9IotrA7nC3kM50yPgDumIwYUB9FhuEjuta2kEzUs8LTi5q8cvkG+9JOZAWDmTl/V5DImui8pv/5OMNKlG4bfg==
+"@stitches/react@^0.1.0-canary.1":
+  version "0.1.0-canary.1"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.1.tgz#2f19c3ab8eb309d806c4be82636597298d81dff5"
+  integrity sha512-PzwrK+pCziPD42oO8xQ0xdZPzTJTEnKNYZBcwmcRnmVzx9yZLKGCIF5BScnQq9zgR8wNd+mMXzPk3kTAhKpTkQ==
   dependencies:
-    "@stitches/core" "^0.0.3-canary.4"
+    "@stitches/core" "^0.1.0-canary.1"
 
 "@storybook/addon-actions@6.1.17", "@storybook/addon-actions@^6.1.17":
   version "6.1.17"
@@ -2307,7 +2307,7 @@
     "@types/react" "*"
     "@types/reactcss" "*"
 
-"@types/react-dom@^17.0.0":
+"@types/react-dom@^17.0.1":
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.1.tgz#d92d77d020bfb083e07cc8e0ac9f933599a4d56a"
   integrity sha512-yIVyopxQb8IDZ7SOHeTovurFq+fXiPICa+GV3gp0Xedsl+MwQlMLKmvrnEjFbQxjliH5YVAEWFh975eVNmKj7Q==
@@ -2321,7 +2321,15 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.1":
+"@types/react@*":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
+  integrity sha512-aj/L7RIMsRlWML3YB6KZiXB3fV2t41+5RBGYF8z+tAKU43Px8C3cYUZsDvf1/+Bm4FK21QWBrDutu8ZJ/70qOw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.2":
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.2.tgz#3de24c4efef902dd9795a49c75f760cbe4f7a5a8"
   integrity sha512-Xt40xQsrkdvjn1EyWe1Bc0dJLcil/9x2vAuW7ya+PuQip4UYUaXyhzWmAbwRsdMgwOFHpfp7/FFZebDU6Y8VHA==
@@ -5367,7 +5375,7 @@ eslint-visitor-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-2.0.0.tgz#21fdc8fbcd9c795cc0321f0563702095751511a8"
   integrity sha512-QudtT6av5WXels9WjIM7qz1XD1cWGvX4gGXvp/zBn9nXG02D0utdU3Em2m/QjTnrsk6bBjmCygl3rmj118msQQ==
 
-eslint@^7.19.0:
+eslint@^7.20.0:
   version "7.20.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.20.0.tgz#db07c4ca4eda2e2316e7aa57ac7fc91ec550bdc7"
   integrity sha512-qGi0CTcOGP2OtCQBgWZlQjcTuP0XkIpYFj25XtRTQSHC+umNnp7UMshr2G8SLsRFYDdAPFeHOsiteadmMH02Yw==

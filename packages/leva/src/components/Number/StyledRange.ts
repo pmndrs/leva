@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const Range = styled('div', {
   position: 'relative',
   width: '100%',
-  height: '2px',
+  height: 2,
   borderRadius: '$xs',
   backgroundColor: '$elevation1',
 })
@@ -23,12 +23,12 @@ export const Scrubber = styled('div', {
       left: {
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
-        transform: 'translateX(calc(-0.5 * ( var(--sizes-scrubberWidth) + 4px ) ))',
+        transform: 'translateX(calc(-0.5 * ($sizes$scrubberWidth + 4px)))',
       },
       right: {
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0,
-        transform: 'translateX(calc(0.5 * ( var(--sizes-scrubberWidth) + 4px ) ))',
+        transform: 'translateX(calc(0.5 * ($sizes$scrubberWidth + 4px)))',
       },
     },
   },
