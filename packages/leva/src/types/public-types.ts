@@ -42,17 +42,17 @@ export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
-export type Point2dArray = [number, number]
-export type Point2dObject = { x: number; y: number }
-export type Point2d = Point2dArray | Point2dObject
-export type Point2dSettings = { x?: NumberSettings; y?: NumberSettings } | NumberSettings
-export type Point2dInput = MergedInputWithSettings<Point2d, Point2dSettings>
+export type Vector2dArray = [number, number]
+export type Vector2dObject = { x: number; y: number }
+export type Vector2d = Vector2dArray | Vector2dObject
+export type Vector2dSettings = { x?: NumberSettings; y?: NumberSettings } | NumberSettings
+export type Vector2dInput = MergedInputWithSettings<Vector2d, Vector2dSettings>
 
-export type Point3dArray = [number, number, number]
-export type Point3dObject = { x: number; y: number; z: number }
-export type Point3d = Point3dArray | Point3dObject
-export type Point3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings } | NumberSettings
-export type Point3dInput = MergedInputWithSettings<Point3d, Point3dSettings>
+export type Vector3dArray = [number, number, number]
+export type Vector3dObject = { x: number; y: number; z: number }
+export type Vector3d = Vector3dArray | Vector3dObject
+export type Vector3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings } | NumberSettings
+export type Vector3dInput = MergedInputWithSettings<Vector3d, Vector3dSettings>
 
 export type IntervalInput = { value: [number, number]; min: number; max: number }
 
@@ -82,8 +82,8 @@ type SchemaItem =
   | MergedInputWithSettings<boolean>
   | MergedInputWithSettings<string>
   | IntervalInput
-  | Point2dInput
-  | Point3dInput
+  | Vector2dInput
+  | Vector3dInput
   | ImageInput
   | SelectInput
   | ColorObjectInput
@@ -114,13 +114,13 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   ? T
   : S extends IntervalInput
   ? [number, number]
-  : S extends Point3dObject
+  : S extends Vector3dObject
   ? { x: number; y: number; z: number }
-  : S extends Point3dArray
+  : S extends Vector3dArray
   ? [number, number, number]
-  : S extends Point2dObject
+  : S extends Vector2dObject
   ? { x: number; y: number }
-  : S extends Point2dArray
+  : S extends Vector2dArray
   ? [number, number]
   : S extends { value: infer G }
   ? PrimitiveToValue<G>

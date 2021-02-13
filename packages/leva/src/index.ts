@@ -4,8 +4,8 @@ import select from './components/Select'
 import color from './components/Color'
 import string from './components/String'
 import boolean from './components/Boolean'
-import point3d from './components/Point3d'
-import point2d from './components/Point2d'
+import vector3d from './components/Vector3d'
+import vector2d from './components/Vector2d'
 import image from './components/Image'
 import interval from './components/Interval'
 
@@ -21,8 +21,8 @@ register('COLOR', color)
 register('STRING', string)
 register('BOOLEAN', boolean)
 register('INTERVAL', interval)
-register('POINT3D', point3d)
-register('POINT2D', point2d)
+register('VECTOR3D', vector3d)
+register('VECTOR2D', vector2d)
 
 export { Leva, LevaPanel } from './components/Leva'
 export { LevaStoreProvider } from './context'
