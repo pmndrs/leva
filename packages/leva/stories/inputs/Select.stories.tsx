@@ -6,7 +6,7 @@ import Reset from '../components/decorator-reset'
 import { useControls } from '../../src';
 
 export default {
-  title: 'Inputs/String',
+  title: 'Inputs/Select',
   decorators: [Reset]
 } as Meta;
 
