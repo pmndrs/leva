@@ -1,4 +1,6 @@
 import React from 'react'
+import createStyled from '@stitches/react'
+
 import {
   useControls,
   folder,
@@ -14,6 +16,14 @@ import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
+
+const { styled } = createStyled({
+  theme: { colors: { hiContrast: 'lightblue' } },
+})
+
+const Box = styled('div', {
+  background: 'red',
+})
 
 const noise = new Noise(Math.random())
 
