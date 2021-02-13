@@ -1,11 +1,11 @@
 import React from 'react';
-import Reset from './components/decorator-reset'
+import Reset from '../components/decorator-reset'
 import { Story, Meta } from '@storybook/react';
 
-import { useControls } from '../src';
+import { useControls } from '../../src';
 
 export default {
-  title: 'Inputs/String',
+  title: 'Inputs/Interval',
   decorators: [Reset]
 } as Meta;
 
@@ -19,15 +19,7 @@ const Template: Story<any> = (args) => {
 
 export const Simple = Template.bind({});
 Simple.args = {
-  value: 'x',
-  options: ['x', 'y']
-};
-
-export const CustomLabels = Template.bind({});
-CustomLabels.args = {
-  value: "Hello World!",
-  options: {
-    helloWorld: "Hello World!",
-    leva: "Leva is awesome!"
-  }
+  value: [10, 15],
+  min: 1,
+  max: 20,
 };

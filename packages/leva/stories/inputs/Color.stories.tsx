@@ -1,8 +1,8 @@
 import React from 'react';
-import Reset from './components/decorator-reset'
+import Reset from '../components/decorator-reset'
 import { Story, Meta } from '@storybook/react';
 
-import { useControls } from '../src';
+import { useControls } from '../../src';
 
 export default {
   title: 'Inputs/Color',
