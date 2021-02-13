@@ -73,7 +73,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  gridRowGap: '$rowGap',
+  rowGap: '$rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {

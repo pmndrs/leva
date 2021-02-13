@@ -11,7 +11,7 @@ type Point3dProps = LevaInputProps<Point3d, InternalPoint3dSettings, Point3dObje
 export const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
 })
 
 export function Point3dComponent() {

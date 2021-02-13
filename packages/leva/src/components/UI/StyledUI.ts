@@ -4,7 +4,7 @@ import { StyledContent } from '../Folder/StyledFolder'
 export const StyledRow = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridRowGap: '$rowGap',
+  rowGap: '$rowGap',
   gridTemplateRows: 'minmax($sizes$rowHeight, max-content)',
   alignItems: 'center',
   color: '$highlight2',
@@ -21,7 +21,7 @@ export const StyledRow = styled('div', {
 
 export const StyledInputRow = styled(StyledRow, {
   gridTemplateColumns: 'auto $sizes$controlWidth',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
 })
 
 export const CopyLabelContainer = styled('div', {

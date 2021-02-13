@@ -12,7 +12,7 @@ export const RangeGrid = styled('div', {
         position: 'relative',
         display: 'grid',
         gridTemplateColumns: '3fr 2fr',
-        gridColumnGap: '$colGap',
+        columnGap: '$colGap',
         alignItems: 'center',
       },
       false: {},

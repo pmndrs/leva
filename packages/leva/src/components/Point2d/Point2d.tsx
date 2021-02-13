@@ -12,7 +12,7 @@ export type Point2dProps = LevaInputProps<Point2d, InternalPoint2dSettings, Poin
 export const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: '$sizes$rowHeight repeat(2, 1fr)',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
 })
 
 export function Point2dComponent() {

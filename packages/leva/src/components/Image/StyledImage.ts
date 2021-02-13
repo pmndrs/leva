@@ -52,7 +52,7 @@ export const Remove = styled('div', {
   width: 20,
   borderRadius: '$sm',
   backgroundColor: '$elevation3',
-  hover: 'none $accent1',
+  $hover: 'none $accent1',
 
   '&::after,&::before': {
     content: '""',

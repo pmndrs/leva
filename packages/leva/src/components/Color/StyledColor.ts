@@ -17,7 +17,7 @@ export const PickerContainer = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '$sizes$rowHeight auto',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
   alignItems: 'center',
   '& > span': {
     fontSize: '0.95em',
