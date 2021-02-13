@@ -20,7 +20,7 @@ export function ColorComponent() {
 
   const pickerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const colorPickerHeight = useTh('sizes', '$colorPickerHeight')
+  const colorPickerHeight = useTh('sizes', 'colorPickerHeight')
 
   const [pickerDirection, setPickerDirection] = useState<'up' | 'down' | false>(false)
   /**

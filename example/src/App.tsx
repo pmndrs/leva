@@ -1,4 +1,6 @@
 import React from 'react'
+import createStyled from '@stitches/react'
+
 import {
   useControls,
   folder,
@@ -14,6 +16,14 @@ import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
+
+const { styled } = createStyled({
+  theme: { colors: { hiContrast: 'lightblue' } },
+})
+
+const Box = styled('div', {
+  background: 'red',
+})
 
 const noise = new Noise(Math.random())
 
@@ -115,7 +125,7 @@ export function App1() {
   // useControls({ color: '#ffffff' })
   return (
     <>
-      <Leva theme={{ colors: { $accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
+      <Leva theme={{ colors: { accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
         <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
         <div>
@@ -159,74 +169,74 @@ export function App2() {
 export function App3() {
   const [colors, colorStore] = usePanel(() => ({
     colors: folder({
-      $elevation1: '#292D39',
-      $elevation2: '#181C20',
-      $elevation3: '#373C4B',
-      $accent1: '#0066DC',
-      $accent2: '#007BFF',
-      $accent3: '#3C93FF',
-      $highlight1: '#535760',
-      $highlight2: '#8C92A4',
-      $highlight3: '#FEFEFE',
+      elevation1: '#292D39',
+      elevation2: '#181C20',
+      elevation3: '#373C4B',
+      accent1: '#0066DC',
+      accent2: '#007BFF',
+      accent3: '#3C93FF',
+      highlight1: '#535760',
+      highlight2: '#8C92A4',
+      highlight3: '#FEFEFE',
     }),
   }))
 
   const [radii, radiiStore] = usePanel(() => ({
     radii: folder({
-      $xs: '2px',
-      $sm: '3px',
-      $lg: '10px',
+      xs: '2px',
+      sm: '3px',
+      lg: '10px',
     }),
   }))
 
   const [space, spaceStore] = usePanel(() => ({
     space: folder({
-      $sm: '6px',
-      $md: '10px',
-      $rowGap: '7px',
-      $colGap: '7px',
+      sm: '6px',
+      md: '10px',
+      rowGap: '7px',
+      colGap: '7px',
     }),
   }))
 
   const [fontSizes, fontSizesStore] = usePanel(() => ({
     fontSizes: folder({
-      $root: '11px',
+      root: '11px',
     }),
   }))
 
   const [sizes, sizesStore] = usePanel(() => ({
     sizes: folder({
-      $rootWidth: '280px',
-      $controlWidth: '160px',
-      $scrubberWidth: '8px',
-      $scrubberHeight: '16px',
-      $rowHeight: '24px',
-      $folderHeight: '20px',
-      $checkboxSize: '16px',
-      $joystickWidth: '100px',
-      $joystickHeight: '100px',
-      $colorPickerWidth: '160px',
-      $colorPickerHeight: '100px',
-      $monitorHeight: '60px',
+      rootWidth: '280px',
+      controlWidth: '160px',
+      scrubberWidth: '8px',
+      scrubberHeight: '16px',
+      rowHeight: '24px',
+      folderHeight: '20px',
+      checkboxSize: '16px',
+      joystickWidth: '100px',
+      joystickHeight: '100px',
+      colorPickerWidth: '160px',
+      colorPickerHeight: '100px',
+      monitorHeight: '60px',
     }),
   }))
 
   const [borderWidths, borderStore] = usePanel(() => ({
     borderWidths: folder({
-      $root: '0px',
-      $input: '1px',
-      $focus: '1px',
-      $hover: '1px',
-      $active: '1px',
-      $folder: '1px',
+      root: '0px',
+      input: '1px',
+      focus: '1px',
+      hover: '1px',
+      active: '1px',
+      folder: '1px',
     }),
   }))
 
   const [fontWeights, weightsStore] = usePanel(() => ({
     fontWeights: folder({
-      $label: { value: 'normal', options: ['bold', 'light'] },
-      $folder: { value: 'normal', options: ['bold', 'light'] },
-      $button: { value: 'normal', options: ['bold', 'light'] },
+      label: { value: 'normal', options: ['bold', 'light'] },
+      folder: { value: 'normal', options: ['bold', 'light'] },
+      button: { value: 'normal', options: ['bold', 'light'] },
     }),
   }))
 

@@ -4,24 +4,24 @@ import { StyledContent } from '../Folder/StyledFolder'
 export const StyledRow = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridRowGap: '$rowGap',
-  gridTemplateRows: 'minmax(var(--sizes-rowHeight), max-content)',
+  rowGap: '$rowGap',
+  gridTemplateRows: 'minmax($sizes$rowHeight, max-content)',
   alignItems: 'center',
   color: '$highlight2',
 
   [`${StyledContent} > &`]: {
-    ':first-of-type': { marginTop: '$rowGap' },
-    ':last-of-type': { marginBottom: '$rowGap' },
+    '&:first-of-type': { marginTop: '$rowGap' },
+    '&:last-of-type': { marginBottom: '$rowGap' },
   },
 
-  ':hover, :focus-within': {
+  '&:hover,&:focus-within': {
     color: '$highlight3',
   },
 })
 
 export const StyledInputRow = styled(StyledRow, {
-  gridTemplateColumns: 'auto var(--sizes-controlWidth)',
-  gridColumnGap: '$colGap',
+  gridTemplateColumns: 'auto $sizes$controlWidth',
+  columnGap: '$colGap',
 })
 
 export const CopyLabelContainer = styled('div', {

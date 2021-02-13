@@ -5,7 +5,7 @@ import { SpringCanvas, SpringProps } from './SpringCanvas'
 const Container = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
-  gridColumnGap: '$colGap',
+  columnGap: '$colGap',
 })
 
 export function Spring() {

@@ -13,16 +13,18 @@ export const StyledWrapper = styled('div', {
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 20px - 43px)',
       },
+      false: {},
     },
     isRoot: {
+      true: {},
       false: {
         paddingLeft: '$md',
-        '::after': {
+        '&::after': {
           content: '""',
           position: 'absolute',
           left: 0,
           top: 0,
-          width: 'var(--borderWidths-folder)',
+          width: '$borderWidths$folder',
           height: '100%',
           backgroundColor: '$elevation3',
           transform: 'translateX(-50%)',
@@ -30,6 +32,7 @@ export const StyledWrapper = styled('div', {
       },
     },
     toggled: {
+      true: {},
       false: { overflow: 'hidden' },
     },
   },
@@ -49,10 +52,10 @@ export const StyledTitle = styled('div', {
     cursor: 'pointer',
     fill: '$highlight1',
   },
-  ':hover > svg': {
+  '&:hover > svg': {
     fill: '$highlight2',
   },
-  [`:hover + ${StyledWrapper}::after`]: {
+  [`&:hover + ${StyledWrapper}::after`]: {
     backgroundColor: '$highlight2',
   },
   [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
@@ -70,7 +73,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  gridRowGap: '$rowGap',
+  rowGap: '$rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {
@@ -99,9 +102,10 @@ export const StyledContent = styled('div', {
         [`> ${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$md',
           marginTop: '$md',
-          borderTop: '$folder solid $elevation1',
+          borderTop: '$borderWidths$folder solid $colors$elevation1',
         },
       },
+      false: {},
     },
   },
 })
