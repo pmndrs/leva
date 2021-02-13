@@ -14,21 +14,15 @@ import { TitleWithFilter } from './Filter'
 export type LevaRootProps = {
   theme: LevaCustomTheme
   store?: StoreType | null
+  hidden?: boolean
   detached: boolean
   collapsed: boolean
   oneLineLabels: boolean
   hideTitleBar: boolean
 }
 
-export function LevaRoot({ store, ...props }: LevaRootProps) {
-  // const [_store, set] = useState(null)
-
-  // React.useEffect(() => {
-  //   set(null)
-  //   setTimeout(() => set(store), 0)
-  // }, [store])
-
-  if (!store) return null
+export function LevaRoot({ store, hidden = false, ...props }: LevaRootProps) {
+  if (!store || hidden) return null
   return <LevaCore store={store} {...props} />
 }
 

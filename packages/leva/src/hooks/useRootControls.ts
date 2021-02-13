@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
 import { useValuesForPath } from '../utils/hooks'
-import { Schema, SchemaToValues } from '../types'
+import { FolderSettings, Schema, SchemaToValues } from '../types'
 
 // export type HookSettings = { show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
@@ -33,15 +33,16 @@ function parseArgs(
 
 // { [nameOrSchema]: folder(schema) }
 
-function returnSchema(schema: SchemaOrFn, name: string | undefined) {
+function returnSchema(schema: SchemaOrFn, name: string | undefined, folderSettingsOrUndefined?: FolderSettings) {
   const _schema = typeof schema === 'function' ? schema() : schema
-  return name ? { [name]: folder(_schema) } : _schema
+  return name ? { [name]: folder(_schema, folderSettingsOrUndefined) } : _schema
 }
 
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT extends boolean = false>(
   store: StoreType,
   nameOrSchema: string | F,
   schemaOrUndefined?: F,
+  folderSettingsOrUndefined?: FolderSettings,
   returnStore?: RT
 ): HookReturnType<F, RT> {
   // We compute this only once for performance reasons;
@@ -51,7 +52,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
 
   const schemaIsFunction = typeof schema === 'function'
 
-  const _schema = useRef(returnSchema(schema, name))
+  const _schema = useRef(returnSchema(schema, name, folderSettingsOrUndefined))
 
   /**
    * Parses the schema to extract the inputs initial data.
