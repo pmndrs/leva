@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
@@ -54,7 +55,7 @@ export function NumberInput({ children, value, onUpdate, onChange }: ValueInputP
       if (dir) {
         event.preventDefault()
         const step = event.altKey ? 0.1 : event.shiftKey ? 10 : 1
-        onUpdate((v: any) => parseFloat(v) + dir * step)
+        onUpdate((v: any) => parseNumber(v) + dir * step)
       }
     },
     [onUpdate]

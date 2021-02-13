@@ -1,6 +1,6 @@
 import { useDrag } from './useDrag'
 import { InternalNumberSettings, sanitizeStep } from '../../components/Number/number-plugin'
-import { ceil } from '../../utils'
+import { ceil, parseNumber } from '../../utils'
 import { LevaInputProps } from '../../types'
 
 type UseDragNumberProps = {
@@ -13,6 +13,6 @@ export const multiplyStep = (event: any) => (event.shiftKey ? 5 : event.altKey ?
 export function useDragNumber({ settings, onDrag }: UseDragNumberProps) {
   const { step } = settings
   return useDrag(({ delta: [dx], event }) => {
-    onDrag((v: any) => sanitizeStep(parseFloat(v) + ceil(dx) * step * multiplyStep(event), settings))
+    onDrag((v: any) => sanitizeStep(parseNumber(v) + ceil(dx) * step * multiplyStep(event), settings))
   })
 }

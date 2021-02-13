@@ -1,5 +1,5 @@
 import { InputWithSettings, NumberSettings } from '../../types'
-import { getStep, clamp } from '../../utils'
+import { getStep, clamp, parseNumber } from '../../utils'
 
 export type InternalNumberSettings = {
   min: number
@@ -11,24 +11,24 @@ export type InternalNumberSettings = {
 }
 type NumberInput = InputWithSettings<number | string, NumberSettings>
 
-export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
+export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseNumber(o)))
 
 export const validate = (v: string | number) => v !== '' && !isNaN(Number(v))
 
 export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
-  const f = parseFloat(v).toFixed(pad)
+  const f = parseNumber(v).toFixed(pad)
   return suffix ? f + suffix : f
 }
 
 export const sanitize = (v: string | number, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
-  const f = clamp(parseFloat(v as string), min, max)
+  const f = clamp(parseNumber(v as string), min, max)
   return suffix ? f + suffix : f
 }
 
 export const normalize = ({ value, ...settings }: NumberInput) => {
   const { min, max } = settings
 
-  const _value = parseFloat(value as any)
+  const _value = parseNumber(value as any)
   let suffix
   if (!Number.isFinite(value)) {
     const match = String(value).match(/[A-Z]+/i)
