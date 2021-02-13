@@ -25,8 +25,6 @@ export type StoreType = {
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
 
-  store.subscribe(console.log)
-  
   this.useStore = store
   /**
    * Folders will hold the folder settings for the pane.

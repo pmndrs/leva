@@ -35,7 +35,11 @@ Collapsed.args = {
 const FolderHelperTemplate: Story<any> = args => {
 
   const values = useControls({
-    myFolder: folder({ x: 0, y: true, z: "hello" }, { collapsed: args.collapsed })
+    myFolder: folder({ 
+      x: "#ff005b", 
+      y: true, 
+      z: "hello"
+    }, { collapsed: args.collapsed })
   })
 
   return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
