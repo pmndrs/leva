@@ -1,6 +1,4 @@
 import React from 'react'
-import createStyled from '@stitches/react'
-
 import {
   useControls,
   folder,
@@ -16,14 +14,6 @@ import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
-
-const { styled } = createStyled({
-  theme: { colors: { hiContrast: 'lightblue' } },
-})
-
-const Box = styled('div', {
-  background: 'red',
-})
 
 const noise = new Noise(Math.random())
 
@@ -42,7 +32,7 @@ function Comp1() {
     folder5: folder({
       boolean2: false,
     }),
-    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
+    firstsuperlonglabel: { value: '40px', min: 30, max: 90 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
