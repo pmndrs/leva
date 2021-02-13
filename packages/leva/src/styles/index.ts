@@ -23,5 +23,4 @@ export function useTh<C extends keyof FullTheme>(category: C, key: keyof FullThe
   return theme[category][key]
 }
 
-export * from './theme'
 export * from './stitches.config'

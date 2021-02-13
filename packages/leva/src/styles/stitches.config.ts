@@ -1,4 +1,4 @@
-import createStyled from '@stitches/react'
+import createCss from '@stitches/react'
 
 export const getDefaultTheme = () => ({
   colors: {
@@ -91,7 +91,7 @@ const utils = {
   $activeStyle: () => (value: any) => createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const { styled, css, theme, global } = createStyled({
+export const { styled, css, theme, global } = createCss({
   theme: getDefaultTheme(),
   utils: {
     ...utils,
