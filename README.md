@@ -11,7 +11,7 @@
 <div align="center"> Customizable, extensible and beautiful by default.</div>
 <br />
 <div align="center">
-<a href="https://docs.pmnd.rs/leva">Documentation</a> 
+<a href="http://leva.pmnd.rs/">Storybook</a> 
 </div>
 <br />
 <div align="center">
