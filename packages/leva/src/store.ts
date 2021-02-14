@@ -88,7 +88,7 @@ export const Store = (function (this: StoreType) {
 
   this.dispose = () => {
     store.setState(() => {
-      return { data: {}}
+      return { data: {} }
     })
   }
 
@@ -183,8 +183,8 @@ export const Store = (function (this: StoreType) {
         Object.assign(data, newData)
         Object.assign(mappedPaths, newPaths)
 
-        // Sets folder preferences
-        folders[newPath] = input.settings as FolderSettings
+        // Sets folder preferences if it wasn't set before
+        if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
       } else {
         // If the input is not a folder, we normalize the input.
         let _render = undefined
