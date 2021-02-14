@@ -112,6 +112,7 @@ export function App1() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
   const { oneLineLabels, hideTitleBar } = useControls({ oneLineLabels: false, hideTitleBar: false })
+
   // useControls({ color: '#ffffff' })
   return (
     <>

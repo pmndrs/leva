@@ -11,12 +11,12 @@ export default {
 
 const Template: Story<any> = (args) => {
   const values = useControls(
-    'Named Folder',
+    args.name,
     {
       foo: 0,
       bar: false,
     },
-    args
+    args.options
   )
 
   const otherValues = useControls('Another Folder', {
@@ -32,11 +32,12 @@ const Template: Story<any> = (args) => {
 }
 
 export const Simple = Template.bind({})
-Simple.args = {}
+Simple.args = { name: 'Regular folder' }
 
 export const Collapsed = Template.bind({})
 Collapsed.args = {
-  collpased: true,
+  options: { collapsed: true },
+  name: 'collapsedFolder',
 }
 
 const FolderHelperTemplate: Story<any> = (args) => {
