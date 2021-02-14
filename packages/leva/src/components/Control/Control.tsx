@@ -17,12 +17,12 @@ const specialComponents = {
 export const Control = React.memo(({ path }: ControlProps) => {
   const [input, set] = useInput(path)
 
-  const { type, key, ...props } = input
+  const { type, label, ...props } = input
 
   if (type in SpecialInputTypes) {
     // @ts-expect-error
     const SpecialInputForType = specialComponents[type]
-    return <SpecialInputForType label={key} path={path} {...props} />
+    return <SpecialInputForType label={label} path={path} {...props} />
   }
 
   if (!(type in Plugins)) {
@@ -31,5 +31,5 @@ export const Control = React.memo(({ path }: ControlProps) => {
   }
 
   // @ts-expect-error
-  return <ControlInput type={type} label={key} path={path} {...props} setValue={set} />
+  return <ControlInput type={type} label={label} path={path} {...props} setValue={set} />
 })

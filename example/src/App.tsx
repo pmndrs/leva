@@ -50,7 +50,7 @@ function Comp1() {
             'Hello Button': button(() => console.log('hello')),
             folder4: folder({
               string: 'hello',
-              pos2d: { value: { x: 3, y: 4 } },
+              pos2d: { value: { x: 3, y: 4 }, label: 'vector2d' },
               pos2dArr: [100, 200],
               pos3d: { value: { x: 0.3, y: 0.1, z: 0.5 }, x: { min: 0 } },
               pos3dArr: [Math.PI / 2, 20, 4],

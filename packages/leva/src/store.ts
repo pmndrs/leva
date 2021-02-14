@@ -188,18 +188,22 @@ export const Store = (function (this: StoreType) {
       } else {
         // If the input is not a folder, we normalize the input.
         let _render = undefined
+        let _label = undefined
         let _input = input
 
-        if (typeof input === 'object' && 'render' in input) {
-          const { render, ...rest } = input
-          _input = rest
+        // parse generic options from input object
+        if (typeof input === 'object' && !Array.isArray(input)) {
+          const { render, label, ...rest } = input
+          _label = label
           _render = render
+          _input = rest
         }
         const normalizedInput = normalizeInput(_input, newPath)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
           data[newPath].key = path
+          data[newPath].label = _label ?? path
           if (typeof _render === 'function') data[newPath].render = _render
           mappedPaths[path] = newPath
         }
