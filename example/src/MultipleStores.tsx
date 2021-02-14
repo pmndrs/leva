@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { folder, LevaPanel, usePanel } from 'leva'
+import { folder, Leva, useControls, LevaPanel, usePanel, button } from 'leva'
 import { useDrag, addV } from 'react-use-gesture'
 
 function Box({ index, selected, setSelect }) {
@@ -82,17 +82,17 @@ export default function App() {
     setBoxes((b) => [...b, Date.now()])
   }
 
+  useControls({ 'New Box': button(addBox) })
+
   return (
     <div className="wrapper">
-      <nav style={{ position: 'fixed', top: 10, left: 10 }}>
-        <button onClick={addBox}>New box</button>
-      </nav>
       <div className="canvas" onClick={unSelect}>
         {boxes.map((v, i) => (
           <Box key={v} selected={selection === i} index={i} setSelect={setSelection} />
         ))}
       </div>
       <div className="panel">
+        <Leva detached={false} hideTitleBar />
         <LevaPanel store={store} />
       </div>
     </div>

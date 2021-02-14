@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App1 as App } from './App'
-// import App from './MultipleStores'
+// import { App1 as App } from './App'
+import App from './MultipleStores'
 // import App from './StyledWithStitches'
 import './styles.css'
 
