@@ -10,7 +10,7 @@ export type FolderTitleProps = {
 
 export function FolderTitle({ toggle, toggled, name }: FolderTitleProps) {
   return (
-    <StyledTitle onClick={() => toggle()} toggled={toggled}>
+    <StyledTitle onClick={() => toggle()}>
       <Chevron toggled={toggled} />
       <div>{name}</div>
     </StyledTitle>

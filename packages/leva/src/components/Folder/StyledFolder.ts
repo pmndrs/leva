@@ -13,10 +13,8 @@ export const StyledWrapper = styled('div', {
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 20px - 43px)',
       },
-      false: {},
     },
     isRoot: {
-      true: {},
       false: {
         paddingLeft: '$md',
         '&::after': {
@@ -32,7 +30,6 @@ export const StyledWrapper = styled('div', {
       },
     },
     toggled: {
-      true: {},
       false: { overflow: 'hidden' },
     },
   },
@@ -63,9 +60,6 @@ export const StyledTitle = styled('div', {
   },
   [`${StyledFolder}:hover > & > svg`]: {
     fill: '$highlight1',
-  },
-  variants: {
-    toggled: { false: {} },
   },
 })
 
@@ -105,7 +99,6 @@ export const StyledContent = styled('div', {
           borderTop: '$borderWidths$folder solid $colors$elevation1',
         },
       },
-      false: {},
     },
   },
 })

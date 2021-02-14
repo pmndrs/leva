@@ -9,7 +9,7 @@ export const ColorPreview = styled('div', {
   $inputStyle: '',
   $hover: '',
   variants: {
-    active: { true: { $inputStyle: '$accent1' }, false: {} },
+    active: { true: { $inputStyle: '$accent1' } },
   },
 })
 

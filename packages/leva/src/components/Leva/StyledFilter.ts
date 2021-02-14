@@ -12,7 +12,7 @@ export const Icon = styled('i', {
   '&:hover > svg': {
     fill: '$highlight3',
   },
-  variants: { active: { true: { '> svg': { fill: '$highlight2' } }, false: {} } },
+  variants: { active: { true: { '> svg': { fill: '$highlight2' } } } },
 })
 
 export const StyledTitleWithFilter = styled('div', {
