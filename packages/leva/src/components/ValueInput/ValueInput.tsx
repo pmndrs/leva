@@ -10,7 +10,7 @@ type ValueInputProps = {
   onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
-} & StitchesComponent<typeof StyledInput>
+} & Partial<StitchesComponent<typeof StyledInput>>
 
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
   const update = useCallback(
