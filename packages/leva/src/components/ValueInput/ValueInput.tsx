@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
+import { StitchesComponent } from '@stitches/react'
 
 type ValueInputProps = {
   value: string
@@ -9,7 +10,7 @@ type ValueInputProps = {
   onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
-} & React.ComponentProps<typeof StyledInput>
+} & StitchesComponent<typeof StyledInput>
 
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
   const update = useCallback(
@@ -37,13 +38,13 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
       <StyledInput
         levaType={type}
         type="text"
-        {...props}
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
         onBlur={update(onUpdate)}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
+        {...props}
       />
     </InputContainer>
   )
