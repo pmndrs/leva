@@ -12,6 +12,7 @@ type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
 export function Number({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
   const bind = useDragNumber({ settings, onDrag: onUpdate })
+  
   return (
     <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
       <InnerNumberLabel title={label.length > 1 ? label : ''} {...bind()}>
