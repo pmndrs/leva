@@ -44,7 +44,7 @@ function Comp1() {
     folder2: folder(
       {
         color: { value: '#ff005b', render: (get) => get('boolean') },
-        spring: spring(),
+        spring: spring({ tension: 100, mass: 1 }),
         folder3: folder(
           {
             'Hello Button': button(() => console.log('hello')),
@@ -52,11 +52,11 @@ function Comp1() {
               string: 'hello',
               pos2d: { value: { x: 3, y: 4 } },
               pos2dArr: [100, 200],
-              pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+              pos3d: { value: { x: 0.3, y: 0.1, z: 0.5 }, x: { min: 0 } },
               pos3dArr: [Math.PI / 2, 20, 4],
             }),
           },
-          { collapsed: true }
+          { collapsed: false }
         ),
       },
       { render: (get) => get('boolean') }

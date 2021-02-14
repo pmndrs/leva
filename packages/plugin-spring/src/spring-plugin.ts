@@ -4,7 +4,7 @@ import { normalizeVector, sanitizeVector, Format } from 'leva/utilities'
 export type Spring = { tension?: number; friction?: number; mass?: number }
 export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
 
-type SpringInput = InputWithSettings<Spring | undefined, SpringSettings>
+type SpringInput = Spring | InputWithSettings<Spring, SpringSettings>
 
 export type InternalSpring = { tension: number; friction: number; mass: number }
 export type InternalSpringSettings = {
@@ -18,8 +18,8 @@ const defaultValue = { mass: 1, tension: 100, friction: 30 }
 
 const keys = ['tension', 'friction', 'mass']
 
-export const normalize = ({ value, ..._settings }: SpringInput) => {
-  _settings = _settings || {}
+export const normalize = (input: SpringInput) => {
+  const { value, ..._settings } = 'value' in input ? input : { value: input }
   const settings = {
     tension: { ...defaultTensionSettings, ..._settings.tension },
     friction: { ...defaultFrictionSettings, ..._settings.friction },

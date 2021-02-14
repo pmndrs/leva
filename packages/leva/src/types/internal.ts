@@ -1,4 +1,4 @@
-import { InputWithSettings, SpecialInput, RenderFn } from './public-types'
+import { SpecialInput, RenderFn } from './public-types'
 
 type Decorators = {
   count: number
@@ -35,5 +35,5 @@ export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> =
   format?: (value: any, settings: InternalSettings) => any
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => Value
-  normalize?: (input: InputWithSettings<Input, Settings>) => { value: Value; settings?: InternalSettings }
+  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
 }
