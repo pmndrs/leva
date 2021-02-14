@@ -39,7 +39,7 @@ body {
 }
 
 .box.selected {
-  border: 1px solid #00ffe7;
+  box-shadow: inset 0 0 0 1px #00ffe7;
   z-index: 100;
 }
 

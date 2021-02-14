@@ -1,71 +1,92 @@
-import React from 'react';
+import React from 'react'
 import Reset from './components/decorator-reset'
-import { Story, Meta } from '@storybook/react';
+import { Story, Meta } from '@storybook/react'
 
-import { folder, useControls } from '../src';
+import { folder, useControls } from '../src'
 
 export default {
   title: 'Misc/Folders',
-  decorators: [Reset]
-} as Meta;
+  decorators: [Reset],
+} as Meta
 
 const Template: Story<any> = (args) => {
-  const values = useControls("Named Folder", {
-    foo: 0,
-    bar: false
-  }, args)
+  const values = useControls(
+    args.name,
+    {
+      foo: 0,
+      bar: false,
+    },
+    args.options
+  )
 
-  const otherValues = useControls("Another Folder", {
+  const otherValues = useControls('Another Folder', {
     foo: 0,
-    bar: false
+    bar: false,
   })
-  
-  return <div><pre>{JSON.stringify({...values,...otherValues}, null, '  ')}</pre></div>;
+
+  return (
+    <div>
+      <pre>{JSON.stringify({ ...values, ...otherValues }, null, '  ')}</pre>
+    </div>
+  )
 }
 
-export const Simple = Template.bind({});
-Simple.args = {
-};
+export const Simple = Template.bind({})
+Simple.args = { name: 'Regular folder' }
 
-export const Collapsed = Template.bind({});
+export const Collapsed = Template.bind({})
 Collapsed.args = {
-  collpased: true
-};
+  options: { collapsed: true },
+  name: 'collapsedFolder',
+}
 
-const FolderHelperTemplate: Story<any> = args => {
-
+const FolderHelperTemplate: Story<any> = (args) => {
   const values = useControls({
-    myFolder: folder({ 
-      x: "#ff005b", 
-      y: true, 
-      z: "hello"
-    }, { collapsed: args.collapsed })
+    myFolder: folder(
+      {
+        x: '#ff005b',
+        y: true,
+        z: 'hello',
+      },
+      { collapsed: args.collapsed }
+    ),
   })
 
-  return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
 }
 
 export const FolderHelper = FolderHelperTemplate.bind({})
 FolderHelper.args = { collapsed: true }
 
 export const NestedFolders = () => {
-  const values = useControls("Named Folder", {
+  const values = useControls('Named Folder', {
     foo: 0,
-    "First Folder": folder({
+    'First Folder': folder({
       x: 0,
       y: 1,
-      "Second Folder": folder({
-        a: "hello",
-        b: "ff005b"
+      'Second Folder': folder({
+        a: 'hello',
+        b: 'ff005b',
       }),
-      "Third Collapsed Folder": folder({
-        a: "hello",
-        b: "ff005b"
-      }, {
-        collapsed: true
-      })
-    })
+      'Third Collapsed Folder': folder(
+        {
+          a: 'hello',
+          b: 'ff005b',
+        },
+        {
+          collapsed: true,
+        }
+      ),
+    }),
   })
-  
-  return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
 }

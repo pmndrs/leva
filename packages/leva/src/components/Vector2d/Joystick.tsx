@@ -2,13 +2,13 @@ import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
-import { Point2dProps } from './Point2d'
+import { Vector2dProps } from './Vector2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
 import { multiplyStep, useTransform } from '../../utils/hooks'
-import { Point2d as Point2dType, Point2dObject } from '../../types'
+import { Vector2d as Vector2dType, Vector2dObject } from '../../types'
 
-type JoystickProps = { value: Point2dObject } & Pick<Point2dProps, 'settings' | 'onUpdate'>
+type JoystickProps = { value: Vector2dObject } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
 
 export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
@@ -49,7 +49,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     if (outOfBoundsX.current) set({ x: outOfBoundsX.current * w })
     if (outOfBoundsY.current) set({ y: outOfBoundsY.current * -h })
     timeout.current = window.setInterval(() => {
-      onUpdate((v: Point2dType) => {
+      onUpdate((v: Vector2dType) => {
         const incX = stepX * outOfBoundsX.current * stepMultiplier.current
         const incY = stepY * outOfBoundsY.current * stepMultiplier.current
         return Array.isArray(v) ? { x: v[0] + incX, y: v[1] + incY } : { x: v.x + incX, y: v.y + incY }

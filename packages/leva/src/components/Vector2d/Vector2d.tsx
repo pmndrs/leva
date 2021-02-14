@@ -1,13 +1,13 @@
 import React from 'react'
 import { styled } from '../../styles'
 import { Vector } from '../Vector'
-import { InternalPoint2dSettings } from './point2d-plugin'
-import { LevaInputProps, Point2d, Point2dObject } from '../../types'
+import { InternalVector2dSettings } from './vector2d-plugin'
+import { LevaInputProps, Vector2d, Vector2dObject } from '../../types'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
 
-export type Point2dProps = LevaInputProps<Point2d, InternalPoint2dSettings, Point2dObject>
+export type Vector2dProps = LevaInputProps<Vector2d, InternalVector2dSettings, Vector2dObject>
 
 export const Container = styled('div', {
   display: 'grid',
@@ -15,8 +15,8 @@ export const Container = styled('div', {
   columnGap: '$colGap',
 })
 
-export function Point2dComponent() {
-  const { label, displayValue, onUpdate, settings } = useInputContext<Point2dProps>()
+export function Vector2dComponent() {
+  const { label, displayValue, onUpdate, settings } = useInputContext<Vector2dProps>()
   return (
     <Row input>
       <Label>{label}</Label>

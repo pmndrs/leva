@@ -1,6 +1,4 @@
 import React from 'react'
-import createStyled from '@stitches/react'
-
 import {
   useControls,
   folder,
@@ -16,14 +14,6 @@ import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
 import Scene3D from './Scene3D'
 import { greenOrBlue } from './myPlugin'
-
-const { styled } = createStyled({
-  theme: { colors: { hiContrast: 'lightblue' } },
-})
-
-const Box = styled('div', {
-  background: 'red',
-})
 
 const noise = new Noise(Math.random())
 
@@ -42,27 +32,27 @@ function Comp1() {
     folder5: folder({
       boolean2: false,
     }),
-    firstsuperlonglabel: { value: 40, min: 30, max: 90 },
+    firstsuperlonglabel: { value: 10, step: 0.25 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
-    interval: { min: -100, max: 100, value: [-10, 10] },
+    interval: { min: -100, max: 100, value: [10, 15] },
     boolean: true,
-    color: { value: '#ffffffff', render: (get) => get('boolean') },
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
     // number: { value: 1000, min: 3 },
     folder2: folder(
       {
-        spring: spring({ tension: 100, friction: 30 }),
+        color: { value: '#ff005b', render: (get) => get('boolean') },
+        spring: spring({ tension: 100, mass: 1 }),
         folder3: folder(
           {
             'Hello Button': button(() => console.log('hello')),
             folder4: folder({
               string: 'hello',
-              pos2d: { value: { x: 3, y: 4 }, step: 3 },
+              pos2d: { value: { x: 3, y: 4 }, label: 'vector2d' },
               pos2dArr: [100, 200],
-              pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+              pos3d: { value: { x: 0.3, y: 0.1, z: 0.5 }, x: { min: 0 } },
               pos3dArr: [Math.PI / 2, 20, 4],
             }),
           },
@@ -77,7 +67,7 @@ function Comp1() {
 
   // console.log(t.colorObj)
   // console.log(t.pos2d)
-  // console.log(t.string)
+  // console.log(t.spring)
   // console.log(t.myPlugin)
 
   return (
@@ -122,12 +112,13 @@ export function App1() {
   const [c1, setC1] = React.useState(true)
   const [c2, setC2] = React.useState(false)
   const { oneLineLabels, hideTitleBar } = useControls({ oneLineLabels: false, hideTitleBar: false })
+
   // useControls({ color: '#ffffff' })
   return (
     <>
       <Leva theme={{ colors: { accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
-        <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div>
+        {/* <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div> */}
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}

@@ -31,7 +31,7 @@ export function NumberComponent() {
     <Row input>
       <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
-        {hasRange && <RangeSlider value={value} onDrag={onUpdate} {...settings} />}
+        {hasRange && <RangeSlider value={parseFloat(value as any)} onDrag={onUpdate} {...settings} />}
         <Number {...props} label="value" />
       </RangeGrid>
     </Row>

@@ -15,7 +15,6 @@ export const RangeGrid = styled('div', {
         columnGap: '$colGap',
         alignItems: 'center',
       },
-      false: {},
     },
   },
 })

@@ -28,10 +28,11 @@ export function ImageComponent() {
 
   const { getRootProps, getInputProps, isDragAccept } = useDropzone({ maxFiles: 1, accept: 'image/*', onDrop })
 
+  // TODO fix any in DropZone
   return (
     <Row input>
       <Label>{label}</Label>
-      <DropZone {...getRootProps({ isDragAccept })}>
+      <DropZone {...(getRootProps({ isDragAccept }) as any)}>
         <input {...getInputProps()} />
         {value ? (
           <Preview>

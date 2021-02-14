@@ -39,5 +39,9 @@ export const normalize = ({ value }: ColorInput) => {
   const _f = color.getFormat()
   const format = (_f === 'name' || _f === 'hex8' ? 'hex' : _f) as Format
   const hasAlpha = format === 'rgb' ? 'a' in (value as any) : _f === 'hex8'
-  return { value, settings: { format, hasAlpha } }
+  const settings = { format, hasAlpha }
+
+  // by santizing the value we make sure the returned value is parsed and fixed,
+  // consistent with future updates.
+  return { value: sanitize(value, settings), settings }
 }

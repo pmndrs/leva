@@ -8,12 +8,22 @@ export const normalizeKeyedNumberInput = <V extends Record<string, number>>(
   const _settings = {} as { [key in keyof V]: InternalNumberSettings }
 
   let maxStep = 0
+  let minPad = Infinity
   Object.entries(value).forEach(([key, v]: [keyof V, any]) => {
     _settings[key] = normalize({ value: v, ...settings[key] }).settings
     maxStep = Math.max(maxStep, _settings[key].step)
-    const { step, min, max } = (settings[key] as any) || {}
-    if (!isFinite(step) && (!isFinite(min) || !isFinite(max))) _settings[key].step = maxStep
+    minPad = Math.min(minPad, _settings[key].pad)
   })
+
+  // makes sure we get a consistent step and pad on all vector components when step is not
+  // specified in settings.
+  for (let key in _settings) {
+    const { step, min, max } = (settings[key] as any) || {}
+    if (!isFinite(step) && (!isFinite(min) || !isFinite(max))) {
+      _settings[key].step = maxStep
+      _settings[key].pad = minPad
+    }
+  }
 
   return { value, settings: _settings }
 }
