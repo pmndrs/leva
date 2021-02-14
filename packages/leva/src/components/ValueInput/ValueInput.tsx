@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
+import { StitchesComponent } from '@stitches/react'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
-import { StitchesComponent } from '@stitches/react'
 
 type ValueInputProps = {
   value: string

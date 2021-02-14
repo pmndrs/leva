@@ -4,7 +4,7 @@ import { StyledLabel, CopyLabelContainer } from './StyledUI'
 import { writeText } from 'clipboard-polyfill/text'
 import { LevaErrors, warn } from '../../utils'
 
-type LabelProps = React.ComponentProps<typeof StyledLabel>
+type LabelProps = React.ComponentProps<any>
 
 function LabelWithCopy(props: LabelProps) {
   const { value, label, key } = useInputContext()
