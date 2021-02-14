@@ -14,7 +14,7 @@ const SpringPreviewAnimated = a(SpringPreview)
 export type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
 
 export function SpringCanvas() {
-  const { displayValue, value, onUpdate, onChange, settings } = useInputContext<SpringProps>()
+  const { displayValue, value, onUpdate, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
   const accentColor = useTh('colors', 'highlight3')
@@ -34,7 +34,11 @@ export function SpringCanvas() {
   }))
 
   const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
-    onChange({ ...value, tension: memo[0] - Math.round(x) * ts!.step!, friction: memo[1] - Math.round(y) * fs!.step! })
+    onUpdate({
+      ...value,
+      tension: memo[0] - Math.round(x) * ts!.step!,
+      friction: memo[1] - Math.round(y / 4) * fs!.step!,
+    })
     return memo
   })
 
@@ -42,14 +46,13 @@ export function SpringCanvas() {
     () =>
       debounce(() => {
         const { tension, friction, mass } = springRef.current
-        onUpdate(springRef.current)
         set({
           from: { scaleX: 0, opacity: 0.9 },
           to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
           config: { friction, tension, mass },
         })
       }, 250),
-    [set, onUpdate]
+    [set]
   )
 
   const drawSpring = useCallback(

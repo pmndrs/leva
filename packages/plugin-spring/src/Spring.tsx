@@ -19,7 +19,7 @@ export function Spring() {
       <Row input>
         <Label>{label}</Label>
         <Container>
-          <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
+          <Vector value={displayValue} settings={settings as any} onUpdate={onUpdate} />
         </Container>
       </Row>
     </>

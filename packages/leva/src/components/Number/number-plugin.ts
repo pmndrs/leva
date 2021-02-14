@@ -43,9 +43,9 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
   let step = settings.step
   if (!step) {
     if (Number.isFinite(min))
-      if (Number.isFinite(max)) step = +(Math.abs(max! - min!) / 100).toPrecision(2)
-      else step = +(Math.abs(_value - min!) / 100).toPrecision(2)
-    else if (Number.isFinite(max)) step = +(Math.abs(max! - _value) / 100).toPrecision(2)
+      if (Number.isFinite(max)) step = +(Math.abs(max! - min!) / 100).toPrecision(1)
+      else step = +(Math.abs(_value - min!) / 100).toPrecision(1)
+    else if (Number.isFinite(max)) step = +(Math.abs(max! - _value) / 100).toPrecision(1)
   }
   // padStep should be based on step first
   const padStep = step ? getStep(step) * 10 : getStep(_value)
