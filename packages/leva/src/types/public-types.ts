@@ -75,7 +75,7 @@ export type FolderInput<Schema> = {
   settings: FolderSettings
 }
 
-export type CustomInput<Value> = Value & { __customInput: true }
+export type CustomInput<Value> = Value & { type: string; __customInput: true }
 
 type SchemaItem =
   | NumberInput

@@ -48,7 +48,7 @@ export function createPlugin<Input, Value, Settings, InternalSettings>(
 ) {
   const type = getUniqueType()
   register(type, plugin)
-  return (input?: Input & Settings) => (({ type, ...input } as unknown) as CustomInput<Value>)
+  return (input?: Input & Settings) => ({ type, ...input } as CustomInput<Value>)
 }
 
 /**
