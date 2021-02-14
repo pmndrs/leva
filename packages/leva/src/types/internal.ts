@@ -3,6 +3,7 @@ import { SpecialInput, RenderFn } from './public-types'
 type Decorators = {
   count: number
   key: string
+  label: string
   render?: RenderFn
 }
 

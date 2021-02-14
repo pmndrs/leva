@@ -93,7 +93,7 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
+export type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
 
 type SchemaItemWithOptions = SchemaItem & GenericSchemaItemOptions
 
