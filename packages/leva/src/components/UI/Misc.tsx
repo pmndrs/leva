@@ -3,12 +3,8 @@ import React, { useContext } from 'react'
 import { Portal as P } from 'react-portal'
 import { ThemeContext } from '../../context'
 
-type OverlayProps = { onClick: () => void }
-
-// TODO should we rather use something like use-onclickoutside?
-
-export function Overlay({ onClick }: OverlayProps) {
-  return <div style={{ position: 'fixed', top: 0, bottom: 0, right: 0, left: 0, zIndex: 1000 }} onClick={onClick} />
+export function Overlay(props: React.HTMLAttributes<HTMLDivElement>) {
+  return <div style={{ position: 'fixed', top: 0, bottom: 0, right: 0, left: 0, zIndex: 1000 }} {...props} />
 }
 
 // @ts-ignore

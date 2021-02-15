@@ -22,6 +22,9 @@ export function ColorComponent() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const colorPickerHeight = useTh('sizes', 'colorPickerHeight')
 
+  // timeout before colorpicker close
+  const timer = useRef(0)
+
   const [pickerDirection, setPickerDirection] = useState<'up' | 'down' | false>(false)
   /**
    * @note we're using initialRgb instead of binding
@@ -43,6 +46,10 @@ export function ColorComponent() {
     setPickerDirection(false)
   }
 
+  const hidePickerAfterDelay = () => {
+    timer.current = window.setTimeout(hidePicker, 500)
+  }
+
   useLayoutEffect(() => {
     if (pickerDirection) {
       const bounds = pickerRef.current!.getBoundingClientRect()
@@ -50,6 +57,7 @@ export function ColorComponent() {
       if (pickerDirection === 'down') wrapperRef.current!.style.top = bounds.bottom + 3 + 'px'
       else wrapperRef.current!.style.bottom = window.innerHeight - bounds.top + 3 + 'px'
     }
+    return () => window.clearTimeout(timer.current)
   }, [pickerDirection])
 
   return (
@@ -60,8 +68,11 @@ export function ColorComponent() {
         <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
         {!!pickerDirection && (
           <Portal>
-            <Overlay onClick={() => hidePicker()} />
-            <PickerWrapper ref={wrapperRef}>
+            <Overlay onPointerUp={() => hidePicker()} />
+            <PickerWrapper
+              ref={wrapperRef}
+              onMouseEnter={() => window.clearTimeout(timer.current)}
+              onMouseLeave={(e) => e.buttons === 0 && hidePickerAfterDelay()}>
               <ColorPicker color={initialRgb} onChange={onUpdate} />
             </PickerWrapper>
           </Portal>
