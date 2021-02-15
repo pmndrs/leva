@@ -57,6 +57,7 @@ export function ColorComponent() {
       if (pickerDirection === 'down') wrapperRef.current!.style.top = bounds.bottom + 3 + 'px'
       else wrapperRef.current!.style.bottom = window.innerHeight - bounds.top + 3 + 'px'
     }
+    return () => window.clearTimeout(timer.current)
   }, [pickerDirection])
 
   return (
@@ -67,11 +68,11 @@ export function ColorComponent() {
         <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
         {!!pickerDirection && (
           <Portal>
-            <Overlay onClick={() => hidePicker()} />
+            <Overlay onPointerUp={() => hidePicker()} />
             <PickerWrapper
               ref={wrapperRef}
               onMouseEnter={() => window.clearTimeout(timer.current)}
-              onMouseLeave={() => hidePickerAfterDelay()}>
+              onMouseLeave={(e) => e.buttons === 0 && hidePickerAfterDelay()}>
               <ColorPicker color={initialRgb} onChange={onUpdate} />
             </PickerWrapper>
           </Portal>
