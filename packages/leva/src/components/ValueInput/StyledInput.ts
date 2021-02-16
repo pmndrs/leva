@@ -9,7 +9,7 @@ export const StyledInput = styled('input', {
   height: '$rowHeight',
   flex: 1,
 
-  variants: { levaType: { number: { textAlign: 'right' } } },
+  variants: { levaType: { number: { textAlign: 'right' }, undefined: {} } },
 })
 
 export const InnerLabel = styled('div', {

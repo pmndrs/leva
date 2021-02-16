@@ -1560,17 +1560,17 @@
     webpack "^4.44.1"
     webpack-bundle-analyzer "^4.4.0"
 
-"@stitches/core@^0.1.0-canary.3":
-  version "0.1.0-canary.3"
-  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0-canary.3.tgz#6431bebfe3c00772fabc6286b3de0f6f37245084"
-  integrity sha512-axvTk7nwIvv9bZvsJ8j/DoUz2pUV/idE7FlERHWApr1llAP6NgRXH45Ez02CKCfL8eNyQQKBortmESufq7sUKA==
+"@stitches/core@^0.1.0-canary.5":
+  version "0.1.0-canary.5"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0-canary.5.tgz#a0c32e33676606097c4841b3175cd1de7028e60f"
+  integrity sha512-WfAVbKUcqAfg3tzLyZ5JnU1pHCOgHFKbJMhKcvSc/sdQPrQTk6nFs/X3V/FipUNTHXN0Ycw4+zP/VUFGaIPpzg==
 
-"@stitches/react@^0.1.0-canary.3":
-  version "0.1.0-canary.3"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.3.tgz#1172606bc5a7c72b238253651633f484dd96f9aa"
-  integrity sha512-uIhBPR3tgttNXBjhN45Ybcfr3Rd9P/tshXfGe7AW0xMySvdYMrNYLIMQDAWvSG2z7cS0UlLF0ekPzVZonTQMHA==
+"@stitches/react@^0.1.0-canary.5":
+  version "0.1.0-canary.5"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.5.tgz#acc3fd2866c23a44d1cac03278ae64b2194ea0e3"
+  integrity sha512-t7JbvFVwIdgcJZWf+v+39U1JZ3me+mMC8MIJ9SiBP7Fbh6M6o2DpclnBeTsdAnSklIs9LRI938JUPa4fQ4ILiA==
   dependencies:
-    "@stitches/core" "^0.1.0-canary.3"
+    "@stitches/core" "^0.1.0-canary.5"
 
 "@storybook/addon-actions@6.1.17", "@storybook/addon-actions@^6.1.17":
   version "6.1.17"
@@ -9703,9 +9703,9 @@ react-textarea-autosize@^8.1.1:
     use-latest "^1.0.0"
 
 react-use-gesture@^9.0.2:
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.2.tgz#e6871938bffb5275a7d374e5daa27cf9602adaf3"
-  integrity sha512-9UxZsnExGH7RHQAbNj08Qnlo4OKYQrXJ203EBOfNLw1dAusTH+PZNlLqmK21hY00O9Kf1q2n85U2JWczobuzcw==
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-9.0.4.tgz#7e0428007df31b6d8daae37c2fb01e9f40283623"
+  integrity sha512-G0sbQY+HSm2gSVIlD+LE1unpVpG7YZRTr8TI72vo0Nu1lecJtvjbcY3ZLonEZLTtODJgLL6nBllMRXyy0bRSQA==
 
 react@^17.0.1:
   version "17.0.1"

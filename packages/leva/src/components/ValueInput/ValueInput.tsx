@@ -31,7 +31,6 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
     [update, onUpdate]
   )
 
-  // TODO fix TS
   return (
     <InputContainer>
       {children && <InnerLabel>{children}</InnerLabel>}
