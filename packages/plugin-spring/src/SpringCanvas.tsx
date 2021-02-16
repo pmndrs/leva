@@ -18,6 +18,7 @@ export function SpringCanvas() {
 
   const springRef = useRef(displayValue)
   const accentColor = useTh('colors', 'highlight3')
+  const backgroundColor = useTh('colors', 'elevation2')
   const fillColor = useTh('colors', 'highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
@@ -60,28 +61,41 @@ export function SpringCanvas() {
       const { tension, friction, mass } = springRef.current
       const { width, height } = _canvas
       const t = springFn(tension, friction, mass)
-      _ctx.clearRect(0, 0, width, height)
-      _ctx.beginPath()
+
+      // compute the path
+      const path = new Path2D()
       let max = 0
       for (let i = 0; i < width; i++) {
         const v = (t(i * 8) * height) / 2
         if (Number.isFinite(v)) max = Math.max(max, v)
-        _ctx.lineTo(i, height - v)
+        path.lineTo(i, height - v)
       }
 
-      const gradient = _ctx.createLinearGradient(0, max, 0, height)
+      // clear
+      _ctx.clearRect(0, 0, width, height)
+
+      // draw gradient
+      const gradientPath = new Path2D(path)
+      gradientPath.lineTo(width - 1, height)
+      gradientPath.lineTo(0, height)
+      const gradient = _ctx.createLinearGradient(0, height / 2, 0, height)
       gradient.addColorStop(0.0, gradientTop)
       gradient.addColorStop(1.0, gradientBottom)
       _ctx.fillStyle = gradient
+      _ctx.fill(gradientPath)
+
+      // draw the dark line
+      _ctx.strokeStyle = backgroundColor
+      _ctx.lineJoin = 'round'
+      _ctx.lineWidth = 14
+      _ctx.stroke(path)
+
+      // draw the white line
       _ctx.strokeStyle = accentColor
       _ctx.lineWidth = 2
-
-      _ctx.stroke()
-      _ctx.lineTo(width - 1, height)
-      _ctx.lineTo(0, height)
-      _ctx.fill()
+      _ctx.stroke(path)
     },
-    [accentColor, gradientTop, gradientBottom]
+    [accentColor, backgroundColor, gradientTop, gradientBottom]
   )
 
   const [canvas, ctx] = useCanvas2d(drawSpring)
