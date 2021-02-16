@@ -1,12 +1,12 @@
 import React from 'react'
 import { styled } from '../../styles'
-import { LevaInputProps, Vector3d, Vector3dObject } from '../../types'
-import { Vector } from '../Vector'
+import { Vector, InternalVectorSettings } from '../Vector'
+import { LevaInputProps, Vector3d, Vector as VectorType } from '../../types'
 import { Label, Row } from '../UI'
-import { InternalVector3dSettings } from './vector3d-plugin'
 import { useInputContext } from '../../context'
 
-type Vector3dProps = LevaInputProps<Vector3d, InternalVector3dSettings, Vector3dObject>
+export type InternalVector3dSettings = InternalVectorSettings<string, [string, string, string]>
+export type Vector3dProps = LevaInputProps<Vector3d, InternalVector3dSettings, VectorType>
 
 export const Container = styled('div', {
   display: 'grid',

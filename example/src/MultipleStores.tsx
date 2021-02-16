@@ -5,30 +5,32 @@ import { useDrag, addV } from 'react-use-gesture'
 function Box({ index, selected, setSelect }) {
   const [{ position, size, fill, color, width }, store, set] = usePanel({
     position: { value: [window.innerWidth / 2 - 150, window.innerHeight / 2], step: 1 },
-    size: { value: [100, 100], min: 10 },
+    size: { value: { width: 100, height: 100 }, min: 10 },
     fill: '#cfcfcf',
     stroke: folder({ color: '#555555', width: { value: 1, min: 0, max: 10 } }),
   })
 
-  const bind = useDrag(({ first, movement: [x, y], args: [control, mod], memo = { p: position, s: size } }) => {
-    if (first) setSelect([index, store])
-    let v
-    switch (control) {
-      case 'position':
-        v = { position: addV(memo.p, [x, y]) }
-        break
-      case 'width':
-        v = { size: [memo.s[0] + x * mod, memo.s[1]] }
-        if (mod === -1) v.position = [memo.p[0] + x, memo.p[1]]
-        break
-      case 'height':
-        v = { size: [memo.s[0], memo.s[1] + y * mod] }
-        if (mod === -1) v.position = [memo.p[0], memo.p[1] + y]
-        break
+  const bind = useDrag(
+    ({ first, movement: [x, y], args: [control, mod], memo = { p: position, s: Object.values(size) } }) => {
+      if (first) setSelect([index, store])
+      let v
+      switch (control) {
+        case 'position':
+          v = { position: addV(memo.p, [x, y]) }
+          break
+        case 'width':
+          v = { size: [memo.s[0] + x * mod, memo.s[1]] }
+          if (mod === -1) v.position = [memo.p[0] + x, memo.p[1]]
+          break
+        case 'height':
+          v = { size: [memo.s[0], memo.s[1] + y * mod] }
+          if (mod === -1) v.position = [memo.p[0], memo.p[1] + y]
+          break
+      }
+      set(v)
+      return memo
     }
-    set(v)
-    return memo
-  })
+  )
 
   useEffect(() => {
     setSelect([index, store])
@@ -40,8 +42,8 @@ function Box({ index, selected, setSelect }) {
       className={`box ${selected ? 'selected' : ''}`}
       style={{
         background: fill,
-        width: size[0],
-        height: size[1],
+        width: size.width,
+        height: size.height,
         border: `${width}px solid ${color}`,
         transform: `translate(${position[0]}px, ${position[1]}px)`,
       }}>

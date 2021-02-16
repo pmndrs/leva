@@ -1,6 +1,7 @@
 /**
  * Types exposed through the public API
  */
+import { VectorSettings } from '../components/Vector'
 import { BeautifyUnionType, UnionToIntersection, Join, Leaf } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -42,16 +43,15 @@ export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
+export type Vector = Record<string, number>
 export type Vector2dArray = [number, number]
-export type Vector2dObject = { x: number; y: number }
-export type Vector2d = Vector2dArray | Vector2dObject
-export type Vector2dSettings = { x?: NumberSettings; y?: NumberSettings } | NumberSettings
+export type Vector2d = Vector2dArray | Vector
+export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'>
 export type Vector2dInput = MergedInputWithSettings<Vector2d, Vector2dSettings>
 
 export type Vector3dArray = [number, number, number]
-export type Vector3dObject = { x: number; y: number; z: number }
-export type Vector3d = Vector3dArray | Vector3dObject
-export type Vector3dSettings = { x?: NumberSettings; y?: NumberSettings; z?: NumberSettings } | NumberSettings
+export type Vector3d = Vector3dArray | Vector
+export type Vector3dSettings = VectorSettings<Vector3d, 'x' | 'y' | 'z'>
 export type Vector3dInput = MergedInputWithSettings<Vector3d, Vector3dSettings>
 
 export type IntervalInput = { value: [number, number]; min: number; max: number }
@@ -104,7 +104,11 @@ type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 type ColorObjectRGBA = { r: number; g: number; b: number; a: number }
 type ColorObjectRGB = { r: number; g: number; b: number }
 
-type PrimitiveToValue<S> = S extends ColorObjectRGBA
+type PrimitiveToValue<S> = S extends CustomInput<infer I>
+  ? I
+  : S extends { value: infer G }
+  ? PrimitiveToValue<G>
+  : S extends ColorObjectRGBA
   ? { r: number; g: number; b: number; a: number }
   : S extends ColorObjectRGB
   ? { r: number; g: number; b: number }
@@ -116,16 +120,12 @@ type PrimitiveToValue<S> = S extends ColorObjectRGBA
   ? T
   : S extends IntervalInput
   ? [number, number]
-  : S extends Vector3dObject
-  ? { x: number; y: number; z: number }
+  : S extends Vector
+  ? S
   : S extends Vector3dArray
   ? [number, number, number]
-  : S extends Vector2dObject
-  ? { x: number; y: number }
   : S extends Vector2dArray
   ? [number, number]
-  : S extends { value: infer G }
-  ? PrimitiveToValue<G>
   : S extends number
   ? number
   : S extends string
@@ -142,15 +142,12 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
   2: { [i in P]: PrimitiveToValue<T> }
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
   4: Leaf
-  5: { [i in P]: T extends CustomInput<infer I> ? I : never } // CustomInput type
-}[T extends FolderInput<any>
+}[T extends FolderInput<unknown>
   ? 0
   : T extends SpecialInput
   ? 1
   : PrimitiveToValue<T> extends NotAPrimitiveType
-  ? T extends CustomInput<{}>
-    ? 5
-    : T extends object
+  ? T extends object
     ? 3
     : 4
   : 2]

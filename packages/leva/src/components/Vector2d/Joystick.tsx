@@ -6,9 +6,9 @@ import { Vector2dProps } from './Vector2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
 import { multiplyStep, useTransform } from '../../utils/hooks'
-import { Vector2d as Vector2dType, Vector2dObject } from '../../types'
+import { Vector2d } from '../../types'
 
-type JoystickProps = { value: Vector2dObject } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
+type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
 
 export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
@@ -33,9 +33,11 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   }, [joystickShown])
 
   const {
-    x: { step: stepX },
-    y: { step: stepY },
+    keys: [v1, v2],
   } = settings
+
+  // prettier-ignore
+  const {[v1]: { step: stepV1 },[v2]: { step: stepV2 }} = settings
 
   const wpx = useTh('sizes', 'joystickWidth')
   const hpx = useTh('sizes', 'joystickHeight')
@@ -49,13 +51,21 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     if (outOfBoundsX.current) set({ x: outOfBoundsX.current * w })
     if (outOfBoundsY.current) set({ y: outOfBoundsY.current * -h })
     timeout.current = window.setInterval(() => {
-      onUpdate((v: Vector2dType) => {
-        const incX = stepX * outOfBoundsX.current * stepMultiplier.current
-        const incY = stepY * outOfBoundsY.current * stepMultiplier.current
-        return Array.isArray(v) ? { x: v[0] + incX, y: v[1] + incY } : { x: v.x + incX, y: v.y + incY }
+      onUpdate((v: Vector2d) => {
+        const incX = stepV1 * outOfBoundsX.current * stepMultiplier.current
+        const incY = stepV2 * outOfBoundsY.current * stepMultiplier.current
+        return Array.isArray(v)
+          ? {
+              [v1]: v[0] + incX,
+              [v2]: v[1] + incY,
+            }
+          : {
+              [v1]: v[v1] + incX,
+              [v2]: v[v2] + incY,
+            }
       })
     }, 16)
-  }, [w, h, onUpdate, set, stepX, stepY])
+  }, [w, h, onUpdate, set, stepV1, stepV2, v1, v2])
 
   const endOutOfBounds = useCallback(() => {
     window.clearTimeout(timeout.current)
@@ -85,22 +95,24 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     outOfBoundsX.current = Math.abs(mx) > Math.abs(_x) ? Math.sign(mx - _x) : 0
     outOfBoundsY.current = Math.abs(my) > Math.abs(_y) ? Math.sign(_y - my) : 0
 
-    let newX = value.x
-    let newY = value.y
+    // @ts-expect-error
+    let newX = value[v1]
+    // @ts-expect-error
+    let newY = value[v2]
 
     if (active) {
       if (!outOfBoundsX.current) {
-        newX += dx * stepX * stepMultiplier.current
+        newX += dx * stepV1 * stepMultiplier.current
         set({ x: _x })
       }
       if (!outOfBoundsY.current) {
-        newY -= dy * stepY * stepMultiplier.current
+        newY -= dy * stepV2 * stepMultiplier.current
         set({ y: _y })
       }
       if (outOfBoundsX.current || outOfBoundsY.current) startOutOfBounds()
       else endOutOfBounds()
 
-      onUpdate({ x: newX, y: newY })
+      onUpdate({ [v1]: newX, [v2]: newY })
     } else {
       setShowJoystick(false)
       outOfBoundsX.current = 0

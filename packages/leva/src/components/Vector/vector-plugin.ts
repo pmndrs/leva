@@ -1,73 +1,81 @@
 import v8n from 'v8n'
 import { NumberSettings } from '../../types'
-import { mapArrayToKeys, orderKeys } from '../../utils'
+import { mapArrayToKeys } from '../../utils'
 import { InternalNumberSettings, sanitize, validate } from '../Number/number-plugin'
-import { normalizeKeyedNumberInput } from './vector-utils'
+import { normalizeKeyedNumberSettings } from './vector-utils'
 
 export type Format = 'array' | 'object'
 
-export type VectorArray = number[]
-export type VectorObj<K extends string> = { [key in K]: number }
-export type VectorType<K extends string, F extends Format = Format> = F extends 'object' ? VectorObj<K> : VectorArray
+export type VectorType<K extends string = string, F extends Format = Format> = F extends 'object'
+  ? { [key in K]: number }
+  : number[]
 
-type FormatFromValue<Value> = Value extends number[] ? 'array' : Value extends Record<string, number> ? 'object' : never
+type GetKeys<V> = V extends Record<infer K, number> ? K : never
 
-export type VectorSettings<K extends string> =
-  | {
-      [key in K]?: NumberSettings
-    }
-  | NumberSettings
+export type VectorObjectSettings<V extends VectorType, K extends string> = GetKeys<V> extends never
+  ? K extends never
+    ? never
+    : { [key in K]: NumberSettings }
+  : { [key in GetKeys<V>]: NumberSettings }
 
-export type InternalVectorSettings<K extends string> = {
+export type VectorSettings<V extends VectorType, K extends string> = NumberSettings | VectorObjectSettings<V, K>
+
+export type InternalVectorSettings<K extends string = string, Keys extends K[] = K[], F extends Format = Format> = {
   [key in K]: InternalNumberSettings
-} & { format: Format }
+} & { keys: Keys; format: F }
 
-// SCHEMA
-const number = v8n().number()
-
-export function getVectorSchema(keys: string[]) {
+export function getVectorSchema(dimension: number) {
   // prettier-ignore
-  const VectorArray = v8n().array().length(keys.length).every.number()
-  const pointObj = v8n().schema(keys.reduce((acc, k) => Object.assign(acc, { [k]: number }), {}))
-  return (o: any) => v8n().passesAnyOf(VectorArray, pointObj).test(o)
+  const isVectorArray = v8n().array().length(dimension).every.number()
+  const isVectorObject = (o: any) => {
+    if (typeof o !== 'object') return false
+    const values = Object.values(o)
+    return values.length === dimension && values.every((v: any) => isFinite(v))
+  }
+  return (o: any) => {
+    return isVectorArray.test(o) || isVectorObject(o)
+  }
 }
 
 export function getVectorType<K extends string>(value: VectorType<K>): Format {
   return Array.isArray(value) ? 'array' : 'object'
 }
 
-function convert<K extends string, F extends Format>(value: VectorType<K>, format: F, keys?: K[]): VectorType<K, F> {
-  if (getVectorType(value) === format) return value as VectorType<K, F>
-  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as VectorArray, keys!)) as VectorType<K, F>
-}
-
-export const validateVector = <K extends string>(value: VectorObj<K>) => {
-  return Object.values(value).every((v: any) => validate(v))
-}
-
-export const sanitizeVector = <K extends string>(
-  value: VectorObj<K>,
-  settings: InternalVectorSettings<K>,
+function convert<Value extends VectorType, F extends Format, K extends string>(
+  value: Value,
+  format: F,
   keys: K[]
-) => {
-  const _value = convert(value, 'object', keys)
-  for (let key in _value) _value[key] = sanitize(_value[key], settings[key]) as number
-
-  return convert(_value, settings.format, keys)
+): VectorType<GetKeys<Value> extends never ? K : GetKeys<Value>, F> {
+  if (getVectorType(value) === format) return (value as unknown) as any
+  return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as number[], keys!)) as any
 }
 
-export const formatVector = <K extends string>(value: any, keys: K[]) => {
-  return convert(value, 'object', keys)
+export const validateVector = (value: any) => Object.values(value).every((v: any) => validate(v))
+
+export const sanitizeVector = <K extends string, F extends Format>(
+  value: number[] | { [key in K]: number },
+  settings: InternalVectorSettings<K, K[], F>
+): F extends 'array' ? number[] : { [key in K]: number } => {
+  const _value = convert(value, 'object', settings.keys) as any
+
+  for (let key in _value) _value[key] = sanitize(_value[key], settings[key as K])
+  return convert(_value, settings.format, settings.keys) as any
 }
+
+export const formatVector = <K extends string, F extends Format>(
+  value: number[] | { [key in K]: number },
+  settings: InternalVectorSettings<K, K[], F>
+) => convert(value, 'object', settings.keys)
 
 const isNumberSettings = (o?: object) => o && ('step' in o || 'min' in o || 'max' in o)
 
-export function normalizeVector<K extends string, Value extends VectorType<K>>(
+export function normalizeVector<Value extends VectorType, K extends string>(
   _value: Value,
-  _settings: VectorSettings<K> = {},
-  keys: K[]
+  _settings: VectorSettings<Value, K>,
+  defaultKeys: K[] = []
 ) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
+  const keys = format === 'object' ? Object.keys(_value) : defaultKeys
   const value = convert(_value, 'object', keys)
 
   // vector can accept either { value: { x, y }, { x: settings, y: settings } }
@@ -78,20 +86,19 @@ export function normalizeVector<K extends string, Value extends VectorType<K>>(
     ? keys.reduce((acc, k) => Object.assign(acc, { [k]: _settings }), {})
     : _settings
 
-  const { settings } = normalizeKeyedNumberInput(value, mergedSettings as any)
-
+  const settings = normalizeKeyedNumberSettings(value, mergedSettings)
   return {
-    value: (format === 'array' ? _value : orderKeys(value, keys)) as VectorType<K, FormatFromValue<Value>>,
-    settings: { ...settings, format },
+    value: (format === 'array' ? _value : value) as Value,
+    settings: { ...settings, format, keys },
   }
 }
 
-export function getVectorPlugin<K extends string>(keys: K[]) {
+export function getVectorPlugin<K extends string>(defaultKeys: K[]) {
   return {
-    schema: getVectorSchema(keys),
-    normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, keys),
+    schema: getVectorSchema(defaultKeys.length),
+    normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, defaultKeys),
     validate: validateVector,
-    format: (value: any) => formatVector(value, keys),
-    sanitize: (value: any, settings: InternalVectorSettings<K>) => sanitizeVector(value, settings, keys),
+    format: (value: any, settings: InternalVectorSettings) => formatVector(value, settings),
+    sanitize: (value: any, settings: InternalVectorSettings) => sanitizeVector(value, settings),
   }
 }

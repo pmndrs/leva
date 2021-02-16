@@ -1,13 +1,13 @@
 import React from 'react'
 import { styled } from '../../styles'
-import { Vector } from '../Vector'
-import { InternalVector2dSettings } from './vector2d-plugin'
-import { LevaInputProps, Vector2d, Vector2dObject } from '../../types'
+import { InternalVectorSettings, Vector } from '../Vector'
+import { LevaInputProps, Vector2d, Vector as VectorType } from '../../types'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
 
-export type Vector2dProps = LevaInputProps<Vector2d, InternalVector2dSettings, Vector2dObject>
+export type InternalVector2dSettings = InternalVectorSettings<string, [string, string]>
+export type Vector2dProps = LevaInputProps<Vector2d, InternalVector2dSettings, VectorType>
 
 export const Container = styled('div', {
   display: 'grid',

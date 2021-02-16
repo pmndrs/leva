@@ -1,22 +1,27 @@
-import { InputWithSettings, NumberSettings, InternalNumberSettings } from 'leva/plugins'
-import { normalizeVector, sanitizeVector, Format } from 'leva/utilities'
+import { InputWithSettings, NumberSettings } from 'leva/plugins'
+import { normalizeVector, sanitizeVector, InternalVectorSettings } from 'leva/utilities'
 
 export type Spring = { tension?: number; friction?: number; mass?: number }
+export type InternalSpring = { tension: number; friction: number; mass: number }
 export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
 
 type SpringInput = Spring | InputWithSettings<Spring, SpringSettings>
 
-export type InternalSpring = { tension: number; friction: number; mass: number }
-export type InternalSpringSettings = {
-  [key in keyof InternalSpring]: InternalNumberSettings
-} & { format: Format }
+export type InternalSpringSettings = InternalVectorSettings<keyof InternalSpring, (keyof InternalSpring)[], 'object'>
 
 const defaultTensionSettings = { min: 1, step: 1 }
 const defaultFrictionSettings = { min: 1, step: 0.5 }
 const defaultMassSettings = { min: 0.1, step: 0.1 }
 const defaultValue = { mass: 1, tension: 100, friction: 30 }
 
-const keys = ['tension', 'friction', 'mass']
+export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = {
+  component: React.ComponentType
+  schema?: (value: any, settings?: Settings) => boolean
+  format?: (value: any, settings: InternalSettings) => any
+  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
+  validate?: (value: any, settings: InternalSettings) => boolean
+  sanitize?: (value: any, settings: InternalSettings) => Value
+}
 
 export const normalize = (input: SpringInput) => {
   const { value, ..._settings } = 'value' in input ? input : { value: input }
@@ -26,8 +31,10 @@ export const normalize = (input: SpringInput) => {
     mass: { ...defaultMassSettings, ..._settings.mass },
   }
 
-  return normalizeVector({ ...defaultValue, ...value }, settings, keys)
+  return normalizeVector({ ...defaultValue, ...value }, settings) as {
+    value: InternalSpring
+    settings: InternalSpringSettings
+  }
 }
 
-// TODO fix type any
-export const sanitize = (value: any, settings: any) => sanitizeVector(value, settings, keys)
+export const sanitize = (value: InternalSpring, settings: InternalSpringSettings) => sanitizeVector(value, settings)
