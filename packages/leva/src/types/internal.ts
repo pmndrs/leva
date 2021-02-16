@@ -34,7 +34,7 @@ export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> =
   component: React.ComponentType
   schema?: (value: any, settings?: Settings) => boolean
   format?: (value: any, settings: InternalSettings) => any
+  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => Value
-  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
 }

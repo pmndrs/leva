@@ -1,7 +1,7 @@
 import { NumberSettings } from '../../types'
 import { InternalNumberSettings, normalize } from '../Number/number-plugin'
 
-export const normalizeKeyedNumberInput = <V extends Record<string, number>>(
+export const normalizeKeyedNumberSettings = <V extends Record<string, number>>(
   value: V,
   settings: { [key in keyof V]?: NumberSettings }
 ) => {
@@ -25,5 +25,5 @@ export const normalizeKeyedNumberInput = <V extends Record<string, number>>(
     }
   }
 
-  return { value, settings: _settings }
+  return _settings
 }

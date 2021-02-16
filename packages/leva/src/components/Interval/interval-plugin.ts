@@ -2,7 +2,7 @@ import v8n from 'v8n'
 import { IntervalInput } from '../../types'
 import { clamp } from '../../utils'
 import { InternalNumberSettings } from '../Number/number-plugin'
-import { normalizeKeyedNumberInput } from '../Vector/vector-utils'
+import { normalizeKeyedNumberSettings } from '../Vector/vector-utils'
 
 export type Interval = IntervalInput['value']
 export type InternalInterval = { min: number; max: number }
@@ -27,7 +27,7 @@ export const sanitize = (
 
 export const normalize = ({ value, min, max }: IntervalInput) => {
   const boundsSettings = { min, max }
-  const { settings } = normalizeKeyedNumberInput(format(value), { min: boundsSettings, max: boundsSettings })
+  const settings = normalizeKeyedNumberSettings(format(value), { min: boundsSettings, max: boundsSettings })
   const bounds: [number, number] = [min, max]
   return { value, settings: { ...settings, bounds } }
 }

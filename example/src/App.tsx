@@ -30,7 +30,7 @@ function Comp1() {
 
   const t = useControls({
     folder5: folder({
-      boolean2: false,
+      boolean: false,
     }),
     firstsuperlonglabel: { value: 10, step: 0.25 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
@@ -40,19 +40,22 @@ function Comp1() {
     interval: { min: -100, max: 100, value: [10, 15] },
     boolean: true,
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
-    // number: { value: 1000, min: 3 },
+    number: { value: 1000, min: 3 },
     folder2: folder(
       {
-        color: { value: '#ff005b', render: (get) => get('boolean') },
-        spring: spring({ tension: 100, mass: 1 }),
+        color2: '#fff',
+        color: {
+          value: '#ff005b',
+          render: (get) => get('boolean'),
+        },
         folder3: folder(
           {
             'Hello Button': button(() => console.log('hello')),
             folder4: folder({
-              string: 'hello',
-              pos2d: { value: { x: 3, y: 4 }, label: 'vector2d' },
-              pos2dArr: [100, 200],
-              pos3d: { value: { x: 0.3, y: 0.1, z: 0.5 }, x: { min: 0 } },
+              spring: spring(),
+              pos2d: { value: { x: 3, y: 4 } },
+              pos2dArr: { value: [100, 200], x: { max: 300 } },
+              pos3d: { value: { x: 0.3, k: 0.1, z: 0.5 }, j: { min: 0 } },
               pos3dArr: [Math.PI / 2, 20, 4],
             }),
           },
@@ -67,6 +70,10 @@ function Comp1() {
 
   // console.log(t.colorObj)
   // console.log(t.pos2d)
+  // console.log(t.pos2dArr)
+  // console.log(t.pos3d)
+  // console.log(t.pos3dArr)
+  // console.log(t.spring)
   // console.log(t.spring)
   // console.log(t.myPlugin)
 
@@ -122,7 +129,7 @@ export function App1() {
         <div>
           {c1 && <Comp1 />}
           {c2 && <Comp1 />}
-          <Comp2 />
+          {/* <Comp2 /> */}
           <button onClick={() => setC1((t) => !t)}>{c1 ? 'Hide' : 'Show'} Json</button>
           <button onClick={() => setC2((t) => !t)}>{c2 ? 'Hide' : 'Show'} Scene</button>
         </div>
