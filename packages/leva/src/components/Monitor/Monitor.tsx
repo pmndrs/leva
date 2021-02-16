@@ -19,6 +19,7 @@ function push(arr: any[], val: any) {
 
 const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
   const accentColor = useTh('colors', 'highlight3')
+  const backgroundColor = useTh('colors', 'elevation2')
   const fillColor = useTh('colors', 'highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
@@ -35,28 +36,44 @@ const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
       // fixes unmount potential bug
       if (!_canvas) return
       const { width, height } = _canvas
-      _ctx.clearRect(0, 0, width, height)
-      _ctx.beginPath()
+
+      // compute the path
+      const path = new Path2D()
       const interval = width / POINTS
+      const verticalPadding = height * 0.05
       for (let i = 0; i < points.current.length; i++) {
         const p = range(points.current[i], min.current!, max.current!)
-        _ctx.lineTo(interval * i, p * height * 0.9)
+        const x = interval * i
+        const y = height - p * (height - verticalPadding * 2) - verticalPadding
+        path.lineTo(x, y)
       }
 
+      // clear
+      _ctx.clearRect(0, 0, width, height)
+
+      // draw gradient
+      const gradientPath = new Path2D(path)
+      gradientPath.lineTo(interval * (points.current.length + 1), height)
+      gradientPath.lineTo(0, height)
+      gradientPath.lineTo(0, 0)
       const gradient = _ctx.createLinearGradient(0, 0, 0, height)
       gradient.addColorStop(0.0, gradientTop)
       gradient.addColorStop(1.0, gradientBottom)
       _ctx.fillStyle = gradient
+      _ctx.fill(gradientPath)
+
+      // draw the dark line
+      _ctx.strokeStyle = backgroundColor
+      _ctx.lineJoin = 'round'
+      _ctx.lineWidth = 14
+      _ctx.stroke(path)
+
+      // draw the white line
       _ctx.strokeStyle = accentColor
       _ctx.lineWidth = 2
-
-      _ctx.stroke()
-      _ctx.lineTo(interval * (points.current.length + 1), height)
-      _ctx.lineTo(0, height)
-      _ctx.lineTo(0, 0)
-      _ctx.fill()
+      _ctx.stroke(path)
     },
-    [accentColor, gradientTop, gradientBottom]
+    [accentColor, backgroundColor, gradientTop, gradientBottom]
   )
 
   const [canvas, ctx] = useCanvas2d(drawPlot)
