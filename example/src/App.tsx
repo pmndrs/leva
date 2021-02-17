@@ -46,7 +46,7 @@ function Comp1() {
         color2: '#fff',
         color: {
           value: '#ff005b',
-          render: (get) => get('boolean'),
+          // render: (get) => get('boolean'),
         },
         folder3: folder(
           {

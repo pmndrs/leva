@@ -13,12 +13,11 @@ type FolderProps = { name: string; path?: string; tree: Tree }
 const Folder = ({ name, path, tree }: FolderProps) => {
   const store = useStoreContext()
   const newPath = join(path, name)
-  const { collapsed, render } = store.getFolderSettings(newPath)
-  const shouldRender = !render || render(store.get)
+  const { collapsed } = store.getFolderSettings(newPath)
   const [toggled, setToggle] = useState(!collapsed)
 
   return (
-    <StyledFolder style={{ display: shouldRender ? 'block' : 'none' }}>
+    <StyledFolder>
       <FolderTitle name={name!} toggled={toggled} toggle={() => setToggle((t) => !t)} />
       <TreeWrapper parent={newPath} tree={tree} toggled={toggled} />
     </StyledFolder>
