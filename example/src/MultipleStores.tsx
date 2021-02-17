@@ -34,7 +34,7 @@ function Box({ index, selected, setSelect }) {
 
   useEffect(() => {
     setSelect([index, store])
-  }, [])
+  }, [index, store, setSelect])
 
   return (
     <div
