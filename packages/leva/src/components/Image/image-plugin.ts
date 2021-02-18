@@ -10,7 +10,8 @@ export const sanitize = (v: any) => {
   }
 }
 
-export const validate = (v: any) => v instanceof File || (typeof v === 'string' && v.indexOf('blob:') === 0)
+export const validate = (v: any) =>
+  v === undefined || v instanceof File || (typeof v === 'string' && v.indexOf('blob:') === 0)
 
 export const schema = (_o: any, s: any) => typeof s === 'object' && 'image' in s
 
