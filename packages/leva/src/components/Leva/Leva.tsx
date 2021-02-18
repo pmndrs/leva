@@ -9,7 +9,7 @@ type LevaProps = Omit<Partial<LevaRootProps>, 'store'>
 
 // uses global store
 export function Leva({
-  theme = {},
+  theme,
   detached = true,
   collapsed = false,
   oneLineLabels = false,
