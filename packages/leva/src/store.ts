@@ -47,9 +47,23 @@ export const Store = (function (this: StoreType) {
    * @param data
    */
   this.getVisiblePaths = (data) => {
+    // identifies hiddenFolders
+    const hiddenFolders: string[] = []
+    Object.entries(folders).forEach(([path, settings]) => {
+      if (settings.render && !settings.render(this.get)) hiddenFolders.push(path + '.')
+    })
+
     const visiblePaths: string[] = []
     orderedPaths.forEach((path: any) => {
-      if (data[path]?.count > 0 && (!data[path].render || data[path].render!(this.get))) visiblePaths.push(path)
+      if (
+        // if input is mounted
+        data[path]?.count > 0 &&
+        // if it's not included in a hidden folder
+        hiddenFolders.every((p) => path.indexOf(p) === -1) &&
+        // if its render functions doesn't exists or returns true
+        (!data[path].render || data[path].render!(this.get))
+      )
+        visiblePaths.push(path)
     })
 
     return visiblePaths
