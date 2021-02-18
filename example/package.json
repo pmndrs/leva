@@ -16,6 +16,7 @@
     "noisejs": "^2.1.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
+    "react-dropzone": "^11.3.1",
     "react-three-fiber": "^5.3.10",
     "react-use-gesture": "^9.0.0",
     "three": "^0.123.0"
