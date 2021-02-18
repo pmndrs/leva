@@ -47,7 +47,7 @@ export const Remove = styled('div', {
   $flexCenter: '',
   top: '0',
   right: '0',
-  margin: '$rowGap $md',
+  margin: '$sm',
   height: 20,
   width: 20,
   borderRadius: '$sm',
