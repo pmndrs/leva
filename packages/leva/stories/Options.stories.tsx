@@ -18,7 +18,7 @@ const Template: Story<any> = () => {
       {
         number: 1,
         string: {
-          value: 'shown if number >= 1',
+          value: 'shown if `number >= 1`',
           render: (get) => get('folder.number') >= 1,
         },
       },
