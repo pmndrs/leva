@@ -1,34 +1,50 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import React from 'react'
+import { Story, Meta } from '@storybook/react'
 
 import Reset from '../components/decorator-reset'
 
-import { useControls } from '../../src';
+import { useControls } from '../../src'
 
 export default {
   title: 'Inputs/Select',
-  decorators: [Reset]
-} as Meta;
+  decorators: [Reset],
+} as Meta
 
 const Template: Story<any> = (args) => {
   const values = useControls({
     foo: args,
   })
-  
-  return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
 }
 
-export const Simple = Template.bind({});
+export const Simple = Template.bind({})
 Simple.args = {
   value: 'x',
-  options: ['x', 'y']
-};
+  options: ['x', 'y'],
+}
 
-export const CustomLabels = Template.bind({});
+export const CustomLabels = Template.bind({})
 CustomLabels.args = {
-  value: "Hello World!",
+  value: 'Hello World!',
   options: {
-    helloWorld: "Hello World!",
-    leva: "Leva is awesome!"
-  }
-};
+    helloWorld: 'Hello World!',
+    leva: 'Leva is awesome!',
+  },
+}
+
+export const InferredValueAsOption = Template.bind({})
+InferredValueAsOption.args = {
+  value: true,
+  options: [false],
+}
+
+export const DifferentOptionTypes = Template.bind({})
+DifferentOptionTypes.args = {
+  value: undefined,
+  options: ['x', 'y', ['x', 'y']],
+}
