@@ -1,13 +1,14 @@
 import { StoryFnReactReturnType } from '@storybook/react/dist/client/preview/types'
 import * as React from 'react'
-import { store } from '../../src';
+import { store } from '../../src'
 
-export default (Story: () => StoryFnReactReturnType) => {
-    const [_, set] = React.useState(false)
+const DefaultStory = (Story: () => StoryFnReactReturnType) => {
+  const [_, set] = React.useState(false)
+  React.useEffect(() => {
+    store.dispose()
+    set(true)
+  }, [])
+  return _ ? <Story /> : <></>
+}
 
-    React.useEffect(() => {
-      store.dispose()
-      set(true)
-    }, [])
-    return _ ? <Story /> : <></>
-  }
+export default DefaultStory
