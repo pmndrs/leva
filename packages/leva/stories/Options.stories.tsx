@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/react'
 import { folder, useControls } from '../src'
 
 export default {
-  title: 'Options',
+  title: 'Misc/Options',
   decorators: [Reset],
 } as Meta
 
