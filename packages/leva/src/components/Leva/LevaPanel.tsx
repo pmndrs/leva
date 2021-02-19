@@ -7,7 +7,7 @@ type LevaPanelProps = Partial<LevaRootProps>
 // uses custom store
 export function LevaPanel({
   store,
-  theme = {},
+  theme,
   detached = false,
   collapsed = false,
   oneLineLabels = false,

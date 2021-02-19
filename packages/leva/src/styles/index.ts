@@ -4,8 +4,9 @@ import { theme, getDefaultTheme, FullTheme, LevaCustomTheme } from './stitches.c
 import { ThemeContext } from '../context'
 import { warn, LevaErrors } from '../utils'
 
-export function mergeTheme(newTheme: LevaCustomTheme) {
+export function mergeTheme(newTheme?: LevaCustomTheme) {
   const defaultTheme = getDefaultTheme()
+  if (!newTheme) return { theme: defaultTheme, className: '' }
   Object.keys(newTheme!).forEach((key) => {
     // @ts-ignore
     Object.assign(defaultTheme![key], newTheme![key])

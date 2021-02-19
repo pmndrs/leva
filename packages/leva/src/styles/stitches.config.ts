@@ -130,6 +130,8 @@ export const { styled, css, theme, global } = createCss({
 
 const globalStyles = global({
   '.leva__panel__dragged': {
+    WebkitUserSelect: 'none',
+    WebkitUserDrag: 'none',
     userSelect: 'none',
     input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },

@@ -12,7 +12,7 @@ import { ThemeContext, StoreContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 
 export type LevaRootProps = {
-  theme: LevaCustomTheme
+  theme?: LevaCustomTheme
   store?: StoreType | null
   hidden?: boolean
   detached: boolean
@@ -21,19 +21,23 @@ export type LevaRootProps = {
   hideTitleBar: boolean
 }
 
-export function LevaRoot({ store, hidden = false, ...props }: LevaRootProps) {
+export function LevaRoot({ store, hidden = false, theme, ...props }: LevaRootProps) {
+  const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
   if (!store || hidden) return null
-  return <LevaCore store={store} {...props} />
+
+  return (
+    <ThemeContext.Provider value={themeContext}>
+      <LevaCore store={store} {...props} rootClass={themeContext.className} />
+    </ThemeContext.Provider>
+  )
 }
 
-type LevaCoreProps = LevaRootProps & { store: StoreType }
+type LevaCoreProps = Omit<LevaRootProps, 'theme'> & { store: StoreType; rootClass: string }
 
-function LevaCore({ store, theme = {}, detached, collapsed, oneLineLabels, hideTitleBar }: LevaCoreProps) {
+const LevaCore = React.memo(({ store, rootClass, detached, collapsed, oneLineLabels, hideTitleBar }: LevaCoreProps) => {
   const paths = useVisiblePaths(store)
   const [filter, setFilter] = useState('')
   const tree = useMemo(() => buildTree(paths, filter), [paths, filter])
-
-  const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
 
   // drag
   const [rootRef, set] = useTransform<HTMLDivElement>()
@@ -47,19 +51,13 @@ function LevaCore({ store, theme = {}, detached, collapsed, oneLineLabels, hideT
   // TODO remove oneLineLabels as any
 
   return (
-    <ThemeContext.Provider value={themeContext}>
-      <StyledRoot
-        ref={rootRef}
-        className={themeContext.className}
-        detached={detached}
-        oneLineLabels={oneLineLabels as any}>
-        {!hideTitleBar && (
-          <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
-        )}
-        <StoreContext.Provider value={store}>
-          <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
-        </StoreContext.Provider>
-      </StyledRoot>
-    </ThemeContext.Provider>
+    <StyledRoot ref={rootRef} className={rootClass} detached={detached} oneLineLabels={oneLineLabels as any}>
+      {!hideTitleBar && (
+        <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+      )}
+      <StoreContext.Provider value={store}>
+        <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
+      </StoreContext.Provider>
+    </StyledRoot>
   )
-}
+})
