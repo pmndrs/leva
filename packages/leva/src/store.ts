@@ -1,5 +1,5 @@
 import create, { UseStore } from 'zustand'
-import { normalizeInput, join, updateInput } from './utils'
+import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
 
 import { Data, FolderSettings, SpecialInputTypes } from './types'
 
@@ -171,8 +171,12 @@ export const Store = (function (this: StoreType) {
   }
 
   this.get = (path) => {
-    //@ts-expect-error
-    return store.getState().data[path].value
+    try {
+      //@ts-expect-error
+      return store.getState().data[path].value
+    } catch (e) {
+      warn(LevaErrors.PATH_DOESNT_EXIST, path)
+    }
   }
 
   /**

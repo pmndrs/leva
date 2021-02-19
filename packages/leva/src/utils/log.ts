@@ -5,6 +5,7 @@ export enum LevaErrors {
   ALREADY_REGISTERED_TYPE,
   CLIPBOARD_ERROR,
   THEME_ERROR,
+  PATH_DOESNT_EXIST,
 }
 
 const ErrorList = {
@@ -19,9 +20,8 @@ const ErrorList = {
     `Type ${type} has already been registered. You can't register a component with the same type.`,
   ],
   [LevaErrors.CLIPBOARD_ERROR]: (value: unknown) => [`Error copying the value`, value],
-  [LevaErrors.THEME_ERROR]: (category: unknown, key: unknown) => [
-    `Error accessing the theme "${category}.${key}" value`,
-  ],
+  [LevaErrors.THEME_ERROR]: (category: string, key: string) => [`Error accessing the theme "${category}.${key}" value`],
+  [LevaErrors.PATH_DOESNT_EXIST]: (path: string) => [`Error accessing the value at path "${path}"`],
 }
 
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
