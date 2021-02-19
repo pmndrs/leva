@@ -18,7 +18,7 @@
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook --quiet"
   },
   "size-limit": [
     {
