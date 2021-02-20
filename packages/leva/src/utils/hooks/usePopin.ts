@@ -1,7 +1,7 @@
 import { useState, useRef, useLayoutEffect, useCallback } from 'react'
 import { parseNumber } from '../math'
 
-export function useOverlay(height: number | string, margin = 3) {
+export function usePopin(height: number | string, margin = 3) {
   const popinRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
