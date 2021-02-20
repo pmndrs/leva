@@ -15,7 +15,7 @@ type Input = Omit<DataItem, 'count'>
  *
  * @param path
  */
-export const useInput = (path: string): [Input, (value: any) => void] => {
+export function useInput(path: string): [Input, (value: any) => void] {
   const store = useStoreContext()
   const [state, setState] = useState<Input>(getInputAtPath(store.getData(), path))
 
