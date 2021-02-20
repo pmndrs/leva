@@ -48,10 +48,23 @@ export const Store = (function (this: StoreType) {
    */
   this.getVisiblePaths = () => {
     const data = this.getData()
+    const paths = Object.keys(data)
     // identifies hiddenFolders
     const hiddenFolders: string[] = []
     Object.entries(folders).forEach(([path, settings]) => {
-      if (settings.render && !settings.render(this.get)) hiddenFolders.push(path + '.')
+      if (
+        // the folder settings have a render function
+        settings.render &&
+        // and the folder path matches a data path
+        // (this can happen on first mount and could probably be solved if folder settings
+        // were set together with the store data. In fact, the store data is set in useEffect
+        // while folders settings are set in useMemo).
+        paths.some((p) => p.indexOf(path) === 0) &&
+        // the folder settings is supposed to be hidden
+        !settings.render(this.get)
+      )
+        // then folder is hidden
+        hiddenFolders.push(path + '.')
     })
 
     const visiblePaths: string[] = []
@@ -65,6 +78,7 @@ export const Store = (function (this: StoreType) {
         // if its render functions doesn't exists or returns true
         (!data[path].render || data[path].render!(this.get))
       )
+        // then the input path is visible
         visiblePaths.push(path)
     })
 
