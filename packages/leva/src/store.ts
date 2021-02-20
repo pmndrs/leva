@@ -173,7 +173,7 @@ export const Store = (function (this: StoreType) {
   this.get = (path) => {
     try {
       //@ts-expect-error
-      return store.getState().data[path].value
+      return this.getData()[path].value
     } catch (e) {
       warn(LevaErrors.PATH_DOESNT_EXIST, path)
     }
@@ -223,7 +223,10 @@ export const Store = (function (this: StoreType) {
           data[newPath].key = path
           data[newPath].label = _label ?? path
           if (typeof _render === 'function') data[newPath].render = _render
-          mappedPaths[path] = newPath
+          if (path in mappedPaths) {
+            // if a key already exists, prompt an error.
+            warn(LevaErrors.DUPLICATE_KEYS, path, newPath, mappedPaths[path])
+          } else mappedPaths[path] = newPath
         }
       }
     })
