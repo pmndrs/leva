@@ -1,6 +1,6 @@
 {
   "name": "leva",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "main": "dist/leva.cjs.js",
   "license": "MIT",
   "peerDependencies": {
