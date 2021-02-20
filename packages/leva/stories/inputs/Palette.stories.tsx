@@ -26,6 +26,6 @@ const Template: Story<any> = (args) => {
 
 export const Simple = Template.bind({})
 Simple.args = {
-  value: colors[3],
+  value: colors[0],
   options: colors.slice(0, 5),
 }

@@ -1,7 +1,7 @@
-import * as props from './string-plugin'
-import { StringComponent } from './String'
+import * as props from './palette-plugin'
+import { PaletteComponent } from './Palette'
 
-const plugin = { ...props, component: StringComponent }
+const plugin = { ...props, component: PaletteComponent }
 
-export * from './String'
+export * from './Palette'
 export default plugin
