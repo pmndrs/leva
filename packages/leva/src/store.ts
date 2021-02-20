@@ -57,8 +57,9 @@ export const Store = (function (this: StoreType) {
     const visiblePaths: string[] = []
     orderedPaths.forEach((path: any) => {
       if (
+        path in data &&
         // if input is mounted
-        data[path]?.count > 0 &&
+        data[path].count > 0 &&
         // if it's not included in a hidden folder
         hiddenFolders.every((p) => path.indexOf(p) === -1) &&
         // if its render functions doesn't exists or returns true
