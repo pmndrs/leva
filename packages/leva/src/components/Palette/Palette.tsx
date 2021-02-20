@@ -1,7 +1,7 @@
 import React from 'react'
 import { LevaInputProps } from '../../types'
 import { useInputContext } from '../../context'
-import { useOverlay } from '../../utils/hooks'
+import { usePopin } from '../../utils/hooks'
 import { Label, Portal, Overlay, Row } from '../UI'
 
 import { css } from '../../styles'
@@ -28,7 +28,7 @@ const row = css({
 
 export function PaletteComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<LevaInputProps<string>>()
-  const { popinRef, wrapperRef, shown, show, hide } = useOverlay(400)
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin(400)
 
   return (
     <Row input>
