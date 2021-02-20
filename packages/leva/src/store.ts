@@ -11,7 +11,7 @@ export type StoreType = {
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[], removeOnDispose?: boolean) => void
   dispose: () => void
-  getVisiblePaths: (data: Data) => string[]
+  getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data) => void
@@ -46,7 +46,8 @@ export const Store = (function (this: StoreType) {
    *
    * @param data
    */
-  this.getVisiblePaths = (data) => {
+  this.getVisiblePaths = () => {
+    const data = this.getData()
     // identifies hiddenFolders
     const hiddenFolders: string[] = []
     Object.entries(folders).forEach(([path, settings]) => {
