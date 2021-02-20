@@ -40,6 +40,7 @@ export const ImagePreview = styled('div', {
   width: '$rowHeight',
   $inputStyle: '',
   backgroundSize: 'cover',
+  backgroundPosition: 'center',
   variants: {
     hasImage: {
       true: { cursor: 'pointer', $hover: '', $active: '' },
@@ -56,6 +57,7 @@ export const ImageLargePreview = styled('div', {
   pointerEvents: 'none',
   $inputStyle: '',
   backgroundSize: 'cover',
+  backgroundPosition: 'center',
 })
 
 export const Instructions = styled('div', {
