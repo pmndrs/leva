@@ -22,9 +22,6 @@ export const PickerContainer = styled('div', {
 })
 
 export const PickerWrapper = styled('div', {
-  position: 'fixed',
-  left: 0,
-  zIndex: 10000,
   width: '$colorPickerWidth',
   height: '$colorPickerHeight',
 
