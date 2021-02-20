@@ -12,13 +12,15 @@ type ColorInput = InputWithSettings<Color>
 
 const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 
+export const validateColor = () => (value: any) => {
+  const c = tc(value)
+  const format = c.getFormat()
+  // we don't want to handle "rgba(0,0,0,1)"
+  return FORMATS.includes(format) && !(format === 'rgb' && typeof value === 'string')
+}
+
 v8n.extend({
-  color: () => (value: any) => {
-    const c = tc(value)
-    const format = c.getFormat()
-    // we don't want to handle "rgba(0,0,0,1)"
-    return FORMATS.includes(format) && !(format === 'rgb' && typeof value === 'string')
-  },
+  color: validateColor,
 })
 // prettier-ignore
 // @ts-expect-error

@@ -8,12 +8,14 @@ import vector3d from './components/Vector3d'
 import vector2d from './components/Vector2d'
 import image from './components/Image'
 import interval from './components/Interval'
+import palette from './components/Palette'
 
 /**
  * Register all the primitive inputs.
  * @note could potentially be done elsewhere.
  */
 
+register('PALETTE', palette)
 register('SELECT', select)
 register('IMAGE', image)
 register('NUMBER', number)
