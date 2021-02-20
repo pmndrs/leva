@@ -5,14 +5,14 @@ import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview
 import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
 import { useTh } from '../../styles'
-import { useOverlay } from '../../utils/hooks'
+import { usePopin } from '../../utils/hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
 export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
   const imagePreviewHeight = useTh('sizes', 'imagePreviewHeight')
-  const { popinRef, wrapperRef, shown, show, hide } = useOverlay(imagePreviewHeight)
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin(imagePreviewHeight)
 
   const onDrop = useCallback(
     (acceptedFiles) => {

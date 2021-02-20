@@ -8,7 +8,7 @@ import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { useTh } from '../../styles'
-import { useOverlay } from '../../utils/hooks'
+import { usePopin } from '../../utils/hooks'
 
 type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
@@ -20,7 +20,7 @@ export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
 
   const colorPickerHeight = useTh('sizes', 'colorPickerHeight')
-  const { popinRef, wrapperRef, shown, show, hide } = useOverlay(colorPickerHeight)
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin(colorPickerHeight)
 
   // timeout before colorpicker close
   const timer = useRef(0)
