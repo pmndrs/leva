@@ -19,17 +19,9 @@ export const PickerContainer = styled('div', {
   gridTemplateColumns: '$sizes$rowHeight auto',
   columnGap: '$colGap',
   alignItems: 'center',
-  '& > span': {
-    fontSize: '0.95em',
-    opacity: 0.8,
-    padding: '0 $md',
-  },
 })
 
 export const PickerWrapper = styled('div', {
-  position: 'fixed',
-  left: 0,
-  zIndex: 10000,
   width: '$colorPickerWidth',
   height: '$colorPickerHeight',
 

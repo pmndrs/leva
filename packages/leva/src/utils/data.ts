@@ -1,5 +1,4 @@
 import { pick } from '.'
-import { warn, LevaErrors } from './log'
 
 import { Data } from '../types'
 
@@ -11,7 +10,7 @@ import { Data } from '../types'
  * @param paths
  * @param shouldWarn
  */
-export function getValuesForPaths(data: Data, paths: string[], shouldWarn: boolean) {
+export function getValuesForPaths(data: Data, paths: string[]) {
   return Object.entries(pick(data, paths)).reduce(
     // Typescript complaints that SpecialInput type doesn't have a value key.
     // But getValuesForPath is only called from paths that are inputs,
@@ -19,11 +18,6 @@ export function getValuesForPaths(data: Data, paths: string[], shouldWarn: boole
 
     // @ts-expect-error
     (acc, [path, { value, key }]) => {
-      // if a key already exists in the accumulator, prompt an error.
-      if (acc[key] !== undefined) {
-        if (shouldWarn) warn(LevaErrors.DUPLICATE_KEYS, key, path)
-        return acc
-      }
       acc[key] = value
       return acc
     },

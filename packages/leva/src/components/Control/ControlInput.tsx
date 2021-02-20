@@ -6,6 +6,7 @@ import { useValue } from '../../utils/hooks'
 type ControlInputProps<V, Settings extends object> = {
   type: string
   label: string
+  valueKey: string
   value: V
   settings: Settings
   setValue: (value: any) => void
@@ -14,6 +15,7 @@ type ControlInputProps<V, Settings extends object> = {
 export function ControlInput<V, Settings extends object>({
   type,
   label,
+  valueKey,
   value,
   settings,
   setValue,
@@ -22,7 +24,7 @@ export function ControlInput<V, Settings extends object>({
   const Input = Plugins[type].component
 
   return (
-    <InputContext.Provider value={{ label, displayValue, value, onChange, onUpdate, settings }}>
+    <InputContext.Provider value={{ key: valueKey, label, displayValue, value, onChange, onUpdate, settings }}>
       <Input />
     </InputContext.Provider>
   )

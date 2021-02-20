@@ -17,7 +17,7 @@ export function useValuesForPath(store: StoreType, paths: string[], initialData:
 
   const valuesForPath = store.useStore((s) => {
     const data = init.current ? initialData : s.data
-    return getValuesForPaths(data, paths, init.current)
+    return getValuesForPaths(data, paths)
   }, shallow)
 
   init.current = false

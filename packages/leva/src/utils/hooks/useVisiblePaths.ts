@@ -6,11 +6,11 @@ import shallow from 'zustand/shallow'
  * Hook used by the root component to get all visible inputs.
  */
 export const useVisiblePaths = (store: StoreType) => {
-  const [state, setState] = useState(store.getVisiblePaths(store.getData()))
+  const [state, setState] = useState(store.getVisiblePaths())
 
   useEffect(() => {
-    setState(store.getVisiblePaths(store.getData()))
-    const unsub = store.useStore.subscribe(setState, (s) => store.getVisiblePaths(s.data), shallow)
+    setState(store.getVisiblePaths())
+    const unsub = store.useStore.subscribe(setState, store.getVisiblePaths, shallow)
     return () => unsub()
   }, [store])
 
