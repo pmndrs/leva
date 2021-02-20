@@ -20,6 +20,8 @@
 
 <br />
 
+## 🚧🚧 This repo is under heavy development 🚧🚧
+
 ## Features
 
 - ⭐️ Beautiful by default

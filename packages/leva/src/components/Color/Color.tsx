@@ -1,4 +1,4 @@
-import React, { useRef, useState, useLayoutEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 import { Color, InternalColorSettings } from './color-plugin'
@@ -8,6 +8,7 @@ import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { useTh } from '../../styles'
+import { usePopin } from '../../utils/hooks'
 
 type ColorProps = LevaInputProps<Color, InternalColorSettings>
 
@@ -18,14 +19,12 @@ function convertToRgb(value: Color, format: string) {
 export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
 
-  const pickerRef = useRef<HTMLDivElement>(null)
-  const wrapperRef = useRef<HTMLDivElement>(null)
   const colorPickerHeight = useTh('sizes', 'colorPickerHeight')
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin(colorPickerHeight)
 
   // timeout before colorpicker close
   const timer = useRef(0)
 
-  const [pickerDirection, setPickerDirection] = useState<'up' | 'down' | false>(false)
   /**
    * @note we're using initialRgb instead of binding
    * const rgb = format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
@@ -36,43 +35,27 @@ export function ColorComponent() {
   const ColorPicker = hasAlpha ? RgbaColorPicker : RgbColorPicker
 
   const showPicker = () => {
-    const { bottom } = pickerRef.current!.getBoundingClientRect()
-    const direction = bottom + parseFloat(colorPickerHeight) > window.innerHeight - 40 ? 'up' : 'down'
     setInitialRgb(convertToRgb(value, format))
-    setPickerDirection(direction)
+    show()
   }
 
-  const hidePicker = () => {
-    setPickerDirection(false)
+  const hideAfterDelay = () => {
+    timer.current = window.setTimeout(hide, 500)
   }
-
-  const hidePickerAfterDelay = () => {
-    timer.current = window.setTimeout(hidePicker, 500)
-  }
-
-  useLayoutEffect(() => {
-    if (pickerDirection) {
-      const bounds = pickerRef.current!.getBoundingClientRect()
-      wrapperRef.current!.style.left = bounds.left + 'px'
-      if (pickerDirection === 'down') wrapperRef.current!.style.top = bounds.bottom + 3 + 'px'
-      else wrapperRef.current!.style.bottom = window.innerHeight - bounds.top + 3 + 'px'
-    }
-    return () => window.clearTimeout(timer.current)
-  }, [pickerDirection])
 
   return (
     <Row input>
       <Label>{label}</Label>
-      <PickerContainer ref={pickerRef}>
-        <ColorPreview active={!!pickerDirection} onClick={() => showPicker()} style={{ background: displayValue }} />
+      <PickerContainer ref={popinRef}>
+        <ColorPreview active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
         <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
-        {!!pickerDirection && (
+        {shown && (
           <Portal>
-            <Overlay onPointerUp={() => hidePicker()} />
+            <Overlay onPointerUp={hide} />
             <PickerWrapper
               ref={wrapperRef}
               onMouseEnter={() => window.clearTimeout(timer.current)}
-              onMouseLeave={(e) => e.buttons === 0 && hidePickerAfterDelay()}>
+              onMouseLeave={(e) => e.buttons === 0 && hideAfterDelay()}>
               <ColorPicker color={initialRgb} onChange={onUpdate} />
             </PickerWrapper>
           </Portal>

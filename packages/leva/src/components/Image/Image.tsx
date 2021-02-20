@@ -1,19 +1,22 @@
 import React, { useCallback } from 'react'
-import { Label, Row } from '../UI'
+import { Label, Portal, Overlay, Row } from '../UI'
 import { useDropzone } from 'react-dropzone'
-import { DropZone, Preview, Instructions, Remove } from './StyledImage'
+import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
+import { useTh } from '../../styles'
+import { usePopin } from '../../utils/hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
 export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
+  const imagePreviewHeight = useTh('sizes', 'imagePreviewHeight')
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin(imagePreviewHeight)
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      if (!acceptedFiles.length) return
-      onUpdate(acceptedFiles[0])
+      if (acceptedFiles.length) onUpdate(acceptedFiles[0])
     },
     [onUpdate]
   )
@@ -32,17 +35,25 @@ export function ImageComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <DropZone {...(getRootProps({ isDragAccept }) as any)}>
-        <input {...getInputProps()} />
-        {value ? (
-          <Preview>
-            <img src={value} alt={`preview for ${label}`} />
-            <Remove onClick={clear} />
-          </Preview>
-        ) : (
-          <Instructions>{isDragAccept ? 'drop image here' : 'click to select'}</Instructions>
+      <ImageContainer ref={popinRef}>
+        <ImagePreview
+          hasImage={!!value}
+          onPointerDown={() => !!value && show()}
+          onPointerUp={hide}
+          style={{ backgroundImage: value ? `url(${value})` : 'none' }}
+        />
+        {shown && (
+          <Portal>
+            <Overlay onPointerUp={hide} style={{ cursor: 'pointer' }} />
+            <ImageLargePreview ref={wrapperRef} style={{ backgroundImage: `url(${value})` }} />
+          </Portal>
         )}
-      </DropZone>
+        <DropZone {...(getRootProps({ isDragAccept }) as any)}>
+          <input {...getInputProps()} />
+          <Instructions>{isDragAccept ? 'drop image' : 'click or drop'}</Instructions>
+        </DropZone>
+        <Remove onClick={clear} disabled={!value} />
+      </ImageContainer>
     </Row>
   )
 }

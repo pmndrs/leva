@@ -11,7 +11,7 @@ export type StoreType = {
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[], removeOnDispose?: boolean) => void
   dispose: () => void
-  getVisiblePaths: (data: Data) => string[]
+  getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data) => void
@@ -46,23 +46,39 @@ export const Store = (function (this: StoreType) {
    *
    * @param data
    */
-  this.getVisiblePaths = (data) => {
+  this.getVisiblePaths = () => {
+    const data = this.getData()
+    const paths = Object.keys(data)
     // identifies hiddenFolders
     const hiddenFolders: string[] = []
     Object.entries(folders).forEach(([path, settings]) => {
-      if (settings.render && !settings.render(this.get)) hiddenFolders.push(path + '.')
+      if (
+        // the folder settings have a render function
+        settings.render &&
+        // and the folder path matches a data path
+        // (this can happen on first mount and could probably be solved if folder settings
+        // were set together with the store data. In fact, the store data is set in useEffect
+        // while folders settings are set in useMemo).
+        paths.some((p) => p.indexOf(path) === 0) &&
+        // the folder settings is supposed to be hidden
+        !settings.render(this.get)
+      )
+        // then folder is hidden
+        hiddenFolders.push(path + '.')
     })
 
     const visiblePaths: string[] = []
     orderedPaths.forEach((path: any) => {
       if (
+        path in data &&
         // if input is mounted
-        data[path]?.count > 0 &&
+        data[path].count > 0 &&
         // if it's not included in a hidden folder
         hiddenFolders.every((p) => path.indexOf(p) === -1) &&
         // if its render functions doesn't exists or returns true
         (!data[path].render || data[path].render!(this.get))
       )
+        // then the input path is visible
         visiblePaths.push(path)
     })
 
@@ -173,7 +189,7 @@ export const Store = (function (this: StoreType) {
   this.get = (path) => {
     try {
       //@ts-expect-error
-      return store.getState().data[path].value
+      return this.getData()[path].value
     } catch (e) {
       warn(LevaErrors.PATH_DOESNT_EXIST, path)
     }
@@ -223,7 +239,10 @@ export const Store = (function (this: StoreType) {
           data[newPath].key = path
           data[newPath].label = _label ?? path
           if (typeof _render === 'function') data[newPath].render = _render
-          mappedPaths[path] = newPath
+          if (path in mappedPaths) {
+            // if a key already exists, prompt an error.
+            warn(LevaErrors.DUPLICATE_KEYS, path, newPath, mappedPaths[path])
+          } else mappedPaths[path] = newPath
         }
       }
     })

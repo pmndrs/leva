@@ -13,8 +13,8 @@ const ErrorList = {
     `you've passed a ${type} input at path "${path}" but we don't support it yet.`,
   ],
   [LevaErrors.UNKNOWN_INPUT]: (path: string, value: unknown) => [`input at path "${path}" is not recognized.`, value],
-  [LevaErrors.DUPLICATE_KEYS]: (key: string, path: string) => [
-    `Key ${key} already exists at path "${path}" in your hook. Even nested keys need to be unique.`,
+  [LevaErrors.DUPLICATE_KEYS]: (key: string, path: string, prevPath: string) => [
+    `Key "${key}" already exists at path "${path}" in your hook. It's already used by path "${prevPath}". Even nested keys need to be unique.`,
   ],
   [LevaErrors.ALREADY_REGISTERED_TYPE]: (type: string) => [
     `Type ${type} has already been registered. You can't register a component with the same type.`,

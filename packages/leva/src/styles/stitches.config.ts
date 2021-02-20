@@ -39,8 +39,10 @@ export const getDefaultTheme = () => ({
     checkboxSize: '16px',
     joystickWidth: '100px',
     joystickHeight: '100px',
-    colorPickerWidth: '160px',
+    colorPickerWidth: '$controlWidth',
     colorPickerHeight: '100px',
+    imagePreviewWidth: '$controlWidth',
+    imagePreviewHeight: '100px',
     monitorHeight: '60px',
   },
   shadows: {

@@ -1,20 +1,28 @@
 import { styled } from '../../styles'
 
+export const ImageContainer = styled('div', {
+  position: 'relative',
+  display: 'grid',
+  gridTemplateColumns: '$sizes$rowHeight auto 20px',
+  columnGap: '$colGap',
+  alignItems: 'center',
+})
+
 export const DropZone = styled('div', {
   $flexCenter: '',
-  textAlign: 'center',
   overflow: 'hidden',
-  minHeight: '$rowHeight',
+  height: '$rowHeight',
   background: '$elevation3',
+  textAlign: 'center',
   color: 'inherit',
   borderRadius: '$sm',
   outline: 'none',
   userSelect: 'none',
   cursor: 'pointer',
+  $inputStyle: '',
   $hover: '',
   $focusWithin: '',
   $active: '$accent1 $elevation1',
-  $inputStyle: '',
   variants: {
     isDragAccept: {
       true: {
@@ -25,15 +33,31 @@ export const DropZone = styled('div', {
   },
 })
 
-export const Preview = styled('div', {
-  position: 'relative',
-  width: '100%',
-  '> img': {
-    display: 'block',
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
+export const ImagePreview = styled('div', {
+  boxSizing: 'border-box',
+  borderRadius: '$sm',
+  height: '$rowHeight',
+  width: '$rowHeight',
+  $inputStyle: '',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  variants: {
+    hasImage: {
+      true: { cursor: 'pointer', $hover: '', $active: '' },
+    },
   },
+})
+
+export const ImageLargePreview = styled('div', {
+  $flexCenter: '',
+  width: '$imagePreviewWidth',
+  height: '$imagePreviewHeight',
+  borderRadius: '$sm',
+  boxShadow: '$level2',
+  pointerEvents: 'none',
+  $inputStyle: '',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
 })
 
 export const Instructions = styled('div', {
@@ -43,16 +67,18 @@ export const Instructions = styled('div', {
 })
 
 export const Remove = styled('div', {
-  position: 'absolute',
   $flexCenter: '',
   top: '0',
   right: '0',
-  margin: '$sm',
-  height: 20,
-  width: 20,
-  borderRadius: '$sm',
-  backgroundColor: '$elevation3',
-  $hover: 'none $accent1',
+  marginRight: '$sm',
+  height: '100%',
+  cursor: 'pointer',
+
+  variants: {
+    disabled: {
+      true: { color: '$elevation3', cursor: 'default' },
+    },
+  },
 
   '&::after,&::before': {
     content: '""',
@@ -60,7 +86,7 @@ export const Remove = styled('div', {
     height: 2,
     width: 10,
     borderRadius: 1,
-    backgroundColor: '$highlight3',
+    backgroundColor: 'currentColor',
   },
 
   '&::after': { transform: 'rotate(45deg)' },
