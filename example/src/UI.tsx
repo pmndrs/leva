@@ -5,7 +5,7 @@ import { useDrag, addV } from 'react-use-gesture'
 import './ui.css'
 
 function Box({ index, selected, setSelect }) {
-  const [{ position, size, color, fillColor, fillMode, fillImage, width }, store, set] = usePanel({
+  const [{ position, size, color, fillColor, fillMode, fillImage, width }, { store, set }] = usePanel({
     position: {
       value: [window.innerWidth / 2 - 150, window.innerHeight / 2],
       step: 1,
@@ -100,7 +100,7 @@ function Box({ index, selected, setSelect }) {
 }
 
 export default function App() {
-  const [boxes, setBoxes] = React.useState([])
+  const [boxes, setBoxes] = React.useState<number[]>([])
   const [[selection, store], setSelection] = React.useState([-1, null])
   React.useEffect(() => {
     function deleteSelection(e) {

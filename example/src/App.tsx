@@ -29,10 +29,8 @@ function Comp1() {
   }, [])
 
   const t = useControls({
-    folder5: folder({
-      boolean: false,
-    }),
     firstsuperlonglabel: { value: 10, step: 0.25 },
+    // folder5: folder({ boolean: false }),
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
@@ -46,7 +44,7 @@ function Comp1() {
         color2: '#fff',
         color: {
           value: '#ff005b',
-          // render: (get) => get('boolean'),
+          render: (get) => get('boolean'),
         },
         folder3: folder(
           {
@@ -65,10 +63,10 @@ function Comp1() {
       { render: (get) => get('boolean') }
     ),
 
-    colorObj: { r: 1, g: 2, b: 3 },
+    colorObj: { r: 1, g: 2, b: 3, a: 1 },
   })
 
-  // console.log(t.colorObj)
+  console.log(t.colorObj)
   // console.log(t.pos2d)
   // console.log(t.pos2dArr)
   // console.log(t.pos3d)
@@ -123,7 +121,7 @@ export function App1() {
   // useControls({ color: '#ffffff' })
   return (
     <>
-      <Leva theme={{ colors: { accent1: 'red' } }} oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
+      <Leva oneLineLabels={oneLineLabels} hideTitleBar={hideTitleBar} />
       <div style={{ display: 'flex' }}>
         {/* <div style={{ width: '50%' }}>{c2 && <Scene3D />}</div> */}
         <div>
@@ -144,8 +142,8 @@ function MyComponent() {
 }
 
 export function App2() {
-  const [, store1] = usePanel(() => ({ color: '#fff' }))
-  const [, store2] = usePanel(() => ({ boolean: true }))
+  const [, { store: store1 }] = usePanel(() => ({ color: '#fff' }))
+  const [, { store: store2 }] = usePanel(() => ({ boolean: true }))
   return (
     <div
       style={{
@@ -165,7 +163,7 @@ export function App2() {
 }
 
 export function App3() {
-  const [colors, colorStore] = usePanel(() => ({
+  const [colors, { store: colorStore }] = usePanel(() => ({
     colors: folder({
       elevation1: '#292D39',
       elevation2: '#181C20',
@@ -179,7 +177,7 @@ export function App3() {
     }),
   }))
 
-  const [radii, radiiStore] = usePanel(() => ({
+  const [radii, { store: radiiStore }] = usePanel(() => ({
     radii: folder({
       xs: '2px',
       sm: '3px',
@@ -187,7 +185,7 @@ export function App3() {
     }),
   }))
 
-  const [space, spaceStore] = usePanel(() => ({
+  const [space, { store: spaceStore }] = usePanel(() => ({
     space: folder({
       sm: '6px',
       md: '10px',
@@ -196,13 +194,13 @@ export function App3() {
     }),
   }))
 
-  const [fontSizes, fontSizesStore] = usePanel(() => ({
+  const [fontSizes, { store: fontSizesStore }] = usePanel(() => ({
     fontSizes: folder({
       root: '11px',
     }),
   }))
 
-  const [sizes, sizesStore] = usePanel(() => ({
+  const [sizes, { store: sizesStore }] = usePanel(() => ({
     sizes: folder({
       rootWidth: '280px',
       controlWidth: '160px',
@@ -219,7 +217,7 @@ export function App3() {
     }),
   }))
 
-  const [borderWidths, borderStore] = usePanel(() => ({
+  const [borderWidths, { store: borderStore }] = usePanel(() => ({
     borderWidths: folder({
       root: '0px',
       input: '1px',
@@ -230,7 +228,7 @@ export function App3() {
     }),
   }))
 
-  const [fontWeights, weightsStore] = usePanel(() => ({
+  const [fontWeights, { store: weightsStore }] = usePanel(() => ({
     fontWeights: folder({
       label: { value: 'normal', options: ['bold', 'light'] },
       folder: { value: 'normal', options: ['bold', 'light'] },

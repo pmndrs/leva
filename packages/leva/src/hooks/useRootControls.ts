@@ -7,7 +7,13 @@ import { FolderSettings, Schema, SchemaToValues } from '../types'
 // export type HookSettings = { show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
-type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
+type FunctionReturnType<S extends Schema> = [
+  SchemaToValues<S>,
+  {
+    store: StoreType
+    set: (value: Partial<SchemaToValues<S>>) => void
+  }
+]
 
 export type HookReturnType<F extends SchemaOrFn, ReturnStore = false> = F extends SchemaOrFn<infer S>
   ? F extends Function
@@ -114,6 +120,6 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
   }, [settings.show, store, paths, initialData])
   */
 
-  if (schemaIsFunction || returnStore) return [values, store, set] as any
+  if (schemaIsFunction || returnStore) return [values, { store, set }] as any
   return values as any
 }
