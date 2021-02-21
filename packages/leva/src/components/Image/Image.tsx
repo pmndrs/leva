@@ -4,15 +4,13 @@ import { useDropzone } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
-import { useTh } from '../../styles'
 import { usePopin } from '../../utils/hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 
 export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
-  const imagePreviewHeight = useTh('sizes', 'imagePreviewHeight')
-  const { popinRef, wrapperRef, shown, show, hide } = usePopin(imagePreviewHeight)
+  const { popinRef, wrapperRef, shown, show, hide } = usePopin()
 
   const onDrop = useCallback(
     (acceptedFiles) => {
