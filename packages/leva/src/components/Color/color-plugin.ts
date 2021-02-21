@@ -19,9 +19,7 @@ export const validateColor = () => (value: any) => {
   return FORMATS.includes(format) && !(format === 'rgb' && typeof value === 'string')
 }
 
-v8n.extend({
-  color: validateColor,
-})
+v8n.extend({ color: validateColor })
 // prettier-ignore
 // @ts-expect-error
 export const schema = (o: any) => v8n().color().test(o)

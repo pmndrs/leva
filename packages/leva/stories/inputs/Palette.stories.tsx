@@ -25,7 +25,8 @@ const Template: Story<any> = (args) => {
 }
 
 export const Simple = Template.bind({})
+
 Simple.args = {
-  value: colors[0],
+  value: ['#69d2e7', '#a7dbd8', '#e0e4cc', '#f38630', '#fa6900'],
   options: colors.slice(0, 5),
 }

@@ -65,6 +65,10 @@ type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
 
 export type ColorObjectInput = { r: number; g: number; b: number; a?: number }
 
+export type Palette = string[]
+export type PaletteSettings = { options: Palette[] }
+export type PaletteInput = InputWithSettings<Palette, PaletteSettings>
+
 type BooleanInput = boolean
 
 type StringInput = string
@@ -113,6 +117,8 @@ type PrimitiveToValue<S> = S extends CustomInput<infer I>
   ? { r: number; g: number; b: number }
   : S extends ImageInput
   ? string | undefined
+  : S extends PaletteInput
+  ? string[]
   : S extends SelectWithValueInput<infer T, infer K>
   ? T | K
   : S extends SelectWithoutValueInput<infer T>
