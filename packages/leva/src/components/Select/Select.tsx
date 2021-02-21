@@ -11,8 +11,6 @@ export function SelectComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<SelectProps>()
   const { keys, values } = settings!
 
-  console.log(displayValue)
-  
   return (
     <Row input>
       <Label>{label}</Label>
