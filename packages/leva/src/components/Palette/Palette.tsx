@@ -9,22 +9,33 @@ import { css } from '../../styles'
 const container = css({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  position: 'relative'
+  gap: 3,
+  width: '$controlWidth',
+  position: 'relative',
 })
 
 const row = css({
   display: 'grid',
-  gridTemplateRows: "1fr",
-  gridTemplateColumns: "repeat(auto-fit, minmax(1px, 1fr))",
-  height: "$rowHeight",
+  gridTemplateRows: '1fr',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(1px, 1fr))',
+  height: '$rowHeight',
   borderRadius: '$sm',
   overflow: 'hidden',
   cursor: 'pointer',
-  position: "relative",
-  $inputStyle: true,
-  $hover: true
+  position: 'relative',
+  $inputStyle: '',
+  $hover: '',
 })
+
+function PaletteRow({ palette, ...props }) {
+  return (
+    <div className={row()} {...props}>
+      {palette.map((col: string, i) => (
+        <div key={i} style={{ backgroundColor: col }} />
+      ))}
+    </div>
+  )
+}
 
 export function PaletteComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<LevaInputProps<string>>()
@@ -33,33 +44,26 @@ export function PaletteComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-
-      <div>
-        <div className={row()} onClick={show} ref={popinRef}>
-          {settings.options[displayValue].map((col: string) => (
-            <div style={{ backgroundColor: col }} />
-          ))}
-        </div>
+      <div ref={popinRef}>
+        <PaletteRow onClick={show} palette={settings.options[displayValue]} />
 
         {shown && (
           <Portal>
             <Overlay onPointerUp={hide} style={{ cursor: 'pointer' }} />
-
             <div className={container()} ref={wrapperRef}>
-              {settings.options.map((palette, i) => {
-                return (
-                  <div className={row()} onClick={() => {
-                    hide()
-                    onUpdate(settings.options[i])
-                  }}>
-                    {palette.map((col: string) => (
-                      <div style={{ backgroundColor: col }} />
-                    ))}
-                  </div>
-                )
-              })}
+              {settings.options.map((palette, i) =>
+                i !== displayValue ? (
+                  <PaletteRow
+                    key={i}
+                    onClick={() => {
+                      hide()
+                      onUpdate(palette)
+                    }}
+                    palette={palette}
+                  />
+                ) : null
+              )}
             </div>
-
           </Portal>
         )}
       </div>
