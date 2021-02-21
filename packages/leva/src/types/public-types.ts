@@ -106,8 +106,6 @@ type ColorObjectRGB = { r: number; g: number; b: number }
 
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
   ? I
-  : S extends { value: infer G }
-  ? PrimitiveToValue<G>
   : S extends ColorObjectRGBA
   ? { r: number; g: number; b: number; a: number }
   : S extends ColorObjectRGB
@@ -120,6 +118,8 @@ type PrimitiveToValue<S> = S extends CustomInput<infer I>
   ? T
   : S extends IntervalInput
   ? [number, number]
+  : S extends { value: infer G }
+  ? PrimitiveToValue<G>
   : S extends Vector
   ? S
   : S extends Vector3dArray
