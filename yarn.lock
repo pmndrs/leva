@@ -104,7 +104,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-annotate-as-pure@npm:^7.0.0, @babel/helper-annotate-as-pure@npm:^7.10.4, @babel/helper-annotate-as-pure@npm:^7.12.13":
+"@babel/helper-annotate-as-pure@npm:^7.10.4, @babel/helper-annotate-as-pure@npm:^7.12.13":
   version: 7.12.13
   resolution: "@babel/helper-annotate-as-pure@npm:7.12.13"
   dependencies:
@@ -1690,7 +1690,6 @@ __metadata:
     "@typescript-eslint/parser": ^4.15.0
     babel-eslint: ^10.0.0
     babel-loader: ^8.2.2
-    babel-plugin-styled-components: ^1.12.0
     eslint: ^7.20.0
     eslint-config-react-app: ^6.0.0
     eslint-plugin-flowtype: ^5.2.0
@@ -4532,20 +4531,6 @@ __metadata:
     lodash: ^4.17.15
     react-docgen: ^5.0.0
   checksum: e375376f2a4f1cfeb28137b970d1b3d5feba22019ecd9226ef50d72af1a3170434922950799aad62b9b77b99d1da16b1eadfaf4362b95807a8fe42036d7c32f2
-  languageName: node
-  linkType: hard
-
-"babel-plugin-styled-components@npm:^1.12.0":
-  version: 1.12.0
-  resolution: "babel-plugin-styled-components@npm:1.12.0"
-  dependencies:
-    "@babel/helper-annotate-as-pure": ^7.0.0
-    "@babel/helper-module-imports": ^7.0.0
-    babel-plugin-syntax-jsx: ^6.18.0
-    lodash: ^4.17.11
-  peerDependencies:
-    styled-components: ">= 2"
-  checksum: 6490bd07b41dd8163c85c52cb4de18793c1bbd346c07cf2bca19a433d36e2bc9174545de2ec490927b114dc497f215295518af95511d825696c4309590e8b79b
   languageName: node
   linkType: hard
 
