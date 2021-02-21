@@ -36,11 +36,20 @@ function Comp1() {
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
     // wrong: { something: 'else' },
     image: { image: undefined },
-    select: { options: ['x', 'y', ['x', 'y']] },
+    select: { value: 'x', options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [10, 15] },
     boolean: true,
     refMonitor: monitor(ref, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
+    palette: {
+      value: ['#69d2e7', '#a7dbd8', '#e0e4cc', '#f38630', '#fa6900'],
+      options: [
+        ['#fe4365', '#fc9d9a', '#f9cdad', '#c8c8a9', '#83af9b'],
+        ['#ecd078', '#d95b43', '#c02942', '#542437', '#53777a'],
+        ['#556270', '#4ecdc4', '#c7f464', '#ff6b6b', '#c44d58'],
+        ['#774f38', '#e08e79', '#f1d4af', '#ece5ce', '#c5e0dc'],
+      ],
+    },
     folder2: folder(
       {
         color2: '#fff',
@@ -76,6 +85,8 @@ function Comp1() {
   // console.log(t.spring)
   // console.log(t.spring)
   // console.log(t.myPlugin)
+  // console.log(t.select)
+  // console.log(t.palette)
 
   return (
     <div>
