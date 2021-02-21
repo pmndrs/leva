@@ -18,7 +18,7 @@
     ]
   },
   "dependencies": {
-    "@stitches/react": "^0.1.0-canary.5",
+    "@stitches/react": "^0.1.0-canary.12",
     "@welldone-software/why-did-you-render": "^6.0.5",
     "clipboard-polyfill": "^3.0.2",
     "dequal": "^2.0.2",

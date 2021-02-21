@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { StitchesComponent } from '@stitches/react'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
@@ -10,7 +9,7 @@ type ValueInputProps = {
   onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
-} & Partial<StitchesComponent<typeof StyledInput>>
+} & React.ComponentProps<any>
 
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
   const update = useCallback(
