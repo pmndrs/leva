@@ -1,30 +1,29 @@
 import { useState, useRef, useLayoutEffect, useCallback } from 'react'
 import { parseNumber } from '../math'
 
-export function usePopin(height: number | string, margin = 3) {
+export function usePopin(margin = 3) {
   const popinRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const [popinDirection, setPopinDirection] = useState<'up' | 'down' | false>(false)
+  const [shown, setShow] = useState(false)
 
-  const show = useCallback(() => {
-    const { bottom } = popinRef.current!.getBoundingClientRect()
-    const direction = bottom + parseNumber(height) > window.innerHeight - 40 ? 'up' : 'down'
-    setPopinDirection(direction)
-  }, [height])
-
-  const hide = useCallback(() => setPopinDirection(false), [])
+  const show = useCallback(() => setShow(true), [])
+  const hide = useCallback(() => setShow(false), [])
 
   useLayoutEffect(() => {
-    if (popinDirection) {
-      const bounds = popinRef.current!.getBoundingClientRect()
+    if (shown) {
+      const { bottom, top, left } = popinRef.current!.getBoundingClientRect()
+      const { height } = wrapperRef.current!.getBoundingClientRect()
+      const direction = bottom + parseNumber(height) > window.innerHeight - 40 ? 'up' : 'down'
+
       wrapperRef.current!.style.position = 'fixed'
       wrapperRef.current!.style.zIndex = '10000'
-      wrapperRef.current!.style.left = bounds.left + 'px'
-      if (popinDirection === 'down') wrapperRef.current!.style.top = bounds.bottom + margin + 'px'
-      else wrapperRef.current!.style.bottom = window.innerHeight - bounds.top + margin + 'px'
-    }
-  }, [margin, popinDirection])
+      wrapperRef.current!.style.left = left + 'px'
 
-  return { popinRef, wrapperRef, shown: !!popinDirection, show, hide }
+      if (direction === 'down') wrapperRef.current!.style.top = bottom + margin + 'px'
+      else wrapperRef.current!.style.bottom = window.innerHeight - top + margin + 'px'
+    }
+  }, [margin, shown])
+
+  return { popinRef, wrapperRef, shown, show, hide }
 }
