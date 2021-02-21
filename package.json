@@ -14,7 +14,7 @@
   "scripts": {
     "postinstall": "preconstruct dev",
     "build": "preconstruct build",
-    "release": "preconstruct build && yarn publish:packages",
+    "release": "preconstruct build && yarn workspaces run publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
