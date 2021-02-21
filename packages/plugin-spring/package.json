@@ -5,9 +5,9 @@
   "module": "dist/leva-ui-plugin-spring.esm.js",
   "license": "MIT",
   "peerDependencies": {
-    "react-dom": ">=16.8.0",
+    "leva": ">=1.0.0",
     "react": ">=16.8.0",
-    "leva": ">=1.0.0"
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "react-spring": "^9.0.0-rc.3"
