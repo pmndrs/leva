@@ -1,3 +1,4 @@
 {
-  "main": "dist/leva-utilities.cjs.js"
+  "main": "dist/leva-utilities.cjs.js",
+  "module": "dist/leva-utilities.esm.js"
 }

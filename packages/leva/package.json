@@ -1,7 +1,8 @@
 {
   "name": "leva",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "dist/leva.cjs.js",
+  "module": "dist/leva.esm.js",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
