@@ -45,11 +45,11 @@ function parseArgs(
   const schemaIsFunction = typeof schema === 'function'
 
   return {
-    schema: typeof schema === 'function' ? schema() : schema,
+    schemaIsFunction,
+    schema: schemaIsFunction ? (schema as Function)() : schema,
     name,
     folderSettings,
     deps: deps || [],
-    schemaIsFunction,
   }
 }
 
