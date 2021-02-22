@@ -15,7 +15,8 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
+        uses: cypress-io/github-action@v2
+        install-command: yarn --immutable-cache --silent
 
       # - name: Lint
       #   run: yarn lint
