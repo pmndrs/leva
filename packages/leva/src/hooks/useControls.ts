@@ -1,5 +1,5 @@
 import { globalStore } from '../store'
-import { useRootControls, SchemaOrFn } from './useRootControls'
+import { useRootControls, SchemaOrFn, DepsCompare } from './useRootControls'
 import { useRenderRoot } from '../components/Leva'
 import { FolderSettings, Schema } from '../types'
 
@@ -13,9 +13,9 @@ import { FolderSettings, Schema } from '../types'
  */
 export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrDeps?: F | React.DependencyList,
-  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
-  depsOrUndefined?: React.DependencyList
+  schemaOrDeps?: F | DepsCompare,
+  folderSettingsOrDeps?: FolderSettings | DepsCompare,
+  depsOrUndefined?: DepsCompare
 ) {
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()

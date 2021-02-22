@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
-import { useDeepMemo, useValuesForPath } from '../utils/hooks'
+import { useValuesForPath, useShallow } from '../utils/hooks'
 import { FolderSettings, Schema, SchemaToValues } from '../types'
 
 // export type HookSettings = { show?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
+export type DepsCompare = React.DependencyList | ((prev: Schema, next: Schema) => boolean)
 
 type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, StoreType, (value: Partial<SchemaToValues<S>>) => void]
 
@@ -19,14 +20,14 @@ export type HookReturnType<F extends SchemaOrFn, ReturnStore = false> = F extend
 
 function parseArgs(
   nameOrSchema: string | SchemaOrFn,
-  schemaOrDeps?: SchemaOrFn | React.DependencyList,
-  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
-  depsOrUndefined?: React.DependencyList
+  schemaOrDeps?: SchemaOrFn | DepsCompare,
+  folderSettingsOrDeps?: FolderSettings | DepsCompare,
+  depsOrUndefined?: DepsCompare
 ) {
   let schema: SchemaOrFn
   let name: string | undefined = undefined
   let folderSettings: FolderSettings | undefined
-  let deps: React.DependencyList | undefined
+  let deps: DepsCompare | undefined
 
   if (typeof nameOrSchema === 'string') {
     schema = schemaOrDeps as SchemaOrFn
@@ -38,15 +39,22 @@ function parseArgs(
     }
   } else {
     schema = nameOrSchema as SchemaOrFn
-    deps = schemaOrDeps as React.DependencyList
+    deps = schemaOrDeps as DepsCompare
   }
 
-  return { schema, name, folderSettings, deps: deps || [] }
+  const schemaIsFunction = typeof schema === 'function'
+
+  return {
+    schema: typeof schema === 'function' ? schema() : schema,
+    name,
+    folderSettings,
+    deps: deps || [],
+    schemaIsFunction,
+  }
 }
 
-function returnSchema(schema: SchemaOrFn, name?: string, folderSettings?: FolderSettings) {
-  const _schema = typeof schema === 'function' ? schema() : schema
-  return name ? { [name]: folder(_schema, folderSettings) } : _schema
+function returnSchema(schema: Schema, name?: string, folderSettings?: FolderSettings) {
+  return name ? { [name]: folder(schema, folderSettings) } : schema
 }
 
 /**
@@ -61,22 +69,20 @@ function returnSchema(schema: SchemaOrFn, name?: string, folderSettings?: Folder
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT extends boolean = false>(
   store: StoreType,
   nameOrSchema: string | F,
-  schemaOrDeps?: F | React.DependencyList,
-  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
-  depsOrUndefined?: React.DependencyList,
+  schemaOrDeps?: F | DepsCompare,
+  folderSettingsOrDeps?: FolderSettings | DepsCompare,
+  depsOrUndefined?: DepsCompare,
   returnStore?: RT
 ): HookReturnType<F, RT> {
   // We parse the args
-  const { name, schema, folderSettings, deps } = useMemo(
+  const { name, schema, folderSettings, deps, schemaIsFunction } = useMemo(
     () => parseArgs(nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined),
     [nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined]
   )
 
-  const schemaIsFunction = typeof schema === 'function'
-
   // Since the schema object would change on every render, we let the user have
   // control over when it should trigger a reset of the hook inputs.
-  const _schema = useDeepMemo(() => returnSchema(schema, name, folderSettings), deps)
+  const _schema = useShallow(schema, () => returnSchema(schema, name, folderSettings), deps)
   /**
    * Parses the schema to extract the inputs initial data.
    *
