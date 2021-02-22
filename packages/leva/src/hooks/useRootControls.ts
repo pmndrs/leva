@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useCallback } from 'react'
+import { useEffect, useMemo, useCallback } from 'react'
 import { StoreType } from '../store'
 import { folder } from '../helpers'
-import { useValuesForPath } from '../utils/hooks'
+import { useDeepMemo, useValuesForPath } from '../utils/hooks'
 import { FolderSettings, Schema, SchemaToValues } from '../types'
 
 // export type HookSettings = { show?: boolean }
@@ -19,41 +19,64 @@ export type HookReturnType<F extends SchemaOrFn, ReturnStore = false> = F extend
 
 function parseArgs(
   nameOrSchema: string | SchemaOrFn,
-  schemaOrUndefined?: SchemaOrFn
-  // settingsOrUndefined?: HookSettings
-): { schema: SchemaOrFn; name?: string } {
+  schemaOrDeps?: SchemaOrFn | React.DependencyList,
+  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
+  depsOrUndefined?: React.DependencyList
+) {
+  let schema: SchemaOrFn
+  let name: string | undefined = undefined
+  let folderSettings: FolderSettings | undefined
+  let deps: React.DependencyList | undefined
+
   if (typeof nameOrSchema === 'string') {
-    // const settings = { show: true, ...settingsOrUndefined }
-    return { schema: schemaOrUndefined as SchemaOrFn, name: nameOrSchema }
+    schema = schemaOrDeps as SchemaOrFn
+    name = nameOrSchema
+    if (Array.isArray(folderSettingsOrDeps)) deps = folderSettingsOrDeps
+    else {
+      folderSettings = folderSettingsOrDeps as FolderSettings
+      deps = depsOrUndefined
+    }
   } else {
-    // const settings = { show: true, ...schemaOrUndefined }
-    return { schema: nameOrSchema as SchemaOrFn }
+    schema = nameOrSchema as SchemaOrFn
+    deps = schemaOrDeps as React.DependencyList
   }
+
+  return { schema, name, folderSettings, deps: deps || [] }
 }
 
-// { [nameOrSchema]: folder(schema) }
-
-function returnSchema(schema: SchemaOrFn, name: string | undefined, folderSettingsOrUndefined?: FolderSettings) {
+function returnSchema(schema: SchemaOrFn, name?: string, folderSettings?: FolderSettings) {
   const _schema = typeof schema === 'function' ? schema() : schema
-  return name ? { [name]: folder(_schema, folderSettingsOrUndefined) } : _schema
+  return name ? { [name]: folder(_schema, folderSettings) } : _schema
 }
 
+/**
+ *
+ * @param store the store consumed by the hook
+ * @param nameOrSchema the schema or the name of the folder
+ * @param schemaOrDeps the schema (if a name was provided) or the dependencies
+ * @param folderSettingsOrDeps the folder settings (if a name was provided) or the deps
+ * @param depsOrUndefined // the deps (only if a name was provided)
+ * @param returnStore // will return [input, store, set] if true (used by usePanel)
+ */
 export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT extends boolean = false>(
   store: StoreType,
   nameOrSchema: string | F,
-  schemaOrUndefined?: F,
-  folderSettingsOrUndefined?: FolderSettings,
+  schemaOrDeps?: F | React.DependencyList,
+  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
+  depsOrUndefined?: React.DependencyList,
   returnStore?: RT
 ): HookReturnType<F, RT> {
-  // We compute this only once for performance reasons;
-  // This might cause problems if a state variable is used in the render
-  // function.
-  const { name, schema } = useMemo(() => parseArgs(nameOrSchema, schemaOrUndefined), [nameOrSchema, schemaOrUndefined])
+  // We parse the args
+  const { name, schema, folderSettings, deps } = useMemo(
+    () => parseArgs(nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined),
+    [nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined]
+  )
 
   const schemaIsFunction = typeof schema === 'function'
 
-  const _schema = useRef(returnSchema(schema, name, folderSettingsOrUndefined))
-
+  // Since the schema object would change on every render, we let the user have
+  // control over when it should trigger a reset of the hook inputs.
+  const _schema = useDeepMemo(() => returnSchema(schema, name, folderSettings), deps)
   /**
    * Parses the schema to extract the inputs initial data.
    *
@@ -62,7 +85,7 @@ export function useRootControls<S extends Schema, F extends SchemaOrFn<S>, RT ex
    * Note that getDataFromSchema recursively
    * parses the schema inside nested folder.
    */
-  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema.current), [store])
+  const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema), [store, _schema])
 
   // Extracts the paths from the initialData and ensures order of paths.
   const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])

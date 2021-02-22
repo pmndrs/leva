@@ -13,10 +13,11 @@ import { FolderSettings, Schema } from '../types'
  */
 export function useControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrUndefined?: F,
-  folderSettingsOrUndefined?: FolderSettings
+  schemaOrDeps?: F | React.DependencyList,
+  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
+  depsOrUndefined?: React.DependencyList
 ) {
   // Renders <Leva /> only if it's not manually rendered by the user
   useRenderRoot()
-  return useRootControls(globalStore, nameOrSchema, schemaOrUndefined, folderSettingsOrUndefined)
+  return useRootControls(globalStore, nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined)
 }
