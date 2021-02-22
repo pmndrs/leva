@@ -40,7 +40,7 @@ export function ImageComponent() {
           onPointerUp={hide}
           style={{ backgroundImage: value ? `url(${value})` : 'none' }}
         />
-        {shown && (
+        {shown && !!value && (
           <Portal>
             <Overlay onPointerUp={hide} style={{ cursor: 'pointer' }} />
             <ImageLargePreview ref={wrapperRef} style={{ backgroundImage: `url(${value})` }} />

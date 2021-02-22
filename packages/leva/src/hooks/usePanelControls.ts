@@ -8,10 +8,11 @@ import { FolderSettings, Schema } from '../types'
  */
 export function usePanelControls<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrUndefined?: F,
-  folderSettingsOrUndefined?: FolderSettings
+  schemaOrDeps?: F | React.DependencyList,
+  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
+  depsOrUndefined?: React.DependencyList
 ) {
   const store = useStoreContext()
   // the true flag indicates that we want the hook to return the set function and the store
-  return useRootControls(store, nameOrSchema, schemaOrUndefined, folderSettingsOrUndefined)
+  return useRootControls(store, nameOrSchema, schemaOrDeps, folderSettingsOrDeps, depsOrUndefined)
 }
