@@ -17,7 +17,7 @@ jobs:
       - name: Install deps and build (with cache)
         uses: cypress-io/github-action@v2
         with:
-          install-command: yarn --immutable-cache --silent
+          install-command: yarn --immutable --silent
 
       # - name: Lint
       #   run: yarn lint
