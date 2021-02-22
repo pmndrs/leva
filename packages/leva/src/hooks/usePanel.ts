@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Store } from '../store'
-import { useRootControls, SchemaOrFn, DepsCompare } from './useRootControls'
+import { useRootControls, SchemaOrFn } from './useRootControls'
 import { FolderSettings, Schema } from '../types'
 
 /**
@@ -9,9 +9,9 @@ import { FolderSettings, Schema } from '../types'
  */
 export function usePanel<S extends Schema, F extends SchemaOrFn<S>>(
   nameOrSchema: string | F,
-  schemaOrDeps?: F | DepsCompare,
-  folderSettingsOrDeps?: FolderSettings | DepsCompare,
-  depsOrUndefined?: DepsCompare
+  schemaOrDeps?: F | React.DependencyList,
+  folderSettingsOrDeps?: FolderSettings | React.DependencyList,
+  depsOrUndefined?: React.DependencyList
 ) {
   const store = useMemo(() => new Store(), [])
   // the true flag indicates that we want the hook to return the set function and the store
