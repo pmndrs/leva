@@ -86,11 +86,13 @@ function createStateClass(value: string, options: Options) {
 }
 
 const utils = {
-  $inputStyle: () => (value: any) =>
+  $inputStyle: () => (value: string) =>
     createStateClass(value, { key: '$input', borderColor: '$highlight1', inset: true }),
-  $focusStyle: () => (value: any) => createStateClass(value, { key: '$focus', borderColor: '$accent2' }),
-  $hoverStyle: () => (value: any) => createStateClass(value, { key: '$hover', borderColor: '$accent1', inset: true }),
-  $activeStyle: () => (value: any) => createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
+  $focusStyle: () => (value: string) => createStateClass(value, { key: '$focus', borderColor: '$accent2' }),
+  $hoverStyle: () => (value: string) =>
+    createStateClass(value, { key: '$hover', borderColor: '$accent1', inset: true }),
+  $activeStyle: () => (value: string) =>
+    createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
 export const { styled, css, theme, global } = createCss({
@@ -123,10 +125,10 @@ export const { styled, css, theme, global } = createCss({
       WebkitUserDrag: 'none',
       userSelect: 'none',
     }),
-    $focus: () => (value) => ({ '&:focus': utils.$focusStyle()(value) }),
-    $focusWithin: () => (value) => ({ '&:focus-within': utils.$focusStyle()(value) }),
-    $hover: () => (value) => ({ '&:hover': utils.$hoverStyle()(value) }),
-    $active: () => (value) => ({ '&:active': utils.$activeStyle()(value) }),
+    $focus: () => (value: string) => ({ '&:focus': utils.$focusStyle()(value) }),
+    $focusWithin: () => (value: string) => ({ '&:focus-within': utils.$focusStyle()(value) }),
+    $hover: () => (value: string) => ({ '&:hover': utils.$hoverStyle()(value) }),
+    $active: () => (value: string) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
 
