@@ -31,7 +31,7 @@ function parseArgs(
   if (typeof nameOrSchema === 'string') {
     schema = schemaOrDeps as SchemaOrFn
     name = nameOrSchema
-    if (Array.isArray(folderSettingsOrDeps) || typeof folderSettingsOrDeps === 'function') {
+    if (Array.isArray(folderSettingsOrDeps)) {
       deps = folderSettingsOrDeps
     } else {
       folderSettings = folderSettingsOrDeps as FolderSettings
