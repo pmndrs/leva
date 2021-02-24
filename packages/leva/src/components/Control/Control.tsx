@@ -4,7 +4,7 @@ import { log, LevaErrors } from '../../utils/log'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
 import { Monitor } from '../Monitor'
-import { useInput } from '../../utils/hooks'
+import { useInput } from '../../hooks'
 import { SpecialInputTypes } from '../../types'
 
 type ControlProps = { path: string }

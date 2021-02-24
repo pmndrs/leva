@@ -3,7 +3,7 @@ import tc from 'tinycolor2'
 import { Canvas } from './StyledMonitor'
 import { Label, Row } from '../UI'
 import { range } from '../../utils'
-import { useCanvas2d } from '../../utils/hooks'
+import { useCanvas2d } from '../../hooks'
 import { MonitorInput } from '../../types/'
 import { useTh } from '../../styles'
 

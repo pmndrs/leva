@@ -4,7 +4,7 @@ import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
 import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
-import { useToggle } from '../../utils/hooks'
+import { useToggle } from '../../hooks'
 import { Tree } from '../../types/'
 import { useStoreContext } from '../../context'
 

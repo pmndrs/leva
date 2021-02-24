@@ -1,5 +1,5 @@
 import { useState, useRef, useLayoutEffect, useCallback } from 'react'
-import { parseNumber } from '../math'
+import { parseNumber } from '../utils/math'
 
 export function usePopin(margin = 3) {
   const popinRef = useRef<HTMLDivElement>(null)

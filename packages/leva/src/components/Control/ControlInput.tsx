@@ -1,7 +1,7 @@
 import React from 'react'
 import { Plugins } from '../../plugin'
 import { InputContext } from '../../context'
-import { useValue } from '../../utils/hooks'
+import { useValue } from '../../hooks'
 
 type ControlInputProps<V, Settings extends object> = {
   type: string

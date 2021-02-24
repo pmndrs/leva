@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
-import { usePopin } from '../../utils/hooks'
+import { usePopin } from '../../hooks'
 
 type ImageProps = LevaInputProps<string | undefined>
 

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { RangeWrapper, Range, Scrubber, Indicator } from './StyledRange'
 import { InternalNumberSettings, sanitizeStep } from './number-plugin'
-import { useDrag } from '../../utils/hooks'
+import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useTh } from '../../styles'
 

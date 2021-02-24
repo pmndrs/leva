@@ -1,7 +1,7 @@
 import { useDrag } from './useDrag'
-import { InternalNumberSettings } from '../../components/Number/number-plugin'
-import { parseNumber } from '../../utils'
-import { LevaInputProps } from '../../types'
+import { InternalNumberSettings } from '../components/Number/number-plugin'
+import { parseNumber } from '../utils'
+import { LevaInputProps } from '../types'
 
 type UseDragNumberProps = {
   settings: InternalNumberSettings

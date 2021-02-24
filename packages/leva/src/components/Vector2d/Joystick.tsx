@@ -5,7 +5,7 @@ import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { Vector2dProps } from './Vector2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
-import { multiplyStep, useTransform } from '../../utils/hooks'
+import { multiplyStep, useTransform } from '../../hooks'
 import { Vector2d } from '../../types'
 
 type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
