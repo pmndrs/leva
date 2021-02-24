@@ -1,7 +1,10 @@
 import * as props from './interval-plugin'
 import { IntervalComponent } from './Interval'
-
-const plugin = { ...props, component: IntervalComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Interval'
-export default plugin
+
+export default createInternalPlugin({
+  component: IntervalComponent,
+  ...props,
+})

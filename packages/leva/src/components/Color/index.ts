@@ -1,7 +1,10 @@
 import * as props from './color-plugin'
 import { ColorComponent } from './Color'
-
-const plugin = { ...props, component: ColorComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Color'
-export default plugin
+
+export default createInternalPlugin({
+  component: ColorComponent,
+  ...props,
+})

@@ -30,11 +30,19 @@ export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
   settings: InternalSettings
 }
 
-export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = {
+export type Plugin<Input, Value = Input, InternalSettings = {}> = {
   component: React.ComponentType
-  schema?: (value: any, settings?: Settings) => boolean
+
   format?: (value: any, settings: InternalSettings) => any
   normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
   validate?: (value: any, settings: InternalSettings) => boolean
   sanitize?: (value: any, settings: InternalSettings) => Value
+}
+
+export type InternalPlugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = Plugin<
+  Input,
+  Value,
+  InternalSettings
+> & {
+  schema: (value: any, settings?: Settings) => boolean
 }

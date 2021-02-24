@@ -1,7 +1,10 @@
 import { Vector2dComponent } from './Vector2d'
 import { getVectorPlugin } from '../Vector'
-
-const plugin = { ...getVectorPlugin(['x', 'y']), component: Vector2dComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Vector2d'
-export default plugin
+
+export default createInternalPlugin({
+  component: Vector2dComponent,
+  ...getVectorPlugin(['x', 'y']),
+})

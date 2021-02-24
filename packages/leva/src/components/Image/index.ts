@@ -1,7 +1,10 @@
 import * as props from './image-plugin'
 import { ImageComponent } from './Image'
-
-const plugin = { ...props, component: ImageComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Image'
-export default plugin
+
+export default createInternalPlugin({
+  component: ImageComponent,
+  ...props,
+})

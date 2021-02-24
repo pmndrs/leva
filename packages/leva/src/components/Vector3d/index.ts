@@ -1,7 +1,10 @@
 import { Vector3dComponent } from './Vector3d'
 import { getVectorPlugin } from '../Vector'
-
-const plugin = { ...getVectorPlugin(['x', 'y', 'z']), component: Vector3dComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Vector3d'
-export default plugin
+
+export default createInternalPlugin({
+  component: Vector3dComponent,
+  ...getVectorPlugin(['x', 'y', 'z']),
+})

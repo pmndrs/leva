@@ -1,7 +1,10 @@
 import * as props from './boolean-plugin'
 import { BooleanComponent } from './Boolean'
-
-const plugin = { ...props, component: BooleanComponent }
+import { createInternalPlugin } from '../../plugin'
 
 export * from './Boolean'
-export default plugin
+
+export default createInternalPlugin({
+  component: BooleanComponent,
+  ...props,
+})

@@ -1,9 +1,9 @@
-import { Plugin, CustomInput, InputWithSettings } from './types'
+import { Plugin, CustomInput, InputWithSettings, InternalPlugin } from './types'
 import { warn, LevaErrors } from './utils/log'
 
 const Schemas: ((v: any, settings?: any) => false | string)[] = []
 
-export const Plugins: Record<string, Omit<Plugin<any, any, any, any>, 'schema'>> = {}
+export const Plugins: Record<string, Omit<Plugin<any, any, any>, 'schema'>> = {}
 
 export function getValueType({ value, ...settings }: any) {
   for (let checker of Schemas) {
@@ -21,21 +21,27 @@ export function getValueType({ value, ...settings }: any) {
  */
 export function register<Input, Value, InternalSettings, Settings>(
   type: string,
-  { schema, ...plugin }: Plugin<Input, Value, Settings, InternalSettings>
+  { schema, ...plugin }: InternalPlugin<Input, Value, Settings, InternalSettings>
 ) {
   if (type in Plugins) {
     warn(LevaErrors.ALREADY_REGISTERED_TYPE, type)
     return
   }
-
-  if (schema) {
-    Schemas.push((value: any, settings?: any) => schema(value, settings) && type)
-  }
-
+  Schemas.push((value: any, settings?: any) => schema(value, settings) && type)
   Plugins[type] = plugin
 }
 
 const getUniqueType = () => '__CUSTOM__PLUGIN__' + Math.random().toString(36).substr(2, 9)
+
+/**
+ * helper function for types
+ * @param plugin
+ */
+export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
+  plugin: InternalPlugin<Input, Value, InternalSettings, Settings>
+) {
+  return plugin
+}
 
 /**
  * This function should be used by custom plugins. It is mostly used as a way
@@ -43,11 +49,9 @@ const getUniqueType = () => '__CUSTOM__PLUGIN__' + Math.random().toString(36).su
  *
  * @param plugin
  */
-export function createPlugin<Input, Value, Settings, InternalSettings>(
-  plugin: Omit<Plugin<Input, Value, Settings, InternalSettings>, 'schema'>
-) {
+export function createPlugin<Input, Value, InternalSettings>(plugin: Plugin<Input, Value, InternalSettings>) {
   const type = getUniqueType()
-  register(type, plugin)
+  Plugins[type] = plugin
   return (input?: Input) => ({ type, ...input } as CustomInput<Value>)
 }
 
