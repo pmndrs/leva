@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { globalStore } from '../../store'
+import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
 let rootInitialized = false
@@ -22,7 +22,7 @@ export function Leva({
 
   return (
     <LevaRoot
-      store={globalStore}
+      store={levaStore}
       theme={theme}
       detached={detached}
       oneLineLabels={oneLineLabels}

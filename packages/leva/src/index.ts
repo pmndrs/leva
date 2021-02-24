@@ -33,9 +33,9 @@ export { Leva, LevaPanel } from './components/Leva'
 // simplifies passing store as context
 export { useStoreContext, LevaStoreProvider } from './context'
 
-// export the globalStore (default store)
+// export the levaStore (default store)
 // hook to create custom store
-export { globalStore, useCreateStore } from './store'
+export { levaStore, useCreateStore } from './store'
 
 // export folder, monitor, button
 export * from './helpers'
