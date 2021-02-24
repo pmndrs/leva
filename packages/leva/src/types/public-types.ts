@@ -164,5 +164,5 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
 /**
  * If P is '' then T is the whole schema and we shouldn't run any type check
  * on the schema, to the risk that { a: 1, b: 2 } is recognized as Vector
- * instead of a two number input/
+ * instead of a two number inputs.
  */
