@@ -1,29 +1,33 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { folder, Leva, useControls, LevaPanel, usePanel, button } from 'leva'
+import { folder, Leva, useCreateStore, useControls, LevaPanel, button } from 'leva'
 import { useDrag, addV } from 'react-use-gesture'
 import './ui.css'
 
 function Box({ index, selected, setSelect }) {
-  const [{ position, size, color, fillColor, fillMode, fillImage, width }, store, set] = usePanel({
-    position: {
-      value: [window.innerWidth / 2 - 150, window.innerHeight / 2],
-      step: 1,
-    },
-    size: { value: { width: 100, height: 100 }, min: 10 },
-    fillMode: { value: 'color', options: ['image'] },
-    fillColor: {
-      value: '#cfcfcf',
-      label: 'fill',
-      render: (get) => get('fillMode') === 'color',
-    },
-    fillImage: {
-      image: undefined,
-      label: 'fill',
-      render: (get) => get('fillMode') === 'image',
-    },
-    stroke: folder({ color: '#555555', width: { value: 1, min: 0, max: 10 } }),
-  })
+  const store = useCreateStore()
+  const [{ position, size, color, fillColor, fillMode, fillImage, width }, set] = useControls(
+    () => ({
+      position: {
+        value: [window.innerWidth / 2 - 150, window.innerHeight / 2],
+        step: 1,
+      },
+      size: { value: { width: 100, height: 100 }, min: 10 },
+      fillMode: { value: 'color', options: ['image'] },
+      fillColor: {
+        value: '#cfcfcf',
+        label: 'fill',
+        render: (get) => get('fillMode') === 'color',
+      },
+      fillImage: {
+        image: undefined,
+        label: 'fill',
+        render: (get) => get('fillMode') === 'image',
+      },
+      stroke: folder({ color: '#555555', width: { value: 1, min: 0, max: 10 } }),
+    }),
+    { store }
+  )
 
   const bind = useDrag(({ first, movement: [x, y], args: controls, memo = { p: position, s: size } }) => {
     if (first) setSelect([index, store])

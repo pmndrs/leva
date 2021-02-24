@@ -5,10 +5,10 @@ import {
   button,
   monitor,
   Leva,
-  usePanel,
-  usePanelControls,
   LevaPanel,
   LevaStoreProvider,
+  useCreateStore,
+  useStoreContext,
 } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
@@ -139,13 +139,16 @@ export function App1() {
 }
 
 function MyComponent() {
-  usePanelControls({ point: [0, 0] })
+  const store = useStoreContext()
+  useControls({ point: [0, 0] }, { store })
   return null
 }
 
 export function App2() {
-  const [, store1] = usePanel(() => ({ color: '#fff' }))
-  const [, store2] = usePanel(() => ({ boolean: true }))
+  const store1 = useCreateStore()
+  const store2 = useCreateStore()
+  useControls({ color: '#fff' }, { store: store1 })
+  useControls({ boolean: true }, { store: store2 })
   return (
     <div
       style={{
@@ -165,78 +168,107 @@ export function App2() {
 }
 
 export function App3() {
-  const [colors, colorStore] = usePanel(() => ({
-    colors: folder({
-      elevation1: '#292D39',
-      elevation2: '#181C20',
-      elevation3: '#373C4B',
-      accent1: '#0066DC',
-      accent2: '#007BFF',
-      accent3: '#3C93FF',
-      highlight1: '#535760',
-      highlight2: '#8C92A4',
-      highlight3: '#FEFEFE',
-    }),
-  }))
+  const colorsStore = useCreateStore()
+  const radiiStore = useCreateStore()
+  const spaceStore = useCreateStore()
+  const fontSizesStore = useCreateStore()
+  const sizesStore = useCreateStore()
+  const borderWidthsStore = useCreateStore()
+  const fontWeightsStore = useCreateStore()
 
-  const [radii, radiiStore] = usePanel(() => ({
-    radii: folder({
-      xs: '2px',
-      sm: '3px',
-      lg: '10px',
-    }),
-  }))
+  const colors = useControls(
+    {
+      colors: folder({
+        elevation1: '#292D39',
+        elevation2: '#181C20',
+        elevation3: '#373C4B',
+        accent1: '#0066DC',
+        accent2: '#007BFF',
+        accent3: '#3C93FF',
+        highlight1: '#535760',
+        highlight2: '#8C92A4',
+        highlight3: '#FEFEFE',
+      }),
+    },
+    { store: colorsStore }
+  )
 
-  const [space, spaceStore] = usePanel(() => ({
-    space: folder({
-      sm: '6px',
-      md: '10px',
-      rowGap: '7px',
-      colGap: '7px',
-    }),
-  }))
+  const radii = useControls(
+    {
+      radii: folder({
+        xs: '2px',
+        sm: '3px',
+        lg: '10px',
+      }),
+    },
+    { store: radiiStore }
+  )
 
-  const [fontSizes, fontSizesStore] = usePanel(() => ({
-    fontSizes: folder({
-      root: '11px',
-    }),
-  }))
+  const space = useControls(
+    {
+      space: folder({
+        sm: '6px',
+        md: '10px',
+        rowGap: '7px',
+        colGap: '7px',
+      }),
+    },
+    { store: spaceStore }
+  )
 
-  const [sizes, sizesStore] = usePanel(() => ({
-    sizes: folder({
-      rootWidth: '280px',
-      controlWidth: '160px',
-      scrubberWidth: '8px',
-      scrubberHeight: '16px',
-      rowHeight: '24px',
-      folderHeight: '20px',
-      checkboxSize: '16px',
-      joystickWidth: '100px',
-      joystickHeight: '100px',
-      colorPickerWidth: '160px',
-      colorPickerHeight: '100px',
-      monitorHeight: '60px',
-    }),
-  }))
+  const fontSizes = useControls(
+    {
+      fontSizes: folder({
+        root: '11px',
+      }),
+    },
+    { store: fontSizesStore }
+  )
 
-  const [borderWidths, borderStore] = usePanel(() => ({
-    borderWidths: folder({
-      root: '0px',
-      input: '1px',
-      focus: '1px',
-      hover: '1px',
-      active: '1px',
-      folder: '1px',
-    }),
-  }))
+  const sizes = useControls(
+    {
+      sizes: folder({
+        rootWidth: '280px',
+        controlWidth: '160px',
+        scrubberWidth: '8px',
+        scrubberHeight: '16px',
+        rowHeight: '24px',
+        folderHeight: '20px',
+        checkboxSize: '16px',
+        joystickWidth: '100px',
+        joystickHeight: '100px',
+        colorPickerWidth: '160px',
+        colorPickerHeight: '100px',
+        monitorHeight: '60px',
+      }),
+    },
+    { store: sizesStore }
+  )
 
-  const [fontWeights, weightsStore] = usePanel(() => ({
-    fontWeights: folder({
-      label: { value: 'normal', options: ['bold', 'light'] },
-      folder: { value: 'normal', options: ['bold', 'light'] },
-      button: { value: 'normal', options: ['bold', 'light'] },
-    }),
-  }))
+  const borderWidths = useControls(
+    {
+      borderWidths: folder({
+        root: '0px',
+        input: '1px',
+        focus: '1px',
+        hover: '1px',
+        active: '1px',
+        folder: '1px',
+      }),
+    },
+    { store: borderWidthsStore }
+  )
+
+  const fontWeights = useControls(
+    {
+      fontWeights: folder({
+        label: { value: 'normal', options: ['bold', 'light'] },
+        folder: { value: 'normal', options: ['bold', 'light'] },
+        button: { value: 'normal', options: ['bold', 'light'] },
+      }),
+    },
+    { store: fontWeightsStore }
+  )
 
   const theme = {
     colors,
@@ -261,13 +293,13 @@ export function App3() {
           maxHeight: '90vh',
           overflow: 'auto',
         }}>
-        <LevaPanel store={colorStore} />
+        <LevaPanel store={colorsStore} />
         <LevaPanel store={radiiStore} />
         <LevaPanel store={spaceStore} />
         <LevaPanel store={fontSizesStore} />
         <LevaPanel store={sizesStore} />
-        <LevaPanel store={borderStore} />
-        <LevaPanel store={weightsStore} />
+        <LevaPanel store={borderWidthsStore} />
+        <LevaPanel store={fontWeightsStore} />
       </div>
       <Comp1 />
     </>
