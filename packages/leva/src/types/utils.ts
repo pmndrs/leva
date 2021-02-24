@@ -10,7 +10,4 @@
  */
 export type BeautifyUnionType<T> = T extends infer TT ? { [k in keyof TT]: TT[k] } : never
 
-export type Leaf = { ___leaf: 'leaf' }
-export type Join<T, K extends keyof T, P> = P extends Leaf ? { [i in K]: T[K] } : P
-
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never

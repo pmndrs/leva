@@ -2,7 +2,7 @@
  * Types exposed through the public API
  */
 import { VectorSettings } from '../components/Vector'
-import { BeautifyUnionType, UnionToIntersection, Join, Leaf } from './utils'
+import { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
@@ -136,13 +136,22 @@ type PrimitiveToValue<S> = S extends CustomInput<infer I>
 
 export type SchemaToValues<S> = BeautifyUnionType<UnionToIntersection<Leaves<S>>>
 
+type Leaf = { ___leaf: 'leaf' }
+type Join<T, K extends keyof T, P> = Leaf extends P ? { [i in K]: T[K] } : P
+
 export type Leaves<T, P extends string | number | symbol = ''> = {
+  // if it's a folder we run the type check on it's schema key
   0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
   1: never
+  // if the leaf is an object, we run the type check on each of its keys
   2: { [i in P]: PrimitiveToValue<T> }
+  // recursivity
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
+  // dead end
   4: Leaf
-}[T extends FolderInput<unknown>
+}[P extends ''
+  ? 3
+  : T extends FolderInput<unknown>
   ? 0
   : T extends SpecialInput
   ? 1
@@ -151,3 +160,9 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
     ? 3
     : 4
   : 2]
+
+/**
+ * If P is '' then T is the whole schema and we shouldn't run any type check
+ * on the schema, to the risk that { a: 1, b: 2 } is recognized as Vector
+ * instead of a two number input/
+ */
