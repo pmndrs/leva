@@ -24,8 +24,20 @@ register('INTERVAL', interval)
 register('VECTOR3D', vector3d)
 register('VECTOR2D', vector2d)
 
+// main hook
+export { useControls } from './useControls'
+
+// hook to create custom store
+export { useCreateStore } from './useCreateStore'
+
+// panel components
 export { Leva, LevaPanel } from './components/Leva'
-export { LevaStoreProvider } from './context'
-export * from './hooks'
+
+// simplifies passing store as context
+export { useStoreContext, LevaStoreProvider } from './context'
+
+// export the globalStore (default store)
+export { globalStore } from './store'
+
+// export folder, monitor, button
 export * from './helpers'
-export { globalStore as store } from './store'

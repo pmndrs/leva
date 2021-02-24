@@ -33,9 +33,15 @@ export function Leva({
   )
 }
 
-export function useRenderRoot() {
+/**
+ * This hook is used by Leva useControls, and ensures that we spawn a Leva Panel
+ * without the user having to put it into the component tree. This should only
+ * happen when using the global store
+ * @param isGlobalPanel
+ */
+export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
-    if (!rootInitialized) {
+    if (isGlobalPanel && !rootInitialized) {
       const rootEl = document.createElement('div')
       if (document.body) {
         document.body.appendChild(rootEl)
@@ -43,5 +49,5 @@ export function useRenderRoot() {
       }
       rootInitialized = true
     }
-  }, [])
+  }, [isGlobalPanel])
 }
