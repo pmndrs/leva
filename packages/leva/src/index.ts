@@ -27,9 +27,6 @@ register('VECTOR2D', vector2d)
 // main hook
 export { useControls } from './useControls'
 
-// hook to create custom store
-export { useCreateStore } from './useCreateStore'
-
 // panel components
 export { Leva, LevaPanel } from './components/Leva'
 
@@ -37,7 +34,8 @@ export { Leva, LevaPanel } from './components/Leva'
 export { useStoreContext, LevaStoreProvider } from './context'
 
 // export the globalStore (default store)
-export { globalStore } from './store'
+// hook to create custom store
+export { globalStore, useCreateStore } from './store'
 
 // export folder, monitor, button
 export * from './helpers'
