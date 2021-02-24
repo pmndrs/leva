@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import create, { UseStore } from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
 
@@ -255,10 +256,14 @@ export const Store = (function (this: StoreType) {
   }
 } as any) as { new (): StoreType }
 
-export const globalStore = new Store()
+export const levaStore = new Store()
+
+export function useCreateStore() {
+  return useMemo(() => new Store(), [])
+}
 
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // TODO remove store from window
   // @ts-expect-error
-  window.__LEVA__STORE = globalStore
+  window.__LEVA__STORE = levaStore
 }
