@@ -100,7 +100,8 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   }, deps)
 
   // GlobalPanel means that no store was provided, therefore we're using the levaStore
-  const isGlobalPanel = !!hookSettings?.store
+  const isGlobalPanel = !hookSettings?.store
+
   useRenderRoot(isGlobalPanel)
   const [store] = useState(() => hookSettings?.store || levaStore)
 
