@@ -7,15 +7,12 @@
   "dependencies": {
     "leva": "*",
     "noisejs": "2.1.0",
-    "react": "17.0.0",
-    "react-dom": "17.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-scripts": "3.4.3"
   },
-  "devDependencies": {
-    "typescript": "3.8.3"
-  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
