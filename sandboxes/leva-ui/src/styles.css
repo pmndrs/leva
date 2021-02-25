@@ -39,6 +39,9 @@ body {
   touch-action: none;
   background-size: cover;
   background-repeat: no-repeat;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .box.selected {
@@ -46,6 +49,7 @@ body {
 }
 
 .handle {
+  touch-action: none;
   position: absolute;
   display: flex;
   align-items: center;
