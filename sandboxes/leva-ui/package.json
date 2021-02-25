@@ -1,13 +1,16 @@
 {
-  "name": "leva-busy",
-  "main": "src/index.js",
+  "name": "leva-ui",
   "version": "1.0.0",
+  "description": "This sandbox has been generated!",
+  "keywords": [],
+  "main": "src/index.js",
   "dependencies": {
     "leva": "*",
-    "noisejs": "2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "3.4.3"
+    "react-dropzone": "11.3.1",
+    "react-scripts": "3.4.3",
+    "react-use-gesture": "^9.0.0"
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",

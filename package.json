@@ -4,7 +4,8 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "sandboxes/*"
   ],
   "preconstruct": {
     "packages": [
@@ -13,8 +14,10 @@
   },
   "scripts": {
     "postinstall": "preconstruct dev",
+    "dev": "preconstruct dev",
+    "watch": "yarn build && preconstruct watch",
     "build": "preconstruct build",
-    "release": "preconstruct build && yarn workspaces foreach npm publish",
+    "release": "preconstruct build && yarn workspaces foreach --include './packages/*' npm publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
