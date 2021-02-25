@@ -305,3 +305,16 @@ export function App3() {
     </>
   )
 }
+
+export function App4() {
+  const x = useControls({
+    number: 10,
+    minmax: {
+      value: 10.5,
+      min: 5.5,
+      max: 30.5
+    }
+  })
+  
+  return <pre>{JSON.stringify(x, null, '  ')}</pre>
+}
