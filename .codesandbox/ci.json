@@ -1,10 +1,10 @@
 {
   "sandboxes": [
-    "/sandboxes/leva-minimal",
-    "/sandboxes/leva-busy",
-    "/sandboxes/leva-scroll",
-    "/sandboxes/leva-plugin-spring",
-    "/sandboxes/leva-advanced-panels",
-    "/sandboxes/leva-ui"
+    "/demo/src/sandboxes/leva-minimal",
+    "/demo/src/sandboxes/leva-busy",
+    "/demo/src/sandboxes/leva-scroll",
+    "/demo/src/sandboxes/leva-plugin-spring",
+    "/demo/src/sandboxes/leva-advanced-panels",
+    "/demo/src/sandboxes/leva-ui"
   ]
 }
