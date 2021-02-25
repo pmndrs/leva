@@ -1,6 +1,7 @@
 {
   "name": "leva-busy",
   "main": "src/index.js",
+  "version": "1.0.0",
   "dependencies": {
     "leva": "*",
     "noisejs": "2.1.0",
