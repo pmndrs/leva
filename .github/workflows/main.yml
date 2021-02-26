@@ -13,14 +13,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          working-directory: |
-            .
-            example
+         
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
           install-command: yarn --immutable --silent
+           working-directory: |
+            .
+            example
 
       - name: Build
         run: yarn build
