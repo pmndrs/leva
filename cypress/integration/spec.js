@@ -1,6 +1,6 @@
 describe('Number', () => {
   it('Works.', () => {
-    cy.visit('/')
+    cy.visit('/leva-minimal')
     cy.findByLabelText(/number/).should('exist')
     
     cy.findByLabelText(/number/).clear().type(123).blur()
@@ -12,7 +12,7 @@ describe('Number', () => {
   })
 
   it("Doesn't accept non-numbers.", () => {
-    cy.visit('/')
+    cy.visit('/leva-minimal')
     
     // expect previous value when typing invalid characters
     cy.findByLabelText(/number/).clear().type("ABC").blur()
@@ -23,7 +23,7 @@ describe('Number', () => {
 describe("MinMax", () => {
 
   it("Works.", () => {
-    cy.visit('/')
+    cy.visit('/leva-minimal')
     cy.findByLabelText(/minmax/).should('exist')
 
     cy.findByLabelText(/number/).clear().type(12.5).blur()
@@ -33,7 +33,7 @@ describe("MinMax", () => {
   })
 
   it("Doesn't go over.", () => {
-    cy.visit('/')
+    cy.visit('/leva-minimal')
 
     // since value is over max, it should reset to max
     cy.findByLabelText(/minmax/).clear().type(123).blur()
@@ -41,7 +41,7 @@ describe("MinMax", () => {
   })
 
   it("Doesn't go under.", () => {
-    cy.visit('/')
+    cy.visit('/leva-minimal')
 
     // since value is under min, it should reset to initial
     cy.findByLabelText(/minmax/).clear().type(1).blur()

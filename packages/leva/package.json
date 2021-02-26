@@ -3,6 +3,7 @@
   "version": "0.3.5",
   "main": "dist/leva.cjs.js",
   "module": "dist/leva.esm.js",
+  "types": "dist/leva.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",

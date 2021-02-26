@@ -10,7 +10,7 @@ export type StoreType = {
   useStore: UseStore<State>
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
-  disposePaths: (paths: string[], removeOnDispose?: boolean) => void
+  disposePaths: (paths: string[]) => void
   dispose: () => void
   getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
@@ -103,15 +103,19 @@ export const Store = (function (this: StoreType) {
    *
    * @param paths
    */
-  this.disposePaths = (paths, removeOnDispose = false) => {
+  this.disposePaths = (paths) => {
     store.setState((s) => {
       const data = s.data
       paths.forEach((path) => {
-        if (path in data)
-          if (removeOnDispose) {
+        if (path in data) {
+          const input = data[path]
+          input.count--
+          if (input.count === 0 && input.type in SpecialInputTypes) {
+            // this makes sure special inputs such as buttons are proprely
+            // refreshed. This might need some attention though.
             delete data[path]
-            orderedPaths.delete(path)
-          } else data[path].count--
+          }
+        }
       })
       return { data }
     })

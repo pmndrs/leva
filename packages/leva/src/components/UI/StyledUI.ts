@@ -28,16 +28,12 @@ export const CopyLabelContainer = styled('div', {
   $flex: '',
   height: '100%',
   position: 'relative',
-  cursor: 'pointer',
   overflow: 'hidden',
-
-  '> label': {
-    cursor: 'pointer',
-  },
 
   '> svg': {
     display: 'none',
     marginLeft: '$colGap',
+    cursor: 'pointer',
     width: 15,
     minWidth: 15,
     height: 15,

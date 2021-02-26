@@ -5,7 +5,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "sandboxes/*"
+    "demo"
   ],
   "preconstruct": {
     "packages": [
@@ -14,10 +14,10 @@
   },
   "scripts": {
     "postinstall": "preconstruct dev",
-    "dev": "preconstruct dev",
-    "watch": "yarn build && preconstruct watch",
     "build": "preconstruct build",
-    "release": "preconstruct build && yarn workspaces foreach --include './packages/*' npm publish",
+    "dev": "preconstruct dev",
+    "watch": "yarn build && concurrently \"preconstruct watch\" \"yarn demo:dev\"",
+    "release": "yarn build && yarn workspaces foreach --include './packages/*' npm publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
@@ -25,8 +25,10 @@
     "build-storybook": "build-storybook --quiet",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "start-example": "cd example && yarn start",
-    "test": "start-server-and-test start-example http://localhost:1234 cypress:run"
+    "demo:dev": "yarn workspace demo dev",
+    "demo:build": "yarn workspace demo build",
+    "demo:serve": "cp ./demo/serve.json ./demo/dist && npx serve ./demo/dist",
+    "ci:test": "yarn demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run"
   },
   "size-limit": [
     {
@@ -65,9 +67,11 @@
     "@typescript-eslint/parser": "^4.15.0",
     "babel-eslint": "^10.0.0",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.0",
     "cypress": "^6.5.0",
     "eslint": "^7.20.0",
     "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",

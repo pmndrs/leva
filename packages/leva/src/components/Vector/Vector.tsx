@@ -1,4 +1,5 @@
 import React from 'react'
+import { useInputContext } from '../../context'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
@@ -7,13 +8,14 @@ import { InternalNumberSettings } from '../Number/number-plugin'
 type CoordinateValue = Record<string, number>
 
 type CoordinateProps<T extends CoordinateValue> = {
+  id?: string
   value: T
   settings: InternalNumberSettings
   valueKey: keyof T
   onUpdate: (value: T) => void
 }
 
-function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUpdate }: CoordinateProps<T>) {
+function Coordinate<T extends CoordinateValue>({ value, id, valueKey, settings, onUpdate }: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
 
   const setValue = (newValue: any) => onUpdate({ ...value, [valueKey]: sanitizeValue(args, newValue) })
@@ -22,6 +24,7 @@ function Coordinate<T extends CoordinateValue>({ value, valueKey, settings, onUp
 
   return (
     <Number
+      id={id}
       label={valueKey as string}
       value={value[valueKey]}
       displayValue={number.displayValue}
@@ -41,10 +44,18 @@ type VectorProps<T extends CoordinateValue> = {
 }
 
 export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }: VectorProps<T>) {
+  const { path } = useInputContext()
   return (
     <>
-      {Object.keys(value).map((key) => (
-        <Coordinate key={key} valueKey={key} value={value} settings={settings[key]} onUpdate={onUpdate} />
+      {Object.keys(value).map((key, i) => (
+        <Coordinate
+          id={i === 0 ? path : `${path}.${key}`}
+          key={key}
+          valueKey={key}
+          value={value}
+          settings={settings[key]}
+          onUpdate={onUpdate}
+        />
       ))}
     </>
   )

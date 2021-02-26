@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react'
+import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
+  id: string
   value: string
   children?: React.ReactNode
   type?: 'number' | undefined
@@ -11,7 +13,9 @@ type ValueInputProps = {
   onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<any>
 
-export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
+export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
+  const { path } = useInputContext()
+  const inputId = id || path
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
@@ -35,6 +39,7 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
       {children && <InnerLabel>{children}</InnerLabel>}
       <StyledInput
         levaType={type}
+        id={inputId}
         type="text"
         spellCheck="false"
         value={value}
