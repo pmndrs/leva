@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { Link, Route } from 'wouter'
 import styles from './styles.module.css'
 
@@ -22,18 +22,18 @@ const links = {
   'leva-custom-plugin': CustomPlugin,
 }
 
-const Example = ({ component }) => {
-  const Component = component
-  
+const Example = ({ link }) => {
+  const Component = links[link]
+  // David did this and he's ashamed 👇👇👇
+  // const Lazy = useMemo(() => React.lazy(() => import(`./sandboxes/${link}/src/App`)), [link])
+
   return (
     <div>
       <Link href="/">
         {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className={styles.back}>← Back</a>
       </Link>
-      <Suspense fallback={<div>loading...</div>}>
-        <Component />
-      </Suspense>
+      <Component />
     </div>
   )
 }
@@ -55,7 +55,7 @@ export default function App() {
           </div>
         </div>
       </Route>
-      <Route path="/:link">{(params) => <Example component={links[params.link]} />}</Route>
+      <Route path="/:link">{(params) => <Example link={params.link} />}</Route>
     </>
   )
 }
