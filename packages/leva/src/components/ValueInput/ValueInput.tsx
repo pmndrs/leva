@@ -3,6 +3,7 @@ import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
+  id: string
   value: string
   children?: React.ReactNode
   type?: 'number' | undefined
@@ -35,6 +36,7 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
       {children && <InnerLabel>{children}</InnerLabel>}
       <StyledInput
         levaType={type}
+        id={id}
         type="text"
         spellCheck="false"
         value={value}

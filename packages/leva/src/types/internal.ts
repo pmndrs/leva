@@ -23,6 +23,7 @@ export type Tree = {
 
 export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
   label: string
+  id: string | number
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>

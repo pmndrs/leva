@@ -27,14 +27,13 @@ export function NumberComponent() {
   const { label, value, onUpdate, settings } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
-  const id = Date.now()
   
   return (
     <Row input>
-      <Label htmlFor={id}>{label}</Label>
+      <Label htmlFor={label}>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={parseFloat(value as any)} onDrag={onUpdate} {...settings} />}
-        <Number id={id} {...props} label="value" />
+        <Number  {...props} id={label} label="value" />
       </RangeGrid>
     </Row>
   )
