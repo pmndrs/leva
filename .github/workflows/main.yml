@@ -34,6 +34,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          install-command: yarn --frozen-lockfile --silent
+          install-command: yarn --immutable --silent
           build: yarn build
           start: yarn start-example
