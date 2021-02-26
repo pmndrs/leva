@@ -8,13 +8,13 @@ import { StyledSelect, SelectContainer } from './StyledSelect'
 type SelectProps = LevaInputProps<any, InternalSelectSettings>
 
 export function SelectComponent() {
-  const { label, displayValue, onUpdate, settings } = useInputContext<SelectProps>()
+  const { label, displayValue, onUpdate, path, settings } = useInputContext<SelectProps>()
   const { keys, values } = settings!
   return (
     <Row input>
       <Label>{label}</Label>
       <SelectContainer>
-        <StyledSelect value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
+        <StyledSelect id={path} value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
           {keys.map((key, index) => (
             <option key={key} value={index}>
               {key}

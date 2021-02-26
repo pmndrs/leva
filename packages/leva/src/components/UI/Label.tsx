@@ -20,13 +20,10 @@ function LabelWithCopy(props: LabelProps) {
   }
 
   return (
-    <CopyLabelContainer
-      onClick={handleClick}
-      title={`Click to copy ${label} value`}
-      onPointerLeave={() => setCopied(false)}>
+    <CopyLabelContainer title={`Click to copy ${label} value`} onPointerLeave={() => setCopied(false)}>
       <StyledLabel {...props} />
       {!copied ? (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <svg onClick={handleClick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
           <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
         </svg>
@@ -45,8 +42,9 @@ function LabelWithCopy(props: LabelProps) {
 }
 
 export function Label(props: LabelProps) {
-  const { key } = useInputContext()
+  const { key, path } = useInputContext()
   const copyClipboard = key !== undefined
+  const htmlFor = props.htmlFor || (path ? { htmlFor: path } : null)
 
-  return copyClipboard ? <LabelWithCopy {...props} /> : <StyledLabel {...props} />
+  return copyClipboard ? <LabelWithCopy {...htmlFor} {...props} /> : <StyledLabel {...htmlFor} {...props} />
 }

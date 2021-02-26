@@ -23,7 +23,7 @@ export type Tree = {
 
 export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
   label: string
-  id: string | number
+  path?: string
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
@@ -33,7 +33,6 @@ export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
 
 export type Plugin<Input, Value = Input, InternalSettings = {}> = {
   component: React.ComponentType
-
   format?: (value: any, settings: InternalSettings) => any
   normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
   validate?: (value: any, settings: InternalSettings) => boolean
