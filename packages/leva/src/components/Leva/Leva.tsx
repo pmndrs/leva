@@ -4,9 +4,9 @@ import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
 let rootInitialized = false
-let rootEl: HTMLDivElement
+let rootEl: HTMLDivElement | null = null
 
-type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot: boolean }
+type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
 // uses global store
 export function Leva({
@@ -18,11 +18,17 @@ export function Leva({
   hideTitleBar = false,
   hidden = false,
 }: LevaProps) {
+  const [, forceUpdate] = React.useReducer((x) => x + 1, 0)
+
   useEffect(() => {
     // if this panel was attached somewhere in the app and there is already
     // a floating panel, we remove it.
-    if (!isRoot && rootEl) rootEl.remove()
+    if (!isRoot && rootEl) {
+      rootEl.remove()
+      rootEl = null
+    }
     rootInitialized = true
+    forceUpdate()
     return () => {
       rootInitialized = false
     }
