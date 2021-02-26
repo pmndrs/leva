@@ -16,8 +16,8 @@
     "postinstall": "preconstruct dev",
     "build": "preconstruct build",
     "dev": "preconstruct dev",
-    "dev:demo": "yarn workspace demo dev",
     "watch": "yarn build && concurrently \"preconstruct watch\" \"yarn dev:demo\"",
+    "dev:demo": "yarn workspace demo dev",
     "release": "yarn build && yarn workspaces foreach --include './packages/*' npm publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
@@ -26,7 +26,7 @@
     "build-storybook": "build-storybook --quiet",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "test": "start-server-and-test dev:demo http://localhost:1234 cypress:run"
+    "test": "start-server-and-test watch http-get://localhost:3000 cypress:run"
   },
   "size-limit": [
     {

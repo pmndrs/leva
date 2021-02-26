@@ -21,7 +21,7 @@ jobs:
           install-command: yarn --immutable --silent
           working-directory: |
             .
-            example
+            demo
 
       - name: Build
         run: yarn build
