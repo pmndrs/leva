@@ -11,7 +11,7 @@ type ValueInputProps = {
   onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<any>
 
-export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
+export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
