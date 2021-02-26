@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App1 as App } from './App'
+import { App4 as App } from './App'
 // import App from './UI'
 import './styles.css'
 

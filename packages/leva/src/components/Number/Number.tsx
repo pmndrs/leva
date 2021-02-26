@@ -10,11 +10,11 @@ import { useInputContext } from '../../context'
 
 type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
-export function Number({ label, displayValue, onUpdate, onChange, settings }: NumberProps) {
+export function Number({ label, id, displayValue, onUpdate, onChange, settings }: NumberProps) {
   const bind = useDragNumber({ settings, onDrag: onUpdate })
 
   return (
-    <NumberInput value={displayValue} onUpdate={onUpdate} onChange={onChange}>
+    <NumberInput id={id} value={displayValue} onUpdate={onUpdate} onChange={onChange}>
       <InnerNumberLabel title={label.length > 1 ? label : ''} {...bind()}>
         {label.charAt(0)}
       </InnerNumberLabel>
@@ -27,12 +27,14 @@ export function NumberComponent() {
   const { label, value, onUpdate, settings } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
+  const id = Date.now()
+  
   return (
     <Row input>
-      <Label>{label}</Label>
+      <Label htmlFor={id}>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={parseFloat(value as any)} onDrag={onUpdate} {...settings} />}
-        <Number {...props} label="value" />
+        <Number id={id} {...props} label="value" />
       </RangeGrid>
     </Row>
   )

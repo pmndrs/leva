@@ -48,7 +48,7 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
   )
 }
 
-export function NumberInput({ children, value, onUpdate, onChange }: ValueInputProps) {
+export function NumberInput({ children, id, value, onUpdate, onChange }: ValueInputProps) {
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const dir = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0
@@ -61,7 +61,7 @@ export function NumberInput({ children, value, onUpdate, onChange }: ValueInputP
     [onUpdate]
   )
   return (
-    <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown} type="number">
+    <ValueInput id={id} value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown} type="number">
       {children}
     </ValueInput>
   )
