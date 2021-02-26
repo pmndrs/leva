@@ -19,7 +19,7 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           install-command: yarn --immutable --silent
-           working-directory: |
+          working-directory: |
             .
             example
 
