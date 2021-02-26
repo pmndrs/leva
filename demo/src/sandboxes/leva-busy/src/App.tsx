@@ -2,6 +2,7 @@ import React from 'react'
 import { useControls, folder, button, monitor } from 'leva'
 // @ts-ignore
 import { Noise } from 'noisejs'
+import styles from './styles.module.css'
 
 const noise = new Noise(Math.random())
 
@@ -10,7 +11,22 @@ function frame() {
   return noise.simplex2(t / 1000, t / 100)
 }
 
+const ExtraControls = () => {
+  useControls('folder.subfolder', {
+    'Hello Button': button(() => console.log('hello')),
+    'deep nested': folder({
+      pos2d: { x: 3, y: 4 },
+      pos2dArr: [100, 200],
+      pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+      pos3dArr: [Math.PI / 2, 20, 4],
+    }),
+  })
+  return null
+}
+
 export default function App() {
+  const [count, setCount] = React.useState(0)
+
   const data = useControls({
     range: { value: 0, min: -10, max: 10 },
     image: { image: undefined },
@@ -20,23 +36,25 @@ export default function App() {
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
     colorObj: { r: 1, g: 2, b: 3 },
-    folder2: folder({
+    folder: folder({
       boolean: false,
       spring: { tension: 100, friction: 30 },
-      folder3: folder(
-        {
-          'Hello Button': button(() => console.log('hello')),
-          folder4: folder({
-            pos2d: { x: 3, y: 4 },
-            pos2dArr: [100, 200],
-            pos3d: { x: 0.3, y: 0.1, z: 0.5 },
-            pos3dArr: [Math.PI / 2, 20, 4],
-          }),
-        },
-        { collapsed: false }
-      ),
     }),
   })
 
-  return <pre>{JSON.stringify(data, null, '  ')}</pre>
+  return (
+    <>
+      <div className={styles.buttons}>
+        Reference count: {count}
+        <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>
+        <button onClick={() => setCount((c) => c + 1)}>+</button>
+      </div>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      {Array(count)
+        .fill(0)
+        .map((_, i) => (
+          <ExtraControls key={i} />
+        ))}
+    </>
+  )
 }
