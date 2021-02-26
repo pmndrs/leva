@@ -22,6 +22,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/noisejs": "^0.0.28"
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "typescript": "^4.1.5"
   }
 }
