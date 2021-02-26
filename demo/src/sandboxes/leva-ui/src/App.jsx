@@ -1,76 +1,59 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import {
-  folder,
-  Leva,
-  useControls,
-  LevaPanel,
-  useCreateStore,
-  button
-} from 'leva'
+import { folder, Leva, useControls, LevaPanel, useCreateStore, button } from 'leva'
 import { useDrag, addV } from 'react-use-gesture'
 import './styles.css'
 
 function Box({ index, selected, setSelect }) {
   const store = useCreateStore()
 
-  const [
-    { position, size, color, fillColor, fillMode, fillImage, width },
-    set
-  ] = useControls(
+  const [{ position, size, color, fillColor, fillMode, fillImage, width }, set] = useControls(
     () => ({
       position: {
         value: [window.innerWidth / 2 - 150, window.innerHeight / 2],
-        step: 1
+        step: 1,
       },
       size: { value: { width: 100, height: 100 }, min: 10 },
       fillMode: { value: 'color', options: ['image'] },
       fillColor: {
         value: '#cfcfcf',
         label: 'fill',
-        render: (get) => get('fillMode') === 'color'
+        render: (get) => get('fillMode') === 'color',
       },
       fillImage: {
         image: undefined,
         label: 'fill',
-        render: (get) => get('fillMode') === 'image'
+        render: (get) => get('fillMode') === 'image',
       },
-      stroke: folder({ color: '#555555', width: { value: 1, min: 0, max: 10 } })
+      stroke: folder({ color: '#555555', width: { value: 1, min: 0, max: 10 } }),
     }),
     { store }
   )
 
-  const bind = useDrag(
-    ({
-      first,
-      movement: [x, y],
-      args: controls,
-      memo = { position, size }
-    }) => {
-      if (first) setSelect([index, store])
-      let _position = [...memo.position]
-      let _size = { ...memo.size }
+  const bind = useDrag(({ first, movement: [x, y], args: controls, memo = { position, size } }) => {
+    if (first) setSelect([index, store])
+    let _position = [...memo.position]
+    let _size = { ...memo.size }
 
-      controls.forEach(([control, mod]) => {
-        switch (control) {
-          case 'position':
-            _position = addV(_position, [x, y])
-            break
-          case 'width':
-            _size.width += x * mod
-            if (mod === -1) _position[0] += x
-            break
-          case 'height':
-            _size.height += y * mod
-            if (mod === -1) _position[1] += y
-            break
-          default:
-        }
-      })
-      set({ position: _position, size: _size })
-      return memo
-    }
-  )
+    controls.forEach(([control, mod]) => {
+      switch (control) {
+        case 'position':
+          _position = addV(_position, [x, y])
+          break
+        case 'width':
+          _size.width += x * mod
+          if (mod === -1) _position[0] += x
+          break
+        case 'height':
+          _size.height += y * mod
+          if (mod === -1) _position[1] += y
+          break
+        default:
+      }
+    })
+    set({ position: _position, size: _size })
+    return memo
+  })
 
   useEffect(() => {
     setSelect([index, store])
@@ -87,13 +70,10 @@ function Box({ index, selected, setSelect }) {
   const { getRootProps, isDragAccept } = useDropzone({
     maxFiles: 1,
     accept: 'image/*',
-    onDrop
+    onDrop,
   })
 
-  const background =
-    fillMode === 'color' || !fillImage
-      ? fillColor
-      : `center / cover no-repeat url(${fillImage})`
+  const background = fillMode === 'color' || !fillImage ? fillColor : `center / cover no-repeat url(${fillImage})`
 
   return (
     <div
@@ -105,29 +85,16 @@ function Box({ index, selected, setSelect }) {
         width: size.width,
         height: size.height,
         boxShadow: `inset 0 0 0 ${width}px ${color}`,
-        transform: `translate(${position[0]}px, ${position[1]}px)`
-      }}
-    >
+        transform: `translate(${position[0]}px, ${position[1]}px)`,
+      }}>
       <span className="handle top" {...bind(['height', -1])} />
       <span className="handle right" {...bind(['width', 1])} />
       <span className="handle bottom" {...bind(['height', 1])} />
       <span className="handle left" {...bind(['width', -1])} />
-      <span
-        className="handle corner top-left"
-        {...bind(['width', -1], ['height', -1])}
-      />
-      <span
-        className="handle corner top-right"
-        {...bind(['width', 1], ['height', -1])}
-      />
-      <span
-        className="handle corner bottom-left"
-        {...bind(['width', -1], ['height', 1])}
-      />
-      <span
-        className="handle corner bottom-right"
-        {...bind(['width', 1], ['height', 1])}
-      />
+      <span className="handle corner top-left" {...bind(['width', -1], ['height', -1])} />
+      <span className="handle corner top-right" {...bind(['width', 1], ['height', -1])} />
+      <span className="handle corner bottom-left" {...bind(['width', -1], ['height', 1])} />
+      <span className="handle corner bottom-right" {...bind(['width', 1], ['height', 1])} />
       <span
         className="handle position"
         {...bind(['position'])}
@@ -171,12 +138,7 @@ export default function App() {
     <div className="wrapper">
       <div className="canvas" onClick={unSelect}>
         {boxes.map((v, i) => (
-          <Box
-            key={v}
-            selected={selection === i}
-            index={i}
-            setSelect={setSelection}
-          />
+          <Box key={v} selected={selection === i} index={i} setSelect={setSelection} />
         ))}
       </div>
       <div className="panel">

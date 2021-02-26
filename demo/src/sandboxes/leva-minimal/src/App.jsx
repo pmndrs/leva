@@ -1,20 +1,15 @@
-import React from "react";
-import { useControls, Leva } from "leva";
-import "./styles.css";
+import React from 'react'
+import { useControls, Leva } from 'leva'
 
 export default function App() {
   const data = useControls({
     first: { value: 0, min: -10, max: 10 },
-  });
+  })
 
   return (
     <>
-
       <Leva hideTitleBar />
-    
-      <div className="App">
-        <pre>{JSON.stringify(data, null, "  ")}</pre>
-      </div>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
     </>
-  );
+  )
 }
