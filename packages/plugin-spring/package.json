@@ -3,6 +3,7 @@
   "version": "0.3.4",
   "main": "dist/leva-ui-plugin-spring.cjs.js",
   "module": "dist/leva-ui-plugin-spring.esm.js",
+  "types": "dist/leva-ui-plugin-spring.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
     "leva": ">=1.0.0",
