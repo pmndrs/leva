@@ -5,6 +5,8 @@
     "/demo/src/sandboxes/leva-scroll",
     "/demo/src/sandboxes/leva-plugin-spring",
     "/demo/src/sandboxes/leva-advanced-panels",
-    "/demo/src/sandboxes/leva-ui"
+    "/demo/src/sandboxes/leva-ui",
+    "/demo/src/sandboxes/leva-theme",
+    "/demo/src/sandboxes/leva-custom-plugin"
   ]
 }

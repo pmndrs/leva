@@ -1,5 +1,5 @@
 .back {
-  position: absolute;
+  position: fixed;
   left: 10px;
   bottom: 10px;
   z-index: 100;
@@ -10,6 +10,7 @@
   font-size: 14px;
   text-decoration: none;
   border-radius: 2px;
+  border: 1px solid #333;
 }
 
 .link {

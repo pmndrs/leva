@@ -1,13 +1,15 @@
 {
-  "name": "leva-busy",
-  "main": "src/index.jsx",
+  "name": "leva-custom-plugin",
   "version": "1.0.0",
+  "main": "src/index.tsx",
   "dependencies": {
     "leva": "*",
-    "noisejs": "2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "3.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.5"
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
@@ -20,8 +22,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@types/noisejs": "^0.0.28"
-  }
+  ]
 }

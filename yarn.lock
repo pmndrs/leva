@@ -6607,11 +6607,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:demo"
   dependencies:
+    "@types/react": ^17.0.2
+    "@types/react-dom": ^17.0.1
     "@vitejs/plugin-react-refresh": ^1.1.0
     noisejs: ^2.1.0
     react: ^17.0.1
     react-dom: ^17.0.1
-    regenerator-runtime: ^0.13.7
+    typescript: ^4.1.5
     vite: ^2.0.1
     wouter: ^2.7.3
   languageName: unknown

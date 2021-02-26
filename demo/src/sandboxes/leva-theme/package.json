@@ -1,10 +1,10 @@
 {
-  "name": "leva-busy",
-  "main": "src/index.jsx",
+  "name": "leva-theme",
   "version": "1.0.0",
+  "main": "src/index.jsx",
   "dependencies": {
     "leva": "*",
-    "noisejs": "2.1.0",
+    "@leva-ui/plugin-spring": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "3.4.3"
@@ -20,8 +20,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "@types/noisejs": "^0.0.28"
-  }
+  ]
 }

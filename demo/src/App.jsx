@@ -2,7 +2,16 @@ import React, { Suspense } from 'react'
 import { Link, Route } from 'wouter'
 import styles from './styles.module.css'
 
-const links = ['leva-minimal', 'leva-plugin-spring', 'leva-busy', 'leva-advanced-panels', 'leva-scroll', 'leva-ui']
+const links = [
+  'leva-minimal',
+  'leva-plugin-spring',
+  'leva-busy',
+  'leva-advanced-panels',
+  'leva-scroll',
+  'leva-ui',
+  'leva-theme',
+  'leva-custom-plugin',
+]
 
 const Example = ({ link }) => {
   const Lazy = React.lazy(() => import(/* @vite-ignore */ `./sandboxes/${link}/src/App`))
