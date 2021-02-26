@@ -2,6 +2,7 @@ name: Build
 on: [push]
 jobs:
   cypress-run:
+    needs: build
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout
