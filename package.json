@@ -26,8 +26,7 @@
     "build-storybook": "build-storybook --quiet",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "start-example": "cd example && yarn start",
-    "test": "start-server-and-test start-example http://localhost:1234 cypress:run"
+    "test": "start-server-and-test dev:demo http://localhost:1234 cypress:run"
   },
   "size-limit": [
     {
