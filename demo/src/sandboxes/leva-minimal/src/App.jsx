@@ -3,7 +3,8 @@ import { useControls, Leva } from 'leva'
 
 export default function App() {
   const data = useControls({
-    first: { value: 0, min: -10, max: 10 },
+    number: 10,
+    minmax: { value: 12.5, min: 5.5, max: 30.5 },
   })
 
   return (

@@ -50,6 +50,7 @@
     "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
     // "preserveSymlinks": true               /* Do not resolve the real path of symlinks. */,
     "skipLibCheck": true,
+<<<<<<< HEAD
 
     /* Source Map Options */
     // "sourceRoot": "",                      /* Specify the location where debugger should locate TypeScript files instead of source locations. */
@@ -61,5 +62,12 @@
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "noEmit": true
+=======
+    // error out if import and file system have a casing mismatch. Recommended by TS
+    "forceConsistentCasingInFileNames": true,
+    // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
+    "noEmit": true,
+    "types": ["cypress", "@testing-library/cypress"]
+>>>>>>> b326dbade35a9c80558f409be2caa61d7be7b74b
   }
 }

@@ -13,14 +13,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+         
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
           install-command: yarn --immutable --silent
-
-      # - name: Lint
-      #   run: yarn lint
+          working-directory: |
+            .
+            example
 
       - name: Build
         run: yarn build
+
+      - name: Cypress run
+        run: yarn test
