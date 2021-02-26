@@ -24,3 +24,15 @@ jobs:
 
       - name: Build
         run: yarn build
+        
+  cypress-run:
+    needs: build
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn build
+          start: yarn start-example
