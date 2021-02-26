@@ -19,9 +19,6 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           install-command: yarn --immutable --silent
-          working-directory: |
-            .
-            demo
 
       - name: Build
         run: yarn build
