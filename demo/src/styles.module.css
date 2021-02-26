@@ -1,0 +1,28 @@
+.back {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 100;
+  padding: 10px;
+  background: #000;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.link {
+  color: inherit;
+}
+
+.linkList {
+  display: grid;
+  gap: 10px;
+}
+
+.page {
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 0 16px;
+}

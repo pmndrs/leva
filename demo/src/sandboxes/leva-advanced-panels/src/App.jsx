@@ -1,6 +1,5 @@
 import React from 'react'
 import { useControls, useStoreContext, useCreateStore, LevaPanel, LevaStoreProvider } from 'leva'
-import './styles.css'
 
 function MyComponent() {
   const store = useStoreContext()

@@ -1,7 +1,7 @@
 {
   "name": "leva-advanced-panels",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "dependencies": {
     "leva": "*",
     "react": "^17.0.1",

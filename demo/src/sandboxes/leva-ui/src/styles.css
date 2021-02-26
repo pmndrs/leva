@@ -1,14 +1,3 @@
-body {
-  font-family: system-ui;
-  margin: 0;
-}
-
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-}
-
 .wrapper {
   height: 100vh;
   width: 100vw;

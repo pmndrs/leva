@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This sandbox has been generated!",
   "keywords": [],
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "dependencies": {
     "leva": "*",
     "react": "^17.0.1",

@@ -4,12 +4,14 @@ import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
 let rootInitialized = false
+let rootEl: HTMLDivElement
 
-type LevaProps = Omit<Partial<LevaRootProps>, 'store'>
+type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot: boolean }
 
 // uses global store
 export function Leva({
   theme,
+  isRoot = false,
   detached = true,
   collapsed = false,
   oneLineLabels = false,
@@ -17,8 +19,17 @@ export function Leva({
   hidden = false,
 }: LevaProps) {
   useEffect(() => {
+    // if this panel was attached somewhere in the app and there is already
+    // a floating panel, we remove it.
+    if (!isRoot && rootEl) rootEl.remove()
     rootInitialized = true
-  }, [])
+    return () => {
+      rootInitialized = false
+    }
+  }, [isRoot])
+
+  // removing this line would prevent root panels from rendering
+  if (!isRoot && rootEl) return null
 
   return (
     <LevaRoot
@@ -42,10 +53,10 @@ export function Leva({
 export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
     if (isGlobalPanel && !rootInitialized) {
-      const rootEl = document.createElement('div')
+      rootEl = document.createElement('div')
       if (document.body) {
         document.body.appendChild(rootEl)
-        ReactDOM.render(<Leva />, rootEl)
+        ReactDOM.render(<Leva isRoot />, rootEl)
       }
       rootInitialized = true
     }
