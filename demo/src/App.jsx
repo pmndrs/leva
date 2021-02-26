@@ -2,19 +2,29 @@ import React, { Suspense } from 'react'
 import { Link, Route } from 'wouter'
 import styles from './styles.module.css'
 
-const links = [
-  'leva-minimal',
-  'leva-plugin-spring',
-  'leva-busy',
-  'leva-advanced-panels',
-  'leva-scroll',
-  'leva-ui',
-  'leva-theme',
-  'leva-custom-plugin',
-]
+import Minimal from './sandboxes/leva-minimal/src/App'
+import PluginSpring from './sandboxes/leva-plugin-spring/src/App'
+import Busy from './sandboxes/leva-busy/src/App'
+import AdvancedPanels from './sandboxes/leva-advanced-panels/src/App'
+import Scroll from './sandboxes/leva-scroll/src/App'
+import UI from './sandboxes/leva-ui/src/App'
+import Theme from './sandboxes/leva-theme/src/App'
+import CustomPlugin from './sandboxes/leva-custom-plugin/src/App'
 
-const Example = ({ link }) => {
-  const Lazy = React.lazy(() => import(/* @vite-ignore */ `./sandboxes/${link}/src/App`))
+const links = {
+  'leva-minimal': Minimal,
+  'leva-plugin-spring': PluginSpring,
+  'leva-busy': Busy,
+  'leva-advanced-panels': AdvancedPanels,
+  'leva-scroll': Scroll,
+  'leva-ui': UI,
+  'leva-theme': Theme,
+  'leva-custom-plugin': CustomPlugin,
+}
+
+const Example = ({ component }) => {
+  const Component = component
+  
   return (
     <div>
       <Link href="/">
@@ -22,7 +32,7 @@ const Example = ({ link }) => {
         <a className={styles.back}>← Back</a>
       </Link>
       <Suspense fallback={<div>loading...</div>}>
-        <Lazy />
+        <Component />
       </Suspense>
     </div>
   )
@@ -36,16 +46,16 @@ export default function App() {
           <h1 style={{ marginTop: '20vh' }}>Leva demos</h1>
           <h2>Sandboxes</h2>
           <div className={styles.linkList}>
-            {links.map((l) => (
-              <Link key={l} href={`/${l}`}>
+            {Object.keys(links).map((link) => (
+              <Link key={link} href={`/${link}`}>
                 {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a className={styles.link}>{l}</a>
+                <a className={styles.link}>{link}</a>
               </Link>
             ))}
           </div>
         </div>
       </Route>
-      <Route path="/:link">{(params) => <Example link={params.link} />}</Route>
+      <Route path="/:link">{(params) => <Example component={links[params.link]} />}</Route>
     </>
   )
 }
