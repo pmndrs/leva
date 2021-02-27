@@ -18,24 +18,18 @@ export function Leva({
   hideTitleBar = false,
   hidden = false,
 }: LevaProps) {
-  const [, forceUpdate] = React.useReducer((x) => x + 1, 0)
-
   useEffect(() => {
+    rootInitialized = true
     // if this panel was attached somewhere in the app and there is already
     // a floating panel, we remove it.
     if (!isRoot && rootEl) {
       rootEl.remove()
       rootEl = null
     }
-    rootInitialized = true
-    forceUpdate()
     return () => {
-      rootInitialized = false
+      if (!isRoot) rootInitialized = false
     }
   }, [isRoot])
-
-  // removing this line would prevent root panels from rendering
-  if (!isRoot && rootEl) return null
 
   return (
     <LevaRoot
