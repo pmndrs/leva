@@ -79,9 +79,9 @@ export function normalize<V, Settings extends object = {}>(type: string, input: 
   return input
 }
 
-export function sanitize<Settings extends object>(type: string, value: any, settings?: Settings) {
+export function sanitize<Settings extends object>(type: string, value: any, settings?: Settings, prevValue?: any) {
   const { sanitize } = Plugins[type]
-  if (sanitize) return sanitize(value, settings)
+  if (sanitize) return sanitize(value, settings, prevValue)
   return value
 }
 

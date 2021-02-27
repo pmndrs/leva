@@ -53,13 +53,15 @@ function convert<Value extends VectorType, F extends Format, K extends string>(
 export const validateVector = (value: any) => Object.values(value).every((v: any) => validate(v))
 
 export const sanitizeVector = <K extends string, F extends Format>(
-  value: number[] | { [key in K]: number },
-  settings: InternalVectorSettings<K, K[], F>
-): F extends 'array' ? number[] : { [key in K]: number } => {
+  value: VectorType<K>,
+  settings: InternalVectorSettings<K, K[], F>,
+  prevValue: any
+): VectorType<K, F> => {
   const _value = convert(value, 'object', settings.keys) as any
-
-  for (let key in _value) _value[key] = sanitize(_value[key], settings[key as K])
-  return convert(_value, settings.format, settings.keys) as any
+  const _prevValue = convert(prevValue, 'object', settings.keys) as any
+  const _newValue = { ..._prevValue, ..._value }
+  for (let key in _newValue) _newValue[key] = sanitize(_newValue[key], settings[key as K])
+  return convert(_newValue, settings.format, settings.keys) as any
 }
 
 export const formatVector = <K extends string, F extends Format>(
@@ -100,6 +102,7 @@ export function getVectorPlugin<K extends string>(defaultKeys: K[]) {
       normalizeVector(value, settings, defaultKeys),
     validate: validateVector,
     format: (value: any, settings: InternalVectorSettings) => formatVector(value, settings),
-    sanitize: (value: any, settings: InternalVectorSettings) => sanitizeVector(value, settings),
+    sanitize: (value: any, settings: InternalVectorSettings, prevValue: any) =>
+      sanitizeVector(value, settings, prevValue),
   }
 }

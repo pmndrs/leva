@@ -58,7 +58,7 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
   if (!validate(type, _newValue, settings)) {
     throw new ValueError(`The value [${newValue}] did not result in a correct value.`, value)
   }
-  const sanitizedNewValue = sanitize(type, _newValue, settings)
+  const sanitizedNewValue = sanitize(type, _newValue, settings, value)
 
   if (dequal(sanitizedNewValue, value)) {
     /**

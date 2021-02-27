@@ -36,7 +36,7 @@ export type Plugin<Input, Value = Input, InternalSettings = {}> = {
   format?: (value: any, settings: InternalSettings) => any
   normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
   validate?: (value: any, settings: InternalSettings) => boolean
-  sanitize?: (value: any, settings: InternalSettings) => Value
+  sanitize?: (value: any, settings: InternalSettings, prevValue: any) => Value
 }
 
 export type InternalPlugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = Plugin<

@@ -12,13 +12,12 @@ type CoordinateProps<T extends CoordinateValue> = {
   value: T
   settings: InternalNumberSettings
   valueKey: keyof T
-  onUpdate: (value: T) => void
+  onUpdate: (value: any) => void
 }
 
 function Coordinate<T extends CoordinateValue>({ value, id, valueKey, settings, onUpdate }: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
-
-  const setValue = (newValue: any) => onUpdate({ ...value, [valueKey]: sanitizeValue(args, newValue) })
+  const setValue = (newValue: any) => onUpdate({ [valueKey]: sanitizeValue(args, newValue) })
 
   const number = useValue({ ...args, setValue })
 

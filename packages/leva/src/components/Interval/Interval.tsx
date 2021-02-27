@@ -13,7 +13,7 @@ type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
 
 type IntervalSliderProps = {
   value: InternalInterval
-  onDrag: (v: InternalInterval) => void
+  onDrag: (v: Partial<InternalInterval>) => void
 } & InternalIntervalSettings
 
 const Container = styled('div', {
@@ -44,7 +44,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
     }
     const newValue = memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min)
 
-    onDrag({ ...value, [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
+    onDrag({ [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
     return memo
   })
 

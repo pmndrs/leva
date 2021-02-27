@@ -21,9 +21,14 @@ export const schema = (o: any, s: any) =>
 export const format = (v: Interval) => ({ min: v[0], max: v[1] })
 
 export const sanitize = (
-  { min, max }: InternalInterval,
-  { bounds: [MIN, MAX] }: InternalIntervalSettings
-): Interval => [clamp(Number(min), MIN, Math.max(MIN, max)), clamp(Number(max), Math.min(MAX, min), MAX)]
+  value: InternalInterval,
+  { bounds: [MIN, MAX] }: InternalIntervalSettings,
+  prevValue: any
+): Interval => {
+  const _newValue = { min: prevValue[0], max: prevValue[1] }
+  const { min, max } = { ..._newValue, ...value }
+  return [clamp(Number(min), MIN, Math.max(MIN, max)), clamp(Number(max), Math.min(MAX, min), MAX)]
+}
 
 export const normalize = ({ value, min, max }: IntervalInput) => {
   const boundsSettings = { min, max }

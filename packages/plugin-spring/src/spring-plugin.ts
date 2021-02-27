@@ -37,4 +37,5 @@ export const normalize = (input: SpringInput) => {
   }
 }
 
-export const sanitize = (value: InternalSpring, settings: InternalSpringSettings) => sanitizeVector(value, settings)
+export const sanitize = (value: InternalSpring, settings: InternalSpringSettings, prevValue?: any) =>
+  sanitizeVector(value, settings, prevValue)
