@@ -37,8 +37,8 @@ export function SpringCanvas() {
   const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
     onUpdate({
       ...value,
-      tension: memo[0] - Math.round(x) * ts!.step!,
-      friction: memo[1] - Math.round(y / 4) * fs!.step!,
+      tension: memo[0] - Math.round(x) * ts.step,
+      friction: memo[1] - Math.round(y / 4) * fs.step,
     })
     return memo
   })
