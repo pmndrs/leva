@@ -1,5 +1,5 @@
 import React from 'react'
-import { useControls, folder, button, monitor } from 'leva'
+import { useControls, folder, button, monitor, Leva } from 'leva'
 // @ts-ignore
 import { Noise } from 'noisejs'
 import styles from './styles.module.css'
@@ -24,9 +24,7 @@ const ExtraControls = () => {
   return null
 }
 
-export default function App() {
-  const [count, setCount] = React.useState(0)
-
+function Controls() {
   const data = useControls({
     range: { value: 0, min: -10, max: 10 },
     image: { image: undefined },
@@ -41,15 +39,23 @@ export default function App() {
       spring: { tension: 100, friction: 30 },
     }),
   })
+  return <pre>{JSON.stringify(data, null, '  ')}</pre>
+}
+
+export default function App() {
+  const [count, setCount] = React.useState(0)
+  const [show, setShow] = React.useState(true)
 
   return (
     <>
+      <Leva />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>
         <button onClick={() => setCount((c) => c + 1)}>+</button>
+        <button onClick={() => setShow((s) => !s)}>Toggle Main Controls</button>
       </div>
-      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      {show && <Controls />}
       {Array(count)
         .fill(0)
         .map((_, i) => (
