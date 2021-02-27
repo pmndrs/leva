@@ -37,6 +37,7 @@ function Controls() {
     folder: folder({
       boolean: false,
       spring: { tension: 100, friction: 30 },
+      noJoy: { value: [1, 2], joystick: false },
     }),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>

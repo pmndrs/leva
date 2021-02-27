@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import { NumberSettings } from '../../types'
+import { InputWithSettings, NumberSettings } from '../../types'
 import { mapArrayToKeys } from '../../utils'
 import { InternalNumberSettings, sanitize, validate } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from './vector-utils'
@@ -96,7 +96,8 @@ export function normalizeVector<Value extends VectorType, K extends string>(
 export function getVectorPlugin<K extends string>(defaultKeys: K[]) {
   return {
     schema: getVectorSchema(defaultKeys.length),
-    normalize: ({ value, ...settings }: any) => normalizeVector(value, settings, defaultKeys),
+    normalize: <Value extends VectorType>({ value, ...settings }: InputWithSettings<Value, VectorSettings<Value, K>>) =>
+      normalizeVector(value, settings, defaultKeys),
     validate: validateVector,
     format: (value: any, settings: InternalVectorSettings) => formatVector(value, settings),
     sanitize: (value: any, settings: InternalVectorSettings) => sanitizeVector(value, settings),

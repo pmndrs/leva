@@ -8,7 +8,7 @@ import { Portal } from '../UI'
 import { multiplyStep, useTransform } from '../../hooks'
 import { Vector2d } from '../../types'
 
-type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
+type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'onUpdate' | 'settings'>
 
 export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
