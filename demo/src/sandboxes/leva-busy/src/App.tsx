@@ -12,7 +12,7 @@ function frame() {
 }
 
 const ExtraControls = () => {
-  useControls('folder.subfolder', {
+  const data = useControls('folder.subfolder', {
     'Hello Button': button(() => console.log('hello')),
     'deep nested': folder({
       pos2d: { x: 3, y: 4 },
@@ -21,7 +21,7 @@ const ExtraControls = () => {
       pos3dArr: [Math.PI / 2, 20, 4],
     }),
   })
-  return null
+  return <pre>{JSON.stringify(data, null, '  ')}</pre>
 }
 
 function Controls() {
