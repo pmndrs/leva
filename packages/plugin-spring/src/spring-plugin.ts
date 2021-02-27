@@ -12,7 +12,7 @@ export type InternalSpringSettings = InternalVectorSettings<keyof InternalSpring
 const defaultTensionSettings = { min: 1, step: 1 }
 const defaultFrictionSettings = { min: 1, step: 0.5 }
 const defaultMassSettings = { min: 0.1, step: 0.1 }
-const defaultValue = { mass: 1, tension: 100, friction: 30 }
+const defaultValue = { tension: 100, friction: 30, mass: 1 }
 
 export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = {
   component: React.ComponentType
