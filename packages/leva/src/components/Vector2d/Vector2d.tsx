@@ -6,13 +6,18 @@ import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
 
-export type InternalVector2dSettings = InternalVectorSettings<string, [string, string]>
+export type InternalVector2dSettings = InternalVectorSettings<string, [string, string]> & { joystick: boolean }
 export type Vector2dProps = LevaInputProps<Vector2d, InternalVector2dSettings, VectorType>
 
 export const Container = styled('div', {
   display: 'grid',
-  gridTemplateColumns: '$sizes$rowHeight repeat(2, 1fr)',
   columnGap: '$colGap',
+  variants: {
+    withJoystick: {
+      true: { gridTemplateColumns: '$sizes$rowHeight repeat(2, 1fr)' },
+      false: { gridTemplateColumns: 'repeat(2, 1fr)' },
+    },
+  },
 })
 
 export function Vector2dComponent() {
@@ -20,8 +25,8 @@ export function Vector2dComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <Container>
-        <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />
+      <Container withJoystick={settings.joystick}>
+        {settings.joystick && <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />}
         <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>
     </Row>
