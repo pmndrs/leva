@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-spring",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "main": "dist/leva-ui-plugin-spring.cjs.js",
   "module": "dist/leva-ui-plugin-spring.esm.js",
   "types": "dist/leva-ui-plugin-spring.cjs.d.ts",
