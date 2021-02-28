@@ -47,9 +47,11 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
+  const { hideTitleBar, oneLineLabels } = useControls({ hideTitleBar: false, oneLineLabels: false })
+
   return (
     <>
-      <Leva />
+      <Leva hideTitleBar={hideTitleBar} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>
