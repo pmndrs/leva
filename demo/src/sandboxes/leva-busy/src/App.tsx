@@ -15,7 +15,7 @@ const ExtraControls = () => {
   const data = useControls('folder.subfolder', {
     'Hello Button': button(() => console.log('hello')),
     'deep nested': folder({
-      pos2d: { x: 3, y: 4 },
+      pos2d: { value: { x: 3, y: 4 }, lock: true },
       pos2dArr: [100, 200],
       pos3d: { x: 0.3, y: 0.1, z: 0.5 },
       pos3dArr: [Math.PI / 2, 20, 4],

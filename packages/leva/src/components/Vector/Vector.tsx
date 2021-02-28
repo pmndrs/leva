@@ -39,7 +39,7 @@ type VectorSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNum
 
 type VectorProps<T extends CoordinateValue> = {
   value: T
-  settings: VectorSettings<T> & { lock?: boolean }
+  settings: VectorSettings<T> & { lock?: boolean; locked?: boolean }
   onUpdate: (value: T) => void
 }
 
@@ -87,11 +87,11 @@ export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }:
 
   // TODO atm if lock is explicitly set in settings we show the lock
   // this can probably be improved with better logic.
-  const withLock = settings.lock !== undefined
+  const { lock, locked } = settings
 
   return (
-    <Container withLock={withLock}>
-      {withLock && <Lock locked={settings.lock!} onClick={() => setSettings({ lock: !settings.lock })} />}
+    <Container withLock={lock}>
+      {lock && <Lock locked={locked!} onClick={() => setSettings({ locked: !locked })} />}
       {Object.keys(value).map((key, i) => (
         <Coordinate
           id={i === 0 ? path : `${path}.${key}`}

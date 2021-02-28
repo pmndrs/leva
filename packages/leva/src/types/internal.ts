@@ -35,8 +35,8 @@ export type Plugin<Input, Value = Input, InternalSettings = {}> = {
   component: React.ComponentType
   format?: (value: any, settings: InternalSettings) => any
   normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
-  validate?: (value: any, settings: InternalSettings) => boolean
-  sanitize?: (value: any, settings: InternalSettings, prevValue: any) => Value
+  validate?: (value: any, settings: any) => boolean
+  sanitize?: (value: any, settings: any, prevValue: any) => Value
 }
 
 export type InternalPlugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = Plugin<

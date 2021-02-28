@@ -24,7 +24,7 @@ export type VectorSettings<V extends VectorType, K extends string> = (NumberSett
 
 export type InternalVectorSettings<K extends string = string, Keys extends K[] = K[], F extends Format = Format> = {
   [key in K]: InternalNumberSettings
-} & { keys: Keys; format: F; lock?: boolean }
+} & { keys: Keys; format: F; lock: boolean; locked: boolean }
 
 export function getVectorSchema(dimension: number) {
   // prettier-ignore
@@ -68,7 +68,7 @@ export const sanitizeVector = <K extends string, F extends Format>(
   else {
     const _prevValue = convert(prevValue, 'object', settings.keys) as any
     // if there's only one key and lock is true we compute the aspect ratio
-    if (_valueKeys.length === 1 && !!settings.lock) {
+    if (_valueKeys.length === 1 && settings.locked) {
       const lockedKey = _valueKeys[0]
       const lockedCoordinate = _value[lockedKey]
       const previousLockedCoordinate = _prevValue[lockedKey]
@@ -117,7 +117,7 @@ export function normalizeVector<Value extends VectorType, K extends string>(
   const settings = normalizeKeyedNumberSettings(value, mergedSettings)
   return {
     value: (format === 'array' ? _value : value) as Value,
-    settings: { ...settings, format, keys, lock },
+    settings: { ...settings, format, keys, lock, locked: false },
   }
 }
 
