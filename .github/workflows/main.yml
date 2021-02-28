@@ -13,12 +13,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-         
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
         with:
           install-command: yarn --immutable --silent
+
+      - name: Check types
+        run: yarn tsc
 
       - name: Build
         run: yarn build
