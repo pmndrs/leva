@@ -15,7 +15,7 @@ const specialComponents = {
 }
 
 export const Control = React.memo(({ path }: ControlProps) => {
-  const [input, set] = useInput(path)
+  const [input, set, setSettings] = useInput(path)
 
   const { type, label, key, ...inputProps } = input
 
@@ -30,6 +30,16 @@ export const Control = React.memo(({ path }: ControlProps) => {
     return null
   }
 
-  // @ts-expect-error
-  return <ControlInput type={type} label={label} path={path} valueKey={key} {...inputProps} setValue={set} />
+  return (
+    // @ts-expect-error
+    <ControlInput
+      type={type}
+      label={label}
+      path={path}
+      valueKey={key}
+      setValue={set}
+      setSettings={setSettings}
+      {...inputProps}
+    />
+  )
 })

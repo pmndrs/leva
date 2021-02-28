@@ -11,6 +11,7 @@ type ControlInputProps<V, Settings extends object> = {
   value: V
   settings: Settings
   setValue: (value: any) => void
+  setSettings: (settings: any) => void
 }
 
 export function ControlInput<V, Settings extends object>({
@@ -21,12 +22,25 @@ export function ControlInput<V, Settings extends object>({
   value,
   settings,
   setValue,
+  setSettings,
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
   const Input = Plugins[type].component
 
   return (
-    <InputContext.Provider value={{ key: valueKey, path, label, displayValue, value, onChange, onUpdate, settings }}>
+    <InputContext.Provider
+      value={{
+        key: valueKey,
+        path,
+        label,
+        displayValue,
+        value,
+        onChange,
+        onUpdate,
+        settings,
+        setValue,
+        setSettings,
+      }}>
       <Input />
     </InputContext.Provider>
   )

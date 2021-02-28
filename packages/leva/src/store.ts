@@ -17,6 +17,7 @@ export type StoreType = {
   getData: () => Data
   addData: (newData: Data) => void
   setValueAtPath: (path: string, value: any) => void
+  setSettingsAtPath: (path: string, settings: any) => void
   // TODO possibly better type this
   set: (values: Record<string, any>) => void
   get: (path: string) => any
@@ -174,6 +175,15 @@ export const Store = (function (this: StoreType) {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
       updateInput(data[path], value)
+      return { data }
+    })
+  }
+
+  this.setSettingsAtPath = (path, settings) => {
+    store.setState((s) => {
+      const data = s.data
+      //@ts-expect-error (we always update inputs with settings)
+      data[path].settings = { ...data[path].settings, ...settings }
       return { data }
     })
   }
