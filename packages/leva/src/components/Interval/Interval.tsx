@@ -18,7 +18,6 @@ type IntervalSliderProps = {
 
 const Container = styled('div', {
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
   columnGap: '$colGap',
   gridColumnStart: 2,
 })

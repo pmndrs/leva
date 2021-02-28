@@ -1,5 +1,6 @@
 import React from 'react'
 import { useInputContext } from '../../context'
+import { styled } from '../../styles'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
@@ -42,10 +43,16 @@ type VectorProps<T extends CoordinateValue> = {
   onUpdate: (value: T) => void
 }
 
+export const Container = styled('div', {
+  display: 'grid',
+  columnGap: '$colGap',
+  gridAutoFlow: 'column dense',
+})
+
 export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }: VectorProps<T>) {
   const { path } = useInputContext()
   return (
-    <>
+    <Container>
       {Object.keys(value).map((key, i) => (
         <Coordinate
           id={i === 0 ? path : `${path}.${key}`}
@@ -56,6 +63,6 @@ export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }:
           onUpdate={onUpdate}
         />
       ))}
-    </>
+    </Container>
   )
 }
