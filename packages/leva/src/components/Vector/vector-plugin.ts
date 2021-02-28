@@ -60,8 +60,16 @@ export const sanitizeVector = <K extends string, F extends Format>(
   prevValue: any
 ): VectorType<K, F> => {
   const _value = convert(value, 'object', settings.keys) as any
-  const _prevValue = convert(prevValue, 'object', settings.keys) as any
-  const _newValue = { ..._prevValue, ..._value }
+  let _newValue
+
+  // if _value includes all keys of the Vector then _value is the full _newValue
+  if (Object.keys(_value).length === settings.keys.length) _newValue = _value
+  else {
+    // _value is incomplete so we merge the previous value with the new one
+    const _prevValue = convert(prevValue, 'object', settings.keys) as any
+    _newValue = { ..._prevValue, ..._value }
+  }
+
   for (let key in _newValue) _newValue[key] = sanitize(_newValue[key], settings[key as K])
   return convert(_newValue, settings.format, settings.keys) as any
 }
