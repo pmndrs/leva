@@ -34,9 +34,9 @@ function Controls() {
     color: '#ffffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
-    colorObj: { r: 1, g: 2, b: 3 },
+    colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },
     folder: folder({
-      boolean: false,
+      boolean: true,
       spring: { tension: 100, friction: 30 },
       noJoy: { value: [1, 2], joystick: false },
     }),

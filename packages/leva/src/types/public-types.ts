@@ -40,10 +40,14 @@ export type SeparatorInput = {
 
 export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
 
+type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
+// type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
+
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
 export type Vector = Record<string, number>
+
 export type Vector2dArray = [number, number]
 export type Vector2d = Vector2dArray | Vector
 export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean; lock?: boolean }
@@ -93,7 +97,13 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
-export type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
+// type Merge<T, G extends Object> = T extends any[]
+//   ? T
+//   : T extends object
+//   ? {
+//       [K in keyof T]: K extends keyof G ? G[K] : T[K]
+//     }
+//   : T
 
 type SchemaItemWithOptions = SchemaItem & GenericSchemaItemOptions
 
