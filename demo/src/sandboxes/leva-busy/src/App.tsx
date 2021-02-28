@@ -15,7 +15,7 @@ const ExtraControls = () => {
   const data = useControls('folder.subfolder', {
     'Hello Button': button(() => console.log('hello')),
     'deep nested': folder({
-      pos2d: { x: 3, y: 4 },
+      pos2d: { value: { x: 3, y: 4 }, lock: true },
       pos2dArr: [100, 200],
       pos3d: { x: 0.3, y: 0.1, z: 0.5 },
       pos3dArr: [Math.PI / 2, 20, 4],
@@ -27,6 +27,7 @@ const ExtraControls = () => {
 function Controls() {
   const data = useControls({
     range: { value: 0, min: -10, max: 10 },
+    dimension: '4px',
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
@@ -47,9 +48,11 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
+  const { hideTitleBar, oneLineLabels } = useControls({ hideTitleBar: false, oneLineLabels: false })
+
   return (
     <>
-      <Leva />
+      <Leva hideTitleBar={hideTitleBar} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>

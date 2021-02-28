@@ -46,12 +46,12 @@ type NumberInput = MergedInputWithSettings<number, NumberSettings>
 export type Vector = Record<string, number>
 export type Vector2dArray = [number, number]
 export type Vector2d = Vector2dArray | Vector
-export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean }
+export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean; lock?: boolean }
 export type Vector2dInput = MergedInputWithSettings<Vector2d, Vector2dSettings>
 
 export type Vector3dArray = [number, number, number]
 export type Vector3d = Vector3dArray | Vector
-export type Vector3dSettings = VectorSettings<Vector3d, 'x' | 'y' | 'z'>
+export type Vector3dSettings = VectorSettings<Vector3d, 'x' | 'y' | 'z'> & { lock?: boolean }
 export type Vector3dInput = MergedInputWithSettings<Vector3d, Vector3dSettings>
 
 export type IntervalInput = { value: [number, number]; min: number; max: number }

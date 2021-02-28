@@ -18,11 +18,13 @@ export type VectorObjectSettings<V extends VectorType, K extends string> = GetKe
     : { [key in K]: NumberSettings }
   : { [key in GetKeys<V>]: NumberSettings }
 
-export type VectorSettings<V extends VectorType, K extends string> = NumberSettings | VectorObjectSettings<V, K>
+export type VectorSettings<V extends VectorType, K extends string> = (NumberSettings | VectorObjectSettings<V, K>) & {
+  lock?: boolean
+}
 
 export type InternalVectorSettings<K extends string = string, Keys extends K[] = K[], F extends Format = Format> = {
   [key in K]: InternalNumberSettings
-} & { keys: Keys; format: F }
+} & { keys: Keys; format: F; lock: boolean; locked: boolean }
 
 export function getVectorSchema(dimension: number) {
   // prettier-ignore
@@ -53,13 +55,39 @@ function convert<Value extends VectorType, F extends Format, K extends string>(
 export const validateVector = (value: any) => Object.values(value).every((v: any) => validate(v))
 
 export const sanitizeVector = <K extends string, F extends Format>(
-  value: number[] | { [key in K]: number },
-  settings: InternalVectorSettings<K, K[], F>
-): F extends 'array' ? number[] : { [key in K]: number } => {
+  value: VectorType<K>,
+  settings: InternalVectorSettings<K, K[], F>,
+  prevValue: any
+): VectorType<K, F> => {
   const _value = convert(value, 'object', settings.keys) as any
+  let _newValue: any = {}
+  const _valueKeys = Object.keys(_value)
 
-  for (let key in _value) _value[key] = sanitize(_value[key], settings[key as K])
-  return convert(_value, settings.format, settings.keys) as any
+  // if _value includes all keys of the Vector then _value is the full _newValue
+  if (_valueKeys.length === settings.keys.length) _newValue = _value
+  else {
+    const _prevValue = convert(prevValue, 'object', settings.keys) as any
+    // if there's only one key and lock is true we compute the aspect ratio
+    if (_valueKeys.length === 1 && settings.locked) {
+      const lockedKey = _valueKeys[0]
+      const lockedCoordinate = _value[lockedKey]
+      const previousLockedCoordinate = _prevValue[lockedKey]
+      for (let key in _prevValue) {
+        if (key === lockedKey) _newValue[lockedKey] = lockedCoordinate
+        else {
+          _newValue[key] = previousLockedCoordinate
+            ? (_prevValue[key] / previousLockedCoordinate) * lockedCoordinate
+            : 0
+        }
+      }
+    } else {
+      // _value is incomplete so we merge the previous value with the new one
+      _newValue = { ..._prevValue, ..._value }
+    }
+  }
+
+  for (let key in _newValue) _newValue[key] = sanitize(_newValue[key], settings[key as K])
+  return convert(_newValue, settings.format, settings.keys) as any
 }
 
 export const formatVector = <K extends string, F extends Format>(
@@ -71,7 +99,7 @@ const isNumberSettings = (o?: object) => o && ('step' in o || 'min' in o || 'max
 
 export function normalizeVector<Value extends VectorType, K extends string>(
   _value: Value,
-  _settings: VectorSettings<Value, K>,
+  { lock = false, ..._settings }: VectorSettings<Value, K>,
   defaultKeys: K[] = []
 ) {
   const format: Format = Array.isArray(_value) ? 'array' : 'object'
@@ -89,7 +117,7 @@ export function normalizeVector<Value extends VectorType, K extends string>(
   const settings = normalizeKeyedNumberSettings(value, mergedSettings)
   return {
     value: (format === 'array' ? _value : value) as Value,
-    settings: { ...settings, format, keys },
+    settings: { ...settings, format, keys, lock, locked: false },
   }
 }
 
@@ -100,6 +128,7 @@ export function getVectorPlugin<K extends string>(defaultKeys: K[]) {
       normalizeVector(value, settings, defaultKeys),
     validate: validateVector,
     format: (value: any, settings: InternalVectorSettings) => formatVector(value, settings),
-    sanitize: (value: any, settings: InternalVectorSettings) => sanitizeVector(value, settings),
+    sanitize: (value: any, settings: InternalVectorSettings, prevValue: any) =>
+      sanitizeVector(value, settings, prevValue),
   }
 }

@@ -14,8 +14,8 @@ export const Container = styled('div', {
   columnGap: '$colGap',
   variants: {
     withJoystick: {
-      true: { gridTemplateColumns: '$sizes$rowHeight repeat(2, 1fr)' },
-      false: { gridTemplateColumns: 'repeat(2, 1fr)' },
+      true: { gridTemplateColumns: '$sizes$rowHeight auto' },
+      false: { gridTemplateColumns: 'auto' },
     },
   },
 })
