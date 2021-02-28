@@ -11,24 +11,24 @@ export type InternalNumberSettings = {
 }
 type NumberInput = InputWithSettings<number | string, NumberSettings>
 
-export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseNumber(o)))
+export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 
-export const validate = (v: string | number) => v !== '' && !isNaN(parseNumber(v))
+export const validate = (v: string | number) => v !== '' && !isNaN(parseFloat(v as string))
 
 export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
-  const f = parseNumber(v).toFixed(pad)
+  const f = parseFloat(v).toFixed(pad)
   return suffix ? f + suffix : f
 }
 
 export const sanitize = (v: string | number, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
-  const f = clamp(parseNumber(v), min, max)
+  const f = clamp(parseFloat(v as string), min, max)
   return suffix ? f + suffix : f
 }
 
 export const normalize = ({ value, ...settings }: NumberInput) => {
   const { min, max } = settings
 
-  const _value = parseNumber(value)
+  const _value = parseFloat(value as string)
   let suffix
   if (!Number.isFinite(value)) {
     const match = String(value).match(/[A-Z]+/i)

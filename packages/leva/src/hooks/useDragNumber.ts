@@ -1,6 +1,5 @@
 import { useDrag } from './useDrag'
 import { InternalNumberSettings } from '../components/Number/number-plugin'
-import { parseNumber } from '../utils'
 import { LevaInputProps } from '../types'
 
 type UseDragNumberProps = {
@@ -16,7 +15,7 @@ export function useDragNumber({ settings, onDrag }: UseDragNumberProps) {
   return useDrag(({ delta: [dx], event, memo = 0 }) => {
     memo += dx / 2
     if (Math.abs(memo) >= 1) {
-      onDrag((v: any) => parseNumber(v) + Math.floor(memo) * step * multiplyStep(event))
+      onDrag((v: any) => parseFloat(v) + Math.floor(memo) * step * multiplyStep(event))
       memo = 0
     }
     return memo

@@ -4,7 +4,8 @@ export const ceil = (v: number) => Math.sign(v) * Math.ceil(Math.abs(v))
 export const parseNumber = (v: number | string) => {
   if (typeof v === 'number') return v
   try {
-    return evaluate(v)
+    const _v = evaluate(v)
+    if (!isNaN(_v)) return _v
   } catch {}
   return parseFloat(v)
 }
