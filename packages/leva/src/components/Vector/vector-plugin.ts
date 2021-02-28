@@ -24,7 +24,7 @@ export type VectorSettings<V extends VectorType, K extends string> = (NumberSett
 
 export type InternalVectorSettings<K extends string = string, Keys extends K[] = K[], F extends Format = Format> = {
   [key in K]: InternalNumberSettings
-} & { keys: Keys; format: F; lock: boolean }
+} & { keys: Keys; format: F; lock?: boolean }
 
 export function getVectorSchema(dimension: number) {
   // prettier-ignore
@@ -60,14 +60,30 @@ export const sanitizeVector = <K extends string, F extends Format>(
   prevValue: any
 ): VectorType<K, F> => {
   const _value = convert(value, 'object', settings.keys) as any
-  let _newValue
+  let _newValue: any = {}
+  const _valueKeys = Object.keys(_value)
 
   // if _value includes all keys of the Vector then _value is the full _newValue
-  if (Object.keys(_value).length === settings.keys.length) _newValue = _value
+  if (_valueKeys.length === settings.keys.length) _newValue = _value
   else {
-    // _value is incomplete so we merge the previous value with the new one
     const _prevValue = convert(prevValue, 'object', settings.keys) as any
-    _newValue = { ..._prevValue, ..._value }
+    // if there's only one key and lock is true we compute the aspect ratio
+    if (_valueKeys.length === 1 && !!settings.lock) {
+      const lockedKey = _valueKeys[0]
+      const lockedCoordinate = _value[lockedKey]
+      const previousLockedCoordinate = _prevValue[lockedKey]
+      for (let key in _prevValue) {
+        if (key === lockedKey) _newValue[lockedKey] = lockedCoordinate
+        else {
+          _newValue[key] = previousLockedCoordinate
+            ? (_prevValue[key] / previousLockedCoordinate) * lockedCoordinate
+            : 0
+        }
+      }
+    } else {
+      // _value is incomplete so we merge the previous value with the new one
+      _newValue = { ..._prevValue, ..._value }
+    }
   }
 
   for (let key in _newValue) _newValue[key] = sanitize(_newValue[key], settings[key as K])

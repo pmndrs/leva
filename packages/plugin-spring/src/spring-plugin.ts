@@ -24,14 +24,16 @@ export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> =
 }
 
 export const normalize = (input: SpringInput) => {
-  const { value, ..._settings } = 'value' in input ? input : { value: input }
-  const settings = {
+  const { value: _value, ..._settings } = 'value' in input ? input : { value: input }
+  const mergedSettings = {
     tension: { ...defaultTensionSettings, ..._settings.tension },
     friction: { ...defaultFrictionSettings, ..._settings.friction },
     mass: { ...defaultMassSettings, ..._settings.mass },
   }
 
-  return normalizeVector({ ...defaultValue, ...value }, settings) as {
+  const { value, settings } = normalizeVector({ ...defaultValue, ..._value }, mergedSettings)
+
+  return { value, settings: { ...settings, lock: undefined } } as {
     value: InternalSpring
     settings: InternalSpringSettings
   }

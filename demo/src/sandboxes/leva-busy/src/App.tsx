@@ -27,6 +27,7 @@ const ExtraControls = () => {
 function Controls() {
   const data = useControls({
     range: { value: 0, min: -10, max: 10 },
+    dimension: '4px',
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
