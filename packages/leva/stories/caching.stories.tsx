@@ -20,11 +20,11 @@ const Controls = () => {
 }
 
 const Template: Story<any> = () => {
-  const [shown, toggle] = React.useState(true)
+  const [mounted, toggle] = React.useState(true)
   return (
     <div>
-      <button onClick={() => toggle((t) => !t)}>{shown ? 'Hide' : 'Show'}</button>
-      {shown && <Controls />}
+      <button onClick={() => toggle((t) => !t)}>{mounted ? 'Unmount' : 'Mount'}</button>
+      {mounted && <Controls />}
     </div>
   )
 }
