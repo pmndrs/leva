@@ -53,10 +53,12 @@ export function Leva({
 export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
     if (isGlobalPanel && !rootInitialized) {
-      rootEl = document.createElement('div')
-      if (document.body) {
-        document.body.appendChild(rootEl)
-        ReactDOM.render(<Leva isRoot />, rootEl)
+      if (!rootEl) {
+        rootEl = document.createElement('div')
+        if (document.body) {
+          document.body.appendChild(rootEl)
+          ReactDOM.render(<Leva isRoot />, rootEl)
+        }
       }
       rootInitialized = true
     }
