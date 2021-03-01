@@ -46,18 +46,23 @@ const LevaCore = React.memo(({ store, rootClass, detached, collapsed, oneLineLab
   const [toggled, setToggle] = useState(!collapsed)
 
   // this generally happens on first render because the store is initialized in useEffect.
-  if (paths.length < 1) return null
-
-  // TODO remove oneLineLabels as any
+  const shouldShow = paths.length > 0
 
   return (
-    <StyledRoot ref={rootRef} className={rootClass} detached={detached} oneLineLabels={oneLineLabels as any}>
+    <StyledRoot
+      ref={rootRef}
+      className={rootClass}
+      detached={detached}
+      oneLineLabels={oneLineLabels}
+      style={{ display: shouldShow ? 'block' : 'none' }}>
       {!hideTitleBar && (
         <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
       )}
-      <StoreContext.Provider value={store}>
-        <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
-      </StoreContext.Provider>
+      {shouldShow && (
+        <StoreContext.Provider value={store}>
+          <TreeWrapper isRoot detached={detached} tree={tree} toggled={toggled} />
+        </StoreContext.Provider>
+      )}
     </StyledRoot>
   )
 })
