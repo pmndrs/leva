@@ -4,6 +4,7 @@ import { useStoreContext } from '../context'
 import { Data, DataItem } from '../types'
 
 const getInputAtPath = (data: Data, path: string) => {
+  if (!data[path]) return null
   const { count, ...input } = data[path]
   return input
 }
@@ -15,9 +16,9 @@ type Input = Omit<DataItem, 'count'>
  *
  * @param path
  */
-export function useInput(path: string): [Input, (value: any) => void, (value: any) => void] {
+export function useInput(path: string): [Input | null, (value: any) => void, (value: any) => void] {
   const store = useStoreContext()
-  const [state, setState] = useState<Input>(getInputAtPath(store.getData(), path))
+  const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
   const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
   const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])

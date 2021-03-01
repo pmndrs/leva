@@ -16,6 +16,7 @@ const specialComponents = {
 
 export const Control = React.memo(({ path }: ControlProps) => {
   const [input, set, setSettings] = useInput(path)
+  if (!input) return null
 
   const { type, label, key, ...inputProps } = input
 
