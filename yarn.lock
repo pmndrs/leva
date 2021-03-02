@@ -1886,13 +1886,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@leva-ui/plugin-spring@workspace:packages/plugin-spring":
+"@leva-ui/plugin-spring@*, @leva-ui/plugin-spring@workspace:packages/plugin-spring":
   version: 0.0.0-use.local
   resolution: "@leva-ui/plugin-spring@workspace:packages/plugin-spring"
   dependencies:
     react-spring: ^9.0.0-rc.3
   peerDependencies:
-    leva: ">=1.0.0"
+    leva: ">=0.4.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
@@ -7042,9 +7042,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:demo"
   dependencies:
+    "@leva-ui/plugin-spring": "*"
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     "@vitejs/plugin-react-refresh": ^1.1.0
+    leva: "*"
     noisejs: ^2.1.0
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -11115,7 +11117,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"leva@workspace:packages/leva":
+"leva@*, leva@workspace:packages/leva":
   version: 0.0.0-use.local
   resolution: "leva@workspace:packages/leva"
   dependencies:

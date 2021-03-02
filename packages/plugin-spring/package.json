@@ -6,7 +6,7 @@
   "types": "dist/leva-ui-plugin-spring.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "leva": ">=1.0.0",
+    "leva": ">=0.4.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },

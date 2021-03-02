@@ -6,6 +6,8 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@leva-ui/plugin-spring": "*",
+    "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
