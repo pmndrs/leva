@@ -10,13 +10,21 @@ type CoordinateValue = Record<string, number>
 
 type CoordinateProps<T extends CoordinateValue> = {
   id?: string
+  hideLabel?: boolean
   value: T
   settings: InternalNumberSettings
   valueKey: keyof T
   onUpdate: (value: any) => void
 }
 
-function Coordinate<T extends CoordinateValue>({ value, id, valueKey, settings, onUpdate }: CoordinateProps<T>) {
+function Coordinate<T extends CoordinateValue>({
+  value,
+  id,
+  valueKey,
+  settings,
+  onUpdate,
+  hideLabel,
+}: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
   const setValue = (newValue: any) => onUpdate({ [valueKey]: sanitizeValue(args, newValue) })
 
@@ -31,6 +39,7 @@ function Coordinate<T extends CoordinateValue>({ value, id, valueKey, settings, 
       onUpdate={number.onUpdate}
       onChange={number.onChange}
       settings={settings}
+      hideLabel={hideLabel}
     />
   )
 }
@@ -41,6 +50,7 @@ type VectorProps<T extends CoordinateValue> = {
   value: T
   settings: VectorSettings<T> & { lock?: boolean; locked?: boolean }
   onUpdate: (value: T) => void
+  hideNumberLabels?: boolean
 }
 
 export const Container = styled('div', {
@@ -82,7 +92,7 @@ function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked:
   )
 }
 
-export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }: VectorProps<T>) {
+export function Vector<T extends CoordinateValue>({ value, onUpdate, settings, hideNumberLabels }: VectorProps<T>) {
   const { path, setSettings } = useInputContext()
 
   // TODO atm if lock is explicitly set in settings we show the lock
@@ -100,6 +110,7 @@ export function Vector<T extends CoordinateValue>({ value, onUpdate, settings }:
           value={value}
           settings={settings[key]}
           onUpdate={onUpdate}
+          hideLabel={hideNumberLabels}
         />
       ))}
     </Container>
