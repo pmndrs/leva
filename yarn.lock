@@ -2162,6 +2162,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-polymorphic@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@radix-ui/react-polymorphic@npm:0.0.5"
+  peerDependencies:
+    react: ^16.8 || ^17.0
+  checksum: d2bca927fb5b63c66dc01c547645db54892693b01b19a72798d2d625259c82a024e19f25efcea1daa23de96f2dc39c7a82d12a3738f9d401b25215f449585901
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-portal@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@radix-ui/react-portal@npm:0.0.5"
+  dependencies:
+    "@radix-ui/react-polymorphic": 0.0.5
+    "@radix-ui/react-primitive": 0.0.4
+    "@radix-ui/react-utils": 0.0.5
+    "@radix-ui/utils": 0.0.3
+  peerDependencies:
+    react: ^16.8 || ^17.0
+    react-dom: ^16.8 || ^17.0
+  checksum: 485491f1e66016fc99c769022731212e0dc6b272359b770322b2e3478cf0dea20437837b9b6e5950b2ff0eadcdd336376f6bd1cf55a7ea2792003424050c66e7
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-primitive@npm:0.0.4":
+  version: 0.0.4
+  resolution: "@radix-ui/react-primitive@npm:0.0.4"
+  dependencies:
+    "@radix-ui/react-polymorphic": 0.0.5
+    "@radix-ui/utils": 0.0.3
+  peerDependencies:
+    react: ^16.8 || ^17.0
+  checksum: f7a94f6c4c9b4c9b815d6499bf64561a080ffdda9574a4320098f4cbfa6d8c8d5d167bba1378f4976d4bce3d96a2346dc9c9f413eb349be9b874a1d1f91d42f9
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-utils@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@radix-ui/react-utils@npm:0.0.5"
+  dependencies:
+    "@radix-ui/react-polymorphic": 0.0.5
+    "@radix-ui/utils": 0.0.3
+  peerDependencies:
+    react: ^16.8 || ^17.0
+  checksum: 1f8ac4cebebb23b6a89f67e6e949ba94378551baf0e066d4d8160a29feecf09155f0e02151b4c72e8ccda49ce725b1e525c00df9eb9896733e0b42c491898795
+  languageName: node
+  linkType: hard
+
+"@radix-ui/utils@npm:0.0.3":
+  version: 0.0.3
+  resolution: "@radix-ui/utils@npm:0.0.3"
+  checksum: 5ba7d5161d90e69fa36b30e5e90185e3f892b795262894f9f06ea62c5b46177af8b324de58818bd4579497926fb30870fe33dba4245f9aef445d395b8497b8c7
+  languageName: node
+  linkType: hard
+
 "@reach/router@npm:^1.3.3":
   version: 1.3.4
   resolution: "@reach/router@npm:1.3.4"
@@ -11121,6 +11176,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "leva@workspace:packages/leva"
   dependencies:
+    "@radix-ui/react-portal": ^0.0.5
     "@stitches/react": ^0.1.0-canary.12
     "@welldone-software/why-did-you-render": ^6.0.5
     clipboard-polyfill: ^3.0.2
@@ -11128,7 +11184,6 @@ fsevents@^1.2.7:
     merge-value: ^1.0.0
     react-colorful: ^5.0.0
     react-dropzone: ^11.3.1
-    react-portal: ^4.2.1
     react-use-gesture: ^9.0.2
     tinycolor2: ^1.4.2
     v8n: ^1.3.3
@@ -13782,7 +13837,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.0.0, prop-types@npm:^15.5.10, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -14345,17 +14400,6 @@ fsevents@^1.2.7:
     "@popperjs/core": ^2.0.0
     react: ^16.8.0 || ^17
   checksum: 0b1303d3285e93245fb7e0460996c4dfd53b66152d09e41b1dcb6c9f99932513bf891b4359511aeb3b17eaa2ae8555129631ca2f61337d461e691104cc454898
-  languageName: node
-  linkType: hard
-
-"react-portal@npm:^4.2.1":
-  version: 4.2.1
-  resolution: "react-portal@npm:4.2.1"
-  dependencies:
-    prop-types: ^15.5.8
-  peerDependencies:
-    react: ^15.0.0-0 || ^16.0.0-0 || ^17.0.0-0
-  checksum: 474640310e97159d53b481b9f7e274e85a1047b09fef9e3429658c3e60131bc9687071996af48169c91752f052bf75e8c65642ecfc062d9dbec75b2c589f6cb2
   languageName: node
   linkType: hard
 

@@ -18,7 +18,6 @@ export default function App() {
     color: '#ffffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
-    colorObj: { r: 1, g: 2, b: 3 },
     folder2: folder({
       boolean: false,
       spring: { tension: 100, friction: 30 },
@@ -35,6 +34,7 @@ export default function App() {
         { collapsed: false }
       ),
     }),
+    colorObj: { r: 1, g: 2, b: 3 },
   })
 
   return (

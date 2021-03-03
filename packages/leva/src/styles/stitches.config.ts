@@ -18,6 +18,7 @@ export const getDefaultTheme = () => ({
     lg: '10px',
   },
   space: {
+    xs: '3px',
     sm: '6px',
     md: '10px',
     rowGap: '7px',
@@ -32,6 +33,7 @@ export const getDefaultTheme = () => ({
   sizes: {
     rootWidth: '280px',
     controlWidth: '160px',
+    numberInputMinWidth: '36px',
     scrubberWidth: '8px',
     scrubberHeight: '16px',
     rowHeight: '24px',

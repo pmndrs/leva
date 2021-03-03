@@ -11,7 +11,7 @@ export const RangeGrid = styled('div', {
       true: {
         position: 'relative',
         display: 'grid',
-        gridTemplateColumns: '3fr 2fr',
+        gridTemplateColumns: 'auto $sizes$numberInputMinWidth',
         columnGap: '$colGap',
         alignItems: 'center',
       },
