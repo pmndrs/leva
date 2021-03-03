@@ -10,5 +10,5 @@ export { useInputContext } from '../context'
 export { styled, useTh } from '../styles'
 
 // export types
-export { LevaInputProps, InputWithSettings, NumberSettings } from '../types'
-export { InternalNumberSettings } from '../components/Number/number-plugin'
+export type { LevaInputProps, InputWithSettings, NumberSettings } from '../types'
+export type { InternalNumberSettings } from '../components/Number/number-plugin'
