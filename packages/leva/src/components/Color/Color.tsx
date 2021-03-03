@@ -17,6 +17,7 @@ function convertToRgb(value: Color, format: string) {
 
 export function ColorComponent() {
   const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
+  const { format, hasAlpha } = settings
 
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
 
@@ -29,7 +30,7 @@ export function ColorComponent() {
    * to the ColorPicker as we were doing before
    */
   const [initialRgb, setInitialRgb] = useState(() => convertToRgb(value, format))
-  const { format, hasAlpha } = settings
+
   const ColorPicker = hasAlpha ? RgbaColorPicker : RgbColorPicker
 
   const showPicker = () => {
