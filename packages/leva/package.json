@@ -3,6 +3,20 @@
   "version": "0.4.4",
   "main": "dist/leva.cjs.js",
   "module": "dist/leva.esm.js",
+  "exports": {
+    ".": {
+      "import": "dist/leva.esm.js",
+      "require": "dist/leva.cjs.js"
+    },
+    "./plugins": {
+      "import": "plugins/dist/leva-plugins.esm.js",
+      "require": "plugins/dist/leva-plugins.cjs.js"
+    },
+    "./utilities": {
+      "import": "utilities/dist/leva-utilities.esm.js",
+      "require": "utilities/dist/leva-utilities.cjs.js"
+    }
+  },
   "types": "dist/leva.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
