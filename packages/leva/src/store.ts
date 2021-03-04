@@ -112,7 +112,7 @@ export const Store = (function (this: StoreType) {
           const input = data[path]
           input.count--
           if (input.count === 0 && input.type in SpecialInputTypes) {
-            // this makes sure special inputs such as buttons are proprely
+            // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
           }
