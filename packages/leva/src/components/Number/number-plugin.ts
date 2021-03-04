@@ -1,5 +1,5 @@
 import { InputWithSettings, NumberSettings } from '../../types'
-import { getStep, clamp, parseNumber, ceil } from '../../utils'
+import { getStep, clamp, ceil } from '../../utils'
 
 export type InternalNumberSettings = {
   min: number
