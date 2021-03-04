@@ -6,14 +6,23 @@ import { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
+/**
+ * Utility types that joins a value with its settings
+ */
 export type InputWithSettings<V extends unknown, Settings = {}> = {
   value: V
 } & Settings
 
+/**
+ * Either the raw value, either the value with its settings
+ * In other words => value || { value, ...settings }
+ */
 export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V, Settings>
 
+/**
+ * Special Inputs
+ */
 export enum SpecialInputTypes {
-  SEPARATOR = 'SEPARATOR',
   BUTTON = 'BUTTON',
   MONITOR = 'MONITOR',
   FOLDER = 'FOLDER',
@@ -24,7 +33,7 @@ export type ButtonInput = {
   onClick: () => any
 }
 
-export type MonitorSettings = { graph: boolean; interval: number }
+export type MonitorSettings = { graph?: boolean; interval?: number }
 
 export type MonitorInput = {
   type: SpecialInputTypes.MONITOR
@@ -32,16 +41,9 @@ export type MonitorInput = {
   settings: MonitorSettings
 }
 
-export type FolderSettings = { collapsed: boolean; render?: RenderFn }
+export type SpecialInput = MonitorInput | ButtonInput
 
-export type SeparatorInput = {
-  type: SpecialInputTypes.SEPARATOR
-}
-
-export type SpecialInput = MonitorInput | ButtonInput | SeparatorInput
-
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
-// type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
+export type FolderSettings = { collapsed?: boolean; render?: RenderFn }
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
@@ -97,6 +99,9 @@ type SchemaItem =
   | FolderInput<unknown>
   | CustomInput<unknown>
 
+type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
+// type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
+
 // type Merge<T, G extends Object> = T extends any[]
 //   ? T
 //   : T extends object
@@ -109,6 +114,10 @@ type SchemaItemWithOptions = SchemaItem & GenericSchemaItemOptions
 
 export type Schema = Record<string, SchemaItemWithOptions>
 
+/**
+ * Dummy type used internally to flag non compatible input types.
+ * @internal
+ */
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
 type ColorObjectRGBA = { r: number; g: number; b: number; a: number }
@@ -176,3 +185,66 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
  * on the schema, to the risk that { a: 1, b: 2 } is recognized as Vector
  * instead of a two number inputs.
  */
+
+/**
+ * Interface to build a plugin.
+ *
+ * @public
+ */
+export interface Plugin<Input, Value = Input, InternalSettings = {}> {
+  /**
+   * The component that shows the input value;
+   */
+  component: React.ComponentType
+  /**
+   * Normalizes the input into a { value, settings } object.
+   *
+   * @example
+   * Let's consider a color with an inverted settings option that computes the negative
+   * of that color. The plugin could look something like:
+   * ```ts
+   * myColorPlugin({ color: '#fff', inverted: true })
+   * ```
+   *
+   * In that case, your normalize funciton would be something like:
+   * ```ts
+   * function normalize({ color, inverted }) {
+   *   return { value: color, settings: { inverted }}
+   * }
+   * ```
+   */
+  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
+  /**
+   * Formats the value into the value that will be displayed by the component.
+   * (Prop name in useInputContext context hook is `displayedValue`)
+   */
+  format?: (value: any, settings: InternalSettings) => any
+  /**
+   * Validates the value. before sanitization.
+   */
+  validate?: (value: any, settings: any) => boolean
+  /**
+   * Sanitize the value. For example the number input will sanitize '3' into 3.
+   */
+  sanitize?: (value: any, settings: any, prevValue: any) => Value
+}
+
+/**
+ * Interface consumed by the useInputContext hook so that its returned values
+ * are properly typed.
+ *
+ * @example
+ * ```ts
+ *  useInputContext<LevaInputProps<boolean>>()
+ * ```
+ * @public
+ */
+export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = any> {
+  label: string
+  path?: string
+  displayValue: DisplayValue
+  value: V
+  onChange: React.Dispatch<any>
+  onUpdate: (v: any | ((_v: any) => any)) => void
+  settings: InternalSettings
+}

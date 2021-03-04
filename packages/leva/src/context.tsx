@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
-import { StoreType } from './store'
 import { FullTheme } from './styles'
+import { StoreType } from './types'
 
 export const InputContext = createContext({})
 
@@ -18,11 +18,11 @@ export function useStoreContext() {
   return useContext(StoreContext)!
 }
 
-type StoreProviderProps = {
+type LevaStoreProviderProps = {
   children: React.ReactChild | React.ReactChild[] | React.ReactChildren
   store: StoreType
 }
 
-export function LevaStoreProvider({ children, store }: StoreProviderProps) {
+export function LevaStoreProvider({ children, store }: LevaStoreProviderProps) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
