@@ -32,6 +32,7 @@ export function ControlInput<V, Settings extends object>({
       value={{
         key: valueKey,
         path,
+        id: 'leva__' + path,
         label,
         displayValue,
         value,

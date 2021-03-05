@@ -242,6 +242,7 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
 export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = any> {
   label: string
   path?: string
+  id?: string
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>

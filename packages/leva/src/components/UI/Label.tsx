@@ -42,9 +42,9 @@ function LabelWithCopy(props: LabelProps) {
 }
 
 export function Label(props: LabelProps) {
-  const { key, path } = useInputContext()
+  const { key, id } = useInputContext()
   const copyClipboard = key !== undefined
-  const htmlFor = props.htmlFor || (path ? { htmlFor: path } : null)
+  const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
 
   return copyClipboard ? <LabelWithCopy {...htmlFor} {...props} /> : <StyledLabel {...htmlFor} {...props} />
 }
