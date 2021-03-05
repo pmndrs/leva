@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useCallback, useState } from 'react'
-import { levaStore, StoreType } from './store'
+import { levaStore } from './store'
 import { folder } from './helpers'
 import { useShallowMemo, useValuesForPath } from './hooks'
-import { FolderSettings, Schema, SchemaToValues } from './types'
+import { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
 import { useRenderRoot } from './components/Leva'
 
 type HookSettings = { store?: StoreType }

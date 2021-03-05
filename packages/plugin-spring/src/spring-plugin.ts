@@ -14,15 +14,6 @@ const defaultFrictionSettings = { min: 1, step: 0.5 }
 const defaultMassSettings = { min: 0.1, step: 0.1 }
 const defaultValue = { tension: 100, friction: 30, mass: 1 }
 
-export type Plugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = {
-  component: React.ComponentType
-  schema?: (value: any, settings?: Settings) => boolean
-  format?: (value: any, settings: InternalSettings) => any
-  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
-  validate?: (value: any, settings: InternalSettings) => boolean
-  sanitize?: (value: any, settings: InternalSettings) => Value
-}
-
 export const normalize = (input: SpringInput) => {
   const { value: _value, ..._settings } = 'value' in input ? input : { value: input }
   const mergedSettings = {

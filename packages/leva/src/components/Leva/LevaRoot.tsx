@@ -1,6 +1,4 @@
 import React, { useMemo, useState } from 'react'
-
-import { StoreType } from '../../store'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -10,6 +8,7 @@ import { StyledRoot } from './StyledLeva'
 import { mergeTheme, LevaCustomTheme } from '../../styles'
 import { ThemeContext, StoreContext } from '../../context'
 import { TitleWithFilter } from './Filter'
+import { StoreType } from '../../types'
 
 export type LevaRootProps = {
   theme?: LevaCustomTheme

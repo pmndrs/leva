@@ -1,5 +1,5 @@
 import { InputWithSettings, NumberSettings } from '../../types'
-import { getStep, clamp, parseNumber, ceil } from '../../utils'
+import { getStep, clamp, ceil } from '../../utils'
 
 export type InternalNumberSettings = {
   min: number
@@ -13,15 +13,15 @@ type NumberInput = InputWithSettings<number | string, NumberSettings>
 
 export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 
-export const validate = (v: string | number) => v !== '' && !isNaN(parseFloat(v as string))
-
-export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
-  const f = parseFloat(v).toFixed(pad)
+export const sanitize = (v: any, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
+  const _v = parseFloat(v as string)
+  if (v === '' || isNaN(_v)) throw Error('Invalid number')
+  const f = clamp(_v, min, max)
   return suffix ? f + suffix : f
 }
 
-export const sanitize = (v: string | number, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
-  const f = clamp(parseFloat(v as string), min, max)
+export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
+  const f = parseFloat(v).toFixed(pad)
   return suffix ? f + suffix : f
 }
 

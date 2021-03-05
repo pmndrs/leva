@@ -1,28 +1,8 @@
 import { useMemo } from 'react'
-import create, { UseStore } from 'zustand'
+import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
 
-import { Data, FolderSettings, SpecialInputTypes } from './types'
-
-type State = { data: Data }
-
-export type StoreType = {
-  useStore: UseStore<State>
-  orderPaths: (paths: string[]) => string[]
-  setOrderedPaths: (newPaths: string[]) => void
-  disposePaths: (paths: string[]) => void
-  dispose: () => void
-  getVisiblePaths: () => string[]
-  getFolderSettings: (path: string) => FolderSettings
-  getData: () => Data
-  addData: (newData: Data) => void
-  setValueAtPath: (path: string, value: any) => void
-  setSettingsAtPath: (path: string, settings: any) => void
-  // TODO possibly better type this
-  set: (values: Record<string, any>) => void
-  get: (path: string) => any
-  getDataFromSchema: (schema: any) => [Data, Record<string, string>]
-}
+import { Data, FolderSettings, SpecialInputTypes, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
@@ -112,7 +92,7 @@ export const Store = (function (this: StoreType) {
           const input = data[path]
           input.count--
           if (input.count === 0 && input.type in SpecialInputTypes) {
-            // this makes sure special inputs such as buttons are proprely
+            // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
           }

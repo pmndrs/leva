@@ -2,10 +2,7 @@ import { FolderInput, Schema, SchemaToValues, FolderSettings, SpecialInputTypes 
 
 const defaultSettings = { collapsed: false }
 
-export function folder<S extends Schema>(
-  schema: S,
-  settings?: Partial<FolderSettings>
-): FolderInput<SchemaToValues<S>> {
+export function folder<S extends Schema>(schema: S, settings?: FolderSettings): FolderInput<SchemaToValues<S>> {
   return {
     type: SpecialInputTypes.FOLDER,
     schema,

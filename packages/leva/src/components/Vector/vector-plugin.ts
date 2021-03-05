@@ -1,7 +1,7 @@
 import v8n from 'v8n'
 import { InputWithSettings, NumberSettings } from '../../types'
 import { mapArrayToKeys } from '../../utils'
-import { InternalNumberSettings, sanitize, validate } from '../Number/number-plugin'
+import { InternalNumberSettings, sanitize } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from './vector-utils'
 
 export type Format = 'array' | 'object'
@@ -51,8 +51,6 @@ function convert<Value extends VectorType, F extends Format, K extends string>(
   if (getVectorType(value) === format) return (value as unknown) as any
   return (format === 'array' ? Object.values(value) : mapArrayToKeys(value as number[], keys!)) as any
 }
-
-export const validateVector = (value: any) => Object.values(value).every((v: any) => validate(v))
 
 export const sanitizeVector = <K extends string, F extends Format>(
   value: VectorType<K>,
@@ -126,7 +124,6 @@ export function getVectorPlugin<K extends string>(defaultKeys: K[]) {
     schema: getVectorSchema(defaultKeys.length),
     normalize: <Value extends VectorType>({ value, ...settings }: InputWithSettings<Value, VectorSettings<Value, K>>) =>
       normalizeVector(value, settings, defaultKeys),
-    validate: validateVector,
     format: (value: any, settings: InternalVectorSettings) => formatVector(value, settings),
     sanitize: (value: any, settings: InternalVectorSettings, prevValue: any) =>
       sanitizeVector(value, settings, prevValue),

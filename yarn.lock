@@ -2424,7 +2424,7 @@ __metadata:
     "@babel/preset-env": ^7.13.9
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.13.0
-    "@preconstruct/cli": ^2.0.5
+    "@preconstruct/cli": ^2.0.6
     "@size-limit/preset-big-lib": ^4.9.2
     "@size-limit/preset-small-lib": ^4.9.2
     "@storybook/addon-actions": ^6.1.20
@@ -2619,9 +2619,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preconstruct/cli@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "@preconstruct/cli@npm:2.0.5"
+"@preconstruct/cli@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "@preconstruct/cli@npm:2.0.6"
   dependencies:
     "@babel/code-frame": ^7.5.5
     "@babel/core": ^7.7.7
@@ -2662,7 +2662,7 @@ __metadata:
     v8-compile-cache: ^2.1.1
   bin:
     preconstruct: bin.js
-  checksum: 351d89091f68fc03d8b7fe433ad23b2160605462e17a73e18a19442af6b6b2ced7211b369cb4b1a77748f4159e5eb914993d91b78452b9d9c4d2713a194a14d7
+  checksum: 4c7503bc736c8a79e2931b8c7b19834289ea8722d4f41e88c36d0e902598336644b71da2774c8e24a5ae7806277e9e651cc474f3ba1ff3bc5fc160c2ec0da447
   languageName: node
   linkType: hard
 
