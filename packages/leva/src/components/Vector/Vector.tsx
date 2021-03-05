@@ -93,7 +93,7 @@ function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked:
 }
 
 export function Vector<T extends CoordinateValue>({ value, onUpdate, settings, hideNumberLabels }: VectorProps<T>) {
-  const { path, setSettings } = useInputContext()
+  const { id, setSettings } = useInputContext()
 
   // TODO atm if lock is explicitly set in settings we show the lock
   // this can probably be improved with better logic.
@@ -104,7 +104,7 @@ export function Vector<T extends CoordinateValue>({ value, onUpdate, settings, h
       {lock && <Lock locked={locked!} onClick={() => setSettings({ locked: !locked })} />}
       {Object.keys(value).map((key, i) => (
         <Coordinate
-          id={i === 0 ? path : `${path}.${key}`}
+          id={i === 0 ? id : `${id}.${key}`}
           key={key}
           valueKey={key}
           value={value}

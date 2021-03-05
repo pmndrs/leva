@@ -34,7 +34,7 @@ export function Number({
 
 export function NumberComponent() {
   const props = useInputContext<NumberProps>()
-  const { label, value, onUpdate, settings, path } = props
+  const { label, value, onUpdate, settings, id } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
 
@@ -43,7 +43,7 @@ export function NumberComponent() {
       <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
         {hasRange && <RangeSlider value={parseFloat(value as any)} onDrag={onUpdate} {...settings} />}
-        <Number {...props} id={path} label="value" hideLabel={hasRange} />
+        <Number {...props} id={id} label="value" hideLabel={hasRange} />
       </RangeGrid>
     </Row>
   )

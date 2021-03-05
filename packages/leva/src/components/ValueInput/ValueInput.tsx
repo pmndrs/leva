@@ -14,8 +14,8 @@ type ValueInputProps = {
 } & React.ComponentProps<any>
 
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
-  const { path } = useInputContext()
-  const inputId = id || path
+  const { id: _id } = useInputContext()
+  const inputId = id || _id
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
