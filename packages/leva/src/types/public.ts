@@ -239,7 +239,7 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
  * ```
  * @public
  */
-export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = any> {
+export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   label: string
   path?: string
   id?: string

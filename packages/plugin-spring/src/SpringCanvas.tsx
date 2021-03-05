@@ -11,7 +11,7 @@ import { springFn } from './math'
 
 const SpringPreviewAnimated = a(SpringPreview)
 
-export type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
+export type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings, InternalSpring>
 
 export function SpringCanvas() {
   const { displayValue, value, onUpdate, settings } = useInputContext<SpringProps>()

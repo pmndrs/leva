@@ -9,7 +9,7 @@ import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
 
-type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
+type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings, InternalInterval>
 
 type IntervalSliderProps = {
   value: InternalInterval
@@ -72,7 +72,7 @@ export function IntervalComponent() {
         <Label>{label}</Label>
         <Container>
           <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
-          <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
+          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
         </Container>
       </Row>
     </>

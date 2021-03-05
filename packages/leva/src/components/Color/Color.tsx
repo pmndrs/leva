@@ -9,7 +9,7 @@ import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
 
-type ColorProps = LevaInputProps<Color, InternalColorSettings>
+type ColorProps = LevaInputProps<Color, InternalColorSettings, string>
 
 function convertToRgb(value: Color, format: string) {
   return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
