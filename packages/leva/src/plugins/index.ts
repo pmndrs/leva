@@ -11,4 +11,4 @@ export { styled, useTh } from '../styles'
 
 // export types
 export type { LevaInputProps, InputWithSettings, NumberSettings } from '../types'
-export type { InternalNumberSettings } from '../components/Number/number-plugin'
+export type { InternalNumberSettings } from '../components/Number/number-types'

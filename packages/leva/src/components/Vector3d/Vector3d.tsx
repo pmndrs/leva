@@ -1,11 +1,8 @@
 import React from 'react'
-import { Vector, InternalVectorSettings } from '../Vector'
-import { LevaInputProps, Vector3d, Vector as VectorType } from '../../types'
+import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
-
-export type InternalVector3dSettings = InternalVectorSettings<string, [string, string, string]>
-export type Vector3dProps = LevaInputProps<Vector3d, InternalVector3dSettings, VectorType>
+import { Vector3dProps } from './vector3d-types'
 
 export function Vector3dComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<Vector3dProps>()

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useInputContext, Vector, Label, Row } from 'leva/plugins'
-import { SpringCanvas, SpringProps } from './SpringCanvas'
+import { SpringCanvas } from './SpringCanvas'
+import { SpringProps } from './spring-types'
 
 export function Spring() {
   const { label, displayValue, onUpdate, settings } = useInputContext<SpringProps>()

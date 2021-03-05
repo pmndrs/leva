@@ -1,30 +1,9 @@
 import v8n from 'v8n'
-import { InputWithSettings, NumberSettings } from '../../types'
+import { InputWithSettings } from '../../types'
 import { mapArrayToKeys } from '../../utils'
-import { InternalNumberSettings, sanitize } from '../Number/number-plugin'
+import { sanitize } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from './vector-utils'
-
-export type Format = 'array' | 'object'
-
-export type VectorType<K extends string = string, F extends Format = Format> = F extends 'object'
-  ? { [key in K]: number }
-  : number[]
-
-type GetKeys<V> = V extends Record<infer K, number> ? K : never
-
-export type VectorObjectSettings<V extends VectorType, K extends string> = GetKeys<V> extends never
-  ? K extends never
-    ? never
-    : { [key in K]: NumberSettings }
-  : { [key in GetKeys<V>]: NumberSettings }
-
-export type VectorSettings<V extends VectorType, K extends string> = (NumberSettings | VectorObjectSettings<V, K>) & {
-  lock?: boolean
-}
-
-export type InternalVectorSettings<K extends string = string, Keys extends K[] = K[], F extends Format = Format> = {
-  [key in K]: InternalNumberSettings
-} & { keys: Keys; format: F; lock: boolean; locked: boolean }
+import { VectorType, Format, GetKeys, InternalVectorSettings, VectorSettings } from './vector-types'
 
 export function getVectorSchema(dimension: number) {
   // prettier-ignore

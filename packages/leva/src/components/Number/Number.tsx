@@ -1,14 +1,11 @@
 import React from 'react'
 import { NumberInput } from '../ValueInput'
-import { LevaInputProps } from '../../types/'
-import { InternalNumberSettings } from './number-plugin'
 import { Label, Row } from '../UI'
 import { useDragNumber } from '../../hooks'
 import { RangeGrid, InnerNumberLabel } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 import { useInputContext } from '../../context'
-
-type NumberProps = LevaInputProps<number, InternalNumberSettings>
+import { NumberProps } from './number-types'
 
 export function Number({
   label,

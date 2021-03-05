@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
-import { Color, InternalColorSettings } from './color-plugin'
-import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
-
-type ColorProps = LevaInputProps<Color, InternalColorSettings, string>
+import { ColorProps, Color } from './color-types'
 
 function convertToRgb(value: Color, format: string) {
   return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)

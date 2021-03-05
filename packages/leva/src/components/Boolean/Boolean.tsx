@@ -1,11 +1,11 @@
 import React from 'react'
-import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
+import { BooleanProps } from './boolean-types'
 
 export function BooleanComponent() {
-  const { label, value, onUpdate, id } = useInputContext<LevaInputProps<boolean>>()
+  const { label, value, onUpdate, id } = useInputContext<BooleanProps>()
 
   return (
     <Row input>

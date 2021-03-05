@@ -4,18 +4,7 @@ import { styled } from '../../styles'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
-import { InternalNumberSettings } from '../Number/number-plugin'
-
-type CoordinateValue = Record<string, number>
-
-type CoordinateProps<T extends CoordinateValue> = {
-  id?: string
-  hideLabel?: boolean
-  value: T
-  settings: InternalNumberSettings
-  valueKey: keyof T
-  onUpdate: (value: any) => void
-}
+import { CoordinateValue, CoordinateProps, VectorProps } from './vector-types'
 
 function Coordinate<T extends CoordinateValue>({
   value,
@@ -42,15 +31,6 @@ function Coordinate<T extends CoordinateValue>({
       hideLabel={hideLabel}
     />
   )
-}
-
-type VectorSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNumberSettings }
-
-type VectorProps<T extends CoordinateValue> = {
-  value: T
-  settings: VectorSettings<T> & { lock?: boolean; locked?: boolean }
-  onUpdate: (value: T) => void
-  hideNumberLabels?: boolean
 }
 
 export const Container = styled('div', {
