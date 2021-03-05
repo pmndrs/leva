@@ -15,8 +15,8 @@
   "scripts": {
     "postinstall": "preconstruct dev",
     "build": "preconstruct build",
+    "watch": "preconstruct watch",
     "dev": "preconstruct dev",
-    "watch": "yarn build && concurrently \"preconstruct watch\" \"yarn demo:dev\"",
     "release": "yarn build && yarn workspaces foreach --include leva npm publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
