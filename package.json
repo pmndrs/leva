@@ -52,7 +52,7 @@
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
-    "@preconstruct/cli": "^2.0.5",
+    "@preconstruct/cli": "^2.0.6",
     "@size-limit/preset-big-lib": "^4.9.2",
     "@size-limit/preset-small-lib": "^4.9.2",
     "@storybook/addon-actions": "^6.1.20",
