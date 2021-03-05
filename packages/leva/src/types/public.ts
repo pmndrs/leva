@@ -215,18 +215,18 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
    */
   normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
   /**
+   * Sanitizes the user value before registering it to the store. For
+   * example, the Number plugin would santize "3.00" into 3. If the provided
+   * value isn't formatted properly, the sanitize function should throw.
+   */
+  sanitize?: (value: any, settings: any, prevValue: any) => Value
+  /**
    * Formats the value into the value that will be displayed by the component.
+   * If the input value of the Number plugin, then format will add proper
+   * padding and show "3.00".
    * (Prop name in useInputContext context hook is `displayedValue`)
    */
   format?: (value: any, settings: InternalSettings) => any
-  /**
-   * Validates the value. before sanitization.
-   */
-  validate?: (value: any, settings: any) => boolean
-  /**
-   * Sanitize the value. For example the number input will sanitize '3' into 3.
-   */
-  sanitize?: (value: any, settings: any, prevValue: any) => Value
 }
 
 /**

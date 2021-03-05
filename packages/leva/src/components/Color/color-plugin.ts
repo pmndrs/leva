@@ -30,8 +30,12 @@ function convert(color: tc.Instance, { format, hasAlpha }: InternalColorSettings
   return hasAlpha ? rgba : pick(rgba, ['r', 'g', 'b'])
 }
 
-export const validate = (v: any) => tc(v).isValid()
-export const sanitize = (v: any, settings: InternalColorSettings) => convert(tc(v), settings)
+export const sanitize = (v: any, settings: InternalColorSettings) => {
+  const color = tc(v)
+  if (!color.isValid()) throw Error('Invalid color')
+  return convert(color, settings)
+}
+
 export const format = (v: any, { hasAlpha }: InternalColorSettings) => convert(tc(v), { format: 'hex', hasAlpha })
 
 export const normalize = ({ value }: ColorInput) => {
