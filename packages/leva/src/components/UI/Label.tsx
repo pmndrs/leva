@@ -11,7 +11,7 @@ function RawLabel({ children, ...props }: LabelProps) {
   const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
   return (
     <StyledLabel {...htmlFor} {...props}>
-      {optional && <input type="checkbox" checked={disabled} onChange={() => disable(!disabled)} />}
+      {optional && <input type="checkbox" checked={!disabled} onChange={() => disable(!disabled)} />}
       {children}
     </StyledLabel>
   )
