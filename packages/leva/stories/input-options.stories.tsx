@@ -9,7 +9,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = () => {
+export const Render = () => {
   const values = useControls({
     show: { value: true, label: 'Show color' },
     color: { value: '#fff', render: (get) => get('show') },
@@ -33,4 +33,14 @@ const Template: Story<any> = () => {
   )
 }
 
-export const Render = Template.bind({})
+export const Optional = () => {
+  const values = useControls({
+    color: { value: '#f00', optional: true },
+    vector: { value: [0, 0, 0], optional: true, disabled: true },
+  })
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
