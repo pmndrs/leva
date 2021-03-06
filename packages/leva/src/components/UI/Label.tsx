@@ -9,9 +9,18 @@ type LabelProps = React.ComponentProps<any>
 function RawLabel({ children, ...props }: LabelProps) {
   const { id, optional, disable, disabled } = useInputContext()
   const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
+
+  // FIXME style of checkbox
   return (
     <StyledLabel {...htmlFor} {...props}>
-      {optional && <input type="checkbox" checked={!disabled} onChange={() => disable(!disabled)} />}
+      {optional && (
+        <input
+          type="checkbox"
+          checked={!disabled}
+          onChange={() => disable(!disabled)}
+          style={{ pointerEvents: 'auto', cursor: 'pointer' }}
+        />
+      )}
       {children}
     </StyledLabel>
   )

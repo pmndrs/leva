@@ -11,6 +11,7 @@ type ControlInputProps<V, Settings extends object> = {
   path: string
   value: V
   settings: Settings
+  disabled: boolean
   setValue: (value: any) => void
   setSettings: (settings: any) => void
   disable: (flag: boolean) => void
@@ -24,6 +25,7 @@ export function ControlInput<V, Settings extends object>({
   value,
   settings,
   setValue,
+  disabled,
   ...rest
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
@@ -34,6 +36,7 @@ export function ControlInput<V, Settings extends object>({
     return null
   }
 
+  // FIXME style of wrapping div
   return (
     <InputContext.Provider
       value={{
@@ -47,9 +50,12 @@ export function ControlInput<V, Settings extends object>({
         onUpdate,
         settings,
         setValue,
+        disabled,
         ...rest,
       }}>
-      <Input />
+      <div style={{ opacity: disabled ? 0.5 : 1, pointerEvents: disabled ? 'none' : 'auto' }}>
+        <Input />
+      </div>
     </InputContext.Provider>
   )
 }
