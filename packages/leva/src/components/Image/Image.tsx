@@ -31,8 +31,9 @@ export function ImageComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <ImageContainer ref={popinRef}>
+      <ImageContainer>
         <ImagePreview
+          ref={popinRef}
           hasImage={!!value}
           onPointerDown={() => !!value && show()}
           onPointerUp={hide}
