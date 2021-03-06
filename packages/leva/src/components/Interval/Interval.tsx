@@ -1,6 +1,4 @@
 import React, { useRef } from 'react'
-import { LevaInputProps } from '../../types/'
-import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
@@ -8,13 +6,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
-
-type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
-
-type IntervalSliderProps = {
-  value: InternalInterval
-  onDrag: (v: Partial<InternalInterval>) => void
-} & InternalIntervalSettings
+import { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
 
 const Container = styled('div', {
   display: 'grid',
@@ -72,7 +64,7 @@ export function IntervalComponent() {
         <Label>{label}</Label>
         <Container>
           <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
-          <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
+          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
         </Container>
       </Row>
     </>

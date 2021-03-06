@@ -4,20 +4,9 @@ import { styled } from '../../styles'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
-import { InternalNumberSettings } from '../Number/number-plugin'
+import { CoordinateProps, VectorProps } from './vector-types'
 
-type CoordinateValue = Record<string, number>
-
-type CoordinateProps<T extends CoordinateValue> = {
-  id?: string
-  hideLabel?: boolean
-  value: T
-  settings: InternalNumberSettings
-  valueKey: keyof T
-  onUpdate: (value: any) => void
-}
-
-function Coordinate<T extends CoordinateValue>({
+function Coordinate<T extends Record<string, number>>({
   value,
   id,
   valueKey,
@@ -42,15 +31,6 @@ function Coordinate<T extends CoordinateValue>({
       hideLabel={hideLabel}
     />
   )
-}
-
-type VectorSettings<T extends CoordinateValue> = { [key in keyof T]: InternalNumberSettings }
-
-type VectorProps<T extends CoordinateValue> = {
-  value: T
-  settings: VectorSettings<T> & { lock?: boolean; locked?: boolean }
-  onUpdate: (value: T) => void
-  hideNumberLabels?: boolean
 }
 
 export const Container = styled('div', {
@@ -92,7 +72,12 @@ function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked:
   )
 }
 
-export function Vector<T extends CoordinateValue>({ value, onUpdate, settings, hideNumberLabels }: VectorProps<T>) {
+export function Vector<T extends Record<string, number>>({
+  value,
+  onUpdate,
+  settings,
+  hideNumberLabels,
+}: VectorProps<T>) {
   const { id, setSettings } = useInputContext()
 
   // TODO atm if lock is explicitly set in settings we show the lock

@@ -1,22 +1,24 @@
 import React, { useRef, useState } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
-import { Color, InternalColorSettings } from './color-plugin'
-import { LevaInputProps } from '../../types/'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
+import { ColorProps, Color as ColorType } from './color-types'
 
-type ColorProps = LevaInputProps<Color, InternalColorSettings>
-
-function convertToRgb(value: Color, format: string) {
+function convertToRgb(value: ColorType, format: string) {
   return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
 }
 
-export function ColorComponent() {
-  const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
+export function Color({
+  value,
+  displayValue,
+  settings,
+  onChange,
+  onUpdate,
+}: Pick<ColorProps, 'value' | 'displayValue' | 'settings' | 'onChange' | 'onUpdate'>) {
   const { format, hasAlpha } = settings
 
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
@@ -43,23 +45,31 @@ export function ColorComponent() {
   }
 
   return (
+    <PickerContainer ref={popinRef}>
+      <ColorPreview active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
+      <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
+      {shown && (
+        <Portal>
+          <Overlay onPointerUp={hide} />
+          <PickerWrapper
+            ref={wrapperRef}
+            onMouseEnter={() => window.clearTimeout(timer.current)}
+            onMouseLeave={(e) => e.buttons === 0 && hideAfterDelay()}>
+            <ColorPicker color={initialRgb} onChange={onUpdate} />
+          </PickerWrapper>
+        </Portal>
+      )}
+    </PickerContainer>
+  )
+}
+
+export function ColorComponent() {
+  const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
+
+  return (
     <Row input>
       <Label>{label}</Label>
-      <PickerContainer ref={popinRef}>
-        <ColorPreview active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
-        <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
-        {shown && (
-          <Portal>
-            <Overlay onPointerUp={hide} />
-            <PickerWrapper
-              ref={wrapperRef}
-              onMouseEnter={() => window.clearTimeout(timer.current)}
-              onMouseLeave={(e) => e.buttons === 0 && hideAfterDelay()}>
-              <ColorPicker color={initialRgb} onChange={onUpdate} />
-            </PickerWrapper>
-          </Portal>
-        )}
-      </PickerContainer>
+      <Color value={value} displayValue={displayValue} onChange={onChange} onUpdate={onUpdate} settings={settings} />
     </Row>
   )
 }

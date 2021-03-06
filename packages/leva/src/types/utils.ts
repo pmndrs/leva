@@ -11,3 +11,8 @@
 export type BeautifyUnionType<T> = T extends infer TT ? { [k in keyof TT]: TT[k] } : never
 
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
+
+/**
+ * Gets keys from Record
+ */
+export type GetKeys<V> = V extends Record<infer K, number> ? K : never

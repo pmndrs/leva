@@ -2,11 +2,11 @@ import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
-import { Vector2dProps } from './Vector2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
 import { multiplyStep, useTransform } from '../../hooks'
 import { Vector2d } from '../../types'
+import { Vector2dProps } from './vector2d-types'
 
 type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'onUpdate' | 'settings'>
 

@@ -1,7 +1,7 @@
 /**
  * Types exposed through the public API
  */
-import { VectorSettings } from '../components/Vector'
+import { VectorSettings } from '../components/Vector/vector-types'
 import { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -48,15 +48,15 @@ export type FolderSettings = { collapsed?: boolean; render?: RenderFn }
 export type NumberSettings = { min?: number; max?: number; step?: number }
 type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
-export type Vector = Record<string, number>
+export type VectorObj = Record<string, number>
 
 export type Vector2dArray = [number, number]
-export type Vector2d = Vector2dArray | Vector
+export type Vector2d = Vector2dArray | VectorObj
 export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean; lock?: boolean }
 export type Vector2dInput = MergedInputWithSettings<Vector2d, Vector2dSettings>
 
 export type Vector3dArray = [number, number, number]
-export type Vector3d = Vector3dArray | Vector
+export type Vector3d = Vector3dArray | VectorObj
 export type Vector3dSettings = VectorSettings<Vector3d, 'x' | 'y' | 'z'> & { lock?: boolean }
 export type Vector3dInput = MergedInputWithSettings<Vector3d, Vector3dSettings>
 
@@ -139,7 +139,7 @@ type PrimitiveToValue<S> = S extends CustomInput<infer I>
   ? [number, number]
   : S extends { value: infer G }
   ? PrimitiveToValue<G>
-  : S extends Vector
+  : S extends VectorObj
   ? S
   : S extends Vector3dArray
   ? [number, number, number]
@@ -239,7 +239,7 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
  * ```
  * @public
  */
-export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = any> {
+export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   label: string
   path?: string
   id?: string

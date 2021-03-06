@@ -1,14 +1,7 @@
 import v8n from 'v8n'
 import tc from 'tinycolor2'
-import { InputWithSettings, ColorObjectInput } from '../../types'
 import { pick } from '../../utils'
-
-type Format = 'hex' | 'rgb'
-
-export type Color = string | ColorObjectInput
-export type InternalColorSettings = { format: Format; hasAlpha: boolean }
-
-type ColorInput = InputWithSettings<Color>
+import { InternalColorSettings, Format, ColorInput } from './color-types'
 
 const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 

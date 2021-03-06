@@ -1,15 +1,5 @@
-import { InputWithSettings, NumberSettings } from '../../types'
 import { getStep, clamp, ceil } from '../../utils'
-
-export type InternalNumberSettings = {
-  min: number
-  max: number
-  step: number
-  pad: number
-  initialValue: number
-  suffix?: string
-}
-type NumberInput = InputWithSettings<number | string, NumberSettings>
+import { InternalNumberSettings, NumberInput } from './number-types'
 
 export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 

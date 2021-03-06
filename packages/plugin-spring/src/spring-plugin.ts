@@ -1,13 +1,5 @@
-import { InputWithSettings, NumberSettings } from 'leva/plugins'
-import { normalizeVector, sanitizeVector, InternalVectorSettings } from 'leva/utilities'
-
-export type Spring = { tension?: number; friction?: number; mass?: number }
-export type InternalSpring = { tension: number; friction: number; mass: number }
-export type SpringSettings = { [key in keyof Spring]?: NumberSettings }
-
-type SpringInput = Spring | InputWithSettings<Spring, SpringSettings>
-
-export type InternalSpringSettings = InternalVectorSettings<keyof InternalSpring, (keyof InternalSpring)[], 'object'>
+import { normalizeVector, sanitizeVector } from 'leva/utilities'
+import { InternalSpring, InternalSpringSettings, SpringInput } from './spring-types'
 
 const defaultTensionSettings = { min: 1, step: 1 }
 const defaultFrictionSettings = { min: 1, step: 0.5 }
