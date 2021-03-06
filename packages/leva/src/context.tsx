@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
-import { FullTheme } from './styles'
-import { StoreType } from './types'
+import type { FullTheme } from './styles'
+import type { StoreType } from './types'
 
 export const InputContext = createContext({})
 

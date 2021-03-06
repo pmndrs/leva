@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import shallow from 'zustand/shallow'
-import { StoreType } from '../types'
+import type { StoreType } from '../types'
 
 /**
  * Hook used by the root component to get all visible inputs.

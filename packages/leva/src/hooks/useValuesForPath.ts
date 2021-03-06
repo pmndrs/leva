@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import shallow from 'zustand/shallow'
 import { getValuesForPaths } from '../utils/data'
-import { Data, StoreType } from '../types'
+import type { Data, StoreType } from '../types'
 
 /**
  * Hook that returns the values from the zustand store for the given paths.

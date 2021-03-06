@@ -6,7 +6,7 @@ import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
-import { ColorProps, Color as ColorType } from './color-types'
+import type { ColorProps, Color as ColorType } from './color-types'
 
 function convertToRgb(value: ColorType, format: string) {
   return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
@@ -45,9 +45,8 @@ export function Color({
   }
 
   return (
-    <PickerContainer ref={popinRef}>
-      <ColorPreview active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
-      <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
+    <>
+      <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
       {shown && (
         <Portal>
           <Overlay onPointerUp={hide} />
@@ -59,7 +58,7 @@ export function Color({
           </PickerWrapper>
         </Portal>
       )}
-    </PickerContainer>
+    </>
   )
 }
 
@@ -69,7 +68,10 @@ export function ColorComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <Color value={value} displayValue={displayValue} onChange={onChange} onUpdate={onUpdate} settings={settings} />
+      <PickerContainer>
+        <Color value={value} displayValue={displayValue} onChange={onChange} onUpdate={onUpdate} settings={settings} />
+        <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
+      </PickerContainer>
     </Row>
   )
 }

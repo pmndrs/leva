@@ -1,4 +1,4 @@
-import { ImageInput } from '../../types'
+import type { ImageInput } from '../../types'
 
 export const sanitize = (v: any): string | undefined => {
   if (v === undefined) return undefined

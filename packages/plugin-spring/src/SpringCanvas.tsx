@@ -1,13 +1,9 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
-
-import { useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
-import { debounce, tinycolor2 as tc } from 'leva/utilities'
-import { useTh } from 'leva/plugins'
-
+import { useCanvas2d, useDrag, useInputContext, debounce, tinycolor2 as tc, useTh } from 'leva/plugin'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
-import { SpringProps } from './spring-types'
+import type { SpringProps } from './spring-types'
 
 const SpringPreviewAnimated = a(SpringPreview)
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { useInputContext } from '../../context'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'
-import { BooleanProps } from './boolean-types'
+import type { BooleanProps } from './boolean-types'
 
 export function Boolean({ value, onUpdate, id }: Pick<BooleanProps, 'value' | 'onUpdate' | 'id'>) {
   return (

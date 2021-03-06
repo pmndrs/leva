@@ -1,5 +1,5 @@
-import { NumberSettings, GetKeys } from '../../types'
-import { InternalNumberSettings } from '../Number/number-types'
+import type { NumberSettings, GetKeys } from '../../types'
+import type { InternalNumberSettings } from '../Number/number-types'
 
 /**
  * A vector can either be number[] or Record<string, number>.

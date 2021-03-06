@@ -4,7 +4,7 @@ import { sanitizeStep } from './number-plugin'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useTh } from '../../styles'
-import { RangeSliderProps } from './number-types'
+import type { RangeSliderProps } from './number-types'
 
 export function RangeSlider({ value, min, max, onDrag, step, initialValue }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)

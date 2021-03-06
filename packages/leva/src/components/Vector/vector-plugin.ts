@@ -1,9 +1,9 @@
 import v8n from 'v8n'
-import { InputWithSettings } from '../../types'
 import { mapArrayToKeys } from '../../utils'
 import { sanitize } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from './vector-utils'
-import {
+import type { InputWithSettings } from '../../types'
+import type {
   VectorType,
   Format,
   InternalVectorSettings,
@@ -158,7 +158,7 @@ export function normalizeVector<Value extends VectorType, K extends string>(
 
   const numberSettings = normalizeKeyedNumberSettings(_value, mergedSettings)
   return {
-    value: (format === 'array' ? _value : value) as Value,
+    value: (format === 'array' ? value : _value) as Value,
     settings: { ...numberSettings, format, keys, lock, locked: false },
   }
 }

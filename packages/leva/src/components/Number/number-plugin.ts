@@ -1,5 +1,5 @@
 import { getStep, clamp, ceil } from '../../utils'
-import { InternalNumberSettings, NumberInput } from './number-types'
+import type { InternalNumberSettings, NumberInput } from './number-types'
 
 export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
 

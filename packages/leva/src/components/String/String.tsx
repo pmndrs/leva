@@ -2,7 +2,7 @@ import React from 'react'
 import { ValueInput } from '../ValueInput'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
-import { StringProps } from './string-types'
+import type { StringProps } from './string-types'
 
 export function String({
   displayValue,

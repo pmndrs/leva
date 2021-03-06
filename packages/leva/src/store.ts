@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-
-import { Data, FolderSettings, SpecialInputTypes, State, StoreType } from './types'
+import { SpecialInputTypes } from './types'
+import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))

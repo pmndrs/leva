@@ -2,7 +2,7 @@ import React from 'react'
 import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
-import { Vector3dProps } from './vector3d-types'
+import type { Vector3dProps } from './vector3d-types'
 
 export function Vector3dComponent() {
   const { label, displayValue, onUpdate, settings } = useInputContext<Vector3dProps>()

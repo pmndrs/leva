@@ -4,7 +4,7 @@ import { styled } from '../../styles'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
-import { CoordinateProps, VectorProps } from './vector-types'
+import type { CoordinateProps, VectorProps } from './vector-types'
 
 function Coordinate<T extends Record<string, number>>({
   value,

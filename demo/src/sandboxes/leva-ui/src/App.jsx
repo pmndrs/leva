@@ -13,7 +13,7 @@ function Box({ index, selected, setSelect }) {
         value: [window.innerWidth / 2 - 150, window.innerHeight / 2],
         step: 1,
       },
-      size: { value: { width: 100, height: 100 }, min: 10 },
+      size: { value: { width: 100, height: 100 }, min: 10, lock: true },
       fillMode: { value: 'color', options: ['image'] },
       fillColor: {
         value: '#cfcfcf',

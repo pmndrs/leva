@@ -5,8 +5,8 @@ import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { useToggle } from '../../hooks'
-import { Tree } from '../../types/'
 import { useStoreContext } from '../../context'
+import type { Tree } from '../../types'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 

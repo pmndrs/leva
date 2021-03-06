@@ -45,7 +45,7 @@ const sub = /(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/ // Regex for identifying subtr
  * @param {String} expr Numerical expression input
  * @returns {Number} Result of expression
  */
-function evaluate(expr: string): number {
+export function evaluate(expr: string): number {
   if (isNaN(Number(expr))) {
     if (parens.test(expr)) {
       const newExpr = expr.replace(parens, (match, subExpr) => String(evaluate(subExpr)))

@@ -1,6 +1,6 @@
-import { NumberSettings } from '../../types'
 import { normalize } from '../Number/number-plugin'
-import { InternalNumberSettings } from '../Number/number-types'
+import type { NumberSettings } from '../../types'
+import type { InternalNumberSettings } from '../Number/number-types'
 
 export const normalizeKeyedNumberSettings = <V extends Record<string, number>>(
   value: V,

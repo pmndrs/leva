@@ -1,7 +1,7 @@
 import v8n from 'v8n'
 import tc from 'tinycolor2'
 import { pick } from '../../utils'
-import { InternalColorSettings, Format, ColorInput } from './color-types'
+import type { InternalColorSettings, Format, ColorInput } from './color-types'
 
 const FORMATS = ['name', 'hex', 'hex8', 'rgb']
 
