@@ -56,26 +56,26 @@ const ValueError = (function (this: ValueErrorType, message: string, value: any,
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue
+  let sanitizedNewValue
   try {
-    const sanitizedNewValue = sanitize(type, _newValue, settings, value)
-
-    if (dequal(sanitizedNewValue, value)) {
-      /**
-       * @note This makes the update function throw when the new value is the same
-       * as the previous one. This can happen for example, if the minimum value of
-       * a number is 30, and the user inputs 15. Then the newValue will be sanitized
-       * to 30 and subsequent calls like 14, 0, etc. won't result in the component displaying
-       * the value to be notified (ie there wouldn't be a new render)
-       */
-
-      throw new ValueError(
-        `The value \`${newValue}\` did not result in a value update, which remained the same: \`${value}\`.
-        You can ignore this warning if this is the intended behavior.`,
-        value
-      )
-    }
-    return sanitizedNewValue
+    sanitizedNewValue = sanitize(type, _newValue, settings, value)
   } catch (e) {
     throw new ValueError(`The value \`${newValue}\` did not result in a correct value.`, value, e)
   }
+  if (dequal(sanitizedNewValue, value)) {
+    /**
+     * @note This makes the update function throw when the new value is the same
+     * as the previous one. This can happen for example, if the minimum value of
+     * a number is 30, and the user inputs 15. Then the newValue will be sanitized
+     * to 30 and subsequent calls like 14, 0, etc. won't result in the component displaying
+     * the value to be notified (ie there wouldn't be a new render)
+     */
+
+    throw new ValueError(
+      `The value \`${newValue}\` did not result in a value update, which remained the same: \`${value}\`.
+        You can ignore this warning if this is the intended behavior.`,
+      value
+    )
+  }
+  return sanitizedNewValue
 }
