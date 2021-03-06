@@ -16,8 +16,8 @@ export const normalizeKeyedNumberSettings = <V extends Record<string, number>>(
     minPad = Math.min(minPad, _settings[key].pad)
   })
 
-  // makes sure we get a consistent step and pad on all vector components when step is not
-  // specified in settings.
+  // makes sure we get a consistent step and pad on all vector components when
+  // step is not specified in settings.
   for (let key in _settings) {
     const { step, min, max } = (settings[key] as any) || {}
     if (!isFinite(step) && (!isFinite(min) || !isFinite(max))) {

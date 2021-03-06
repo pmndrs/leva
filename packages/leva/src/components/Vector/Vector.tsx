@@ -4,9 +4,9 @@ import { styled } from '../../styles'
 import { useValue } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
-import { CoordinateValue, CoordinateProps, VectorProps } from './vector-types'
+import { CoordinateProps, VectorProps } from './vector-types'
 
-function Coordinate<T extends CoordinateValue>({
+function Coordinate<T extends Record<string, number>>({
   value,
   id,
   valueKey,
@@ -72,7 +72,12 @@ function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked:
   )
 }
 
-export function Vector<T extends CoordinateValue>({ value, onUpdate, settings, hideNumberLabels }: VectorProps<T>) {
+export function Vector<T extends Record<string, number>>({
+  value,
+  onUpdate,
+  settings,
+  hideNumberLabels,
+}: VectorProps<T>) {
   const { id, setSettings } = useInputContext()
 
   // TODO atm if lock is explicitly set in settings we show the lock
