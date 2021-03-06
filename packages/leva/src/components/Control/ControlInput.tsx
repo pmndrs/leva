@@ -3,6 +3,7 @@ import { Plugins } from '../../plugin'
 import { log, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
 import { useValue } from '../../hooks'
+import { StyledInputWrapper } from '../UI/StyledUI'
 
 type ControlInputProps<V, Settings extends object> = {
   type: string
@@ -53,9 +54,9 @@ export function ControlInput<V, Settings extends object>({
         disabled,
         ...rest,
       }}>
-      <div style={{ opacity: disabled ? 0.5 : 1, pointerEvents: disabled ? 'none' : 'auto' }}>
+      <StyledInputWrapper disabled={disabled}>
         <Input />
-      </div>
+      </StyledInputWrapper>
     </InputContext.Provider>
   )
 }

@@ -30,7 +30,7 @@ export const CopyLabelContainer = styled('div', {
   position: 'relative',
   overflow: 'hidden',
 
-  '> svg': {
+  '& > div > svg': {
     display: 'none',
     marginLeft: '$colGap',
     cursor: 'pointer',
@@ -39,8 +39,53 @@ export const CopyLabelContainer = styled('div', {
     height: 15,
     backgroundColor: '$elevation2',
   },
-  '&:hover > svg': {
+  '&:hover > div > svg': {
     display: 'block',
+  },
+})
+
+export const StyledToggle = styled('input', {
+  $reset: '',
+  height: 0,
+  width: 0,
+  opacity: 0,
+  margin: 0,
+
+  '& + label': {
+    position: 'relative',
+    $flexCenter: '',
+    userSelect: 'none',
+    cursor: 'pointer',
+    height: 9,
+    width: 9,
+    backgroundColor: '$elevation3',
+    borderRadius: 5,
+    marginLeft: 1,
+    marginRight: '$sm',
+    pointerEvents: 'auto',
+    $activeStyle: '',
+  },
+
+  '&:focus + label': { $focusStyle: '' },
+
+  '& + label:active': {
+    backgroundColor: '$accent1',
+    $focusStyle: '',
+  },
+
+  '&:checked + label': {
+    backgroundColor: '$accent1',
+  },
+})
+
+export const StyledInputWrapper = styled('div', {
+  variants: {
+    disabled: {
+      true: {
+        opacity: 0.6,
+        pointerEvents: 'none',
+      },
+    },
   },
 })
 
