@@ -15,8 +15,7 @@
   "preconstruct": {
     "entrypoints": [
       "index.ts",
-      "utilities/index.ts",
-      "plugins/index.ts"
+      "plugin/index.ts"
     ]
   },
   "dependencies": {

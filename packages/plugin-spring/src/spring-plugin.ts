@@ -1,5 +1,5 @@
-import { normalizeVector, sanitizeVector } from 'leva/utilities'
-import { InternalSpring, InternalSpringSettings, SpringInput } from './spring-types'
+import { normalizeVector, sanitizeVector } from 'leva/plugin'
+import type { InternalSpring, InternalSpringSettings, SpringInput } from './spring-types'
 
 const defaultTensionSettings = { min: 1, step: 1 }
 const defaultFrictionSettings = { min: 1, step: 0.5 }

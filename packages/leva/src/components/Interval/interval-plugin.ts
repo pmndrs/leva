@@ -1,8 +1,8 @@
 import v8n from 'v8n'
 import { clamp } from '../../utils'
 import { normalizeKeyedNumberSettings } from '../Vector/vector-utils'
-import { IntervalInput } from '../../types'
-import { InternalInterval, InternalIntervalSettings, Interval } from './interval-types'
+import type { IntervalInput } from '../../types'
+import type { InternalInterval, InternalIntervalSettings, Interval } from './interval-types'
 
 const number = v8n().number()
 

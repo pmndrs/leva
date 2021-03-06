@@ -2,8 +2,8 @@ import { useEffect, useMemo, useCallback, useState } from 'react'
 import { levaStore } from './store'
 import { folder } from './helpers'
 import { useShallowMemo, useValuesForPath } from './hooks'
-import { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
 import { useRenderRoot } from './components/Leva'
+import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
 
 type HookSettings = { store?: StoreType }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)

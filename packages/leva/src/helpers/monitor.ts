@@ -1,4 +1,5 @@
-import { SpecialInputTypes, MonitorInput, MonitorSettings } from '../types/'
+import { SpecialInputTypes } from '../types'
+import type { MonitorInput, MonitorSettings } from '../types'
 
 const defaultSettings = { graph: false, interval: 100 }
 

@@ -4,8 +4,8 @@ import { Canvas } from './StyledMonitor'
 import { Label, Row } from '../UI'
 import { range } from '../../utils'
 import { useCanvas2d } from '../../hooks'
-import { MonitorInput } from '../../types/'
 import { useTh } from '../../styles'
+import type { MonitorInput } from '../../types'
 
 type MonitorProps = { label: string } & Omit<MonitorInput, 'type'>
 type ObjectProps = { initialValue: any }

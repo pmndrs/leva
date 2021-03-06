@@ -4,7 +4,7 @@ import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
-import { Vector2dProps } from './vector2d-types'
+import type { Vector2dProps } from './vector2d-types'
 
 export const Container = styled('div', {
   display: 'grid',

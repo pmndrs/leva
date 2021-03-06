@@ -1,4 +1,4 @@
-import { styled } from 'leva/plugins'
+import { styled } from 'leva/plugin'
 
 export const Canvas = styled('canvas', {
   height: 80,

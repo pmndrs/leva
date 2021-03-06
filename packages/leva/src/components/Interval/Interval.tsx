@@ -6,7 +6,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
-import { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
+import type { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
 
 const Container = styled('div', {
   display: 'grid',

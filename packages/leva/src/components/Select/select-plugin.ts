@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import { InternalSelectSettings, SelectInput } from './select-types'
+import type { InternalSelectSettings, SelectInput } from './select-types'
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>

@@ -5,7 +5,7 @@ import { useDragNumber } from '../../hooks'
 import { RangeGrid, InnerNumberLabel } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 import { useInputContext } from '../../context'
-import { NumberProps } from './number-types'
+import type { NumberProps } from './number-types'
 
 export function Number({
   label,

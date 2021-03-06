@@ -1,4 +1,4 @@
-import { InputWithSettings, LevaInputProps, NumberSettings } from '../../types'
+import type { InputWithSettings, LevaInputProps, NumberSettings } from '../../types'
 
 export type InternalNumberSettings = {
   min: number

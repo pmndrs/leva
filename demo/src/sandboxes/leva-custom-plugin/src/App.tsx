@@ -1,6 +1,6 @@
 import React from 'react'
 import { Leva, useControls } from 'leva'
-import { createPlugin, useInputContext, LevaInputProps, Row, Label, ValueInput } from 'leva/plugins'
+import { createPlugin, useInputContext, LevaInputProps, Row, Label, ValueInput } from 'leva/plugin'
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color?: string; light: boolean }
@@ -26,6 +26,7 @@ const normalize = ({ color, light, alpha }: GreenOrBlueInput) => {
 }
 
 const sanitize = (v: string): GreenOrBlueType => {
+  if (!['green', 'blue', 'lightgreen', 'lightblue'].includes(v)) throw Error('Invalid value')
   // @ts-ignore
   const [, isLight, color] = v.match(/(light)?(.*)/)
   return { light: !!isLight, color }
@@ -34,7 +35,6 @@ const sanitize = (v: string): GreenOrBlueType => {
 const format = (v: GreenOrBlueType) => (v.light ? 'light' : '') + v.color
 
 const greenOrBlue = createPlugin({
-  validate: (v: any) => ['green', 'blue', 'lightgreen', 'lightblue'].includes(v),
   sanitize,
   format,
   normalize,

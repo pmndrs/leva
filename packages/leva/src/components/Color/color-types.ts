@@ -1,4 +1,4 @@
-import { ColorObjectInput, InputWithSettings, LevaInputProps } from '../../types'
+import type { ColorObjectInput, InputWithSettings, LevaInputProps } from '../../types'
 
 export type Format = 'hex' | 'rgb'
 

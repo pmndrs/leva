@@ -1,5 +1,4 @@
-import { InputWithSettings, NumberSettings, LevaInputProps } from 'leva/plugins'
-import { InternalVectorSettings } from 'leva/utilities'
+import type { InputWithSettings, NumberSettings, LevaInputProps, InternalVectorSettings } from 'leva/plugin'
 
 export type Spring = { tension?: number; friction?: number; mass?: number }
 export type InternalSpring = { tension: number; friction: number; mass: number }

@@ -1,5 +1,5 @@
-import { UseStore } from 'zustand'
-import { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
+import type { UseStore } from 'zustand'
+import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
 
 export type State = { data: Data }
 

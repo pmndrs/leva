@@ -1,5 +1,5 @@
-import { LevaInputProps, IntervalInput } from '../../types'
-import { InternalNumberSettings } from '../Number/number-types'
+import type { LevaInputProps, IntervalInput } from '../../types'
+import type { InternalNumberSettings } from '../Number/number-types'
 
 export type Interval = IntervalInput['value']
 export type InternalInterval = { min: number; max: number }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useInputContext } from '../../context'
 import { Label, Row, Chevron } from '../UI'
 import { StyledSelect, SelectContainer } from './StyledSelect'
-import { SelectProps } from './select-types'
+import type { SelectProps } from './select-types'
 
 function Select({
   displayValue,

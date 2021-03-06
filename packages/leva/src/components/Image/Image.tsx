@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
-import { ImageProps } from './image-types'
+import type { ImageProps } from './image-types'
 
 export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()

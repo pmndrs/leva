@@ -1,8 +1,8 @@
 /**
  * Types exposed through the public API
  */
-import { VectorSettings } from '../components/Vector/vector-types'
-import { BeautifyUnionType, UnionToIntersection } from './utils'
+import type { VectorSettings } from '../components/Vector/vector-types'
+import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
