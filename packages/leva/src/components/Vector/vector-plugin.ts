@@ -158,7 +158,7 @@ export function normalizeVector<Value extends VectorType, K extends string>(
 
   const numberSettings = normalizeKeyedNumberSettings(_value, mergedSettings)
   return {
-    value: (format === 'array' ? _value : value) as Value,
+    value: (format === 'array' ? value : _value) as Value,
     settings: { ...numberSettings, format, keys, lock, locked: false },
   }
 }
