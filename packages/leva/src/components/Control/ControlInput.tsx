@@ -1,5 +1,6 @@
 import React from 'react'
 import { Plugins } from '../../plugin'
+import { log, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
 import { useValue } from '../../hooks'
 
@@ -25,7 +26,12 @@ export function ControlInput<V, Settings extends object>({
   setSettings,
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
+
   const Input = Plugins[type].component
+  if (!Input) {
+    log(LevaErrors.NO_COMPONENT_FOR_TYPE, type, path)
+    return null
+  }
 
   return (
     <InputContext.Provider
