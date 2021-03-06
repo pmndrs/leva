@@ -3,7 +3,8 @@
   "rules": {
     "no-console": "warn"
   },
-  "plugins": [
-    "cypress"
-  ]
+  "plugins": ["cypress"],
+  "env": {
+    "cypress/globals": true
+  }
 }
