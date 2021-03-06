@@ -6,6 +6,17 @@ import { LevaErrors, warn } from '../../utils'
 
 type LabelProps = React.ComponentProps<any>
 
+function RawLabel({ children, ...props }: LabelProps) {
+  const { id, optional, disable, disabled } = useInputContext()
+  const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
+  return (
+    <StyledLabel {...htmlFor} {...props}>
+      {optional && <input type="checkbox" checked={disabled} onChange={() => disable(!disabled)} />}
+      {children}
+    </StyledLabel>
+  )
+}
+
 function LabelWithCopy(props: LabelProps) {
   const { value, label, key } = useInputContext()
   const [copied, setCopied] = useState(false)
@@ -21,7 +32,7 @@ function LabelWithCopy(props: LabelProps) {
 
   return (
     <CopyLabelContainer title={`Click to copy ${label} value`} onPointerLeave={() => setCopied(false)}>
-      <StyledLabel {...props} />
+      <RawLabel {...props} />
       {!copied ? (
         <svg onClick={handleClick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -42,9 +53,8 @@ function LabelWithCopy(props: LabelProps) {
 }
 
 export function Label(props: LabelProps) {
-  const { key, id } = useInputContext()
+  const { key } = useInputContext()
   const copyClipboard = key !== undefined
-  const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
 
-  return copyClipboard ? <LabelWithCopy {...htmlFor} {...props} /> : <StyledLabel {...htmlFor} {...props} />
+  return copyClipboard ? <LabelWithCopy {...props} /> : <RawLabel {...props} />
 }

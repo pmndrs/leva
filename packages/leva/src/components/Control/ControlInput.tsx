@@ -13,6 +13,7 @@ type ControlInputProps<V, Settings extends object> = {
   settings: Settings
   setValue: (value: any) => void
   setSettings: (settings: any) => void
+  disable: (flag: boolean) => void
 }
 
 export function ControlInput<V, Settings extends object>({
@@ -23,7 +24,7 @@ export function ControlInput<V, Settings extends object>({
   value,
   settings,
   setValue,
-  setSettings,
+  ...rest
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
 
@@ -46,7 +47,7 @@ export function ControlInput<V, Settings extends object>({
         onUpdate,
         settings,
         setValue,
-        setSettings,
+        ...rest,
       }}>
       <Input />
     </InputContext.Provider>

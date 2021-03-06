@@ -16,12 +16,15 @@ type Input = Omit<DataItem, 'count'>
  *
  * @param path
  */
-export function useInput(path: string): [Input | null, (value: any) => void, (value: any) => void] {
+export function useInput(
+  path: string
+): [Input | null, { set: (value: any) => void; setSettings: (value: any) => void; disable: (flag: boolean) => void }] {
   const store = useStoreContext()
   const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
   const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
   const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])
+  const disable = useCallback((flag) => store.disableInputAtPath(path, flag), [path, store])
 
   useEffect(() => {
     setState(getInputAtPath(store.getData(), path))
@@ -29,5 +32,5 @@ export function useInput(path: string): [Input | null, (value: any) => void, (va
     return () => unsub()
   }, [store, path])
 
-  return [state, set, setSettings]
+  return [state, { set, setSettings, disable }]
 }
