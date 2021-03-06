@@ -1,5 +1,4 @@
 import { pick } from '.'
-
 import { Data } from '../types'
 
 /**
@@ -12,7 +11,7 @@ import { Data } from '../types'
  */
 export function getValuesForPaths(data: Data, paths: string[]) {
   return Object.entries(pick(data, paths)).reduce(
-    // Typescript complaints that SpecialInput type doesn't have a value key.
+    // Typescript complains that SpecialInput type doesn't have a value key.
     // But getValuesForPath is only called from paths that are inputs,
     // so they always have a value key.
 
