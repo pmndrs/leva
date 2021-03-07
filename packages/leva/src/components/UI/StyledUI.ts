@@ -1,3 +1,4 @@
+import { Arrow } from '@radix-ui/react-tooltip'
 import { styled } from '../../styles'
 import { StyledContent } from '../Folder/StyledFolder'
 
@@ -110,4 +111,18 @@ export const Overlay = styled('div', {
   right: 0,
   left: 0,
   zIndex: 1000,
+})
+
+export const StyledToolTipContent = styled('div', {
+  background: '$toolTipBackground',
+  fontFamily: '$sans',
+  fontSize: '$toolTip',
+  padding: '$xs',
+  color: '$toolTipText',
+  borderRadius: '$xs',
+  boxShadow: '$level2',
+})
+
+export const ToolTipArrow = styled(Arrow, {
+  fill: '$highlight3',
 })

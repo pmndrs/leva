@@ -16,6 +16,7 @@ type ControlInputProps<V, Settings extends object> = {
   setValue: (value: any) => void
   setSettings: (settings: any) => void
   optional: boolean
+  hint?: string
   disable: (flag: boolean) => void
 }
 
