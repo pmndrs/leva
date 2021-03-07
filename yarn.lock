@@ -2409,7 +2409,7 @@ __metadata:
   dependencies:
     react-spring: ^9.0.0-rc.3
   peerDependencies:
-    leva: ">=0.4.0"
+    leva: ">=0.5.1"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
