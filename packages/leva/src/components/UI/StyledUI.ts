@@ -79,12 +79,10 @@ export const StyledToggle = styled('input', {
 })
 
 export const StyledInputWrapper = styled('div', {
+  opacity: 1,
   variants: {
     disabled: {
-      true: {
-        opacity: 0.6,
-        pointerEvents: 'none',
-      },
+      true: { opacity: 0.6, pointerEvents: 'none' },
     },
   },
 })
