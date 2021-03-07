@@ -117,12 +117,12 @@ export const StyledToolTipContent = styled('div', {
   background: '$toolTipBackground',
   fontFamily: '$sans',
   fontSize: '$toolTip',
-  padding: '$xs',
+  padding: '$xs $sm',
   color: '$toolTipText',
   borderRadius: '$xs',
   boxShadow: '$level2',
 })
 
 export const ToolTipArrow = styled(Arrow, {
-  fill: '$highlight3',
+  fill: '$toolTipBackground',
 })
