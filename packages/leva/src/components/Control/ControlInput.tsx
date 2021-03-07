@@ -37,7 +37,6 @@ export function ControlInput<V, Settings extends object>({
     return null
   }
 
-  // FIXME style of wrapping div
   return (
     <InputContext.Provider
       value={{
