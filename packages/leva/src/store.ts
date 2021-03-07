@@ -227,18 +227,20 @@ export const Store = (function (this: StoreType) {
         // If the input is not a folder, we normalize the input.
         let _render = undefined
         let _label = undefined
+        let _hint = undefined
         let _optional
         let _disabled
         let _input = input
 
         // parse generic options from input object
         if (typeof input === 'object' && !Array.isArray(input)) {
-          const { render, label, optional, disabled, ...rest } = input
+          const { render, label, optional, disabled, hint, ...rest } = input
           _label = label
           _render = render
           _input = rest
           _optional = optional
           _disabled = disabled
+          _hint = hint
         }
         const normalizedInput = normalizeInput(_input, newPath)
         // normalizeInput can return false if the input is not recognized.
@@ -246,6 +248,7 @@ export const Store = (function (this: StoreType) {
           data[newPath] = normalizedInput
           data[newPath].key = path
           data[newPath].label = _label ?? path
+          data[newPath].hint = _hint
           if (!(input.type in SpecialInputTypes)) {
             data[newPath].optional = _optional ?? false
             data[newPath].disabled = _disabled ?? false

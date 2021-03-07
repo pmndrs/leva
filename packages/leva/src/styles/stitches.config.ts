@@ -11,6 +11,8 @@ export const getDefaultTheme = () => ({
     highlight1: '#535760',
     highlight2: '#8C92A4',
     highlight3: '#FEFEFE',
+    toolTipBackground: '$highlight3',
+    toolTipText: '$elevation2',
   },
   radii: {
     xs: '2px',
@@ -26,9 +28,11 @@ export const getDefaultTheme = () => ({
   },
   fonts: {
     mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
+    sans: `system-ui, sans-serif`,
   },
   fontSizes: {
     root: '11px',
+    toolTip: '$root',
   },
   sizes: {
     rootWidth: '280px',

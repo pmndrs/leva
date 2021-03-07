@@ -9,6 +9,31 @@ export default {
   decorators: [Reset],
 } as Meta
 
+export const Label = () => {
+  const values = useControls({
+    number: { value: 3, label: 'My number' },
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const Hint = () => {
+  const values = useControls({
+    color: { value: '#f00', hint: 'Used for important content' },
+    position: { value: [0, 0, 0], hint: 'Position of the object relative to the screen' },
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
 export const Render = () => {
   const values = useControls({
     show: { value: true, label: 'Show color' },

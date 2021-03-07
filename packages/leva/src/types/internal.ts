@@ -26,6 +26,7 @@ type Decorators = {
   count: number
   key: string
   label: string
+  hint?: string
   render?: RenderFn
 }
 
