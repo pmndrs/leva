@@ -4,7 +4,7 @@ import { spring } from '@leva-ui/plugin-spring'
 
 export default function App() {
   const { mySpring } = useControls({
-    mySpring: spring({ tension: 100, friction: 30 }),
+    mySpring: { ...spring({ tension: 100, friction: 30 }), optional: true },
   })
 
   return (

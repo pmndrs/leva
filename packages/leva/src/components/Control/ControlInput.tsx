@@ -3,6 +3,7 @@ import { Plugins } from '../../plugin'
 import { log, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
 import { useValue } from '../../hooks'
+import { StyledInputWrapper } from '../UI/StyledUI'
 
 type ControlInputProps<V, Settings extends object> = {
   type: string
@@ -11,8 +12,12 @@ type ControlInputProps<V, Settings extends object> = {
   path: string
   value: V
   settings: Settings
+  disabled: boolean
   setValue: (value: any) => void
   setSettings: (settings: any) => void
+  optional: boolean
+  hint?: string
+  disable: (flag: boolean) => void
 }
 
 export function ControlInput<V, Settings extends object>({
@@ -23,7 +28,8 @@ export function ControlInput<V, Settings extends object>({
   value,
   settings,
   setValue,
-  setSettings,
+  disabled,
+  ...rest
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
 
@@ -46,9 +52,12 @@ export function ControlInput<V, Settings extends object>({
         onUpdate,
         settings,
         setValue,
-        setSettings,
+        disabled,
+        ...rest,
       }}>
-      <Input />
+      <StyledInputWrapper disabled={disabled}>
+        <Input />
+      </StyledInputWrapper>
     </InputContext.Provider>
   )
 }

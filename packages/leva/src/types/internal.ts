@@ -15,6 +15,7 @@ export type StoreType = {
   addData: (newData: Data) => void
   setValueAtPath: (path: string, value: any) => void
   setSettingsAtPath: (path: string, settings: any) => void
+  disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this
   set: (values: Record<string, any>) => void
   get: (path: string) => any
@@ -25,12 +26,15 @@ type Decorators = {
   count: number
   key: string
   label: string
+  hint?: string
   render?: RenderFn
 }
 
 export type DataInput = {
   type: string
   value: unknown
+  optional: boolean
+  disabled: boolean
   settings?: object
 } & Decorators
 

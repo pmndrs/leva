@@ -1,6 +1,6 @@
 import React from 'react'
 import Reset from './components/decorator-reset'
-import { Story, Meta } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import { folder, useControls } from '../src'
 
@@ -9,7 +9,32 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = () => {
+export const Label = () => {
+  const values = useControls({
+    number: { value: 3, label: 'My number' },
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const Hint = () => {
+  const values = useControls({
+    color: { value: '#f00', hint: 'Used for important content' },
+    position: { value: [0, 0, 0], hint: 'Position of the object relative to the screen' },
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const Render = () => {
   const values = useControls({
     show: { value: true, label: 'Show color' },
     color: { value: '#fff', render: (get) => get('show') },
@@ -33,4 +58,14 @@ const Template: Story<any> = () => {
   )
 }
 
-export const Render = Template.bind({})
+export const Optional = () => {
+  const values = useControls({
+    color: { value: '#f00', optional: true },
+    vector: { value: [0, 0, 0], optional: true, disabled: true },
+  })
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}

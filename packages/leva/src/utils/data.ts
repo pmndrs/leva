@@ -16,8 +16,8 @@ export function getValuesForPaths(data: Data, paths: string[]) {
     // so they always have a value key.
 
     // @ts-expect-error
-    (acc, [path, { value, key }]) => {
-      acc[key] = value
+    (acc, [path, { value, disabled, key }]) => {
+      acc[key] = disabled ? undefined : value
       return acc
     },
     {} as { [path: string]: any }

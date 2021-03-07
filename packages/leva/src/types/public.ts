@@ -95,11 +95,9 @@ type SchemaItem =
   | ColorObjectInput
   | BooleanInput
   | StringInput
-  | SpecialInput
-  | FolderInput<unknown>
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
+type GenericSchemaItemOptions = { render?: RenderFn; label?: string; hint?: string }
 // type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
 
 // type Merge<T, G extends Object> = T extends any[]
@@ -110,7 +108,9 @@ type GenericSchemaItemOptions = { render?: RenderFn; label?: string }
 //     }
 //   : T
 
-type SchemaItemWithOptions = SchemaItem & GenericSchemaItemOptions
+type SchemaItemWithOptions =
+  | FolderInput<unknown>
+  | ((SpecialInput | (SchemaItem & { optional?: boolean })) & GenericSchemaItemOptions)
 
 export type Schema = Record<string, SchemaItemWithOptions>
 
@@ -163,7 +163,7 @@ export type Leaves<T, P extends string | number | symbol = ''> = {
   0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
   1: never
   // if the leaf is an object, we run the type check on each of its keys
-  2: { [i in P]: PrimitiveToValue<T> }
+  2: { [i in P]: T extends { optional: true } ? PrimitiveToValue<T> | undefined : PrimitiveToValue<T> }
   // recursivity
   3: { [K in keyof T]: Join<T, K, Leaves<T[K], K>> }[keyof T]
   // dead end
