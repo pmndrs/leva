@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { writeText } from 'clipboard-polyfill/text'
 import * as Tooltip from '@radix-ui/react-tooltip'
-import { StyledLabel, CopyLabelContainer, StyledToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
+import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
 import { useInputContext } from '../../context'
 import { LevaErrors, warn } from '../../utils'
 
@@ -11,7 +11,12 @@ function OptionalToggle() {
   const { id, disable, disabled } = useInputContext()
   return (
     <>
-      <StyledToggle id={id + '__disable'} type="checkbox" checked={!disabled} onChange={() => disable(!disabled)} />
+      <StyledOptionalToggle
+        id={id + '__disable'}
+        type="checkbox"
+        checked={!disabled}
+        onChange={() => disable(!disabled)}
+      />
       <label htmlFor={id + '__disable'}></label>
     </>
   )

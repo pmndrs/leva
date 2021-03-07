@@ -45,7 +45,7 @@ export const CopyLabelContainer = styled('div', {
   },
 })
 
-export const StyledToggle = styled('input', {
+export const StyledOptionalToggle = styled('input', {
   $reset: '',
   height: 0,
   width: 0,
@@ -55,26 +55,31 @@ export const StyledToggle = styled('input', {
   '& + label': {
     position: 'relative',
     $flexCenter: '',
+    height: '100%',
     userSelect: 'none',
     cursor: 'pointer',
-    height: 9,
-    width: 9,
-    backgroundColor: '$elevation3',
-    borderRadius: 5,
-    marginLeft: 1,
-    marginRight: '$sm',
+    paddingLeft: 2,
+    paddingRight: '$sm',
     pointerEvents: 'auto',
+  },
+
+  '& + label:after': {
+    content: '""',
+    width: 6,
+    height: 6,
+    backgroundColor: '$elevation3',
+    borderRadius: '50%',
     $activeStyle: '',
   },
 
-  '&:focus + label': { $focusStyle: '' },
+  '&:focus + label:after': { $focusStyle: '' },
 
-  '& + label:active': {
+  '& + label:active:after': {
     backgroundColor: '$accent1',
     $focusStyle: '',
   },
 
-  '&:checked + label': {
+  '&:checked + label:after': {
     backgroundColor: '$accent1',
   },
 })
