@@ -19,7 +19,7 @@ export const StyledTitleWithFilter = styled('div', {
   display: 'flex',
   alignItems: 'stretch',
   justifyContent: 'space-between',
-  height: 43,
+  height: '$titleBarHeight',
   cursor: 'grab',
 })
 

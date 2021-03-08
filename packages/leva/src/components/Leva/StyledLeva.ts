@@ -10,19 +10,23 @@ export const StyledRoot = styled('div', {
   backgroundColor: '$elevation1',
 
   variants: {
-    detached: {
-      true: {
+    fill: {
+      false: {
         position: 'fixed',
         top: '10px',
         right: '10px',
-        width: '$rootWidth',
-        borderRadius: '$lg',
-        boxShadow: '$level1',
         zIndex: 1000,
+        width: '$rootWidth',
       },
-      false: {
+      true: {
         position: 'relative',
         width: '100%',
+      },
+    },
+    flat: {
+      false: {
+        borderRadius: '$lg',
+        boxShadow: '$level1',
       },
     },
     oneLineLabels: {

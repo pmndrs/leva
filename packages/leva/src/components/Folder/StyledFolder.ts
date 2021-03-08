@@ -5,14 +5,17 @@ export const StyledFolder = styled('div', {})
 export const StyledWrapper = styled('div', {
   position: 'relative',
   background: '$elevation2',
-  transition: 'height 350ms ease',
+  transition: 'height 300ms ease',
   variants: {
-    detached: {
-      true: {
-        borderRadius: '$lg',
+    fill: {
+      false: {
         overflowY: 'auto',
-        maxHeight: 'calc(100vh - 20px - 43px)',
+        // 20px accounts for top margin
+        maxHeight: 'calc(100vh - 20px - $titleBarHeight)',
       },
+    },
+    flat: {
+      false: { borderRadius: '$lg' },
     },
     isRoot: {
       false: {
@@ -41,7 +44,7 @@ export const StyledTitle = styled('div', {
   userSelect: 'none',
   cursor: 'pointer',
   marginTop: '$rowGap',
-  height: '$folderHeight',
+  height: '$folderTitleHeight',
   fontWeight: '$folder',
   '> svg': {
     marginLeft: -4,

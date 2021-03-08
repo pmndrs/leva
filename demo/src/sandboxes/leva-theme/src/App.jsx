@@ -177,13 +177,13 @@ export default function App() {
           overflow: 'auto',
           background: '#181C20',
         }}>
-        <LevaPanel store={colorsStore} />
-        <LevaPanel store={radiiStore} />
-        <LevaPanel store={spaceStore} />
-        <LevaPanel store={fontSizesStore} />
-        <LevaPanel store={sizesStore} />
-        <LevaPanel store={borderWidthsStore} />
-        <LevaPanel store={fontWeightsStore} />
+        <LevaPanel fill flat hideTitleBar store={colorsStore} />
+        <LevaPanel fill flat hideTitleBar store={radiiStore} />
+        <LevaPanel fill flat hideTitleBar store={spaceStore} />
+        <LevaPanel fill flat hideTitleBar store={fontSizesStore} />
+        <LevaPanel fill flat hideTitleBar store={sizesStore} />
+        <LevaPanel fill flat hideTitleBar store={borderWidthsStore} />
+        <LevaPanel fill flat hideTitleBar store={fontWeightsStore} />
       </div>
       <Controls />
     </div>
@@ -196,9 +196,9 @@ export function App4() {
     minmax: {
       value: 10.5,
       min: 5.5,
-      max: 30.5
-    }
+      max: 30.5,
+    },
   })
-  
+
   return <pre>{JSON.stringify(x, null, '  ')}</pre>
 }

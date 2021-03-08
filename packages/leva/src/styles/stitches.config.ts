@@ -41,7 +41,7 @@ export const getDefaultTheme = () => ({
     scrubberWidth: '8px',
     scrubberHeight: '16px',
     rowHeight: '24px',
-    folderHeight: '20px',
+    folderTitleHeight: '20px',
     checkboxSize: '16px',
     joystickWidth: '100px',
     joystickHeight: '100px',
@@ -50,6 +50,7 @@ export const getDefaultTheme = () => ({
     imagePreviewWidth: '$controlWidth',
     imagePreviewHeight: '100px',
     monitorHeight: '60px',
+    titleBarHeight: '39px',
   },
   shadows: {
     level1: '0 0 9px 0 #00000088',

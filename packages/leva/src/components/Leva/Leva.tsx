@@ -9,15 +9,7 @@ let rootEl: HTMLDivElement | null = null
 type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
 // uses global store
-export function Leva({
-  theme,
-  isRoot = false,
-  detached = true,
-  collapsed = false,
-  oneLineLabels = false,
-  hideTitleBar = false,
-  hidden = false,
-}: LevaProps) {
+export function Leva({ isRoot = false, ...props }: LevaProps) {
   useEffect(() => {
     rootInitialized = true
     // if this panel was attached somewhere in the app and there is already
@@ -31,17 +23,7 @@ export function Leva({
     }
   }, [isRoot])
 
-  return (
-    <LevaRoot
-      store={levaStore}
-      theme={theme}
-      detached={detached}
-      oneLineLabels={oneLineLabels}
-      hideTitleBar={hideTitleBar}
-      collapsed={collapsed}
-      hidden={hidden}
-    />
-  )
+  return <LevaRoot store={levaStore} {...props} />
 }
 
 /**
