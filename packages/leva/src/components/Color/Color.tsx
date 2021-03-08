@@ -16,7 +16,6 @@ export function Color({
   value,
   displayValue,
   settings,
-  onChange,
   onUpdate,
 }: Pick<ColorProps, 'value' | 'displayValue' | 'settings' | 'onChange' | 'onUpdate'>) {
   const { format, hasAlpha } = settings

@@ -56,3 +56,22 @@ export const String = Template.bind({})
 String.args = {
   value: 'royalblue',
 }
+
+export const AllTheColors = () => {
+  const values = useControls({
+    Hex: '#f00',
+    Hex8: '#ff0ff033',
+    RgbString: 'rgb(0,0,0)',
+    RgbaString: 'rgba(0,0,0,0.5)',
+    Rgb: { r: 100, g: 100, b: 100 },
+    Rgba: { r: 100, g: 100, b: 100, a: 0.5 },
+    Hsl: { h: 0, s: 1, l: 0.5 },
+    HslaString: 'hsla(0,0,0,0.5)',
+  })
+
+  return (
+    <div style={{ width: '100vw', height: '100vh', padding: '2rem' }}>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
