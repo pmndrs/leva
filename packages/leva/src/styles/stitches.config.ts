@@ -41,7 +41,7 @@ export const getDefaultTheme = () => ({
     scrubberWidth: '8px',
     scrubberHeight: '16px',
     rowHeight: '24px',
-    folderHeight: '20px',
+    folderTitleHeight: '20px',
     checkboxSize: '16px',
     joystickWidth: '100px',
     joystickHeight: '100px',

@@ -41,7 +41,7 @@ export const StyledTitle = styled('div', {
   userSelect: 'none',
   cursor: 'pointer',
   marginTop: '$rowGap',
-  height: '$folderHeight',
+  height: '$folderTitleHeight',
   fontWeight: '$folder',
   '> svg': {
     marginLeft: -4,
