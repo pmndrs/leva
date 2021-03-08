@@ -69,7 +69,10 @@ type SelectInput = { options: any[] | Record<string, any>; value?: any }
 type SelectWithValueInput<T, K> = { options: T[] | Record<string, T>; value: K }
 type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
 
-export type ColorObjectInput = { r: number; g: number; b: number; a?: number }
+type ColorRgbaInput = { r: number; g: number; b: number; a?: number }
+type ColorHslaInput = { h: number; s: number; l: number; a?: number }
+type ColorHsvaInput = { h: number; s: number; v: number; a?: number }
+export type ColorVectorInput = ColorRgbaInput | ColorHslaInput | ColorHsvaInput
 
 type BooleanInput = boolean
 
@@ -88,11 +91,11 @@ type SchemaItem =
   | MergedInputWithSettings<boolean>
   | MergedInputWithSettings<string>
   | IntervalInput
+  | ColorVectorInput
   | Vector2dInput
   | Vector3dInput
   | ImageInput
   | SelectInput
-  | ColorObjectInput
   | BooleanInput
   | StringInput
   | CustomInput<unknown>
@@ -120,15 +123,8 @@ export type Schema = Record<string, SchemaItemWithOptions>
  */
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
-type ColorObjectRGBA = { r: number; g: number; b: number; a: number }
-type ColorObjectRGB = { r: number; g: number; b: number }
-
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
   ? I
-  : S extends ColorObjectRGBA
-  ? { r: number; g: number; b: number; a: number }
-  : S extends ColorObjectRGB
-  ? { r: number; g: number; b: number }
   : S extends ImageInput
   ? string | undefined
   : S extends SelectWithValueInput<infer T, infer K>
