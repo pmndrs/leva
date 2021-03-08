@@ -50,6 +50,7 @@ export const getDefaultTheme = () => ({
     imagePreviewWidth: '$controlWidth',
     imagePreviewHeight: '100px',
     monitorHeight: '60px',
+    titleBarHeight: '39px',
   },
   shadows: {
     level1: '0 0 9px 0 #00000088',
