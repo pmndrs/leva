@@ -52,7 +52,7 @@ export const getDefaultTheme = () => ({
     monitorHeight: '60px',
   },
   shadows: {
-    level1: '0 0 9px 0 rgba(53,49,49,0.50)',
+    level1: '0 0 9px 0 #00000088',
     level2: '0 4px 14px #00000033',
   },
   borderWidths: {
