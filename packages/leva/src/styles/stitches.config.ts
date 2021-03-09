@@ -1,16 +1,16 @@
-import createCss from '@stitches/react'
+import { createCss } from '@stitches/react'
 
 export const getDefaultTheme = () => ({
   colors: {
-    elevation1: '#292D39', // bg color of the root panel (main title bar)
-    elevation2: '#181C20', // bg color of the rows (main panel color)
-    elevation3: '#373C4B', // bg color of the inputs
-    accent1: '#0066DC',
-    accent2: '#007BFF',
-    accent3: '#3C93FF',
+    elevation1: '#292d39', // bg color of the root panel (main title bar)
+    elevation2: '#181c20', // bg color of the rows (main panel color)
+    elevation3: '#373c4b', // bg color of the inputs
+    accent1: '#0066dc',
+    accent2: '#007bff',
+    accent3: '#3c93ff',
     highlight1: '#535760',
-    highlight2: '#8C92A4',
-    highlight3: '#FEFEFE',
+    highlight2: '#8c92a4',
+    highlight3: '#fefefe',
     toolTipBackground: '$highlight3',
     toolTipText: '$elevation2',
   },
@@ -103,6 +103,23 @@ const utils = {
 }
 
 export const { styled, css, theme, global } = createCss({
+  insertMethod() {
+    let currentCssHead: HTMLHeadElement | null = null
+    let currentCssNode: HTMLElement | null = null
+
+    return (cssText) => {
+      if (typeof document === 'object') {
+        if (!currentCssHead) currentCssHead = document.head || document.documentElement
+        if (!currentCssNode)
+          currentCssNode =
+            document.getElementById('leva__stitches') ||
+            Object.assign(document.createElement('style'), { id: 'leva__stitches' })
+        if (!currentCssNode.parentNode) currentCssHead.append(currentCssNode)
+
+        currentCssNode.textContent = cssText
+      }
+    }
+  },
   theme: getDefaultTheme(),
   utils: {
     ...utils,
