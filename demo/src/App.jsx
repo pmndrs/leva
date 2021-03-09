@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link, Route } from 'wouter'
+import { createCss } from '@stitches/react'
+
 import styles from './styles.module.css'
 
 import Minimal from './sandboxes/leva-minimal/src/App'
@@ -10,6 +12,21 @@ import Scroll from './sandboxes/leva-scroll/src/App'
 import UI from './sandboxes/leva-ui/src/App'
 import Theme from './sandboxes/leva-theme/src/App'
 import CustomPlugin from './sandboxes/leva-custom-plugin/src/App'
+
+const { styled } = createCss({
+  theme: {
+    colors: { pageBackground: '#f7f7f7' },
+    sizes: { maxWidth: '720px' },
+  },
+})
+
+const Page = styled('div', {
+  margin: '0 auto',
+  maxWidth: '$maxWidth',
+  padding: '20vh 16px 0',
+  background: '$pageBackground',
+  minHeight: '100vh',
+})
 
 const links = {
   'leva-minimal': Minimal,
@@ -42,8 +59,8 @@ export default function App() {
   return (
     <>
       <Route path="/">
-        <div className={styles.page}>
-          <h1 style={{ marginTop: '20vh' }}>Leva demos</h1>
+        <Page>
+          <h1>Leva demos</h1>
           <h2>Sandboxes</h2>
           <div className={styles.linkList}>
             {Object.keys(links).map((link) => (
@@ -53,7 +70,7 @@ export default function App() {
               </Link>
             ))}
           </div>
-        </div>
+        </Page>
       </Route>
       <Route path="/:link">{(params) => <Example link={params.link} />}</Route>
     </>

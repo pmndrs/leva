@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
+    "@stitches/react": "^0.1.0-canary.15",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^17.0.1",

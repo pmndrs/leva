@@ -35,7 +35,7 @@ function Coordinate<T extends Record<string, number>>({
 
 export const Container = styled('div', {
   display: 'grid',
-  columnGap: '$colGap',
+  columnGap: '$leva__colGap',
   gridAutoFlow: 'column dense',
   alignItems: 'center',
   variants: {

@@ -21,9 +21,3 @@
   display: grid;
   gap: 10px;
 }
-
-.page {
-  margin: 0 auto;
-  max-width: 720px;
-  padding: 0 16px;
-}

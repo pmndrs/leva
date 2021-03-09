@@ -1,21 +1,21 @@
 import { styled } from '../../styles'
 
 export const JoystickTrigger = styled('div', {
-  $flexCenter: '',
+  $leva__flexCenter: '',
   position: 'relative',
-  backgroundColor: '$elevation3',
-  borderRadius: '$sm',
+  backgroundColor: '$leva__elevation3',
+  borderRadius: '$leva__sm',
   cursor: 'pointer',
-  height: '$rowHeight',
-  width: '$rowHeight',
-  $draggable: '',
-  $hover: '',
+  height: '$leva__rowHeight',
+  width: '$leva__rowHeight',
+  $leva__draggable: '',
+  $leva__hover: '',
 
   '&:active': { cursor: 'none' },
 
   '&::after': {
     content: '""',
-    backgroundColor: '$accent2',
+    backgroundColor: '$leva__accent2',
     height: 4,
     width: 4,
     borderRadius: 2,
@@ -23,30 +23,30 @@ export const JoystickTrigger = styled('div', {
 })
 
 export const JoystickPlayground = styled('div', {
-  $flexCenter: '',
-  width: '$joystickWidth',
-  height: '$joystickHeight',
-  borderRadius: '$sm',
-  boxShadow: '$level2',
+  $leva__flexCenter: '',
+  width: '$leva__joystickWidth',
+  height: '$leva__joystickHeight',
+  borderRadius: '$leva__sm',
+  boxShadow: '$leva__level2',
   position: 'fixed',
   zIndex: 10000,
   overflow: 'hidden',
-  $draggable: '',
+  $leva__draggable: '',
   transform: 'translate(-50%, -50%)',
 
   variants: {
     isOutOfBounds: {
-      true: { backgroundColor: '$elevation1' },
-      false: { backgroundColor: '$elevation3' },
+      true: { backgroundColor: '$leva__elevation1' },
+      false: { backgroundColor: '$leva__elevation3' },
     },
   },
   '> div': {
     position: 'absolute',
-    $flexCenter: '',
+    $leva__flexCenter: '',
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '$highlight1',
-    backgroundColor: '$elevation3',
+    borderColor: '$leva__highlight1',
+    backgroundColor: '$leva__elevation3',
     width: '80%',
     height: '80%',
 
@@ -54,7 +54,7 @@ export const JoystickPlayground = styled('div', {
       content: '""',
       position: 'absolute',
       zindex: 10,
-      backgroundColor: '$highlight1',
+      backgroundColor: '$leva__highlight1',
     },
 
     '&::before': {
@@ -73,7 +73,7 @@ export const JoystickPlayground = styled('div', {
     zindex: 100,
     width: 10,
     height: 10,
-    backgroundColor: '$accent2',
+    backgroundColor: '$leva__accent2',
     borderRadius: '50%',
   },
 })

@@ -8,10 +8,10 @@ import type { Vector2dProps } from './vector2d-types'
 
 export const Container = styled('div', {
   display: 'grid',
-  columnGap: '$colGap',
+  columnGap: '$leva__colGap',
   variants: {
     withJoystick: {
-      true: { gridTemplateColumns: '$sizes$rowHeight auto' },
+      true: { gridTemplateColumns: '$sizes$leva__rowHeight auto' },
       false: { gridTemplateColumns: 'auto' },
     },
   },
