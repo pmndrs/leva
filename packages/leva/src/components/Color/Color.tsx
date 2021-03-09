@@ -45,7 +45,7 @@ export function Color({
 
   return (
     <>
-      <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
+      <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ color: displayValue }} />
       {shown && (
         <Portal>
           <Overlay onPointerUp={hide} />

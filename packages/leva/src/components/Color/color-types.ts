@@ -1,6 +1,6 @@
 import type { ColorVectorInput, InputWithSettings, LevaInputProps } from '../../types'
 
-export type Format = 'hex' | 'rgb' | 'hex8' | 'hsl' | 'hsv'
+export type Format = 'hex' | 'rgb' | 'hsl' | 'hsv'
 
 export type Color = string | ColorVectorInput
 export type InternalColorSettings = { format: Format; hasAlpha: boolean; isString: boolean }

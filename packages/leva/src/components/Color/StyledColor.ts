@@ -1,15 +1,30 @@
 import { styled } from '../../styles'
 
 export const ColorPreview = styled('div', {
+  position: 'relative',
   boxSizing: 'border-box',
   borderRadius: '$sm',
+  overflow: 'hidden',
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
+  backgroundColor: '#fff',
+  backgroundImage: `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>')`,
   $inputStyle: '',
   $hover: '',
+  zIndex: 1,
   variants: {
     active: { true: { $inputStyle: '$accent1' } },
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    backgroundColor: 'currentColor',
+    zIndex: 1,
   },
 })
 

@@ -19,9 +19,10 @@ v8n.extend({
 export const schema = (o: any) => v8n().color().test(o)
 
 function convert(color: tc.Instance, { format, hasAlpha, isString }: InternalColorSettings) {
-  if (isString) return color.toString(format)
+  const _format = format === 'hex' && hasAlpha ? 'hex8' : format
+  if (isString) return color.toString(_format)
   // @ts-ignore
-  const colorObj = color[convertMap[format]]()
+  const colorObj = color[convertMap[_format]]()
   return hasAlpha ? colorObj : omit(colorObj, ['a'])
 }
 
@@ -32,13 +33,13 @@ export const sanitize = (v: any, settings: InternalColorSettings) => {
 }
 
 export const format = (v: any, settings: InternalColorSettings) => {
-  return convert(tc(v), { ...settings, isString: true, format: settings.hasAlpha ? 'hex8' : 'hex' })
+  return convert(tc(v), { ...settings, isString: true, format: 'hex' })
 }
 
 export const normalize = ({ value }: ColorInput) => {
   const color = tc(value)
   const _f = color.getFormat()
-  const format = (_f === 'name' ? 'hex' : _f) as Format
+  const format = (_f === 'name' || _f === 'hex8' ? 'hex' : _f) as Format
   const hasAlpha = typeof value === 'object' ? 'a' in value : _f === 'hex8' || /^(rgba)|(hsla)|(hsva)/.test(value)
   const settings = { format, hasAlpha, isString: typeof value === 'string' }
 
