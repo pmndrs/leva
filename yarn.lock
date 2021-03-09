@@ -7830,6 +7830,7 @@ __metadata:
   resolution: "demo@workspace:demo"
   dependencies:
     "@leva-ui/plugin-spring": "*"
+    "@stitches/react": ^0.1.0-canary.15
     "@types/react": ^17.0.2
     "@types/react-dom": ^17.0.1
     "@vitejs/plugin-react-refresh": ^1.3.1
