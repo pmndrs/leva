@@ -1,25 +1,25 @@
 import { styled } from '../../styles'
 
 export const SelectContainer = styled('div', {
-  $flexCenter: '',
+  $leva__flexCenter: '',
   position: 'relative',
   '> svg': {
     pointerEvents: 'none',
     position: 'absolute',
-    right: '$md',
+    right: '$leva__md',
   },
 })
 
 export const StyledSelect = styled('select', {
-  $reset: '',
+  $leva__reset: '',
   width: '100%',
-  height: '$rowHeight',
-  backgroundColor: '$elevation3',
+  height: '$leva__rowHeight',
+  backgroundColor: '$leva__elevation3',
   color: 'inherit',
   borderStyle: 'none',
-  borderRadius: '$sm',
-  padding: '0 $sm',
+  borderRadius: '$leva__sm',
+  padding: '0 $leva__sm',
   cursor: 'pointer',
-  $hover: '',
-  $focus: '',
+  $leva__hover: '',
+  $leva__focus: '',
 })

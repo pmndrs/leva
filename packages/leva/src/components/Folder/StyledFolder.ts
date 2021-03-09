@@ -4,30 +4,30 @@ export const StyledFolder = styled('div', {})
 
 export const StyledWrapper = styled('div', {
   position: 'relative',
-  background: '$elevation2',
+  background: '$leva__elevation2',
   transition: 'height 300ms ease',
   variants: {
     fill: {
       false: {
         overflowY: 'auto',
         // 20px accounts for top margin
-        maxHeight: 'calc(100vh - 20px - $titleBarHeight)',
+        maxHeight: 'calc(100vh - 20px - $leva__titleBarHeight)',
       },
     },
     flat: {
-      false: { borderRadius: '$lg' },
+      false: { borderRadius: '$leva__lg' },
     },
     isRoot: {
       false: {
-        paddingLeft: '$md',
+        paddingLeft: '$leva__md',
         '&::after': {
           content: '""',
           position: 'absolute',
           left: 0,
           top: 0,
-          width: '$borderWidths$folder',
+          width: '$borderWidths$leva__folder',
           height: '100%',
-          backgroundColor: '$elevation3',
+          backgroundColor: '$leva__elevation3',
           transform: 'translateX(-50%)',
         },
       },
@@ -39,30 +39,30 @@ export const StyledWrapper = styled('div', {
 })
 
 export const StyledTitle = styled('div', {
-  $flex: '',
-  color: '$highlight3',
+  $leva__flex: '',
+  color: '$leva__highlight3',
   userSelect: 'none',
   cursor: 'pointer',
-  marginTop: '$rowGap',
-  height: '$folderTitleHeight',
-  fontWeight: '$folder',
+  marginTop: '$leva__rowGap',
+  height: '$leva__folderTitleHeight',
+  fontWeight: '$leva__folder',
   '> svg': {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
   },
   '&:hover > svg': {
-    fill: '$highlight2',
+    fill: '$leva__highlight2',
   },
   [`&:hover + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight2',
+    backgroundColor: '$leva__highlight2',
   },
   [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight1',
+    backgroundColor: '$leva__highlight1',
   },
   [`${StyledFolder}:hover > & > svg`]: {
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
   },
 })
 
@@ -70,7 +70,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  rowGap: '$rowGap',
+  rowGap: '$leva__rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {
@@ -87,19 +87,19 @@ export const StyledContent = styled('div', {
     isRoot: {
       true: {
         '& > div': {
-          paddingLeft: '$md',
-          paddingRight: '$md',
+          paddingLeft: '$leva__md',
+          paddingRight: '$leva__md',
         },
         '& > div:first-of-type': {
-          paddingTop: '$sm',
+          paddingTop: '$leva__sm',
         },
         '& > div:last-of-type': {
-          paddingBottom: '$sm',
+          paddingBottom: '$leva__sm',
         },
         [`> ${StyledFolder}:not(:first-of-type)`]: {
-          paddingTop: '$md',
-          marginTop: '$md',
-          borderTop: '$borderWidths$folder solid $colors$elevation1',
+          paddingTop: '$leva__md',
+          marginTop: '$leva__md',
+          borderTop: '$borderWidths$leva__folder solid $colors$leva__elevation1',
         },
       },
     },

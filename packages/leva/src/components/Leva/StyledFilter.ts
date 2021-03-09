@@ -1,36 +1,36 @@
 import { styled } from '../../styles'
 
 export const Icon = styled('i', {
-  $flexCenter: '',
+  $leva__flexCenter: '',
   width: 40,
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
     transition: 'transform 350ms ease, fill 250ms ease',
   },
   '&:hover > svg': {
-    fill: '$highlight3',
+    fill: '$leva__highlight3',
   },
-  variants: { active: { true: { '> svg': { fill: '$highlight2' } } } },
+  variants: { active: { true: { '> svg': { fill: '$leva__highlight2' } } } },
 })
 
 export const StyledTitleWithFilter = styled('div', {
   display: 'flex',
   alignItems: 'stretch',
   justifyContent: 'space-between',
-  height: '$titleBarHeight',
+  height: '$leva__titleBarHeight',
   cursor: 'grab',
 })
 
 export const FilterWrapper = styled('div', {
-  $flex: '',
+  $leva__flex: '',
   position: 'relative',
   width: '100%',
   overflow: 'hidden',
   transition: 'height 250ms ease',
-  color: '$highlight3',
-  paddingLeft: '$md',
+  color: '$leva__highlight3',
+  paddingLeft: '$leva__md',
 
   [`> ${Icon}`]: {
     height: 30,
@@ -42,29 +42,29 @@ export const FilterWrapper = styled('div', {
 })
 
 export const StyledFilterInput = styled('input', {
-  $reset: '',
+  $leva__reset: '',
   flex: 1,
   position: 'relative',
   height: 30,
   width: '100%',
   backgroundColor: 'transparent',
   fontSize: '10px',
-  borderRadius: '$root',
+  borderRadius: '$leva__root',
   '&:focus': {},
   '&::placeholder': {
-    color: '$highlight2',
+    color: '$leva__highlight2',
   },
 })
 
 export const Drag = styled('div', {
-  $flexCenter: '',
-  $draggable: '',
+  $leva__flexCenter: '',
+  $leva__draggable: '',
   flex: 1,
   '> svg': {
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
     transition: 'fill 250ms ease',
   },
   '&:hover > svg': {
-    fill: '$highlight3',
+    fill: '$leva__highlight3',
   },
 })
