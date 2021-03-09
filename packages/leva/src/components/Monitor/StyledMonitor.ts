@@ -1,8 +1,8 @@
 import { styled } from '../../styles'
 
 export const Canvas = styled('canvas', {
-  height: '$monitorHeight',
+  height: '$leva__monitorHeight',
   width: '100%',
   display: 'block',
-  borderRadius: '$sm',
+  borderRadius: '$leva__sm',
 })

@@ -4,10 +4,10 @@ import { StyledInputRow } from '../UI/StyledUI'
 export const StyledRoot = styled('div', {
   /* position */
   position: 'relative',
-  fontFamily: '$mono',
-  fontSize: '$root',
-  color: '$rootText',
-  backgroundColor: '$elevation1',
+  fontFamily: '$leva__mono',
+  fontSize: '$leva__root',
+  color: '$leva__rootText',
+  backgroundColor: '$leva__elevation1',
 
   variants: {
     fill: {
@@ -16,7 +16,7 @@ export const StyledRoot = styled('div', {
         top: '10px',
         right: '10px',
         zIndex: 1000,
-        width: '$rootWidth',
+        width: '$leva__rootWidth',
       },
       true: {
         position: 'relative',
@@ -25,8 +25,8 @@ export const StyledRoot = styled('div', {
     },
     flat: {
       false: {
-        borderRadius: '$lg',
-        boxShadow: '$level1',
+        borderRadius: '$leva__lg',
+        boxShadow: '$leva__level1',
       },
     },
     oneLineLabels: {
@@ -34,10 +34,10 @@ export const StyledRoot = styled('div', {
         [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
           gridAutoColumns: 'minmax(max-content, 1fr)',
-          gridAutoRows: 'minmax($sizes$rowHeight), auto)',
+          gridAutoRows: 'minmax($sizes$leva__rowHeight), auto)',
           rowGap: 0,
           columnGap: 0,
-          marginTop: '$rowGap',
+          marginTop: '$leva__rowGap',
         },
       },
     },
@@ -48,6 +48,6 @@ export const StyledRoot = styled('div', {
   },
 
   '*::selection': {
-    backgroundColor: '$accent2',
+    backgroundColor: '$leva__accent2',
   },
 })

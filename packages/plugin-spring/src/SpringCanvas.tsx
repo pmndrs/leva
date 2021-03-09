@@ -11,9 +11,9 @@ export function SpringCanvas() {
   const { displayValue, value, onUpdate, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useTh('colors', 'highlight3')
-  const backgroundColor = useTh('colors', 'elevation2')
-  const fillColor = useTh('colors', 'highlight1')
+  const accentColor = useTh('colors', 'leva__highlight3')
+  const backgroundColor = useTh('colors', 'leva__elevation2')
+  const fillColor = useTh('colors', 'leva__highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
     return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]

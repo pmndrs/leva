@@ -2,11 +2,11 @@ import { styled } from '../../styles'
 
 export const StyledInputWrapper = styled('div', {
   position: 'relative',
-  $flex: '',
-  height: '$rowHeight',
+  $leva__flex: '',
+  height: '$leva__rowHeight',
 
   input: {
-    $reset: '',
+    $leva__reset: '',
     height: 0,
     width: 0,
     opacity: 0,
@@ -15,39 +15,39 @@ export const StyledInputWrapper = styled('div', {
 
   label: {
     position: 'relative',
-    $flexCenter: '',
+    $leva__flexCenter: '',
     userSelect: 'none',
     cursor: 'pointer',
-    height: '$checkboxSize',
-    width: '$checkboxSize',
-    backgroundColor: '$elevation3',
-    borderRadius: '$sm',
-    $hover: '',
+    height: '$leva__checkboxSize',
+    width: '$leva__checkboxSize',
+    backgroundColor: '$leva__elevation3',
+    borderRadius: '$leva__sm',
+    $leva__hover: '',
   },
 
-  'input:focus + label': { $focusStyle: '' },
+  'input:focus + label': { $leva__focusStyle: '' },
 
   'input:focus:checked + label, input:checked + label:hover': {
-    $hoverStyle: '$accent3',
+    $leva__hoverStyle: '$leva__accent3',
   },
 
   'input + label:active': {
-    backgroundColor: '$accent1',
+    backgroundColor: '$leva__accent1',
   },
 
   'input:checked + label:active': {
-    backgroundColor: '$accent1',
+    backgroundColor: '$leva__accent1',
   },
 
   'label > svg': {
     display: 'none',
     width: '90%',
     height: '90%',
-    stroke: '$highlight3',
+    stroke: '$leva__highlight3',
   },
 
   'input:checked + label': {
-    backgroundColor: '$accent2',
+    backgroundColor: '$leva__accent2',
   },
 
   'input:checked + label > svg': {

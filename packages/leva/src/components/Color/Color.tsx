@@ -16,7 +16,6 @@ export function Color({
   value,
   displayValue,
   settings,
-  onChange,
   onUpdate,
 }: Pick<ColorProps, 'value' | 'displayValue' | 'settings' | 'onChange' | 'onUpdate'>) {
   const { format, hasAlpha } = settings
@@ -46,7 +45,7 @@ export function Color({
 
   return (
     <>
-      <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ background: displayValue }} />
+      <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ color: displayValue }} />
       {shown && (
         <Portal>
           <Overlay onPointerUp={hide} />
