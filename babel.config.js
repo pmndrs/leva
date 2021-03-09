@@ -1,8 +1,10 @@
 module.exports = {
+  comments: false,
   presets: [
     [
       '@babel/preset-env',
       {
+        bugfixes: true,
         targets: {
           esmodules: true,
         },
