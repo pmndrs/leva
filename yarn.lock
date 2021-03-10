@@ -1793,6 +1793,7 @@ __metadata:
     "@storybook/addon-actions": ^6.1.21
     "@storybook/addon-essentials": ^6.1.21
     "@storybook/addon-links": ^6.1.21
+    "@storybook/addon-storysource": ^6.1.21
     "@storybook/react": ^6.1.21
     "@testing-library/cypress": ^7.0.4
     "@types/react": ^17.0.3
@@ -2833,6 +2834,36 @@ __metadata:
     react-dom:
       optional: true
   checksum: 64b50bdbbf219287dbb7138444e8de5af897d0cd1a68854650ed89092d6bc9479c065a8a83c53c36d7f3c8fa225d719d36ed7b50bae5a8c3ac25518efad6cb1b
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-storysource@npm:^6.1.21":
+  version: 6.1.21
+  resolution: "@storybook/addon-storysource@npm:6.1.21"
+  dependencies:
+    "@storybook/addons": 6.1.21
+    "@storybook/api": 6.1.21
+    "@storybook/client-logger": 6.1.21
+    "@storybook/components": 6.1.21
+    "@storybook/router": 6.1.21
+    "@storybook/source-loader": 6.1.21
+    "@storybook/theming": 6.1.21
+    core-js: ^3.0.1
+    estraverse: ^4.2.0
+    loader-utils: ^2.0.0
+    prettier: ~2.0.5
+    prop-types: ^15.7.2
+    react-syntax-highlighter: ^13.5.0
+    regenerator-runtime: ^0.13.7
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: c944cf36213db1a37b9665ea5d91678cd3a3db0c584aa5cc1f0c593032d1eb03423b56d905bff9e6e2369af16bde7d66370ed1eb7a111a7ad6c44e653e78ca71
   languageName: node
   linkType: hard
 
