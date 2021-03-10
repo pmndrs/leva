@@ -58,6 +58,7 @@
     "@storybook/addon-actions": "^6.1.20",
     "@storybook/addon-essentials": "^6.1.20",
     "@storybook/addon-links": "^6.1.20",
+    "@storybook/addon-storysource": "^6.1.21",
     "@storybook/react": "^6.1.20",
     "@testing-library/cypress": "^7.0.4",
     "@types/react": "^17.0.2",
