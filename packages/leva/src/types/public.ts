@@ -35,8 +35,8 @@ export type ButtonInput = {
 }
 
 export type ButtonGroupInput = {
-  type: SpecialInputTypes.BUTTON_GROUP,
-  opts: { [title: string]: undefined | (() => void) }
+  type: SpecialInputTypes.BUTTON_GROUP
+  opts: { [title: string]: () => void }
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
