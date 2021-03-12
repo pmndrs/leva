@@ -100,8 +100,7 @@ type SchemaItem =
   | StringInput
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string; hint?: string }
-// type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
+type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Element; hint?: string }
 
 // type Merge<T, G extends Object> = T extends any[]
 //   ? T
