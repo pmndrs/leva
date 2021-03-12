@@ -4,7 +4,7 @@ import { TreeWrapper } from '../Folder'
 
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
 
-import { StyledRoot } from './StyledLeva'
+import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme } from '../../styles'
 import { ThemeContext, StoreContext } from '../../context'
 import { TitleWithFilter } from './Filter'
