@@ -1788,6 +1788,7 @@ __metadata:
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.13.0
     "@preconstruct/cli": ^2.0.6
+    "@radix-ui/react-icons": ^1.0.2
     "@size-limit/preset-big-lib": ^4.10.1
     "@size-limit/preset-small-lib": ^4.10.1
     "@storybook/addon-actions": ^6.1.21
@@ -2087,6 +2088,15 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0
   checksum: 6308829bf1154dca6bc47d4b4155924262a813f0d1c1fe59ccbd711d3b1b83866a6f8aab8f7b894c0a6582d3218f6ec65f3a628198d0969585c380eafbf53093
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-icons@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@radix-ui/react-icons@npm:1.0.2"
+  peerDependencies:
+    react: ^16.x || ^17.x
+  checksum: 9418b0f5fbe7880a85613f77f534049ce825e57d7713306ae6d029a1ba75737f681790662dbe3de4fcdd9e2e3e56d968d853157cf9c9e0322a58328092a1801d
   languageName: node
   linkType: hard
 
@@ -7211,6 +7221,7 @@ __metadata:
   resolution: "demo@workspace:demo"
   dependencies:
     "@leva-ui/plugin-spring": "*"
+    "@radix-ui/react-icons": ^1.0.2
     "@stitches/react": ^0.1.0-canary.15
     "@types/react": ^17.0.3
     "@types/react-dom": ^17.0.2

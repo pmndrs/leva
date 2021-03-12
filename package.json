@@ -53,6 +53,7 @@
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
     "@preconstruct/cli": "^2.0.6",
+    "@radix-ui/react-icons": "^1.0.2",
     "@size-limit/preset-big-lib": "^4.10.1",
     "@size-limit/preset-small-lib": "^4.10.1",
     "@storybook/addon-actions": "^6.1.21",
