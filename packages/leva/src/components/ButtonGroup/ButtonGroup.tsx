@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '../Button'
 import { Row, Label } from '../UI'
 import { StyledButtonGroup } from './StyledButtonGroup'
+import { StyledButtonGroupButton } from './StyledButtonGroupButton'
 
 type ButtonGroupProps = {
   label: string
@@ -16,7 +16,9 @@ export function ButtonGroup({ label, opts }: ButtonGroupProps) {
       <Label>{label}</Label>
       <StyledButtonGroup>
         {Object.entries(opts).map(([label, onClick]) => (
-          <Button key={label} onClick={() => onClick()} label={label} />
+          <StyledButtonGroupButton key={label} onClick={() => onClick()}>
+            {label}
+          </StyledButtonGroupButton>
         ))}
       </StyledButtonGroup>
     </Row>

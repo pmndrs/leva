@@ -11,12 +11,16 @@ export default {
 } as Meta
 
 const Template: Story<any> = (args) => {
-  const values = useControls({
-    bars: buttonGroup({
-      hi: () => alert('click hi'),
-      ho: () => alert('click ho'),
+  const [values, set] = useControls(() => ({
+    Size: 1,
+    '': buttonGroup({
+      '0.25x': () => set({ Size: 0.25 }),
+      '0.5x': () => set({ Size: 0.5 }),
+      '1x': () => set({ Size: 1 }),
+      '2x': () => set({ Size: 2 }),
+      '3x': () => set({ Size: 3 }),
     }),
-  })
+  }))
 
   return (
     <div>
