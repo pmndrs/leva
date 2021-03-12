@@ -42,7 +42,7 @@ export const StyledRoot = styled('div', {
     },
     hideTitleBar: {
       true: { $$titleBarHeight: '0px' },
-      false: { $$titleBarHeight: '$leva__titleBarHeight' },
+      false: { $$titleBarHeight: '$sizes$leva__titleBarHeight' },
     },
   },
 
