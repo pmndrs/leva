@@ -3,6 +3,7 @@ import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
+import { ButtonGroup } from '../ButtonGroup'
 import { Monitor } from '../Monitor'
 import { useInput } from '../../hooks'
 import { SpecialInputTypes } from '../../types'
@@ -11,6 +12,7 @@ type ControlProps = { path: string }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
+  [SpecialInputTypes.BUTTON_GROUP]: ButtonGroup,
   [SpecialInputTypes.MONITOR]: Monitor,
 }
 

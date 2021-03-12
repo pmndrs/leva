@@ -24,6 +24,7 @@ export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V,
  */
 export enum SpecialInputTypes {
   BUTTON = 'BUTTON',
+  BUTTON_GROUP = 'BUTTON_GROUP',
   MONITOR = 'MONITOR',
   FOLDER = 'FOLDER',
 }
@@ -31,6 +32,11 @@ export enum SpecialInputTypes {
 export type ButtonInput = {
   type: SpecialInputTypes.BUTTON
   onClick: () => any
+}
+
+export type ButtonGroupInput = {
+  type: SpecialInputTypes.BUTTON_GROUP,
+  opts: { [title: string]: undefined | (() => void) }
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
@@ -41,7 +47,7 @@ export type MonitorInput = {
   settings: MonitorSettings
 }
 
-export type SpecialInput = MonitorInput | ButtonInput
+export type SpecialInput = MonitorInput | ButtonInput | ButtonGroupInput
 
 export type FolderSettings = { collapsed?: boolean; render?: RenderFn }
 
