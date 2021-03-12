@@ -8,7 +8,6 @@ export const StyledRoot = styled('div', {
   fontSize: '$leva__root',
   color: '$leva__rootText',
   backgroundColor: '$leva__elevation1',
-
   variants: {
     fill: {
       false: {
@@ -40,6 +39,10 @@ export const StyledRoot = styled('div', {
           marginTop: '$leva__rowGap',
         },
       },
+    },
+    hideTitleBar: {
+      true: { $$titleBarHeight: '0px' },
+      false: { $$titleBarHeight: '$leva__titleBarHeight' },
     },
   },
 

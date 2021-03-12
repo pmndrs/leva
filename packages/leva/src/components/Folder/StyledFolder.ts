@@ -11,7 +11,7 @@ export const StyledWrapper = styled('div', {
       false: {
         overflowY: 'auto',
         // 20px accounts for top margin
-        maxHeight: 'calc(100vh - 20px - $leva__titleBarHeight)',
+        maxHeight: 'calc(100vh - 20px - $$titleBarHeight)',
       },
     },
     flat: {

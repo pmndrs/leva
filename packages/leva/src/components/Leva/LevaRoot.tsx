@@ -88,6 +88,7 @@ const LevaCore = React.memo(
         fill={fill}
         flat={flat}
         oneLineLabels={oneLineLabels}
+        hideTitleBar={hideTitleBar}
         style={{ display: shouldShow ? 'block' : 'none' }}>
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
