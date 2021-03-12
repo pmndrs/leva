@@ -1788,6 +1788,7 @@ __metadata:
     "@babel/preset-react": ^7.12.13
     "@babel/preset-typescript": ^7.13.0
     "@preconstruct/cli": ^2.0.6
+    "@radix-ui/react-icons": ^1.0.2
     "@size-limit/preset-big-lib": ^4.10.1
     "@size-limit/preset-small-lib": ^4.10.1
     "@storybook/addon-actions": ^6.1.21
@@ -2087,6 +2088,15 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0
   checksum: 6308829bf1154dca6bc47d4b4155924262a813f0d1c1fe59ccbd711d3b1b83866a6f8aab8f7b894c0a6582d3218f6ec65f3a628198d0969585c380eafbf53093
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-icons@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@radix-ui/react-icons@npm:1.0.2"
+  peerDependencies:
+    react: ^16.x || ^17.x
+  checksum: 9418b0f5fbe7880a85613f77f534049ce825e57d7713306ae6d029a1ba75737f681790662dbe3de4fcdd9e2e3e56d968d853157cf9c9e0322a58328092a1801d
   languageName: node
   linkType: hard
 
@@ -2607,6 +2617,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stitches/core@npm:^0.1.0-canary.19":
+  version: 0.1.0-canary.19
+  resolution: "@stitches/core@npm:0.1.0-canary.19"
+  checksum: b693e472bae25aac4e2ca25bc69e42a296eb1dd9c31c1bf18d4ac5f368a74993fd0f2be50f6ca70b9727ab309d653d36c31f93a2c9a5d3cd8585cc7de801f87f
+  languageName: node
+  linkType: hard
+
 "@stitches/react@npm:^0.1.0-canary.15":
   version: 0.1.0-canary.17
   resolution: "@stitches/react@npm:0.1.0-canary.17"
@@ -2615,6 +2632,17 @@ __metadata:
   peerDependencies:
     react: ">=17.0.0 <19.0.0"
   checksum: 2685bb869702031655bb86bb3ee1c8b42bdefe5f20c8129c8d79bba89b89821bd813ec5248f210430d17bc1fb9ea41f9c6b3d598204c498fe5594785248cc159
+  languageName: node
+  linkType: hard
+
+"@stitches/react@npm:^0.1.0-canary.19":
+  version: 0.1.0-canary.19
+  resolution: "@stitches/react@npm:0.1.0-canary.19"
+  dependencies:
+    "@stitches/core": ^0.1.0-canary.19
+  peerDependencies:
+    react: ">=17.0.0 <19.0.0"
+  checksum: 3209dcdcd79ff1db8037bdd64b4c2581476b997fc350731f63d601080928e4d7a7ca9c2543b1920e947117050b8abbef555c246f4bc92ca306865ddd55324463
   languageName: node
   linkType: hard
 
@@ -7211,6 +7239,7 @@ __metadata:
   resolution: "demo@workspace:demo"
   dependencies:
     "@leva-ui/plugin-spring": "*"
+    "@radix-ui/react-icons": ^1.0.2
     "@stitches/react": ^0.1.0-canary.15
     "@types/react": ^17.0.3
     "@types/react-dom": ^17.0.2
@@ -11284,7 +11313,7 @@ fsevents@^1.2.7:
   dependencies:
     "@radix-ui/react-portal": ^0.0.6
     "@radix-ui/react-tooltip": ^0.0.9
-    "@stitches/react": ^0.1.0-canary.15
+    "@stitches/react": ^0.1.0-canary.19
     "@welldone-software/why-did-you-render": ^6.1.0
     clipboard-polyfill: ^3.0.2
     dequal: ^2.0.2

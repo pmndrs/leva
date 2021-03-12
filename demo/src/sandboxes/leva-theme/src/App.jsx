@@ -133,6 +133,7 @@ export default function App() {
         colorPickerWidth: '160px',
         colorPickerHeight: '100px',
         monitorHeight: '60px',
+        titleBarHeight: '39px',
       }),
     },
     { store: sizesStore }

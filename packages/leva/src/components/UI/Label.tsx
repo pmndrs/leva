@@ -33,7 +33,8 @@ function RawLabel(props: LabelProps) {
           <Tooltip.Trigger as={StyledLabel} {...htmlFor} {...props} />
           <Tooltip.Content side="top" sideOffset={2}>
             <StyledToolTipContent>
-              {hint} <ToolTipArrow />
+              {hint}
+              <ToolTipArrow />
             </StyledToolTipContent>
           </Tooltip.Content>
         </Tooltip.Root>
@@ -60,7 +61,7 @@ function LabelWithCopy(props: LabelProps) {
   return (
     <CopyLabelContainer onPointerLeave={() => setCopied(false)}>
       <RawLabel {...props} />
-      <div title={`Click to copy ${label} value`}>
+      <div title={`Click to copy ${typeof label === 'string' ? label : key} value`}>
         {!copied ? (
           <svg onClick={handleClick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />

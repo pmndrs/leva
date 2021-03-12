@@ -4,7 +4,7 @@ import { TreeWrapper } from '../Folder'
 
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
 
-import { StyledRoot } from './StyledLeva'
+import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme } from '../../styles'
 import { ThemeContext, StoreContext } from '../../context'
 import { TitleWithFilter } from './Filter'
@@ -45,18 +45,25 @@ export type LevaRootProps = {
   hideTitleBar?: boolean
 }
 
-export function LevaRoot({ store, hidden = false, theme, ...props }: LevaRootProps) {
+export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
+  // collapsible
+  const [toggled, setToggle] = useState(!collapsed)
   if (!store || hidden) return null
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <LevaCore store={store} {...props} rootClass={themeContext.className} />
+      <LevaCore store={store} {...props} toggled={toggled} setToggle={setToggle} rootClass={themeContext.className} />
     </ThemeContext.Provider>
   )
 }
 
-type LevaCoreProps = Omit<LevaRootProps, 'theme' | 'hidden'> & { store: StoreType; rootClass: string }
+type LevaCoreProps = Omit<LevaRootProps, 'theme' | 'hidden' | 'collapsed'> & {
+  store: StoreType
+  rootClass: string
+  toggled: boolean
+  setToggle: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const LevaCore = React.memo(
   ({
@@ -64,9 +71,10 @@ const LevaCore = React.memo(
     rootClass,
     fill = false,
     flat = false,
-    collapsed = false,
     oneLineLabels = false,
     hideTitleBar = false,
+    toggled,
+    setToggle,
   }: LevaCoreProps) => {
     const paths = useVisiblePaths(store)
     const [filter, setFilter] = useState('')
@@ -74,9 +82,6 @@ const LevaCore = React.memo(
 
     // drag
     const [rootRef, set] = useTransform<HTMLDivElement>()
-
-    // collapsible
-    const [toggled, setToggle] = useState(!collapsed)
 
     // this generally happens on first render because the store is initialized in useEffect.
     const shouldShow = paths.length > 0
@@ -88,6 +93,7 @@ const LevaCore = React.memo(
         fill={fill}
         flat={flat}
         oneLineLabels={oneLineLabels}
+        hideTitleBar={hideTitleBar}
         style={{ display: shouldShow ? 'block' : 'none' }}>
         {!hideTitleBar && (
           <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />

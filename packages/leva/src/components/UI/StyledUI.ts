@@ -31,18 +31,24 @@ export const CopyLabelContainer = styled('div', {
   position: 'relative',
   overflow: 'hidden',
 
+  '& > div': {
+    marginLeft: '$leva__colGap',
+    padding: '0 $xs',
+    opacity: 0.4,
+  },
+  '& > div:hover': {
+    opacity: 0.8,
+  },
+
   '& > div > svg': {
     display: 'none',
-    marginLeft: '$leva__colGap',
     cursor: 'pointer',
-    width: 15,
-    minWidth: 15,
-    height: 15,
+    width: 13,
+    minWidth: 13,
+    height: 13,
     backgroundColor: '$leva__elevation2',
   },
-  '&:hover > div > svg': {
-    display: 'block',
-  },
+  '&:hover > div > svg': { display: 'block' },
 })
 
 export const StyledOptionalToggle = styled('input', {
@@ -98,6 +104,9 @@ export const StyledLabel = styled('label', {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  '& > svg': {
+    display: 'block', // fixes svg vertical misalignment
+  },
   variants: {
     align: {
       top: {

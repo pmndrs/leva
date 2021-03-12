@@ -1,6 +1,7 @@
 import React from 'react'
-import Reset from './components/decorator-reset'
 import { Meta } from '@storybook/react'
+import Reset from './components/decorator-reset'
+import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
 
 import { folder, useControls } from '../src'
 
@@ -9,9 +10,12 @@ export default {
   decorators: [Reset],
 } as Meta
 
-export const Label = () => {
+export const LabelAndIcon = () => {
   const values = useControls({
-    number: { value: 3, label: 'My number' },
+    string: { value: 'hello', label: 'My string' },
+    color: { value: '#f00', label: <Half2Icon /> },
+    opacity: { value: 0.5, label: <OpacityIcon /> },
+    size: { value: { width: 200, height: 300 }, label: <DimensionsIcon /> },
   })
 
   return (
