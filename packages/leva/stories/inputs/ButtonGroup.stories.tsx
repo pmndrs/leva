@@ -3,16 +3,19 @@ import { Story, Meta } from '@storybook/react'
 
 import Reset from '../components/decorator-reset'
 
-import { useControls, button } from '../../src'
+import { useControls, buttonGroup } from '../../src'
 
 export default {
-  title: 'Inputs/Button',
+  title: 'Inputs/ButtonGroup',
   decorators: [Reset],
 } as Meta
 
 const Template: Story<any> = (args) => {
   const values = useControls({
-    foo: button(() => alert('click')),
+    bars: buttonGroup({
+      hi: () => alert('click hi'),
+      ho: () => alert('click ho'),
+    }),
   })
 
   return (

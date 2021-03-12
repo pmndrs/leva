@@ -16,7 +16,7 @@ export function ButtonGroup({ label, opts }: ButtonGroupProps) {
       <Label>{label}</Label>
       <StyledButtonGroup>
         {Object.entries(opts).map(([label, onClick]) => (
-          <Button onClick={() => onClick()} label={label} />
+          <Button key={label} onClick={() => onClick()} label={label} />
         ))}
       </StyledButtonGroup>
     </Row>
