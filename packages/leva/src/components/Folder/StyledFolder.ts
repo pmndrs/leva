@@ -7,17 +7,10 @@ export const StyledWrapper = styled('div', {
   background: '$leva__elevation2',
   transition: 'height 300ms ease',
   variants: {
-    fill: {
-      false: {
-        overflowY: 'auto',
-        // 20px accounts for top margin
-        maxHeight: 'calc(100vh - 20px - $$titleBarHeight)',
-      },
-    },
-    flat: {
-      false: { borderRadius: '$leva__lg' },
-    },
+    fill: { true: {}, false: {} },
+    flat: { false: {}, true: {} },
     isRoot: {
+      true: {},
       false: {
         paddingLeft: '$leva__md',
         '&::after': {
@@ -32,10 +25,24 @@ export const StyledWrapper = styled('div', {
         },
       },
     },
-    toggled: {
-      false: { overflow: 'hidden' },
-    },
+    toggled: { false: { overflow: 'hidden' } },
   },
+  compoundVariants: [
+    {
+      isRoot: true,
+      fill: false,
+      css: {
+        overflowY: 'auto',
+        // 20px accounts for top margin
+        maxHeight: 'calc(100vh - 20px - $$titleBarHeight)',
+      },
+    },
+    {
+      isRoot: true,
+      flat: false,
+      css: { borderRadius: '$leva__lg' },
+    },
+  ],
 })
 
 export const StyledTitle = styled('div', {
@@ -94,7 +101,7 @@ export const StyledContent = styled('div', {
           paddingTop: '$leva__sm',
         },
         '& > div:last-of-type': {
-          paddingBottom: '$leva__sm',
+          paddingBottom: '$leva__md', // adds an extra padding at the very bottom of the root folder
         },
         [`> ${StyledFolder}:not(:first-of-type)`]: {
           paddingTop: '$leva__md',
