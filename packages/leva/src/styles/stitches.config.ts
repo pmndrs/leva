@@ -1,4 +1,5 @@
 import { createCss } from '@stitches/react'
+import prefixes from '@stitches/react/utils/prefixes'
 
 export const getDefaultTheme = () => ({
   colors: {
@@ -123,6 +124,7 @@ export const { styled, css, theme, global } = createCss({
   },
   theme: getDefaultTheme(),
   utils: {
+    ...prefixes,
     ...utils,
     $leva__flex: () => () => ({
       display: 'flex',
@@ -141,12 +143,10 @@ export const { styled, css, theme, global } = createCss({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
-      WebkitAppearance: 'none',
       appearance: 'none',
     }),
     $leva__draggable: () => () => ({
       touchAction: 'none',
-      WebkitUserSelect: 'none',
       WebkitUserDrag: 'none',
       userSelect: 'none',
     }),
@@ -162,7 +162,7 @@ const globalStyles = global({
     WebkitUserSelect: 'none',
     WebkitUserDrag: 'none',
     userSelect: 'none',
-    input: { userSelect: 'none' },
+    input: { userSelect: 'none', WebkitUserSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })
