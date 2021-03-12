@@ -6,11 +6,11 @@ import Reset from '../components/decorator-reset'
 import { useControls, buttonGroup } from '../../src'
 
 export default {
-  title: 'Inputs/ButtonGroup',
+  title: 'Inputs/Button Group',
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+export const ButtonGroup = () => {
   const [values, set] = useControls(() => ({
     Size: 1,
     '': buttonGroup({
@@ -28,6 +28,3 @@ const Template: Story<any> = (args) => {
     </div>
   )
 }
-
-export const Default = Template.bind({})
-Default.args = {}

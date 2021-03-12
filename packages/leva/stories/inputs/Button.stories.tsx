@@ -10,7 +10,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+export const Button = () => {
   const values = useControls({
     foo: button(() => alert('click')),
   })
@@ -21,6 +21,3 @@ const Template: Story<any> = (args) => {
     </div>
   )
 }
-
-export const Default = Template.bind({})
-Default.args = {}
