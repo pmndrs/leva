@@ -17,7 +17,7 @@
     "build": "preconstruct build",
     "watch": "preconstruct watch",
     "dev": "preconstruct dev",
-    "release": "yarn build && changeset publish",
+    "release": "yarn build && yarn changeset publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
