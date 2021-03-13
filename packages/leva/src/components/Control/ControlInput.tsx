@@ -18,7 +18,6 @@ type ControlInputProps<V, Settings extends object> = {
   optional: boolean
   hint?: string
   disable: (flag: boolean) => void
-  hideCopyButton: boolean
 }
 
 export function ControlInput<V, Settings extends object>({
@@ -30,7 +29,6 @@ export function ControlInput<V, Settings extends object>({
   settings,
   setValue,
   disabled,
-  hideCopyButton,
   ...rest
 }: ControlInputProps<V, Settings>) {
   const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
@@ -55,7 +53,6 @@ export function ControlInput<V, Settings extends object>({
         settings,
         setValue,
         disabled,
-        hideCopyButton,
         ...rest,
       }}>
       <StyledInputWrapper disabled={disabled}>
