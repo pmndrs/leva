@@ -1767,6 +1767,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@leva-ui/plugin-plot@workspace:packages/plugin-plot":
+  version: 0.0.0-use.local
+  resolution: "@leva-ui/plugin-plot@workspace:packages/plugin-plot"
+  dependencies:
+    mathjs: ^9.3.0
+  peerDependencies:
+    leva: ">=0.5.2"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  languageName: unknown
+  linkType: soft
+
 "@leva-ui/plugin-spring@*, @leva-ui/plugin-spring@workspace:packages/plugin-spring":
   version: 0.0.0-use.local
   resolution: "@leva-ui/plugin-spring@workspace:packages/plugin-spring"
@@ -6374,6 +6386,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"complex.js@npm:^2.0.11":
+  version: 2.0.12
+  resolution: "complex.js@npm:2.0.12"
+  checksum: 4386e1ccd3496e12882ac0955e926d7dd342a9d97d55b155bbd3a367cc1e190c7bd91584b7152208b05708f0f6eb173f8e886f89aa0f2012cc012a5c42b222b3
+  languageName: node
+  linkType: hard
+
 "component-emitter@npm:^1.2.1":
   version: 1.3.0
   resolution: "component-emitter@npm:1.3.0"
@@ -7106,6 +7125,13 @@ __metadata:
   version: 1.2.0
   resolution: "decamelize@npm:1.2.0"
   checksum: 8ca9d03ea8ac07920f4504e219d18edff2491bdd0a3e05a1e5ca2e9a0bf6333564231de3528b01d5e76c40a38c37bbc1e09cb5a0424714f53dd615ed78ced464
+  languageName: node
+  linkType: hard
+
+"decimal.js@npm:^10.2.1":
+  version: 10.2.1
+  resolution: "decimal.js@npm:10.2.1"
+  checksum: ba28b27bb8aca6bbb73fbdb51d759961d9ff82218c4aa737b4f4826dee4244618a61c410201bb152950c4915e3d82a86211d1c2a4e23f805ee577574ba115e59
   languageName: node
   linkType: hard
 
@@ -7875,6 +7901,13 @@ __metadata:
   version: 1.0.3
   resolution: "escape-html@npm:1.0.3"
   checksum: 900a7f2b80b9f89c85b7a303d1b7a4d354b93e328871414f165f13c5c209a80eab787e3a63429e596877def69fe4dcb3d1b55af655207a901a9ec99f7f148743
+  languageName: node
+  linkType: hard
+
+"escape-latex@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "escape-latex@npm:1.2.0"
+  checksum: d8012eb447a373f61270138f9acd749566f24b42f6727c2cc80254f0e678e83a7cf20c14ec45887f80173be2aad15a80d396ca2f4a53edd857a769faebc409fb
   languageName: node
   linkType: hard
 
@@ -8938,6 +8971,13 @@ __metadata:
   version: 0.1.2
   resolution: "forwarded@npm:0.1.2"
   checksum: 568d862ad1c514813fc62dc1bd58b8669b16d4ee2e634a6fc71f4849df798883ab94e63d8e1b35a17af51b2b39ca869e672c7310efe42fc7b9bad43a80b5ff87
+  languageName: node
+  linkType: hard
+
+"fraction.js@npm:^4.0.13":
+  version: 4.0.13
+  resolution: "fraction.js@npm:4.0.13"
+  checksum: 1e9ec132b09f17f3e41aa53508197901277f11896f6adc0b51a4b38511e6236813a471488c319221f4fadf7c854be9566a4924215623b460364591d80e1791c3
   languageName: node
   linkType: hard
 
@@ -10908,6 +10948,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"javascript-natural-sort@npm:^0.7.1":
+  version: 0.7.1
+  resolution: "javascript-natural-sort@npm:0.7.1"
+  checksum: f097317419cf0be44aa491a3a7b7c8dfa3590852e994641afb6ea4a7e57e5dae58d9198dd5fa0b98585f296f91f534100825e734f9b69cef65728819f50d701b
+  languageName: node
+  linkType: hard
+
 "jest-haste-map@npm:^26.6.2":
   version: 26.6.2
   resolution: "jest-haste-map@npm:26.6.2"
@@ -11734,6 +11781,24 @@ fsevents@^1.2.7:
   version: 1.2.6
   resolution: "material-colors@npm:1.2.6"
   checksum: 15883150a32abdb79638175b320712621a2962200ca3c09dfa0d5e3b614c081a0d459058ae367714f133801b8d9779f4137ddda4f2fbcaf8038a4624ab32c037
+  languageName: node
+  linkType: hard
+
+"mathjs@npm:^9.3.0":
+  version: 9.3.0
+  resolution: "mathjs@npm:9.3.0"
+  dependencies:
+    complex.js: ^2.0.11
+    decimal.js: ^10.2.1
+    escape-latex: ^1.2.0
+    fraction.js: ^4.0.13
+    javascript-natural-sort: ^0.7.1
+    seedrandom: ^3.0.5
+    tiny-emitter: ^2.1.0
+    typed-function: ^2.0.0
+  bin:
+    mathjs: bin/cli.js
+  checksum: 55bfaa2ea29fe04df816cd0a9fa6d428eb649599864d11379da3d960d16c12b91c92844fda571b78e914bbb7c681487eebc64202f6f5f94ba725b37beaf50f54
   languageName: node
   linkType: hard
 
@@ -15393,6 +15458,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"seedrandom@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "seedrandom@npm:3.0.5"
+  checksum: 8ca859bd79cc6a4367783f19d802ef4651f957da388f162f45c4e32c4d4df8cb55649b25b9d66cf73f905d920640b8da9ae04418feb40b41c9c7c767a1c49691
+  languageName: node
+  linkType: hard
+
 "select@npm:^1.1.2":
   version: 1.1.2
   resolution: "select@npm:1.1.2"
@@ -16581,7 +16653,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"tiny-emitter@npm:^2.0.0":
+"tiny-emitter@npm:^2.0.0, tiny-emitter@npm:^2.1.0":
   version: 2.1.0
   resolution: "tiny-emitter@npm:2.1.0"
   checksum: 0055509c72e5fe35d6ab66fa6339342e0f29129e77ed2086e475fdf80be43a8651f2517be76513b46a042c8356396f4da5a35e2e23457252176808d5a892036a
@@ -16911,6 +16983,13 @@ fsevents@^1.2.7:
     media-typer: 0.3.0
     mime-types: ~2.1.24
   checksum: 20a3514f1d835c979237995129d1f8c564325301e3a8f1c732bcbe1d7fa0ca1f65994e41a79e9030d79f31e5459bb9be5c377848fcb477cb3049a661b3713d74
+  languageName: node
+  linkType: hard
+
+"typed-function@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "typed-function@npm:2.0.0"
+  checksum: 0bf5a920acf5d6c0d132c3ff948e0c139740f0c24f1e5f36d660887d018da2fc149067ae3f99ee5b7c1207f2c554455a80879ed9d383f1b014166ba87334abcb
   languageName: node
   linkType: hard
 

@@ -1,0 +1,16 @@
+{
+  "name": "@leva-ui/plugin-plot",
+  "version": "0.1.0",
+  "main": "dist/leva-ui-plugin-plot.cjs.js",
+  "module": "dist/leva-ui-plugin-plot.esm.js",
+  "types": "dist/leva-ui-plugin-plot.cjs.d.ts",
+  "license": "MIT",
+  "peerDependencies": {
+    "leva": ">=0.5.2",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "mathjs": "^9.3.0"
+  }
+}
