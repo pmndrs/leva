@@ -48,6 +48,7 @@ export const StyledWrapper = styled('div', {
 export const StyledTitle = styled('div', {
   $leva__flex: '',
   color: '$leva__highlight3',
+  WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
   userSelect: 'none',
   cursor: 'pointer',
   marginTop: '$leva__rowGap',

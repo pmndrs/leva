@@ -1,5 +1,5 @@
 import { createCss } from '@stitches/react'
-import prefixes from '@stitches/react/utils/prefixes'
+// import prefixes from '@stitches/react/utils/prefixes'
 
 export const getDefaultTheme = () => ({
   colors: {
@@ -124,7 +124,7 @@ export const { styled, css, theme, global } = createCss({
   },
   theme: getDefaultTheme(),
   utils: {
-    ...prefixes,
+    // ...prefixes,
     ...utils,
     $leva__flex: () => () => ({
       display: 'flex',
@@ -143,6 +143,7 @@ export const { styled, css, theme, global } = createCss({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
+      WebkitAppearance: 'none', // TODO remove when stitches fixes prefix import
       appearance: 'none',
     }),
     $leva__draggable: () => () => ({

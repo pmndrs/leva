@@ -62,6 +62,7 @@ export const StyledOptionalToggle = styled('input', {
     position: 'relative',
     $leva__flexCenter: '',
     height: '100%',
+    WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
     userSelect: 'none',
     cursor: 'pointer',
     paddingLeft: 2,

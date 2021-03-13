@@ -2617,10 +2617,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/core@npm:^0.1.0-canary.19":
-  version: 0.1.0-canary.19
-  resolution: "@stitches/core@npm:0.1.0-canary.19"
-  checksum: b693e472bae25aac4e2ca25bc69e42a296eb1dd9c31c1bf18d4ac5f368a74993fd0f2be50f6ca70b9727ab309d653d36c31f93a2c9a5d3cd8585cc7de801f87f
+"@stitches/core@npm:^0.1.0-canary.20":
+  version: 0.1.0-canary.20
+  resolution: "@stitches/core@npm:0.1.0-canary.20"
+  checksum: 0b00b5f27deab8365fdcc6a3815f985ddf0a08dad81459b9f1c171e97067056d3e0e2b328d80bb149e7c092206e1b6e7643048a1d39f630d64eb527413f5cc73
   languageName: node
   linkType: hard
 
@@ -2635,14 +2635,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/react@npm:^0.1.0-canary.19":
-  version: 0.1.0-canary.19
-  resolution: "@stitches/react@npm:0.1.0-canary.19"
+"@stitches/react@npm:^0.1.0-canary.20":
+  version: 0.1.0-canary.20
+  resolution: "@stitches/react@npm:0.1.0-canary.20"
   dependencies:
-    "@stitches/core": ^0.1.0-canary.19
+    "@stitches/core": ^0.1.0-canary.20
   peerDependencies:
     react: ">=17.0.0 <19.0.0"
-  checksum: 3209dcdcd79ff1db8037bdd64b4c2581476b997fc350731f63d601080928e4d7a7ca9c2543b1920e947117050b8abbef555c246f4bc92ca306865ddd55324463
+  checksum: 7d99527fd6d17582cb9e490f22db788681646e130e5b665f572e75869c91fdb0d2c7d7554074fbc2aaa9dd80f1fea75eb3e6bd0d02d87c4726d58fcd5bc24361
   languageName: node
   linkType: hard
 
@@ -11313,7 +11313,7 @@ fsevents@^1.2.7:
   dependencies:
     "@radix-ui/react-portal": ^0.0.6
     "@radix-ui/react-tooltip": ^0.0.9
-    "@stitches/react": ^0.1.0-canary.19
+    "@stitches/react": ^0.1.0-canary.20
     "@welldone-software/why-did-you-render": ^6.1.0
     clipboard-polyfill: ^3.0.2
     dequal: ^2.0.2

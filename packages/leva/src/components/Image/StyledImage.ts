@@ -17,6 +17,7 @@ export const DropZone = styled('div', {
   color: 'inherit',
   borderRadius: '$leva__sm',
   outline: 'none',
+  WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
   userSelect: 'none',
   cursor: 'pointer',
   $leva__inputStyle: '',

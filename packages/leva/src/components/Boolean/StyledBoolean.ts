@@ -16,6 +16,7 @@ export const StyledInputWrapper = styled('div', {
   label: {
     position: 'relative',
     $leva__flexCenter: '',
+    WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
     userSelect: 'none',
     cursor: 'pointer',
     height: '$leva__checkboxSize',
