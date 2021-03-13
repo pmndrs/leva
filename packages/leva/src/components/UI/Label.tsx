@@ -83,8 +83,8 @@ function LabelWithCopy(props: LabelProps) {
 }
 
 export function Label(props: LabelProps) {
-  const { key } = useInputContext()
+  const { key, hideCopyButton } = useInputContext()
   const copyClipboard = key !== undefined
 
-  return copyClipboard ? <LabelWithCopy {...props} /> : <RawLabel {...props} />
+  return copyClipboard && !hideCopyButton ? <LabelWithCopy {...props} /> : <RawLabel {...props} />
 }

@@ -43,6 +43,10 @@ export type LevaRootProps = {
    * If true, the title bar including filters and drag zone will be hidden
    */
   hideTitleBar?: boolean
+  /**
+   * If true, the copy button will be hidden
+   */
+  hideCopyButton?: boolean
 }
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
@@ -73,6 +77,7 @@ const LevaCore = React.memo(
     flat = false,
     oneLineLabels = false,
     hideTitleBar = false,
+    hideCopyButton = false,
     toggled,
     setToggle,
   }: LevaCoreProps) => {
@@ -100,7 +105,7 @@ const LevaCore = React.memo(
         )}
         {shouldShow && (
           <StoreContext.Provider value={store}>
-            <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
+            <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} hideCopyButton={hideCopyButton} />
           </StoreContext.Provider>
         )}
       </StyledRoot>

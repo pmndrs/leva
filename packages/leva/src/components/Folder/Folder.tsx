@@ -8,9 +8,9 @@ import { useToggle } from '../../hooks'
 import { useStoreContext } from '../../context'
 import type { Tree } from '../../types'
 
-type FolderProps = { name: string; path?: string; tree: Tree }
+type FolderProps = { name: string; path?: string; tree: Tree; hideCopyButton: boolean }
 
-const Folder = ({ name, path, tree }: FolderProps) => {
+const Folder = ({ name, path, tree, hideCopyButton }: FolderProps) => {
   const store = useStoreContext()
   const newPath = join(path, name)
   const { collapsed } = store.getFolderSettings(newPath)
@@ -19,7 +19,7 @@ const Folder = ({ name, path, tree }: FolderProps) => {
   return (
     <StyledFolder>
       <FolderTitle name={name!} toggled={toggled} toggle={() => setToggle((t) => !t)} />
-      <TreeWrapper parent={newPath} tree={tree} toggled={toggled} />
+      <TreeWrapper parent={newPath} tree={tree} toggled={toggled} hideCopyButton={hideCopyButton} />
     </StyledFolder>
   )
 }
@@ -28,13 +28,14 @@ type TreeWrapperProps = {
   isRoot?: boolean
   fill?: boolean
   flat?: boolean
+  hideCopyButton?: boolean
   parent?: string
   tree: Tree
   toggled: boolean
 }
 
 export const TreeWrapper = React.memo(
-  ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
+  ({ isRoot = false, fill = false, flat = false, hideCopyButton = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     return (
       <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat} toggled={toggled}>
@@ -42,9 +43,9 @@ export const TreeWrapper = React.memo(
           {Object.entries(tree).map(([key, value]) =>
             isInput(value) ? (
               // @ts-expect-error
-              <Control key={value.path} valueKey={value.valueKey} path={value.path} />
+              <Control key={value.path} valueKey={value.valueKey} path={value.path} hideCopyButton={hideCopyButton} />
             ) : (
-              <Folder key={key} name={key} path={parent} tree={value as Tree} />
+              <Folder key={key} name={key} path={parent} tree={value as Tree} hideCopyButton={hideCopyButton} />
             )
           )}
         </StyledContent>

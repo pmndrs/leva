@@ -8,7 +8,7 @@ import { Monitor } from '../Monitor'
 import { useInput } from '../../hooks'
 import { SpecialInputTypes } from '../../types'
 
-type ControlProps = { path: string }
+type ControlProps = { path: string; hideCopyButton: boolean }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
@@ -16,7 +16,7 @@ const specialComponents = {
   [SpecialInputTypes.MONITOR]: Monitor,
 }
 
-export const Control = React.memo(({ path }: ControlProps) => {
+export const Control = React.memo(({ path, hideCopyButton }: ControlProps) => {
   const [input, { set, setSettings, disable }] = useInput(path)
   if (!input) return null
 
@@ -43,6 +43,7 @@ export const Control = React.memo(({ path }: ControlProps) => {
       setValue={set}
       setSettings={setSettings}
       disable={disable}
+      hideCopyButton={hideCopyButton}
       {...inputProps}
     />
   )
