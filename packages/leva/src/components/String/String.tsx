@@ -4,12 +4,8 @@ import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
 import type { StringProps } from './string-types'
 
-export function String({
-  displayValue,
-  onUpdate,
-  onChange,
-}: Pick<StringProps, 'displayValue' | 'onUpdate' | 'onChange'>) {
-  return <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+export function String({ value, onUpdate, onChange }: Pick<StringProps, 'value' | 'onUpdate' | 'onChange'>) {
+  return <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} />
 }
 
 export function StringComponent() {
@@ -17,7 +13,7 @@ export function StringComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
+      <String value={displayValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }

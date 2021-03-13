@@ -4,7 +4,7 @@ import { Label, Row, Chevron } from '../UI'
 import { StyledSelect, SelectContainer } from './StyledSelect'
 import type { SelectProps } from './select-types'
 
-function Select({
+export function Select({
   displayValue,
   onUpdate,
   id,
