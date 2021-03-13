@@ -15,3 +15,7 @@ export function omit<K extends string, T extends { [k in K]: unknown }>(object: 
 export function mapArrayToKeys<U extends any, K extends string>(value: U[], keys: K[]): Record<K, U> {
   return value.reduce((acc, v, i) => Object.assign(acc, { [keys[i]]: v }), {} as any)
 }
+
+export function isObject(variable: any) {
+  return Object.prototype.toString.call(variable) === '[object Object]'
+}

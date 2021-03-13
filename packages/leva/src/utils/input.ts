@@ -20,7 +20,8 @@ export function normalizeInput(input: any, path: string) {
       // If the type key exists at this point, it must be a custom plugin
       // defined by the user.
       const { type, ...rest } = input
-      return { type, ...normalize(type, rest) }
+      const _input = 'value' in rest ? rest.value : rest
+      return { type, ...normalize(type, _input) }
     }
     const type = getValueType(input)
     if (type) return { type, ...normalize(type, input) }
