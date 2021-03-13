@@ -1,12 +1,12 @@
 import React from 'react'
 import { Leva, useControls } from 'leva'
-import { createPlugin, useInputContext, LevaInputProps, Row, Label, ValueInput } from 'leva/plugin'
+import { createPlugin, useInputContext, LevaInputProps, Row, Label, String } from 'leva/plugin'
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color?: string; light: boolean }
 type GreenOrBlueInput = GreenOrBlueType & GreenOrBlueSettings
 
-type GreenOrBlueProps = LevaInputProps<GreenOrBlueType, GreenOrBlueSettings>
+type GreenOrBlueProps = LevaInputProps<GreenOrBlueType, GreenOrBlueSettings, string>
 
 function GreenOrBlue() {
   const props = useInputContext<GreenOrBlueProps>()
@@ -16,7 +16,7 @@ function GreenOrBlue() {
   return (
     <Row input>
       <Label style={{ background, opacity: settings.alpha }}>{label}</Label>
-      <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+      <String value={displayValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }
