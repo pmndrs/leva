@@ -39,3 +39,6 @@ Fill.args = { fill: true }
 
 export const Flat = Template.bind({})
 Flat.args = { flat: true }
+
+export const HideCopyButton = Template.bind({})
+HideCopyButton.args = { hideCopyButton: true }

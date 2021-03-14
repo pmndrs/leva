@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { writeText } from 'clipboard-polyfill/text'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
-import { useInputContext } from '../../context'
+import { useInputContext, usePanelSettingsContext } from '../../context'
 import { LevaErrors, warn } from '../../utils'
 
 type LabelProps = React.ComponentProps<any>
@@ -84,7 +84,8 @@ function LabelWithCopy(props: LabelProps) {
 
 export function Label(props: LabelProps) {
   const { key } = useInputContext()
+  const { hideCopyButton } = usePanelSettingsContext()
   const copyClipboard = key !== undefined
 
-  return copyClipboard ? <LabelWithCopy {...props} /> : <RawLabel {...props} />
+  return copyClipboard && !hideCopyButton ? <LabelWithCopy {...props} /> : <RawLabel {...props} />
 }

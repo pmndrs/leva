@@ -6,7 +6,7 @@ import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
 
 import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme } from '../../styles'
-import { ThemeContext, StoreContext } from '../../context'
+import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { StoreType } from '../../types'
 
@@ -43,6 +43,10 @@ export type LevaRootProps = {
    * If true, the title bar including filters and drag zone will be hidden
    */
   hideTitleBar?: boolean
+  /**
+   * If true, the copy button will be hidden
+   */
+  hideCopyButton?: boolean
 }
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
@@ -73,6 +77,7 @@ const LevaCore = React.memo(
     flat = false,
     oneLineLabels = false,
     hideTitleBar = false,
+    hideCopyButton = false,
     toggled,
     setToggle,
   }: LevaCoreProps) => {
@@ -87,23 +92,25 @@ const LevaCore = React.memo(
     const shouldShow = paths.length > 0
 
     return (
-      <StyledRoot
-        ref={rootRef}
-        className={rootClass}
-        fill={fill}
-        flat={flat}
-        oneLineLabels={oneLineLabels}
-        hideTitleBar={hideTitleBar}
-        style={{ display: shouldShow ? 'block' : 'none' }}>
-        {!hideTitleBar && (
-          <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
-        )}
-        {shouldShow && (
-          <StoreContext.Provider value={store}>
-            <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
-          </StoreContext.Provider>
-        )}
-      </StyledRoot>
+      <PanelSettingsContext.Provider value={{ hideCopyButton }}>
+        <StyledRoot
+          ref={rootRef}
+          className={rootClass}
+          fill={fill}
+          flat={flat}
+          oneLineLabels={oneLineLabels}
+          hideTitleBar={hideTitleBar}
+          style={{ display: shouldShow ? 'block' : 'none' }}>
+          {!hideTitleBar && (
+            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+          )}
+          {shouldShow && (
+            <StoreContext.Provider value={store}>
+              <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
+            </StoreContext.Provider>
+          )}
+        </StyledRoot>
+      </PanelSettingsContext.Provider>
     )
   }
 )
