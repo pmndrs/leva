@@ -25,7 +25,6 @@ export const StyledWrapper = styled('div', {
         },
       },
     },
-    toggled: { false: { overflow: 'hidden' } },
   },
   compoundVariants: [
     {

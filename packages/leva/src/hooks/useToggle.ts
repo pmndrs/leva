@@ -26,6 +26,7 @@ export function useToggle(toggled: boolean) {
     const fixHeight = () => {
       if (toggled) {
         ref.style.removeProperty('height')
+        ref.style.removeProperty('overflow')
         contentRef.current!.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
       }
     }
@@ -33,10 +34,9 @@ export function useToggle(toggled: boolean) {
     ref.addEventListener('transitionend', fixHeight, { once: true })
 
     const { height } = contentRef.current!.getBoundingClientRect()
-    if (toggled) {
-      ref.style.height = height + 'px'
-    } else {
-      ref.style.height = height + 'px'
+    ref.style.height = height + 'px'
+    if (!toggled) {
+      ref.style.overflow = 'hidden'
       timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
     }
 
