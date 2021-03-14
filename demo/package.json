@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@leva-ui/plugin-plot": "*",
     "@leva-ui/plugin-spring": "*",
     "@radix-ui/react-icons": "^1.0.2",
     "@stitches/react": "^0.1.0-canary.15",
