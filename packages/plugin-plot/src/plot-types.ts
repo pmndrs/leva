@@ -1,7 +1,8 @@
 import type { LevaInputProps } from 'leva/plugin'
+import type { MathNode } from 'mathjs'
 
-export type Plot = { expression: string; boundsX?: [number, number]; boundsY?: [number, number]; color?: string }
-export type InternalPlot = string
-export type InternalPlotSettings = { boundsX: [number, number]; boundsY: [number, number]; color?: string }
+export type Plot = { expression: string; boundsX?: [number, number]; boundsY?: [number, number] }
+export type InternalPlot = MathNode
+export type InternalPlotSettings = { boundsX: [number, number]; boundsY: [number, number] }
 
-export type PlotProps = LevaInputProps<InternalPlot, InternalPlotSettings>
+export type PlotProps = LevaInputProps<InternalPlot, InternalPlotSettings, string>

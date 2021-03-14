@@ -22,15 +22,13 @@ function getSymbols(expr: math.MathNode) {
 type PlotCanvasProps = { value: InternalPlot; settings: InternalPlotSettings }
 
 export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
-  const { color, boundsX, boundsY } = settings
+  const { boundsX, boundsY } = settings
 
   const accentColor = useTh('colors', 'leva__highlight3')
-  const curveColor = color || accentColor
 
   const [expr, symbols] = useMemo(() => {
-    const node = math.parse(value)
-    const symbols = getSymbols(node)
-    const expr = node.compile()
+    const symbols = getSymbols(value)
+    const expr = value.compile()
     return [expr, symbols]
   }, [value])
 
@@ -62,20 +60,20 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
 
       // clear
       _ctx.clearRect(0, 0, width, height)
-      const path = new Path2D()
 
       // compute the path
+      const path = new Path2D()
       for (let i = 0; i < width; i++) {
         const value = invertedRange(range(points[i], minY, maxY), height - 5, 5)
         path.lineTo(i, value)
       }
 
       // draw the white line
-      _ctx.strokeStyle = curveColor
+      _ctx.strokeStyle = accentColor
       _ctx.lineWidth = 2
       _ctx.stroke(path)
     },
-    [boundsX, boundsY, curveColor, scope, expr]
+    [boundsX, boundsY, accentColor, scope, expr]
   )
 
   const [canvas, ctx] = useCanvas2d(drawPlot)
