@@ -1771,6 +1771,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@leva-ui/plugin-plot@workspace:packages/plugin-plot"
   dependencies:
+    "@types/mathjs": ^6.0.11
     mathjs: ^9.3.0
   peerDependencies:
     leva: ">=0.5.2"
@@ -3581,6 +3582,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 9f2c38e9399e4de5c6114ed2c102b07cad38276f3ecdf527adad762daa173d065b21de1b6dca0d527167d386d1960632e5048b4740944eabf5c38e86a5bc61fe
+  languageName: node
+  linkType: hard
+
+"@types/mathjs@npm:^6.0.11":
+  version: 6.0.11
+  resolution: "@types/mathjs@npm:6.0.11"
+  dependencies:
+    decimal.js: ^10.0.0
+  checksum: 3e24a7dda483bce63282553b9929fb312e37ca3d88e32e2b0bea9da426b3764ca460a17724152b68916948a5639d049519ab90d58893f260afdae60b729dc509
   languageName: node
   linkType: hard
 
@@ -7128,7 +7138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decimal.js@npm:^10.2.1":
+"decimal.js@npm:^10.0.0, decimal.js@npm:^10.2.1":
   version: 10.2.1
   resolution: "decimal.js@npm:10.2.1"
   checksum: ba28b27bb8aca6bbb73fbdb51d759961d9ff82218c4aa737b4f4826dee4244618a61c410201bb152950c4915e3d82a86211d1c2a4e23f805ee577574ba115e59

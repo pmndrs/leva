@@ -4,12 +4,12 @@ import { PlotCanvas } from './PlotCanvas'
 import type { PlotProps } from './plot-types'
 
 export function Plot() {
-  const { label, displayValue, onUpdate, onChange } = useInputContext<PlotProps>()
+  const { label, displayValue, value, onUpdate, onChange, settings } = useInputContext<PlotProps>()
 
   return (
     <>
       <Row>
-        <PlotCanvas />
+        <PlotCanvas value={value} settings={settings} />
       </Row>
       <Row input>
         <Label>{label}</Label>

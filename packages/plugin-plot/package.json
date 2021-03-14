@@ -12,5 +12,8 @@
   },
   "dependencies": {
     "mathjs": "^9.3.0"
+  },
+  "devDependencies": {
+    "@types/mathjs": "^6.0.11"
   }
 }

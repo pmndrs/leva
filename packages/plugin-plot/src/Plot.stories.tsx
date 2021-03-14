@@ -12,7 +12,7 @@ export default {
 } as Meta
 
 export const Plot = () => {
-  const values = useControls({ curve: plot('x') })
+  const values = useControls({ num: 5, curve: plot({ expression: 'cos(x)', boundsX: [-10, 10], boundsY: [-1, 1] }) })
 
   return (
     <div>
