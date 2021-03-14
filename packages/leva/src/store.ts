@@ -1,27 +1,8 @@
 import { useMemo } from 'react'
-import create, { UseStore } from 'zustand'
+import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-
-import { Data, FolderSettings, SpecialInputTypes } from './types'
-
-type State = { data: Data }
-
-export type StoreType = {
-  useStore: UseStore<State>
-  orderPaths: (paths: string[]) => string[]
-  setOrderedPaths: (newPaths: string[]) => void
-  disposePaths: (paths: string[], removeOnDispose?: boolean) => void
-  dispose: () => void
-  getVisiblePaths: () => string[]
-  getFolderSettings: (path: string) => FolderSettings
-  getData: () => Data
-  addData: (newData: Data) => void
-  setValueAtPath: (path: string, value: any) => void
-  // TODO possibly better type this
-  set: (values: Record<string, any>) => void
-  get: (path: string) => any
-  getDataFromSchema: (schema: any) => [Data, Record<string, string>]
-}
+import { SpecialInputTypes } from './types'
+import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
@@ -103,15 +84,19 @@ export const Store = (function (this: StoreType) {
    *
    * @param paths
    */
-  this.disposePaths = (paths, removeOnDispose = false) => {
+  this.disposePaths = (paths) => {
     store.setState((s) => {
       const data = s.data
       paths.forEach((path) => {
-        if (path in data)
-          if (removeOnDispose) {
+        if (path in data) {
+          const input = data[path]
+          input.count--
+          if (input.count === 0 && input.type in SpecialInputTypes) {
+            // this makes sure special inputs such as buttons are properly
+            // refreshed. This might need some attention though.
             delete data[path]
-            orderedPaths.delete(path)
-          } else data[path].count--
+          }
+        }
       })
       return { data }
     })
@@ -174,6 +159,24 @@ export const Store = (function (this: StoreType) {
     })
   }
 
+  this.setSettingsAtPath = (path, settings) => {
+    store.setState((s) => {
+      const data = s.data
+      //@ts-expect-error (we always update inputs with settings)
+      data[path].settings = { ...data[path].settings, ...settings }
+      return { data }
+    })
+  }
+
+  this.disableInputAtPath = (path, flag) => {
+    store.setState((s) => {
+      const data = s.data
+      //@ts-expect-error (we always update inputs with a value)
+      data[path].disabled = flag
+      return { data }
+    })
+  }
+
   this.set = (values) => {
     store.setState((s) => {
       const data = s.data
@@ -204,55 +207,66 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string): [Data, Record<string, string>] => {
+  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: Record<string, string>): Data => {
     const data: any = {}
-    const mappedPaths: Record<string, string> = {}
 
-    Object.entries(schema).forEach(([path, input]: [string, any]) => {
-      let newPath = join(rootPath, path)
+    Object.entries(schema).forEach(([key, input]: [string, any]) => {
+      let newPath = join(rootPath, key)
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
       if (input.type === SpecialInputTypes.FOLDER) {
-        const [newData, newPaths] = _getDataFromSchema(input.schema, newPath)
+        const newData = _getDataFromSchema(input.schema, newPath, mappedPaths)
         Object.assign(data, newData)
-        Object.assign(mappedPaths, newPaths)
 
         // Sets folder preferences if it wasn't set before
         if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
+      } else if (key in mappedPaths) {
+        // if a key already exists, prompt an error.
+        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key])
       } else {
+        mappedPaths[key] = newPath
         // If the input is not a folder, we normalize the input.
         let _render = undefined
         let _label = undefined
+        let _hint = undefined
+        let _optional
+        let _disabled
         let _input = input
 
         // parse generic options from input object
         if (typeof input === 'object' && !Array.isArray(input)) {
-          const { render, label, ...rest } = input
+          const { render, label, optional, disabled, hint, ...rest } = input
           _label = label
           _render = render
           _input = rest
+          _optional = optional
+          _disabled = disabled
+          _hint = hint
         }
         const normalizedInput = normalizeInput(_input, newPath)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
-          data[newPath].key = path
-          data[newPath].label = _label ?? path
+          data[newPath].key = key
+          data[newPath].label = _label ?? key
+          data[newPath].hint = _hint
+          if (!(input.type in SpecialInputTypes)) {
+            data[newPath].optional = _optional ?? false
+            data[newPath].disabled = _disabled ?? false
+          }
           if (typeof _render === 'function') data[newPath].render = _render
-          if (path in mappedPaths) {
-            // if a key already exists, prompt an error.
-            warn(LevaErrors.DUPLICATE_KEYS, path, newPath, mappedPaths[path])
-          } else mappedPaths[path] = newPath
         }
       }
     })
 
-    return [data, mappedPaths]
+    return data
   }
 
   this.getDataFromSchema = (schema) => {
-    return _getDataFromSchema(schema, '')
+    const mappedPaths: Record<string, string> = {}
+    const data = _getDataFromSchema(schema, '', mappedPaths)
+    return [data, mappedPaths]
   }
 } as any) as { new (): StoreType }
 

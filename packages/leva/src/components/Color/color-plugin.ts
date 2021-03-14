@@ -1,45 +1,47 @@
 import v8n from 'v8n'
 import tc from 'tinycolor2'
-import { InputWithSettings, ColorObjectInput } from '../../types'
-import { pick } from '../../utils'
+import { omit } from '../../utils'
+import type { InternalColorSettings, Format, ColorInput } from './color-types'
 
-type Format = 'hex' | 'rgb'
-
-export type Color = string | ColorObjectInput
-export type InternalColorSettings = { format: Format; hasAlpha: boolean }
-
-type ColorInput = InputWithSettings<Color>
-
-const FORMATS = ['name', 'hex', 'hex8', 'rgb']
+const convertMap = {
+  rgb: 'toRgb',
+  hsl: 'toHsl',
+  hsv: 'toHsv',
+  hex: 'toHexString',
+  hex8: 'toHex8String',
+}
 
 v8n.extend({
-  color: () => (value: any) => {
-    const c = tc(value)
-    const format = c.getFormat()
-    // we don't want to handle "rgba(0,0,0,1)"
-    return FORMATS.includes(format) && !(format === 'rgb' && typeof value === 'string')
-  },
+  color: () => (value: any) => tc(value).isValid(),
 })
 // prettier-ignore
 // @ts-expect-error
 export const schema = (o: any) => v8n().color().test(o)
 
-function convert(color: tc.Instance, { format, hasAlpha }: InternalColorSettings) {
-  if (format === 'hex') return color[hasAlpha ? 'toHex8String' : 'toHexString']()
-  const rgba = color.toRgb()
-  return hasAlpha ? rgba : pick(rgba, ['r', 'g', 'b'])
+function convert(color: tc.Instance, { format, hasAlpha, isString }: InternalColorSettings) {
+  const _format = format === 'hex' && hasAlpha ? 'hex8' : format
+  if (isString) return color.toString(_format)
+  // @ts-ignore
+  const colorObj = color[convertMap[_format]]()
+  return hasAlpha ? colorObj : omit(colorObj, ['a'])
 }
 
-export const validate = (v: any) => tc(v).isValid()
-export const sanitize = (v: any, settings: InternalColorSettings) => convert(tc(v), settings)
-export const format = (v: any, { hasAlpha }: InternalColorSettings) => convert(tc(v), { format: 'hex', hasAlpha })
+export const sanitize = (v: any, settings: InternalColorSettings) => {
+  const color = tc(v)
+  if (!color.isValid()) throw Error('Invalid color')
+  return convert(color, settings)
+}
+
+export const format = (v: any, settings: InternalColorSettings) => {
+  return convert(tc(v), { ...settings, isString: true, format: 'hex' })
+}
 
 export const normalize = ({ value }: ColorInput) => {
   const color = tc(value)
   const _f = color.getFormat()
   const format = (_f === 'name' || _f === 'hex8' ? 'hex' : _f) as Format
-  const hasAlpha = format === 'rgb' ? 'a' in (value as any) : _f === 'hex8'
-  const settings = { format, hasAlpha }
+  const hasAlpha = typeof value === 'object' ? 'a' in value : _f === 'hex8' || /^(rgba)|(hsla)|(hsva)/.test(value)
+  const settings = { format, hasAlpha, isString: typeof value === 'string' }
 
   // by santizing the value we make sure the returned value is parsed and fixed,
   // consistent with future updates.

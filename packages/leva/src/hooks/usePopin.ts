@@ -1,5 +1,4 @@
 import { useState, useRef, useLayoutEffect, useCallback } from 'react'
-import { parseNumber } from '../utils/math'
 
 export function usePopin(margin = 3) {
   const popinRef = useRef<HTMLDivElement>(null)
@@ -14,7 +13,7 @@ export function usePopin(margin = 3) {
     if (shown) {
       const { bottom, top, left } = popinRef.current!.getBoundingClientRect()
       const { height } = wrapperRef.current!.getBoundingClientRect()
-      const direction = bottom + parseNumber(height) > window.innerHeight - 40 ? 'up' : 'down'
+      const direction = bottom + height > window.innerHeight - 40 ? 'up' : 'down'
 
       wrapperRef.current!.style.position = 'fixed'
       wrapperRef.current!.style.zIndex = '10000'

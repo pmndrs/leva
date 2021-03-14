@@ -32,5 +32,8 @@ OneLineLabels.args = { oneLineLabels: true }
 export const HideTitleBar = Template.bind({})
 HideTitleBar.args = { hideTitleBar: true }
 
-export const NotDetached = Template.bind({})
-NotDetached.args = { detached: false }
+export const Fill = Template.bind({})
+Fill.args = { fill: true }
+
+export const Flat = Template.bind({})
+Flat.args = { flat: true }

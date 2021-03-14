@@ -19,8 +19,11 @@ jobs:
         with:
           install-command: yarn --immutable --silent
 
-      # - name: Lint
-      #   run: yarn lint
+      - name: Check types
+        run: yarn tsc
 
       - name: Build
         run: yarn build
+
+      - name: Cypress run
+        run: yarn ci:test

@@ -3,6 +3,7 @@ import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
 import { Plugins } from '../../plugin'
 import { Button } from '../Button'
+import { ButtonGroup } from '../ButtonGroup'
 import { Monitor } from '../Monitor'
 import { useInput } from '../../hooks'
 import { SpecialInputTypes } from '../../types'
@@ -11,11 +12,13 @@ type ControlProps = { path: string }
 
 const specialComponents = {
   [SpecialInputTypes.BUTTON]: Button,
+  [SpecialInputTypes.BUTTON_GROUP]: ButtonGroup,
   [SpecialInputTypes.MONITOR]: Monitor,
 }
 
 export const Control = React.memo(({ path }: ControlProps) => {
-  const [input, set] = useInput(path)
+  const [input, { set, setSettings, disable }] = useInput(path)
+  if (!input) return null
 
   const { type, label, key, ...inputProps } = input
 
@@ -30,6 +33,17 @@ export const Control = React.memo(({ path }: ControlProps) => {
     return null
   }
 
-  // @ts-expect-error
-  return <ControlInput type={type} label={label} path={path} valueKey={key} {...inputProps} setValue={set} />
+  return (
+    // @ts-expect-error
+    <ControlInput
+      type={type}
+      label={label}
+      path={path}
+      valueKey={key}
+      setValue={set}
+      setSettings={setSettings}
+      disable={disable}
+      {...inputProps}
+    />
+  )
 })

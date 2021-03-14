@@ -1,28 +1,37 @@
 import React from 'react'
-import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
 import { Label, Row, Chevron } from '../UI'
-import { InternalSelectSettings } from './select-plugin'
 import { StyledSelect, SelectContainer } from './StyledSelect'
+import type { SelectProps } from './select-types'
 
-type SelectProps = LevaInputProps<any, InternalSelectSettings>
+function Select({
+  displayValue,
+  onUpdate,
+  id,
+  settings,
+}: Pick<SelectProps, 'displayValue' | 'onUpdate' | 'id' | 'settings'>) {
+  const { keys, values } = settings!
+
+  return (
+    <SelectContainer>
+      <StyledSelect id={id} value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
+        {keys.map((key, index) => (
+          <option key={key} value={index}>
+            {key}
+          </option>
+        ))}
+      </StyledSelect>
+      <Chevron toggled />
+    </SelectContainer>
+  )
+}
 
 export function SelectComponent() {
-  const { label, displayValue, onUpdate, settings } = useInputContext<SelectProps>()
-  const { keys, values } = settings!
+  const { label, displayValue, onUpdate, id, settings } = useInputContext<SelectProps>()
   return (
     <Row input>
       <Label>{label}</Label>
-      <SelectContainer>
-        <StyledSelect value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
-          {keys.map((key, index) => (
-            <option key={key} value={index}>
-              {key}
-            </option>
-          ))}
-        </StyledSelect>
-        <Chevron toggled />
-      </SelectContainer>
+      <Select id={id} displayValue={displayValue} onUpdate={onUpdate} settings={settings} />
     </Row>
   )
 }

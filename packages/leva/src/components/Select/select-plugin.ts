@@ -1,15 +1,5 @@
 import v8n from 'v8n'
-
-type SelectSettings<U = unknown> = { options: Record<string, U> | U[] }
-export type InternalSelectSettings = { keys: string[]; values: unknown[] }
-
-type SelectInput<P = unknown, U = unknown> = { value?: P } & SelectSettings<U>
-
-/*
-export type ValueTypeFromInput<T> = T extends SelectInput<infer P, infer U> ? U | P : never
-const d = { value: {}, options: { a: 'allo', b: true } }
-let c: ValueTypeFromInput<typeof d>
-*/
+import type { InternalSelectSettings, SelectInput } from './select-types'
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>

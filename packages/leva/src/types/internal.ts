@@ -1,15 +1,40 @@
-import { SpecialInput, RenderFn } from './public-types'
+import type { UseStore } from 'zustand'
+import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
+
+export type State = { data: Data }
+
+export type StoreType = {
+  useStore: UseStore<State>
+  orderPaths: (paths: string[]) => string[]
+  setOrderedPaths: (newPaths: string[]) => void
+  disposePaths: (paths: string[]) => void
+  dispose: () => void
+  getVisiblePaths: () => string[]
+  getFolderSettings: (path: string) => FolderSettings
+  getData: () => Data
+  addData: (newData: Data) => void
+  setValueAtPath: (path: string, value: any) => void
+  setSettingsAtPath: (path: string, settings: any) => void
+  disableInputAtPath: (path: string, flag: boolean) => void
+  // TODO possibly better type this
+  set: (values: Record<string, any>) => void
+  get: (path: string) => any
+  getDataFromSchema: (schema: any) => [Data, Record<string, string>]
+}
 
 type Decorators = {
   count: number
   key: string
   label: string
+  hint?: string
   render?: RenderFn
 }
 
 export type DataInput = {
   type: string
   value: unknown
+  optional: boolean
+  disabled: boolean
   settings?: object
 } & Decorators
 
@@ -21,28 +46,11 @@ export type Tree = {
   [key: string]: { __levaInput: true; path: string } | Tree
 }
 
-export type LevaInputProps<V, InternalSettings = {}, DisplayValue = any> = {
-  label: string
-  displayValue: DisplayValue
-  value: V
-  onChange: React.Dispatch<any>
-  onUpdate: (v: any | ((_v: any) => any)) => void
-  settings: InternalSettings
-}
-
-export type Plugin<Input, Value = Input, InternalSettings = {}> = {
-  component: React.ComponentType
-
-  format?: (value: any, settings: InternalSettings) => any
-  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
-  validate?: (value: any, settings: InternalSettings) => boolean
-  sanitize?: (value: any, settings: InternalSettings) => Value
-}
-
-export type InternalPlugin<Input, Value = Input, Settings = {}, InternalSettings = {}> = Plugin<
-  Input,
-  Value,
-  InternalSettings
-> & {
+/**
+ * Internal plugin type including schema.
+ * @internal
+ */
+export interface InternalPlugin<Input, Value = Input, Settings = {}, InternalSettings = {}>
+  extends Plugin<Input, Value, InternalSettings> {
   schema: (value: any, settings?: Settings) => boolean
 }

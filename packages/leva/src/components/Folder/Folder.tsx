@@ -5,8 +5,8 @@ import { isInput } from '../Leva/tree'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { useToggle } from '../../hooks'
-import { Tree } from '../../types/'
 import { useStoreContext } from '../../context'
+import type { Tree } from '../../types'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 
@@ -24,13 +24,20 @@ const Folder = ({ name, path, tree }: FolderProps) => {
   )
 }
 
-type TreeWrapperProps = { isRoot?: boolean; detached?: boolean; parent?: string; tree: Tree; toggled: boolean }
+type TreeWrapperProps = {
+  isRoot?: boolean
+  fill?: boolean
+  flat?: boolean
+  parent?: string
+  tree: Tree
+  toggled: boolean
+}
 
 export const TreeWrapper = React.memo(
-  ({ isRoot = false, detached = false, parent, tree, toggled }: TreeWrapperProps) => {
+  ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     return (
-      <StyledWrapper ref={wrapperRef} isRoot={isRoot} detached={detached} toggled={toggled}>
+      <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat} toggled={toggled}>
         <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
           {Object.entries(tree).map(([key, value]) =>
             isInput(value) ? (

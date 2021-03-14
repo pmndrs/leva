@@ -1,6 +1,4 @@
 import React, { useRef } from 'react'
-import { LevaInputProps } from '../../types/'
-import { Interval as IntervalType, InternalInterval, InternalIntervalSettings } from './interval-plugin'
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
@@ -8,19 +6,12 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
-
-type IntervalProps = LevaInputProps<IntervalType, InternalIntervalSettings>
-
-type IntervalSliderProps = {
-  value: InternalInterval
-  onDrag: (v: InternalInterval) => void
-} & InternalIntervalSettings
+import type { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
 
 const Container = styled('div', {
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  columnGap: '$colGap',
-  gridColumnStart: 2,
+  columnGap: '$leva__colGap',
+  gridTemplateColumns: 'auto calc($sizes$leva__numberInputMinWidth * 2 + $space$leva__rowGap)',
 })
 
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
@@ -28,7 +19,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
-  const scrubberWidth = useTh('sizes', 'scrubberWidth')
+  const scrubberWidth = useTh('sizes', 'leva__scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {
@@ -44,7 +35,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
     }
     const newValue = memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min)
 
-    onDrag({ ...value, [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
+    onDrag({ [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
     return memo
   })
 
@@ -71,11 +62,9 @@ export function IntervalComponent() {
     <>
       <Row input>
         <Label>{label}</Label>
-        <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
-      </Row>
-      <Row input>
         <Container>
-          <Vector value={displayValue as InternalInterval} settings={_settings} onUpdate={onUpdate} />
+          <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
+          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
         </Container>
       </Row>
     </>
