@@ -4,7 +4,7 @@ import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
 let rootInitialized = false
-let rootEl: HTMLDivElement | null = null
+let rootEl: HTMLElement | null = null
 
 type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
@@ -36,7 +36,8 @@ export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
     if (isGlobalPanel && !rootInitialized) {
       if (!rootEl) {
-        rootEl = document.createElement('div')
+        rootEl =
+          document.getElementById('leva__root') || Object.assign(document.createElement('div'), { id: 'leva__root' })
         if (document.body) {
           document.body.appendChild(rootEl)
           ReactDOM.render(<Leva isRoot />, rootEl)
