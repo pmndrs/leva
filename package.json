@@ -26,7 +26,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "demo:dev": "yarn workspace demo dev",
-    "demo:build": "yarn workspace demo build",
+    "demo:build": "yarn workspace demo build-demo",
     "demo:serve": "cp ./demo/serve.json ./demo/dist && npx serve ./demo/dist",
     "ci:test": "yarn demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run"
   },

@@ -1,9 +1,10 @@
 {
   "name": "demo",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build-demo": "vite build"
   },
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
