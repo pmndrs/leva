@@ -4,62 +4,73 @@ export const StyledFolder = styled('div', {})
 
 export const StyledWrapper = styled('div', {
   position: 'relative',
-  background: '$elevation2',
-  transition: 'height 350ms ease',
+  background: '$leva__elevation2',
+  transition: 'height 300ms ease',
   variants: {
-    detached: {
-      true: {
-        borderRadius: '$lg',
-        overflowY: 'auto',
-        maxHeight: 'calc(100vh - 20px - 43px)',
-      },
-    },
+    fill: { true: {}, false: {} },
+    flat: { false: {}, true: {} },
     isRoot: {
+      true: {},
       false: {
-        paddingLeft: '$md',
+        paddingLeft: '$leva__md',
         '&::after': {
           content: '""',
           position: 'absolute',
           left: 0,
           top: 0,
-          width: '$borderWidths$folder',
+          width: '$borderWidths$leva__folder',
           height: '100%',
-          backgroundColor: '$elevation3',
+          backgroundColor: '$leva__elevation3',
           transform: 'translateX(-50%)',
         },
       },
     },
-    toggled: {
-      false: { overflow: 'hidden' },
-    },
+    toggled: { false: { overflow: 'hidden' } },
   },
+  compoundVariants: [
+    {
+      isRoot: true,
+      fill: false,
+      css: {
+        overflowY: 'auto',
+        // 20px accounts for top margin
+        maxHeight: 'calc(100vh - 20px - $$titleBarHeight)',
+      },
+    },
+    {
+      isRoot: true,
+      flat: false,
+      css: { borderRadius: '$leva__lg' },
+    },
+  ],
 })
 
 export const StyledTitle = styled('div', {
-  $flex: '',
-  color: '$highlight3',
+  $leva__flex: '',
+  color: '$leva__highlight3',
+  WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
   userSelect: 'none',
   cursor: 'pointer',
-  marginTop: '$rowGap',
-  height: '$folderHeight',
-  fontWeight: '$folder',
+  marginTop: '$leva__rowGap',
+  height: '$leva__folderTitleHeight',
+  fontWeight: '$leva__folder',
   '> svg': {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
   },
   '&:hover > svg': {
-    fill: '$highlight2',
+    fill: '$leva__highlight2',
   },
   [`&:hover + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight2',
+    backgroundColor: '$leva__highlight2',
   },
   [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight1',
+    backgroundColor: '$leva__highlight1',
   },
   [`${StyledFolder}:hover > & > svg`]: {
-    fill: '$highlight1',
+    fill: '$leva__highlight1',
   },
 })
 
@@ -67,7 +78,7 @@ export const StyledContent = styled('div', {
   position: 'relative',
   display: 'grid',
   gridTemplateColumns: '100%',
-  rowGap: '$rowGap',
+  rowGap: '$leva__rowGap',
   transition: 'opacity 250ms ease',
   variants: {
     toggled: {
@@ -84,19 +95,19 @@ export const StyledContent = styled('div', {
     isRoot: {
       true: {
         '& > div': {
-          paddingLeft: '$md',
-          paddingRight: '$md',
+          paddingLeft: '$leva__md',
+          paddingRight: '$leva__md',
         },
         '& > div:first-of-type': {
-          paddingTop: '$sm',
+          paddingTop: '$leva__sm',
         },
         '& > div:last-of-type': {
-          paddingBottom: '$sm',
+          paddingBottom: '$leva__md', // adds an extra padding at the very bottom of the root folder
         },
         [`> ${StyledFolder}:not(:first-of-type)`]: {
-          paddingTop: '$md',
-          marginTop: '$md',
-          borderTop: '$borderWidths$folder solid $colors$elevation1',
+          paddingTop: '$leva__md',
+          marginTop: '$leva__md',
+          borderTop: '$borderWidths$leva__folder solid $colors$leva__elevation1',
         },
       },
     },

@@ -48,7 +48,7 @@ Note that since `UnmountedComponent` is not mounted anywhere in our application,
 
 ## Input types
 
-Leva will automagically use the best input type for your values, all the rules can be found in the [Inputs page](docs/inputs.md)
+Leva will automagically use the best input type for your values, all the rules can be found in the [Inputs page](inputs.md)
 
 ## Conditionally showing fields
 

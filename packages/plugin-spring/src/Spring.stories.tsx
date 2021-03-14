@@ -1,25 +1,30 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import React from 'react'
+import { Story, Meta } from '@storybook/react'
 
 import Reset from '../../leva/stories/components/decorator-reset'
-import { useControls } from '../../leva/src';
+import { useControls } from '../../leva/src'
 
 import { spring } from './index'
 
 export default {
   title: 'Plugins/Spring',
-  decorators: [Reset]
-} as Meta;
+  decorators: [Reset],
+} as Meta
 
 const Template: Story<any> = (args) => {
-  const values = useControls({
-    foo: 0,
-    bar: spring({ tension: 100, friction: 30 })
-  }, args)
-  
-  return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
+  const values = useControls(
+    {
+      bar: spring({ tension: 100, friction: 30 }),
+    },
+    args
+  )
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
 }
 
-export const Simple = Template.bind({});
-Simple.args = {
-};
+export const Spring = Template.bind({})
+Spring.args = {}

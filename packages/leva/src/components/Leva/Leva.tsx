@@ -4,33 +4,26 @@ import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
 
 let rootInitialized = false
+let rootEl: HTMLDivElement | null = null
 
-type LevaProps = Omit<Partial<LevaRootProps>, 'store'>
+type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
 // uses global store
-export function Leva({
-  theme,
-  detached = true,
-  collapsed = false,
-  oneLineLabels = false,
-  hideTitleBar = false,
-  hidden = false,
-}: LevaProps) {
+export function Leva({ isRoot = false, ...props }: LevaProps) {
   useEffect(() => {
     rootInitialized = true
-  }, [])
+    // if this panel was attached somewhere in the app and there is already
+    // a floating panel, we remove it.
+    if (!isRoot && rootEl) {
+      rootEl.remove()
+      rootEl = null
+    }
+    return () => {
+      if (!isRoot) rootInitialized = false
+    }
+  }, [isRoot])
 
-  return (
-    <LevaRoot
-      store={levaStore}
-      theme={theme}
-      detached={detached}
-      oneLineLabels={oneLineLabels}
-      hideTitleBar={hideTitleBar}
-      collapsed={collapsed}
-      hidden={hidden}
-    />
-  )
+  return <LevaRoot store={levaStore} {...props} />
 }
 
 /**
@@ -42,10 +35,12 @@ export function Leva({
 export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
     if (isGlobalPanel && !rootInitialized) {
-      const rootEl = document.createElement('div')
-      if (document.body) {
-        document.body.appendChild(rootEl)
-        ReactDOM.render(<Leva />, rootEl)
+      if (!rootEl) {
+        rootEl = document.createElement('div')
+        if (document.body) {
+          document.body.appendChild(rootEl)
+          ReactDOM.render(<Leva isRoot />, rootEl)
+        }
       }
       rootInitialized = true
     }

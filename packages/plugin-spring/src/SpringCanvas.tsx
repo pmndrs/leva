@@ -1,25 +1,19 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from 'react-spring'
-
-import { LevaInputProps, useCanvas2d, useDrag, useInputContext } from 'leva/plugins'
-import { debounce, tinycolor2 as tc } from 'leva/utilities'
-import { useTh } from 'leva/plugins'
-
+import { useCanvas2d, useDrag, useInputContext, debounce, tinycolor2 as tc, useTh } from 'leva/plugin'
 import { Canvas, SpringPreview } from './StyledSpring'
-import { InternalSpring, InternalSpringSettings } from './spring-plugin'
 import { springFn } from './math'
+import type { SpringProps } from './spring-types'
 
 const SpringPreviewAnimated = a(SpringPreview)
-
-export type SpringProps = LevaInputProps<InternalSpring, InternalSpringSettings>
 
 export function SpringCanvas() {
   const { displayValue, value, onUpdate, settings } = useInputContext<SpringProps>()
 
   const springRef = useRef(displayValue)
-  const accentColor = useTh('colors', 'highlight3')
-  const backgroundColor = useTh('colors', 'elevation2')
-  const fillColor = useTh('colors', 'highlight1')
+  const accentColor = useTh('colors', 'leva__highlight3')
+  const backgroundColor = useTh('colors', 'leva__elevation2')
+  const fillColor = useTh('colors', 'leva__highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
     return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
@@ -37,8 +31,8 @@ export function SpringCanvas() {
   const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
     onUpdate({
       ...value,
-      tension: memo[0] - Math.round(x) * ts!.step!,
-      friction: memo[1] - Math.round(y / 4) * fs!.step!,
+      tension: memo[0] - Math.round(x) * ts.step,
+      friction: memo[1] - Math.round(y / 4) * fs.step,
     })
     return memo
   })

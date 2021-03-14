@@ -2,13 +2,13 @@ import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from
 import { useDrag } from 'react-use-gesture'
 import { clamp } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
-import { Vector2dProps } from './Vector2d'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
 import { multiplyStep, useTransform } from '../../hooks'
-import { Vector2d } from '../../types'
+import type { Vector2d } from '../../types'
+import type { Vector2dProps } from './vector2d-types'
 
-type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'settings' | 'onUpdate'>
+type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'onUpdate' | 'settings'>
 
 export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
@@ -39,8 +39,8 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   // prettier-ignore
   const {[v1]: { step: stepV1 },[v2]: { step: stepV2 }} = settings
 
-  const wpx = useTh('sizes', 'joystickWidth')
-  const hpx = useTh('sizes', 'joystickHeight')
+  const wpx = useTh('sizes', 'leva__joystickWidth')
+  const hpx = useTh('sizes', 'leva__joystickHeight')
 
   const w = (parseFloat(wpx) * 0.8) / 2
   const h = (parseFloat(hpx) * 0.8) / 2

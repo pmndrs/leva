@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react'
+import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
 type ValueInputProps = {
+  id: string
   value: string
   children?: React.ReactNode
   type?: 'number' | undefined
@@ -11,7 +13,9 @@ type ValueInputProps = {
   onKeyDown?: (event: React.KeyboardEvent) => void
 } & React.ComponentProps<any>
 
-export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, ...props }: ValueInputProps) {
+export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
+  const { id: _id } = useInputContext()
+  const inputId = id || _id
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
@@ -35,6 +39,7 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
       {children && <InnerLabel>{children}</InnerLabel>}
       <StyledInput
         levaType={type}
+        id={inputId}
         type="text"
         spellCheck="false"
         value={value}
@@ -48,20 +53,21 @@ export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, typ
   )
 }
 
-export function NumberInput({ children, value, onUpdate, onChange }: ValueInputProps) {
+export function NumberInput({ children, id, value, onUpdate, onChange }: ValueInputProps) {
+  const _onUpdate = useCallback((v: any) => onUpdate(parseNumber(v)), [onUpdate])
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const dir = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0
       if (dir) {
         event.preventDefault()
         const step = event.altKey ? 0.1 : event.shiftKey ? 10 : 1
-        onUpdate((v: any) => parseNumber(v) + dir * step)
+        onUpdate((v: any) => parseFloat(v) + dir * step)
       }
     },
     [onUpdate]
   )
   return (
-    <ValueInput value={value} onUpdate={onUpdate} onChange={onChange} onKeyDown={onKeyDown} type="number">
+    <ValueInput id={id} value={value} onUpdate={_onUpdate} onChange={onChange} onKeyDown={onKeyDown} type="number">
       {children}
     </ValueInput>
   )

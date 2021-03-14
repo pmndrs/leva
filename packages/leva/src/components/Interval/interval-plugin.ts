@@ -1,17 +1,8 @@
 import v8n from 'v8n'
-import { IntervalInput } from '../../types'
 import { clamp } from '../../utils'
-import { InternalNumberSettings } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from '../Vector/vector-utils'
-
-export type Interval = IntervalInput['value']
-export type InternalInterval = { min: number; max: number }
-
-export type InternalIntervalSettings = {
-  bounds: [number, number]
-  min: InternalNumberSettings
-  max: InternalNumberSettings
-}
+import type { IntervalInput } from '../../types'
+import type { InternalInterval, InternalIntervalSettings, Interval } from './interval-types'
 
 const number = v8n().number()
 
@@ -21,9 +12,14 @@ export const schema = (o: any, s: any) =>
 export const format = (v: Interval) => ({ min: v[0], max: v[1] })
 
 export const sanitize = (
-  { min, max }: InternalInterval,
-  { bounds: [MIN, MAX] }: InternalIntervalSettings
-): Interval => [clamp(Number(min), MIN, Math.max(MIN, max)), clamp(Number(max), Math.min(MAX, min), MAX)]
+  value: InternalInterval,
+  { bounds: [MIN, MAX] }: InternalIntervalSettings,
+  prevValue: any
+): Interval => {
+  const _newValue = { min: prevValue[0], max: prevValue[1] }
+  const { min, max } = { ..._newValue, ...value }
+  return [clamp(Number(min), MIN, Math.max(MIN, max)), clamp(Number(max), Math.min(MAX, min), MAX)]
+}
 
 export const normalize = ({ value, min, max }: IntervalInput) => {
   const boundsSettings = { min, max }

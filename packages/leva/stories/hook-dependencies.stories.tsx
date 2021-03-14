@@ -25,4 +25,4 @@ const Template: Story<any> = () => {
   )
 }
 
-export const Deps = Template.bind({})
+export const Dependency = Template.bind({})

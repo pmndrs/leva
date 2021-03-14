@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useCallback, useState } from 'react'
-import { levaStore, StoreType } from './store'
+import { levaStore } from './store'
 import { folder } from './helpers'
 import { useShallowMemo, useValuesForPath } from './hooks'
-import { FolderSettings, Schema, SchemaToValues } from './types'
 import { useRenderRoot } from './components/Leva'
+import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
 
 type HookSettings = { store?: StoreType }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
@@ -100,7 +100,8 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   }, deps)
 
   // GlobalPanel means that no store was provided, therefore we're using the levaStore
-  const isGlobalPanel = !!hookSettings?.store
+  const isGlobalPanel = !hookSettings?.store
+
   useRenderRoot(isGlobalPanel)
   const [store] = useState(() => hookSettings?.store || levaStore)
 

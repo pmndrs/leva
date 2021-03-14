@@ -1,9 +1,10 @@
 import { useCallback, useState, useEffect } from 'react'
 import shallow from 'zustand/shallow'
 import { useStoreContext } from '../context'
-import { Data, DataItem } from '../types'
+import type { Data, DataItem } from '../types'
 
 const getInputAtPath = (data: Data, path: string) => {
+  if (!data[path]) return null
   const { count, ...input } = data[path]
   return input
 }
@@ -15,17 +16,21 @@ type Input = Omit<DataItem, 'count'>
  *
  * @param path
  */
-export function useInput(path: string): [Input, (value: any) => void] {
+export function useInput(
+  path: string
+): [Input | null, { set: (value: any) => void; setSettings: (value: any) => void; disable: (flag: boolean) => void }] {
   const store = useStoreContext()
-  const [state, setState] = useState<Input>(getInputAtPath(store.getData(), path))
+  const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
   const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
+  const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])
+  const disable = useCallback((flag) => store.disableInputAtPath(path, flag), [path, store])
 
   useEffect(() => {
     setState(getInputAtPath(store.getData(), path))
     const unsub = store.useStore.subscribe(setState, (s) => getInputAtPath(s.data, path), shallow)
     return () => unsub()
-  }, [store, set, path])
+  }, [store, path])
 
-  return [state, set]
+  return [state, { set, setSettings, disable }]
 }

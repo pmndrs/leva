@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import { theme, getDefaultTheme, FullTheme, LevaCustomTheme } from './stitches.config'
-
 import { ThemeContext } from '../context'
 import { warn, LevaErrors } from '../utils'
 

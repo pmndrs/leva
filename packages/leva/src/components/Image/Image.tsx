@@ -2,11 +2,9 @@ import React, { useCallback } from 'react'
 import { Label, Portal, Overlay, Row } from '../UI'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
-import { LevaInputProps } from '../../types/'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
-
-type ImageProps = LevaInputProps<string | undefined>
+import type { ImageProps } from './image-types'
 
 export function ImageComponent() {
   const { label, value, onUpdate } = useInputContext<ImageProps>()
@@ -33,8 +31,9 @@ export function ImageComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <ImageContainer ref={popinRef}>
+      <ImageContainer>
         <ImagePreview
+          ref={popinRef}
           hasImage={!!value}
           onPointerDown={() => !!value && show()}
           onPointerUp={hide}

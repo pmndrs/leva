@@ -1,5 +1,5 @@
-import { Plugin, CustomInput, InputWithSettings, InternalPlugin } from './types'
 import { warn, LevaErrors } from './utils/log'
+import type { Plugin, CustomInput, InputWithSettings, InternalPlugin } from './types'
 
 const Schemas: ((v: any, settings?: any) => false | string)[] = []
 
@@ -55,40 +55,16 @@ export function createPlugin<Input, Value, InternalSettings>(plugin: Plugin<Inpu
   return (input?: Input) => ({ type, ...input } as CustomInput<Value>)
 }
 
-/**
- * The following functions are part of a plugin structure.
- *
- * @normalize is used to normalize the input into a { value, settings }
- * structure inside the store. It might add settings based on the default among
- * other things.
- *
- * @validate checks if the user value is valid. For example a Number plugin
- * would reject "hello" as invalid;
- *
- * @sanitize sanitizes the user value before registering it to the store. For
- * example, the Number plugin would santize "3.00" into 3.
- *
- * @format is sanitization but for the displayed value. If the input value of
- * the Number plugin, then format will add proper padding and show "3.00".
- *
- */
-
 export function normalize<V, Settings extends object = {}>(type: string, input: InputWithSettings<V, Settings>) {
   const { normalize: _normalize } = Plugins[type]
   if (_normalize) return _normalize(input)
   return input
 }
 
-export function sanitize<Settings extends object>(type: string, value: any, settings?: Settings) {
+export function sanitize<Settings extends object>(type: string, value: any, settings?: Settings, prevValue?: any) {
   const { sanitize } = Plugins[type]
-  if (sanitize) return sanitize(value, settings)
+  if (sanitize) return sanitize(value, settings, prevValue)
   return value
-}
-
-export function validate<Settings extends object>(type: string, value: any, settings?: Settings) {
-  const { validate } = Plugins[type]
-  if (validate) return validate(value, settings)
-  return true
 }
 
 export function format<Settings extends object>(type: string, value: any, settings?: Settings) {

@@ -1,11 +1,6 @@
-<a href=""><img src="https://raw.githubusercontent.com/gsimone/leva/master/hero.png" /></a>
+[![npm (tag)](https://img.shields.io/npm/v/leva?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/leva) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/leva?style=flat&colorA=000000&colorB=000000&label=gzipped)](https://bundlephobia.com/result?p=leva) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/pmndrs/leva/CI?style=flat&colorA=000000) [![Discord Shield](https://img.shields.io/discord/740090768164651008?style=flat&colorA=000000&colorB=000000&label=&logo=discord&logoColor=ffffff)](https://discord.gg/poimandres)
 
-<div align="center">
-    <img src="https://badgen.net/npm/v/leva?labelColor=181C20&color=181C20" alt="NPM Version" />
-  <img src="https://badgen.net/bundlephobia/minzip/leva?labelColor=181C20&color=181C20" alt="minzipped size"/>
-    <img src="https://github.com/gsimone/leva/workflows/CI/badge.svg" alt="Build Status" />
-</a>
-</div>
+<a href=""><img src="https://raw.githubusercontent.com/gsimone/leva/master/hero.png" /></a>
 <br />
 <div align="center"><strong>A GUI you are going to lava.</strong></div>
 <div align="center"> Customizable, extensible and beautiful by default.</div>

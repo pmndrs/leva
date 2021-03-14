@@ -1,7 +1,7 @@
 import { styled } from '../../styles'
 
 export const InnerNumberLabel = styled('div', {
-  $draggable: '',
+  $leva__draggable: '',
   cursor: 'ew-resize',
 })
 
@@ -11,8 +11,8 @@ export const RangeGrid = styled('div', {
       true: {
         position: 'relative',
         display: 'grid',
-        gridTemplateColumns: '3fr 2fr',
-        columnGap: '$colGap',
+        gridTemplateColumns: 'auto $sizes$leva__numberInputMinWidth',
+        columnGap: '$leva__colGap',
         alignItems: 'center',
       },
     },

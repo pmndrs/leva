@@ -1,12 +1,7 @@
 import React from 'react'
-import { useInputContext, Vector, Label, Row, styled } from 'leva/plugins'
-import { SpringCanvas, SpringProps } from './SpringCanvas'
-
-const Container = styled('div', {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  columnGap: '$colGap',
-})
+import { useInputContext, Vector, Label, Row } from 'leva/plugin'
+import { SpringCanvas } from './SpringCanvas'
+import type { SpringProps } from './spring-types'
 
 export function Spring() {
   const { label, displayValue, onUpdate, settings } = useInputContext<SpringProps>()
@@ -18,9 +13,7 @@ export function Spring() {
       </Row>
       <Row input>
         <Label>{label}</Label>
-        <Container>
-          <Vector value={displayValue} settings={settings as any} onUpdate={onUpdate} />
-        </Container>
+        <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Row>
     </>
   )

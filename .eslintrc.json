@@ -2,5 +2,9 @@
   "extends": "react-app",
   "rules": {
     "no-console": "warn"
+  },
+  "plugins": ["cypress"],
+  "env": {
+    "cypress/globals": true
   }
 }

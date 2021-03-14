@@ -1,18 +1,20 @@
 import React from 'react'
 import { styled } from '../../styles'
-import { InternalVectorSettings, Vector } from '../Vector'
-import { LevaInputProps, Vector2d, Vector as VectorType } from '../../types'
+import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
-
-export type InternalVector2dSettings = InternalVectorSettings<string, [string, string]>
-export type Vector2dProps = LevaInputProps<Vector2d, InternalVector2dSettings, VectorType>
+import type { Vector2dProps } from './vector2d-types'
 
 export const Container = styled('div', {
   display: 'grid',
-  gridTemplateColumns: '$sizes$rowHeight repeat(2, 1fr)',
-  columnGap: '$colGap',
+  columnGap: '$leva__colGap',
+  variants: {
+    withJoystick: {
+      true: { gridTemplateColumns: '$sizes$leva__rowHeight auto' },
+      false: { gridTemplateColumns: 'auto' },
+    },
+  },
 })
 
 export function Vector2dComponent() {
@@ -20,8 +22,8 @@ export function Vector2dComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <Container>
-        <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />
+      <Container withJoystick={settings.joystick}>
+        {settings.joystick && <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />}
         <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>
     </Row>

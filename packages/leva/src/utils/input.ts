@@ -1,5 +1,5 @@
 import { dequal } from 'dequal/lite'
-import { getValueType, normalize, sanitize, validate } from '../plugin'
+import { getValueType, normalize, sanitize } from '../plugin'
 import { DataInput, SpecialInputTypes } from '../types'
 import { warn, LevaErrors } from './log'
 
@@ -46,20 +46,22 @@ type SanitizeProps = {
   settings: object | undefined
 }
 
-type ValueErrorType = { message: string; previousValue: any }
+type ValueErrorType = { message: string; previousValue: any; error?: Error }
 
-const ValueError = (function (this: ValueErrorType, message: string, value: any) {
+const ValueError = (function (this: ValueErrorType, message: string, value: any, error?: Error) {
   this.message = 'LEVA: ' + message
   this.previousValue = value
-} as unknown) as { new (message: string, value: any): ValueErrorType }
+  this.error = error
+} as unknown) as { new (message: string, value: any, error?: Error): ValueErrorType }
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue
-  if (!validate(type, _newValue, settings)) {
-    throw new ValueError(`The value [${newValue}] did not result in a correct value.`, value)
+  let sanitizedNewValue
+  try {
+    sanitizedNewValue = sanitize(type, _newValue, settings, value)
+  } catch (e) {
+    throw new ValueError(`The value \`${newValue}\` did not result in a correct value.`, value, e)
   }
-  const sanitizedNewValue = sanitize(type, _newValue, settings)
-
   if (dequal(sanitizedNewValue, value)) {
     /**
      * @note This makes the update function throw when the new value is the same
@@ -70,7 +72,8 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
      */
 
     throw new ValueError(
-      `The value [${newValue}] did not result in a value update, which remained the same: [${value}]. You can ignore this warning if this is the intended behavior.`,
+      `The value \`${newValue}\` did not result in a value update, which remained the same: \`${value}\`.
+        You can ignore this warning if this is the intended behavior.`,
       value
     )
   }
