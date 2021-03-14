@@ -2,7 +2,7 @@ import React from 'react'
 import { Plugins } from '../../plugin'
 import { log, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
-import { useValue } from '../../hooks'
+import { useComputeInputSetters } from '../../hooks'
 import { StyledInputWrapper } from '../UI/StyledUI'
 
 type ControlInputProps<V, Settings extends object> = {
@@ -31,7 +31,7 @@ export function ControlInput<V, Settings extends object>({
   disabled,
   ...rest
 }: ControlInputProps<V, Settings>) {
-  const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
+  const { displayValue, onChange, onUpdate } = useComputeInputSetters({ type, value, settings, setValue })
 
   const Input = Plugins[type].component
   if (!Input) {

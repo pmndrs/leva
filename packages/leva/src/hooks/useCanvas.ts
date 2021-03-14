@@ -6,7 +6,10 @@ export function useCanvas2d(
 ): [React.RefObject<HTMLCanvasElement>, React.RefObject<CanvasRenderingContext2D>] {
   const canvas = useRef<HTMLCanvasElement>(null)
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
+  const firedOnce = useRef(false)
 
+  // TODO this is pretty much useless in 90% of cases since panels
+  // have a fixed width
   useEffect(() => {
     const handleCanvas = debounce(() => {
       canvas.current!.width = canvas.current!.offsetWidth * window.devicePixelRatio
@@ -14,7 +17,10 @@ export function useCanvas2d(
       fn(canvas.current, ctx.current)
     }, 250)
     window.addEventListener('resize', handleCanvas)
-    handleCanvas()
+    if (firedOnce.current) {
+      handleCanvas()
+      firedOnce.current = false
+    }
     return () => window.removeEventListener('resize', handleCanvas)
   }, [fn])
 

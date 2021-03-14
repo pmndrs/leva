@@ -1,7 +1,7 @@
 // used as entrypoint
 
 export { default as tinycolor2 } from 'tinycolor2'
-export { debounce, clamp, pad, evaluate } from '../utils'
+export { debounce, clamp, pad, evaluate, range, invertedRange } from '../utils'
 export { normalizeKeyedNumberSettings } from '../components/Vector/vector-utils'
 
 export { createPlugin } from '../plugin'
@@ -17,8 +17,8 @@ export { Vector } from '../components/Vector'
 // export vector utilities
 export * from '../components/Vector/vector-plugin'
 // export useful hooks
-export { useDrag, useDragNumber, useCanvas2d, useTransform, useInput } from '../hooks'
-export { useInputContext } from '../context'
+export { useDrag, useDragNumber, useCanvas2d, useTransform, useInput, useValue, useValues } from '../hooks'
+export { useInputContext, useStoreContext } from '../context'
 
 // export styling utilities
 export { styled, useTh } from '../styles'

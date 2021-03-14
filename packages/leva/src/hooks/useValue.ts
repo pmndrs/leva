@@ -1,37 +1,20 @@
-import { dequal } from 'dequal/lite'
-import { useState, useCallback, useEffect, useRef } from 'react'
-import { format } from '../plugin'
+import shallow from 'zustand/shallow'
+import { useStoreContext } from '../context'
 
-type Props<V, Settings> = {
-  type: string
-  value: V
-  settings?: Settings
-  setValue: (v: V) => void
+export const useValue = (path: string) => {
+  return useValues([path])[path]
 }
 
-export function useValue<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
-  // the value used by the panel vs the value
-  const [displayValue, setDisplayValue] = useState(format(type, value, settings))
-  const previousValueRef = useRef(value)
-  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settings)), [type, settings])
-
-  const onUpdate = useCallback(
-    (updatedValue: any) => {
-      try {
-        setValue(updatedValue)
-      } catch ({ previousValue }) {
-        setFormat(previousValue)
-      }
-    },
-    [setFormat, setValue]
+export const useValues = <T extends string>(paths: T[]) => {
+  const store = useStoreContext()
+  const value = store.useStore(
+    ({ data }) =>
+      paths.reduce((acc, path) => {
+        // @ts-expect-error
+        if (data[path] && 'value' in data[path]) return Object.assign(acc, { [path]: data[path].value })
+        return acc
+      }, {} as { [key in T]: any }),
+    shallow
   )
-
-  useEffect(() => {
-    if (!dequal(value, previousValueRef.current)) {
-      setFormat(value)
-    }
-    previousValueRef.current = value
-  }, [value, setFormat])
-
-  return { displayValue, onChange: setDisplayValue, onUpdate }
+  return value
 }
