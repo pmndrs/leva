@@ -95,7 +95,7 @@ const utils = {
     createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const { styled, css, theme, global } = createCss({
+export const { styled, css, theme, global: _global } = createCss({
   theme: getDefaultTheme(),
   utils: {
     ...utils,
@@ -132,7 +132,7 @@ export const { styled, css, theme, global } = createCss({
   },
 })
 
-const globalStyles = global({
+const globalStyles = _global({
   '.leva__panel__dragged': {
     WebkitUserSelect: 'none',
     WebkitUserDrag: 'none',
