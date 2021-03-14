@@ -1,4 +1,5 @@
 {
+  "buildCommand": false,
   "sandboxes": [
     "/demo/src/sandboxes/leva-minimal",
     "/demo/src/sandboxes/leva-busy",
