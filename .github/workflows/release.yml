@@ -24,6 +24,16 @@ jobs:
       - name: Install Dependencies
         run: yarn
 
+      - name: mark demo as private
+        run: |
+          node -e "
+            const fs = require('fs');
+            const pkgJsonPath = 'demo/package.json';
+            const contents = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
+            contents.private = true;
+            fs.writeFileSync(pkgJsonPath, JSON.stringify(contents, 0, 2) + '\n');
+          "
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@master
