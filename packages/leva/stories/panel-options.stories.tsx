@@ -25,6 +25,8 @@ const Template: Story<any> = (args) => {
     </div>
   )
 }
+export const Collapsed = Template.bind({})
+Collapsed.args = { collapsed: true }
 
 export const OneLineLabels = Template.bind({})
 OneLineLabels.args = { oneLineLabels: true }
