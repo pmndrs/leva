@@ -17,7 +17,7 @@
     "build": "preconstruct build",
     "watch": "preconstruct watch",
     "dev": "preconstruct dev",
-    "release": "yarn build && yarn workspaces foreach --include leva npm publish",
+    "release": "yarn build && yarn changeset publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
@@ -27,7 +27,7 @@
     "cypress:run": "cypress run",
     "demo:dev": "yarn workspace demo dev",
     "demo:build": "yarn workspace demo build",
-    "demo:serve": "cp ./demo/serve.json ./demo/dist && npx serve ./demo/dist",
+    "demo:serve": "yarn workspace demo serve",
     "ci:test": "yarn demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run"
   },
   "size-limit": [
@@ -52,6 +52,7 @@
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
+    "@changesets/cli": "^2.14.1",
     "@preconstruct/cli": "^2.0.6",
     "@radix-ui/react-icons": "^1.0.2",
     "@size-limit/preset-big-lib": "^4.10.1",
