@@ -50,7 +50,6 @@ export const StyledTitle = styled('div', {
   WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
   userSelect: 'none',
   cursor: 'pointer',
-  marginTop: '$leva__rowGap',
   height: '$leva__folderTitleHeight',
   fontWeight: '$leva__folder',
   '> svg': {
@@ -101,10 +100,10 @@ export const StyledContent = styled('div', {
           paddingTop: '$leva__sm',
         },
         '& > div:last-of-type': {
-          paddingBottom: '$leva__md', // adds an extra padding at the very bottom of the root folder
+          paddingBottom: '$leva__sm', // adds an extra padding at the very bottom of the root folder
         },
         [`> ${StyledFolder}:not(:first-of-type)`]: {
-          paddingTop: '$leva__md',
+          paddingTop: '$leva__sm',
           marginTop: '$leva__md',
           borderTop: '$borderWidths$leva__folder solid $colors$leva__elevation1',
         },
