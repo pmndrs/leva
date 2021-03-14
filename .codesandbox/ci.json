@@ -1,6 +1,4 @@
 {
-  "buildCommand": false,
-  "installCommand": false,
   "packages": ["packages/*"],
   "sandboxes": [
     "/demo/src/sandboxes/leva-minimal",
