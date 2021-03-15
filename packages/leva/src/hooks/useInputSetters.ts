@@ -9,12 +9,7 @@ type Props<V, Settings> = {
   setValue: (v: V) => void
 }
 
-export function useComputeInputSetters<V, Settings extends object>({
-  value,
-  type,
-  settings,
-  setValue,
-}: Props<V, Settings>) {
+export function useInputSetters<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
   // the value used by the panel vs the value
   const [displayValue, setDisplayValue] = useState(format(type, value, settings))
   const previousValueRef = useRef(value)

@@ -1,4 +1,4 @@
-export * from './useComputeInputSetters'
+export * from './useInputSetters'
 export * from './useDeepMemo'
 export * from './useShallowMemo'
 export * from './useCompareMemoize'
