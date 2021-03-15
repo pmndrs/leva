@@ -18,7 +18,7 @@ export function getVectorSchema(dimension: number) {
 
   // check if vector is an object and that all its keys are finite numbers
   const isVectorObject = (o: any) => {
-    if (typeof o !== 'object') return false
+    if (!o || typeof o !== 'object') return false
     const values = Object.values(o)
     return values.length === dimension && values.every((v: any) => isFinite(v))
   }
