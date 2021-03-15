@@ -1,5 +1,11 @@
 # leva
 
+## 0.6.2
+
+### Patch Changes
+
+- 72bcebe: Reject null Vectors
+
 ## 0.6.1
 
 ### Patch Changes
