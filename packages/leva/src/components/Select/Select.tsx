@@ -10,13 +10,13 @@ function Select({
   id,
   settings,
 }: Pick<SelectProps, 'displayValue' | 'onUpdate' | 'id' | 'settings'>) {
-  const { keys, values } = settings!
+  const { keys } = settings!
 
   return (
     <SelectContainer>
-      <StyledSelect id={id} value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
-        {keys.map((key, index) => (
-          <option key={key} value={index}>
+      <StyledSelect id={id} value={displayValue} onChange={(e) => onUpdate(e.currentTarget.value)}>
+        {keys.map((key) => (
+          <option key={key} value={key}>
             {key}
           </option>
         ))}

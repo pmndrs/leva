@@ -9,7 +9,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = () => {
+export const Inputs: Story<any> = () => {
   const [n, setN] = React.useState(1)
   const inputs = Array(n)
     .fill(0)
@@ -25,4 +25,49 @@ const Template: Story<any> = () => {
   )
 }
 
-export const Dependency = Template.bind({})
+export const Update: Story<any> = () => {
+  const [toggle, setToggle] = React.useState(true)
+  const options = toggle ? ['foo', 'bar'] : ['x', 'y', 'z']
+
+  const values = useControls(
+    {
+      select: { value: options[0], options: options },
+      color: { value: '#f00', hint: 'Used for important content' },
+    },
+    [options]
+  )
+
+  return (
+    <div>
+      <button onClick={() => setToggle(!toggle)}>Update options</button>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+      <pre>{JSON.stringify(options, null, '  ')}</pre>
+    </div>
+  )
+}
+
+function A() {
+  const options = ['x', 'y', 'z']
+  useControls({ color: { value: 'blue' }, select: { value: 'x', options: options } })
+
+  return null
+}
+
+function B() {
+  const options = ['foo', 'bar']
+  useControls({ color: { value: '#f00', label: 'bg' }, select: { value: 'foo', options: options } })
+
+  return null
+}
+
+export const Siblings: Story<any> = () => {
+  const [showB, setShowB] = React.useState(false)
+  return (
+    <>
+      <A />
+      {showB && <B />}
+      <button onClick={() => setShowB(!showB)}>Switch component</button>
+      <pre>Showing component {showB ? 'B' : 'A'}</pre>
+    </>
+  )
+}

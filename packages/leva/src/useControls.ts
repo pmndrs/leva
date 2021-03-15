@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useCallback, useState } from 'react'
 import { levaStore } from './store'
 import { folder } from './helpers'
-import { useShallowMemo, useValuesForPath } from './hooks'
+import { useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
 import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
 
@@ -94,7 +94,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
 
   // Since the schema object would change on every render, we let the user have
   // control over when it should trigger a reset of the hook inputs.
-  const _schema = useShallowMemo(() => {
+  const _schema = useMemo(() => {
     const s = typeof schema === 'function' ? schema() : schema
     return folderName ? { [folderName]: folder(s, folderSettings) } : s
   }, deps)

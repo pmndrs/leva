@@ -10,7 +10,7 @@ export const schema = (_o: any, s: any) =>
     .test(s)
 
 export const format = (value: any, { values }: InternalSelectSettings) => {
-  return values.indexOf(value)
+  return value
 }
 
 export const normalize = (input: SelectInput) => {

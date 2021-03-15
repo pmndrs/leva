@@ -128,14 +128,19 @@ export const Store = (function (this: StoreType) {
   this.addData = (newData) => {
     store.setState((s) => {
       const data = s.data
-
       Object.entries(newData).forEach(([path, value]) => {
-        const input = data[path]
-        // if an input already exists at the path, increment
-        // the reference count.
-        if (!!input) input.count++
-        // if not, create a path for the input.
-        else data[path] = { ...value, count: 1 }
+        let input = data[path]
+
+        // If an input already exists compare its values and increase the reference count.
+        if (!!input) {
+          // TODO: TS errors.
+          const { settings, label } = value
+          input.count++
+          input.settings = settings
+          input.label = label
+        } else {
+          data[path] = { ...value, count: 1 }
+        }
       })
 
       // Since we're returning a new object, direct mutation of data
