@@ -42,13 +42,14 @@ jobs:
         name: Setup Yarn build cache
         id: yarn-build-cache
         with:
-          path: /dist
+          path: packages/**/dist
           key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/') }}
           restore-keys: |
             ${{ runner.os }}-yarn-build-
+
       - name: Yarn build
-        run: yarn build
         if: steps.yarn-build-cache.outputs.cache-hit != 'true'
+        run: yarn build
 
       - name: Cypress run
         run: yarn ci:test
