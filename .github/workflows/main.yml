@@ -16,8 +16,9 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
+        run: npm t
         with:
-          install-command: yarn --immutable --silent
+          useLockFile: false
 
       - name: Check types
         run: yarn tsc
