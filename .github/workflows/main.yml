@@ -33,8 +33,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install project
-        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
-        run: yarn install --silent
+        run: yarn install --immutable --silent
 
       - name: Build
         run: yarn build
