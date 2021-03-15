@@ -1,5 +1,11 @@
 name: CI
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - 'demo/**'
+      - 'docs/**'
+      - '**.md'
+      - '.changeset/**'
 jobs:
   build:
     name: Build, lint, and test
