@@ -1,7 +1,7 @@
 import React from 'react'
 import { useInputContext } from '../../context'
 import { styled } from '../../styles'
-import { useValue } from '../../hooks'
+import { useInputSetters } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
 import type { CoordinateProps, VectorProps } from './vector-types'
@@ -15,9 +15,10 @@ function Coordinate<T extends Record<string, number>>({
   hideLabel,
 }: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
+  // @ts-expect-error
   const setValue = (newValue: any) => onUpdate({ [valueKey]: sanitizeValue(args, newValue) })
 
-  const number = useValue({ ...args, setValue })
+  const number = useInputSetters({ ...args, setValue })
 
   return (
     <Number
