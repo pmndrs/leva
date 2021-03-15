@@ -38,9 +38,6 @@ jobs:
       - name: Check types
         run: yarn tsc
 
-      - name: Build
-        run: yarn build
-
       - uses: actions/cache@v2
         name: Setup Yarn build cache
         id: yarn-build-cache
