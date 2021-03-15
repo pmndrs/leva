@@ -22,9 +22,9 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
-        run: npm t
         with:
           useLockFile: false
+        - run: npm t
 
       - name: Check types
         run: yarn tsc
