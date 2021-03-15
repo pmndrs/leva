@@ -24,7 +24,7 @@ jobs:
         uses: bahmutov/npm-install@v1
         with:
           useLockFile: false
-      - run: npm t
+      - run: yarn t
 
       - name: Check types
         run: yarn tsc
