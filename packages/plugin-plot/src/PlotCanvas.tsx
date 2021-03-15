@@ -15,6 +15,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
       // fixes unmount potential bug
       if (!_canvas) return
       const { width, height } = _canvas
+      const expr = value.compile()
 
       // compute the expressions
       const points: number[] = []
@@ -24,7 +25,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
       for (let i = 0; i < width; i++) {
         // maps the width of the canvas to minX / maxX
         const x = invertedRange(range(i, 0, width), minX, maxX)
-        const v = value.evaluate({ x })
+        const v = expr.evaluate({ x })
         if (v < minY && v !== -Infinity) minY = v
         if (v > maxY && v !== Infinity) maxY = v
         // adds the value to the points array

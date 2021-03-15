@@ -8,8 +8,8 @@ export default function App() {
     y1: plot({ expression: 'cos(x)', boundsX: [-10, 10] }),
     y2: plot({ expression: '1/x', boundsX: [-10, 10] }),
   })
-  const t1 = values.y1.evaluate({ x: 1 })
-  const t2 = values.y2.evaluate({ x: 1 })
+  const t1 = values.y1.compile().evaluate({ x: 1 })
+  const t2 = values.y2.compile().evaluate({ x: 1 })
   return (
     <div className="App">
       <pre>x = 1 → y1 = {t1}</pre>

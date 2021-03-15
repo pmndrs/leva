@@ -31,7 +31,7 @@ export function parseExpression(expression: string, get: (path: string) => any) 
     _formattedString = _formattedString.replace(re, scope[key])
   }
 
-  const value = Object.assign(math.parse(_formattedString).compile(), {
+  const value = Object.assign(math.parse(_formattedString), {
     __symbols: symbols,
     __parsed: parsed,
   })
