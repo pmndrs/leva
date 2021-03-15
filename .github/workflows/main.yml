@@ -32,9 +32,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install project dependencies if no cache
-        if: steps.yarn-cache.outputs.cache-hit != 'true' # Over here!
-        run: yarn --silent
+      - name: Install project
+        run: yarn install --silent
 
       - name: Check types
         run: yarn tsc
