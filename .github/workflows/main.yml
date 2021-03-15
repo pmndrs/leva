@@ -52,4 +52,6 @@ jobs:
         run: yarn build
 
       - name: Cypress run
-        run: yarn ci:test
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn run ci:test
