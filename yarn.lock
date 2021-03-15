@@ -1983,7 +1983,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@leva-ui/plugin-plot@workspace:packages/plugin-plot":
+"@leva-ui/plugin-plot@*, @leva-ui/plugin-plot@workspace:packages/plugin-plot":
   version: 0.0.0-use.local
   resolution: "@leva-ui/plugin-plot@workspace:packages/plugin-plot"
   dependencies:
@@ -7641,6 +7641,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:demo"
   dependencies:
+    "@leva-ui/plugin-plot": "*"
     "@leva-ui/plugin-spring": "*"
     "@radix-ui/react-icons": ^1.0.2
     "@stitches/react": ^0.1.0-canary.15
