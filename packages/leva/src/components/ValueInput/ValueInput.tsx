@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback } from 'react'
 import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
@@ -16,12 +16,11 @@ type ValueInputProps = {
 export function ValueInput({ children, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
   const { id: _id } = useInputContext()
   const inputId = id || _id
-  const lastValue = useRef(value)
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
       const _value = event.currentTarget.value
-      if (lastValue.current !== _value) fn(_value)
+      fn(_value)
     },
     []
   )

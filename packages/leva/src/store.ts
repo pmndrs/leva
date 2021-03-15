@@ -154,7 +154,7 @@ export const Store = (function (this: StoreType) {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value)
+      updateInput(data[path], value, path, this)
       return { data }
     })
   }
@@ -208,7 +208,7 @@ export const Store = (function (this: StoreType) {
    * @param rootPath used for recursivity
    */
   const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: Record<string, string>): Data => {
-    const data: any = {}
+    const data: Data = {}
 
     Object.entries(schema).forEach(([key, input]: [string, any]) => {
       let newPath = join(rootPath, key)
@@ -244,7 +244,7 @@ export const Store = (function (this: StoreType) {
           _disabled = disabled
           _hint = hint
         }
-        const normalizedInput = normalizeInput(_input, newPath)
+        const normalizedInput = normalizeInput(_input, newPath, data)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
@@ -252,7 +252,9 @@ export const Store = (function (this: StoreType) {
           data[newPath].label = _label ?? key
           data[newPath].hint = _hint
           if (!(input.type in SpecialInputTypes)) {
+            // @ts-expect-error
             data[newPath].optional = _optional ?? false
+            // @ts-expect-error
             data[newPath].disabled = _disabled ?? false
           }
           if (typeof _render === 'function') data[newPath].render = _render

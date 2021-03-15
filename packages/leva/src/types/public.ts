@@ -2,6 +2,7 @@
  * Types exposed through the public API
  */
 import type { VectorSettings } from '../components/Vector/vector-types'
+import { StoreType, Data } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -212,13 +213,13 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
    * }
    * ```
    */
-  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
+  normalize?: (input: Input, path: string, data: Data) => { value: Value; settings?: InternalSettings }
   /**
    * Sanitizes the user value before registering it to the store. For
    * example, the Number plugin would santize "3.00" into 3. If the provided
    * value isn't formatted properly, the sanitize function should throw.
    */
-  sanitize?: (value: any, settings: any, prevValue: any) => Value
+  sanitize?: (value: any, settings: any, prevValue: any, path: string, store: StoreType) => Value
   /**
    * Formats the value into the value that will be displayed by the component.
    * If the input value of the Number plugin, then format will add proper
