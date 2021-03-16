@@ -10,8 +10,18 @@ export const SelectContainer = styled('div', {
   },
 })
 
-export const StyledSelect = styled('select', {
-  $leva__reset: '',
+export const NativeSelect = styled('select', {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  opacity: 0,
+})
+
+export const PresentationalSelect = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
   width: '100%',
   height: '$leva__rowHeight',
   backgroundColor: '$leva__elevation3',
@@ -20,6 +30,11 @@ export const StyledSelect = styled('select', {
   borderRadius: '$leva__sm',
   padding: '0 $leva__sm',
   cursor: 'pointer',
-  $leva__hover: '',
-  $leva__focus: '',
+  [`${NativeSelect}:focus + &`]: {
+    borderColor: '$leva__accent2',
+  },
+  [`${NativeSelect}:hover + &`]: {
+    borderColor: '$leva__accent1',
+    inset: true,
+  },
 })
