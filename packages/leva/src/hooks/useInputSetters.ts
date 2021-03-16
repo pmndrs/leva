@@ -13,7 +13,9 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
   // the value used by the panel vs the value
   const [displayValue, setDisplayValue] = useState(format(type, value, settings))
   const previousValueRef = useRef(value)
-  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settings)), [type, settings])
+  const settingsRef = useRef(settings)
+  settingsRef.current = settings
+  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settingsRef.current)), [type])
 
   const onUpdate = useCallback(
     (updatedValue: any) => {
