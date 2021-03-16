@@ -133,11 +133,16 @@ export const Store = (function (this: StoreType) {
 
         // If an input already exists compare its values and increase the reference count.
         if (!!input) {
-          // TODO: TS errors.
-          const { settings, label } = value
-          input.count++
-          input.settings = settings
-          input.label = label
+          // If count is above 0 (the panel is already used by a sibling) we don't update settings.
+          if (input.count > 0) {
+            input.count++
+          } else {
+            // TODO: TS errors.
+            const { settings, label } = value
+            input.count++
+            input.settings = settings
+            input.label = label
+          }
         } else {
           data[path] = { ...value, count: 1 }
         }

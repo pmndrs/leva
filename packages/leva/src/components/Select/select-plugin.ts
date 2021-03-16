@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import type { InternalSelectSettings, SelectInput } from './select-types'
+import type { SelectInput } from './select-types'
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>
@@ -8,10 +8,6 @@ export const schema = (_o: any, s: any) =>
       options: v8n().passesAnyOf(v8n().object(), v8n().array()),
     })
     .test(s)
-
-export const format = (value: any, { values }: InternalSelectSettings) => {
-  return value
-}
 
 export const normalize = (input: SelectInput) => {
   let { value, options } = input
