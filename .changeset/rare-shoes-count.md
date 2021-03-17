@@ -2,4 +2,4 @@
 'leva': patch
 ---
 
-Allow useControls to update settings if dependency array changes. (See #124)
+Allow useControls to update settings and input options when dependency array changes. (See #124)
