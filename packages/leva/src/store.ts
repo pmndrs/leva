@@ -140,7 +140,7 @@ export const Store = (function (this: StoreType) {
         if (!!input) {
           const { type, value, ...rest } = newInputData as DataInput
           if (type !== input.type) {
-            warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
+            warn(LevaErrors.INPUT_TYPE_OVERRIDE, path, input.type, type)
           } else {
             if (input.__refCount === 0 || override) {
               Object.assign(input, rest)
