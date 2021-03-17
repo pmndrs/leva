@@ -23,7 +23,7 @@ export type StoreType = {
 }
 
 type Decorators = {
-  count: number
+  __refCount: number
   key: string
   label: string
   hint?: string

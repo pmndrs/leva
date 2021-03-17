@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useCallback, useState } from 'react'
+import { useEffect, useMemo, useCallback, useState, useRef } from 'react'
 import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
@@ -32,6 +32,8 @@ function parseArgs(
   let folderSettings: FolderSettings | undefined
   let hookSettings: HookSettings | undefined
   let deps: React.DependencyList | undefined
+
+  console.log({schemaOrFolderName})
 
   if (typeof schemaOrFolderName === 'string') {
     folderName = schemaOrFolderName
@@ -92,9 +94,13 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
 
   const schemaIsFunction = typeof schema === 'function'
 
+  // Keep track of deps to see if they changed and if there's need to recompute.
+  const depsChanged = useRef(false)
+
   // Since the schema object would change on every render, we let the user have
   // control over when it should trigger a reset of the hook inputs.
   const _schema = useDeepMemo(() => {
+    depsChanged.current = true
     const s = typeof schema === 'function' ? schema() : schema
     return folderName ? { [folderName]: folder(s, folderSettings) } : s
   }, deps)
@@ -142,7 +148,8 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // Note that doing this while rendering (ie in useMemo) would make
     // things easier and remove the need for initializing useValuesForPath but
     // it breaks the ref from Monitor.
-    store.addData(initialData)
+    store.addData(initialData, depsChanged.current)
+    depsChanged.current = false
     return () => store.disposePaths(paths)
   }, [store, paths, initialData])
 

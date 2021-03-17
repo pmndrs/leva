@@ -22,7 +22,7 @@ export const Store = (function (this: StoreType) {
 
   /**
    * For a given data structure, gets all paths for which inputs have
-   * a reference count superior to zero. This function is used by the
+   * a reference __refCount superior to zero. This function is used by the
    * root pane to only display the inputs that are consumed by mounted
    * components.
    *
@@ -54,7 +54,7 @@ export const Store = (function (this: StoreType) {
       if (
         path in data &&
         // if input is mounted
-        data[path].count > 0 &&
+        data[path].__refCount > 0 &&
         // if it's not included in a hidden folder
         hiddenFolders.every((p) => path.indexOf(p) === -1) &&
         // if its render functions doesn't exists or returns true
@@ -79,7 +79,7 @@ export const Store = (function (this: StoreType) {
 
   /**
    * When the useControls hook unmmounts, it will call this function that will
-   * decrease the count of all the inputs. When an input count reaches 0, it
+   * decrease the __refCount of all the inputs. When an input __refCount reaches 0, it
    * should no longer be displayed in the panel.
    *
    * @param paths
@@ -90,8 +90,8 @@ export const Store = (function (this: StoreType) {
       paths.forEach((path) => {
         if (path in data) {
           const input = data[path]
-          input.count--
-          if (input.count === 0 && input.type in SpecialInputTypes) {
+          input.__refCount--
+          if (input.__refCount === 0 && input.type in SpecialInputTypes) {
             // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
@@ -120,33 +120,65 @@ export const Store = (function (this: StoreType) {
   /**
    * Merges the data passed as an argument with the store data.
    * If an input path from the data already exists in the store,
-   * the function doesn't update the data but increments count
+   * the function doesn't update the data but increments __refCount
    * to keep track of how many components use that input key.
    *
+   * Uses depsChanged to trigger a recompute and update inputs
+   * settings if needed.
+   *
    * @param newData the data to update
+   * @param depsChanged to keep track of dependencies
    */
-  this.addData = (newData) => {
+  // TODO: TS errors.
+  this.addData = (newData, depsChanged) => {
+    console.log({ newData, depsChanged })
     store.setState((s) => {
       const data = s.data
-      Object.entries(newData).forEach(([path, value]) => {
+      Object.entries(newData).forEach(([path, newInputData]) => {
         let input = data[path]
 
-        // If an input already exists compare its values and increase the reference count.
+        // If an input already exists compare its values and increase the reference __refCount.
         if (!!input) {
-          // If count is above 0 (the panel is already used by a sibling) we don't update settings.
-          if (input.count > 0) {
-            input.count++
+          console.log(input.__refCount)
+          // If component is master (__refCount = 1) & depsChanged is true update settings.
+          if (input.__refCount <= 1 && depsChanged) {
+            const { type, value, ...rest } = newInputData
+            if (type !== input.type) {
+              warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
+            } else {
+              Object.assign(input, rest)
+              console.log({input})
+            }
           } else {
-            // TODO: TS errors.
-            const { settings, label } = value
-            input.count++
-            input.settings = settings
-            input.label = label
+            // Else we add the input to the store.
+            input.__refCount++
           }
         } else {
-          data[path] = { ...value, count: 1 }
+          data[path] = { ...newInputData, __refCount: 1 }
         }
+
+        // If an input already exists compare its values and increase the reference __refCount.
+        // if (!!input) {
+        //   // If __refCount is above or equal 1 (the panel is already used by a sibling) __refCount is increased.
+        //   if (input.__refCount >= 1) {
+        //     input.__refCount++
+        //     // If component is master (__refCount = 1) & depsChanged is true update settings.
+        //   } else if (input.__refCount === 1 && depsChanged) {
+        //     const { type, value, ...rest } = newInputData
+        //     if (type !== input.type) {
+        //       warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
+        //     } else {
+        //       // Else we add the input to the store.
+        //       input.__refCount++
+        //       Object.assign(input, rest)
+        //     }
+        //   }
+        // } else {
+        //   data[path] = { ...newInputData, __refCount: 1 }
+        // }
       })
+
+      console.log({ data })
 
       // Since we're returning a new object, direct mutation of data
       // Should trigger a re-render so we're good!
