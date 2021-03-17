@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { SpecialInputTypes } from './types'
+import { DataInput, SpecialInputTypes } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -130,8 +130,7 @@ export const Store = (function (this: StoreType) {
    * @param depsChanged to keep track of dependencies
    */
   // TODO: TS errors.
-  this.addData = (newData, depsChanged) => {
-    console.log({ newData, depsChanged })
+  this.addData = (newData, override) => {
     store.setState((s) => {
       const data = s.data
       Object.entries(newData).forEach(([path, newInputData]) => {
@@ -139,46 +138,20 @@ export const Store = (function (this: StoreType) {
 
         // If an input already exists compare its values and increase the reference __refCount.
         if (!!input) {
-          console.log(input.__refCount)
-          // If component is master (__refCount = 1) & depsChanged is true update settings.
-          if (input.__refCount <= 1 && depsChanged) {
-            const { type, value, ...rest } = newInputData
-            if (type !== input.type) {
-              warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
-            } else {
-              Object.assign(input, rest)
-              console.log({input})
-            }
+          const { type, value, ...rest } = newInputData as DataInput
+          if (type !== input.type) {
+            warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
           } else {
-            // Else we add the input to the store.
+            if (input.__refCount === 0 || override) {
+              Object.assign(input, rest)
+            }
+            // Else we increment the ref count
             input.__refCount++
           }
         } else {
           data[path] = { ...newInputData, __refCount: 1 }
         }
-
-        // If an input already exists compare its values and increase the reference __refCount.
-        // if (!!input) {
-        //   // If __refCount is above or equal 1 (the panel is already used by a sibling) __refCount is increased.
-        //   if (input.__refCount >= 1) {
-        //     input.__refCount++
-        //     // If component is master (__refCount = 1) & depsChanged is true update settings.
-        //   } else if (input.__refCount === 1 && depsChanged) {
-        //     const { type, value, ...rest } = newInputData
-        //     if (type !== input.type) {
-        //       warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
-        //     } else {
-        //       // Else we add the input to the store.
-        //       input.__refCount++
-        //       Object.assign(input, rest)
-        //     }
-        //   }
-        // } else {
-        //   data[path] = { ...newInputData, __refCount: 1 }
-        // }
       })
-
-      console.log({ data })
 
       // Since we're returning a new object, direct mutation of data
       // Should trigger a re-render so we're good!
