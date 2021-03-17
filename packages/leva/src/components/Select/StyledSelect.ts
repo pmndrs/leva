@@ -25,16 +25,13 @@ export const PresentationalSelect = styled('div', {
   width: '100%',
   height: '$leva__rowHeight',
   backgroundColor: '$leva__elevation3',
-  color: 'inherit',
-  borderStyle: 'none',
   borderRadius: '$leva__sm',
   padding: '0 $leva__sm',
   cursor: 'pointer',
   [`${NativeSelect}:focus + &`]: {
-    borderColor: '$leva__accent2',
+    $leva__focusStyle: '',
   },
   [`${NativeSelect}:hover + &`]: {
-    borderColor: '$leva__accent1',
-    inset: true,
+    $leva__hoverStyle: '',
   },
 })
