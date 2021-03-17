@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { SpecialInputTypes } from './types'
+import { DataInput, SpecialInputTypes } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -22,7 +22,7 @@ export const Store = (function (this: StoreType) {
 
   /**
    * For a given data structure, gets all paths for which inputs have
-   * a reference count superior to zero. This function is used by the
+   * a reference __refCount superior to zero. This function is used by the
    * root pane to only display the inputs that are consumed by mounted
    * components.
    *
@@ -54,7 +54,7 @@ export const Store = (function (this: StoreType) {
       if (
         path in data &&
         // if input is mounted
-        data[path].count > 0 &&
+        data[path].__refCount > 0 &&
         // if it's not included in a hidden folder
         hiddenFolders.every((p) => path.indexOf(p) === -1) &&
         // if its render functions doesn't exists or returns true
@@ -79,7 +79,7 @@ export const Store = (function (this: StoreType) {
 
   /**
    * When the useControls hook unmmounts, it will call this function that will
-   * decrease the count of all the inputs. When an input count reaches 0, it
+   * decrease the __refCount of all the inputs. When an input __refCount reaches 0, it
    * should no longer be displayed in the panel.
    *
    * @param paths
@@ -90,8 +90,8 @@ export const Store = (function (this: StoreType) {
       paths.forEach((path) => {
         if (path in data) {
           const input = data[path]
-          input.count--
-          if (input.count === 0 && input.type in SpecialInputTypes) {
+          input.__refCount--
+          if (input.__refCount === 0 && input.type in SpecialInputTypes) {
             // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
@@ -120,22 +120,37 @@ export const Store = (function (this: StoreType) {
   /**
    * Merges the data passed as an argument with the store data.
    * If an input path from the data already exists in the store,
-   * the function doesn't update the data but increments count
+   * the function doesn't update the data but increments __refCount
    * to keep track of how many components use that input key.
    *
+   * Uses depsChanged to trigger a recompute and update inputs
+   * settings if needed.
+   *
    * @param newData the data to update
+   * @param depsChanged to keep track of dependencies
    */
-  this.addData = (newData) => {
+  // TODO: TS errors.
+  this.addData = (newData, override) => {
     store.setState((s) => {
       const data = s.data
+      Object.entries(newData).forEach(([path, newInputData]) => {
+        let input = data[path]
 
-      Object.entries(newData).forEach(([path, value]) => {
-        const input = data[path]
-        // if an input already exists at the path, increment
-        // the reference count.
-        if (!!input) input.count++
-        // if not, create a path for the input.
-        else data[path] = { ...value, count: 1 }
+        // If an input already exists compare its values and increase the reference __refCount.
+        if (!!input) {
+          const { type, value, ...rest } = newInputData as DataInput
+          if (type !== input.type) {
+            warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
+          } else {
+            if (input.__refCount === 0 || override) {
+              Object.assign(input, rest)
+            }
+            // Else we increment the ref count
+            input.__refCount++
+          }
+        } else {
+          data[path] = { ...newInputData, __refCount: 1 }
+        }
       })
 
       // Since we're returning a new object, direct mutation of data

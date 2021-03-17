@@ -5,11 +5,11 @@ import type { Data, DataItem } from '../types'
 
 const getInputAtPath = (data: Data, path: string) => {
   if (!data[path]) return null
-  const { count, ...input } = data[path]
+  const { __refCount, ...input } = data[path]
   return input
 }
 
-type Input = Omit<DataItem, 'count'>
+type Input = Omit<DataItem, '__refCount'>
 
 /**
  * Return all input (value and settings) properties at a given path.
