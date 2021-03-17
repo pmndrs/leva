@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { DataInput, SpecialInputTypes } from './types'
+import { DataInput, SpecialInputs } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -91,7 +91,7 @@ export const Store = (function (this: StoreType) {
         if (path in data) {
           const input = data[path]
           input.__refCount--
-          if (input.__refCount === 0 && input.type in SpecialInputTypes) {
+          if (input.__refCount === 0 && input.type in SpecialInputs) {
             // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
@@ -230,7 +230,7 @@ export const Store = (function (this: StoreType) {
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
-      if (input.type === SpecialInputTypes.FOLDER) {
+      if (input.type === SpecialInputs.FOLDER) {
         const newData = _getDataFromSchema(input.schema, newPath, mappedPaths)
         Object.assign(data, newData)
 
@@ -266,7 +266,7 @@ export const Store = (function (this: StoreType) {
           data[newPath].key = key
           data[newPath].label = _label ?? key
           data[newPath].hint = _hint
-          if (!(input.type in SpecialInputTypes)) {
+          if (!(input.type in SpecialInputs)) {
             // @ts-expect-error
             data[newPath].optional = _optional ?? false
             // @ts-expect-error

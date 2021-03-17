@@ -1,4 +1,4 @@
-import { SpecialInputTypes } from '../types'
+import { SpecialInputs } from '../types'
 import type { ButtonInput } from '../types'
 
 /**
@@ -7,5 +7,5 @@ import type { ButtonInput } from '../types'
  * @param onClick function that executes when the button is clicked
  */
 export function button(onClick: () => any): ButtonInput {
-  return { type: SpecialInputTypes.BUTTON, onClick }
+  return { type: SpecialInputs.BUTTON, onClick }
 }

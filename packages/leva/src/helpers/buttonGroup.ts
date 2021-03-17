@@ -1,4 +1,4 @@
-import { SpecialInputTypes } from '../types'
+import { SpecialInputs } from '../types'
 import type { ButtonGroupInput } from '../types'
 
 /**
@@ -7,5 +7,5 @@ import type { ButtonGroupInput } from '../types'
  * @param onClick function that executes when the button is clicked
  */
 export function buttonGroup(opts: { [title: string]: () => void }): ButtonGroupInput {
-  return { type: SpecialInputTypes.BUTTON_GROUP, opts }
+  return { type: SpecialInputs.BUTTON_GROUP, opts }
 }

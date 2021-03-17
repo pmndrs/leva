@@ -1,6 +1,6 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { Data, DataInput, SpecialInputTypes, StoreType } from '../types'
+import { Data, DataInput, SpecialInputs, StoreType } from '../types'
 import { warn, LevaErrors } from './log'
 
 /**
@@ -15,7 +15,7 @@ export function normalizeInput(input: any, path: string, data: Data) {
   if (typeof input === 'object') {
     if ('type' in input) {
       // If the input is a special input then we return it as it is.
-      if (input.type in SpecialInputTypes) return input
+      if (input.type in SpecialInputs) return input
 
       // If the type key exists at this point, it must be a custom plugin
       // defined by the user.

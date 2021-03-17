@@ -23,7 +23,7 @@ export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V,
 /**
  * Special Inputs
  */
-export enum SpecialInputTypes {
+export enum SpecialInputs {
   BUTTON = 'BUTTON',
   BUTTON_GROUP = 'BUTTON_GROUP',
   MONITOR = 'MONITOR',
@@ -31,19 +31,19 @@ export enum SpecialInputTypes {
 }
 
 export type ButtonInput = {
-  type: SpecialInputTypes.BUTTON
+  type: SpecialInputs.BUTTON
   onClick: () => any
 }
 
 export type ButtonGroupInput = {
-  type: SpecialInputTypes.BUTTON_GROUP
+  type: SpecialInputs.BUTTON_GROUP
   opts: { [title: string]: () => void }
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
 
 export type MonitorInput = {
-  type: SpecialInputTypes.MONITOR
+  type: SpecialInputs.MONITOR
   objectOrFn: React.MutableRefObject<any> | Function
   settings: MonitorSettings
 }
@@ -85,7 +85,7 @@ type BooleanInput = boolean
 type StringInput = string
 
 export type FolderInput<Schema> = {
-  type: SpecialInputTypes.FOLDER
+  type: SpecialInputs.FOLDER
   schema: Schema
   settings: FolderSettings
 }
