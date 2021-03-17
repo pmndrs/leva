@@ -23,7 +23,7 @@ export function Plot() {
       </Row>
       <Row input>
         <Label>{label}</Label>
-        <String value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+        <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
       </Row>
     </>
   )
