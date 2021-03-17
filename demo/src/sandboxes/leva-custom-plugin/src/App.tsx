@@ -16,7 +16,7 @@ function GreenOrBlue() {
   return (
     <Row input>
       <Label style={{ background, opacity: settings.alpha }}>{label}</Label>
-      <String value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+      <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
     </Row>
   )
 }
@@ -43,7 +43,6 @@ const greenOrBlue = createPlugin({
 
 export default function App() {
   const data = useControls({
-    first: { value: 0, min: -10, max: 10 },
     myPlugin: greenOrBlue({ color: 'green', light: true, alpha: 0.5 }),
   })
 
