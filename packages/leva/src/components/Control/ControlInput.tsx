@@ -1,6 +1,6 @@
 import React from 'react'
 import { Plugins } from '../../plugin'
-import { log, LevaErrors } from '../../utils/log'
+import { warn, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
 import { useInputSetters } from '../../hooks'
 import { StyledInputWrapper } from '../UI/StyledUI'
@@ -35,7 +35,7 @@ export function ControlInput<V, Settings extends object>({
 
   const Input = Plugins[type].component
   if (!Input) {
-    log(LevaErrors.NO_COMPONENT_FOR_TYPE, type, path)
+    warn(LevaErrors.NO_COMPONENT_FOR_TYPE, type, path)
     return null
   }
 
