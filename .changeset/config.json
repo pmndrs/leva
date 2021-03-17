@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@1.5.0/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "linked": [
+    ["leva", "@leva-ui/plugin-spring"]
+  ],
+  "access": "public",
+  "baseBranch": "master",
+  "updateInternalDependencies": "minor",
+  "ignore": ["demo"]
+}

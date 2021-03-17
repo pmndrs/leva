@@ -37,7 +37,7 @@ export const TreeWrapper = React.memo(
   ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     return (
-      <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat} toggled={toggled}>
+      <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat}>
         <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
           {Object.entries(tree).map(([key, value]) =>
             isInput(value) ? (

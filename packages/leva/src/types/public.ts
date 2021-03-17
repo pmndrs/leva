@@ -24,6 +24,7 @@ export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V,
  */
 export enum SpecialInputTypes {
   BUTTON = 'BUTTON',
+  BUTTON_GROUP = 'BUTTON_GROUP',
   MONITOR = 'MONITOR',
   FOLDER = 'FOLDER',
 }
@@ -31,6 +32,11 @@ export enum SpecialInputTypes {
 export type ButtonInput = {
   type: SpecialInputTypes.BUTTON
   onClick: () => any
+}
+
+export type ButtonGroupInput = {
+  type: SpecialInputTypes.BUTTON_GROUP
+  opts: { [title: string]: () => void }
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
@@ -41,12 +47,11 @@ export type MonitorInput = {
   settings: MonitorSettings
 }
 
-export type SpecialInput = MonitorInput | ButtonInput
+export type SpecialInput = MonitorInput | ButtonInput | ButtonGroupInput
 
 export type FolderSettings = { collapsed?: boolean; render?: RenderFn }
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
-type NumberInput = MergedInputWithSettings<number, NumberSettings>
 
 export type VectorObj = Record<string, number>
 
@@ -87,9 +92,9 @@ export type FolderInput<Schema> = {
 export type CustomInput<Value> = Value & { type: string; __customInput: true }
 
 type SchemaItem =
-  | NumberInput
-  | MergedInputWithSettings<boolean>
-  | MergedInputWithSettings<string>
+  | InputWithSettings<number, NumberSettings>
+  | InputWithSettings<boolean>
+  | InputWithSettings<string>
   | IntervalInput
   | ColorVectorInput
   | Vector2dInput
@@ -100,20 +105,18 @@ type SchemaItem =
   | StringInput
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string; hint?: string }
-// type StripGenericOptions<K> = K extends any[] ? K : K extends object ? Omit<K, keyof GenericSchemaItemOptions> : K
+type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Element; hint?: string }
+type ReservedKeys = keyof GenericSchemaItemOptions | 'optional' | '__customInput' | 'type'
 
-// type Merge<T, G extends Object> = T extends any[]
-//   ? T
-//   : T extends object
-//   ? {
-//       [K in keyof T]: K extends keyof G ? G[K] : T[K]
-//     }
-//   : T
+type StripReservedKeys<K> = BeautifyUnionType<K extends any[] ? K : K extends object ? Omit<K, ReservedKeys> : K>
 
 type SchemaItemWithOptions =
+  | number
+  | boolean
+  | string
+  | (SchemaItem & { optional?: boolean } & GenericSchemaItemOptions)
+  | (SpecialInput & GenericSchemaItemOptions)
   | FolderInput<unknown>
-  | ((SpecialInput | (SchemaItem & { optional?: boolean })) & GenericSchemaItemOptions)
 
 export type Schema = Record<string, SchemaItemWithOptions>
 
@@ -124,7 +127,7 @@ export type Schema = Record<string, SchemaItemWithOptions>
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
-  ? I
+  ? StripReservedKeys<I>
   : S extends ImageInput
   ? string | undefined
   : S extends SelectWithValueInput<infer T, infer K>

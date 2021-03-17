@@ -1,4 +1,5 @@
 import { createCss } from '@stitches/react'
+// import prefixes from '@stitches/react/utils/prefixes'
 
 export const getDefaultTheme = () => ({
   colors: {
@@ -103,7 +104,7 @@ const utils = {
     createStateClass(value, { key: '$leva__active', borderColor: '$leva__accent1', inset: true }),
 }
 
-export const { styled, css, theme, global } = createCss({
+export const { styled, css, theme, global: _global } = createCss({
   insertMethod() {
     let currentCssHead: HTMLHeadElement | null = null
     let currentCssNode: HTMLElement | null = null
@@ -123,6 +124,7 @@ export const { styled, css, theme, global } = createCss({
   },
   theme: getDefaultTheme(),
   utils: {
+    // ...prefixes,
     ...utils,
     $leva__flex: () => () => ({
       display: 'flex',
@@ -141,12 +143,11 @@ export const { styled, css, theme, global } = createCss({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
-      WebkitAppearance: 'none',
+      WebkitAppearance: 'none', // TODO remove when stitches fixes prefix import
       appearance: 'none',
     }),
     $leva__draggable: () => () => ({
       touchAction: 'none',
-      WebkitUserSelect: 'none',
       WebkitUserDrag: 'none',
       userSelect: 'none',
     }),
@@ -157,12 +158,12 @@ export const { styled, css, theme, global } = createCss({
   },
 })
 
-const globalStyles = global({
+const globalStyles = _global({
   '.leva__panel__dragged': {
     WebkitUserSelect: 'none',
     WebkitUserDrag: 'none',
     userSelect: 'none',
-    input: { userSelect: 'none' },
+    input: { userSelect: 'none', WebkitUserSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })

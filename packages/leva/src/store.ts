@@ -207,23 +207,25 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string): [Data, Record<string, string>] => {
+  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: Record<string, string>): Data => {
     const data: any = {}
-    const mappedPaths: Record<string, string> = {}
 
-    Object.entries(schema).forEach(([path, input]: [string, any]) => {
-      let newPath = join(rootPath, path)
+    Object.entries(schema).forEach(([key, input]: [string, any]) => {
+      let newPath = join(rootPath, key)
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
       if (input.type === SpecialInputTypes.FOLDER) {
-        const [newData, newPaths] = _getDataFromSchema(input.schema, newPath)
+        const newData = _getDataFromSchema(input.schema, newPath, mappedPaths)
         Object.assign(data, newData)
-        Object.assign(mappedPaths, newPaths)
 
         // Sets folder preferences if it wasn't set before
         if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
+      } else if (key in mappedPaths) {
+        // if a key already exists, prompt an error.
+        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key])
       } else {
+        mappedPaths[key] = newPath
         // If the input is not a folder, we normalize the input.
         let _render = undefined
         let _label = undefined
@@ -246,27 +248,25 @@ export const Store = (function (this: StoreType) {
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
-          data[newPath].key = path
-          data[newPath].label = _label ?? path
+          data[newPath].key = key
+          data[newPath].label = _label ?? key
           data[newPath].hint = _hint
           if (!(input.type in SpecialInputTypes)) {
             data[newPath].optional = _optional ?? false
             data[newPath].disabled = _disabled ?? false
           }
           if (typeof _render === 'function') data[newPath].render = _render
-          if (path in mappedPaths) {
-            // if a key already exists, prompt an error.
-            warn(LevaErrors.DUPLICATE_KEYS, path, newPath, mappedPaths[path])
-          } else mappedPaths[path] = newPath
         }
       }
     })
 
-    return [data, mappedPaths]
+    return data
   }
 
   this.getDataFromSchema = (schema) => {
-    return _getDataFromSchema(schema, '')
+    const mappedPaths: Record<string, string> = {}
+    const data = _getDataFromSchema(schema, '', mappedPaths)
+    return [data, mappedPaths]
   }
 } as any) as { new (): StoreType }
 

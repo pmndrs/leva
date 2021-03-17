@@ -80,8 +80,7 @@ export function Vector<T extends Record<string, number>>({
 }: VectorProps<T>) {
   const { id, setSettings } = useInputContext()
 
-  // TODO atm if lock is explicitly set in settings we show the lock
-  // this can probably be improved with better logic.
+  // TODO atm if lock is explicitly set in settings we show the lock, this can probably be improved with better logic.
   const { lock, locked } = settings
 
   return (

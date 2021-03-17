@@ -54,3 +54,7 @@ export interface InternalPlugin<Input, Value = Input, Settings = {}, InternalSet
   extends Plugin<Input, Value, InternalSettings> {
   schema: (value: any, settings?: Settings) => boolean
 }
+
+export type PanelSettingsType = {
+  hideCopyButton: boolean
+}
