@@ -1,5 +1,5 @@
 import { warn, LevaErrors } from './utils/log'
-import type { Plugin, CustomInput, InputWithSettings, InternalPlugin, StoreType, Data } from './types'
+import type { Plugin, CustomInput, InputWithSettings, InternalPlugin, StoreType, Data, LevaInputs } from './types'
 import { isObject } from './utils'
 
 const Schemas: ((v: any, settings?: any) => false | string)[] = []
@@ -21,7 +21,7 @@ export function getValueType({ value, ...settings }: any) {
  * @param plugin
  */
 export function register<Input, Value, InternalSettings, Settings>(
-  type: string,
+  type: LevaInputs,
   { schema, ...plugin }: InternalPlugin<Input, Value, Settings, InternalSettings>
 ) {
   if (type in Plugins) {

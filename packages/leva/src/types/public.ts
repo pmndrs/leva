@@ -30,6 +30,18 @@ export enum SpecialInputs {
   FOLDER = 'FOLDER',
 }
 
+export enum LevaInputs {
+  SELECT = 'SELECT',
+  IMAGE = 'IMAGE',
+  NUMBER = 'NUMBER',
+  COLOR = 'COLOR',
+  STRING = 'STRING',
+  BOOLEAN = 'BOOLEAN',
+  INTERVAL = 'INTERVAL',
+  VECTOR3D = 'VECTOR3D',
+  VECTOR2D = 'VECTOR2D',
+}
+
 export type ButtonInput = {
   type: SpecialInputs.BUTTON
   onClick: () => any
