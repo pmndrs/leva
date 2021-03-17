@@ -1,5 +1,11 @@
 # leva
 
+## 0.6.3
+
+### Patch Changes
+
+- fa909f0: Allow useControls to update settings and input options when dependency array changes. (See #124)
+
 ## 0.6.2
 
 ### Patch Changes
