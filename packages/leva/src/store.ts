@@ -151,6 +151,9 @@ export const Store = (function (this: StoreType) {
         } else {
           data[path] = { ...newInputData, __refCount: 1 }
         }
+        input = data[path]
+        // @ts-ignore
+        if (typeof input.onChange === 'function') input.onChange(input.value)
       })
 
       // Since we're returning a new object, direct mutation of data
@@ -247,17 +250,19 @@ export const Store = (function (this: StoreType) {
         let _hint = undefined
         let _optional
         let _disabled
+        let _onChange
         let _input = input
 
         // parse generic options from input object
         if (typeof input === 'object' && !Array.isArray(input)) {
-          const { render, label, optional, disabled, hint, ...rest } = input
+          const { render, label, optional, disabled, hint, onChange, ...rest } = input
           _label = label
           _render = render
           _input = rest
           _optional = optional
           _disabled = disabled
           _hint = hint
+          _onChange = onChange
         }
         const normalizedInput = normalizeInput(_input, newPath)
         // normalizeInput can return false if the input is not recognized.
@@ -269,6 +274,7 @@ export const Store = (function (this: StoreType) {
           if (!(input.type in SpecialInputTypes)) {
             data[newPath].optional = _optional ?? false
             data[newPath].disabled = _disabled ?? false
+            if (typeof _onChange === 'function') data[newPath].onChange = _onChange
           }
           if (typeof _render === 'function') data[newPath].render = _render
         }

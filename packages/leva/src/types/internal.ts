@@ -35,6 +35,7 @@ export type DataInput = {
   value: unknown
   optional: boolean
   disabled: boolean
+  onChange?: (value: unknown) => void
   settings?: object
 } & Decorators
 

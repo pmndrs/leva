@@ -36,8 +36,9 @@ export function normalizeInput(input: any, path: string) {
 }
 
 export function updateInput(input: DataInput, newValue: any) {
-  const { value, type, settings } = input
+  const { value, type, onChange, settings } = input
   input.value = sanitizeValue({ type, value, settings }, newValue)
+  if (typeof onChange === 'function') onChange(input.value)
 }
 
 type SanitizeProps = {
