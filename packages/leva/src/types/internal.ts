@@ -12,7 +12,7 @@ export type StoreType = {
   getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
-  addData: (newData: Data) => void
+  addData: (newData: Data, override: boolean) => void
   setValueAtPath: (path: string, value: any) => void
   setSettingsAtPath: (path: string, settings: any) => void
   disableInputAtPath: (path: string, flag: boolean) => void
@@ -23,7 +23,7 @@ export type StoreType = {
 }
 
 type Decorators = {
-  count: number
+  __refCount: number
   key: string
   label: string
   hint?: string

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useInputContext } from '../../context'
 import { Label, Row, Chevron } from '../UI'
-import { StyledSelect, SelectContainer } from './StyledSelect'
+import { NativeSelect, PresentationalSelect, SelectContainer } from './StyledSelect'
 import type { SelectProps } from './select-types'
 
 export function Select({
@@ -10,17 +10,18 @@ export function Select({
   id,
   settings,
 }: Pick<SelectProps, 'displayValue' | 'onUpdate' | 'id' | 'settings'>) {
-  const { keys, values } = settings!
+  const { keys } = settings!
 
   return (
     <SelectContainer>
-      <StyledSelect id={id} value={displayValue} onChange={(e) => onUpdate(values[+e.currentTarget.value])}>
-        {keys.map((key, index) => (
-          <option key={key} value={index}>
+      <NativeSelect id={id} value={displayValue} onChange={(e) => onUpdate(e.currentTarget.value)}>
+        {keys.map((key) => (
+          <option key={key} value={key}>
             {key}
           </option>
         ))}
-      </StyledSelect>
+      </NativeSelect>
+      <PresentationalSelect>{displayValue}</PresentationalSelect>
       <Chevron toggled />
     </SelectContainer>
   )
