@@ -2,6 +2,7 @@ import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
 // @ts-ignore
 import { Noise } from 'noisejs'
+import { DimensionsIcon } from '@radix-ui/react-icons'
 import styles from './styles.module.css'
 
 const noise = new Noise(Math.random())
@@ -17,7 +18,14 @@ const ExtraControls = () => {
     'deep nested': folder({
       pos2d: { value: { x: 3, y: 4 }, lock: true },
       pos2dArr: [100, 200],
-      pos3d: { x: 0.3, y: 0.1, z: 0.5 },
+      pos3d: {
+        value: {
+          x: 0.3,
+          y: 0.1,
+          z: 0.5,
+        },
+        label: <DimensionsIcon />,
+      },
       pos3dArr: [Math.PI / 2, 20, 4],
     }),
   })
@@ -36,9 +44,9 @@ function Controls() {
     number: { value: 1000, min: 3 },
     colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },
     folder: folder({
+      noJoy: { value: [1, 2], joystick: false },
       boolean: true,
       spring: { tension: 100, friction: 30 },
-      noJoy: { value: [1, 2], joystick: false },
     }),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 import type { FullTheme } from './styles'
-import type { StoreType } from './types'
+import type { StoreType, PanelSettingsType } from './types'
 
 export const InputContext = createContext({})
 
@@ -14,8 +14,14 @@ export const ThemeContext = createContext<ThemeContextProps | null>(null)
 
 export const StoreContext = createContext<StoreType | null>(null)
 
+export const PanelSettingsContext = createContext<PanelSettingsType | null>(null)
+
 export function useStoreContext() {
   return useContext(StoreContext)!
+}
+
+export function usePanelSettingsContext() {
+  return useContext(PanelSettingsContext)!
 }
 
 type LevaStoreProviderProps = {

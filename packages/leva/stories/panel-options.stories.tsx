@@ -25,6 +25,8 @@ const Template: Story<any> = (args) => {
     </div>
   )
 }
+export const Collapsed = Template.bind({})
+Collapsed.args = { collapsed: true }
 
 export const OneLineLabels = Template.bind({})
 OneLineLabels.args = { oneLineLabels: true }
@@ -37,3 +39,6 @@ Fill.args = { fill: true }
 
 export const Flat = Template.bind({})
 Flat.args = { flat: true }
+
+export const HideCopyButton = Template.bind({})
+HideCopyButton.args = { hideCopyButton: true }

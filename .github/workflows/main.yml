@@ -1,5 +1,11 @@
 name: CI
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - 'demo/**'
+      - 'docs/**'
+      - '**.md'
+      - '.changeset/**'
 jobs:
   build:
     name: Build, lint, and test
@@ -9,20 +15,40 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - name: Use Node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '14'
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          install-command: yarn --immutable --silent
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn --immutable --silent
 
       - name: Check types
         run: yarn tsc
 
-      - name: Build
+      - uses: actions/cache@v2
+        name: Setup Yarn build cache
+        id: yarn-build-cache
+        with:
+          path: packages/**/dist
+          key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-build-
+
+      - name: Yarn build without cache
+        if: steps.yarn-build-cache.outputs.cache-hit != 'true'
         run: yarn build
 
       - name: Cypress run

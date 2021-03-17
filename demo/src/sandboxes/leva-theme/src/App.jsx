@@ -52,6 +52,14 @@ function Controls() {
   return null
 }
 
+const prefix = (token) => {
+  const o = {}
+  for (let key in token) {
+    o['leva__' + key] = token[key]
+  }
+  return o
+}
+
 export default function App() {
   const colorsStore = useCreateStore()
   const radiiStore = useCreateStore()
@@ -125,6 +133,7 @@ export default function App() {
         colorPickerWidth: '160px',
         colorPickerHeight: '100px',
         monitorHeight: '60px',
+        titleBarHeight: '39px',
       }),
     },
     { store: sizesStore }
@@ -156,13 +165,13 @@ export default function App() {
   )
 
   const theme = {
-    colors,
-    radii,
-    space,
-    fontSizes,
-    sizes,
-    borderWidths,
-    fontWeights,
+    colors: prefix(colors),
+    radii: prefix(radii),
+    space: prefix(space),
+    fontSizes: prefix(fontSizes),
+    sizes: prefix(sizes),
+    borderWidths: prefix(borderWidths),
+    fontWeights: prefix(fontWeights),
   }
 
   return (
