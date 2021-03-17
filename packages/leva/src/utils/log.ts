@@ -7,6 +7,7 @@ export enum LevaErrors {
   CLIPBOARD_ERROR,
   THEME_ERROR,
   PATH_DOESNT_EXIST,
+  INPUT_TYPE_OVERRIDE,
 }
 
 const ErrorList = {
@@ -30,6 +31,8 @@ const ErrorList = {
   [LevaErrors.PATH_DOESNT_EXIST]: (path: string) => [
     `Error getting the value at path \`${path}\`. There is probably an error in your \`render\` function.`,
   ],
+  [LevaErrors.PATH_DOESNT_EXIST]: (path: string) => [`Error accessing the value at path \`${path}\``],
+  [LevaErrors.INPUT_TYPE_OVERRIDE]: (type: string) => [`Type cannot be overwritten on update (\`${type}\`)`],
 }
 
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
