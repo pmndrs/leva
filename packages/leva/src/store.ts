@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { DataInput, SpecialInputTypes } from './types'
+import { SpecialInputTypes } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -129,7 +129,6 @@ export const Store = (function (this: StoreType) {
    * @param newData the data to update
    * @param depsChanged to keep track of dependencies
    */
-  // TODO: TS errors.
   this.addData = (newData, override) => {
     store.setState((s) => {
       const data = s.data
@@ -138,7 +137,8 @@ export const Store = (function (this: StoreType) {
 
         // If an input already exists compare its values and increase the reference __refCount.
         if (!!input) {
-          const { type, value, ...rest } = newInputData as DataInput
+          // @ts-ignore
+          const { type, value, ...rest } = newInputData
           if (type !== input.type) {
             warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
           } else {

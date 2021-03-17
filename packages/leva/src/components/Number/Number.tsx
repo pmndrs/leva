@@ -15,7 +15,7 @@ export function Number({
   onChange,
   settings,
   hideLabel = false,
-}: NumberProps & { id?: string; hideLabel?: boolean }) {
+}: NumberProps & { id?: string; label: string; hideLabel?: boolean }) {
   const bind = useDragNumber({ settings, onDrag: onUpdate })
 
   return (

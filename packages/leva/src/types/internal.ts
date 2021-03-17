@@ -25,7 +25,7 @@ export type StoreType = {
 type Decorators = {
   __refCount: number
   key: string
-  label: string
+  label: string | JSX.Element
   hint?: string
   render?: RenderFn
 }

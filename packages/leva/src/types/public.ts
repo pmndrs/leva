@@ -106,7 +106,8 @@ type SchemaItem =
   | CustomInput<unknown>
 
 type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Element; hint?: string }
-type ReservedKeys = keyof GenericSchemaItemOptions | 'optional' | '__customInput' | 'type'
+type InputOptions = { optional?: boolean; disabled?: boolean }
+type ReservedKeys = keyof GenericSchemaItemOptions | keyof InputOptions | 'type'
 
 type StripReservedKeys<K> = BeautifyUnionType<K extends any[] ? K : K extends object ? Omit<K, ReservedKeys> : K>
 
@@ -114,7 +115,7 @@ type SchemaItemWithOptions =
   | number
   | boolean
   | string
-  | (SchemaItem & { optional?: boolean } & GenericSchemaItemOptions)
+  | (SchemaItem & InputOptions & GenericSchemaItemOptions)
   | (SpecialInput & GenericSchemaItemOptions)
   | FolderInput<unknown>
 
@@ -239,7 +240,7 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
  * @public
  */
 export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
-  label: string
+  label: string | JSX.Element
   path?: string
   id?: string
   displayValue: DisplayValue
