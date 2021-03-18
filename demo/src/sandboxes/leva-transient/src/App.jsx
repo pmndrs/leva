@@ -1,48 +1,31 @@
-import React from 'react'
-import { useControls, Leva } from 'leva'
+import React, { useRef } from 'react'
+import { useControls } from 'leva'
+import { Canvas } from 'react-three-fiber'
+import { OrbitControls } from '@react-three/drei'
 
-function A() {
-  const renderRef = React.useRef(0)
-  const divRef = React.useRef(null)
-  renderRef.current++
-  const data = useControls({
-    color: {
-      value: '#f00',
-      onChange: (v) => {
-        divRef.current.style.color = v
-        divRef.current.innerText = `Transient color is ${v}`
-      },
-    },
-  })
-  return (
-    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-      <pre>A data (should be empty)</pre>
-      <pre>{JSON.stringify(data, null, '  ')}</pre>A rendered {renderRef.current} time
-      <div style={{ marginTop: 20 }} ref={divRef} />
-    </div>
-  )
-}
+import * as THREE from 'three'
 
-function B() {
-  const data = useControls({
-    color: { value: '#f00' },
-  })
+const torusknot = new THREE.TorusKnotBufferGeometry(3, 0.8, 256, 16)
+
+const Mesh = () => {
+  const matRef = useRef()
+  useControls({ color: { value: 'indianred', onChange: (v) => matRef.current && matRef.current.color.set(v) } })
   return (
-    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-      <pre>B data (should update)</pre>
-      <pre>{JSON.stringify(data, null, '  ')}</pre>
-    </div>
+    <mesh geometry={torusknot}>
+      <meshPhysicalMaterial ref={matRef} attach="material" flatShading />
+    </mesh>
   )
 }
 
 export default function App() {
-  const [showA, setShowA] = React.useState(true)
   return (
-    <>
-      <button onClick={() => setShowA((s) => !s)}>{showA ? 'Hide A' : 'Show A'}</button>
-      {showA && <A />}
-      <B />
-      <Leva hideTitleBar />
-    </>
+    <Canvas
+      pixelRatio={[1, 2]}
+      camera={{ position: [0, 0, 16], fov: 50 }}
+      style={{ background: 'dimgray', height: '100vh', width: '100vw' }}>
+      <OrbitControls />
+      <directionalLight />
+      <Mesh />
+    </Canvas>
   )
 }
