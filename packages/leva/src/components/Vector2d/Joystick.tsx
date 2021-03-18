@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '../../hooks'
 import { clamp } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { useTh } from '../../styles'
