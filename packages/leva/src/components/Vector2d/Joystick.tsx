@@ -34,8 +34,9 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
 
   const {
     keys: [v1, v2],
+    invertY
   } = settings
-
+  const yFactor = invertY ?  -1 : 1
   // prettier-ignore
   const {[v1]: { step: stepV1 },[v2]: { step: stepV2 }} = settings
 
@@ -53,7 +54,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     timeout.current = window.setInterval(() => {
       onUpdate((v: Vector2d) => {
         const incX = stepV1 * outOfBoundsX.current * stepMultiplier.current
-        const incY = stepV2 * outOfBoundsY.current * stepMultiplier.current
+        const incY = yFactor * stepV2 * outOfBoundsY.current * stepMultiplier.current
         return Array.isArray(v)
           ? {
               [v1]: v[0] + incX,
@@ -65,7 +66,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
             }
       })
     }, 16)
-  }, [w, h, onUpdate, set, stepV1, stepV2, v1, v2])
+  }, [w, h, onUpdate, set, stepV1, stepV2, v1, v2, yFactor])
 
   const endOutOfBounds = useCallback(() => {
     window.clearTimeout(timeout.current)
@@ -106,7 +107,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
         set({ x: _x })
       }
       if (!outOfBoundsY.current) {
-        newY -= dy * stepV2 * stepMultiplier.current
+        newY -= yFactor * dy * stepV2 * stepMultiplier.current
         set({ y: _y })
       }
       if (outOfBoundsX.current || outOfBoundsY.current) startOutOfBounds()

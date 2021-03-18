@@ -6,9 +6,9 @@ import type { InternalVector2dSettings } from './vector2d-types'
 export * from './Vector2d'
 
 const plugin = getVectorPlugin(['x', 'y'])
-const normalize = ({ joystick = true, ...input }: any) => {
+const normalize = ({ joystick = true, invertY = false, ...input }: any) => {
   const { value, settings } = plugin.normalize(input)
-  return { value, settings: { ...settings, joystick } as InternalVector2dSettings }
+  return { value, settings: { ...settings, joystick, invertY } as InternalVector2dSettings }
 }
 
 export default createInternalPlugin({
