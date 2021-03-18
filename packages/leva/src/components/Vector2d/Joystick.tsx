@@ -38,7 +38,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   } = settings
   const yFactor = joystick === 'invertY' ? 1 : -1
   // prettier-ignore
-  const {[v1]: { step: stepV1 },[v2]: { step: stepV2 }} = settings
+  const {[v1]: { step: stepV1 }, [v2]: { step: stepV2 }} = settings
 
   const wpx = useTh('sizes', 'leva__joystickWidth')
   const hpx = useTh('sizes', 'leva__joystickHeight')
