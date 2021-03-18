@@ -8,7 +8,9 @@ Add the `invertY` setting for the Vector2D joystick for inverting the y coordina
 const values = useControl({
   vector2d: {
     value: [0, 0],
-    invertY: true,
+    joystick: {
+      invertY: true,
+    },
   },
 })
 ```

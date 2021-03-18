@@ -38,16 +38,16 @@ Vector2WithLock.args = {
   lock: true,
 }
 
-export const Vector2WithInvertedY = Template.bind({})
-Vector2WithInvertedY.args = {
-  value: [0, 0],
-  invertY: true
-}
-
 export const Vector2WithoutJoystick = Template.bind({})
 Vector2WithoutJoystick.args = {
   value: { x: 0, y: 0 },
   joystick: false,
+}
+
+export const Vector2WithInvertedJoystickY = ({ value, invertY }) => <Template value={value} joystick={{ invertY }} />
+Vector2WithInvertedJoystickY.args = {
+  value: [0, 0],
+  invertY: true,
 }
 
 export const Vector3 = Template.bind({})
