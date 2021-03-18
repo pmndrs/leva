@@ -1,6 +1,6 @@
 name: CI
 on:
-  [push, pull_request]:
+  push:
     paths-ignore:
       - 'demo/**'
       - 'docs/**'
@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn --immutable --silent
+        run: yarn --silent
 
       - name: Check types
         run: yarn tsc
