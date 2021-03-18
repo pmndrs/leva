@@ -36,7 +36,7 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
     keys: [v1, v2],
     joystick,
   } = settings
-  const yFactor = typeof joystick === 'object' && joystick.invertY ? -1 : 1
+  const yFactor = joystick === 'invertY' ? 1 : -1
   // prettier-ignore
   const {[v1]: { step: stepV1 },[v2]: { step: stepV2 }} = settings
 

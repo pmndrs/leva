@@ -44,7 +44,9 @@ Vector2WithoutJoystick.args = {
   joystick: false,
 }
 
-export const Vector2WithInvertedJoystickY = ({ value, invertY }) => <Template value={value} joystick={{ invertY }} />
+export const Vector2WithInvertedJoystickY = ({ value, invertY }) => (
+  <Template value={value} joystick={invertY ? 'invertY' : undefined} />
+)
 Vector2WithInvertedJoystickY.args = {
   value: [0, 0],
   invertY: true,
