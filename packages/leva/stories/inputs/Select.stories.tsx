@@ -30,10 +30,10 @@ Simple.args = {
 
 export const CustomLabels = Template.bind({})
 CustomLabels.args = {
-  value: 'Hello World!',
+  value: 'helloWorld',
   options: {
-    helloWorld: 'Hello World!',
-    leva: 'Leva is awesome!',
+    'Hello World': 'helloWorld',
+    'Leva is awesome!': 'leva',
   },
 }
 
