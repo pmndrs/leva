@@ -81,6 +81,7 @@ expectType<{ a: { width: number; height: number } }>(useControls({ a: { value: {
 // array format
 expectType<{ a: [number, number] }>(useControls({ a: [0, 0] }))
 expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 0] } }))
+expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 0], joystick: 'invertY' } }))
 
 /**
  * Vector3d
