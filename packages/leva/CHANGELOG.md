@@ -1,5 +1,11 @@
 # leva
 
+## 0.7.2
+
+### Patch Changes
+
+- d2eaf58: fix: properly resolves value-keyed objects for the `Select` input.
+
 ## 0.7.1
 
 ### Patch Changes
