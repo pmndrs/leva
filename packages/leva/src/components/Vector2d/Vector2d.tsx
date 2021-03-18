@@ -22,7 +22,7 @@ export function Vector2dComponent() {
   return (
     <Row input>
       <Label>{label}</Label>
-      <Container withJoystick={settings.joystick}>
+      <Container withJoystick={!!settings.joystick}>
         {settings.joystick && <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />}
         <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
       </Container>

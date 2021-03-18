@@ -57,7 +57,7 @@ export type VectorObj = Record<string, number>
 
 export type Vector2dArray = [number, number]
 export type Vector2d = Vector2dArray | VectorObj
-export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean; lock?: boolean }
+export type Vector2dSettings = VectorSettings<Vector2d, 'x' | 'y'> & { joystick?: boolean | 'invertY'; lock?: boolean }
 export type Vector2dInput = MergedInputWithSettings<Vector2d, Vector2dSettings>
 
 export type Vector3dArray = [number, number, number]
