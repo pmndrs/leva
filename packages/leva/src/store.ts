@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
 import { SpecialInputTypes } from './types'
-import type { Data, FolderSettings, State, StoreType } from './types'
+import type { Data, FolderSettings, State, StoreType, MappedPaths } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
@@ -152,8 +152,6 @@ export const Store = (function (this: StoreType) {
           data[path] = { ...newInputData, __refCount: 1 }
         }
         input = data[path]
-        // @ts-ignore
-        if (typeof input.onChange === 'function') input.onChange(input.value)
       })
 
       // Since we're returning a new object, direct mutation of data
@@ -225,7 +223,8 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: Record<string, string>): Data => {
+
+  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
     const data: any = {}
 
     Object.entries(schema).forEach(([key, input]: [string, any]) => {
@@ -241,17 +240,16 @@ export const Store = (function (this: StoreType) {
         if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
       } else if (key in mappedPaths) {
         // if a key already exists, prompt an error.
-        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key])
+        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key].path)
       } else {
-        mappedPaths[key] = newPath
         // If the input is not a folder, we normalize the input.
         let _render = undefined
         let _label = undefined
         let _hint = undefined
         let _optional
         let _disabled
-        let _onChange
         let _input = input
+        let _onChange
 
         // parse generic options from input object
         if (typeof input === 'object' && !Array.isArray(input)) {
@@ -264,6 +262,8 @@ export const Store = (function (this: StoreType) {
           _hint = hint
           _onChange = onChange
         }
+        mappedPaths[key] = { path: newPath, onChange: _onChange }
+
         const normalizedInput = normalizeInput(_input, newPath)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
@@ -274,7 +274,6 @@ export const Store = (function (this: StoreType) {
           if (!(input.type in SpecialInputTypes)) {
             data[newPath].optional = _optional ?? false
             data[newPath].disabled = _disabled ?? false
-            if (typeof _onChange === 'function') data[newPath].onChange = _onChange
           }
           if (typeof _render === 'function') data[newPath].render = _render
         }
@@ -285,7 +284,7 @@ export const Store = (function (this: StoreType) {
   }
 
   this.getDataFromSchema = (schema) => {
-    const mappedPaths: Record<string, string> = {}
+    const mappedPaths: MappedPaths = {}
     const data = _getDataFromSchema(schema, '', mappedPaths)
     return [data, mappedPaths]
   }

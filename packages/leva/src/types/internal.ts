@@ -3,6 +3,8 @@ import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
 
 export type State = { data: Data }
 
+export type MappedPaths = Record<string, { path: string; onChange: (value: any) => void }>
+
 export type StoreType = {
   useStore: UseStore<State>
   orderPaths: (paths: string[]) => string[]
@@ -19,7 +21,7 @@ export type StoreType = {
   // TODO possibly better type this
   set: (values: Record<string, any>) => void
   get: (path: string) => any
-  getDataFromSchema: (schema: any) => [Data, Record<string, string>]
+  getDataFromSchema: (schema: any) => [Data, MappedPaths]
 }
 
 type Decorators = {
