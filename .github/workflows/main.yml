@@ -1,6 +1,6 @@
 name: CI
 on:
-  push:
+  [push, pull_request]:
     paths-ignore:
       - 'demo/**'
       - 'docs/**'
