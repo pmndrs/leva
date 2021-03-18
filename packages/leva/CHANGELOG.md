@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 98984e1: types: fix `set types in transient mode
+- 98984e1: types: fix `set` types in transient mode.
 
 ## 0.7.0
 
