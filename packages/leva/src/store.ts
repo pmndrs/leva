@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { SpecialInputs } from './types'
+import { SpecialInputs, MappedPaths } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -222,7 +222,7 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: Record<string, string>): Data => {
+  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
     const data: Data = {}
 
     Object.entries(schema).forEach(([key, input]: [string, any]) => {
