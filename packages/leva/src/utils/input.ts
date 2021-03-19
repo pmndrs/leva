@@ -46,13 +46,14 @@ type SanitizeProps = {
   settings: object | undefined
 }
 
-type ValueErrorType = { message: string; previousValue: any; error?: Error }
+type ValueErrorType = { type: string; message: string; previousValue: any; error?: Error }
 
 const ValueError = (function (this: ValueErrorType, message: string, value: any, error?: Error) {
+  this.type = 'LEVA_ERROR'
   this.message = 'LEVA: ' + message
   this.previousValue = value
   this.error = error
-} as unknown) as { new (message: string, value: any, error?: Error): ValueErrorType }
+} as unknown) as { new (type: string, message: string, value: any, error?: Error): ValueErrorType }
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   const _newValue = typeof newValue === 'function' ? newValue(value) : newValue

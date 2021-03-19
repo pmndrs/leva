@@ -19,7 +19,10 @@ export function useValue<V, Settings extends object>({ value, type, settings, se
     (updatedValue: any) => {
       try {
         setValue(updatedValue)
-      } catch ({ previousValue }) {
+      } catch (error) {
+        const { type, previousValue } = error
+        // makes sure we throw an error if it's not a sanitization error
+        if (type !== 'LEVA_ERROR') throw error
         setFormat(previousValue)
       }
     },
