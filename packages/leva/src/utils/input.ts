@@ -53,7 +53,7 @@ const ValueError = (function (this: ValueErrorType, message: string, value: any,
   this.message = 'LEVA: ' + message
   this.previousValue = value
   this.error = error
-} as unknown) as { new (type: string, message: string, value: any, error?: Error): ValueErrorType }
+} as unknown) as { new (message: string, value: any, error?: Error): ValueErrorType }
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
   // sanitizeValue can accept a new value in the form of fn(oldValue). This
