@@ -30,10 +30,10 @@ Simple.args = {
 
 export const CustomLabels = Template.bind({})
 CustomLabels.args = {
-  value: 'Hello World!',
+  value: 'helloWorld',
   options: {
-    helloWorld: 'Hello World!',
-    leva: 'Leva is awesome!',
+    'Hello World': 'helloWorld',
+    'Leva is awesome!': 'leva',
   },
 }
 
@@ -47,4 +47,19 @@ export const DifferentOptionTypes = Template.bind({})
 DifferentOptionTypes.args = {
   value: undefined,
   options: ['x', 'y', ['x', 'y']],
+}
+
+const IconA = () => <span>IconA</span>
+const IconB = () => <span>IconB</span>
+
+export const FunctionAsOptions = () => {
+  const values = useControls({
+    foo: { options: { none: '', IconA, IconB } },
+  })
+
+  return (
+    <div>
+      <pre>{values.foo.toString()}</pre>
+    </div>
+  )
 }

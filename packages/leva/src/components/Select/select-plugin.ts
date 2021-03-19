@@ -1,5 +1,5 @@
 import v8n from 'v8n'
-import type { SelectInput } from './select-types'
+import type { SelectInput, InternalSelectSettings } from './select-types'
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>
@@ -9,6 +9,15 @@ export const schema = (_o: any, s: any) =>
     })
     .test(s)
 
+export const sanitize = (value: any, { values }: InternalSelectSettings) => {
+  if (values.indexOf(value) < 0) throw Error(`Selected value doesn't match Select options`)
+  return value
+}
+
+export const format = (value: any, { values }: InternalSelectSettings) => {
+  return values.indexOf(value)
+}
+
 export const normalize = (input: SelectInput) => {
   let { value, options } = input
   let keys
@@ -16,7 +25,7 @@ export const normalize = (input: SelectInput) => {
 
   if (Array.isArray(options)) {
     values = options
-    keys = options.map(String)
+    keys = options.map((o) => String(o))
   } else {
     values = Object.values(options)
     keys = Object.keys(options)

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { DataInput, SpecialInputs } from './types'
+import { SpecialInputs } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
@@ -129,7 +129,6 @@ export const Store = (function (this: StoreType) {
    * @param newData the data to update
    * @param depsChanged to keep track of dependencies
    */
-  // TODO: TS errors.
   this.addData = (newData, override) => {
     store.setState((s) => {
       const data = s.data
@@ -138,9 +137,10 @@ export const Store = (function (this: StoreType) {
 
         // If an input already exists compare its values and increase the reference __refCount.
         if (!!input) {
-          const { type, value, ...rest } = newInputData as DataInput
+          // @ts-ignore
+          const { type, value, ...rest } = newInputData
           if (type !== input.type) {
-            warn(LevaErrors.INPUT_TYPE_OVERRIDE, path, input.type, type)
+            warn(LevaErrors.INPUT_TYPE_OVERRIDE, type)
           } else {
             if (input.__refCount === 0 || override) {
               Object.assign(input, rest)
@@ -238,9 +238,8 @@ export const Store = (function (this: StoreType) {
         if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
       } else if (key in mappedPaths) {
         // if a key already exists, prompt an error.
-        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key])
+        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key].path)
       } else {
-        mappedPaths[key] = newPath
         // If the input is not a folder, we normalize the input.
         let _render = undefined
         let _label = undefined
@@ -248,17 +247,21 @@ export const Store = (function (this: StoreType) {
         let _optional
         let _disabled
         let _input = input
+        let _onChange
 
         // parse generic options from input object
         if (typeof input === 'object' && !Array.isArray(input)) {
-          const { render, label, optional, disabled, hint, ...rest } = input
+          const { render, label, optional, disabled, hint, onChange, ...rest } = input
           _label = label
           _render = render
           _input = rest
           _optional = optional
           _disabled = disabled
           _hint = hint
+          _onChange = onChange
         }
+        mappedPaths[key] = { path: newPath, onChange: _onChange }
+
         const normalizedInput = normalizeInput(_input, newPath, data)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
@@ -281,7 +284,7 @@ export const Store = (function (this: StoreType) {
   }
 
   this.getDataFromSchema = (schema) => {
-    const mappedPaths: Record<string, string> = {}
+    const mappedPaths: MappedPaths = {}
     const data = _getDataFromSchema(schema, '', mappedPaths)
     return [data, mappedPaths]
   }

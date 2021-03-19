@@ -4,11 +4,19 @@ import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
 import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
+import shallow from 'zustand/shallow'
 
 type HookSettings = { store?: StoreType }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
-type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, (value: Partial<SchemaToValues<S>>) => void]
+type FunctionReturnType<S extends Schema> = [
+  SchemaToValues<S>,
+  (
+    value: {
+      [K in keyof Partial<SchemaToValues<S, true>>]: any
+    }
+  ) => void
+]
 
 type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
@@ -121,9 +129,20 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
    * parses the schema inside nested folder.
    */
   const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema), [store, _schema])
+  const [allPaths, renderPaths, onChangePaths] = useMemo(() => {
+    const allPaths: string[] = []
+    const renderPaths: string[] = []
+    const onChangePaths: Record<string, (v: any) => void> = {}
+    Object.values(mappedPaths).forEach(({ path, onChange }) => {
+      allPaths.push(path)
+      if (!!onChange) onChangePaths[path] = onChange
+      else renderPaths.push(path)
+    })
+    return [allPaths, renderPaths, onChangePaths]
+  }, [mappedPaths])
 
   // Extracts the paths from the initialData and ensures order of paths.
-  const paths = useMemo(() => store.orderPaths(Object.values(mappedPaths)), [mappedPaths, store])
+  const paths = useMemo(() => store.orderPaths(allPaths), [allPaths, store])
 
   /**
    * Reactive hook returning the values from the store at given paths.
@@ -133,12 +152,14 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
    * initalData is going to be returned on the first render. Subsequent renders
    * will call the store data.
    * */
-  const values = useValuesForPath(store, paths, initialData)
+  const values = useValuesForPath(store, renderPaths, initialData)
 
   const set = useCallback(
     (values: Record<string, any>) => {
-      // @ts-ignore
-      const _values = Object.entries(values).reduce((acc, [p, v]) => Object.assign(acc, { [mappedPaths[p]]: v }), {})
+      const _values = Object.entries(values).reduce(
+        (acc, [p, v]) => Object.assign(acc, { [mappedPaths[p].path]: v }),
+        {}
+      )
       store.set(_values)
     },
     [store, mappedPaths]
@@ -158,6 +179,18 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     depsChanged.current = false
     return () => store.disposePaths(paths)
   }, [store, paths, initialData])
+
+  useEffect(() => {
+    // let's handle transient subscriptions
+    const unsubscriptions: (() => void)[] = []
+    Object.entries(onChangePaths).forEach(([path, onChange]) => {
+      onChange(store.get(path))
+      // @ts-ignore
+      const unsub = store.useStore.subscribe(onChange, (s) => s.data[path].value, shallow)
+      unsubscriptions.push(unsub)
+    })
+    return () => unsubscriptions.forEach((unsub) => unsub())
+  }, [store, onChangePaths])
 
   if (schemaIsFunction) return [values, set] as any
   return values as any

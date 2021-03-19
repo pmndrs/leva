@@ -12,6 +12,9 @@ import { useControls } from '../useControls'
  */
 expectType<{ a: number }>(useControls({ a: 3 }))
 expectType<[{ a: number }, (value: { a?: number }) => void]>(useControls(() => ({ a: 3 })))
+expectType<[{ a: number }, (value: { a?: number; color?: string }) => void]>(
+  useControls(() => ({ a: 3, color: { value: '#fff', onChange: () => {} } }))
+)
 
 /**
  * options
@@ -81,6 +84,7 @@ expectType<{ a: { width: number; height: number } }>(useControls({ a: { value: {
 // array format
 expectType<{ a: [number, number] }>(useControls({ a: [0, 0] }))
 expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 0] } }))
+expectType<{ a: [number, number] }>(useControls({ a: { value: [0, 0], joystick: 'invertY' } }))
 
 /**
  * Vector3d

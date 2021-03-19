@@ -11,11 +11,14 @@
     "@leva-ui/plugin-plot": "*",
     "@leva-ui/plugin-spring": "*",
     "@radix-ui/react-icons": "^1.0.2",
+    "@react-three/drei": "^3.11.1",
     "@stitches/react": "^0.1.0-canary.15",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-three-fiber": "^5.3.19",
+    "three": "^0.126.1",
     "wouter": "^2.7.4"
   },
   "devDependencies": {

@@ -1,11 +1,13 @@
 name: CI
 on:
   push:
-    paths-ignore:
-      - 'demo/**'
-      - 'docs/**'
-      - '**.md'
-      - '.changeset/**'
+    paths:
+      - '.github/**'
+      - 'packages/**'
+      - '!demo/**'
+      - '!docs/**'
+      - '!**.md'
+      - '!.changeset/**'
 jobs:
   build:
     name: Build, lint, and test
@@ -33,7 +35,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn --immutable --silent
+        run: yarn --silent
 
       - name: Check types
         run: yarn tsc

@@ -4,23 +4,17 @@ import { warn, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
 import { useInputSetters } from '../../hooks'
 import { StyledInputWrapper } from '../UI/StyledUI'
+import type { DataInput } from '../../types'
 
-type ControlInputProps<V, Settings extends object> = {
-  type: string
-  label: string
+type ControlInputProps = Omit<DataInput, '__refCount' | 'key'> & {
   valueKey: string
   path: string
-  value: V
-  settings: Settings
-  disabled: boolean
   setValue: (value: any) => void
   setSettings: (settings: any) => void
-  optional: boolean
-  hint?: string
   disable: (flag: boolean) => void
 }
 
-export function ControlInput<V, Settings extends object>({
+export function ControlInput({
   type,
   label,
   path,
@@ -30,7 +24,7 @@ export function ControlInput<V, Settings extends object>({
   setValue,
   disabled,
   ...rest
-}: ControlInputProps<V, Settings>) {
+}: ControlInputProps) {
   const { displayValue, onChange, onUpdate } = useInputSetters({ type, value, settings, setValue })
 
   const Input = Plugins[type].component
