@@ -9,6 +9,11 @@ export const schema = (_o: any, s: any) =>
     })
     .test(s)
 
+export const sanitize = (value: any, { values }: InternalSelectSettings) => {
+  if (values.indexOf(value) < 0) throw Error(`Selected value doesn't match Select options`)
+  return value
+}
+
 export const format = (value: any, { values }: InternalSelectSettings) => {
   return values.indexOf(value)
 }

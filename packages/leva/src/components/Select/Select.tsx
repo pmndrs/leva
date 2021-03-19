@@ -14,6 +14,8 @@ function Select({
   const { keys, values } = settings
   const lastDisplayedValue = useRef<any>()
 
+  // in case the value isn't present in values (possibly when changing options
+  // via deps), remember the last correct display value.
   if (value === values[displayValue]) {
     lastDisplayedValue.current = keys[displayValue]
   }

@@ -9,7 +9,14 @@ import shallow from 'zustand/shallow'
 type HookSettings = { store?: StoreType }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
-type FunctionReturnType<S extends Schema> = [SchemaToValues<S>, (value: Partial<SchemaToValues<S, true>>) => void]
+type FunctionReturnType<S extends Schema> = [
+  SchemaToValues<S>,
+  (
+    value: {
+      [K in keyof Partial<SchemaToValues<S, true>>]: any
+    }
+  ) => void
+]
 
 type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
