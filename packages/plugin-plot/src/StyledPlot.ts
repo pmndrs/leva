@@ -35,3 +35,22 @@ export const Dot = styled('div', {
   backgroundColor: '$leva__highlight3',
   pointerEvents: 'none',
 })
+
+export const SyledInnerLabel = styled('div', {
+  $leva__flexCenter: '',
+  height: 14,
+  width: 14,
+  borderRadius: 7,
+  marginRight: '$leva__sm',
+  cursor: 'pointer',
+  fontSize: '0.8em',
+  variants: {
+    graph: { true: { backgroundColor: '$leva__elevation1' } },
+  },
+})
+
+export const Container = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'auto 1fr',
+  alignItems: 'center',
+})

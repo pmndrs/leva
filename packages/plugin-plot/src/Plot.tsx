@@ -2,11 +2,14 @@ import React, { useEffect, useRef } from 'react'
 import { useInputContext, useValues, Components } from 'leva/plugin'
 import { PlotCanvas } from './PlotCanvas'
 import type { PlotProps } from './plot-types'
+import { SyledInnerLabel, Container } from './StyledPlot'
 
 const { Label, Row, String } = Components
 
 export function Plot() {
-  const { label, value, displayValue, settings, onUpdate, onChange } = useInputContext<PlotProps>()
+  const { label, value, displayValue, settings, onUpdate, onChange, setSettings } = useInputContext<PlotProps>()
+
+  const { graph } = settings
 
   const scope = useValues(value.__symbols)
   const displayRef = useRef(displayValue)
@@ -19,14 +22,19 @@ export function Plot() {
 
   return (
     <>
-      {settings.graph && (
+      {graph && (
         <Row>
           <PlotCanvas value={value} settings={settings} />
         </Row>
       )}
       <Row input>
         <Label>{label}</Label>
-        <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} innerLabel="𝑓" />
+        <Container>
+          <SyledInnerLabel graph={graph} onClick={() => setSettings({ graph: !graph })}>
+            𝑓
+          </SyledInnerLabel>
+          <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
+        </Container>
       </Row>
     </>
   )

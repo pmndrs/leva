@@ -269,4 +269,5 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   onChange: React.Dispatch<any>
   onUpdate: (v: any | ((_v: any) => any)) => void
   settings: InternalSettings
+  setSettings: (v: Partial<InternalSettings>) => void
 }

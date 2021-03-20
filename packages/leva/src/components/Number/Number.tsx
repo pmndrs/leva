@@ -42,7 +42,7 @@ export function Number({
   onChange,
   settings,
   hideLabel = false,
-}: NumberProps & { id?: string; label: string; hideLabel?: boolean }) {
+}: Omit<NumberProps, 'setSettings'> & { id?: string; label: string; hideLabel?: boolean }) {
   const InnerLabel = !hideLabel && <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} />
   return (
     <NumberInput id={id} value={String(displayValue)} onUpdate={onUpdate} onChange={onChange} innerLabel={InnerLabel} />
