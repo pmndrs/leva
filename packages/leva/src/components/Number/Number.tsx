@@ -1,11 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NumberInput } from '../ValueInput'
 import { Label, Row } from '../UI'
-import { useDragNumber } from '../../hooks'
+import { useDrag } from '../../hooks'
 import { RangeGrid, InnerNumberLabel } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 import { useInputContext } from '../../context'
 import type { NumberProps } from './number-types'
+import { multiplyStep } from '../../utils'
+
+type DraggableLabelProps = {
+  label: string
+  step: number
+  onUpdate: (v: any) => void
+}
+
+const DraggableLabel = React.memo(({ label, onUpdate, step }: DraggableLabelProps) => {
+  const [dragging, setDragging] = useState(false)
+  const bind = useDrag(({ active, delta: [dx], event, memo = 0 }) => {
+    setDragging(active)
+    memo += dx / 2
+    if (Math.abs(memo) >= 1) {
+      onUpdate((v: any) => parseFloat(v) + Math.floor(memo) * step * multiplyStep(event))
+      memo = 0
+    }
+    return memo
+  })
+
+  return (
+    <InnerNumberLabel dragging={dragging} title={label.length > 1 ? label : ''} {...bind()}>
+      {label.charAt(0)}
+    </InnerNumberLabel>
+  )
+})
 
 export function Number({
   label,
@@ -16,15 +42,9 @@ export function Number({
   settings,
   hideLabel = false,
 }: NumberProps & { id?: string; label: string; hideLabel?: boolean }) {
-  const bind = useDragNumber({ settings, onDrag: onUpdate })
-
   return (
     <NumberInput id={id} value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      {!hideLabel && (
-        <InnerNumberLabel title={label.length > 1 ? label : ''} {...bind()}>
-          {label.charAt(0)}
-        </InnerNumberLabel>
-      )}
+      {!hideLabel && <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} />}
     </NumberInput>
   )
 }
