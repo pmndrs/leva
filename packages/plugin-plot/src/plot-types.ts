@@ -4,7 +4,9 @@ export type Plot = { expression: string }
 export type PlotSettings = { boundsX?: [number, number]; boundsY?: [number, number]; graph?: boolean }
 export type PlotInput = Plot & PlotSettings
 
-export type InternalPlot = math.MathNode & {
+export type InternalPlot = {
+  (v: number): any
+  __parsedScoped: math.MathNode
   __parsed: math.MathNode
   __symbols: string[]
 }

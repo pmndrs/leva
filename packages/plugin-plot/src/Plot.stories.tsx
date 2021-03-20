@@ -12,13 +12,12 @@ export default {
 } as Meta
 
 const Template: Story<any> = (args) => {
-  const { curve } = useControls({ curve: plot(args) })
-  const expr = curve.compile()
+  const { y } = useControls({ y: plot(args) })
   return (
     <div>
       {[0, 0.5, -1].map((x) => (
         <pre key={x}>
-          x = {x}, curve: {expr.evaluate({ x }).toFixed(2)}
+          y({x}) = {y(x).toFixed(2)}
         </pre>
       ))}
     </div>
@@ -38,13 +37,12 @@ export const BoundsY = Template.bind({})
 BoundsY.args = { expression: 'sin(x) * tan(x)', boundsX: [-10, 10], boundsY: [-1, 1] }
 
 export const InputAsVariable = () => {
-  const { curve } = useControls({ var: 10, curve: plot({ expression: 'cos(x * var)' }) })
-  const expr = curve.compile()
+  const { y } = useControls({ var: 10, y: plot({ expression: 'cos(x * var)' }) })
   return (
     <div>
       {[0, 0.5, -1].map((x) => (
         <pre key={x}>
-          x = {x}, curve: {expr.evaluate({ x }).toFixed(2)}
+          y({x}) = {y(x).toFixed(2)}
         </pre>
       ))}
     </div>
@@ -52,17 +50,16 @@ export const InputAsVariable = () => {
 }
 
 export const CurveAsVariable = () => {
-  const { curve } = useControls({
+  const { y2 } = useControls({
     var: 10,
     y1: plot({ expression: 'cos(x * var)' }),
-    curve: plot({ expression: 'x * y1' }),
+    y2: plot({ expression: 'x * y1' }),
   })
-  const expr = curve.compile()
   return (
     <div>
       {[0, 0.5, -1].map((x) => (
         <pre key={x}>
-          x = {x}, curve: {expr.evaluate({ x }).toFixed(2)}
+          y2({x}) = {y2(x).toFixed(2)}
         </pre>
       ))}
     </div>

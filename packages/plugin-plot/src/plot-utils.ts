@@ -5,7 +5,8 @@ export function getSymbols(expr: math.MathNode) {
     .filter((node) => {
       if (node.isSymbolNode) {
         try {
-          node.evaluate()
+          const e = node.evaluate()
+          return !!e.units
         } catch {
           return node.name !== 'x'
         }
@@ -28,13 +29,22 @@ export function parseExpression(expression: string, get: (path: string) => any) 
 
   for (let key in scope) {
     const re = new RegExp(`\\b${key}\\b`, 'g')
-    _formattedString = _formattedString.replace(re, scope[key])
+    const s = typeof scope[key] === 'object' ? scope[key].__parsedScoped.toString() : scope[key]
+    _formattedString = _formattedString.replace(re, s)
   }
 
-  const value = Object.assign(math.parse(_formattedString), {
-    __symbols: symbols,
+  const parsedScoped = math.parse(_formattedString)
+  const compiled = parsedScoped.compile()
+
+  function expr(v: number) {
+    return compiled.evaluate({ x: v })
+  }
+
+  Object.assign(expr, {
+    __parsedScoped: parsedScoped,
     __parsed: parsed,
+    __symbols: symbols,
   })
 
-  return value
+  return expr
 }

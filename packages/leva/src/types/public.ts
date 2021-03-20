@@ -122,7 +122,9 @@ type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Elemen
 type InputOptions = { optional?: boolean; disabled?: boolean; onChange?: (v: any) => void }
 type ReservedKeys = keyof GenericSchemaItemOptions | keyof InputOptions | '__customInput' | 'type'
 
-type StripReservedKeys<K> = BeautifyUnionType<K extends any[] ? K : K extends object ? Omit<K, ReservedKeys> : K>
+type StripReservedKeys<K> = BeautifyUnionType<
+  K extends any[] | Function ? K : K extends object ? Omit<K, ReservedKeys> : K
+>
 
 type SchemaItemWithOptions =
   | number

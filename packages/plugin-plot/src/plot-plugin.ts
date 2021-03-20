@@ -30,7 +30,7 @@ export const normalize = ({ expression, ..._settings }: PlotInput, _path: string
     if ('value' in data[path]) return data[path].value
     return undefined // TODO should throw
   }
-  const value = parseExpression(expression, get)
+  const value = parseExpression(expression, get) as (v: number) => any
   const settings = { ...defaultSettings, ..._settings }
   return { value, settings }
 }

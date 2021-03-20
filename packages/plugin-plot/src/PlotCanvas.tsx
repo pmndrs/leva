@@ -6,11 +6,10 @@ import type { InternalPlot, InternalPlotSettings } from './plot-types'
 
 type PlotCanvasProps = { value: InternalPlot; settings: InternalPlotSettings }
 
-export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
+export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps) => {
   const { boundsX, boundsY } = settings
 
   const accentColor = useTh('colors', 'leva__highlight3')
-  const expr = useRef<math.EvalFunction>()
   const yPositions = useRef<number[]>([])
 
   const canvasBoundsY = useRef({ minY: -Infinity, maxY: Infinity })
@@ -20,7 +19,6 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
       // fixes unmount potential bug
       if (!_canvas) return
       const { width, height } = _canvas
-      expr.current = value.compile()
 
       const points: number[] = []
 
@@ -31,7 +29,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
       for (let i = 0; i < width; i++) {
         // maps the width of the canvas to minX / maxX
         const x = invertedRange(range(i, 0, width), minX, maxX)
-        const v = expr.current.evaluate({ x })
+        const v = expr(x)
         if (v < canvasBoundsY.current.minY && v !== -Infinity) canvasBoundsY.current.minY = v
         if (v > canvasBoundsY.current.maxY && v !== Infinity) canvasBoundsY.current.maxY = v
         // adds the value to the points array
@@ -59,7 +57,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
       _ctx.lineWidth = 2
       _ctx.stroke(path)
     },
-    [value, boundsX, boundsY, accentColor]
+    [expr, boundsX, boundsY, accentColor]
   )
 
   const [canvas, ctx] = useCanvas2d(drawPlot)
@@ -86,7 +84,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
     const [minX, maxX] = boundsX
     const i = Math.ceil(x - left)
     const valueX = invertedRange(range(i, 0, width), minX, maxX)
-    let valueY = expr.current?.evaluate({ x: valueX })
+    let valueY = expr(valueX)
     valueY = isFinite(valueY) ? valueY.toFixed(0) : 'NaN'
 
     const relY = clamp(yPositions.current[i * window.devicePixelRatio] / window.devicePixelRatio, 0, height)
