@@ -6,9 +6,10 @@
   "types": "dist/leva-ui-plugin-plot.cjs.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "leva": ">=0.6.0",
+    "leva": ">=0.7.0",
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react-dom": ">=16.8.0",
+    "react-use-gesture": "^9.1.3"
   },
   "dependencies": {
     "mathjs": "^9.3.0"

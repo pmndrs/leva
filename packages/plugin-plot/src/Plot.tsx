@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react'
-import { useInputContext, Label, Row, String, useValues } from 'leva/plugin'
-
+import { useInputContext, useValues, Components } from 'leva/plugin'
 import { PlotCanvas } from './PlotCanvas'
 import type { PlotProps } from './plot-types'
+
+const { Label, Row, String } = Components
 
 export function Plot() {
   const { label, value, displayValue, settings, onUpdate, onChange } = useInputContext<PlotProps>()
