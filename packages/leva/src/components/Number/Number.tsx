@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { NumberInput } from '../ValueInput'
 import { Label, Row } from '../UI'
 import { useDrag } from '../../hooks'
-import { RangeGrid, InnerNumberLabel } from './StyledNumber'
+import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 import { useInputContext } from '../../context'
 import type { NumberProps } from './number-types'
 import { multiplyStep } from '../../utils'
+import { InnerNumberLabel } from '../ValueInput/StyledInput'
 
 type DraggableLabelProps = {
   label: string
@@ -42,10 +43,9 @@ export function Number({
   settings,
   hideLabel = false,
 }: NumberProps & { id?: string; label: string; hideLabel?: boolean }) {
+  const InnerLabel = !hideLabel && <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} />
   return (
-    <NumberInput id={id} value={displayValue} onUpdate={onUpdate} onChange={onChange}>
-      {!hideLabel && <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} />}
-    </NumberInput>
+    <NumberInput id={id} value={String(displayValue)} onUpdate={onUpdate} onChange={onChange} innerLabel={InnerLabel} />
   )
 }
 

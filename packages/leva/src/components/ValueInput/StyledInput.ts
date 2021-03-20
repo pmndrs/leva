@@ -8,25 +8,31 @@ export const StyledInput = styled('input', {
   minWidth: 0,
   flex: 1,
   height: '100%',
-
-  variants: { levaType: { number: { textAlign: 'right', paddingLeft: '$leva__xs' } } },
+  variants: {
+    levaType: { number: { textAlign: 'right' } },
+  },
 })
 
 export const InnerLabel = styled('div', {
+  $leva__draggable: '',
   height: '100%',
+  $leva__flexCenter: '',
   position: 'relative',
-  '& > :first-of-type': {
-    $leva__flexCenter: '',
-    width: 14,
-    height: '100%',
-    marginRight: '-$leva__sm',
-    textTransform: 'uppercase',
-    fontSize: '0.8em',
-    opacity: 0.3,
-    '&:hover': { opacity: 0.8 },
-  },
-  [`& + ${StyledInput}`]: {
-    paddingLeft: 0,
+  width: 14,
+  fontSize: '0.8em',
+  opacity: 0.8,
+  cursor: 'default',
+  [`& + ${StyledInput}`]: { paddingLeft: 0 },
+})
+
+export const InnerNumberLabel = styled(InnerLabel, {
+  cursor: 'ew-resize',
+  marginRight: '-$leva__xs',
+  textTransform: 'uppercase',
+  opacity: 0.3,
+  '&:hover': { opacity: 1 },
+  variants: {
+    dragging: { true: { backgroundColor: '$leva__accent2', opacity: 1 } },
   },
 })
 

@@ -28,6 +28,9 @@ const Template: Story<any> = (args) => {
 export const DefaultBounds = Template.bind({})
 DefaultBounds.args = { expression: 'x' }
 
+export const HideGraph = Template.bind({})
+HideGraph.args = { expression: 'x', graph: false }
+
 export const BoundsX = Template.bind({})
 BoundsX.args = { expression: 'cos(x)', boundsX: [-10, 10] }
 

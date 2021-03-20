@@ -7,6 +7,7 @@ import { Number } from '../components/Number'
 import { Boolean } from '../components/Boolean'
 import { Select } from '../components/Select'
 import { Vector } from '../components/Vector'
+import { InnerLabel } from '../components/ValueInput/StyledInput'
 
 export const Components = {
   Row,
@@ -18,6 +19,7 @@ export const Components = {
   Boolean,
   Select,
   Vector,
+  InnerLabel,
 }
 
 export { default as tinycolor2 } from 'tinycolor2'

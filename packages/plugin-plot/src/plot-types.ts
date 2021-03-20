@@ -1,14 +1,14 @@
 import type { LevaInputProps } from 'leva/plugin'
 
-export type Plot = { expression: string; boundsX?: [number, number]; boundsY?: [number, number] }
+export type Plot = { expression: string }
+export type PlotSettings = { boundsX?: [number, number]; boundsY?: [number, number]; graph?: boolean }
+export type PlotInput = Plot & PlotSettings
+
 export type InternalPlot = math.MathNode & {
   __parsed: math.MathNode
   __symbols: string[]
 }
 
-export type InternalPlotSettings = {
-  boundsX: [number, number]
-  boundsY: [number, number]
-}
+export type InternalPlotSettings = Required<PlotSettings>
 
 export type PlotProps = LevaInputProps<InternalPlot, InternalPlotSettings, string>

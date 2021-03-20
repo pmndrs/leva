@@ -5,8 +5,6 @@ import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipCon
 import { useInputContext, usePanelSettingsContext } from '../../context'
 import { LevaErrors, warn } from '../../utils'
 
-type LabelProps = React.ComponentProps<any>
-
 function OptionalToggle() {
   const { id, disable, disabled } = useInputContext()
   return (
@@ -21,6 +19,8 @@ function OptionalToggle() {
     </>
   )
 }
+
+type LabelProps = React.ComponentProps<any>
 
 function RawLabel(props: LabelProps) {
   const { id, optional, hint } = useInputContext()

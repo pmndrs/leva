@@ -19,12 +19,14 @@ export function Plot() {
 
   return (
     <>
-      <Row>
-        <PlotCanvas value={value} settings={settings} />
-      </Row>
+      {settings.graph && (
+        <Row>
+          <PlotCanvas value={value} settings={settings} />
+        </Row>
+      )}
       <Row input>
         <Label>{label}</Label>
-        <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
+        <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} innerLabel="𝑓" />
       </Row>
     </>
   )

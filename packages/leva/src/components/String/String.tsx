@@ -4,12 +4,11 @@ import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
 import type { StringProps } from './string-types'
 
-export function String({
-  displayValue,
-  onUpdate,
-  onChange,
-}: Pick<StringProps, 'displayValue' | 'onUpdate' | 'onChange'>) {
-  return <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} />
+type BaseStringProps = Pick<StringProps, 'displayValue' | 'onUpdate' | 'onChange'> &
+  Omit<React.ComponentProps<typeof ValueInput>, 'value'>
+
+export function String({ displayValue, onUpdate, onChange, ...props }: BaseStringProps) {
+  return <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} {...props} />
 }
 
 export function StringComponent() {
