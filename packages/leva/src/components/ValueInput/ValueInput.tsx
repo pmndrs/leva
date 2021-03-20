@@ -42,6 +42,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         levaType={type}
         id={inputId}
         type="text"
+        autoComplete="off"
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
