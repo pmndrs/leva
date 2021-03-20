@@ -15,6 +15,6 @@ import { Components } from 'leva/plugin'
 const { Row, Label, String } = Components 
 ```
 
-Styles: better feedback when dragging number from inner label
+Styles: better feedback when dragging number from inner label.
 
 Plugin: add the Plot plugin 📈

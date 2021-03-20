@@ -13,9 +13,6 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
   const expr = useRef<math.EvalFunction>()
   const yPositions = useRef<number[]>([])
 
-  const [toolTipOpen, toggleToolTip] = useState(false)
-  const [toolTipValues, setToolTipValues] = useState({ x: '0', y: '0' })
-
   const canvasBoundsY = useRef({ minY: -Infinity, maxY: Infinity })
 
   const drawPlot = useCallback(
@@ -75,6 +72,9 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
   ])
   useEffect(() => updatePlot(), [updatePlot])
 
+  const [toolTipOpen, toggleToolTip] = useState(false)
+  const [toolTipValues, setToolTipValues] = useState({ x: '0', y: '0' })
+
   const [dotRef, set] = useTransform<HTMLDivElement>()
   const canvasBounds = useRef<DOMRect>()
 
@@ -84,7 +84,7 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
     }
     const { left, top, width, height } = canvasBounds.current!
     const [minX, maxX] = boundsX
-    const i = Math.ceil(x) - left
+    const i = Math.ceil(x - left)
     const valueX = invertedRange(range(i, 0, width), minX, maxX)
     let valueY = expr.current?.evaluate({ x: valueX })
     valueY = isFinite(valueY) ? valueY.toFixed(0) : 'NaN'

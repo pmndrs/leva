@@ -32,6 +32,6 @@ export const Dot = styled('div', {
   height: 6,
   width: 6,
   borderRadius: 6,
-  backgroundColor: '$leva__accent1',
+  backgroundColor: '$leva__highlight3',
   pointerEvents: 'none',
 })
