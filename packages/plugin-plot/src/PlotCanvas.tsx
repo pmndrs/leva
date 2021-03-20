@@ -86,11 +86,12 @@ export const PlotCanvas = React.memo(({ value, settings }: PlotCanvasProps) => {
     const [minX, maxX] = boundsX
     const i = Math.ceil(x) - left
     const valueX = invertedRange(range(i, 0, width), minX, maxX)
-    const valueY = expr.current?.evaluate({ x: valueX }) ?? 0
+    let valueY = expr.current?.evaluate({ x: valueX })
+    valueY = isFinite(valueY) ? valueY.toFixed(0) : 'NaN'
 
     const relY = clamp(yPositions.current[i * window.devicePixelRatio] / window.devicePixelRatio, 0, height)
 
-    setToolTipValues({ x: valueX.toFixed(2), y: valueY.toFixed(2) })
+    setToolTipValues({ x: valueX.toFixed(2), y: valueY })
     set({ x: left + i - 3, y: top + relY - 5 + 2 })
   })
 
