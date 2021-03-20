@@ -6,14 +6,15 @@ export const StyledInput = styled('input', {
   padding: '0 $leva__sm',
   width: 0,
   minWidth: 0,
-  height: '$leva__rowHeight',
   flex: 1,
+  height: '100%',
 
   variants: { levaType: { number: { textAlign: 'right', paddingLeft: '$leva__xs' } } },
 })
 
 export const InnerLabel = styled('div', {
   height: '100%',
+  position: 'relative',
   '& > :first-of-type': {
     $leva__flexCenter: '',
     width: 14,
@@ -31,8 +32,11 @@ export const InnerLabel = styled('div', {
 
 export const InputContainer = styled('div', {
   $leva__flex: '',
+  position: 'relative',
   borderRadius: '$leva__sm',
+  overflow: 'hidden',
   color: 'inherit',
+  height: '$leva__rowHeight',
   backgroundColor: '$leva__elevation3',
   $leva__inputStyle: '$leva__elevation1',
   $leva__hover: '',
