@@ -6,7 +6,7 @@ export function useCanvas2d(
 ): [React.RefObject<HTMLCanvasElement>, React.RefObject<CanvasRenderingContext2D>] {
   const canvas = useRef<HTMLCanvasElement>(null)
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
-  const firedOnce = useRef(false)
+  const hasFired = useRef(false)
 
   // TODO this is pretty much useless in 90% of cases since panels
   // have a fixed width
@@ -17,9 +17,9 @@ export function useCanvas2d(
       fn(canvas.current, ctx.current)
     }, 250)
     window.addEventListener('resize', handleCanvas)
-    if (firedOnce.current) {
+    if (!hasFired.current) {
       handleCanvas()
-      firedOnce.current = false
+      hasFired.current = true
     }
     return () => window.removeEventListener('resize', handleCanvas)
   }, [fn])
