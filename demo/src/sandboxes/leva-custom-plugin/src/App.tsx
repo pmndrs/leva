@@ -1,6 +1,8 @@
 import React from 'react'
 import { Leva, useControls } from 'leva'
-import { createPlugin, useInputContext, LevaInputProps, Row, Label, String } from 'leva/plugin'
+import { createPlugin, useInputContext, LevaInputProps, Components } from 'leva/plugin'
+
+const { Row, Label, String } = Components
 
 type GreenOrBlueSettings = { alpha?: number }
 type GreenOrBlueType = { color?: string; light: boolean }
