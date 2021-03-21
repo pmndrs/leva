@@ -29,7 +29,8 @@ export function parseExpression(expression: string, get: (path: string) => any) 
 
   for (let key in scope) {
     const re = new RegExp(`\\b${key}\\b`, 'g')
-    const s = typeof scope[key] === 'object' ? scope[key].__parsedScoped.toString() : scope[key]
+    // TODO check type better than this
+    const s = typeof scope[key] === 'function' ? scope[key].__parsedScoped.toString() : scope[key]
     _formattedString = _formattedString.replace(re, s)
   }
 

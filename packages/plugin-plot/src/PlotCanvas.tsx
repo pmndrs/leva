@@ -85,7 +85,7 @@ export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps
     const i = Math.ceil(x - left)
     const valueX = invertedRange(range(i, 0, width), minX, maxX)
     let valueY = expr(valueX)
-    valueY = isFinite(valueY) ? valueY.toFixed(0) : 'NaN'
+    valueY = isFinite(valueY) ? valueY.toFixed(2) : 'NaN'
 
     const relY = clamp(yPositions.current[i * window.devicePixelRatio] / window.devicePixelRatio, 0, height)
 
