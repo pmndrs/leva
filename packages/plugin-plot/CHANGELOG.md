@@ -1,6 +1,6 @@
 # @leva-ui/plugin-plot
 
-## 1.0.0
+## 0.0.1
 ### Patch Changes
 
 - edc8847: Breaking: change how `leva/plugin` exports components.
