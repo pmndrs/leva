@@ -15,8 +15,7 @@ export default function App() {
     {
       'y1(t)': monitor(
         () => {
-          // @ts-ignore
-          const t = performance.measure('top').duration
+          const t = performance.now() - p.current
           return values.y1(t / 100)
         },
         { graph: true, interval: 30 }
