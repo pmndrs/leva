@@ -52,4 +52,4 @@
   useControls({ y: plot({ expression: 'cos(x)', graph: true, boundsX: [-10,10], boundsY: [0, 100] }) })
   ```
 - Updated dependencies [edc8847]
-  - leva@1.0.0
+  - leva@0.8.0
