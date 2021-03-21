@@ -1,8 +1,8 @@
 import React from 'react'
 import { Plugins } from '../../plugin'
-import { log, LevaErrors } from '../../utils/log'
+import { warn, LevaErrors } from '../../utils/log'
 import { InputContext } from '../../context'
-import { useValue } from '../../hooks'
+import { useInputSetters } from '../../hooks'
 import { StyledInputWrapper } from '../UI/StyledUI'
 import type { DataInput } from '../../types'
 
@@ -25,11 +25,11 @@ export function ControlInput({
   disabled,
   ...rest
 }: ControlInputProps) {
-  const { displayValue, onChange, onUpdate } = useValue({ type, value, settings, setValue })
+  const { displayValue, onChange, onUpdate } = useInputSetters({ type, value, settings, setValue })
 
   const Input = Plugins[type].component
   if (!Input) {
-    log(LevaErrors.NO_COMPONENT_FOR_TYPE, type, path)
+    warn(LevaErrors.NO_COMPONENT_FOR_TYPE, type, path)
     return null
   }
 

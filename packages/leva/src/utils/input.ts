@@ -1,6 +1,6 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { DataInput, SpecialInputTypes } from '../types'
+import { Data, DataInput, SpecialInputs, StoreType } from '../types'
 import { warn, LevaErrors } from './log'
 
 /**
@@ -11,19 +11,20 @@ import { warn, LevaErrors } from './log'
  * @param input
  * @param path
  */
-export function normalizeInput(input: any, path: string) {
+export function normalizeInput(input: any, path: string, data: Data) {
   if (typeof input === 'object') {
     if ('type' in input) {
       // If the input is a special input then we return it as it is.
-      if (input.type in SpecialInputTypes) return input
+      if (input.type in SpecialInputs) return input
 
       // If the type key exists at this point, it must be a custom plugin
       // defined by the user.
       const { type, ...rest } = input
-      return { type, ...normalize(type, rest) }
+      const _input = 'value' in rest ? rest.value : rest
+      return { type, ...normalize(type, _input, path, data) }
     }
     const type = getValueType(input)
-    if (type) return { type, ...normalize(type, input) }
+    if (type) return { type, ...normalize(type, input, path, data) }
   }
 
   const type = getValueType({ value: input })
@@ -32,12 +33,12 @@ export function normalizeInput(input: any, path: string) {
   // is not recognized.
   if (!type) return warn(LevaErrors.UNKNOWN_INPUT, path, input)
 
-  return { type, ...normalize(type, { value: input }) }
+  return { type, ...normalize(type, { value: input }, path, data) }
 }
 
-export function updateInput(input: DataInput, newValue: any) {
+export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType) {
   const { value, type, settings } = input
-  input.value = sanitizeValue({ type, value, settings }, newValue)
+  input.value = sanitizeValue({ type, value, settings }, newValue, path, store)
 }
 
 type SanitizeProps = {
@@ -55,7 +56,7 @@ const ValueError = (function (this: ValueErrorType, message: string, value: any,
   this.error = error
 } as unknown) as { new (message: string, value: any, error?: Error): ValueErrorType }
 
-export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any) {
+export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any, path: string, store: StoreType) {
   // sanitizeValue can accept a new value in the form of fn(oldValue). This
   // allows inputs to run onUpdate(oldValue => oldValue + 1). However, this
   // issue makes the case of a SELECT input with functions as options:
@@ -65,7 +66,7 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
   const _newValue = type !== 'SELECT' && typeof newValue === 'function' ? newValue(value) : newValue
   let sanitizedNewValue
   try {
-    sanitizedNewValue = sanitize(type, _newValue, settings, value)
+    sanitizedNewValue = sanitize(type, _newValue, settings, value, path, store)
   } catch (e) {
     throw new ValueError(`The value \`${newValue}\` did not result in a correct value.`, value, e)
   }

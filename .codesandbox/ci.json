@@ -8,6 +8,7 @@
     "/demo/src/sandboxes/leva-ui",
     "/demo/src/sandboxes/leva-theme",
     "/demo/src/sandboxes/leva-transient",
+    "/demo/src/sandboxes/leva-plugin-plot",
     "/demo/src/sandboxes/leva-plugin-spring",
     "/demo/src/sandboxes/leva-custom-plugin"
   ]

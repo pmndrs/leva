@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { writeText } from 'clipboard-polyfill/text'
-import * as Tooltip from '@radix-ui/react-tooltip'
+import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
 import { useInputContext, usePanelSettingsContext } from '../../context'
 import { LevaErrors, warn } from '../../utils'
-
-type LabelProps = React.ComponentProps<any>
 
 function OptionalToggle() {
   const { id, disable, disabled } = useInputContext()
@@ -22,6 +20,8 @@ function OptionalToggle() {
   )
 }
 
+type LabelProps = React.ComponentProps<any>
+
 function RawLabel(props: LabelProps) {
   const { id, optional, hint } = useInputContext()
   const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
@@ -29,15 +29,15 @@ function RawLabel(props: LabelProps) {
     <>
       {optional && <OptionalToggle />}
       {hint !== undefined ? (
-        <Tooltip.Root>
-          <Tooltip.Trigger as={StyledLabel} {...htmlFor} {...props} />
-          <Tooltip.Content side="top" sideOffset={2}>
+        <RadixTooltip.Root>
+          <RadixTooltip.Trigger as={StyledLabel} {...htmlFor} {...props} />
+          <RadixTooltip.Content side="top" sideOffset={2}>
             <StyledToolTipContent>
               {hint}
               <ToolTipArrow />
             </StyledToolTipContent>
-          </Tooltip.Content>
-        </Tooltip.Root>
+          </RadixTooltip.Content>
+        </RadixTooltip.Root>
       ) : (
         <StyledLabel {...htmlFor} {...props} />
       )}

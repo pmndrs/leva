@@ -113,7 +113,10 @@ export function Monitor({ label, objectOrFn, settings }: MonitorProps) {
   const initialValue = useRef(getValue(objectOrFn))
 
   useEffect(() => {
-    const timeout = window.setInterval(() => ref.current?.frame(getValue(objectOrFn)), settings.interval)
+    const timeout = window.setInterval(() => {
+      if (document.hidden) return // prevent drawing when document is hidden
+      ref.current?.frame(getValue(objectOrFn))
+    }, settings.interval)
     return () => window.clearInterval(timeout)
   }, [objectOrFn, settings.interval])
 

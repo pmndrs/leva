@@ -1,10 +1,5 @@
 import { styled } from '../../styles'
 
-export const InnerNumberLabel = styled('div', {
-  $leva__draggable: '',
-  cursor: 'ew-resize',
-})
-
 export const RangeGrid = styled('div', {
   variants: {
     hasRange: {

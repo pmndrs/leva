@@ -6,7 +6,7 @@ const defaultFrictionSettings = { min: 1, step: 0.5 }
 const defaultMassSettings = { min: 0.1, step: 0.1 }
 const defaultValue = { tension: 100, friction: 30, mass: 1 }
 
-export const normalize = (input: SpringInput) => {
+export const normalize = (input: SpringInput = {}) => {
   const { value: _value, ..._settings } = 'value' in input ? input : { value: input }
   const mergedSettings = {
     tension: { ...defaultTensionSettings, ..._settings.tension },

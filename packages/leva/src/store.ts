@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
-import { SpecialInputTypes } from './types'
-import type { Data, FolderSettings, State, StoreType, MappedPaths } from './types'
+import { SpecialInputs, MappedPaths } from './types'
+import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
@@ -91,7 +91,7 @@ export const Store = (function (this: StoreType) {
         if (path in data) {
           const input = data[path]
           input.__refCount--
-          if (input.__refCount === 0 && input.type in SpecialInputTypes) {
+          if (input.__refCount === 0 && input.type in SpecialInputs) {
             // this makes sure special inputs such as buttons are properly
             // refreshed. This might need some attention though.
             delete data[path]
@@ -151,7 +151,6 @@ export const Store = (function (this: StoreType) {
         } else {
           data[path] = { ...newInputData, __refCount: 1 }
         }
-        input = data[path]
       })
 
       // Since we're returning a new object, direct mutation of data
@@ -170,7 +169,7 @@ export const Store = (function (this: StoreType) {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value)
+      updateInput(data[path], value, path, this)
       return { data }
     })
   }
@@ -223,16 +222,15 @@ export const Store = (function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-
   const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
-    const data: any = {}
+    const data: Data = {}
 
     Object.entries(schema).forEach(([key, input]: [string, any]) => {
       let newPath = join(rootPath, key)
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
-      if (input.type === SpecialInputTypes.FOLDER) {
+      if (input.type === SpecialInputs.FOLDER) {
         const newData = _getDataFromSchema(input.schema, newPath, mappedPaths)
         Object.assign(data, newData)
 
@@ -264,15 +262,17 @@ export const Store = (function (this: StoreType) {
         }
         mappedPaths[key] = { path: newPath, onChange: _onChange }
 
-        const normalizedInput = normalizeInput(_input, newPath)
+        const normalizedInput = normalizeInput(_input, newPath, data)
         // normalizeInput can return false if the input is not recognized.
         if (normalizedInput) {
           data[newPath] = normalizedInput
           data[newPath].key = key
           data[newPath].label = _label ?? key
           data[newPath].hint = _hint
-          if (!(input.type in SpecialInputTypes)) {
+          if (!(input.type in SpecialInputs)) {
+            // @ts-expect-error
             data[newPath].optional = _optional ?? false
+            // @ts-expect-error
             data[newPath].disabled = _disabled ?? false
           }
           if (typeof _render === 'function') data[newPath].render = _render

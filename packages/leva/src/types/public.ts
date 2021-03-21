@@ -2,6 +2,7 @@
  * Types exposed through the public API
  */
 import type { VectorSettings } from '../components/Vector/vector-types'
+import { StoreType, Data } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -22,27 +23,39 @@ export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V,
 /**
  * Special Inputs
  */
-export enum SpecialInputTypes {
+export enum SpecialInputs {
   BUTTON = 'BUTTON',
   BUTTON_GROUP = 'BUTTON_GROUP',
   MONITOR = 'MONITOR',
   FOLDER = 'FOLDER',
 }
 
+export enum LevaInputs {
+  SELECT = 'SELECT',
+  IMAGE = 'IMAGE',
+  NUMBER = 'NUMBER',
+  COLOR = 'COLOR',
+  STRING = 'STRING',
+  BOOLEAN = 'BOOLEAN',
+  INTERVAL = 'INTERVAL',
+  VECTOR3D = 'VECTOR3D',
+  VECTOR2D = 'VECTOR2D',
+}
+
 export type ButtonInput = {
-  type: SpecialInputTypes.BUTTON
+  type: SpecialInputs.BUTTON
   onClick: () => any
 }
 
 export type ButtonGroupInput = {
-  type: SpecialInputTypes.BUTTON_GROUP
+  type: SpecialInputs.BUTTON_GROUP
   opts: { [title: string]: () => void }
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
 
 export type MonitorInput = {
-  type: SpecialInputTypes.MONITOR
+  type: SpecialInputs.MONITOR
   objectOrFn: React.MutableRefObject<any> | Function
   settings: MonitorSettings
 }
@@ -84,7 +97,7 @@ type BooleanInput = boolean
 type StringInput = string
 
 export type FolderInput<Schema> = {
-  type: SpecialInputTypes.FOLDER
+  type: SpecialInputs.FOLDER
   schema: Schema
   settings: FolderSettings
 }
@@ -109,7 +122,9 @@ type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Elemen
 type InputOptions = { optional?: boolean; disabled?: boolean; onChange?: (v: any) => void }
 type ReservedKeys = keyof GenericSchemaItemOptions | keyof InputOptions | '__customInput' | 'type'
 
-type StripReservedKeys<K> = BeautifyUnionType<K extends any[] ? K : K extends object ? Omit<K, ReservedKeys> : K>
+type StripReservedKeys<K> = BeautifyUnionType<
+  K extends any[] | Function ? K : K extends object ? Omit<K, ReservedKeys> : K
+>
 
 type SchemaItemWithOptions =
   | number
@@ -221,13 +236,13 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
    * }
    * ```
    */
-  normalize?: (input: Input) => { value: Value; settings?: InternalSettings }
+  normalize?: (input: Input, path: string, data: Data) => { value: Value; settings?: InternalSettings }
   /**
    * Sanitizes the user value before registering it to the store. For
    * example, the Number plugin would santize "3.00" into 3. If the provided
    * value isn't formatted properly, the sanitize function should throw.
    */
-  sanitize?: (value: any, settings: any, prevValue: any) => Value
+  sanitize?: (value: any, settings: any, prevValue: any, path: string, store: StoreType) => Value
   /**
    * Formats the value into the value that will be displayed by the component.
    * If the input value of the Number plugin, then format will add proper
@@ -256,4 +271,5 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   onChange: React.Dispatch<any>
   onUpdate: (v: any | ((_v: any) => any)) => void
   settings: InternalSettings
+  setSettings: (v: Partial<InternalSettings>) => void
 }

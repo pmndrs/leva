@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
 import { useDrag } from '../../hooks'
-import { clamp } from '../../utils'
+import { clamp, multiplyStep } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
-import { multiplyStep, useTransform } from '../../hooks'
+import { useTransform } from '../../hooks'
 import type { Vector2d } from '../../types'
 import type { Vector2dProps } from './vector2d-types'
 

@@ -8,21 +8,22 @@ import vector3d from './components/Vector3d'
 import vector2d from './components/Vector2d'
 import image from './components/Image'
 import interval from './components/Interval'
+import { LevaInputs } from './types'
 
 /**
  * Register all the primitive inputs.
  * @note could potentially be done elsewhere.
  */
 
-register('SELECT', select)
-register('IMAGE', image)
-register('NUMBER', number)
-register('COLOR', color)
-register('STRING', string)
-register('BOOLEAN', boolean)
-register('INTERVAL', interval)
-register('VECTOR3D', vector3d)
-register('VECTOR2D', vector2d)
+register(LevaInputs.SELECT, select)
+register(LevaInputs.IMAGE, image)
+register(LevaInputs.NUMBER, number)
+register(LevaInputs.COLOR, color)
+register(LevaInputs.STRING, string)
+register(LevaInputs.BOOLEAN, boolean)
+register(LevaInputs.INTERVAL, interval)
+register(LevaInputs.VECTOR3D, vector3d)
+register(LevaInputs.VECTOR2D, vector2d)
 
 // main hook
 export { useControls } from './useControls'
