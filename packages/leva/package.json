@@ -5,18 +5,21 @@
   "module": "dist/leva.esm.js",
   "types": "dist/leva.cjs.d.ts",
   "license": "MIT",
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/leva.git",
+    "directory": "packages/leva"
   },
-  "scripts": {
-    "prebuild": "cp ../../README.md README.md"
-  },
+  "bugs": "https://github.com/pmndrs/leva/issues",
   "preconstruct": {
     "entrypoints": [
       "index.ts",
       "plugin/index.ts"
     ]
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "@radix-ui/react-portal": "^0.0.6",

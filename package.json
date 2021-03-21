@@ -42,7 +42,11 @@
       "path": "packages/plugin-spring/dist/leva-ui-plugin-spring.*.prod.js"
     }
   ],
-  "repository": "https://github.com/gsimone/leva.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pmndrs/leva.git"
+  },
+  "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
