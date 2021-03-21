@@ -226,6 +226,7 @@ export const Store = (function (this: StoreType) {
     const data: Data = {}
 
     Object.entries(schema).forEach(([key, input]: [string, any]) => {
+      key = input.type === SpecialInputs.BUTTON_GROUP && key === '' ? '__LEVA_EMPTY_LABEL_' : key
       let newPath = join(rootPath, key)
 
       // If the input is a folder, then we recursively parse its schema and assign
