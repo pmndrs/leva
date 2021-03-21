@@ -2,7 +2,7 @@ import React from 'react'
 import Reset from './components/decorator-reset'
 import { Story, Meta } from '@storybook/react'
 
-import { folder, useControls } from '../src'
+import { folder, useControls, buttonGroup } from '../src'
 
 export default {
   title: 'Misc/Folders',
@@ -83,6 +83,25 @@ export const NestedFolders = () => {
       ),
     }),
   })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const FolderWithButtonGroup = () => {
+  const [values, set] = useControls('folder', () => ({
+    Size: 1,
+    '': buttonGroup({
+      '0.25x': () => set({ Size: 0.25 }),
+      '0.5x': () => set({ Size: 0.5 }),
+      '1x': () => set({ Size: 1 }),
+      '2x': () => set({ Size: 2 }),
+      '3x': () => set({ Size: 3 }),
+    }),
+  }))
 
   return (
     <div>
