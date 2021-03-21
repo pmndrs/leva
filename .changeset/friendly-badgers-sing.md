@@ -47,3 +47,8 @@ const sanitize = (
 Styles: better feedback when dragging number from inner label.
 
 Plugin: add the Plot plugin 📈
+
+```js
+import { plot } from '@leva-ui/plugin-plot'
+useControls({ y: plot({ expression: 'cos(x)', graph: true, boundsX: [-10,10], boundsY: [0, 100] }) })
+```
