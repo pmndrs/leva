@@ -38,7 +38,7 @@ export const getDefaultTheme = () => ({
   sizes: {
     leva__rootWidth: '280px',
     leva__controlWidth: '160px',
-    leva__numberInputMinWidth: '36px',
+    leva__numberInputMinWidth: '38px',
     leva__scrubberWidth: '8px',
     leva__scrubberHeight: '16px',
     leva__rowHeight: '24px',
