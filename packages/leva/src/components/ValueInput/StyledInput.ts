@@ -18,7 +18,7 @@ export const InnerLabel = styled('div', {
   height: '100%',
   $leva__flexCenter: '',
   position: 'relative',
-  width: 14,
+  padding: '0 $leva__xs',
   fontSize: '0.8em',
   opacity: 0.8,
   cursor: 'default',
