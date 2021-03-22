@@ -49,6 +49,16 @@ export const CopyLabelContainer = styled('div', {
     backgroundColor: '$leva__elevation2',
   },
   '&:hover > div > svg': { display: 'block' },
+
+  variants: {
+    align: {
+      top: {
+        height: '100%',
+        alignItems: 'flex-start',
+        paddingTop: '$leva__sm',
+      },
+    },
+  },
 })
 
 export const StyledOptionalToggle = styled('input', {
@@ -107,15 +117,6 @@ export const StyledLabel = styled('label', {
   whiteSpace: 'nowrap',
   '& > svg': {
     display: 'block', // fixes svg vertical misalignment
-  },
-  variants: {
-    align: {
-      top: {
-        height: '100%',
-        alignItems: 'flex-start',
-        paddingTop: '$leva__sm',
-      },
-    },
   },
 })
 
