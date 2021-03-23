@@ -8,8 +8,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@leva-ui/plugin-plot": "*",
-    "@leva-ui/plugin-spring": "*",
     "@radix-ui/react-icons": "^1.0.2",
     "@react-three/drei": "^3.11.1",
     "@stitches/react": "^0.1.0-canary.15",

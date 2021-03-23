@@ -4,6 +4,7 @@ import { StyledContent } from '../Folder/StyledFolder'
 
 export const StyledRow = styled('div', {
   position: 'relative',
+  zIndex: 100,
   display: 'grid',
   rowGap: '$leva__rowGap',
   gridTemplateRows: 'minmax($sizes$leva__rowHeight, max-content)',
