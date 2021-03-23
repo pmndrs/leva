@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
-import { useDrag } from 'react-use-gesture'
+import React, { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
+import { mergeRefs, useDrag } from 'leva/plugin'
 import { useRange, useInvertedRange } from './bezier-utils'
 import { Svg } from './StyledBezier'
 import type { Bezier as BezierType, BezierProps } from './bezier-types'
@@ -26,18 +26,31 @@ export function BezierSvg({ displayValue, onUpdate, value }: Pick<BezierProps, '
   const r = useRange()
   const ir = useInvertedRange()
   const [ref, { width, height }] = useMeasure()
+  const svgRef = useRef<SVGSVGElement>(null)
+  const handleLeft = useRef<SVGCircleElement>(null)
+  const handleRight = useRef<SVGCircleElement>(null)
+  const bounds = useRef<DOMRect>()
 
-  const bind = useDrag(
-    ({ movement: [x, y], args: [i] }) => {
-      onUpdate((v: BezierType) => {
-        const newV = [...v]
-        newV[i] = ir(x, width)
-        newV[i + 1] = 1 - ir(y, height)
-        return newV
-      })
-    },
-    { initial: ({ args: [i] }) => [r(value[i], width), r(1 - value[i + 1], height)] }
-  )
+  const bind = useDrag(({ xy: [x, y], event, first, memo }) => {
+    if (first) {
+      bounds.current = svgRef.current!.getBoundingClientRect()
+      memo = [handleLeft.current, handleRight.current].indexOf(event!.target as any)
+      if (memo < 0) memo = x - bounds.current.left < width / 2 ? 0 : 1
+      memo *= 2
+    }
+
+    const relX = x - bounds.current!.left
+    const relY = y - bounds.current!.top
+
+    onUpdate((v: BezierType) => {
+      const newV = [...v]
+      newV[memo] = ir(relX, width)
+      newV[memo + 1] = 1 - ir(relY, height)
+      return newV
+    })
+
+    return memo
+  })
 
   const { x1, y1, x2, y2 } = displayValue
 
@@ -56,16 +69,16 @@ export function BezierSvg({ displayValue, onUpdate, value }: Pick<BezierProps, '
   )
 
   return (
-    <Svg ref={ref}>
+    <Svg ref={mergeRefs([svgRef, ref])} {...bind()}>
       <line x1={sx} y1={sy} x2={ex} y2={ey} />
       <path fill="none" d={`M${sx},${sy} C${cx1},${cy1} ${cx2},${cy2} ${ex},${ey}`} strokeLinecap="round" />
       <g>
         <Line sx={sx} sy={sy} cx={cx1} cy={cy1} />
-        <circle cx={cx1} cy={cy1} r={HANDLE_RADIUS} {...bind(0)} />
+        <circle ref={handleLeft} cx={cx1} cy={cy1} r={HANDLE_RADIUS} />
       </g>
       <g>
         <Line sx={ex} sy={ey} cx={cx2} cy={cy2} />
-        <circle cx={cx2} cy={cy2} r={HANDLE_RADIUS} {...bind(2)} />
+        <circle ref={handleRight} cx={cx2} cy={cy2} r={HANDLE_RADIUS} />
       </g>
     </Svg>
   )

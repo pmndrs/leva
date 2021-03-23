@@ -13,7 +13,7 @@ export const Svg = styled('svg', {
   g: {
     color: '$leva__accent1',
     '&:hover': { color: '$leva__accent3' },
-    '&:active': { color: 'yellow' },
+    '&:active': { color: '$leva__vivid1' },
   },
   circle: {
     fill: 'currentColor',
@@ -42,7 +42,7 @@ export const PreviewSvg = styled('svg', {
   height: 6,
   '> circle': {
     opacity: 0,
-    fill: 'yellow',
+    fill: '$leva__vivid1',
     cy: '50%',
     animation: `${fadeIn(0.4)} 1000ms forwards`,
     '&:first-of-type, &:last-of-type': {

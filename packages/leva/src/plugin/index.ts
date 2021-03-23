@@ -25,7 +25,7 @@ export const Components = {
 export { default as tinycolor2 } from 'tinycolor2'
 export { dequal } from 'dequal/lite'
 
-export { debounce, clamp, pad, evaluate, range, invertedRange } from '../utils'
+export { debounce, clamp, pad, evaluate, range, invertedRange, mergeRefs } from '../utils'
 export { normalizeKeyedNumberSettings } from '../components/Vector/vector-utils'
 
 export { createPlugin } from '../plugin'
