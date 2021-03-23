@@ -104,7 +104,7 @@ const utils = {
     createStateClass(value, { key: '$leva__active', borderColor: '$leva__accent1', inset: true }),
 }
 
-export const { styled, css, theme, global: _global } = createCss({
+export const { styled, css, theme, global: _global, keyframes } = createCss({
   insertMethod() {
     let currentCssHead: HTMLHeadElement | null = null
     let currentCssNode: HTMLElement | null = null
