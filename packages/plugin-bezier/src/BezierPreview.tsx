@@ -8,14 +8,22 @@ const DebouncedBezierPreview = React.memo(({ value }: Pick<BezierProps, 'value'>
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
 
   const bezierFn = bezier(...value)
-  const plotPoints = Array(11)
+  const plotPoints = Array(21)
     .fill(0)
-    .map((_, i) => 5 + bezierFn(i / 10) * 90)
+    .map((_, i) => 5 + bezierFn(i / 20) * 90)
   return (
     <PreviewSvg onClick={forceUpdate}>
       {plotPoints.map((p, i) => (
-        <circle key={i + Date.now()} r={3} cx={`${p}%`} style={{ animationDelay: `${i * 100}ms` }} />
+        <circle key={i + Date.now()} r={3} cx={`${p}%`} style={{ animationDelay: `${i * 50}ms` }} />
       ))}
+      <circle
+        key={Date.now() - 1}
+        r={3}
+        style={{
+          animationTimingFunction: `cubic-bezier(${value.join(',')})`,
+          animationDuration: `${plotPoints.length * 50}ms`,
+        }}
+      />
     </PreviewSvg>
   )
 })

@@ -22,7 +22,7 @@ function Line({ sx, sy, cx, cy }: LineProps) {
   return <line x1={cxs} y1={cys} x2={sx} y2={sy} />
 }
 
-export function BezierSvg({ displayValue, onUpdate, value }: Pick<BezierProps, 'displayValue' | 'value' | 'onUpdate'>) {
+export function BezierSvg({ displayValue, onUpdate }: Pick<BezierProps, 'displayValue' | 'onUpdate'>) {
   const r = useRange()
   const ir = useInvertedRange()
   const [ref, { width, height }] = useMeasure()

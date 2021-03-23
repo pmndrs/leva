@@ -32,21 +32,25 @@ export const Svg = styled('svg', {
 
 const fadeIn = (o: number) =>
   keyframes({
-    '10%': { opacity: 1 },
+    '0%': { opacity: 0 },
+    '10%': { opacity: 0.8 },
     '100%': { opacity: o },
   })
+
+const move = keyframes({
+  '0%': { transform: 'translateX(5%)' },
+  '100%': { transform: 'translateX(95%)' },
+})
 
 export const PreviewSvg = styled('svg', {
   width: '100%',
   overflow: 'visible',
   height: 6,
   '> circle': {
-    opacity: 0,
     fill: '$leva__vivid1',
     cy: '50%',
-    animation: `${fadeIn(0.4)} 1000ms forwards`,
-    '&:first-of-type, &:last-of-type': {
-      animationName: fadeIn(0.7),
-    },
+    animation: `${fadeIn(0.3)} 1000ms both`,
+    '&:first-of-type': { animationName: fadeIn(0.7) },
+    '&:last-of-type': { animationName: move },
   },
 })

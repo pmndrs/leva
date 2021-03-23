@@ -13,6 +13,11 @@ const optionSelect = {
   'ease-in': [0.42, 0, 1, 1].toString(),
   'ease-out': [0, 0, 0.58, 1].toString(),
   'ease-in-out': [0.42, 0, 0.58, 1].toString(),
+  'in-out-sine': [0.45, 0.05, 0.55, 0.95].toString(),
+  'in-out-quadratic': [0.46, 0.03, 0.52, 0.96].toString(),
+  'in-out-cubic': [0.65, 0.05, 0.36, 1].toString(),
+  'fast-out-slow-in': [0.4, 0, 0.2, 1].toString(),
+  'in-out-back': [0.68, -0.55, 0.27, 1.55].toString(),
 }
 
 const optionKeys = Object.keys(optionSelect)
@@ -44,7 +49,7 @@ export function Bezier() {
         <SelectBezier value={value} onUpdate={onUpdate} />
       </Row>
       <Row>
-        <BezierSvg value={value} displayValue={displayValue} onUpdate={onUpdate} />
+        <BezierSvg displayValue={displayValue} onUpdate={onUpdate} />
         <BezierPreview value={value} />
         <Vector value={displayValue} settings={settings} onUpdate={onUpdate} innerLabelTrim={2} />
       </Row>
