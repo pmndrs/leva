@@ -12,6 +12,7 @@ export const getDefaultTheme = () => ({
     leva__highlight1: '#535760',
     leva__highlight2: '#8c92a4',
     leva__highlight3: '#fefefe',
+    leva__vivid1: '#ffcc00',
     leva__toolTipBackground: '$leva__highlight3',
     leva__toolTipText: '$leva__elevation2',
   },
@@ -105,7 +106,7 @@ const utils = {
 }
 
 export const { styled, css, theme, global: _global, keyframes } = createCss({
-  insertMethod() {
+  insertionMethod() {
     let currentCssHead: HTMLHeadElement | null = null
     let currentCssNode: HTMLElement | null = null
 
