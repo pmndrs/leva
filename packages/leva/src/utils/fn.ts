@@ -1,4 +1,4 @@
-export const debounce = <T extends Function>(callback: T, wait: number, immediate = false) => {
+export const debounce = <F extends Function>(callback: F, wait: number, immediate = false) => {
   let timeout: number = 0
 
   return function () {
@@ -11,5 +11,5 @@ export const debounce = <T extends Function>(callback: T, wait: number, immediat
     timeout = window.setTimeout(next, wait)
 
     if (callNow) next()
-  }
+  } as F extends (...args: infer A) => infer B ? (...args: A) => B : never
 }
