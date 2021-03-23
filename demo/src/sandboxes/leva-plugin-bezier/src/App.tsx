@@ -3,9 +3,7 @@ import { useControls } from 'leva'
 import { bezier } from '@leva-ui/plugin-bezier'
 
 export default function App() {
-  const { curve } = useControls({
-    curve: bezier(),
-  })
+  const { curve } = useControls({ curve: bezier() })
 
   return (
     <div className="App">

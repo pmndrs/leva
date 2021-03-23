@@ -1,5 +1,5 @@
 {
-  "name": "leva-plugin-beziers",
+  "name": "leva-plugin-bezier",
   "version": "1.0.0",
   "keywords": [],
   "main": "src/index.jsx",
