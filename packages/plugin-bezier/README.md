@@ -25,6 +25,6 @@ function MyComponent() {
   console.log(curve.evaluate(0.3))
 
   // just spread the array inside a css style
-  return <div style={{animationTimingFunction: `cubic-bezier(${...curve})`}} />
+  return <div style={{animationTimingFunction: `cubic-bezier(${curve.join(',')})`}} />
 }
 ```
