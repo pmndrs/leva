@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-bezier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/leva-ui-plugin-bezier.cjs.js",
   "module": "dist/leva-ui-plugin-bezier.esm.js",
   "types": "dist/leva-ui-plugin-bezier.cjs.d.ts",
