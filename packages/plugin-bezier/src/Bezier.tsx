@@ -45,7 +45,7 @@ export function Bezier() {
       <Row>
         {graph && <BezierSvg displayValue={displayValue} onUpdate={onUpdate} />}
         <BezierPreview value={value} />
-        <Vector value={displayValue} settings={settings} onUpdate={onUpdate} innerLabelTrim={2} />
+        {graph && <Vector value={displayValue} settings={settings} onUpdate={onUpdate} innerLabelTrim={2} />}
       </Row>
     </>
   )
