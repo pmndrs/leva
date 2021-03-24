@@ -32,5 +32,5 @@ export const normalize = ({ expression, ..._settings }: PlotInput, _path: string
   }
   const value = parseExpression(expression, get) as (v: number) => any
   const settings = { ...defaultSettings, ..._settings }
-  return { value, settings }
+  return { value, settings: settings as InternalPlotSettings }
 }

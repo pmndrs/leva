@@ -81,6 +81,7 @@ export default function App() {
         highlight1: '#535760',
         highlight2: '#8C92A4',
         highlight3: '#FEFEFE',
+        vivid1: '#ffcc00',
       }),
     },
     { store: colorsStore }

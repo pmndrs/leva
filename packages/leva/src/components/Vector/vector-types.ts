@@ -57,7 +57,7 @@ export type InternalVectorSettings<K extends string = string, Keys extends K[] =
 
 export type CoordinateProps<T extends Record<string, number>> = {
   id?: string
-  hideLabel?: boolean
+  innerLabelTrim?: number
   value: T
   settings: InternalNumberSettings
   valueKey: keyof T
@@ -68,5 +68,5 @@ export type VectorProps<T extends Record<string, number>> = {
   value: T
   settings: { [key in keyof T]: InternalNumberSettings } & { lock?: boolean; locked?: boolean }
   onUpdate: (value: T) => void
-  hideNumberLabels?: boolean
+  innerLabelTrim?: number
 }

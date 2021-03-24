@@ -64,7 +64,7 @@ export function IntervalComponent() {
         <Label>{label}</Label>
         <Container>
           <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
-          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} hideNumberLabels />
+          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} innerLabelTrim={0} />
         </Container>
       </Row>
     </>

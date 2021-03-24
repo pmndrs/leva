@@ -1,14 +1,14 @@
 {
-  "name": "@leva-ui/plugin-spring",
-  "version": "0.8.0",
-  "main": "dist/leva-ui-plugin-spring.cjs.js",
-  "module": "dist/leva-ui-plugin-spring.esm.js",
-  "types": "dist/leva-ui-plugin-spring.cjs.d.ts",
+  "name": "@leva-ui/plugin-bezier",
+  "version": "0.0.1",
+  "main": "dist/leva-ui-plugin-bezier.cjs.js",
+  "module": "dist/leva-ui-plugin-bezier.esm.js",
+  "types": "dist/leva-ui-plugin-bezier.cjs.d.ts",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/pmndrs/leva.git",
-    "directory": "packages/plugin-spring"
+    "directory": "packages/plugin-beziers"
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
@@ -17,6 +17,6 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "react-spring": "9.0.0-rc.3"
+    "react-use-measure": "^2.0.4"
   }
 }

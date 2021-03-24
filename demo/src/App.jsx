@@ -7,6 +7,7 @@ import styles from './styles.module.css'
 import Minimal from './sandboxes/leva-minimal/src/App'
 import PluginSpring from './sandboxes/leva-plugin-spring/src/App'
 import PluginPlot from './sandboxes/leva-plugin-plot/src/App'
+import PluginBezier from './sandboxes/leva-plugin-bezier/src/App'
 import Busy from './sandboxes/leva-busy/src/App'
 import AdvancedPanels from './sandboxes/leva-advanced-panels/src/App'
 import Scroll from './sandboxes/leva-scroll/src/App'
@@ -40,6 +41,7 @@ const links = {
   'leva-transient': LevaTransient,
   'leva-plugin-spring': PluginSpring,
   'leva-plugin-plot': PluginPlot,
+  'leva-plugin-bezier': PluginBezier,
   'leva-custom-plugin': CustomPlugin,
 }
 

@@ -10,15 +10,18 @@ export type RenderFn = (get: (key: string) => any) => boolean
 /**
  * Utility types that joins a value with its settings
  */
-export type InputWithSettings<V extends unknown, Settings = {}> = {
-  value: V
-} & Settings
+export type InputWithSettings<V extends unknown, Settings = {}, K extends string = 'value'> = {
+  [key in K]: V
+} &
+  Settings
 
 /**
  * Either the raw value, either the value with its settings
  * In other words => value || { value, ...settings }
  */
-export type MergedInputWithSettings<V, Settings = {}> = V | InputWithSettings<V, Settings>
+export type MergedInputWithSettings<V, Settings = {}, K extends string = 'value'> =
+  | V
+  | InputWithSettings<V, Settings, K>
 
 /**
  * Special Inputs
@@ -242,7 +245,7 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
    * example, the Number plugin would santize "3.00" into 3. If the provided
    * value isn't formatted properly, the sanitize function should throw.
    */
-  sanitize?: (value: any, settings: any, prevValue: any, path: string, store: StoreType) => Value
+  sanitize?: (value: any, settings: InternalSettings, prevValue: any, path: string, store: StoreType) => Value
   /**
    * Formats the value into the value that will be displayed by the component.
    * If the input value of the Number plugin, then format will add proper
