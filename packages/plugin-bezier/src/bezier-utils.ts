@@ -8,6 +8,12 @@ export const useInvertedRange = () => {
   return useCallback((v: number, size) => v / size, [])
 }
 
+/**
+ * https://github.com/gre/bezier-easing
+ * BezierEasing - use bezier curve for transition easing function
+ * by Gaëtan Renaudeau 2014 - 2015 – MIT License
+ */
+
 const NEWTON_ITERATIONS = 4
 const NEWTON_MIN_SLOPE = 0.001
 const SUBDIVISION_PRECISION = 0.0000001

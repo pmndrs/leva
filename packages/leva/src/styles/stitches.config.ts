@@ -150,6 +150,7 @@ export const { styled, css, theme, global: _global, keyframes } = createCss({
     $leva__draggable: () => () => ({
       touchAction: 'none',
       WebkitUserDrag: 'none',
+      WebkitUserSelect: 'none',
       userSelect: 'none',
     }),
     $leva__focus: () => (value: string) => ({ '&:focus': utils.$leva__focusStyle()(value) }),

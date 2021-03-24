@@ -14,7 +14,8 @@ export const normalize = (input: SpringInput = {}) => {
     mass: { ...defaultMassSettings, ..._settings.mass },
   }
 
-  return normalizeVector({ ...defaultValue, ..._value }, mergedSettings)
+  const { value, settings } = normalizeVector({ ...defaultValue, ..._value }, mergedSettings)
+  return { value, settings: settings as InternalSpringSettings }
 }
 
 export const sanitize = (value: InternalSpring, settings: InternalSpringSettings, prevValue?: any) =>

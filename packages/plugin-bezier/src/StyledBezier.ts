@@ -54,3 +54,24 @@ export const PreviewSvg = styled('svg', {
     '&:last-of-type': { animationName: move },
   },
 })
+
+export const SyledInnerLabel = styled('div', {
+  WebkitUserSelect: 'none',
+  userSelect: 'none',
+  $leva__flexCenter: '',
+  height: 14,
+  width: 14,
+  borderRadius: 7,
+  marginRight: '$leva__sm',
+  cursor: 'pointer',
+  fontSize: '0.8em',
+  variants: {
+    graph: { true: { backgroundColor: '$leva__elevation1' } },
+  },
+})
+
+export const Container = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'auto 1fr',
+  alignItems: 'center',
+})

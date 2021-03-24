@@ -25,3 +25,9 @@ DefaultBezier.args = bezier(undefined)
 
 export const WithArguments = Template.bind({})
 WithArguments.args = bezier([0.54, 0.05, 0.6, 0.98])
+
+export const WithPreset = Template.bind({})
+WithPreset.args = bezier('in-out-quadratic')
+
+export const WithOptions = Template.bind({})
+WithOptions.args = bezier({ handles: [0.54, 0.05, 0.6, 0.98], graph: false })
