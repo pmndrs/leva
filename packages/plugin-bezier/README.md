@@ -10,10 +10,21 @@ npm i @leva-ui/plugin-plot
 
 ```jsx
 import { useControls } from "leva"
-import { plot } from "@leva-ui/plugin-plot"
+import { bezier } from "@leva-ui/plugin-bezier"
 
 function MyComponent() {
-  const { y } = useControls({ y: plot({ expression: 'cos(x)', graph: true, boundsX: [-10,10], boundsY: [0, 100] }) })
-  return y(Math.PI)
+  const { curve } = useControls({ curve: bezier() })
+  // or
+  const { curve } = useControls({ curve: bezier([0.54, 0.05, 0.6, 0.98]) })
+  // or
+  const { curve } = useControls({ curve: bezier('in-out-quadratic') })
+  // or 
+  const { curve } = useControls({ curve: bezier({ handles: [0.54, 0.05, 0.6, 0.98], graph: false }) })
+
+  // use built-in function evaluation
+  console.log(curve.evaluate(0.3))
+
+  // just spread the array inside a css style
+  return <div style={{animationTimingFunction: `cubic-bezier(${...curve})`}} />
 }
 ```
