@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useMemo, useReducer } from 'react'
 import { debounce } from 'leva/plugin'
-import { bezier } from './bezier-utils'
 import { PreviewSvg } from './StyledBezier'
 import type { BezierProps } from './bezier-types'
 
 const DebouncedBezierPreview = React.memo(({ value }: Pick<BezierProps, 'value'>) => {
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
 
-  const bezierFn = bezier(...value)
   const plotPoints = Array(21)
     .fill(0)
-    .map((_, i) => 5 + bezierFn(i / 20) * 90)
+    .map((_, i) => 5 + value.evaluate(i / 20) * 90)
   return (
     <PreviewSvg onClick={forceUpdate}>
       {plotPoints.map((p, i) => (
