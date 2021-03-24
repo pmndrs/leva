@@ -10,3 +10,10 @@ body {
 *:before {
   box-sizing: border-box;
 }
+
+pre {
+  max-width: 720px;
+  margin: 20px;
+  padding: 20px;
+  border: 10px solid black;
+}
