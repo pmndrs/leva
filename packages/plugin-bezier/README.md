@@ -21,10 +21,10 @@ function MyComponent() {
   // or 
   const { curve } = useControls({ curve: bezier({ handles: [0.54, 0.05, 0.6, 0.98], graph: false }) })
 
-  // use built-in function evaluation
+  // built-in function evaluation
   console.log(curve.evaluate(0.3))
 
-  // just spread the array inside a css style
-  return <div style={{animationTimingFunction: `cubic-bezier(${curve.join(',')})`}} />
+  // inside a css like animation-timing-function
+  return <div style={{animationTimingFunction: value.cssEasing}} />
 }
 ```

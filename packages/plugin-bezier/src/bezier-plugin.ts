@@ -28,6 +28,7 @@ export const normalize = (input: BezierInput = [0.25, 0.1, 0.25, 1]) => {
   const { value: _value, settings } = normalizeVector(handles, mergedSettings, ['x1', 'y1', 'x2', 'y2'])
   const value = _value as InternalBezier
   value.evaluate = bezier(..._value)
+  value.cssEasing = `cubic-bezier(${_value.join(',')})`
   return { value, settings: { ...settings, ...defaultSettings, ..._settings } as InternalBezierSettings }
 }
 
@@ -35,5 +36,6 @@ export const sanitize = (value: any, settings: InternalBezierSettings, prevValue
   const _value = sanitizeVector(value, settings, prevValue) as BezierArray
   const newValue = _value as InternalBezier
   newValue.evaluate = bezier(..._value)
+  newValue.cssEasing = `cubic-bezier(${_value.join(',')})`
   return newValue
 }
