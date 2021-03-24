@@ -19,7 +19,7 @@ export type Bezier = BezierArray | BuiltInKeys
 export type BezierSettings = { graph?: boolean }
 export type BezierInput = MergedInputWithSettings<Bezier, BezierSettings, 'handles'>
 
-export type InternalBezier = [number, number, number, number] & { evaluate(value: number): number }
+export type InternalBezier = [number, number, number, number] & { evaluate(value: number): number; cssEasing: string }
 
 export type DisplayValueBezier = { x1: number; y1: number; x2: number; y2: number }
 

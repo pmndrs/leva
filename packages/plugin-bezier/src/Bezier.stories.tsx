@@ -5,6 +5,7 @@ import Reset from 'leva/stories/components/decorator-reset'
 import { useControls } from 'leva/src'
 
 import { bezier } from './index'
+import './Bezier.stories.css'
 
 export default {
   title: 'Plugins/Bezier',
@@ -12,9 +13,10 @@ export default {
 } as Meta
 
 const Template: Story<any> = (args) => {
-  const data = useControls({ b: args })
+  const data = useControls({ curve: args })
   return (
     <div>
+      <div className="bezier-animated" style={{ animationTimingFunction: data.curve.cssEasing }} />
       <pre>{JSON.stringify(data, null, '  ')}</pre>
     </div>
   )
