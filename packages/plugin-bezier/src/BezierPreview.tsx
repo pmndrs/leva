@@ -4,6 +4,7 @@ import { PreviewSvg } from './StyledBezier'
 import type { BezierProps } from './bezier-types'
 
 const DebouncedBezierPreview = React.memo(({ value }: Pick<BezierProps, 'value'>) => {
+  // use to forceUpdate on click
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
 
   const plotPoints = Array(21)
