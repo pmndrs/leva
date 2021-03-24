@@ -56,7 +56,6 @@ export const PreviewSvg = styled('svg', {
 })
 
 export const SyledInnerLabel = styled('div', {
-  WebkitUserSelect: 'none',
   userSelect: 'none',
   $leva__flexCenter: '',
   height: 14,

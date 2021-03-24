@@ -3,7 +3,6 @@ import { styled } from '../../styles'
 export const Icon = styled('i', {
   $leva__flexCenter: '',
   width: 40,
-  WebkitUserSelect: 'none', // TODO remove when stitches fixes prefix import
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {

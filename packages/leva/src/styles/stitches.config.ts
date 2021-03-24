@@ -144,13 +144,11 @@ export const { styled, css, theme, global: _global, keyframes } = createCss({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
-      WebkitAppearance: 'none', // TODO remove when stitches fixes prefix import
       appearance: 'none',
     }),
     $leva__draggable: () => () => ({
       touchAction: 'none',
       WebkitUserDrag: 'none',
-      WebkitUserSelect: 'none',
       userSelect: 'none',
     }),
     $leva__focus: () => (value: string) => ({ '&:focus': utils.$leva__focusStyle()(value) }),
@@ -162,10 +160,9 @@ export const { styled, css, theme, global: _global, keyframes } = createCss({
 
 const globalStyles = _global({
   '.leva__panel__dragged': {
-    WebkitUserSelect: 'none',
     WebkitUserDrag: 'none',
     userSelect: 'none',
-    input: { userSelect: 'none', WebkitUserSelect: 'none' },
+    input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })
