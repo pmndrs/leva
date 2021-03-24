@@ -1,5 +1,7 @@
 body {
   font-family: system-ui;
+  min-height: 100vh;
+  background: linear-gradient(140deg, rgb(165, 142, 251), rgb(233, 191, 248));
   margin: 0;
 }
 
