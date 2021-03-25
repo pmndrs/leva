@@ -13,7 +13,7 @@ export default {
 export const ButtonGroup = () => {
   const [values, set] = useControls(() => ({
     Size: 1,
-    '': buttonGroup({
+    ' ': buttonGroup({
       '0.25x': () => set({ Size: 0.25 }),
       '0.5x': () => set({ Size: 0.5 }),
       '1x': () => set({ Size: 1 }),
