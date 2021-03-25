@@ -1,0 +1,17 @@
+@keyframes bezierStoryScale {
+  0% {
+    transform: scaleX(0);
+  }
+
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.bezier-animated {
+  height: 10px;
+  width: 200px;
+  background: indianred;
+  transform-origin: left;
+  animation: bezierStoryScale 1000ms infinite alternate both;
+}

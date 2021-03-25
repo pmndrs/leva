@@ -1,5 +1,16 @@
 # leva
 
+## 0.8.1
+
+### Patch Changes
+
+- c997410: Plugin: add the Bezier plugin
+
+  ```js
+  import { bezier } from '@leva-ui/plugin-bezier'
+  useControls({ curve: bezier([0.25, 0.1, 0.25, 1]) })
+  ```
+
 ## 0.8.0
 
 ### Minor Changes

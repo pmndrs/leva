@@ -12,6 +12,7 @@ export const getDefaultTheme = () => ({
     leva__highlight1: '#535760',
     leva__highlight2: '#8c92a4',
     leva__highlight3: '#fefefe',
+    leva__vivid1: '#ffcc00',
     leva__toolTipBackground: '$leva__highlight3',
     leva__toolTipText: '$leva__elevation2',
   },
@@ -38,7 +39,7 @@ export const getDefaultTheme = () => ({
   sizes: {
     leva__rootWidth: '280px',
     leva__controlWidth: '160px',
-    leva__numberInputMinWidth: '36px',
+    leva__numberInputMinWidth: '38px',
     leva__scrubberWidth: '8px',
     leva__scrubberHeight: '16px',
     leva__rowHeight: '24px',
@@ -104,8 +105,8 @@ const utils = {
     createStateClass(value, { key: '$leva__active', borderColor: '$leva__accent1', inset: true }),
 }
 
-export const { styled, css, theme, global: _global } = createCss({
-  insertMethod() {
+export const { styled, css, theme, global: _global, keyframes } = createCss({
+  insertionMethod() {
     let currentCssHead: HTMLHeadElement | null = null
     let currentCssNode: HTMLElement | null = null
 
@@ -143,7 +144,6 @@ export const { styled, css, theme, global: _global } = createCss({
       fontFamily: 'inherit',
       border: 'none',
       backgroundColor: 'transparent',
-      WebkitAppearance: 'none', // TODO remove when stitches fixes prefix import
       appearance: 'none',
     }),
     $leva__draggable: () => () => ({
@@ -160,10 +160,9 @@ export const { styled, css, theme, global: _global } = createCss({
 
 const globalStyles = _global({
   '.leva__panel__dragged': {
-    WebkitUserSelect: 'none',
     WebkitUserDrag: 'none',
     userSelect: 'none',
-    input: { userSelect: 'none', WebkitUserSelect: 'none' },
+    input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })

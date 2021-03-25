@@ -37,6 +37,7 @@ export const Dot = styled('div', {
 })
 
 export const SyledInnerLabel = styled('div', {
+  userSelect: 'none',
   $leva__flexCenter: '',
   height: 14,
   width: 14,

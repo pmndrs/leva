@@ -12,7 +12,7 @@ function Coordinate<T extends Record<string, number>>({
   valueKey,
   settings,
   onUpdate,
-  hideLabel,
+  innerLabelTrim,
 }: CoordinateProps<T>) {
   const args = { type: 'NUMBER', value: value[valueKey], settings }
   // @ts-expect-error
@@ -29,7 +29,7 @@ function Coordinate<T extends Record<string, number>>({
       onUpdate={number.onUpdate}
       onChange={number.onChange}
       settings={settings}
-      hideLabel={hideLabel}
+      innerLabelTrim={innerLabelTrim}
     />
   )
 }
@@ -77,7 +77,7 @@ export function Vector<T extends Record<string, number>>({
   value,
   onUpdate,
   settings,
-  hideNumberLabels,
+  innerLabelTrim,
 }: VectorProps<T>) {
   const { id, setSettings } = useInputContext()
 
@@ -95,7 +95,7 @@ export function Vector<T extends Record<string, number>>({
           value={value}
           settings={settings[key]}
           onUpdate={onUpdate}
-          hideLabel={hideNumberLabels}
+          innerLabelTrim={innerLabelTrim}
         />
       ))}
     </Container>
