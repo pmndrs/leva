@@ -32,7 +32,7 @@ export function RangeSlider({ value, min, max, onDrag, step, initialValue }: Ran
   return (
     <RangeWrapper ref={ref} {...bind()}>
       <Range>
-        <Indicator style={{ left: 0, right: `calc(${1 - pos} * (100% - ${scrubberWidth}))` }} />
+        <Indicator style={{ left: 0, right: `${(1 - pos) * 100}%` }} />
       </Range>
       <Scrubber ref={scrubberRef} style={{ left: `calc(${pos} * (100% - ${scrubberWidth}))` }} />
     </RangeWrapper>
