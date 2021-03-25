@@ -48,13 +48,13 @@ function MyComponent() {
 
 ### Documentation
 
-- [Getting Started](docs/getting-started.md)
-- [Inputs](docs/inputs.md)
-- [Configuration](docs/configuration.md)
-- [Styling](docs/styling.md)
+- [Getting Started](/docs/getting-started.md)
+- [Inputs](/docs/inputs.md)
+- [Configuration](/docs/configuration.md)
+- [Styling](/docs/styling.md)
 
-- [Advanced: Controlled Inputs](docs/advanced/controlled-inputs.md)
-- [Advanced: Creating Plugins](docs/advanced/creating-plugins.md)
+- [Advanced: Controlled Inputs](/docs/advanced/controlled-inputs.md)
+- [Advanced: Creating Plugins](/docs/advanced/creating-plugins.md)
 
 
 ## Contributors ✨
