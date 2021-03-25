@@ -8,6 +8,7 @@ export enum LevaErrors {
   THEME_ERROR,
   PATH_DOESNT_EXIST,
   INPUT_TYPE_OVERRIDE,
+  EMPTY_KEY,
 }
 
 const ErrorList = {
@@ -35,6 +36,7 @@ const ErrorList = {
   [LevaErrors.INPUT_TYPE_OVERRIDE]: (path: string, type: string, wrongType: string) => [
     `Input at path \`${path}\` already exists with type: \`${type}\`. Its type cannot be overridden with type \`${wrongType}\`.`,
   ],
+  [LevaErrors.EMPTY_KEY]: () => ['Key can not be empty, if you want hide label use whitespace'],
 }
 
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
