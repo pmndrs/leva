@@ -13,7 +13,7 @@ type ButtonGroupProps = {
 export function ButtonGroup({ label, opts }: ButtonGroupProps) {
   return (
     <Row input={true}>
-      <Label>{label !== '__LEVA_EMPTY_LABEL_' ? label : ''}</Label>
+      <Label>{label}</Label>
       <StyledButtonGroup>
         {Object.entries(opts).map(([label, onClick]) => (
           <StyledButtonGroupButton key={label} onClick={() => onClick()}>
