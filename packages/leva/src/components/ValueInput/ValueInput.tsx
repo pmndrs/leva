@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
@@ -16,6 +16,7 @@ type ValueInputProps = {
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
   const { id: _id } = useInputContext()
   const inputId = id || _id
+  const previousOnUpdate = useRef(onUpdate)
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
@@ -25,11 +26,19 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     []
   )
 
+  const onBlur = useCallback(
+    (event: any) => {
+      update(previousOnUpdate.current)(event)
+      previousOnUpdate.current = onUpdate
+    },
+    [update, onUpdate]
+  )
+
   const onKeyPress = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        update(onUpdate)(e)
-        // e.currentTarget.blur()
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        update(onUpdate)(event)
+        // event.currentTarget.blur()
       }
     },
     [update, onUpdate]
@@ -46,7 +55,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onBlur={update(onUpdate)}
+        onBlur={onBlur}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}
