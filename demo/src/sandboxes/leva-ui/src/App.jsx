@@ -109,7 +109,7 @@ export default function App() {
   const [[selection, store], setSelection] = React.useState([-1, null])
   React.useEffect(() => {
     function deleteSelection(e) {
-      if (e.key === 'Backspace' && selection > -1) {
+      if (e.key === 'Backspace' && selection > -1 && e.target.classList.contains('selected')) {
         setBoxes((b) => {
           const _b = [...b]
           _b.splice(selection, 1)
