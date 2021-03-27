@@ -1,11 +1,11 @@
 import React, { createContext, useContext } from 'react'
 import type { FullTheme } from './styles'
-import type { StoreType, PanelSettingsType } from './types'
+import type { StoreType, PanelSettingsType, InputContextProps } from './types'
 
 export const InputContext = createContext({})
 
-export function useInputContext<T>() {
-  return useContext(InputContext) as T
+export function useInputContext<T = {}>() {
+  return useContext(InputContext) as InputContextProps & T
 }
 
 type ThemeContextProps = { theme: FullTheme; className: string }
