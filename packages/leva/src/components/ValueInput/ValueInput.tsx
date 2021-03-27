@@ -26,6 +26,12 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     []
   )
 
+  /**
+   * We need to add native blur handler because of this issue in React, where
+   * the onBlur handler isn't called during unmount:
+   * https://github.com/facebook/react/issues/12363
+   */
+
   React.useEffect(() => {
     const ref = inputRef.current
     const _onUpdate = update(onUpdate)
