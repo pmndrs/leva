@@ -2,7 +2,7 @@ export const clamp = (x: number, min: number, max: number) => (x > max ? max : x
 export const pad = (x: number, pad: number) => String(x).padStart(pad, '0')
 export const ceil = (v: number) => Math.sign(v) * Math.ceil(Math.abs(v))
 export const parseNumber = (v: number | string) => {
-  if (typeof v === 'number') return v
+  if (v === '' || typeof v === 'number') return v
   try {
     const _v = evaluate(v)
     if (!isNaN(_v)) return _v
