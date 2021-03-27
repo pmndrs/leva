@@ -7,6 +7,7 @@ export type MappedPaths = Record<string, { path: string; onChange: (value: any) 
 
 export type StoreType = {
   useStore: UseStore<State>
+  storeId: string
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[]) => void

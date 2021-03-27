@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
 import create from 'zustand'
-import { normalizeInput, join, updateInput, warn, LevaErrors } from './utils'
+import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
 
+  this.storeId = getUid()
   this.useStore = store
   /**
    * Folders will hold the folder settings for the pane.
