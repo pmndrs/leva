@@ -16,7 +16,7 @@ type ValueInputProps = {
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
   const { id: _id } = useInputContext()
   const inputId = id || _id
-  const previousOnUpdate = useRef(onUpdate)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
@@ -26,13 +26,12 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     []
   )
 
-  const onBlur = useCallback(
-    (event: any) => {
-      update(previousOnUpdate.current)(event)
-      previousOnUpdate.current = onUpdate
-    },
-    [update, onUpdate]
-  )
+  React.useEffect(() => {
+    const ref = inputRef.current
+    const _onUpdate = update(onUpdate)
+    ref?.addEventListener('blur', _onUpdate)
+    return () => ref?.removeEventListener('blur', _onUpdate)
+  }, [update, onUpdate])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,13 +48,13 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
       {innerLabel && typeof innerLabel === 'string' ? <InnerLabel>{innerLabel}</InnerLabel> : innerLabel}
       <StyledInput
         levaType={type}
+        ref={inputRef}
         id={inputId}
         type="text"
         autoComplete="off"
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onBlur={onBlur}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}
