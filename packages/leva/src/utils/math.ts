@@ -30,7 +30,7 @@ export const range = (v: number, min: number, max: number) => {
 export const invertedRange = (p: number, min: number, max: number) => p * (max - min) + min
 
 // from https://gist.github.com/gordonbrander/2230317
-export const uid = () => '_' + Math.random().toString(36).substr(2, 9)
+export const getUid = () => '_' + Math.random().toString(36).substr(2, 9)
 
 const parens = /\(([0-9+\-*/^ .]+)\)/ // Regex for identifying parenthetical expressions
 const exp = /(\d+(?:\.\d+)?) ?\^ ?(\d+(?:\.\d+)?)/ // Regex for identifying exponentials (x ^ y)
