@@ -8,7 +8,7 @@ type ParsedOptions = {
   options: CommonOptions | DataInputOptions
 }
 
-export function parseOptions(_input: any, key: string, customType?: string): ParsedOptions {
+export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
   if (typeof _input !== 'object' || Array.isArray(_input)) {
     return {
       type: customType,
@@ -18,17 +18,25 @@ export function parseOptions(_input: any, key: string, customType?: string): Par
         label: key,
         optional: false,
         disabled: false,
+        ...mergedOptions,
       },
     }
   }
 
   if ('__customInput' in _input) {
-    return parseOptions(_input.__customInput, key, _input.type)
+    /**
+     * If a custom input uses a non object arg, the only way to parse options
+     * is { ...myPlugin('value'), label: 'my label' }.
+     * In that case, the input will be shaped like so:
+     * { type, __customInput, label }
+     */
+    const { type, __customInput, ...options } = _input
+    return parseOptions(__customInput, key, options, type)
   }
 
   // parse generic options from input object
   const { render, label, optional, disabled, hint, onChange, ...inputWithType } = _input
-  const commonOptions = { render, key, label: label ?? key, hint }
+  const commonOptions = { render, key, label: label ?? key, hint, ...mergedOptions }
 
   let { type, ...input } = inputWithType
   type = customType ?? type
