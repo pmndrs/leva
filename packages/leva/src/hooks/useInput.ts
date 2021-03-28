@@ -18,7 +18,10 @@ type Input = Omit<DataItem, '__refCount'>
  */
 export function useInput(
   path: string
-): [Input | null, { set: (value: any) => void; setSettings: (value: any) => void; disable: (flag: boolean) => void }] {
+): [
+  Input | null,
+  { set: (value: any) => void; setSettings: (value: any) => void; disable: (flag: boolean) => void; storeId: string }
+] {
   const store = useStoreContext()
   const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
@@ -32,5 +35,5 @@ export function useInput(
     return () => unsub()
   }, [store, path])
 
-  return [state, { set, setSettings, disable }]
+  return [state, { set, setSettings, disable, storeId: store.storeId }]
 }

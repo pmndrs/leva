@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
@@ -16,6 +16,7 @@ type ValueInputProps = {
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
   const { id: _id } = useInputContext()
   const inputId = id || _id
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
@@ -25,11 +26,24 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     []
   )
 
+  /**
+   * We need to add native blur handler because of this issue in React, where
+   * the onBlur handler isn't called during unmount:
+   * https://github.com/facebook/react/issues/12363
+   */
+
+  React.useEffect(() => {
+    const ref = inputRef.current
+    const _onUpdate = update(onUpdate)
+    ref?.addEventListener('blur', _onUpdate)
+    return () => ref?.removeEventListener('blur', _onUpdate)
+  }, [update, onUpdate])
+
   const onKeyPress = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
-        update(onUpdate)(e)
-        // e.currentTarget.blur()
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        update(onUpdate)(event)
+        // event.currentTarget.blur()
       }
     },
     [update, onUpdate]
@@ -40,13 +54,13 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
       {innerLabel && typeof innerLabel === 'string' ? <InnerLabel>{innerLabel}</InnerLabel> : innerLabel}
       <StyledInput
         levaType={type}
+        ref={inputRef}
         id={inputId}
         type="text"
         autoComplete="off"
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onBlur={update(onUpdate)}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}

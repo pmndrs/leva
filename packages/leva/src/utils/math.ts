@@ -2,7 +2,7 @@ export const clamp = (x: number, min: number, max: number) => (x > max ? max : x
 export const pad = (x: number, pad: number) => String(x).padStart(pad, '0')
 export const ceil = (v: number) => Math.sign(v) * Math.ceil(Math.abs(v))
 export const parseNumber = (v: number | string) => {
-  if (typeof v === 'number') return v
+  if (v === '' || typeof v === 'number') return v
   try {
     const _v = evaluate(v)
     if (!isNaN(_v)) return _v
@@ -30,7 +30,7 @@ export const range = (v: number, min: number, max: number) => {
 export const invertedRange = (p: number, min: number, max: number) => p * (max - min) + min
 
 // from https://gist.github.com/gordonbrander/2230317
-export const uid = () => '_' + Math.random().toString(36).substr(2, 9)
+export const getUid = () => '_' + Math.random().toString(36).substr(2, 9)
 
 const parens = /\(([0-9+\-*/^ .]+)\)/ // Regex for identifying parenthetical expressions
 const exp = /(\d+(?:\.\d+)?) ?\^ ?(\d+(?:\.\d+)?)/ // Regex for identifying exponentials (x ^ y)

@@ -1,7 +1,64 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { Data, DataInput, SpecialInputs, StoreType } from '../types'
-import { warn, LevaErrors } from './log'
+import { CommonOptions, Data, DataInput, DataInputOptions, SpecialInputs, StoreType } from '../types'
+
+type ParsedOptions = {
+  type?: string
+  input: any
+  options: CommonOptions | DataInputOptions
+}
+
+export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
+  // if input isn't an object then we just need to assing default options to it.
+  if (typeof _input !== 'object' || Array.isArray(_input)) {
+    return {
+      type: customType,
+      input: _input,
+      options: {
+        key,
+        label: key,
+        optional: false,
+        disabled: false,
+        ...mergedOptions,
+      },
+    }
+  }
+
+  // if it's a custom input, then the input will be under the __customInput key
+  // so we run the parseOptions function on that key and for its type.
+  if ('__customInput' in _input) {
+    /**
+     * If a custom input uses a non object arg, the only way to parse options
+     * is { ...myPlugin('value'), label: 'my label' }.
+     * In that case, the input will be shaped like so:
+     * { type, __customInput, label }
+     */
+    const { type, __customInput, ...options } = _input
+    return parseOptions(__customInput, key, options, type)
+  }
+
+  // parse generic options from input object
+  const { render, label, optional, disabled, hint, onChange, ...inputWithType } = _input
+  const commonOptions = { render, key, label: label ?? key, hint, ...mergedOptions }
+
+  let { type, ...input } = inputWithType
+  type = customType ?? type
+
+  if (type in SpecialInputs) {
+    return { type, input, options: commonOptions }
+  }
+
+  return {
+    type,
+    input,
+    options: {
+      ...commonOptions,
+      onChange,
+      optional: optional ?? false,
+      disabled: disabled ?? false,
+    },
+  }
+}
 
 /**
  * This function is used to normalize the way an input is stored in the store.
@@ -11,29 +68,28 @@ import { warn, LevaErrors } from './log'
  * @param input
  * @param path
  */
-export function normalizeInput(input: any, path: string, data: Data) {
-  if (typeof input === 'object') {
-    if ('type' in input) {
+export function normalizeInput(_input: any, key: string, path: string, data: Data) {
+  const parsedInputAndOptions = parseOptions(_input, key)
+  const { type, input: parsedInput, options } = parsedInputAndOptions
+
+  if (type) {
+    if (type in SpecialInputs)
       // If the input is a special input then we return it as it is.
-      if (input.type in SpecialInputs) return input
+      return parsedInputAndOptions
 
-      // If the type key exists at this point, it must be a custom plugin
-      // defined by the user.
-      const { type, ...rest } = input
-      const _input = 'value' in rest ? rest.value : rest
-      return { type, ...normalize(type, _input, path, data) }
-    }
-    const type = getValueType(input)
-    if (type) return { type, ...normalize(type, input, path, data) }
+    // If the type key exists at this point, it must be a custom plugin
+    // defined by the user, and it's already been normalized.
+    return { type, input: normalize(type, parsedInput, path, data), options }
   }
+  let inputType = getValueType(parsedInput)
+  if (inputType) return { type: inputType, input: normalize(inputType, parsedInput, path, data), options }
 
-  const type = getValueType({ value: input })
+  inputType = getValueType({ value: parsedInput })
 
-  // At this point, if type is null we'll have to warn the user that its input
-  // is not recognized.
-  if (!type) return warn(LevaErrors.UNKNOWN_INPUT, path, input)
+  if (inputType) return { type: inputType, input: normalize(inputType, { value: parsedInput }, path, data), options }
 
-  return { type, ...normalize(type, { value: input }, path, data) }
+  // At this point, the input is not recognized and we return false
+  return false
 }
 
 export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType) {

@@ -6,6 +6,9 @@ import './style.css'
 export default function App() {
   const { curve } = useControls({ curve: bezier() })
 
+  //const a = [...curve]
+  console.log(...curve)
+
   return (
     <div className="App">
       <div className="bezier-animated" style={{ animationTimingFunction: curve.cssEasing }} />

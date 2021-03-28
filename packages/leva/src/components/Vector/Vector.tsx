@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useCallback } from 'react'
 import { useInputContext } from '../../context'
 import { styled } from '../../styles'
 import { useInputSetters } from '../../hooks'
@@ -14,11 +14,19 @@ function Coordinate<T extends Record<string, number>>({
   onUpdate,
   innerLabelTrim,
 }: CoordinateProps<T>) {
-  const args = { type: 'NUMBER', value: value[valueKey], settings }
-  // @ts-expect-error
-  const setValue = (newValue: any) => onUpdate({ [valueKey]: sanitizeValue(args, newValue) })
+  // TODO make this better
 
-  const number = useInputSetters({ ...args, setValue })
+  const valueRef = useRef(value[valueKey])
+  valueRef.current = value[valueKey]
+
+  const setValue = useCallback(
+    (newValue: any) =>
+      // @ts-expect-error
+      onUpdate({ [valueKey]: sanitizeValue({ type: 'NUMBER', value: valueRef.current, settings }, newValue) }),
+    [onUpdate, settings, valueKey]
+  )
+
+  const number = useInputSetters({ type: 'NUMBER', value: value[valueKey], settings, setValue })
 
   return (
     <Number

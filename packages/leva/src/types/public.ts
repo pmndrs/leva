@@ -105,7 +105,7 @@ export type FolderInput<Schema> = {
   settings: FolderSettings
 }
 
-export type CustomInput<Value> = Value & { type: string; __customInput: true }
+export type CustomInput<Value> = { type: string; __customInput: Value }
 
 type SchemaItem =
   | InputWithSettings<number, NumberSettings>
@@ -121,19 +121,23 @@ type SchemaItem =
   | StringInput
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Element; hint?: string }
-type InputOptions = { optional?: boolean; disabled?: boolean; onChange?: (v: any) => void }
-type ReservedKeys = keyof GenericSchemaItemOptions | keyof InputOptions | '__customInput' | 'type'
+type GenericSchemaItemOptions = {
+  render?: RenderFn
+  label?: string | JSX.Element
+  hint?: string
+}
 
-type StripReservedKeys<K> = BeautifyUnionType<
-  K extends any[] | Function ? K : K extends object ? Omit<K, ReservedKeys> : K
->
+export type InputOptions = GenericSchemaItemOptions & {
+  optional?: boolean
+  disabled?: boolean
+  onChange?: (v: any) => void
+}
 
 type SchemaItemWithOptions =
   | number
   | boolean
   | string
-  | (SchemaItem & InputOptions & GenericSchemaItemOptions)
+  | (SchemaItem & InputOptions)
   | (SpecialInput & GenericSchemaItemOptions)
   | FolderInput<unknown>
 
@@ -146,7 +150,7 @@ export type Schema = Record<string, SchemaItemWithOptions>
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
-  ? StripReservedKeys<I>
+  ? BeautifyUnionType<I>
   : S extends ImageInput
   ? string | undefined
   : S extends SelectWithValueInput<infer T, infer K>
@@ -255,6 +259,24 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
   format?: (value: any, settings: InternalSettings) => any
 }
 
+export type InputContextProps = {
+  id: string
+  label: string | JSX.Element
+  hint?: string
+  path: string
+  key: string
+  optional: boolean
+  disabled: boolean
+  disable: (flag: boolean) => void
+  storeId: string
+  value: unknown
+  displayValue: unknown
+  onChange: React.Dispatch<any>
+  onUpdate: (v: any | ((v: any) => any)) => void
+  settings: unknown
+  setSettings: (v: any) => void
+}
+
 /**
  * Interface consumed by the useInputContext hook so that its returned values
  * are properly typed.
@@ -266,13 +288,13 @@ export interface Plugin<Input, Value = Input, InternalSettings = {}> {
  * @public
  */
 export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
-  label: string | JSX.Element
   path?: string
   id?: string
+  hint?: string
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
-  onUpdate: (v: any | ((_v: any) => any)) => void
+  onUpdate: (v: any | ((v: any) => any)) => void
   settings: InternalSettings
   setSettings: (v: Partial<InternalSettings>) => void
 }
