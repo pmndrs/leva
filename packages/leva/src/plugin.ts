@@ -52,6 +52,8 @@ export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
   return plugin
 }
 
+type PluginInput<Input> = Input extends object ? Input & InputOptions : Input
+
 /**
  * This function should be used by custom plugins. It is mostly used as a way
  * to properly type the input return value.
@@ -61,7 +63,7 @@ export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
 export function createPlugin<Input, Value, InternalSettings>(plugin: Plugin<Input, Value, InternalSettings>) {
   const type = getUniqueType()
   Plugins[type] = plugin
-  return (input?: Input & InputOptions) => {
+  return (input?: PluginInput<Input>) => {
     return ({ type, __customInput: input } as unknown) as CustomInput<Value>
   }
 }
