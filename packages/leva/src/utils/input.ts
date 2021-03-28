@@ -9,6 +9,7 @@ type ParsedOptions = {
 }
 
 export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
+  // if input isn't an object then we just need to assing default options to it.
   if (typeof _input !== 'object' || Array.isArray(_input)) {
     return {
       type: customType,
@@ -23,6 +24,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
     }
   }
 
+  // if it's a custom input, then the input will be under the __customInput key
+  // so we run the parseOptions function on that key and for its type.
   if ('__customInput' in _input) {
     /**
      * If a custom input uses a non object arg, the only way to parse options
