@@ -150,7 +150,7 @@ export type Schema = Record<string, SchemaItemWithOptions>
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
-  ? I
+  ? BeautifyUnionType<I>
   : S extends ImageInput
   ? string | undefined
   : S extends SelectWithValueInput<infer T, infer K>
@@ -188,7 +188,7 @@ export type Leaves<IncludeTransient extends boolean, T, P extends string | numbe
   1: never
   // if the leaf is an object, we run the type check on each of its keys
   2: {
-    [i in P]: BeautifyUnionType<T extends { optional: true } ? PrimitiveToValue<T> | undefined : PrimitiveToValue<T>>
+    [i in P]: T extends { optional: true } ? PrimitiveToValue<T> | undefined : PrimitiveToValue<T>
   }
   // recursivity
   3: { [K in keyof T]: Join<T, K, Leaves<IncludeTransient, T[K], K>> }[keyof T]
