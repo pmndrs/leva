@@ -1,5 +1,4 @@
 // Utils from https://github.com/pmndrs/use-tweaks/blob/92561618abbf43c581fc5950fd35c0f8b21047cd/src/types.ts#L70
-
 /**
  * It does nothing but beautify union type
  *
@@ -11,8 +10,10 @@
 export type BeautifyUnionType<T> = T extends Function
   ? T
   : T extends infer TT
-  ? { [k in keyof TT]: TT[k] } & IterableIterator<T> // adds Iterator to the return type in case it has any
+  ? { [k in keyof TT]: TT[k] } & GetIterator<TT> // adds Iterator to the return type in case it has any
   : never
+
+type GetIterator<T> = T extends { [Symbol.iterator]: any } ? IterableIterator<T> : {}
 
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
 

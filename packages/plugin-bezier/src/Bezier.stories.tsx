@@ -32,4 +32,4 @@ export const WithPreset = Template.bind({})
 WithPreset.args = bezier('in-out-quadratic')
 
 export const WithOptions = Template.bind({})
-WithOptions.args = bezier({ handles: [0.54, 0.05, 0.6, 0.98], graph: false })
+WithOptions.args = bezier({ handles: [0.54, 0.05, 0.6, 0.98], graph: false, label: 'no graph' })

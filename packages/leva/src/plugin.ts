@@ -1,6 +1,14 @@
 import { warn, LevaErrors } from './utils/log'
-import type { Plugin, CustomInput, InputWithSettings, InternalPlugin, StoreType, Data, LevaInputs } from './types'
-import { isObject } from './utils'
+import type {
+  Plugin,
+  CustomInput,
+  InputWithSettings,
+  InternalPlugin,
+  StoreType,
+  Data,
+  LevaInputs,
+  InputOptions,
+} from './types'
 
 const Schemas: ((v: any, settings?: any) => false | string)[] = []
 
@@ -53,9 +61,8 @@ export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
 export function createPlugin<Input, Value, InternalSettings>(plugin: Plugin<Input, Value, InternalSettings>) {
   const type = getUniqueType()
   Plugins[type] = plugin
-  return (input?: Input) => {
-    const _input = isObject(input) ? input : { value: input }
-    return { type, ..._input } as CustomInput<Value>
+  return (input?: Input & InputOptions) => {
+    return ({ type, __customInput: input } as unknown) as CustomInput<Value>
   }
 }
 
@@ -67,7 +74,11 @@ export function normalize<V, Settings extends object = {}>(
 ) {
   const { normalize: _normalize } = Plugins[type]
   if (_normalize) return _normalize(input, path, data)
-  return input
+
+  if (typeof input !== 'object' || !('value' in input)) return { value: input }
+
+  const { value, ...settings } = input
+  return { value, settings }
 }
 
 export function sanitize<Settings extends object | undefined>(

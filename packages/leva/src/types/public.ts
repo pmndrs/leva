@@ -105,7 +105,7 @@ export type FolderInput<Schema> = {
   settings: FolderSettings
 }
 
-export type CustomInput<Value> = Value & { type: string; __customInput: true }
+export type CustomInput<Value> = { type: string; __customInput: Value }
 
 type SchemaItem =
   | InputWithSettings<number, NumberSettings>
@@ -121,19 +121,23 @@ type SchemaItem =
   | StringInput
   | CustomInput<unknown>
 
-type GenericSchemaItemOptions = { render?: RenderFn; label?: string | JSX.Element; hint?: string }
-type InputOptions = { optional?: boolean; disabled?: boolean; onChange?: (v: any) => void }
-type ReservedKeys = keyof GenericSchemaItemOptions | keyof InputOptions | '__customInput' | 'type'
+type GenericSchemaItemOptions = {
+  render?: RenderFn
+  label?: string | JSX.Element
+  hint?: string
+}
 
-type StripReservedKeys<K> = BeautifyUnionType<
-  K extends any[] | Function ? K : K extends object ? Omit<K, ReservedKeys> : K
->
+export type InputOptions = GenericSchemaItemOptions & {
+  optional?: boolean
+  disabled?: boolean
+  onChange?: (v: any) => void
+}
 
 type SchemaItemWithOptions =
   | number
   | boolean
   | string
-  | (SchemaItem & InputOptions & GenericSchemaItemOptions)
+  | (SchemaItem & InputOptions)
   | (SpecialInput & GenericSchemaItemOptions)
   | FolderInput<unknown>
 
@@ -146,7 +150,7 @@ export type Schema = Record<string, SchemaItemWithOptions>
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
 type PrimitiveToValue<S> = S extends CustomInput<infer I>
-  ? StripReservedKeys<I>
+  ? BeautifyUnionType<I>
   : S extends ImageInput
   ? string | undefined
   : S extends SelectWithValueInput<infer T, infer K>

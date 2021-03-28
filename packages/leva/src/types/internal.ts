@@ -25,24 +25,27 @@ export type StoreType = {
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
 }
 
-type Decorators = {
-  __refCount: number
+export type CommonOptions = {
   key: string
   label: string | JSX.Element
   hint?: string
   render?: RenderFn
 }
 
-export type DataInput = {
-  type: string
-  value: unknown
+export type DataInputOptions = CommonOptions & {
   optional: boolean
   disabled: boolean
   onChange?: (value: unknown) => void
-  settings?: object
-} & Decorators
+}
 
-export type DataItem = DataInput | (SpecialInput & Decorators)
+export type DataInput = {
+  __refCount: number
+  type: string
+  value: unknown
+  settings?: object
+} & DataInputOptions
+
+export type DataItem = DataInput | (SpecialInput & CommonOptions & { __refCount: number })
 
 export type Data = Record<string, DataItem>
 
