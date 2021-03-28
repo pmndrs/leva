@@ -1,5 +1,21 @@
 # leva
 
+## 0.8.2
+
+### Patch Changes
+
+- 7fd9f92: feat: allow input options to be spread inside custom plugin.
+- b4aa43d: Fix: add empty key warning.
+- 7fd9f92: fix: correct onUpdate for a blurred input: previously bluring an input from a
+  store while selecting a second store would commit the change on the second
+  store.
+
+  fix: return number previous value when field is empty.
+
+  types: (internal) fix default useInputContext types.
+
+- e21f2fe: fix: slider position overflowing with range input.
+
 ## 0.8.1
 
 ### Patch Changes
