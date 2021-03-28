@@ -1,5 +1,11 @@
 # leva
 
+## 0.8.3
+
+### Patch Changes
+
+- a7f9bf1: types: don't use union type when not using objects as plugin function args.
+
 ## 0.8.2
 
 ### Patch Changes
