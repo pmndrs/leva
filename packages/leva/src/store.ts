@@ -226,7 +226,7 @@ export const Store = (function (this: StoreType) {
   const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
     const data: Data = {}
 
-    Object.entries(schema).forEach(([key, input]: [string, any]) => {
+    Object.entries(schema).forEach(([key, rawInput]: [string, any]) => {
       // if the key is empty, skip schema parsing and prompt an error.
       if (key === '') return warn(LevaErrors.EMPTY_KEY)
 
@@ -234,52 +234,25 @@ export const Store = (function (this: StoreType) {
 
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
-      if (input.type === SpecialInputs.FOLDER) {
-        const newData = _getDataFromSchema(input.schema, newPath, mappedPaths)
+      if (rawInput.type === SpecialInputs.FOLDER) {
+        const newData = _getDataFromSchema(rawInput.schema, newPath, mappedPaths)
         Object.assign(data, newData)
 
         // Sets folder preferences if it wasn't set before
-        if (!(newPath in folders)) folders[newPath] = input.settings as FolderSettings
+        if (!(newPath in folders)) folders[newPath] = rawInput.settings as FolderSettings
       } else if (key in mappedPaths) {
         // if a key already exists, prompt an error.
         warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key].path)
       } else {
-        // If the input is not a folder, we normalize the input.
-        let _render = undefined
-        let _label = undefined
-        let _hint = undefined
-        let _optional
-        let _disabled
-        let _input = input
-        let _onChange
-
-        // parse generic options from input object
-        if (typeof input === 'object' && !Array.isArray(input)) {
-          const { render, label, optional, disabled, hint, onChange, ...rest } = input
-          _label = label
-          _render = render
-          _input = rest
-          _optional = optional
-          _disabled = disabled
-          _hint = hint
-          _onChange = onChange
-        }
-        mappedPaths[key] = { path: newPath, onChange: _onChange }
-
-        const normalizedInput = normalizeInput(_input, newPath, data)
-        // normalizeInput can return false if the input is not recognized.
+        const normalizedInput = normalizeInput(rawInput, key, newPath, data)
         if (normalizedInput) {
-          data[newPath] = normalizedInput
-          data[newPath].key = key
-          data[newPath].label = _label ?? key
-          data[newPath].hint = _hint
-          if (!(input.type in SpecialInputs)) {
-            // @ts-expect-error
-            data[newPath].optional = _optional ?? false
-            // @ts-expect-error
-            data[newPath].disabled = _disabled ?? false
-          }
-          if (typeof _render === 'function') data[newPath].render = _render
+          const { type, options, input } = normalizedInput
+          // @ts-ignore
+          const { onChange, ..._options } = options
+          data[newPath] = { type, ..._options, ...input }
+          mappedPaths[key] = { path: newPath, onChange }
+        } else {
+          warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
         }
       }
     })
