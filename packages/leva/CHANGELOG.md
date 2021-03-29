@@ -1,5 +1,11 @@
 # leva
 
+## 0.8.4
+
+### Patch Changes
+
+- e0fdefc: types: fix beautifier union type.
+
 ## 0.8.3
 
 ### Patch Changes
