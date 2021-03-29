@@ -8,14 +8,6 @@ on:
       - '!docs/**'
       - '!**.md'
       - '!.changeset/**'
-  pull_request:
-    paths:
-      - '.github/**'
-      - 'packages/**'
-      - '!demo/**'
-      - '!docs/**'
-      - '!**.md'
-      - '!.changeset/**'
 jobs:
   build:
     name: Build, lint, and test
