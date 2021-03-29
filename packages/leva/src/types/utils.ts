@@ -7,13 +7,18 @@
  * type B = Id<{ a: 'a' } & { b: 'b' }> // { a: 'a', b: 'b' }
  * ```
  */
-export type BeautifyUnionType<T> = T extends Function
-  ? T
-  : T extends infer TT
-  ? { [k in keyof TT]: TT[k] } & GetIterator<TT> // adds Iterator to the return type in case it has any
-  : never
+export type BeautifyUnionType<T> = T extends object
+  ? T extends Function // if T is a function return it as is
+    ? T
+    : any[] extends T // if T is a plain array return it as is
+    ? T
+    : T extends infer TT // if T is an object beautify it
+    ? { [k in keyof TT]: TT[k] } & GetIterator<TT>
+    : never
+  : T
 
-type GetIterator<T> = T extends { [Symbol.iterator]: any } ? IterableIterator<T> : {}
+// adds Iterator to the return type in case it has any
+type GetIterator<T> = T extends { [Symbol.iterator]: infer U } ? { [Symbol.iterator]: U } : {}
 
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
 
