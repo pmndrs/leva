@@ -91,7 +91,11 @@ const LevaCore = React.memo(
     fill = false,
     flat = false,
     oneLineLabels = false,
-    titleBar = true,
+    titleBar = {
+      title: undefined,
+      drag: true,
+      filter: true
+    },
     hideCopyButton = false,
     toggled,
     setToggle,
