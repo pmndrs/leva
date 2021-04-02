@@ -20,7 +20,13 @@ export const StyledTitleWithFilter = styled('div', {
   alignItems: 'stretch',
   justifyContent: 'space-between',
   height: '$leva__titleBarHeight',
-  cursor: 'grab',
+  variants: {
+    mode: {
+      drag: {
+        cursor: 'grab',
+      },
+    },
+  },
 })
 
 export const FilterWrapper = styled('div', {
@@ -56,15 +62,27 @@ export const StyledFilterInput = styled('input', {
   },
 })
 
-export const Drag = styled('div', {
+export const TitleContainer = styled('div', {
   $leva__flexCenter: '',
-  $leva__draggable: '',
   flex: 1,
   '> svg': {
     fill: '$leva__highlight1',
-    transition: 'fill 250ms ease',
   },
-  '&:hover > svg': {
-    fill: '$leva__highlight3',
+  color: '$leva__highlight1',
+  variants: {
+    mode: {
+      drag: {
+        $leva__draggable: '',
+        '> svg': {
+          transition: 'fill 250ms ease',
+        },
+        '&:hover': {
+          color: '$leva__highlight3',
+        },
+        '&:hover > svg': {
+          fill: '$leva__highlight3',
+        },
+      },
+    },
   },
 })

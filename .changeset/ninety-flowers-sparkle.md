@@ -4,7 +4,7 @@
 
 BREAKING CHANGE: Replace `hideTitleBar` with `titleBar` option.
 
-For hidng the title bar the usages of `<Leva hideTitleBar />` must be replaced with `<Leva titleBar={false} />`.
+For hiding the title bar the usages of `<Leva hideTitleBar />` must be replaced with `<Leva titleBar={false} />`.
 
 It is now possible to overwite the six dots rendered as the title by default by providing a object with a `title` property to the `titleBar` property.
 
@@ -12,6 +12,16 @@ It is now possible to overwite the six dots rendered as the title by default by 
 <Leva
   titleBar={{
     title: "Some Title"
+  }}
+/>
+```
+
+Its is now possible to disable dragging of the panel via the `drag` property on the `titleBar` property.
+
+```tsx
+<Leva
+  titleBar={{
+    drag: false
   }}
 />
 ```

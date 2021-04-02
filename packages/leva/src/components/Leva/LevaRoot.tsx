@@ -45,9 +45,13 @@ export type LevaRootProps = {
    */
   titleBar?: boolean | {
     /**
-     * Overwrites the default titles (6 dots) if set to a value that is not undefined.
+     * Overwrites the default title content (6 dots if drag is enabled) if set to a non undefined value.
      */
     title?: React.ReactNode;
+    /**
+     * Toggle whether the leva panel can be dragged around via the title bar.
+     */
+    drag?: boolean;
   };
   /**
    * If true, the copy button will be hidden
@@ -97,6 +101,8 @@ const LevaCore = React.memo(
 
     // this generally happens on first render because the store is initialized in useEffect.
     const shouldShow = paths.length > 0
+    const title = typeof titleBar === "object" ? titleBar.title : undefined
+    const drag = typeof titleBar === "object" ? titleBar.drag ?? true : true
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
@@ -109,7 +115,14 @@ const LevaCore = React.memo(
           hideTitleBar={!titleBar}
           style={{ display: shouldShow ? 'block' : 'none' }}>
           {titleBar && (
-            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} title={typeof titleBar === "object" ? titleBar.title : undefined} />
+            <TitleWithFilter
+              onDrag={set}
+              setFilter={setFilter}
+              toggle={() => setToggle((t) => !t)}
+              toggled={toggled}
+              title={title}
+              drag={drag}
+            />
           )}
           {shouldShow && (
             <StoreContext.Provider value={store}>

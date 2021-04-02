@@ -44,6 +44,11 @@ export const HideCopyButton = Template.bind({})
 HideCopyButton.args = { hideCopyButton: true }
 
 export const Title: Story<any> = (args, context) => {
-  return Template({ titleBar: { title:  args.title }}, context)
+  return Template({ titleBar: { title: args.title } }, context)
 }
-Title.args = { title: "Custom title" }
+Title.args = { title: 'Custom title' }
+
+export const Drag: Story<any> = (args, context) => {
+  return Template({ titleBar: { drag: args.drag } }, context)
+}
+Drag.args = { drag: true }

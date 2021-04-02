@@ -3,7 +3,7 @@ import { useDrag } from 'react-use-gesture'
 import { debounce } from '../../utils'
 import { FolderTitleProps } from '../Folder'
 import { Chevron } from '../UI'
-import { StyledFilterInput, StyledTitleWithFilter, Drag, Icon, FilterWrapper } from './StyledFilter'
+import { StyledFilterInput, StyledTitleWithFilter, TitleContainer, Icon, FilterWrapper } from './StyledFilter'
 
 type FilterProps = { setFilter: (value: string) => void }
 
@@ -50,9 +50,10 @@ export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
     onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
     title: React.ReactNode
+    drag: boolean
   }
 
-export function TitleWithFilter({ setFilter, onDrag, toggle, toggled, title }: TitleWithFilterProps) {
+export function TitleWithFilter({ setFilter, onDrag, toggle, toggled, title, drag }: TitleWithFilterProps) {
   const [filterShown, setShowFilter] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -75,12 +76,12 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled, title }: T
 
   return (
     <>
-      <StyledTitleWithFilter>
+      <StyledTitleWithFilter mode={drag ? 'drag' : undefined}>
         <Icon active={!toggled} onClick={() => toggle()}>
           <Chevron toggled={toggled} width={12} height={8} />
         </Icon>
-        <Drag {...bind()}>
-          {title === undefined ? (
+        <TitleContainer {...(drag ? bind() : {})} mode={drag ? 'drag' : undefined}>
+          {title === undefined && drag ? (
             <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
               <circle cx="2" cy="2" r="2" />
               <circle cx="14" cy="2" r="2" />
@@ -92,7 +93,7 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled, title }: T
           ) : (
             title
           )}
-        </Drag>
+        </TitleContainer>
         <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)}>
           <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 20 20">
             <path d="M9 9a2 2 0 114 0 2 2 0 01-4 0z" />
