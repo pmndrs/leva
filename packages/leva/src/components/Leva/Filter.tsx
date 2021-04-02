@@ -49,9 +49,10 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
 export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
     onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
+    title: React.ReactNode
   }
 
-export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWithFilterProps) {
+export function TitleWithFilter({ setFilter, onDrag, toggle, toggled, title }: TitleWithFilterProps) {
   const [filterShown, setShowFilter] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -79,14 +80,18 @@ export function TitleWithFilter({ setFilter, onDrag, toggle, toggled }: TitleWit
           <Chevron toggled={toggled} width={12} height={8} />
         </Icon>
         <Drag {...bind()}>
-          <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="2" cy="2" r="2" />
-            <circle cx="14" cy="2" r="2" />
-            <circle cx="26" cy="2" r="2" />
-            <circle cx="2" cy="12" r="2" />
-            <circle cx="14" cy="12" r="2" />
-            <circle cx="26" cy="12" r="2" />
-          </svg>
+          {title === undefined ? (
+            <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="2" cy="2" r="2" />
+              <circle cx="14" cy="2" r="2" />
+              <circle cx="26" cy="2" r="2" />
+              <circle cx="2" cy="12" r="2" />
+              <circle cx="14" cy="12" r="2" />
+              <circle cx="26" cy="12" r="2" />
+            </svg>
+          ) : (
+            title
+          )}
         </Drag>
         <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)}>
           <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 20 20">

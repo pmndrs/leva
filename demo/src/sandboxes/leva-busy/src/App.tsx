@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <>
-      <Leva hideTitleBar={hideTitleBar} oneLineLabels={oneLineLabels} />
+      <Leva titleBar={!hideTitleBar} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>

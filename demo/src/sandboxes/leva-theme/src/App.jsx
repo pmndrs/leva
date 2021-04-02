@@ -187,13 +187,13 @@ export default function App() {
           overflow: 'auto',
           background: '#181C20',
         }}>
-        <LevaPanel fill flat hideTitleBar store={colorsStore} />
-        <LevaPanel fill flat hideTitleBar store={radiiStore} />
-        <LevaPanel fill flat hideTitleBar store={spaceStore} />
-        <LevaPanel fill flat hideTitleBar store={fontSizesStore} />
-        <LevaPanel fill flat hideTitleBar store={sizesStore} />
-        <LevaPanel fill flat hideTitleBar store={borderWidthsStore} />
-        <LevaPanel fill flat hideTitleBar store={fontWeightsStore} />
+        <LevaPanel fill flat titleBar={false} store={colorsStore} />
+        <LevaPanel fill flat titleBar={false} store={radiiStore} />
+        <LevaPanel fill flat titleBar={false} store={spaceStore} />
+        <LevaPanel fill flat titleBar={false} store={fontSizesStore} />
+        <LevaPanel fill flat titleBar={false} store={sizesStore} />
+        <LevaPanel fill flat titleBar={false} store={borderWidthsStore} />
+        <LevaPanel fill flat titleBar={false} store={fontWeightsStore} />
       </div>
       <Controls />
     </div>

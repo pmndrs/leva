@@ -40,14 +40,21 @@ export type LevaRootProps = {
    */
   oneLineLabels?: boolean
   /**
-   * If true, the title bar including filters and drag zone will be hidden
+   * If true, the title bar including filters and drag zone will be shown. If set to false, the title bar including filters will be hidden.
+   * In case it is set to an object the title bar will be shown and the additional sub-options might be applied.
    */
-  hideTitleBar?: boolean
+  titleBar?: boolean | {
+    /**
+     * Overwrites the default titles (6 dots) if set to a value that is not undefined.
+     */
+    title?: React.ReactNode;
+  };
   /**
    * If true, the copy button will be hidden
    */
   hideCopyButton?: boolean
 }
+
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
@@ -76,7 +83,7 @@ const LevaCore = React.memo(
     fill = false,
     flat = false,
     oneLineLabels = false,
-    hideTitleBar = false,
+    titleBar = true,
     hideCopyButton = false,
     toggled,
     setToggle,
@@ -99,10 +106,10 @@ const LevaCore = React.memo(
           fill={fill}
           flat={flat}
           oneLineLabels={oneLineLabels}
-          hideTitleBar={hideTitleBar}
+          hideTitleBar={!titleBar}
           style={{ display: shouldShow ? 'block' : 'none' }}>
-          {!hideTitleBar && (
-            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+          {titleBar && (
+            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} title={typeof titleBar === "object" ? titleBar.title : undefined} />
           )}
           {shouldShow && (
             <StoreContext.Provider value={store}>

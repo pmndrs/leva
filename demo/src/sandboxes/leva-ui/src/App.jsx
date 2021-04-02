@@ -142,8 +142,8 @@ export default function App() {
         ))}
       </div>
       <div className="panel">
-        <Leva fill flat hideTitleBar />
-        <LevaPanel store={store} fill flat hideTitleBar />
+        <Leva fill flat titleBar={false} />
+        <LevaPanel store={store} fill flat  titleBar={false} />
       </div>
     </div>
   )
