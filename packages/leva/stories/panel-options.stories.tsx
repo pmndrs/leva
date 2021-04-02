@@ -52,3 +52,8 @@ export const Drag: Story<any> = (args, context) => {
   return Template({ titleBar: { drag: args.drag } }, context)
 }
 Drag.args = { drag: true }
+
+export const Filter: Story<any> = (args, context) => {
+  return Template({ titleBar: { filter: args.filter } }, context)
+}
+Filter.args = { filter: true }

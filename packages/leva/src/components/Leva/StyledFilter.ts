@@ -1,8 +1,14 @@
 import { styled } from '../../styles'
 
+const iconWidth = 40
+
+export const DisabledIconPlaceholder = styled('span', {
+  width: iconWidth,
+})
+
 export const Icon = styled('i', {
   $leva__flexCenter: '',
-  width: 40,
+  width: iconWidth,
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {

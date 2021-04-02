@@ -52,6 +52,10 @@ export type LevaRootProps = {
      * Toggle whether the leva panel can be dragged around via the title bar.
      */
     drag?: boolean;
+    /**
+     * Toggle whether filtering should be enabled or disabled.
+     */
+    filter?: boolean;
   };
   /**
    * If true, the copy button will be hidden
@@ -103,6 +107,7 @@ const LevaCore = React.memo(
     const shouldShow = paths.length > 0
     const title = typeof titleBar === "object" ? titleBar.title : undefined
     const drag = typeof titleBar === "object" ? titleBar.drag ?? true : true
+    const filterEnabled =  typeof titleBar === "object" ? titleBar.filter ?? true : true
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
@@ -122,6 +127,7 @@ const LevaCore = React.memo(
               toggled={toggled}
               title={title}
               drag={drag}
+              filterEnabled={filterEnabled}
             />
           )}
           {shouldShow && (
