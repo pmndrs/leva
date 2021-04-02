@@ -3,14 +3,7 @@ import { useDrag } from 'react-use-gesture'
 import { debounce } from '../../utils'
 import { FolderTitleProps } from '../Folder'
 import { Chevron } from '../UI'
-import {
-  StyledFilterInput,
-  StyledTitleWithFilter,
-  TitleContainer,
-  Icon,
-  FilterWrapper,
-  DisabledIconPlaceholder,
-} from './StyledFilter'
+import { StyledFilterInput, StyledTitleWithFilter, TitleContainer, Icon, FilterWrapper } from './StyledFilter'
 
 type FilterProps = { setFilter: (value: string) => void }
 
@@ -96,7 +89,7 @@ export function TitleWithFilter({
         <Icon active={!toggled} onClick={() => toggle()}>
           <Chevron toggled={toggled} width={12} height={8} />
         </Icon>
-        <TitleContainer {...(drag ? bind() : {})} mode={drag ? 'drag' : undefined}>
+        <TitleContainer {...(drag ? bind() : {})} drag={drag} filterEnabled={filterEnabled}>
           {title === undefined && drag ? (
             <svg width="20" height="10" viewBox="0 0 28 14" xmlns="http://www.w3.org/2000/svg">
               <circle cx="2" cy="2" r="2" />
@@ -109,7 +102,6 @@ export function TitleWithFilter({
           ) : (
             title
           )}
-          {!filterEnabled && <DisabledIconPlaceholder />}
         </TitleContainer>
         {filterEnabled && (
           <Icon active={filterShown} onClick={() => setShowFilter((f) => !f)}>

@@ -2,10 +2,6 @@ import { styled } from '../../styles'
 
 const iconWidth = 40
 
-export const DisabledIconPlaceholder = styled('span', {
-  width: iconWidth,
-})
-
 export const Icon = styled('i', {
   $leva__flexCenter: '',
   width: iconWidth,
@@ -76,8 +72,8 @@ export const TitleContainer = styled('div', {
   },
   color: '$leva__highlight1',
   variants: {
-    mode: {
-      drag: {
+    drag: {
+      true: {
         $leva__draggable: '',
         '> svg': {
           transition: 'fill 250ms ease',
@@ -88,6 +84,11 @@ export const TitleContainer = styled('div', {
         '&:hover > svg': {
           fill: '$leva__highlight3',
         },
+      },
+    },
+    filterEnabled: {
+      false: {
+        paddingRight: iconWidth,
       },
     },
   },
