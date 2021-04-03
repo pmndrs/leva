@@ -26,7 +26,6 @@
     "@radix-ui/react-tooltip": "0.0.9",
     "@stitches/react": "^0.1.0",
     "@welldone-software/why-did-you-render": "^6.1.1",
-    "clipboard-polyfill": "^3.0.2",
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
     "react-colorful": "^5.0.1",
