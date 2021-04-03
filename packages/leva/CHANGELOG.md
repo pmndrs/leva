@@ -1,6 +1,6 @@
 # leva
 
-## 0.8.5
+## 0.9.0
 
 ### Patch Changes
 
