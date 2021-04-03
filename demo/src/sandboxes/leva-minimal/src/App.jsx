@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <>
-      <Leva hideTitleBar />
+      <Leva titleBar={false} />
       <pre>{JSON.stringify(data, null, '  ')}</pre>
     </>
   )

@@ -1,8 +1,10 @@
 import { styled } from '../../styles'
 
+const iconWidth = 40
+
 export const Icon = styled('i', {
   $leva__flexCenter: '',
-  width: 40,
+  width: iconWidth,
   userSelect: 'none',
   cursor: 'pointer',
   '> svg': {
@@ -20,7 +22,13 @@ export const StyledTitleWithFilter = styled('div', {
   alignItems: 'stretch',
   justifyContent: 'space-between',
   height: '$leva__titleBarHeight',
-  cursor: 'grab',
+  variants: {
+    mode: {
+      drag: {
+        cursor: 'grab',
+      },
+    },
+  },
 })
 
 export const FilterWrapper = styled('div', {
@@ -56,15 +64,32 @@ export const StyledFilterInput = styled('input', {
   },
 })
 
-export const Drag = styled('div', {
+export const TitleContainer = styled('div', {
   $leva__flexCenter: '',
-  $leva__draggable: '',
   flex: 1,
   '> svg': {
     fill: '$leva__highlight1',
-    transition: 'fill 250ms ease',
   },
-  '&:hover > svg': {
-    fill: '$leva__highlight3',
+  color: '$leva__highlight1',
+  variants: {
+    drag: {
+      true: {
+        $leva__draggable: '',
+        '> svg': {
+          transition: 'fill 250ms ease',
+        },
+        '&:hover': {
+          color: '$leva__highlight3',
+        },
+        '&:hover > svg': {
+          fill: '$leva__highlight3',
+        },
+      },
+    },
+    filterEnabled: {
+      false: {
+        paddingRight: iconWidth,
+      },
+    },
   },
 })

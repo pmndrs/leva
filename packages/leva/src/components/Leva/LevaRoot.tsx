@@ -40,14 +40,29 @@ export type LevaRootProps = {
    */
   oneLineLabels?: boolean
   /**
-   * If true, the title bar including filters and drag zone will be hidden
+   * If true, the title bar including filters and drag zone will be shown. If set to false, the title bar including filters will be hidden.
+   * In case it is set to an object the title bar will be shown and the additional sub-options might be applied.
    */
-  hideTitleBar?: boolean
+  titleBar?: boolean | {
+    /**
+     * Overwrites the default title content (6 dots if drag is enabled) if set to a non undefined value.
+     */
+    title?: React.ReactNode;
+    /**
+     * Toggle whether the leva panel can be dragged around via the title bar.
+     */
+    drag?: boolean;
+    /**
+     * Toggle whether filtering should be enabled or disabled.
+     */
+    filter?: boolean;
+  };
   /**
    * If true, the copy button will be hidden
    */
   hideCopyButton?: boolean
 }
+
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
@@ -76,7 +91,11 @@ const LevaCore = React.memo(
     fill = false,
     flat = false,
     oneLineLabels = false,
-    hideTitleBar = false,
+    titleBar = {
+      title: undefined,
+      drag: true,
+      filter: true
+    },
     hideCopyButton = false,
     toggled,
     setToggle,
@@ -90,6 +109,9 @@ const LevaCore = React.memo(
 
     // this generally happens on first render because the store is initialized in useEffect.
     const shouldShow = paths.length > 0
+    const title = typeof titleBar === "object" ? titleBar.title : undefined
+    const drag = typeof titleBar === "object" ? titleBar.drag ?? true : true
+    const filterEnabled =  typeof titleBar === "object" ? titleBar.filter ?? true : true
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
@@ -99,10 +121,18 @@ const LevaCore = React.memo(
           fill={fill}
           flat={flat}
           oneLineLabels={oneLineLabels}
-          hideTitleBar={hideTitleBar}
+          hideTitleBar={!titleBar}
           style={{ display: shouldShow ? 'block' : 'none' }}>
-          {!hideTitleBar && (
-            <TitleWithFilter onDrag={set} setFilter={setFilter} toggle={() => setToggle((t) => !t)} toggled={toggled} />
+          {titleBar && (
+            <TitleWithFilter
+              onDrag={set}
+              setFilter={setFilter}
+              toggle={() => setToggle((t) => !t)}
+              toggled={toggled}
+              title={title}
+              drag={drag}
+              filterEnabled={filterEnabled}
+            />
           )}
           {shouldShow && (
             <StoreContext.Provider value={store}>
