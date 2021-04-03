@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { writeText } from 'clipboard-polyfill/text'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
 import { useInputContext, usePanelSettingsContext } from '../../context'
@@ -55,7 +54,7 @@ export function Label({ align, ...props }: LabelProps) {
 
   const handleClick = async () => {
     try {
-      await writeText(JSON.stringify({ [key]: value ?? '' }))
+      await navigator.clipboard.writeText(JSON.stringify({ [key]: value ?? '' }))
       setCopied(true)
     } catch {
       warn(LevaErrors.CLIPBOARD_ERROR, { [key]: value })
