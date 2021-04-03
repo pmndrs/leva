@@ -1,5 +1,5 @@
 ---
-'leva': minor
+'leva': patch
 ---
 
 BREAKING CHANGE: Replace `hideTitleBar` with `titleBar` option.
