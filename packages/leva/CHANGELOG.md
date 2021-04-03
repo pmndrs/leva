@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.1
+
+### Patch Changes
+
+- 09ac7b1: chore: remove `clipboard-polyfill` dependency.
+
 ## 0.9.0
 
 ### Patch Changes
