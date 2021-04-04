@@ -125,6 +125,7 @@ type GenericSchemaItemOptions = {
   render?: RenderFn
   label?: string | JSX.Element
   hint?: string
+  copy?: (key: string, value: unknown) => string
 }
 
 export type InputOptions = GenericSchemaItemOptions & {
@@ -263,6 +264,7 @@ export type InputContextProps = {
   id: string
   label: string | JSX.Element
   hint?: string
+  copy: (key: string, value: unknown) => string
   path: string
   key: string
   optional: boolean

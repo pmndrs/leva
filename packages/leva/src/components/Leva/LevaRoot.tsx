@@ -61,6 +61,10 @@ export type LevaRootProps = {
    * If true, the copy button will be hidden
    */
   hideCopyButton?: boolean
+  /**
+   * Change what will be copied when clicking the global copy button
+   */
+  copy?: (values: unknown) => string
 }
 
 
@@ -97,6 +101,7 @@ const LevaCore = React.memo(
       filter: true
     },
     hideCopyButton = false,
+    copy,
     toggled,
     setToggle,
   }: LevaCoreProps) => {
@@ -115,31 +120,33 @@ const LevaCore = React.memo(
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
-        <StyledRoot
-          ref={rootRef}
-          className={rootClass}
-          fill={fill}
-          flat={flat}
-          oneLineLabels={oneLineLabels}
-          hideTitleBar={!titleBar}
-          style={{ display: shouldShow ? 'block' : 'none' }}>
-          {titleBar && (
-            <TitleWithFilter
-              onDrag={set}
-              setFilter={setFilter}
-              toggle={() => setToggle((t) => !t)}
-              toggled={toggled}
-              title={title}
-              drag={drag}
-              filterEnabled={filterEnabled}
-            />
-          )}
-          {shouldShow && (
-            <StoreContext.Provider value={store}>
-              <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
-            </StoreContext.Provider>
-          )}
-        </StyledRoot>
+        <StoreContext.Provider value={store}>
+          <StyledRoot
+            ref={rootRef}
+            className={rootClass}
+            fill={fill}
+            flat={flat}
+            oneLineLabels={oneLineLabels}
+            hideTitleBar={!titleBar}
+            style={{ display: shouldShow ? 'block' : 'none' }}>
+            {titleBar && (
+              <TitleWithFilter
+                onDrag={set}
+                setFilter={setFilter}
+                toggle={() => setToggle((t) => !t)}
+                toggled={toggled}
+                title={title}
+                drag={drag}
+                filterEnabled={filterEnabled}
+                hideCopyButton={hideCopyButton}
+                copy={copy}
+              />
+            )}
+            {shouldShow && (
+                <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
+            )}
+          </StyledRoot>
+        </StoreContext.Provider>
       </PanelSettingsContext.Provider>
     )
   }
