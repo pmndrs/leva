@@ -26,7 +26,7 @@ register(LevaInputs.VECTOR3D, vector3d)
 register(LevaInputs.VECTOR2D, vector2d)
 
 // main hook
-export { useControls } from './useControls'
+export { useControls, withRenderUpdate } from './useControls'
 
 // panel components
 export { Leva, LevaPanel } from './components/Leva'
