@@ -51,7 +51,11 @@ const [, set] = useControls(() => ({
 }))
 ```
 
-See [this CodeSandbox](https://codesandbox.io/s/leva-controlled-input-71dkb?file=/src/App.tsx) for an example.
+[codesandbox-drag]: (https://codesandbox.io/s/leva-controlled-input-71dkb?file=/src/App.tsx)
+
+[![dragging circle while Leva GUI updates](./circle-drag.gif)][codesandbox-drag]
+
+See [this CodeSandbox][codesandbox-drag] for an example.
 
 ---
 
