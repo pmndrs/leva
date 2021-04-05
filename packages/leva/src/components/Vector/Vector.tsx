@@ -12,6 +12,8 @@ function Coordinate<T extends Record<string, number>>({
   valueKey,
   settings,
   onUpdate,
+  onChangeStart,
+  onChangeEnd,
   innerLabelTrim,
 }: CoordinateProps<T>) {
   // TODO make this better
@@ -36,6 +38,8 @@ function Coordinate<T extends Record<string, number>>({
       displayValue={number.displayValue}
       onUpdate={number.onUpdate}
       onChange={number.onChange}
+      onChangeStart={onChangeStart}
+      onChangeEnd={onChangeEnd}
       settings={settings}
       innerLabelTrim={innerLabelTrim}
     />
@@ -84,6 +88,8 @@ function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked:
 export function Vector<T extends Record<string, number>>({
   value,
   onUpdate,
+  onChangeStart,
+  onChangeEnd,
   settings,
   innerLabelTrim,
 }: VectorProps<T>) {
@@ -103,6 +109,8 @@ export function Vector<T extends Record<string, number>>({
           value={value}
           settings={settings[key]}
           onUpdate={onUpdate}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
           innerLabelTrim={innerLabelTrim}
         />
       ))}

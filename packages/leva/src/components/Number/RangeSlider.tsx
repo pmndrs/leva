@@ -6,13 +6,13 @@ import { invertedRange, range } from '../../utils'
 import { useTh } from '../../styles'
 import type { RangeSliderProps } from './number-types'
 
-export function RangeSlider({ value, min, max, onDrag, step, initialValue }: RangeSliderProps) {
+export function RangeSlider({ value, min, max, onDrag, onDragStart, onDragEnd, step, initialValue }: RangeSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const scrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
   const scrubberWidth = useTh('sizes', 'leva__scrubberWidth')
 
-  const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo }) => {
+  const bind = useDrag(({ event, first, last, xy: [x], movement: [mx], memo }) => {
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
       const { width, left } = ref.current!.getBoundingClientRect()
@@ -24,6 +24,11 @@ export function RangeSlider({ value, min, max, onDrag, step, initialValue }: Ran
     }
     const newValue = memo + invertedRange(mx / rangeWidth.current, 0, max - min)
     onDrag(sanitizeStep(newValue, { step, initialValue }))
+    if (first) {
+      onDragStart(newValue)
+    } else if (last) {
+      onDragEnd(newValue)
+    }
     return memo
   })
 

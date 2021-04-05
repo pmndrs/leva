@@ -36,6 +36,8 @@ export type DataInputOptions = CommonOptions & {
   optional: boolean
   disabled: boolean
   onChange?: (value: unknown) => void
+  onChangeStart?: (value: unknown) => void
+  onChangeEnd?: (value: unknown) => void
 }
 
 export type DataInput = {

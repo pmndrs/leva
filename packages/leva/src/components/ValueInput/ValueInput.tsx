@@ -10,10 +10,23 @@ type ValueInputProps = {
   type?: 'number' | undefined
   onUpdate: (value: any) => void
   onChange: (value: string) => void
+  onChangeStart?: () => void
+  onChangeEnd?: () => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 }
 
-export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
+export function ValueInput({
+  innerLabel,
+  value,
+  onUpdate,
+  onChange,
+  onChangeStart,
+  onChangeEnd,
+  onKeyDown,
+  type,
+  id,
+  ...props
+}: ValueInputProps) {
   const { id: _id } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement>(null)
@@ -34,10 +47,13 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 
   React.useEffect(() => {
     const ref = inputRef.current
-    const _onUpdate = update(onUpdate)
+    const _onUpdate = (ev: FocusEvent) => {
+      update(onUpdate)(ev)
+      onChangeEnd?.()
+    }
     ref?.addEventListener('blur', _onUpdate)
     return () => ref?.removeEventListener('blur', _onUpdate)
-  }, [update, onUpdate])
+  }, [update, onUpdate, onChangeEnd])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,6 +77,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
+        onFocus={() => onChangeStart?.()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}

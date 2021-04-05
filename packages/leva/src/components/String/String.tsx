@@ -12,11 +12,17 @@ export function String({ displayValue, onUpdate, onChange, ...props }: BaseStrin
 }
 
 export function StringComponent() {
-  const { label, displayValue, onUpdate, onChange } = useInputContext<StringProps>()
+  const { label, displayValue, onUpdate, onChange, onChangeStart, onChangeEnd } = useInputContext<StringProps>()
   return (
     <Row input>
       <Label>{label}</Label>
-      <String displayValue={displayValue} onUpdate={onUpdate} onChange={onChange} />
+      <String
+        displayValue={displayValue}
+        onUpdate={onUpdate}
+        onChange={onChange}
+        onChangeStart={onChangeStart}
+        onChangeEnd={onChangeEnd}
+      />
     </Row>
   )
 }

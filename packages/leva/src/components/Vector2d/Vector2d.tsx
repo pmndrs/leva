@@ -18,13 +18,27 @@ export const Container = styled('div', {
 })
 
 export function Vector2dComponent() {
-  const { label, displayValue, onUpdate, settings } = useInputContext<Vector2dProps>()
+  const { label, displayValue, onUpdate, onChangeStart, onChangeEnd, settings } = useInputContext<Vector2dProps>()
   return (
     <Row input>
       <Label>{label}</Label>
       <Container withJoystick={!!settings.joystick}>
-        {settings.joystick && <Joystick value={displayValue} settings={settings} onUpdate={onUpdate} />}
-        <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
+        {settings.joystick && (
+          <Joystick
+            value={displayValue}
+            settings={settings}
+            onUpdate={onUpdate}
+            onChangeStart={onChangeStart}
+            onChangeEnd={onChangeEnd}
+          />
+        )}
+        <Vector
+          value={displayValue}
+          settings={settings}
+          onUpdate={onUpdate}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+        />
       </Container>
     </Row>
   )

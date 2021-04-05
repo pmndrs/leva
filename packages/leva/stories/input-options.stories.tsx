@@ -158,3 +158,75 @@ export const EnforceInputType = ({ inputType }) => {
 
   return null
 }
+
+export const OnChangeStartOnChangeEnd = () => {
+  const [isEditing, setIsEditing] = React.useState(0)
+  const data = useControls({
+    string: {
+      value: 'foobars',
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+    },
+    number: {
+      value: 1,
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+    },
+    numberSlider: {
+      value: 1,
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+      min: 0,
+      max: 10,
+    },
+    interval: {
+      value: [1, 10],
+      min: 1,
+      max: 10,
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+    },
+    vector2d: {
+      value: [1, 1],
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+    },
+    vector3d: {
+      value: [1, 1, 1],
+      onChangeStart: () => {
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: () => {
+        setIsEditing((i) => i - 1)
+      },
+    },
+  })
+
+  return (
+    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+      <pre>Value</pre>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      <pre>Is Editing? {isEditing === 0 ? 'No' : 'Yes'}</pre>
+    </div>
+  )
+}

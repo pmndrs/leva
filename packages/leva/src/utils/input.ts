@@ -38,8 +38,28 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, onChange, transient, ...inputWithType } = _input
-  const commonOptions = { render, key, label: label ?? key, hint, transient: transient ?? !!onChange, ...mergedOptions }
+  const {
+    render,
+    label,
+    optional,
+    disabled,
+    hint,
+    onChange,
+    transient,
+    onChangeStart,
+    onChangeEnd,
+    ...inputWithType
+  } = _input
+  const commonOptions = {
+    render,
+    key,
+    label: label ?? key,
+    hint,
+    transient: transient ?? !!onChange,
+    onChangeStart,
+    onChangeEnd,
+    ...mergedOptions,
+  }
 
   let { type, ...input } = inputWithType
   type = customType ?? type

@@ -62,14 +62,29 @@ export function Color({
 }
 
 export function ColorComponent() {
-  const { value, displayValue, label, onChange, onUpdate, settings } = useInputContext<ColorProps>()
+  const {
+    value,
+    displayValue,
+    label,
+    onChange,
+    onChangeStart,
+    onChangeEnd,
+    onUpdate,
+    settings,
+  } = useInputContext<ColorProps>()
 
   return (
     <Row input>
       <Label>{label}</Label>
       <PickerContainer>
         <Color value={value} displayValue={displayValue} onChange={onChange} onUpdate={onUpdate} settings={settings} />
-        <ValueInput value={displayValue} onChange={onChange} onUpdate={onUpdate} />
+        <ValueInput
+          value={displayValue}
+          onChange={onChange}
+          onChangeStart={onChangeStart}
+          onChangeEnd={onChangeEnd}
+          onUpdate={onUpdate}
+        />
       </PickerContainer>
     </Row>
   )

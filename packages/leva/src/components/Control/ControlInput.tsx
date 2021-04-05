@@ -24,9 +24,16 @@ export function ControlInput({
   settings,
   setValue,
   disabled,
+  onChangeStart,
+  onChangeEnd,
   ...rest
 }: ControlInputProps) {
-  const { displayValue, onChange, onUpdate } = useInputSetters({ type, value, settings, setValue })
+  const { displayValue, onChange, onUpdate } = useInputSetters({
+    type,
+    value,
+    settings,
+    setValue,
+  })
 
   const Input = Plugins[type].component
   if (!Input) {
@@ -44,6 +51,8 @@ export function ControlInput({
         displayValue,
         value,
         onChange,
+        onChangeStart,
+        onChangeEnd,
         onUpdate,
         settings,
         setValue,

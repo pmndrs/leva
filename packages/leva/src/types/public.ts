@@ -161,6 +161,8 @@ export type InputOptions = GenericSchemaItemOptions &
   OnChangeSchemaItemOptions & {
     optional?: boolean
     disabled?: boolean
+    onChangeStart?: () => void
+    onChangeEnd?: () => void
   }
 
 type SchemaItemWithOptions =
@@ -328,6 +330,8 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
+  onChangeStart?: () => void
+  onChangeEnd?: () => void
   onUpdate: (v: any | ((v: any) => any)) => void
   settings: InternalSettings
   setSettings: (v: Partial<InternalSettings>) => void
