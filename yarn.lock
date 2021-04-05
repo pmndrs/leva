@@ -6612,13 +6612,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clipboard-polyfill@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "clipboard-polyfill@npm:3.0.2"
-  checksum: 5ec98e212ca70efa92e86cb5d8f75b64612e94812f5ab6bb35f0dbfc1ab53911a9bbf21b2e4339714a84e190cdf068c3137231422866057b58dbc035f7096a4f
-  languageName: node
-  linkType: hard
-
 "clipboard@npm:^2.0.0":
   version: 2.0.8
   resolution: "clipboard@npm:2.0.8"
@@ -11979,7 +11972,6 @@ fsevents@^1.2.7:
     "@radix-ui/react-tooltip": 0.0.9
     "@stitches/react": ^0.1.0
     "@welldone-software/why-did-you-render": ^6.1.1
-    clipboard-polyfill: ^3.0.2
     dequal: ^2.0.2
     merge-value: ^1.0.0
     react-colorful: ^5.0.1
