@@ -75,19 +75,6 @@ function parseArgs(
   return { schema, folderName, folderSettings, hookSettings, deps: deps || [] }
 }
 
-const UNSTABLE_SomeSymbol: unique symbol = Symbol()
-
-type UNSTABLE_SomeFunction<TValue> = {
-  (value: TValue): void
-  [UNSTABLE_SomeSymbol]: boolean
-}
-
-export const withRenderUpdate = <TValue>(value: (value: TValue) => void) => {
-  // @ts-ignore
-  value[UNSTABLE_SomeSymbol] = UNSTABLE_SomeSymbol
-  return value as UNSTABLE_SomeFunction<TValue>
-}
-
 /**
  *
  * @param schemaOrFolderName
@@ -146,14 +133,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const allPaths: string[] = []
     const renderPaths: string[] = []
     const onChangePaths: Record<string, (v: any) => void> = {}
-    Object.values(mappedPaths).forEach(({ path, onChange }) => {
+    Object.values(mappedPaths).forEach(({ path, onChange, transient }) => {
       allPaths.push(path)
       if (!!onChange) {
         onChangePaths[path] = onChange
-        if (UNSTABLE_SomeSymbol in onChange) {
+        if (!transient) {
           renderPaths.push(path)
         }
-      } else renderPaths.push(path)
+      } else {
+        renderPaths.push(path)
+      }
     })
     return [allPaths, renderPaths, onChangePaths]
   }, [mappedPaths])

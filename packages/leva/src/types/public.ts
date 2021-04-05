@@ -127,11 +127,31 @@ type GenericSchemaItemOptions = {
   hint?: string
 }
 
-export type InputOptions = GenericSchemaItemOptions & {
-  optional?: boolean
-  disabled?: boolean
-  onChange?: (v: any) => void
+type TransientOnChangeSchemaItemOptions = {
+  onChange: (v: any) => void
+  transient?: true
 }
+
+type NonTransientOnChangeSchemaItemOptions = {
+  onChange: (v: any) => void
+  transient: false
+}
+
+type NoOnChangeSchemaItemOptions = {
+  onChange?: undefined
+  transient?: undefined
+}
+
+type OnChangeSchemaItemOptions =
+  | TransientOnChangeSchemaItemOptions
+  | NonTransientOnChangeSchemaItemOptions
+  | NoOnChangeSchemaItemOptions
+
+export type InputOptions = GenericSchemaItemOptions &
+  OnChangeSchemaItemOptions & {
+    optional?: boolean
+    disabled?: boolean
+  }
 
 type SchemaItemWithOptions =
   | number
@@ -204,7 +224,7 @@ export type Leaves<IncludeTransient extends boolean, T, P extends string | numbe
   ? T extends object
     ? 3
     : 4
-  : T extends { onChange: any } // if an input has the onChange property then it's transient and isn't returned
+  : T extends TransientOnChangeSchemaItemOptions // if an input has the onChange property then it's transient and isn't returned
   ? IncludeTransient extends true
     ? 2
     : 1

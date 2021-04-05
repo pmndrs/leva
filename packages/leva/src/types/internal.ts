@@ -3,7 +3,7 @@ import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
 
 export type State = { data: Data }
 
-export type MappedPaths = Record<string, { path: string; onChange: (value: any) => void }>
+export type MappedPaths = Record<string, { path: string; onChange: (value: any) => void; transient: boolean }>
 
 export type StoreType = {
   useStore: UseStore<State>
