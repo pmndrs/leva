@@ -2,28 +2,25 @@
 
 ## set
 
-To change values in leva store from the outside, use the function API
-by passing `() => schema` to `useControls`.
+To change values in Leva store from the outside, use the function API by passing `() => schema` to `useControls`.
 
 ```jsx
-const [{ value }, set] = useControls(() => ({ value: '' }))
+const [{ text }, set] = useControls(() => ({ text: 'my string' }))
 
-return <input type="text" value={value} onChange={(e) => set({ value: e.target.value })} />
+return <input type="text" value={text} onChange={(e) => set({ text: e.target.value })} />
 ```
 
 Use `set` to update values from outside of Leva GUI.
 
-See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-controlled-inputs--external-updates-with-set)
+See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-controlled-inputs--external-updates-with-set).
 
 ## onChange
 
-`onChange` handler in the schema is called for all changes to the value.
-Values with `onChange` will no longer cause React to rerender, so you can use it
-to efficiently update frequently changing value.
+`onChange` callback in the schema is called for all changes to the value. Values with `onChange` will no longer cause React to rerender (unless passing an additional `transient` flag set to `true`, see below), so you can use it to efficiently update frequently changing values.
 
 ```jsx
 const divRef = React.useRef(null)
-const _ = useControls({
+const data = useControls({
   color: {
     value: '#f00',
     onChange: (v) => {
@@ -32,9 +29,14 @@ const _ = useControls({
     },
   },
 })
+
+// `data.color` is undefined
 ```
 
-See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-input-options--on-change)
+See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-input-options--on-change).
+
+### Transient
+If you need the `onChange` callback while 
 
 ## set and onChange
 

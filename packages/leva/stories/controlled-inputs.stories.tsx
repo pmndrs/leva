@@ -1,5 +1,6 @@
 import React from 'react'
-import { ComponentPropsWithoutRef, forwardRef, useRef, MouseEventHandler } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import { useDrag } from 'react-use-gesture'
 import { Meta, Story } from '@storybook/react'
 import Reset from './components/decorator-reset'
 
@@ -13,7 +14,7 @@ export default {
 const formStyles: React.CSSProperties = { display: 'flex', flexDirection: 'column', gap: '0.5em' }
 
 export const ExternalUpdatesWithSet: Story = () => {
-  const [{ username, counter }, set] = useControls(() => ({ username: 'Mario', counter: 0 }))
+  const [{ username, counter }, set] = useControls(() => ({ username: 'Mario', counter: { value: 0, step: 1 } }))
 
   return (
     <form style={formStyles}>
@@ -35,68 +36,51 @@ const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((prop
     <div
       ref={ref}
       style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100px',
-        height: '100px',
+        position: 'relative',
+        top: 100,
+        left: 100,
+        width: 100,
+        height: 100,
         borderRadius: '50%',
         backgroundColor: '#eee',
         border: '1px solid #222',
+        touchAction: 'none',
       }}
       {...props}
     />
   )
 })
 
-ExternalUpdatesWithSet.storyName = 'external updates with set'
+ExternalUpdatesWithSet.storyName = 'External Updates With set'
 
 export const OnChangeAndSet: Story = () => {
-  const isDragging = useRef(false)
   const circleRef = useRef<HTMLDivElement>(null)
   const [, set] = useControls(() => ({
-    mousePosition: {
-      value: { x: 100, y: 150 },
+    position: {
+      value: { x: 0, y: 0 },
       onChange: (position) => {
-        const element = circleRef.current
-        if (element) {
-          element.style.transform = `translate3d(
-            calc(${position.x}px - 50%), calc(${position.y}px - 50%), 0)`
+        if (circleRef.current) {
+          circleRef.current.style.transform = `translate(${position.x}px, ${position.y}px)`
         }
       },
     },
   }))
 
-  const onDragStart: MouseEventHandler<HTMLDivElement> = (event) => {
-    event.currentTarget.style.cursor = 'grabbing'
-    isDragging.current = true
-  }
-  const onDragMove: MouseEventHandler<HTMLDivElement> = (event) => {
-    if (isDragging.current) {
-      const newPosition = {
-        x: event.clientX,
-        y: event.clientY,
-      }
-      set({ mousePosition: newPosition })
-    }
-  }
-  const onDragStop: MouseEventHandler<HTMLDivElement> = (event) => {
-    event.currentTarget.style.cursor = 'initial'
-    isDragging.current = false
-  }
+  useDrag(
+    ({ first, last, offset: [x, y] }) => {
+      if (first) circleRef.current.style.cursor = 'grabbing'
+      if (last) circleRef.current.style.removeProperty('cursor')
+      set({ position: { x, y } })
+    },
+    { domTarget: circleRef }
+  )
 
   return (
     <div style={{ padding: '2em' }}>
       <p>Drag the circle around or change its position from leva input.</p>
-      <Circle
-        ref={circleRef}
-        onPointerDown={onDragStart}
-        onPointerMove={onDragMove}
-        onPointerUp={onDragStop}
-        onPointerOut={onDragStop}
-      />
+      <Circle ref={circleRef} />
     </div>
   )
 }
 
-OnChangeAndSet.storyName = 'onChange and set'
+OnChangeAndSet.storyName = 'onChange And set'
