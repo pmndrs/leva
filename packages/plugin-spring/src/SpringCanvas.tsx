@@ -22,7 +22,7 @@ export function SpringCanvas() {
   const { tension, friction, mass = 1 } = displayValue
   const { tension: ts, friction: fs } = settings!
 
-  const [spring, set] = useSpring(() => ({
+  const [spring, api] = useSpring(() => ({
     scaleX: 0.5,
     opacity: 0.2,
     immediate: (k) => k === 'opacity',
@@ -41,13 +41,13 @@ export function SpringCanvas() {
     () =>
       debounce(() => {
         const { tension, friction, mass } = springRef.current
-        set({
+        api.start({
           from: { scaleX: 0, opacity: 0.9 },
           to: [{ scaleX: 0.5 }, { opacity: 0.2 }],
           config: { friction, tension, mass },
         })
       }, 250),
-    [set]
+    [api]
   )
 
   const drawSpring = useCallback(
