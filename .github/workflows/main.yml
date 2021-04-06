@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/**'
       - 'packages/**'
+      - 'package.json'
       - '!demo/**'
       - '!docs/**'
       - '!**.md'
