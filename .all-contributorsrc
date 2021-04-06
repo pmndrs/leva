@@ -131,6 +131,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "guidovizoso",
+      "name": "Guido Vizoso",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27702539?v=4",
+      "profile": "https://www.linkedin.com/in/guidovizoso/?locale=en_US",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
