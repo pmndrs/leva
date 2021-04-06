@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
-import { a, useSpring } from 'react-spring'
+import { a, useSpring } from '@react-spring/web'
 import { useCanvas2d, useDrag, useInputContext, debounce, tinycolor2 as tc, useTh } from 'leva/plugin'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'

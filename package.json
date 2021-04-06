@@ -74,7 +74,7 @@
     "@typescript-eslint/parser": "^4.21.0",
     "babel-eslint": "^10.1.0",
     "concurrently": "^6.0.1",
-    "cypress": "^6.9.1",
+    "cypress": "^6.8.0",
     "eslint": "^7.23.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-cypress": "^2.11.2",
