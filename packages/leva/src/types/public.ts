@@ -127,11 +127,31 @@ type GenericSchemaItemOptions = {
   hint?: string
 }
 
-export type InputOptions = GenericSchemaItemOptions & {
-  optional?: boolean
-  disabled?: boolean
-  onChange?: (v: any) => void
+type TransientOnChangeSchemaItemOptions = {
+  onChange: (v: any) => void
+  transient?: true
 }
+
+type NonTransientOnChangeSchemaItemOptions = {
+  onChange: (v: any) => void
+  transient: false
+}
+
+type NoOnChangeSchemaItemOptions = {
+  onChange?: undefined
+  transient?: undefined
+}
+
+type OnChangeSchemaItemOptions =
+  | TransientOnChangeSchemaItemOptions
+  | NonTransientOnChangeSchemaItemOptions
+  | NoOnChangeSchemaItemOptions
+
+export type InputOptions = GenericSchemaItemOptions &
+  OnChangeSchemaItemOptions & {
+    optional?: boolean
+    disabled?: boolean
+  }
 
 type SchemaItemWithOptions =
   | number
@@ -149,62 +169,66 @@ export type Schema = Record<string, SchemaItemWithOptions>
  */
 type NotAPrimitiveType = { ____: 'NotAPrimitiveType' }
 
-type PrimitiveToValue<S> = S extends CustomInput<infer I>
-  ? BeautifyUnionType<I>
-  : S extends ImageInput
+type PrimitiveToValue<P> = P extends CustomInput<infer CustomValue>
+  ? BeautifyUnionType<CustomValue>
+  : P extends ImageInput
   ? string | undefined
-  : S extends SelectWithValueInput<infer T, infer K>
-  ? T | K
-  : S extends SelectWithoutValueInput<infer T>
-  ? T
-  : S extends IntervalInput
+  : P extends SelectWithValueInput<infer SelectValue, infer Options>
+  ? SelectValue | Options
+  : P extends SelectWithoutValueInput<infer Options>
+  ? Options
+  : P extends IntervalInput
   ? [number, number]
-  : S extends { value: infer G }
-  ? PrimitiveToValue<G>
-  : S extends VectorObj
-  ? S
-  : S extends Vector3dArray
+  : P extends { value: infer Value }
+  ? PrimitiveToValue<Value>
+  : P extends VectorObj
+  ? P
+  : P extends Vector3dArray
   ? [number, number, number]
-  : S extends Vector2dArray
+  : P extends Vector2dArray
   ? [number, number]
-  : S extends number
+  : P extends number
   ? number
-  : S extends string
+  : P extends string
   ? string
-  : S extends boolean
+  : P extends boolean
   ? boolean
   : NotAPrimitiveType
 
 export type SchemaToValues<Schema, IncludeTransient extends boolean = false> = BeautifyUnionType<
-  UnionToIntersection<Leaves<IncludeTransient, Schema>>
+  UnionToIntersection<Tree<IncludeTransient, Schema>>
 >
 
-type Leaf = { ___leaf: 'leaf' }
-type Join<T, K extends keyof T, P> = Leaf extends P ? { [i in K]: T[K] } : P
+type EndLeaf = { ___leaf: 'leaf' }
 
-export type Leaves<IncludeTransient extends boolean, T, P extends string | number | symbol = ''> = {
+type Join<Leaf1, Leaf1Key extends keyof Leaf1, Leaf2> = EndLeaf extends Leaf2
+  ? { [i in Leaf1Key]: Leaf1[Leaf1Key] }
+  : Leaf2
+
+type Tree<IncludeTransient extends boolean, Leaf, LeafKey extends string | number | symbol = ''> = {
   // if it's a folder we run the type check on it's schema key
-  0: T extends { schema: infer F } ? { [K in keyof F]: Join<F, K, F[K]> } : never
+  0: Leaf extends { schema: infer Schema } ? { [Key in keyof Schema]: Join<Schema, Key, Schema[Key]> } : never
   1: never
   // if the leaf is an object, we run the type check on each of its keys
   2: {
-    [i in P]: T extends { optional: true } ? PrimitiveToValue<T> | undefined : PrimitiveToValue<T>
+    [Key in LeafKey]: Leaf extends { optional: true } ? PrimitiveToValue<Leaf> | undefined : PrimitiveToValue<Leaf>
   }
   // recursivity
-  3: { [K in keyof T]: Join<T, K, Leaves<IncludeTransient, T[K], K>> }[keyof T]
+  3: { [Key in keyof Leaf]: Join<Leaf, Key, Tree<IncludeTransient, Leaf[Key], Key>> }[keyof Leaf]
   // dead end
-  4: Leaf
-}[P extends ''
+  4: EndLeaf
+}[LeafKey extends ''
   ? 3
-  : T extends FolderInput<unknown>
+  : Leaf extends FolderInput<unknown>
   ? 0
-  : T extends SpecialInput
+  : Leaf extends SpecialInput
   ? 1
-  : PrimitiveToValue<T> extends NotAPrimitiveType
-  ? T extends object
+  : PrimitiveToValue<Leaf> extends NotAPrimitiveType
+  ? Leaf extends object
     ? 3
     : 4
-  : T extends { onChange: any } // if an input has the onChange property then it's transient and isn't returned
+  : // if an input has the onChange property then it's transient and isn't returned
+  Leaf extends TransientOnChangeSchemaItemOptions
   ? IncludeTransient extends true
     ? 2
     : 1
