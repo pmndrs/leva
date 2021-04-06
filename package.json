@@ -72,6 +72,7 @@
     "@types/tinycolor2": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
+    "all-contributors-cli": "^6.20.0",
     "babel-eslint": "^10.1.0",
     "concurrently": "^6.0.1",
     "cypress": "6.8.0",
