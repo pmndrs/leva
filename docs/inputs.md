@@ -7,8 +7,8 @@
 A single numerical input.
 
 ```jsx
-const { myNumber } = useControls({ 
-  myNumber: 4
+const { myNumber } = useControls({
+  myNumber: 4,
 })
 ```
 
@@ -22,12 +22,13 @@ const { myNumber } = useControls({
 A Number input with an additional range slider. It will be used when you provide a `min` and `max` value.
 
 ```jsx
-const { myNumber } = useControls({ myNumber: {
+const { myNumber } = useControls({
+  myNumber: {
     value: 4,
     min: 0,
     max: 10,
-    step: 1
-  } 
+    step: 1,
+  },
 })
 ```
 
@@ -39,8 +40,8 @@ A color picker. Color format is inferred by the object used:
 
 ```jsx
 const colors = useControls({
-  myFooColor: "#fff",
-  myBarColor: { r: 200, b: 125, g: 106, a: 0.4 }
+  myFooColor: '#fff',
+  myBarColor: { r: 200, b: 125, g: 106, a: 0.4 },
 })
 ```
 
@@ -54,19 +55,20 @@ A simple toggle.
 const { toggle } = useControls({ toggle: true })
 ```
 
-### Interval 
+### Interval
 
-An array containing two numerical values. 
-Will be used when `value` is an array of 2 numbers:
+An array containing two numerical values.
+Will be used when `value` is an array of 2 numbers and `min` and `max` are specified.
 
 ```jsx
-const { myInterval } = useControls({ 
+const { myInterval } = useControls({
   myInterval: {
     min: 0,
     max: 10,
-    value: [4,5] 
-  } 
-}) // initial value of 4, 5
+    // initial value of 4, 5
+    value: [4, 5],
+  },
+})
 ```
 
 All rules from Number type also apply.
@@ -79,7 +81,34 @@ All rules from Number type also apply.
 
 @todo
 
-### Point2d
-### Point3d
+### Vector2
+
+Compound input of two numerical values without `min` and `max` bounds.
+Will be used when value is an object with `x` and `y` properties or an array of
+two numbers.
+
+```jsx
+const { position } = useControls({
+  position: { x: 0, y: 0 },
+  boxSize: [10, 20],
+})
+```
+
+The joystick can be hidden with `joystick: false` and inverted with `"invertY"`.
+
+```jsx
+const { position } = useControls({
+  position: {
+    value: { x: 0, y: 0 },
+    joystick: "invertY,
+  },
+  boxSize: {
+    value: [10, 20],
+    joystick: false,
+  }
+})
+```
+
+### Vector3
 
 @todo

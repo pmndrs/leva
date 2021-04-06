@@ -38,8 +38,16 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, copy, onChange, ...inputWithType } = _input
-  const commonOptions = { render, key, label: label ?? key, hint, copy, ...mergedOptions }
+  const { render, label, optional, disabled, hint, copy, onChange, transient, ...inputWithType } = _input
+  const commonOptions = {
+    render,
+    key,
+    label: label ?? key,
+    hint,
+    copy,
+    transient: transient ?? !!onChange,
+    ...mergedOptions,
+  }
 
   let { type, ...input } = inputWithType
   type = customType ?? type
@@ -71,7 +79,6 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
 export function normalizeInput(_input: any, key: string, path: string, data: Data) {
   const parsedInputAndOptions = parseOptions(_input, key)
   const { type, input: parsedInput, options } = parsedInputAndOptions
-
   if (type) {
     if (type in SpecialInputs)
       // If the input is a special input then we return it as it is.
