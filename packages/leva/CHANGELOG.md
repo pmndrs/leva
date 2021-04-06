@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.3
+
+### Patch Changes
+
+- 7edbb69: chore: update dependencies.
+
 ## 0.9.2
 
 ### Patch Changes
