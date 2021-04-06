@@ -51,6 +51,12 @@ const [, set] = useControls(() => ({
     },
   },
 }))
+
+const targetRef = useRef()
+useDrag(
+  ({ offset: [x, y] }) => set({ position: { x, y } }),
+  { domTarget: targetRef }
+)
 ```
 
 [codesandbox-drag]: (https://codesandbox.io/s/leva-controlled-input-71dkb?file=/src/App.tsx)
