@@ -137,8 +137,8 @@ export const CustomCopy = () => {
 
   const handleLevaCopy = (values: any) => {
     return `<button
-  id="${values.id}"
->${values.label}</button>`
+  id="${id}"
+>${label}</button>`
   }
 
   return (
