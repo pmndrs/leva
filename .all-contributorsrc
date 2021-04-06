@@ -103,6 +103,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "n1ru4l",
+      "name": "Laurin Quast",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14338007?v=4",
+      "profile": "https://n1ru4l.cloud/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7
