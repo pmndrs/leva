@@ -32,9 +32,10 @@ export type VectorTypeFromValueFormatAndKeys<
  * settings type based on the DefaultKeys. If Value is provided as on object,
  * it extract the keys from Value and forms the Settings from the Value keys.
  */
-export type VectorSettingsFromValueAndKeys<Value extends VectorType, DefaultKeys extends string> = GetKeys<
-  Value
-> extends never
+export type VectorSettingsFromValueAndKeys<
+  Value extends VectorType,
+  DefaultKeys extends string
+> = GetKeys<Value> extends never
   ? DefaultKeys extends never
     ? never
     : { [key in DefaultKeys]: NumberSettings }
