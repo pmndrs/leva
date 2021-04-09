@@ -5,17 +5,11 @@ import { useInputContext } from '../../context'
 import type { Vector3dProps } from './vector3d-types'
 
 export function Vector3dComponent() {
-  const { label, displayValue, onUpdate, onChangeStart, onChangeEnd, settings } = useInputContext<Vector3dProps>()
+  const { label, displayValue, onUpdate, settings } = useInputContext<Vector3dProps>()
   return (
     <Row input>
       <Label>{label}</Label>
-      <Vector
-        value={displayValue}
-        settings={settings}
-        onUpdate={onUpdate}
-        onChangeStart={onChangeStart}
-        onChangeEnd={onChangeEnd}
-      />
+      <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
     </Row>
   )
 }

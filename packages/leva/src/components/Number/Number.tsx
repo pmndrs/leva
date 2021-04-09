@@ -14,67 +14,41 @@ type DraggableLabelProps = {
   step: number
   innerLabelTrim: number
   onUpdate: (v: any) => void
-  onDragStart?: (v: any) => void
-  onDragEnd?: (v: any) => void
 }
 
-const DraggableLabel = React.memo(
-  ({ label, onUpdate, onDragStart, onDragEnd, step, innerLabelTrim }: DraggableLabelProps) => {
-    const [dragging, setDragging] = useState(false)
-    const bind = useDrag(({ active, delta: [dx], event, memo = 0, first, last }) => {
-      setDragging(active)
-      memo += dx / 2
-      if (Math.abs(memo) >= 1) {
-        onUpdate((v: any) => parseFloat(v) + Math.floor(memo) * step * multiplyStep(event))
-        memo = 0
-      }
-      if (first) {
-        onDragStart?.(undefined)
-      } else if (last) {
-        onDragEnd?.(undefined)
-      }
-      return memo
-    })
+const DraggableLabel = React.memo(({ label, onUpdate, step, innerLabelTrim }: DraggableLabelProps) => {
+  const [dragging, setDragging] = useState(false)
+  const bind = useDrag(({ active, delta: [dx], event, memo = 0 }) => {
+    setDragging(active)
+    memo += dx / 2
+    if (Math.abs(memo) >= 1) {
+      onUpdate((v: any) => parseFloat(v) + Math.floor(memo) * step * multiplyStep(event))
+      memo = 0
+    }
+    return memo
+  })
 
-    return (
-      <InnerNumberLabel dragging={dragging} title={label.length > 1 ? label : ''} {...bind()}>
-        {label.slice(0, innerLabelTrim)}
-      </InnerNumberLabel>
-    )
-  }
-)
+  return (
+    <InnerNumberLabel dragging={dragging} title={label.length > 1 ? label : ''} {...bind()}>
+      {label.slice(0, innerLabelTrim)}
+    </InnerNumberLabel>
+  )
+})
 
 export function Number({
   label,
   id,
   displayValue,
   onUpdate,
-  onChangeStart,
-  onChangeEnd,
   onChange,
   settings,
   innerLabelTrim = 1,
 }: Omit<NumberProps, 'setSettings'> & { id?: string; label: string; innerLabelTrim?: number }) {
   const InnerLabel = innerLabelTrim > 0 && (
-    <DraggableLabel
-      label={label}
-      step={settings.step}
-      onUpdate={onUpdate}
-      onDragStart={onChangeStart}
-      onDragEnd={onChangeEnd}
-      innerLabelTrim={innerLabelTrim}
-    />
+    <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} innerLabelTrim={innerLabelTrim} />
   )
   return (
-    <NumberInput
-      id={id}
-      value={String(displayValue)}
-      onUpdate={onUpdate}
-      onChange={onChange}
-      onChangeStart={onChangeStart}
-      onChangeEnd={onChangeEnd}
-      innerLabel={InnerLabel}
-    />
+    <NumberInput id={id} value={String(displayValue)} onUpdate={onUpdate} onChange={onChange} innerLabel={InnerLabel} />
   )
 }
 
@@ -87,15 +61,7 @@ export function NumberComponent() {
     <Row input>
       <Label>{label}</Label>
       <RangeGrid hasRange={hasRange}>
-        {hasRange && (
-          <RangeSlider
-            value={parseFloat(value as any)}
-            onDrag={onUpdate}
-            onDragStart={(value) => props.onChangeStart?.(value)}
-            onDragEnd={(value) => props.onChangeEnd?.(value)}
-            {...settings}
-          />
-        )}
+        {hasRange && <RangeSlider value={parseFloat(value as any)} onDrag={onUpdate} {...settings} />}
         <Number {...props} id={id} label="value" innerLabelTrim={hasRange ? 0 : 1} />
       </RangeGrid>
     </Row>

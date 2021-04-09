@@ -15,6 +15,4 @@ export type IntervalProps = LevaInputProps<Interval, InternalIntervalSettings, I
 export type IntervalSliderProps = {
   value: InternalInterval
   onDrag: (v: Partial<InternalInterval>) => void
-  onDragStart?: () => void
-  onDragEnd?: () => void
 } & InternalIntervalSettings

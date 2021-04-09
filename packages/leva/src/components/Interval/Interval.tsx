@@ -14,23 +14,15 @@ const Container = styled('div', {
   gridTemplateColumns: 'auto calc($sizes$leva__numberInputMinWidth * 2 + $space$leva__rowGap)',
 })
 
-function IntervalSlider({
-  value,
-  bounds: [min, max],
-  onDrag,
-  onDragStart,
-  onDragEnd,
-  ...settings
-}: IntervalSliderProps) {
+function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
   const ref = useRef<HTMLDivElement>(null)
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
   const scrubberWidth = useTh('sizes', 'leva__scrubberWidth')
 
-  const bind = useDrag(({ event, first, last, xy: [x], movement: [mx], memo = {} }) => {
+  const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {
-      onDragStart?.()
       const { width, left } = ref.current!.getBoundingClientRect()
       rangeWidth.current = width - parseFloat(scrubberWidth)
 
@@ -44,10 +36,6 @@ function IntervalSlider({
     const newValue = memo.pos + invertedRange(mx / rangeWidth.current, 0, max - min)
 
     onDrag({ [memo.key]: sanitizeStep(newValue, settings[memo.key as 'min' | 'max']) })
-    if (last) {
-      onDragEnd?.()
-    }
-
     return memo
   })
 
@@ -66,7 +54,7 @@ function IntervalSlider({
 }
 
 export function IntervalComponent() {
-  const { label, displayValue, onUpdate, onChangeStart, onChangeEnd, settings } = useInputContext<IntervalProps>()
+  const { label, displayValue, onUpdate, settings } = useInputContext<IntervalProps>()
 
   const { bounds, ..._settings } = settings
 
@@ -75,21 +63,8 @@ export function IntervalComponent() {
       <Row input>
         <Label>{label}</Label>
         <Container>
-          <IntervalSlider
-            value={displayValue}
-            {...settings}
-            onDrag={onUpdate}
-            onDragStart={onChangeStart}
-            onDragEnd={onChangeEnd}
-          />
-          <Vector
-            value={displayValue}
-            settings={_settings}
-            onUpdate={onUpdate}
-            onChangeStart={onChangeStart}
-            onChangeEnd={onChangeEnd}
-            innerLabelTrim={0}
-          />
+          <IntervalSlider value={displayValue} {...settings} onDrag={onUpdate} />
+          <Vector value={displayValue} settings={_settings} onUpdate={onUpdate} innerLabelTrim={0} />
         </Container>
       </Row>
     </>

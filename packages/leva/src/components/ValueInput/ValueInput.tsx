@@ -10,24 +10,11 @@ type ValueInputProps = {
   type?: 'number' | undefined
   onUpdate: (value: any) => void
   onChange: (value: string) => void
-  onChangeStart?: () => void
-  onChangeEnd?: () => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 }
 
-export function ValueInput({
-  innerLabel,
-  value,
-  onUpdate,
-  onChange,
-  onChangeStart,
-  onChangeEnd,
-  onKeyDown,
-  type,
-  id,
-  ...props
-}: ValueInputProps) {
-  const { id: _id } = useInputContext()
+export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
+  const { id: _id, onChangeStart, onChangeEnd, value: panelValue } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -39,6 +26,11 @@ export function ValueInput({
     []
   )
 
+  const _onChangeEnd = React.useRef<null | (() => void)>(null)
+  React.useEffect(() => {
+    _onChangeEnd.current = () => onChangeEnd?.(panelValue)
+  }, [onChangeEnd, panelValue])
+
   /**
    * We need to add native blur handler because of this issue in React, where
    * the onBlur handler isn't called during unmount:
@@ -49,11 +41,11 @@ export function ValueInput({
     const ref = inputRef.current
     const _onUpdate = (ev: FocusEvent) => {
       update(onUpdate)(ev)
-      onChangeEnd?.()
+      _onChangeEnd.current?.()
     }
     ref?.addEventListener('blur', _onUpdate)
     return () => ref?.removeEventListener('blur', _onUpdate)
-  }, [update, onUpdate, onChangeEnd])
+  }, [update, onUpdate])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -77,7 +69,7 @@ export function ValueInput({
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onFocus={() => onChangeStart?.()}
+        onFocus={() => onChangeStart?.(panelValue)}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}

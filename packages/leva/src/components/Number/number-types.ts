@@ -12,9 +12,4 @@ export type NumberInput = InputWithSettings<number | string, NumberSettings>
 
 export type NumberProps = LevaInputProps<number, InternalNumberSettings>
 
-export type RangeSliderProps = {
-  value: number
-  onDrag: (v: number) => void
-  onDragStart: (v: number) => void
-  onDragEnd: (v: number) => void
-} & InternalNumberSettings
+export type RangeSliderProps = { value: number; onDrag: (v: number) => void } & InternalNumberSettings

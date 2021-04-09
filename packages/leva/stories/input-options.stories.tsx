@@ -204,6 +204,17 @@ export const OnChangeStartOnChangeEnd = () => {
     },
     vector2d: {
       value: [1, 1],
+      onChangeStart: (value) => {
+        console.log(value)
+        setIsEditing((i) => i + 1)
+      },
+      onChangeEnd: (value) => {
+        console.log(value)
+        setIsEditing((i) => i - 1)
+      },
+    },
+    vector3d: {
+      value: [1, 1, 1],
       onChangeStart: () => {
         setIsEditing((i) => i + 1)
       },
@@ -211,8 +222,8 @@ export const OnChangeStartOnChangeEnd = () => {
         setIsEditing((i) => i - 1)
       },
     },
-    vector3d: {
-      value: [1, 1, 1],
+    color: {
+      value: '#fff',
       onChangeStart: () => {
         setIsEditing((i) => i + 1)
       },

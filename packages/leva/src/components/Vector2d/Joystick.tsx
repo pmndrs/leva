@@ -8,12 +8,9 @@ import { useTransform } from '../../hooks'
 import type { Vector2d } from '../../types'
 import type { Vector2dProps } from './vector2d-types'
 
-type JoystickProps = { value: Vector2d } & Pick<
-  Vector2dProps,
-  'onUpdate' | 'settings' | 'onChangeStart' | 'onChangeEnd'
->
+type JoystickProps = { value: Vector2d } & Pick<Vector2dProps, 'onUpdate' | 'settings'>
 
-export function Joystick({ value, settings, onUpdate, onChangeStart, onChangeEnd }: JoystickProps) {
+export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const timeout = useRef<number | undefined>()
   const outOfBoundsX = useRef(0)
   const outOfBoundsY = useRef(0)
@@ -90,7 +87,7 @@ export function Joystick({ value, settings, onUpdate, onChangeStart, onChangeEnd
     }
   }, [])
 
-  const bind = useDrag(({ first, last, active, delta: [dx, dy], movement: [mx, my] }) => {
+  const bind = useDrag(({ first, active, delta: [dx, dy], movement: [mx, my] }) => {
     if (first) setShowJoystick(true)
 
     const _x = clamp(mx, -w, w)
@@ -123,12 +120,6 @@ export function Joystick({ value, settings, onUpdate, onChangeStart, onChangeEnd
       outOfBoundsY.current = 0
       set({ x: 0, y: 0 })
       endOutOfBounds()
-    }
-
-    if (first) {
-      onChangeStart?.()
-    } else if (last) {
-      onChangeEnd?.()
     }
   })
 

@@ -63,15 +63,11 @@ export type CoordinateProps<T extends Record<string, number>> = {
   settings: InternalNumberSettings
   valueKey: keyof T
   onUpdate: (value: any) => void
-  onChangeStart?: (value: any) => void
-  onChangeEnd?: (value: any) => void
 }
 
 export type VectorProps<T extends Record<string, number>> = {
   value: T
   settings: { [key in keyof T]: InternalNumberSettings } & { lock?: boolean; locked?: boolean }
   onUpdate: (value: T) => void
-  onChangeStart?: (value: any) => void
-  onChangeEnd?: (value: any) => void
   innerLabelTrim?: number
 }
