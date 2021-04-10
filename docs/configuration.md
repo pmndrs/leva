@@ -1,6 +1,6 @@
 ## Configuration
 
-You can configure `leva` by using the `<Leva>` component anywhere in your App:
+You can configure Leva by using the `<Leva>` component anywhere in your App:
 
 ```jsx
 import { Leva } from 'leva'
