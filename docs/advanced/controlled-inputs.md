@@ -36,7 +36,16 @@ const data = useControls({
 See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-input-options--on-change).
 
 ### Transient
-If you need the `onChange` callback while 
+If you need the `onChange` callback while still wanting to retrieve the input value, you can set `transient: false`.
+
+```jsx
+const divRef = React.useRef(null)
+const data = useControls({
+  color: { value: '#f00', onChange: (v) => {}, transient: false },
+})
+
+// `data.color` will be defined
+```
 
 ## set and onChange
 
