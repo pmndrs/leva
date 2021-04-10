@@ -76,8 +76,8 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
       // If the input is a special input then we return it as it is.
       return parsedInputAndOptions
 
-    // If the type key exists at this point, it must be a forced type or a custom plugin
-    // defined by the user
+    // If the type key exists at this point, it must be a forced type or a
+    // custom plugin defined by the user.
     return { type, input: normalize(type, parsedInput, path, data), options }
   }
   let inputType = getValueType(parsedInput)
@@ -87,7 +87,7 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
 
   if (inputType) return { type: inputType, input: normalize(inputType, { value: parsedInput }, path, data), options }
 
-  // At this point, the input is not recognized and we return false
+  // At this point, the input is not recognized and we return false.
   return false
 }
 
