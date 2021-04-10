@@ -1,4 +1,4 @@
-import { getStep, clamp, ceil } from '../../utils'
+import { getStep, clamp } from '../../utils'
 import type { InternalNumberSettings, NumberInput } from './number-types'
 
 export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
@@ -53,6 +53,6 @@ export const sanitizeStep = (
   v: number,
   { step, initialValue }: Pick<InternalNumberSettings, 'step' | 'initialValue'>
 ) => {
-  const steps = ceil((v - initialValue) / step)
+  const steps = Math.round((v - initialValue) / step)
   return initialValue + steps * step!
 }

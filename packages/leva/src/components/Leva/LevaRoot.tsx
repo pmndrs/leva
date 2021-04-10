@@ -128,7 +128,7 @@ const LevaCore = React.memo(
             <TitleWithFilter
               onDrag={set}
               setFilter={setFilter}
-              toggle={() => setToggle((t) => !t)}
+              toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
               toggled={toggled}
               title={title}
               drag={drag}

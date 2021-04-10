@@ -5,7 +5,7 @@ import { Chevron } from '../UI'
 export type FolderTitleProps = {
   name?: string
   toggled: boolean
-  toggle: () => void
+  toggle: (flag?: boolean) => void
 }
 
 export function FolderTitle({ toggle, toggled, name }: FolderTitleProps) {
