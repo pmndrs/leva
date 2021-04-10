@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import Reset from './components/decorator-reset'
 import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
 
-import { folder, useControls } from '../src'
+import { folder, useControls, LevaInputs } from '../src'
 
 export default {
   title: 'Misc/Input options',
@@ -117,4 +117,44 @@ export const OnChange = () => {
       <B />
     </>
   )
+}
+
+export const OnChangeWithRender = ({ transient }) => {
+  const ref = React.useRef<HTMLPreElement | null>(null)
+  const data = useControls({
+    color: {
+      value: '#f00',
+      onChange: (value) => {
+        ref.current.innerHTML = value
+      },
+      transient,
+    },
+  })
+
+  return (
+    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+      <pre>color data (should{transient ? ' not' : null} update)</pre>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      <pre>Transient Value (should also update)</pre>
+      <pre ref={ref}></pre>
+    </div>
+  )
+}
+OnChangeWithRender.args = {
+  transient: false,
+}
+
+export const EnforceInputType = ({ inputType }) => {
+  useControls({
+    color: {
+      type: LevaInputs.STRING,
+      value: '#f00',
+    },
+    number: {
+      type: LevaInputs.STRING,
+      value: '1',
+    },
+  })
+
+  return null
 }

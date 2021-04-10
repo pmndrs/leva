@@ -133,10 +133,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const allPaths: string[] = []
     const renderPaths: string[] = []
     const onChangePaths: Record<string, (v: any) => void> = {}
-    Object.values(mappedPaths).forEach(({ path, onChange }) => {
+    Object.values(mappedPaths).forEach(({ path, onChange, transient }) => {
       allPaths.push(path)
-      if (!!onChange) onChangePaths[path] = onChange
-      else renderPaths.push(path)
+      if (!!onChange) {
+        onChangePaths[path] = onChange
+        if (!transient) {
+          renderPaths.push(path)
+        }
+      } else {
+        renderPaths.push(path)
+      }
     })
     return [allPaths, renderPaths, onChangePaths]
   }, [mappedPaths])

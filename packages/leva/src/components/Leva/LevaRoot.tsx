@@ -43,26 +43,27 @@ export type LevaRootProps = {
    * If true, the title bar including filters and drag zone will be shown. If set to false, the title bar including filters will be hidden.
    * In case it is set to an object the title bar will be shown and the additional sub-options might be applied.
    */
-  titleBar?: boolean | {
-    /**
-     * Overwrites the default title content (6 dots if drag is enabled) if set to a non undefined value.
-     */
-    title?: React.ReactNode;
-    /**
-     * Toggle whether the leva panel can be dragged around via the title bar.
-     */
-    drag?: boolean;
-    /**
-     * Toggle whether filtering should be enabled or disabled.
-     */
-    filter?: boolean;
-  };
+  titleBar?:
+    | boolean
+    | {
+        /**
+         * Overwrites the default title content (6 dots if drag is enabled) if set to a non undefined value.
+         */
+        title?: React.ReactNode
+        /**
+         * Toggle whether the leva panel can be dragged around via the title bar.
+         */
+        drag?: boolean
+        /**
+         * Toggle whether filtering should be enabled or disabled.
+         */
+        filter?: boolean
+      }
   /**
    * If true, the copy button will be hidden
    */
   hideCopyButton?: boolean
 }
-
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
@@ -94,7 +95,7 @@ const LevaCore = React.memo(
     titleBar = {
       title: undefined,
       drag: true,
-      filter: true
+      filter: true,
     },
     hideCopyButton = false,
     toggled,
@@ -109,9 +110,9 @@ const LevaCore = React.memo(
 
     // this generally happens on first render because the store is initialized in useEffect.
     const shouldShow = paths.length > 0
-    const title = typeof titleBar === "object" ? titleBar.title : undefined
-    const drag = typeof titleBar === "object" ? titleBar.drag ?? true : true
-    const filterEnabled =  typeof titleBar === "object" ? titleBar.filter ?? true : true
+    const title = typeof titleBar === 'object' ? titleBar.title : undefined
+    const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
+    const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
@@ -127,7 +128,7 @@ const LevaCore = React.memo(
             <TitleWithFilter
               onDrag={set}
               setFilter={setFilter}
-              toggle={() => setToggle((t) => !t)}
+              toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
               toggled={toggled}
               title={title}
               drag={drag}

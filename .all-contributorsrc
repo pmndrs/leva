@@ -103,6 +103,43 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "n1ru4l",
+      "name": "Laurin Quast",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14338007?v=4",
+      "profile": "https://n1ru4l.cloud/",
+      "contributions": [
+        "code",
+        "ideas"
+      ]
+    },
+    {
+      "login": "hasparus",
+      "name": "Piotr Monwid-Olechnowicz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15332326?v=4",
+      "profile": "https://haspar.us/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "jeetiss",
+      "name": "Dmitry Ivakhnenko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6726016?v=4",
+      "profile": "https://jeetiss.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "guidovizoso",
+      "name": "Guido Vizoso",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27702539?v=4",
+      "profile": "https://www.linkedin.com/in/guidovizoso/?locale=en_US",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7

@@ -40,3 +40,5 @@ export { levaStore, useCreateStore } from './store'
 
 // export folder, monitor, button
 export * from './helpers'
+
+export { LevaInputs }

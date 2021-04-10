@@ -38,8 +38,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, onChange, ...inputWithType } = _input
-  const commonOptions = { render, key, label: label ?? key, hint, ...mergedOptions }
+  const { render, label, optional, disabled, hint, onChange, transient, ...inputWithType } = _input
+  const commonOptions = { render, key, label: label ?? key, hint, transient: transient ?? !!onChange, ...mergedOptions }
 
   let { type, ...input } = inputWithType
   type = customType ?? type
@@ -71,14 +71,13 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
 export function normalizeInput(_input: any, key: string, path: string, data: Data) {
   const parsedInputAndOptions = parseOptions(_input, key)
   const { type, input: parsedInput, options } = parsedInputAndOptions
-
   if (type) {
     if (type in SpecialInputs)
       // If the input is a special input then we return it as it is.
       return parsedInputAndOptions
 
-    // If the type key exists at this point, it must be a custom plugin
-    // defined by the user, and it's already been normalized.
+    // If the type key exists at this point, it must be a forced type or a
+    // custom plugin defined by the user.
     return { type, input: normalize(type, parsedInput, path, data), options }
   }
   let inputType = getValueType(parsedInput)
@@ -88,7 +87,7 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
 
   if (inputType) return { type: inputType, input: normalize(inputType, { value: parsedInput }, path, data), options }
 
-  // At this point, the input is not recognized and we return false
+  // At this point, the input is not recognized and we return false.
   return false
 }
 

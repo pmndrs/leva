@@ -1,4 +1,4 @@
-import { StoryFnReactReturnType } from '@storybook/react/dist/client/preview/types'
+import { StoryFnReactReturnType } from '@storybook/react/dist/ts3.9/client/preview/types'
 import * as React from 'react'
 import { levaStore } from '../../src'
 
