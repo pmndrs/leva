@@ -1,5 +1,28 @@
 # leva
 
+## 0.9.4
+
+### Patch Changes
+
+- 50e8096: fix: sanitize step should behave better.
+  improvement: expand panel when filter changes.
+- 09a1a38: Allow specifying the explicit input type via the `type` option. This is handy when you want to prevent your string value being casted to a color or number.
+
+  ```tsx
+  import { LevaInputs, useControls } from 'leva'
+
+  useControls({
+    color: {
+      type: LevaInputs.STRING,
+      value: '#f00',
+    },
+    number: {
+      type: LevaInputs.STRING,
+      value: '1',
+    },
+  })
+  ```
+
 ## 0.9.3
 
 ### Patch Changes
@@ -16,7 +39,7 @@
   const data = useControls({
     color: {
       value: '#7c3d3d',
-      onChange: value => {
+      onChange: (value) => {
         console.log(value)
       },
       transient: false,
@@ -30,7 +53,7 @@
   const data = useControls({
     color: {
       value: '#7c3d3d',
-      onChange: value => {
+      onChange: (value) => {
         console.log(value)
       },
       transient: true,
@@ -218,7 +241,7 @@
 - f323cfc: Feat: `onChange` callback for transient updates
 
   ```js
-  useControls({ color: { value: 'red', onChange: v => console.log(v) } })
+  useControls({ color: { value: 'red', onChange: (v) => console.log(v) } })
   ```
 
 ## 0.6.3
