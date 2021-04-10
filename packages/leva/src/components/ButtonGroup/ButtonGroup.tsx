@@ -2,18 +2,31 @@ import React from 'react'
 import { Row, Label } from '../UI'
 import { StyledButtonGroup } from './StyledButtonGroup'
 import { StyledButtonGroupButton } from './StyledButtonGroupButton'
+import { ButtonGroupInputOpts, ButtonGroupOpts } from '../../types'
 
-type ButtonGroupProps = {
-  label: string
-  opts: {
-    [label: string]: () => void
-  }
+export type ButtonGroupInternalOpts = {
+  label: null | string
+  opts: ButtonGroupInputOpts
 }
 
-export function ButtonGroup({ label, opts }: ButtonGroupProps) {
+const getOpts = ({ label: _label, opts: _opts }: ButtonGroupInternalOpts) => {
+  let label = _label?.trim() === '' ? null : _label
+  let opts = _opts
+  if (typeof _opts.opts === 'object') {
+    if (opts.label !== undefined) {
+      label = _opts.label as any
+    }
+    opts = _opts.opts
+  }
+
+  return { label, opts: opts as ButtonGroupOpts }
+}
+
+export function ButtonGroup(props: ButtonGroupInternalOpts) {
+  const { label, opts } = getOpts(props)
   return (
-    <Row input={true}>
-      <Label>{label}</Label>
+    <Row input={!!label}>
+      {label && <Label>{label}</Label>}
       <StyledButtonGroup>
         {Object.entries(opts).map(([label, onClick]) => (
           <StyledButtonGroupButton key={label} onClick={() => onClick()}>

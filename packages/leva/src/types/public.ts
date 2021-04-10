@@ -49,9 +49,20 @@ export type ButtonInput = {
   onClick: () => any
 }
 
+export type ButtonGroupOpts = {
+  [title: string]: () => void
+}
+
+export type ButtonGroupInputOpts =
+  | ButtonGroupOpts
+  | {
+      label?: string | null
+      opts: ButtonGroupOpts
+    }
+
 export type ButtonGroupInput = {
   type: SpecialInputs.BUTTON_GROUP
-  opts: { [title: string]: () => void }
+  opts: ButtonGroupInputOpts
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
