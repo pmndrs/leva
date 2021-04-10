@@ -12,8 +12,7 @@ export type RenderFn = (get: (key: string) => any) => boolean
  */
 export type InputWithSettings<V extends unknown, Settings = {}, K extends string = 'value'> = {
   [key in K]: V
-} &
-  Settings
+} & { type?: LevaInputs } & Settings
 
 /**
  * Either the raw value, either the value with its settings

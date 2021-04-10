@@ -29,7 +29,8 @@
     "demo:dev": "yarn workspace demo dev",
     "demo:build": "yarn workspace demo build",
     "demo:serve": "yarn workspace demo serve",
-    "ci:test": "yarn demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run"
+    "ci:test": "yarn demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run",
+    "prepare": "husky install"
   },
   "size-limit": [
     {
