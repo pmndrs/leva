@@ -56,7 +56,7 @@ export type ButtonGroupOpts = {
 export type ButtonGroupInputOpts =
   | ButtonGroupOpts
   | {
-      label?: string | null
+      label?: string | JSX.Element | null
       opts: ButtonGroupOpts
     }
 

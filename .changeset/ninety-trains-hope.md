@@ -48,4 +48,6 @@ const [values, set] = useControls(() => ({
 }))
 ```
 
-This helps avoiding a bunch of ` ` labels (where each new one contains one more space).
+This also allows passing any JSX element as the label beside strings.
+
+It also helps avoiding a bunch of ` ` labels (where each new one contains one more space).

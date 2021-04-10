@@ -5,12 +5,12 @@ import { StyledButtonGroupButton } from './StyledButtonGroupButton'
 import { ButtonGroupInputOpts, ButtonGroupOpts } from '../../types'
 
 export type ButtonGroupInternalOpts = {
-  label: null | string
+  label: null | JSX.Element | string
   opts: ButtonGroupInputOpts
 }
 
 const getOpts = ({ label: _label, opts: _opts }: ButtonGroupInternalOpts) => {
-  let label = _label?.trim() === '' ? null : _label
+  let label = typeof _label === 'string' ? (_label.trim() === '' ? null : _label) : _label
   let opts = _opts
   if (typeof _opts.opts === 'object') {
     if (opts.label !== undefined) {
