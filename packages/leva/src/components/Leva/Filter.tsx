@@ -5,9 +5,9 @@ import { FolderTitleProps } from '../Folder'
 import { Chevron } from '../UI'
 import { StyledFilterInput, StyledTitleWithFilter, TitleContainer, Icon, FilterWrapper } from './StyledFilter'
 
-type FilterProps = { setFilter: (value: string) => void }
+type FilterProps = { setFilter: (value: string) => void; toggle: (flag?: boolean) => void }
 
-const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter }, ref) => {
+const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter, toggle }, ref) => {
   const [value, set] = useState('')
   const debouncedOnChange = useMemo<FilterProps['setFilter']>(() => debounce(setFilter, 250), [setFilter])
   const clear = () => {
@@ -17,6 +17,7 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
 
   const _onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.currentTarget.value
+    toggle(true)
     set(v)
   }
 
@@ -117,7 +118,7 @@ export function TitleWithFilter({
         )}
       </StyledTitleWithFilter>
       <FilterWrapper toggled={filterShown}>
-        <FilterInput ref={inputRef} setFilter={setFilter} />
+        <FilterInput ref={inputRef} setFilter={setFilter} toggle={toggle} />
       </FilterWrapper>
     </>
   )
