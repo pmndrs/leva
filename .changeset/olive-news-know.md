@@ -19,3 +19,20 @@ useControls({
   },
 })
 ```
+
+The `context.fromPanel` boolean parameter can be used to identify whether the `onChange` invocation is caused by the `Leva` component or via the `set` function return from the `useControl` hook.
+
+```tsx
+const [, set] = useControls(() => ({
+  value: {
+    value: 1,
+    onChange: (value, { initial, fromPanel }) => {
+      syncValue(value)
+      if (!initial && !fromPanel) {
+        // we don't wanna trigger a remote save in case the value has not been updated from the panel
+        saveValueOnRemote(value)
+      }
+    },
+  },
+}))
+```

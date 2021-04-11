@@ -142,6 +142,10 @@ type OnChangeHandlerContext = {
    * Whether the onChange handler is invoked initially.
    */
   initial: boolean
+  /**
+   * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
+   */
+  fromPanel: boolean
 }
 
 export type OnChangeHandler<TValue = any> = (value: TValue, path: string, context: OnChangeHandlerContext) => void

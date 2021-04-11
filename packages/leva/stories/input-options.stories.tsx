@@ -144,7 +144,29 @@ OnChangeWithRender.args = {
   transient: false,
 }
 
-export const EnforceInputType = ({ inputType }) => {
+export const OnChangeFromPanel = () => {
+  const ref = React.useRef<HTMLDivElement>()
+  const [, set] = useControls(() => ({
+    value: {
+      value: 0.1,
+      onChange: (value, context) => {
+        const node = window.document.createElement('pre')
+        node.innerText = JSON.stringify({ value, context })
+        ref.current.appendChild(node)
+        ref.current.scrollTop = ref.current.scrollHeight
+      },
+    },
+  }))
+
+  return (
+    <>
+      <div ref={ref} style={{ overflowY: 'scroll', height: 150 }}></div>
+      <button onClick={() => set({ value: Math.random() })}>Change Value externally</button>
+    </>
+  )
+}
+
+export const EnforceInputType = () => {
   useControls({
     color: {
       type: LevaInputs.STRING,

@@ -169,11 +169,11 @@ export const Store = (function (this: StoreType) {
    * @param path path of the input
    * @param value new value of the input
    */
-  this.setValueAtPath = (path, value) => {
+  this.setValueAtPath = (path, value, fromPanel) => {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value, path, this)
+      updateInput(data[path], value, path, this, fromPanel)
       return { data }
     })
   }
@@ -196,13 +196,13 @@ export const Store = (function (this: StoreType) {
     })
   }
 
-  this.set = (values) => {
+  this.set = (values, fromPanel: boolean) => {
     store.setState((s) => {
       const data = s.data
       Object.entries(values).forEach(([path, value]) => {
         try {
           //@ts-expect-error (we always update inputs with a value)
-          updateInput(data[path], value)
+          updateInput(data[path], value, undefined, undefined, fromPanel)
         } catch {}
       })
       return { data }
@@ -270,7 +270,7 @@ export const Store = (function (this: StoreType) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
           const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
-          data[newPath] = { type, ..._options, ...input }
+          data[newPath] = { type, ..._options, ...input, fromPanel: true }
           mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)

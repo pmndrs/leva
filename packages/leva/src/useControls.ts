@@ -176,7 +176,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
         (acc, [p, v]) => Object.assign(acc, { [mappedPaths[p].path]: v }),
         {}
       )
-      store.set(_values)
+      store.set(_values, false)
     },
     [store, mappedPaths]
   )
@@ -200,11 +200,11 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path), path, { initial: true })
+      onChange(store.get(path), path, { initial: true, fromPanel: false })
       const unsub = store.useStore.subscribe(
-        (v) => onChange(v, path, { initial: false }),
+        ([value, fromPanel]: any) => onChange(value, path, { initial: false, fromPanel }),
         // @ts-ignore
-        (s) => s.data[path].value,
+        (s) => [s.data[path].value, s.data[path].fromPanel],
         shallow
       )
       unsubscriptions.push(unsub)

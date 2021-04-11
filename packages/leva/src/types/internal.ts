@@ -27,11 +27,11 @@ export type StoreType = {
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data, override: boolean) => void
-  setValueAtPath: (path: string, value: any) => void
+  setValueAtPath: (path: string, value: any, fromPanel: boolean) => void
   setSettingsAtPath: (path: string, settings: any) => void
   disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this
-  set: (values: Record<string, any>) => void
+  set: (values: Record<string, any>, fromPanel: boolean) => void
   get: (path: string) => any
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
   subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
@@ -62,6 +62,7 @@ export type DataInput = {
   __refCount: number
   type: string
   value: unknown
+  fromPanel: boolean
   settings?: object
 } & DataInputOptions
 
