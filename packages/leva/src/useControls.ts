@@ -3,7 +3,7 @@ import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
-import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
+import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
 import shallow from 'zustand/shallow'
 
 type HookSettings = { store?: StoreType }
@@ -132,7 +132,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
-    const onChangePaths: Record<string, (...args: any) => void> = {}
+    const onChangePaths: Record<string, OnChangeHandler> = {}
     const onEditStartPaths: Record<string, (...args: any) => void> = {}
     const onEditEndPaths: Record<string, (...args: any) => void> = {}
 
@@ -200,9 +200,9 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path), path)
+      onChange(store.get(path), path, { initial: true })
       const unsub = store.useStore.subscribe(
-        (v) => onChange(v, path),
+        (v) => onChange(v, path, { initial: false }),
         // @ts-ignore
         (s) => s.data[path].value,
         shallow

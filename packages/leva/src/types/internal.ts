@@ -1,5 +1,5 @@
 import type { UseStore } from 'zustand'
-import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
+import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
 
@@ -7,7 +7,7 @@ export type MappedPaths = Record<
   string,
   {
     path: string
-    onChange?: (...args: any) => void
+    onChange?: OnChangeHandler
     onEditStart?: (...args: any) => void
     onEditEnd?: (...args: any) => void
     transient: boolean

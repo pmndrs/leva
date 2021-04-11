@@ -137,13 +137,22 @@ type GenericSchemaItemOptions = {
   hint?: string
 }
 
+type OnChangeHandlerContext = {
+  /**
+   * Whether the onChange handler is invoked initially.
+   */
+  initial: boolean
+}
+
+export type OnChangeHandler<TValue = any> = (value: TValue, path: string, context: OnChangeHandlerContext) => void
+
 type TransientOnChangeSchemaItemOptions = {
-  onChange: (value: any, path: string) => void
+  onChange: OnChangeHandler
   transient?: true
 }
 
 type NonTransientOnChangeSchemaItemOptions = {
-  onChange: (value: any, path: string) => void
+  onChange: OnChangeHandler
   transient: false
 }
 
