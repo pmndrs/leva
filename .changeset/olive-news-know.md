@@ -36,3 +36,19 @@ const [, set] = useControls(() => ({
   },
 }))
 ```
+
+The `context.get` parameter can be used for retrieving the up to date state of the store. This is handy if you need to do some invocations based on all the store values.
+
+```tsx
+const [, set] = useControls(() => ({
+  value1: 1,
+  value2: 2,
+  value3: {
+    value: 1,
+    onChange: (value3, { get }) => {
+      const { value1, value2 } = get()
+      // calculate something based on value1 and value2
+    },
+  },
+}))
+```

@@ -137,7 +137,7 @@ type GenericSchemaItemOptions = {
   hint?: string
 }
 
-type OnChangeHandlerContext = {
+type OnChangeHandlerContext<TValues = any> = {
   /**
    * Whether the onChange handler is invoked initially.
    */
@@ -146,6 +146,10 @@ type OnChangeHandlerContext = {
    * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
    */
   fromPanel: boolean
+  /**
+   * Get all the current values.
+   */
+  get(): TValues
 }
 
 export type OnChangeHandler<TValue = any> = (value: TValue, path: string, context: OnChangeHandlerContext) => void
