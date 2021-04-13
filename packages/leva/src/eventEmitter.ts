@@ -14,11 +14,11 @@ export const createEventEmitter = (): EventEmitter => {
   return {
     on: (topic, listener) => {
       let listeners = listenerMapping.get(topic)
-      if (listener === undefined) {
+      if (listeners === undefined) {
         listeners = new Set()
-        listeners.add(listener)
         listenerMapping.set(topic, listeners)
       }
+      listeners.add(listener)
     },
     off: (topic, listener) => {
       const listeners = listenerMapping.get(topic)

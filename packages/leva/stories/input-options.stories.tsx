@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import Reset from './components/decorator-reset'
 import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
 
-import { folder, useControls, LevaInputs } from '../src'
+import { folder, useControls, LevaInputs, useCreateStore, LevaPanel } from '../src'
 
 export default {
   title: 'Misc/Input options',
@@ -169,7 +169,6 @@ export const OnEditStartOnEditEnd = () => {
       },
       onEditEnd: () => {
         setIsEditing((i) => i - 1)
-        console.log('moi ok')
       },
     },
     number: {
@@ -205,12 +204,10 @@ export const OnEditStartOnEditEnd = () => {
     },
     vector2d: {
       value: [1, 1],
-      onEditStart: (value) => {
-        console.log(value)
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onEditEnd: (value) => {
-        console.log(value)
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
     },
@@ -240,5 +237,48 @@ export const OnEditStartOnEditEnd = () => {
       <pre>{JSON.stringify(data, null, '  ')}</pre>
       <pre>Is Editing? {isEditing === 0 ? 'No' : 'Yes'}</pre>
     </div>
+  )
+}
+
+export const OnEditStartOnEditEndMultiPanel = () => {
+  const [editCounter1, setEditCounter1] = React.useState(0)
+  const [editCounter2, setEditCounter2] = React.useState(0)
+
+  const store = useCreateStore()
+
+  useControls(
+    {
+      value: {
+        value: 'lol',
+        onEditStart: () => setEditCounter1((counter) => counter + 1),
+        onEditEnd: () => setEditCounter1((counter) => counter - 1),
+      },
+    },
+    { store }
+  )
+
+  useControls(
+    {
+      value: {
+        value: 'lol',
+        onEditStart: () => setEditCounter2((counter) => counter + 1),
+        onEditEnd: () => setEditCounter2((counter) => counter - 1),
+      },
+    },
+    { store }
+  )
+
+  return (
+    <>
+      <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+        <LevaPanel flat fill store={store} />
+        Is panel 1 value being edited? {String(!!editCounter1)}
+      </div>
+
+      <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+        <LevaPanel flat fill store={store} />
+        Is panel 2 value being edited? {String(!!editCounter2)}
+      </div>
+    </>
   )
 }

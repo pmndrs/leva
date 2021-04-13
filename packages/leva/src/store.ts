@@ -269,9 +269,9 @@ export const Store = (function (this: StoreType) {
         if (normalizedInput) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
-          const { onChange, transient, ..._options } = options
+          const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
           data[newPath] = { type, ..._options, ...input }
-          mappedPaths[key] = { path: newPath, onChange, transient }
+          mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
         }
