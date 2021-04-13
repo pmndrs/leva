@@ -8,13 +8,13 @@ type ValueInputProps = {
   value: string
   innerLabel?: false | React.ReactNode
   type?: 'number' | undefined
-  onUpdate: (value: any) => void
+  onUpdate: (value: any, onNewValueDetermined?: (value: any) => void) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 }
 
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
-  const { id: _id, onChangeStart, onChangeEnd, value: panelValue } = useInputContext()
+  const { id: _id, onEditStart, onEditEnd, value: panelValue } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -26,11 +26,6 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     []
   )
 
-  const _onChangeEnd = React.useRef<null | (() => void)>(null)
-  React.useEffect(() => {
-    _onChangeEnd.current = () => onChangeEnd?.(panelValue)
-  }, [onChangeEnd, panelValue])
-
   /**
    * We need to add native blur handler because of this issue in React, where
    * the onBlur handler isn't called during unmount:
@@ -39,13 +34,10 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 
   React.useEffect(() => {
     const ref = inputRef.current
-    const _onUpdate = (ev: FocusEvent) => {
-      update(onUpdate)(ev)
-      _onChangeEnd.current?.()
-    }
+    const _onUpdate = update((value) => onUpdate(value, onEditEnd))
     ref?.addEventListener('blur', _onUpdate)
     return () => ref?.removeEventListener('blur', _onUpdate)
-  }, [update, onUpdate])
+  }, [update, onUpdate, onEditEnd])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -69,7 +61,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onFocus={() => onChangeStart?.(panelValue)}
+        onFocus={() => onEditStart(panelValue)}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}
@@ -79,7 +71,8 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 }
 
 export function NumberInput({ onUpdate, ...props }: ValueInputProps) {
-  const _onUpdate = useCallback((v: any) => onUpdate(parseNumber(v)), [onUpdate])
+  const { onEditEnd } = useInputContext()
+  const _onUpdate = useCallback((v: any) => onUpdate(parseNumber(v), onEditEnd), [onUpdate, onEditEnd])
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const dir = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0

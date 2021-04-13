@@ -3,7 +3,12 @@ import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
 
 export type State = { data: Data }
 
-export type MappedPaths = Record<string, { path: string; onChange: (value: any) => void; transient: boolean }>
+export type MappedPaths = Record<
+  string,
+  { path: string; onChange: (value: any) => void; onEditStart?: () => void; onEditEnd?: () => void; transient: boolean }
+>
+
+type Dispose = () => void
 
 export type StoreType = {
   useStore: UseStore<State>
@@ -16,13 +21,17 @@ export type StoreType = {
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data, override: boolean) => void
-  setValueAtPath: (path: string, value: any) => void
+  setValueAtPath: (path: string, value: any, onValueChanged?: (value: any) => void) => void
   setSettingsAtPath: (path: string, settings: any) => void
   disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this
   set: (values: Record<string, any>) => void
   get: (path: string) => any
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
+  subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
+  subscribeToEditEnd: (path: string, listener: (value: any) => void) => Dispose
+  emitOnEditStart: (path: string, value: any) => void
+  emitOnEditEnd: (path: string, value: any) => void
 }
 
 export type CommonOptions = {
@@ -36,8 +45,8 @@ export type DataInputOptions = CommonOptions & {
   optional: boolean
   disabled: boolean
   onChange?: (value: unknown) => void
-  onChangeStart?: (value: unknown) => void
-  onChangeEnd?: (value: unknown) => void
+  onEditStart?: (value: unknown) => void
+  onEditEnd?: (value: unknown) => void
 }
 
 export type DataInput = {

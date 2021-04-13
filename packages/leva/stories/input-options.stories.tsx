@@ -159,33 +159,34 @@ export const EnforceInputType = ({ inputType }) => {
   return null
 }
 
-export const OnChangeStartOnChangeEnd = () => {
+export const OnEditStartOnEditEnd = () => {
   const [isEditing, setIsEditing] = React.useState(0)
   const data = useControls({
     string: {
       value: 'foobars',
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
+        console.log('moi ok')
       },
     },
     number: {
       value: 1,
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
     },
     numberSlider: {
       value: 1,
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
       min: 0,
@@ -195,39 +196,39 @@ export const OnChangeStartOnChangeEnd = () => {
       value: [1, 10],
       min: 1,
       max: 10,
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
     },
     vector2d: {
       value: [1, 1],
-      onChangeStart: (value) => {
+      onEditStart: (value) => {
         console.log(value)
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: (value) => {
+      onEditEnd: (value) => {
         console.log(value)
         setIsEditing((i) => i - 1)
       },
     },
     vector3d: {
       value: [1, 1, 1],
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
     },
     color: {
       value: '#fff',
-      onChangeStart: () => {
+      onEditStart: () => {
         setIsEditing((i) => i + 1)
       },
-      onChangeEnd: () => {
+      onEditEnd: () => {
         setIsEditing((i) => i - 1)
       },
     },

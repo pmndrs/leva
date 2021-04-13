@@ -161,8 +161,8 @@ export type InputOptions = GenericSchemaItemOptions &
   OnChangeSchemaItemOptions & {
     optional?: boolean
     disabled?: boolean
-    onChangeStart?: (value: any) => void
-    onChangeEnd?: (value: any) => void
+    onEditStart?: (value: any) => void
+    onEditEnd?: (value: any) => void
   }
 
 type SchemaItemWithOptions =
@@ -308,8 +308,8 @@ export type InputContextProps = {
   value: unknown
   displayValue: unknown
   onChange: React.Dispatch<any>
-  onChangeStart?: (value: any) => void
-  onChangeEnd?: (value: any) => void
+  onEditStart: (value: any) => void
+  onEditEnd: (value: any) => void
   onUpdate: (v: any | ((v: any) => any)) => void
   settings: unknown
   setSettings: (v: any) => void
@@ -332,9 +332,9 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
-  onChangeStart?: (value: any) => void
-  onChangeEnd?: (value: any) => void
-  onUpdate: (v: any | ((v: any) => any)) => void
+  onEditStart: (value: any) => void
+  onEditEnd: (value: any) => void
+  onUpdate: (v: any | ((v: any) => any), onNewValueDetermined?: (v: any) => void) => void
   settings: InternalSettings
   setSettings: (v: Partial<InternalSettings>) => void
 }

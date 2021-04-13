@@ -6,7 +6,7 @@ type Props<V, Settings> = {
   type: string
   value: V
   settings?: Settings
-  setValue: (v: V) => void
+  setValue: (v: V, onValueChanged?: (value: any) => void) => void
 }
 
 export function useInputSetters<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
@@ -18,14 +18,15 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
   const setFormat = useCallback((v) => setDisplayValue(format(type, v, settingsRef.current)), [type])
 
   const onUpdate = useCallback(
-    (updatedValue: any) => {
+    (updatedValue: any, onValueChanged?: (value: any) => void) => {
       try {
-        setValue(updatedValue)
+        setValue(updatedValue, onValueChanged)
       } catch (error) {
         const { type, previousValue } = error
         // make sure we throw an error if it's not a sanitization error
         if (type !== 'LEVA_ERROR') throw error
         setFormat(previousValue)
+        onValueChanged?.(previousValue)
       }
     },
     [setFormat, setValue]

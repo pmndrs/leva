@@ -45,9 +45,9 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
     disabled,
     hint,
     onChange,
+    onEditStart,
+    onEditEnd,
     transient,
-    onChangeStart,
-    onChangeEnd,
     ...inputWithType
   } = _input
   const commonOptions = {
@@ -56,8 +56,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
     label: label ?? key,
     hint,
     transient: transient ?? !!onChange,
-    onChangeStart,
-    onChangeEnd,
+    onEditStart,
+    onEditEnd,
     ...mergedOptions,
   }
 
@@ -111,9 +111,16 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
   return false
 }
 
-export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType) {
+export function updateInput(
+  input: DataInput,
+  newValue: any,
+  path: string,
+  store: StoreType,
+  onValueChanged?: (value: any) => void
+) {
   const { value, type, settings } = input
   input.value = sanitizeValue({ type, value, settings }, newValue, path, store)
+  onValueChanged?.(input.value)
 }
 
 type SanitizeProps = {

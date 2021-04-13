@@ -3,9 +3,12 @@ import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
+import { createEventEmitter } from './eventEmitter'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
+
+  const eventEmitter = createEventEmitter()
 
   this.storeId = getUid()
   this.useStore = store
@@ -166,11 +169,11 @@ export const Store = (function (this: StoreType) {
    * @param path path of the input
    * @param value new value of the input
    */
-  this.setValueAtPath = (path, value) => {
+  this.setValueAtPath = (path, value, onValueChanged) => {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value, path, this)
+      updateInput(data[path], value, path, this, onValueChanged)
       return { data }
     })
   }
@@ -215,6 +218,24 @@ export const Store = (function (this: StoreType) {
     }
   }
 
+  this.emitOnEditStart = (path: string, value: any) => {
+    eventEmitter.emit(`onEditStart:${path}`, value)
+  }
+
+  this.emitOnEditEnd = (path: string, value: any) => {
+    eventEmitter.emit(`onEditEnd:${path}`, value)
+  }
+
+  this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditStart:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
+  }
+
+  this.subscribeToEditEnd = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditEnd:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
+  }
+
   /**
    * Recursively extract the data from the schema, sets folder initial
    * preferences and normalize the inputs (normalizing an input means parsing the
@@ -248,8 +269,8 @@ export const Store = (function (this: StoreType) {
         if (normalizedInput) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
-          const { onChange, onChangeStart, onChangeEnd, transient, ..._options } = options
-          data[newPath] = { type, onChangeStart, onChangeEnd, ..._options, ...input }
+          const { onChange, transient, ..._options } = options
+          data[newPath] = { type, ..._options, ...input }
           mappedPaths[key] = { path: newPath, onChange, transient }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)

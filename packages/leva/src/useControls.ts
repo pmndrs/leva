@@ -129,11 +129,14 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
    * parses the schema inside nested folder.
    */
   const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema), [store, _schema])
-  const [allPaths, renderPaths, onChangePaths] = useMemo(() => {
+  const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
     const onChangePaths: Record<string, (v: any) => void> = {}
-    Object.values(mappedPaths).forEach(({ path, onChange, transient }) => {
+    const onEditStartPaths: Record<string, (v: any) => void> = {}
+    const onEditEndPaths: Record<string, (v: any) => void> = {}
+
+    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
       allPaths.push(path)
       if (!!onChange) {
         onChangePaths[path] = onChange
@@ -143,8 +146,15 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
       } else {
         renderPaths.push(path)
       }
+
+      if (onEditStart) {
+        onEditStartPaths[path] = onEditStart
+      }
+      if (onEditEnd) {
+        onEditEndPaths[path] = onEditEnd
+      }
     })
-    return [allPaths, renderPaths, onChangePaths]
+    return [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths]
   }, [mappedPaths])
 
   // Extracts the paths from the initialData and ensures order of paths.
@@ -197,6 +207,17 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     })
     return () => unsubscriptions.forEach((unsub) => unsub())
   }, [store, onChangePaths])
+
+  useEffect(() => {
+    const unsubscriptions: Array<() => void> = []
+    Object.entries(onEditStartPaths).forEach(([path, onEditStart]) =>
+      unsubscriptions.push(store.subscribeToEditStart(path, onEditStart))
+    )
+    Object.entries(onEditEndPaths).forEach(([path, onEditEnd]) =>
+      unsubscriptions.push(store.subscribeToEditEnd(path, onEditEnd))
+    )
+    return () => unsubscriptions.forEach((unsub) => unsub())
+  }, [onEditStartPaths, onEditEndPaths, store])
 
   if (schemaIsFunction) return [values, set] as any
   return values as any
