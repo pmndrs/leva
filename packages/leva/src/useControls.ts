@@ -132,9 +132,9 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
-    const onChangePaths: Record<string, (v: any) => void> = {}
-    const onEditStartPaths: Record<string, (v: any) => void> = {}
-    const onEditEndPaths: Record<string, (v: any) => void> = {}
+    const onChangePaths: Record<string, (...args: any) => void> = {}
+    const onEditStartPaths: Record<string, (...args: any) => void> = {}
+    const onEditEndPaths: Record<string, (...args: any) => void> = {}
 
     Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
       allPaths.push(path)
@@ -200,9 +200,13 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path))
-      // @ts-ignore
-      const unsub = store.useStore.subscribe(onChange, (s) => s.data[path].value, shallow)
+      onChange(store.get(path), path)
+      const unsub = store.useStore.subscribe(
+        (v) => onChange(v, path),
+        // @ts-ignore
+        (s) => s.data[path].value,
+        shallow
+      )
       unsubscriptions.push(unsub)
     })
     return () => unsubscriptions.forEach((unsub) => unsub())

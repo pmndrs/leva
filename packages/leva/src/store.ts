@@ -219,11 +219,11 @@ export const Store = (function (this: StoreType) {
   }
 
   this.emitOnEditStart = (path: string) => {
-    eventEmitter.emit(`onEditStart:${path}`, this.get(path))
+    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path)
   }
 
   this.emitOnEditEnd = (path: string) => {
-    eventEmitter.emit(`onEditEnd:${path}`, this.get(path))
+    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path)
   }
 
   this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {

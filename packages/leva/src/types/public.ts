@@ -138,12 +138,12 @@ type GenericSchemaItemOptions = {
 }
 
 type TransientOnChangeSchemaItemOptions = {
-  onChange: (v: any) => void
+  onChange: (value: any, path: string) => void
   transient?: true
 }
 
 type NonTransientOnChangeSchemaItemOptions = {
-  onChange: (v: any) => void
+  onChange: (value: any, path: string) => void
   transient: false
 }
 
@@ -161,8 +161,8 @@ export type InputOptions = GenericSchemaItemOptions &
   OnChangeSchemaItemOptions & {
     optional?: boolean
     disabled?: boolean
-    onEditStart?: (value: any) => void
-    onEditEnd?: (value: any) => void
+    onEditStart?: (value: any, path: string) => void
+    onEditEnd?: (value: any, path: string) => void
   }
 
 type SchemaItemWithOptions =
