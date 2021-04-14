@@ -8,8 +8,10 @@ Add `onEditStart` and `onEditEnd` callbacks for values.
 useControls({
   value: {
     value: 1,
-    onEditStart: () => {},
-    onEditEnd: () => {},
+    onEditStart: (value, path) => {},
+    onEditEnd: (value, path) => {},
   },
 })
 ```
+
+Add `path` as a second parameter to `onChange` callback to mimic `onEditXXX` signature.
