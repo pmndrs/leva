@@ -43,7 +43,7 @@ export function Number({
   onChange,
   settings,
   innerLabelTrim = 1,
-}: Omit<NumberProps, 'setSettings' | 'onEditStart' | 'onEditEnd'> & {
+}: Omit<NumberProps, 'setSettings' | 'emitOnEditStart' | 'emitOnEditEnd'> & {
   id?: string
   label: string
   innerLabelTrim?: number
@@ -61,6 +61,7 @@ export function NumberComponent() {
   const { label, value, onUpdate, settings, id } = props
   const { min, max } = settings
   const hasRange = max !== Infinity && min !== -Infinity
+
   return (
     <Row input>
       <Label>{label}</Label>

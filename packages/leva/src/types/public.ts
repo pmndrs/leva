@@ -332,9 +332,9 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
-  onEditStart: (value: any) => void
-  onEditEnd: (value: any) => void
-  onUpdate: (v: any | ((v: any) => any), onNewValueDetermined?: (v: any) => void) => void
+  emitOnEditStart: () => void
+  emitOnEditEnd: () => void
+  onUpdate: (v: any | ((v: any) => any)) => void
   settings: InternalSettings
   setSettings: (v: Partial<InternalSettings>) => void
 }
