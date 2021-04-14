@@ -10,7 +10,7 @@ type ControlInputProps = Omit<DataInput, '__refCount' | 'key'> & {
   valueKey: string
   path: string
   storeId: string
-  setValue: (value: any, onValueChanged?: (value: any) => void) => void
+  setValue: (value: any) => void
   setSettings: (settings: any) => void
   disable: (flag: boolean) => void
 }
