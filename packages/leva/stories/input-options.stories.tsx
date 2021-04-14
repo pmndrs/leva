@@ -149,9 +149,9 @@ export const OnChangeFromPanel = () => {
   const [, set] = useControls(() => ({
     value: {
       value: 0.1,
-      onChange: (value, context) => {
+      onChange: (value, path, context) => {
         const node = window.document.createElement('pre')
-        node.innerText = JSON.stringify({ value, context })
+        node.innerText = JSON.stringify({ value, path, context })
         ref.current.appendChild(node)
         ref.current.scrollTop = ref.current.scrollHeight
       },
