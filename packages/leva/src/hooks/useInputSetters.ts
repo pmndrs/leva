@@ -6,7 +6,7 @@ type Props<V, Settings> = {
   type: string
   value: V
   settings?: Settings
-  setValue: (v: V, onValueChanged?: (value: any) => void) => void
+  setValue: (v: V) => void
 }
 
 export function useInputSetters<V, Settings extends object>({ value, type, settings, setValue }: Props<V, Settings>) {
