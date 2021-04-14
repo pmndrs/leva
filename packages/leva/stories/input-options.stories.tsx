@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import Reset from './components/decorator-reset'
 import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
 
-import { folder, useControls, LevaInputs, useCreateStore, LevaPanel } from '../src'
+import { folder, useControls, LevaInputs } from '../src'
 
 export default {
   title: 'Misc/Input options',
@@ -161,7 +161,7 @@ export const EnforceInputType = ({ inputType }) => {
 
 export const OnEditStartOnEditEnd = () => {
   const [isEditing, setIsEditing] = React.useState(0)
-  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>({})
+  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>(null)
 
   const onEditStart = (value, path) => {
     setIsEditing((i) => i + 1)
@@ -197,45 +197,31 @@ export const OnEditStartOnEditEnd = () => {
 
 OnEditStartOnEditEnd.storyName = 'onEditStart And onEditEnd'
 
+function OnEditComponent({ name }) {
+  const [edited, setEdited] = React.useState(false)
+  useControls({
+    input: {
+      value: 'something',
+      onEditStart: () => setEdited(true),
+      onEditEnd: () => setEdited(false),
+    },
+  })
+  return (
+    <pre>
+      Component {name} is being edited: {String(edited)}
+    </pre>
+  )
+}
+
 export const OnEditStartOnEditEndMultiPanel = () => {
-  const [editCounter1, setEditCounter1] = React.useState(0)
-  const [editCounter2, setEditCounter2] = React.useState(0)
-
-  const store = useCreateStore()
-
-  useControls(
-    {
-      value: {
-        value: 'lol',
-        onEditStart: () => setEditCounter1((counter) => counter + 1),
-        onEditEnd: () => setEditCounter1((counter) => counter - 1),
-      },
-    },
-    { store }
-  )
-
-  useControls(
-    {
-      value: {
-        value: 'lol',
-        onEditStart: () => setEditCounter2((counter) => counter + 1),
-        onEditEnd: () => setEditCounter2((counter) => counter - 1),
-      },
-    },
-    { store }
-  )
-
+  const [toggled, toggle] = React.useState(true)
   return (
     <>
-      <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-        <LevaPanel flat fill store={store} />
-        Is panel 1 value being edited? {String(!!editCounter1)}
-      </div>
-
-      <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-        <LevaPanel flat fill store={store} />
-        Is panel 2 value being edited? {String(!!editCounter2)}
-      </div>
+      <button onClick={() => toggle((t) => !t)}>{toggled ? 'Hide' : 'Show'} B</button>
+      <OnEditComponent name="A" />
+      {toggled && <OnEditComponent name="B" />}
     </>
   )
 }
+
+OnEditStartOnEditEndMultiPanel.storyName = 'onEdit Multiple Callbacks'
