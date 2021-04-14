@@ -45,6 +45,7 @@ export function Color({
   const hidePicker = () => {
     hide()
     emitOnEditEnd()
+    window.clearTimeout(timer.current)
   }
 
   const hideAfterDelay = () => {
@@ -60,7 +61,7 @@ export function Color({
       <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ color: displayValue }} />
       {shown && (
         <Portal>
-          <Overlay onPointerUp={hide} />
+          <Overlay onPointerUp={hidePicker} />
           <PickerWrapper
             ref={wrapperRef}
             onMouseEnter={() => window.clearTimeout(timer.current)}
