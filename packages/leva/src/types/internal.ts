@@ -21,7 +21,7 @@ export type StoreType = {
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data, override: boolean) => void
-  setValueAtPath: (path: string, value: any, onValueChanged?: (value: any) => void) => void
+  setValueAtPath: (path: string, value: any) => void
   setSettingsAtPath: (path: string, settings: any) => void
   disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this

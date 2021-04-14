@@ -32,7 +32,7 @@ export function useInput(
   const store = useStoreContext()
   const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
-  const set = useCallback((value, onValueChanged) => store.setValueAtPath(path, value, onValueChanged), [path, store])
+  const set = useCallback((value) => store.setValueAtPath(path, value), [path, store])
   const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])
   const disable = useCallback((flag) => store.disableInputAtPath(path, flag), [path, store])
   const emitOnEditStart = useCallback(() => store.emitOnEditStart(path), [path, store])

@@ -169,11 +169,11 @@ export const Store = (function (this: StoreType) {
    * @param path path of the input
    * @param value new value of the input
    */
-  this.setValueAtPath = (path, value, onValueChanged) => {
+  this.setValueAtPath = (path, value) => {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value, path, this, onValueChanged)
+      updateInput(data[path], value, path, this)
       return { data }
     })
   }
