@@ -81,7 +81,7 @@ function A() {
   const data = useControls({
     color: {
       value: '#f00',
-      onChange: (v) => {
+      onChange: (v, path) => {
         divRef.current.style.color = v
         divRef.current.innerText = `Transient color is ${v}`
       },
@@ -161,84 +161,41 @@ export const EnforceInputType = ({ inputType }) => {
 
 export const OnEditStartOnEditEnd = () => {
   const [isEditing, setIsEditing] = React.useState(0)
+  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>({})
+
+  const onEditStart = (value, path) => {
+    setIsEditing((i) => i + 1)
+    setEditedInput({ value, path })
+  }
+
+  const onEditEnd = () => {
+    setIsEditing((i) => i - 1)
+  }
+
   const data = useControls({
-    string: {
-      value: 'foobars',
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
-    number: {
-      value: 1,
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
-    numberSlider: {
-      value: 1,
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-      min: 0,
-      max: 10,
-    },
-    interval: {
-      value: [1, 10],
-      min: 1,
-      max: 10,
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
-    vector2d: {
-      value: [1, 1],
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
-    vector3d: {
-      value: [1, 1, 1],
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
-    color: {
-      value: '#fff',
-      onEditStart: () => {
-        setIsEditing((i) => i + 1)
-      },
-      onEditEnd: () => {
-        setIsEditing((i) => i - 1)
-      },
-    },
+    string: { value: 'foobars', onEditStart, onEditEnd },
+    number: { value: 1, onEditStart, onEditEnd },
+    numberSlider: { value: 1, onEditStart, onEditEnd, min: 0, max: 10 },
+    interval: { value: [1, 10], min: 1, max: 10, onEditStart, onEditEnd },
+    vector2d: { value: [1, 1], onEditStart, onEditEnd },
+    vector3d: { value: [1, 1, 1], onEditStart, onEditEnd },
+    color: { value: '#fff', onEditStart, onEditEnd },
   })
 
   return (
     <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
       <pre>Value</pre>
       <pre>{JSON.stringify(data, null, '  ')}</pre>
-      <pre>Is Editing? {isEditing === 0 ? 'No' : 'Yes'}</pre>
+      <pre>
+        {isEditing === 0
+          ? 'Not Editing'
+          : `Editing ${editedInput.path} with initial value ${String(editedInput.value)}`}
+      </pre>
     </div>
   )
 }
+
+OnEditStartOnEditEnd.storyName = 'onEditStart And onEditEnd'
 
 export const OnEditStartOnEditEndMultiPanel = () => {
   const [editCounter1, setEditCounter1] = React.useState(0)
