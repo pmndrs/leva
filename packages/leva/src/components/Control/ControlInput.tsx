@@ -24,8 +24,6 @@ export function ControlInput({
   settings,
   setValue,
   disabled,
-  onEditStart,
-  onEditEnd,
   ...rest
 }: ControlInputProps) {
   const { displayValue, onChange, onUpdate } = useInputSetters({
@@ -51,8 +49,6 @@ export function ControlInput({
         displayValue,
         value,
         onChange,
-        onEditStart,
-        onEditEnd,
         onUpdate,
         settings,
         setValue,

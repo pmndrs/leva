@@ -18,6 +18,8 @@ export function Color({
   settings,
   onUpdate,
 }: Pick<ColorProps, 'value' | 'displayValue' | 'settings' | 'onChange' | 'onUpdate'>) {
+  const { emitOnEditStart, emitOnEditEnd } = useInputContext()
+
   const { format, hasAlpha } = settings
 
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
@@ -37,10 +39,16 @@ export function Color({
   const showPicker = () => {
     setInitialRgb(convertToRgb(value, format))
     show()
+    emitOnEditStart()
+  }
+
+  const hidePicker = () => {
+    hide()
+    emitOnEditEnd()
   }
 
   const hideAfterDelay = () => {
-    timer.current = window.setTimeout(hide, 500)
+    timer.current = window.setTimeout(hidePicker, 500)
   }
 
   useEffect(() => {

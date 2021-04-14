@@ -8,13 +8,13 @@ type ValueInputProps = {
   value: string
   innerLabel?: false | React.ReactNode
   type?: 'number' | undefined
-  onUpdate: (value: any, onNewValueDetermined?: (value: any) => void) => void
+  onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
 }
 
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
-  const { id: _id, onEditStart, onEditEnd, value: panelValue } = useInputContext()
+  const { id: _id, emitOnEditStart, emitOnEditEnd } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -34,10 +34,13 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 
   React.useEffect(() => {
     const ref = inputRef.current
-    const _onUpdate = update((value) => onUpdate(value, onEditEnd))
+    const _onUpdate = update((value) => {
+      onUpdate(value)
+      emitOnEditEnd()
+    })
     ref?.addEventListener('blur', _onUpdate)
     return () => ref?.removeEventListener('blur', _onUpdate)
-  }, [update, onUpdate, onEditEnd])
+  }, [update, onUpdate, emitOnEditEnd])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,7 +64,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
-        onFocus={() => onEditStart(panelValue)}
+        onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}
@@ -71,8 +74,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 }
 
 export function NumberInput({ onUpdate, ...props }: ValueInputProps) {
-  const { onEditEnd } = useInputContext()
-  const _onUpdate = useCallback((v: any) => onUpdate(parseNumber(v), onEditEnd), [onUpdate, onEditEnd])
+  const _onUpdate = useCallback((v: any) => onUpdate(parseNumber(v)), [onUpdate])
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       const dir = event.key === 'ArrowUp' ? 1 : event.key === 'ArrowDown' ? -1 : 0

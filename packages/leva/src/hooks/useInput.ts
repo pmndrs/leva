@@ -25,8 +25,8 @@ export function useInput(
     setSettings: (value: any) => void
     disable: (flag: boolean) => void
     storeId: string
-    onEditStart: (value: any) => void
-    onEditEnd: (value: any) => void
+    emitOnEditStart: () => void
+    emitOnEditEnd: () => void
   }
 ] {
   const store = useStoreContext()
@@ -35,8 +35,8 @@ export function useInput(
   const set = useCallback((value, onValueChanged) => store.setValueAtPath(path, value, onValueChanged), [path, store])
   const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])
   const disable = useCallback((flag) => store.disableInputAtPath(path, flag), [path, store])
-  const onEditStart = useCallback((value: any) => store.emitOnEditStart(path, value), [path, store])
-  const onEditEnd = useCallback((value: any) => store.emitOnEditEnd(path, value), [path, store])
+  const emitOnEditStart = useCallback(() => store.emitOnEditStart(path), [path, store])
+  const emitOnEditEnd = useCallback(() => store.emitOnEditEnd(path), [path, store])
 
   useEffect(() => {
     setState(getInputAtPath(store.getData(), path))
@@ -44,5 +44,5 @@ export function useInput(
     return () => unsub()
   }, [store, path])
 
-  return [state, { set, setSettings, disable, storeId: store.storeId, onEditStart, onEditEnd }]
+  return [state, { set, setSettings, disable, storeId: store.storeId, emitOnEditStart, emitOnEditEnd }]
 }

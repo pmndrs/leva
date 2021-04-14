@@ -308,8 +308,8 @@ export type InputContextProps = {
   value: unknown
   displayValue: unknown
   onChange: React.Dispatch<any>
-  onEditStart: (value: any) => void
-  onEditEnd: (value: any) => void
+  emitOnEditStart: () => void
+  emitOnEditEnd: () => void
   onUpdate: (v: any | ((v: any) => any)) => void
   settings: unknown
   setSettings: (v: any) => void

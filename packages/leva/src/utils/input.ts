@@ -111,16 +111,9 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
   return false
 }
 
-export function updateInput(
-  input: DataInput,
-  newValue: any,
-  path: string,
-  store: StoreType,
-  onValueChanged?: (value: any) => void
-) {
+export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType) {
   const { value, type, settings } = input
   input.value = sanitizeValue({ type, value, settings }, newValue, path, store)
-  onValueChanged?.(input.value)
 }
 
 type SanitizeProps = {

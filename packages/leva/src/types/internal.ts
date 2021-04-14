@@ -30,8 +30,8 @@ export type StoreType = {
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
   subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
   subscribeToEditEnd: (path: string, listener: (value: any) => void) => Dispose
-  emitOnEditStart: (path: string, value: any) => void
-  emitOnEditEnd: (path: string, value: any) => void
+  emitOnEditStart: (path: string) => void
+  emitOnEditEnd: (path: string) => void
 }
 
 export type CommonOptions = {
@@ -45,8 +45,8 @@ export type DataInputOptions = CommonOptions & {
   optional: boolean
   disabled: boolean
   onChange?: (value: unknown) => void
-  onEditStart?: (value: unknown) => void
-  onEditEnd?: (value: unknown) => void
+  emitOnEditStart?: (value: unknown) => void
+  emitOnEditEnd?: (value: unknown) => void
 }
 
 export type DataInput = {

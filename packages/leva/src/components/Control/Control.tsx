@@ -17,7 +17,7 @@ const specialComponents = {
 }
 
 export const Control = React.memo(({ path }: ControlProps) => {
-  const [input, { set, setSettings, disable, storeId, onEditStart, onEditEnd }] = useInput(path)
+  const [input, { set, setSettings, disable, storeId, emitOnEditStart, emitOnEditEnd }] = useInput(path)
   if (!input) return null
 
   const { type, label, key, ...inputProps } = input
@@ -45,8 +45,8 @@ export const Control = React.memo(({ path }: ControlProps) => {
       setValue={set}
       setSettings={setSettings}
       disable={disable}
-      onEditStart={onEditStart}
-      onEditEnd={onEditEnd}
+      emitOnEditStart={emitOnEditStart}
+      emitOnEditEnd={emitOnEditEnd}
       {...inputProps}
     />
   )

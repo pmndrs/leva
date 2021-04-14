@@ -18,15 +18,14 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
   const setFormat = useCallback((v) => setDisplayValue(format(type, v, settingsRef.current)), [type])
 
   const onUpdate = useCallback(
-    (updatedValue: any, onValueChanged?: (value: any) => void) => {
+    (updatedValue: any) => {
       try {
-        setValue(updatedValue, onValueChanged)
+        setValue(updatedValue)
       } catch (error) {
         const { type, previousValue } = error
         // make sure we throw an error if it's not a sanitization error
         if (type !== 'LEVA_ERROR') throw error
         setFormat(previousValue)
-        onValueChanged?.(previousValue)
       }
     },
     [setFormat, setValue]
