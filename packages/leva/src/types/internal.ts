@@ -5,7 +5,13 @@ export type State = { data: Data }
 
 export type MappedPaths = Record<
   string,
-  { path: string; onChange: (value: any) => void; onEditStart?: () => void; onEditEnd?: () => void; transient: boolean }
+  {
+    path: string
+    onChange?: (...args: any) => void
+    onEditStart?: (...args: any) => void
+    onEditEnd?: (...args: any) => void
+    transient: boolean
+  }
 >
 
 type Dispose = () => void
@@ -44,9 +50,12 @@ export type CommonOptions = {
 export type DataInputOptions = CommonOptions & {
   optional: boolean
   disabled: boolean
-  onChange?: (value: unknown) => void
-  emitOnEditStart?: (value: unknown) => void
-  emitOnEditEnd?: (value: unknown) => void
+}
+
+export type PanelInputOptions = {
+  onChange?: (...args: any) => void
+  onEditStart?: (...args: any) => void
+  onEditEnd?: (...args: any) => void
 }
 
 export type DataInput = {

@@ -1,11 +1,11 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { CommonOptions, Data, DataInput, DataInputOptions, SpecialInputs, StoreType } from '../types'
+import { CommonOptions, Data, DataInput, DataInputOptions, PanelInputOptions, SpecialInputs, StoreType } from '../types'
 
 type ParsedOptions = {
   type?: string
   input: any
-  options: CommonOptions | DataInputOptions
+  options: CommonOptions | DataInputOptions | PanelInputOptions
 }
 
 export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
