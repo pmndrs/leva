@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
@@ -42,6 +42,10 @@ export function Color({
   const hideAfterDelay = () => {
     timer.current = window.setTimeout(hide, 500)
   }
+
+  useEffect(() => {
+    return () => window.clearTimeout(timer.current)
+  }, [])
 
   return (
     <>
