@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.6
+
+### Patch Changes
+
+- 0511799: styles: remove manual 'leva\_\_' prefix from stitches styles.
+
 ## 0.9.5
 
 ### Patch Changes
