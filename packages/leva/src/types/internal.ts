@@ -1,5 +1,5 @@
 import type { UseStore } from 'zustand'
-import type { SpecialInput, RenderFn, FolderSettings, Plugin } from './public'
+import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
 
@@ -7,7 +7,7 @@ export type MappedPaths = Record<
   string,
   {
     path: string
-    onChange?: (...args: any) => void
+    onChange?: OnChangeHandler
     onEditStart?: (...args: any) => void
     onEditEnd?: (...args: any) => void
     transient: boolean
@@ -27,11 +27,12 @@ export type StoreType = {
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
   addData: (newData: Data, override: boolean) => void
-  setValueAtPath: (path: string, value: any) => void
+  setValueAtPath: (path: string, value: any, fromPanel: boolean) => void
   setSettingsAtPath: (path: string, settings: any) => void
   disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this
-  set: (values: Record<string, any>) => void
+  set: (values: Record<string, any>, fromPanel: boolean) => void
+  getInput: (path: string) => DataInput | undefined
   get: (path: string) => any
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
   subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
@@ -62,6 +63,10 @@ export type DataInput = {
   __refCount: number
   type: string
   value: unknown
+  /**
+   * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
+   */
+  fromPanel: boolean
   settings?: object
 } & DataInputOptions
 

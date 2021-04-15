@@ -81,7 +81,7 @@ function A() {
   const data = useControls({
     color: {
       value: '#f00',
-      onChange: (v, path) => {
+      onChange: (v) => {
         divRef.current.style.color = v
         divRef.current.innerText = `Transient color is ${v}`
       },
@@ -119,6 +119,8 @@ export const OnChange = () => {
   )
 }
 
+OnChange.storyName = 'onChange'
+
 export const OnChangeWithRender = ({ transient }) => {
   const ref = React.useRef<HTMLPreElement | null>(null)
   const data = useControls({
@@ -144,7 +146,34 @@ OnChangeWithRender.args = {
   transient: false,
 }
 
-export const EnforceInputType = ({ inputType }) => {
+OnChangeWithRender.storyName = 'onChange With Render'
+
+export const OnChangeFromPanel = () => {
+  const ref = React.useRef<HTMLDivElement>()
+  const [, set] = useControls(() => ({
+    value: {
+      value: 0.1,
+      optional: true,
+      onChange: (value, path, context) => {
+        const node = window.document.createElement('pre')
+        node.innerText = JSON.stringify({ value, path, context })
+        ref.current.appendChild(node)
+        ref.current.scrollTop = ref.current.scrollHeight
+      },
+    },
+  }))
+
+  return (
+    <>
+      <div ref={ref} style={{ overflowY: 'scroll', height: 150 }}></div>
+      <button onClick={() => set({ value: Math.random() })}>Change Value externally</button>
+    </>
+  )
+}
+
+OnChangeFromPanel.storyName = 'onChange From Panel'
+
+export const EnforceInputType = () => {
   useControls({
     color: {
       type: LevaInputs.STRING,
@@ -163,7 +192,7 @@ export const OnEditStartOnEditEnd = () => {
   const [isEditing, setIsEditing] = React.useState(0)
   const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>(null)
 
-  const onEditStart = (value, path) => {
+  const onEditStart = (value, path, context) => {
     setIsEditing((i) => i + 1)
     setEditedInput({ value, path })
   }

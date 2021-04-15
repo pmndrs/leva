@@ -3,7 +3,7 @@ import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
-import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
+import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
 import shallow from 'zustand/shallow'
 
 type HookSettings = { store?: StoreType }
@@ -132,7 +132,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
-    const onChangePaths: Record<string, (...args: any) => void> = {}
+    const onChangePaths: Record<string, OnChangeHandler> = {}
     const onEditStartPaths: Record<string, (...args: any) => void> = {}
     const onEditEndPaths: Record<string, (...args: any) => void> = {}
 
@@ -176,7 +176,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
         (acc, [p, v]) => Object.assign(acc, { [mappedPaths[p].path]: v }),
         {}
       )
-      store.set(_values)
+      store.set(_values, false)
     },
     [store, mappedPaths]
   )
@@ -200,11 +200,15 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path), path)
+      onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
       const unsub = store.useStore.subscribe(
-        (v) => onChange(v, path),
-        // @ts-ignore
-        (s) => s.data[path].value,
+        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        (s) => {
+          const input = s.data[path]
+          // @ts-ignore
+          const value = input.disabled ? undefined : input.value
+          return [value, input]
+        },
         shallow
       )
       unsubscriptions.push(unsub)
