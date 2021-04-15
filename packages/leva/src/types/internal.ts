@@ -32,6 +32,7 @@ export type StoreType = {
   disableInputAtPath: (path: string, flag: boolean) => void
   // TODO possibly better type this
   set: (values: Record<string, any>, fromPanel: boolean) => void
+  getInput: (path: string) => DataInput | undefined
   get: (path: string) => any
   getDataFromSchema: (schema: any) => [Data, MappedPaths]
   subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
@@ -62,6 +63,9 @@ export type DataInput = {
   __refCount: number
   type: string
   value: unknown
+  /**
+   * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
+   */
   fromPanel: boolean
   settings?: object
 } & DataInputOptions

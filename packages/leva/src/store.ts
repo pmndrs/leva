@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
-import { SpecialInputs, MappedPaths } from './types'
+import { SpecialInputs, MappedPaths, DataInput } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
@@ -209,21 +209,24 @@ export const Store = (function (this: StoreType) {
     })
   }
 
-  this.get = (path) => {
+  this.getInput = (path) => {
     try {
-      //@ts-expect-error
-      return this.getData()[path].value
+      return this.getData()[path] as DataInput
     } catch (e) {
       warn(LevaErrors.PATH_DOESNT_EXIST, path)
     }
   }
 
+  this.get = (path) => {
+    return this.getInput(path)?.value
+  }
+
   this.emitOnEditStart = (path: string) => {
-    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path)
+    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
   }
 
   this.emitOnEditEnd = (path: string) => {
-    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path)
+    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
   }
 
   this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {

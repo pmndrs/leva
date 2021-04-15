@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useCallback, useState, useRef } from 'react'
 import { levaStore } from './store'
 import { folder } from './helpers'
-import { getValuesForPaths } from './utils/data'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
 import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
@@ -200,13 +199,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   useEffect(() => {
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
-    const get = () => getValuesForPaths(store.getData(), store.getVisiblePaths())
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path), path, { initial: true, fromPanel: false, get })
+      onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
       const unsub = store.useStore.subscribe(
-        ([value, fromPanel]: any) => onChange(value, path, { initial: false, fromPanel, get }),
-        // @ts-ignore
-        (s) => [s.data[path].value, s.data[path].fromPanel],
+        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        (s) => {
+          const input = s.data[path]
+          // @ts-ignore
+          const value = input.disabled ? undefined : input.value
+          return [value, input]
+        },
         shallow
       )
       unsubscriptions.push(unsub)

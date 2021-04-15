@@ -2,7 +2,7 @@
  * Types exposed through the public API
  */
 import type { VectorSettings } from '../components/Vector/vector-types'
-import { StoreType, Data } from './internal'
+import { StoreType, Data, DataInput } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -137,22 +137,16 @@ type GenericSchemaItemOptions = {
   hint?: string
 }
 
-type OnChangeHandlerContext<TValues = any> = {
+type OnHandlerContext = DataInput & { get(path: string): any }
+
+type OnChangeHandlerContext = OnHandlerContext & {
   /**
    * Whether the onChange handler is invoked initially.
    */
   initial: boolean
-  /**
-   * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
-   */
-  fromPanel: boolean
-  /**
-   * Get all the current values.
-   */
-  get(): TValues
 }
 
-export type OnChangeHandler<TValue = any> = (value: TValue, path: string, context: OnChangeHandlerContext) => void
+export type OnChangeHandler = (value: any, path: string, context: OnChangeHandlerContext) => void
 
 type TransientOnChangeSchemaItemOptions = {
   onChange: OnChangeHandler
@@ -178,8 +172,8 @@ export type InputOptions = GenericSchemaItemOptions &
   OnChangeSchemaItemOptions & {
     optional?: boolean
     disabled?: boolean
-    onEditStart?: (value: any, path: string) => void
-    onEditEnd?: (value: any, path: string) => void
+    onEditStart?: (value: any, path: string, context: OnHandlerContext) => void
+    onEditEnd?: (value: any, path: string, context: OnHandlerContext) => void
   }
 
 type SchemaItemWithOptions =
