@@ -3,18 +3,18 @@ import { styled } from '../../styles'
 export const ColorPreview = styled('div', {
   position: 'relative',
   boxSizing: 'border-box',
-  borderRadius: '$leva__sm',
+  borderRadius: '$sm',
   overflow: 'hidden',
   cursor: 'pointer',
-  height: '$leva__rowHeight',
-  width: '$leva__rowHeight',
+  height: '$rowHeight',
+  width: '$rowHeight',
   backgroundColor: '#fff',
   backgroundImage: `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>')`,
-  $leva__inputStyle: '',
-  $leva__hover: '',
+  $inputStyle: '',
+  $hover: '',
   zIndex: 1,
   variants: {
-    active: { true: { $leva__inputStyle: '$leva__accent1' } },
+    active: { true: { $inputStyle: '$accent1' } },
   },
   '&::before': {
     content: '""',
@@ -31,24 +31,24 @@ export const ColorPreview = styled('div', {
 export const PickerContainer = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridTemplateColumns: '$sizes$leva__rowHeight auto',
-  columnGap: '$leva__colGap',
+  gridTemplateColumns: '$sizes$rowHeight auto',
+  columnGap: '$colGap',
   alignItems: 'center',
 })
 
 export const PickerWrapper = styled('div', {
-  width: '$leva__colorPickerWidth',
-  height: '$leva__colorPickerHeight',
+  width: '$colorPickerWidth',
+  height: '$colorPickerHeight',
 
   '.react-colorful': {
     width: '100%',
     height: '100%',
-    boxShadow: '$leva__level2',
+    boxShadow: '$level2',
     cursor: 'crosshair',
   },
 
   '.react-colorful__saturation': {
-    borderRadius: '$leva__sm $leva__sm 0 0',
+    borderRadius: '$sm $sm 0 0',
   },
 
   '.react-colorful__alpha, .react-colorful__hue': {
@@ -56,7 +56,7 @@ export const PickerWrapper = styled('div', {
   },
 
   '.react-colorful__last-control': {
-    borderRadius: '0 0 $leva__sm $leva__sm',
+    borderRadius: '0 0 $sm $sm',
   },
 
   '.react-colorful__pointer': {

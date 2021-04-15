@@ -52,14 +52,6 @@ function Controls() {
   return null
 }
 
-const prefix = (token) => {
-  const o = {}
-  for (let key in token) {
-    o['leva__' + key] = token[key]
-  }
-  return o
-}
-
 export default function App() {
   const colorsStore = useCreateStore()
   const radiiStore = useCreateStore()
@@ -165,15 +157,7 @@ export default function App() {
     { store: fontWeightsStore }
   )
 
-  const theme = {
-    colors: prefix(colors),
-    radii: prefix(radii),
-    space: prefix(space),
-    fontSizes: prefix(fontSizes),
-    sizes: prefix(sizes),
-    borderWidths: prefix(borderWidths),
-    fontWeights: prefix(fontWeights),
-  }
+  const theme = { colors, radii, space, fontSizes, sizes, borderWidths, fontWeights }
 
   return (
     <div style={{ backgroundColor: 'lightgray', minHeight: '100vh' }}>

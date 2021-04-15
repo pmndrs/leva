@@ -300,5 +300,5 @@ export function useCreateStore() {
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // TODO remove store from window
   // @ts-expect-error
-  window.__LEVA__STORE = levaStore
+  window.__STORE = levaStore
 }

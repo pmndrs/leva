@@ -4,10 +4,10 @@ import { StyledInputRow } from '../UI/StyledUI'
 export const StyledRoot = styled('div', {
   /* position */
   position: 'relative',
-  fontFamily: '$leva__mono',
-  fontSize: '$leva__root',
-  color: '$leva__rootText',
-  backgroundColor: '$leva__elevation1',
+  fontFamily: '$mono',
+  fontSize: '$root',
+  color: '$rootText',
+  backgroundColor: '$elevation1',
   variants: {
     fill: {
       false: {
@@ -15,7 +15,7 @@ export const StyledRoot = styled('div', {
         top: '10px',
         right: '10px',
         zIndex: 1000,
-        width: '$leva__rootWidth',
+        width: '$rootWidth',
       },
       true: {
         position: 'relative',
@@ -24,8 +24,8 @@ export const StyledRoot = styled('div', {
     },
     flat: {
       false: {
-        borderRadius: '$leva__lg',
-        boxShadow: '$leva__level1',
+        borderRadius: '$lg',
+        boxShadow: '$level1',
       },
     },
     oneLineLabels: {
@@ -33,16 +33,16 @@ export const StyledRoot = styled('div', {
         [`${StyledInputRow}`]: {
           gridTemplateColumns: 'auto',
           gridAutoColumns: 'minmax(max-content, 1fr)',
-          gridAutoRows: 'minmax($sizes$leva__rowHeight), auto)',
+          gridAutoRows: 'minmax($sizes$rowHeight), auto)',
           rowGap: 0,
           columnGap: 0,
-          marginTop: '$leva__rowGap',
+          marginTop: '$rowGap',
         },
       },
     },
     hideTitleBar: {
       true: { $$titleBarHeight: '0px' },
-      false: { $$titleBarHeight: '$sizes$leva__titleBarHeight' },
+      false: { $$titleBarHeight: '$sizes$titleBarHeight' },
     },
   },
 
@@ -51,6 +51,6 @@ export const StyledRoot = styled('div', {
   },
 
   '*::selection': {
-    backgroundColor: '$leva__accent2',
+    backgroundColor: '$accent2',
   },
 })
