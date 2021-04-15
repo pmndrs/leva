@@ -6,34 +6,34 @@ export const StyledRow = styled('div', {
   position: 'relative',
   zIndex: 100,
   display: 'grid',
-  rowGap: '$leva__rowGap',
-  gridTemplateRows: 'minmax($sizes$leva__rowHeight, max-content)',
+  rowGap: '$rowGap',
+  gridTemplateRows: 'minmax($sizes$rowHeight, max-content)',
   alignItems: 'center',
-  color: '$leva__highlight2',
+  color: '$highlight2',
 
   [`${StyledContent} > &`]: {
-    '&:first-of-type': { marginTop: '$leva__rowGap' },
-    '&:last-of-type': { marginBottom: '$leva__rowGap' },
+    '&:first-of-type': { marginTop: '$rowGap' },
+    '&:last-of-type': { marginBottom: '$rowGap' },
   },
 
   '&:hover,&:focus-within': {
-    color: '$leva__highlight3',
+    color: '$highlight3',
   },
 })
 
 export const StyledInputRow = styled(StyledRow, {
-  gridTemplateColumns: 'auto $sizes$leva__controlWidth',
-  columnGap: '$leva__colGap',
+  gridTemplateColumns: 'auto $sizes$controlWidth',
+  columnGap: '$colGap',
 })
 
 export const CopyLabelContainer = styled('div', {
-  $leva__flex: '',
+  $flex: '',
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
 
   '& > div': {
-    marginLeft: '$leva__colGap',
+    marginLeft: '$colGap',
     padding: '0 $xs',
     opacity: 0.4,
   },
@@ -47,7 +47,7 @@ export const CopyLabelContainer = styled('div', {
     width: 13,
     minWidth: 13,
     height: 13,
-    backgroundColor: '$leva__elevation2',
+    backgroundColor: '$elevation2',
   },
   '&:hover > div > svg': { display: 'block' },
 
@@ -56,14 +56,14 @@ export const CopyLabelContainer = styled('div', {
       top: {
         height: '100%',
         alignItems: 'flex-start',
-        paddingTop: '$leva__sm',
+        paddingTop: '$sm',
       },
     },
   },
 })
 
 export const StyledOptionalToggle = styled('input', {
-  $leva__reset: '',
+  $reset: '',
   height: 0,
   width: 0,
   opacity: 0,
@@ -71,12 +71,12 @@ export const StyledOptionalToggle = styled('input', {
 
   '& + label': {
     position: 'relative',
-    $leva__flexCenter: '',
+    $flexCenter: '',
     height: '100%',
     userSelect: 'none',
     cursor: 'pointer',
     paddingLeft: 2,
-    paddingRight: '$leva__sm',
+    paddingRight: '$sm',
     pointerEvents: 'auto',
   },
 
@@ -84,20 +84,20 @@ export const StyledOptionalToggle = styled('input', {
     content: '""',
     width: 6,
     height: 6,
-    backgroundColor: '$leva__elevation3',
+    backgroundColor: '$elevation3',
     borderRadius: '50%',
-    $leva__activeStyle: '',
+    $activeStyle: '',
   },
 
-  '&:focus + label:after': { $leva__focusStyle: '' },
+  '&:focus + label:after': { $focusStyle: '' },
 
   '& + label:active:after': {
-    backgroundColor: '$leva__accent1',
-    $leva__focusStyle: '',
+    backgroundColor: '$accent1',
+    $focusStyle: '',
   },
 
   '&:checked + label:after': {
-    backgroundColor: '$leva__accent1',
+    backgroundColor: '$accent1',
   },
 })
 
@@ -111,7 +111,7 @@ export const StyledInputWrapper = styled('div', {
 })
 
 export const StyledLabel = styled('label', {
-  fontWeight: '$leva__label',
+  fontWeight: '$label',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -130,15 +130,15 @@ export const Overlay = styled('div', {
 })
 
 export const StyledToolTipContent = styled('div', {
-  background: '$leva__toolTipBackground',
-  fontFamily: '$leva__sans',
-  fontSize: '$leva__toolTip',
-  padding: '$leva__xs $leva__sm',
-  color: '$leva__toolTipText',
-  borderRadius: '$leva__xs',
-  boxShadow: '$leva__level2',
+  background: '$toolTipBackground',
+  fontFamily: '$sans',
+  fontSize: '$toolTip',
+  padding: '$xs $sm',
+  color: '$toolTipText',
+  borderRadius: '$xs',
+  boxShadow: '$level2',
 })
 
 export const ToolTipArrow = styled(Arrow, {
-  fill: '$leva__toolTipBackground',
+  fill: '$toolTipBackground',
 })

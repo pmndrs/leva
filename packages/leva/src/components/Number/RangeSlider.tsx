@@ -10,7 +10,7 @@ export function RangeSlider({ value, min, max, onDrag, step, initialValue }: Ran
   const ref = useRef<HTMLDivElement>(null)
   const scrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
-  const scrubberWidth = useTh('sizes', 'leva__scrubberWidth')
+  const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo }) => {
     if (first) {

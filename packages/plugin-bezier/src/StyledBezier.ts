@@ -2,18 +2,18 @@ import { styled, keyframes } from 'leva/plugin'
 
 export const Svg = styled('svg', {
   width: '100%',
-  height: '$leva__controlWidth',
-  marginTop: '$leva__rowGap',
+  height: '$controlWidth',
+  marginTop: '$rowGap',
   overflow: 'visible',
   zIndex: 100,
   '> path': {
-    stroke: '$leva__highlight3',
+    stroke: '$highlight3',
     strokeWidth: 2,
   },
   g: {
-    color: '$leva__accent1',
-    '&:hover': { color: '$leva__accent3' },
-    '&:active': { color: '$leva__vivid1' },
+    color: '$accent1',
+    '&:hover': { color: '$accent3' },
+    '&:active': { color: '$vivid1' },
   },
   circle: {
     fill: 'currentColor',
@@ -22,7 +22,7 @@ export const Svg = styled('svg', {
     cursor: 'pointer',
   },
   '> line': {
-    stroke: '$leva__highlight1',
+    stroke: '$highlight1',
     strokeWidth: 2,
   },
   '> g > line': {
@@ -47,7 +47,7 @@ export const PreviewSvg = styled('svg', {
   overflow: 'visible',
   height: 6,
   '> circle': {
-    fill: '$leva__vivid1',
+    fill: '$vivid1',
     cy: '50%',
     animation: `${fadeIn(0.3)} 1000ms both`,
     '&:first-of-type': { animationName: fadeIn(0.7) },
@@ -57,15 +57,15 @@ export const PreviewSvg = styled('svg', {
 
 export const SyledInnerLabel = styled('div', {
   userSelect: 'none',
-  $leva__flexCenter: '',
+  $flexCenter: '',
   height: 14,
   width: 14,
   borderRadius: 7,
-  marginRight: '$leva__sm',
+  marginRight: '$sm',
   cursor: 'pointer',
   fontSize: '0.8em',
   variants: {
-    graph: { true: { backgroundColor: '$leva__elevation1' } },
+    graph: { true: { backgroundColor: '$elevation1' } },
   },
 })
 

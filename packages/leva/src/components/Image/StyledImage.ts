@@ -3,31 +3,31 @@ import { styled } from '../../styles'
 export const ImageContainer = styled('div', {
   position: 'relative',
   display: 'grid',
-  gridTemplateColumns: '$sizes$leva__rowHeight auto 20px',
-  columnGap: '$leva__colGap',
+  gridTemplateColumns: '$sizes$rowHeight auto 20px',
+  columnGap: '$colGap',
   alignItems: 'center',
 })
 
 export const DropZone = styled('div', {
-  $leva__flexCenter: '',
+  $flexCenter: '',
   overflow: 'hidden',
-  height: '$leva__rowHeight',
-  background: '$leva__elevation3',
+  height: '$rowHeight',
+  background: '$elevation3',
   textAlign: 'center',
   color: 'inherit',
-  borderRadius: '$leva__sm',
+  borderRadius: '$sm',
   outline: 'none',
   userSelect: 'none',
   cursor: 'pointer',
-  $leva__inputStyle: '',
-  $leva__hover: '',
-  $leva__focusWithin: '',
-  $leva__active: '$leva__accent1 $leva__elevation1',
+  $inputStyle: '',
+  $hover: '',
+  $focusWithin: '',
+  $active: '$accent1 $elevation1',
   variants: {
     isDragAccept: {
       true: {
-        $leva__inputStyle: '$leva__accent1',
-        backgroundColor: '$leva__elevation1',
+        $inputStyle: '$accent1',
+        backgroundColor: '$elevation1',
       },
     },
   },
@@ -35,27 +35,27 @@ export const DropZone = styled('div', {
 
 export const ImagePreview = styled('div', {
   boxSizing: 'border-box',
-  borderRadius: '$leva__sm',
-  height: '$leva__rowHeight',
-  width: '$leva__rowHeight',
-  $leva__inputStyle: '',
+  borderRadius: '$sm',
+  height: '$rowHeight',
+  width: '$rowHeight',
+  $inputStyle: '',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   variants: {
     hasImage: {
-      true: { cursor: 'pointer', $leva__hover: '', $leva__active: '' },
+      true: { cursor: 'pointer', $hover: '', $active: '' },
     },
   },
 })
 
 export const ImageLargePreview = styled('div', {
-  $leva__flexCenter: '',
-  width: '$leva__imagePreviewWidth',
-  height: '$leva__imagePreviewHeight',
-  borderRadius: '$leva__sm',
-  boxShadow: '$leva__level2',
+  $flexCenter: '',
+  width: '$imagePreviewWidth',
+  height: '$imagePreviewHeight',
+  borderRadius: '$sm',
+  boxShadow: '$level2',
   pointerEvents: 'none',
-  $leva__inputStyle: '',
+  $inputStyle: '',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 })
@@ -63,20 +63,20 @@ export const ImageLargePreview = styled('div', {
 export const Instructions = styled('div', {
   fontSize: '0.8em',
   height: '100%',
-  padding: '$leva__rowGap $leva__md',
+  padding: '$rowGap $md',
 })
 
 export const Remove = styled('div', {
-  $leva__flexCenter: '',
+  $flexCenter: '',
   top: '0',
   right: '0',
-  marginRight: '$leva__sm',
+  marginRight: '$sm',
   height: '100%',
   cursor: 'pointer',
 
   variants: {
     disabled: {
-      true: { color: '$leva__elevation3', cursor: 'default' },
+      true: { color: '$elevation3', cursor: 'default' },
     },
   },
 

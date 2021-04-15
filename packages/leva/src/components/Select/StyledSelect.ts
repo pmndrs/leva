@@ -1,12 +1,12 @@
 import { styled } from '../../styles'
 
 export const SelectContainer = styled('div', {
-  $leva__flexCenter: '',
+  $flexCenter: '',
   position: 'relative',
   '> svg': {
     pointerEvents: 'none',
     position: 'absolute',
-    right: '$leva__md',
+    right: '$md',
   },
 })
 
@@ -23,15 +23,15 @@ export const PresentationalSelect = styled('div', {
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  height: '$leva__rowHeight',
-  backgroundColor: '$leva__elevation3',
-  borderRadius: '$leva__sm',
-  padding: '0 $leva__sm',
+  height: '$rowHeight',
+  backgroundColor: '$elevation3',
+  borderRadius: '$sm',
+  padding: '0 $sm',
   cursor: 'pointer',
   [`${NativeSelect}:focus + &`]: {
-    $leva__focusStyle: '',
+    $focusStyle: '',
   },
   [`${NativeSelect}:hover + &`]: {
-    $leva__hoverStyle: '',
+    $hoverStyle: '',
   },
 })

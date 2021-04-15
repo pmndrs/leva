@@ -41,7 +41,7 @@ export function ControlInput({
       value={{
         key: valueKey,
         path,
-        id: 'leva__' + path,
+        id: '' + path,
         label,
         displayValue,
         value,

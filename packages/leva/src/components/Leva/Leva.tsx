@@ -36,8 +36,7 @@ export function useRenderRoot(isGlobalPanel: boolean) {
   useEffect(() => {
     if (isGlobalPanel && !rootInitialized) {
       if (!rootEl) {
-        rootEl =
-          document.getElementById('leva__root') || Object.assign(document.createElement('div'), { id: 'leva__root' })
+        rootEl = document.getElementById('root') || Object.assign(document.createElement('div'), { id: 'root' })
         if (document.body) {
           document.body.appendChild(rootEl)
           ReactDOM.render(<Leva isRoot />, rootEl)

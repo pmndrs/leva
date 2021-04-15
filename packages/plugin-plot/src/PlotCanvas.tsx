@@ -9,7 +9,7 @@ type PlotCanvasProps = { value: InternalPlot; settings: InternalPlotSettings }
 export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps) => {
   const { boundsX, boundsY } = settings
 
-  const accentColor = useTh('colors', 'leva__highlight3')
+  const accentColor = useTh('colors', 'highlight3')
   const yPositions = useRef<number[]>([])
 
   const canvasBoundsY = useRef({ minY: -Infinity, maxY: Infinity })

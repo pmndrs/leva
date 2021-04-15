@@ -3,73 +3,73 @@ import { createCss } from '@stitches/react'
 
 export const getDefaultTheme = () => ({
   colors: {
-    leva__elevation1: '#292d39', // bg color of the root panel (main title bar)
-    leva__elevation2: '#181c20', // bg color of the rows (main panel color)
-    leva__elevation3: '#373c4b', // bg color of the inputs
-    leva__accent1: '#0066dc',
-    leva__accent2: '#007bff',
-    leva__accent3: '#3c93ff',
-    leva__highlight1: '#535760',
-    leva__highlight2: '#8c92a4',
-    leva__highlight3: '#fefefe',
-    leva__vivid1: '#ffcc00',
-    leva__toolTipBackground: '$leva__highlight3',
-    leva__toolTipText: '$leva__elevation2',
+    elevation1: '#292d39', // bg color of the root panel (main title bar)
+    elevation2: '#181c20', // bg color of the rows (main panel color)
+    elevation3: '#373c4b', // bg color of the inputs
+    accent1: '#0066dc',
+    accent2: '#007bff',
+    accent3: '#3c93ff',
+    highlight1: '#535760',
+    highlight2: '#8c92a4',
+    highlight3: '#fefefe',
+    vivid1: '#ffcc00',
+    toolTipBackground: '$highlight3',
+    toolTipText: '$elevation2',
   },
   radii: {
-    leva__xs: '2px',
-    leva__sm: '3px',
-    leva__lg: '10px',
+    xs: '2px',
+    sm: '3px',
+    lg: '10px',
   },
   space: {
-    leva__xs: '3px',
-    leva__sm: '6px',
-    leva__md: '10px',
-    leva__rowGap: '7px',
-    leva__colGap: '7px',
+    xs: '3px',
+    sm: '6px',
+    md: '10px',
+    rowGap: '7px',
+    colGap: '7px',
   },
   fonts: {
-    leva__mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
-    leva__sans: `system-ui, sans-serif`,
+    mono: `ui-monospace, SFMono-Regular, Menlo, 'Roboto Mono', monospace`,
+    sans: `system-ui, sans-serif`,
   },
   fontSizes: {
-    leva__root: '11px',
-    leva__toolTip: '$leva__root',
+    root: '11px',
+    toolTip: '$root',
   },
   sizes: {
-    leva__rootWidth: '280px',
-    leva__controlWidth: '160px',
-    leva__numberInputMinWidth: '38px',
-    leva__scrubberWidth: '8px',
-    leva__scrubberHeight: '16px',
-    leva__rowHeight: '24px',
-    leva__folderTitleHeight: '20px',
-    leva__checkboxSize: '16px',
-    leva__joystickWidth: '100px',
-    leva__joystickHeight: '100px',
-    leva__colorPickerWidth: '$leva__controlWidth',
-    leva__colorPickerHeight: '100px',
-    leva__imagePreviewWidth: '$leva__controlWidth',
-    leva__imagePreviewHeight: '100px',
-    leva__monitorHeight: '60px',
-    leva__titleBarHeight: '39px',
+    rootWidth: '280px',
+    controlWidth: '160px',
+    numberInputMinWidth: '38px',
+    scrubberWidth: '8px',
+    scrubberHeight: '16px',
+    rowHeight: '24px',
+    folderTitleHeight: '20px',
+    checkboxSize: '16px',
+    joystickWidth: '100px',
+    joystickHeight: '100px',
+    colorPickerWidth: '$controlWidth',
+    colorPickerHeight: '100px',
+    imagePreviewWidth: '$controlWidth',
+    imagePreviewHeight: '100px',
+    monitorHeight: '60px',
+    titleBarHeight: '39px',
   },
   shadows: {
-    leva__level1: '0 0 9px 0 #00000088',
-    leva__level2: '0 4px 14px #00000033',
+    level1: '0 0 9px 0 #00000088',
+    level2: '0 4px 14px #00000033',
   },
   borderWidths: {
-    leva__root: '0px',
-    leva__input: '1px',
-    leva__focus: '1px',
-    leva__hover: '1px',
-    leva__active: '1px',
-    leva__folder: '1px',
+    root: '0px',
+    input: '1px',
+    focus: '1px',
+    hover: '1px',
+    active: '1px',
+    folder: '1px',
   },
   fontWeights: {
-    leva__label: 'normal',
-    leva__folder: 'normal',
-    leva__button: 'normal',
+    label: 'normal',
+    folder: 'normal',
+    button: 'normal',
   },
 })
 
@@ -95,14 +95,13 @@ function createStateClass(value: string, options: Options) {
 }
 
 const utils = {
-  $leva__inputStyle: () => (value: string) =>
-    createStateClass(value, { key: '$leva__input', borderColor: '$leva__highlight1', inset: true }),
-  $leva__focusStyle: () => (value: string) =>
-    createStateClass(value, { key: '$leva__focus', borderColor: '$leva__accent2' }),
-  $leva__hoverStyle: () => (value: string) =>
-    createStateClass(value, { key: '$leva__hover', borderColor: '$leva__accent1', inset: true }),
-  $leva__activeStyle: () => (value: string) =>
-    createStateClass(value, { key: '$leva__active', borderColor: '$leva__accent1', inset: true }),
+  $inputStyle: () => (value: string) =>
+    createStateClass(value, { key: '$input', borderColor: '$highlight1', inset: true }),
+  $focusStyle: () => (value: string) => createStateClass(value, { key: '$focus', borderColor: '$accent2' }),
+  $hoverStyle: () => (value: string) =>
+    createStateClass(value, { key: '$hover', borderColor: '$accent1', inset: true }),
+  $activeStyle: () => (value: string) =>
+    createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
 export const { styled, css, theme, global: _global, keyframes } = createCss({
@@ -123,20 +122,21 @@ export const { styled, css, theme, global: _global, keyframes } = createCss({
       }
     }
   },
+  prefix: 'leva',
   theme: getDefaultTheme(),
   utils: {
     // ...prefixes,
     ...utils,
-    $leva__flex: () => () => ({
+    $flex: () => () => ({
       display: 'flex',
       alignItems: 'center',
     }),
-    $leva__flexCenter: () => () => ({
+    $flexCenter: () => () => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }),
-    $leva__reset: () => () => ({
+    $reset: () => () => ({
       outline: 'none',
       fontSize: 'inherit',
       fontWeight: 'inherit',
@@ -146,20 +146,20 @@ export const { styled, css, theme, global: _global, keyframes } = createCss({
       backgroundColor: 'transparent',
       appearance: 'none',
     }),
-    $leva__draggable: () => () => ({
+    $draggable: () => () => ({
       touchAction: 'none',
       WebkitUserDrag: 'none',
       userSelect: 'none',
     }),
-    $leva__focus: () => (value: string) => ({ '&:focus': utils.$leva__focusStyle()(value) }),
-    $leva__focusWithin: () => (value: string) => ({ '&:focus-within': utils.$leva__focusStyle()(value) }),
-    $leva__hover: () => (value: string) => ({ '&:hover': utils.$leva__hoverStyle()(value) }),
-    $leva__active: () => (value: string) => ({ '&:active': utils.$leva__activeStyle()(value) }),
+    $focus: () => (value: string) => ({ '&:focus': utils.$focusStyle()(value) }),
+    $focusWithin: () => (value: string) => ({ '&:focus-within': utils.$focusStyle()(value) }),
+    $hover: () => (value: string) => ({ '&:hover': utils.$hoverStyle()(value) }),
+    $active: () => (value: string) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
 
 const globalStyles = _global({
-  '.leva__panel__dragged': {
+  '.panel__dragged': {
     WebkitUserDrag: 'none',
     userSelect: 'none',
     input: { userSelect: 'none' },

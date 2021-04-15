@@ -1,10 +1,10 @@
 import { styled } from '../../styles'
 
 export const StyledButtonGroupButton = styled('button', {
-  $leva__reset: '',
+  $reset: '',
   cursor: 'pointer',
-  borderRadius: '$leva__xs',
+  borderRadius: '$xs',
   '&:hover': {
-    backgroundColor: '$leva__elevation3',
+    backgroundColor: '$elevation3',
   },
 })
