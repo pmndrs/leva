@@ -1,5 +1,13 @@
 # @leva-ui/plugin-plot
 
+## 0.0.3
+
+### Patch Changes
+
+- 0511799: styles: remove manual 'leva\_\_' prefix from stitches styles.
+- Updated dependencies [0511799]
+  - leva@0.9.6
+
 ## 0.0.2
 
 ### Patch Changes
