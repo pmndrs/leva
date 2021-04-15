@@ -13,6 +13,8 @@ type ControlInputProps = Omit<DataInput, '__refCount' | 'key'> & {
   setValue: (value: any) => void
   setSettings: (settings: any) => void
   disable: (flag: boolean) => void
+  emitOnEditStart?: (...args: any) => void
+  emitOnEditEnd?: (...args: any) => void
 }
 
 export function ControlInput({

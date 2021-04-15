@@ -81,7 +81,7 @@ function A() {
   const data = useControls({
     color: {
       value: '#f00',
-      onChange: (v) => {
+      onChange: (v, path) => {
         divRef.current.style.color = v
         divRef.current.innerText = `Transient color is ${v}`
       },
@@ -158,3 +158,70 @@ export const EnforceInputType = ({ inputType }) => {
 
   return null
 }
+
+export const OnEditStartOnEditEnd = () => {
+  const [isEditing, setIsEditing] = React.useState(0)
+  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>(null)
+
+  const onEditStart = (value, path) => {
+    setIsEditing((i) => i + 1)
+    setEditedInput({ value, path })
+  }
+
+  const onEditEnd = () => {
+    setIsEditing((i) => i - 1)
+  }
+
+  const data = useControls({
+    string: { value: 'foobars', onEditStart, onEditEnd },
+    number: { value: 1, onEditStart, onEditEnd },
+    numberSlider: { value: 1, onEditStart, onEditEnd, min: 0, max: 10 },
+    interval: { value: [1, 10], min: 1, max: 10, onEditStart, onEditEnd },
+    vector2d: { value: [1, 1], onEditStart, onEditEnd },
+    vector3d: { value: [1, 1, 1], onEditStart, onEditEnd },
+    color: { value: '#fff', onEditStart, onEditEnd },
+  })
+
+  return (
+    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+      <pre>Value</pre>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      <pre>
+        {isEditing === 0
+          ? 'Not Editing'
+          : `Editing ${editedInput.path} with initial value ${String(editedInput.value)}`}
+      </pre>
+    </div>
+  )
+}
+
+OnEditStartOnEditEnd.storyName = 'onEditStart And onEditEnd'
+
+function OnEditComponent({ name }) {
+  const [edited, setEdited] = React.useState(false)
+  useControls({
+    input: {
+      value: 'something',
+      onEditStart: () => setEdited(true),
+      onEditEnd: () => setEdited(false),
+    },
+  })
+  return (
+    <pre>
+      Component {name} is being edited: {String(edited)}
+    </pre>
+  )
+}
+
+export const OnEditStartOnEditEndMultiPanel = () => {
+  const [toggled, toggle] = React.useState(true)
+  return (
+    <>
+      <button onClick={() => toggle((t) => !t)}>{toggled ? 'Hide' : 'Show'} B</button>
+      <OnEditComponent name="A" />
+      {toggled && <OnEditComponent name="B" />}
+    </>
+  )
+}
+
+OnEditStartOnEditEndMultiPanel.storyName = 'onEdit Multiple Callbacks'

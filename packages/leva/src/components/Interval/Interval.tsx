@@ -39,8 +39,8 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
     return memo
   })
 
-  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth}))`
-  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth}))`
+  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth} - 8px) + 4px)`
+  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth} - 8px) + 4px)`
 
   return (
     <RangeWrapper ref={ref} {...bind()}>

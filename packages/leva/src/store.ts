@@ -3,9 +3,12 @@ import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
+import { createEventEmitter } from './eventEmitter'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
+
+  const eventEmitter = createEventEmitter()
 
   this.storeId = getUid()
   this.useStore = store
@@ -215,6 +218,24 @@ export const Store = (function (this: StoreType) {
     }
   }
 
+  this.emitOnEditStart = (path: string) => {
+    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path)
+  }
+
+  this.emitOnEditEnd = (path: string) => {
+    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path)
+  }
+
+  this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditStart:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
+  }
+
+  this.subscribeToEditEnd = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditEnd:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
+  }
+
   /**
    * Recursively extract the data from the schema, sets folder initial
    * preferences and normalize the inputs (normalizing an input means parsing the
@@ -248,9 +269,9 @@ export const Store = (function (this: StoreType) {
         if (normalizedInput) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
-          const { onChange, transient, ..._options } = options
+          const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
           data[newPath] = { type, ..._options, ...input }
-          mappedPaths[key] = { path: newPath, onChange, transient }
+          mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
         }

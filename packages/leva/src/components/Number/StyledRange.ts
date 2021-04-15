@@ -13,7 +13,7 @@ export const Scrubber = styled('div', {
   width: '$leva__scrubberWidth',
   height: '$leva__scrubberHeight',
   borderRadius: '$leva__xs',
-  boxShadow: '0 0 0 2px $leva__elevation2',
+  boxShadow: '0 0 0 2px $colors$leva__elevation2',
   backgroundColor: '$leva__accent2',
   cursor: 'pointer',
   $leva__active: 'none $leva__accent1',
