@@ -137,6 +137,7 @@ export const StyledToolTipContent = styled('div', {
   color: '$toolTipText',
   borderRadius: '$xs',
   boxShadow: '$level2',
+  maxWidth: 260,
 })
 
 export const ToolTipArrow = styled(Arrow, {
