@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.7
+
+### Patch Changes
+
+- d5383c0: fix: fix bug in which the panel would remove the root node of the app.
+
 ## 0.9.6
 
 ### Patch Changes
