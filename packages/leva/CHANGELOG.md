@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.8
+
+### Patch Changes
+
+- e29e5fd: style: wrap hint text
+
 ## 0.9.7
 
 ### Patch Changes
