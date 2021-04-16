@@ -19,7 +19,7 @@ function OptionalToggle() {
   )
 }
 
-type LabelProps = React.ComponentProps<any>
+type LabelProps = React.ComponentProps<typeof StyledLabel>
 
 function RawLabel(props: LabelProps) {
   const { id, optional, hint } = useInputContext()
@@ -44,7 +44,7 @@ function RawLabel(props: LabelProps) {
   )
 }
 
-export function Label({ align, ...props }: LabelProps) {
+export function Label({ align, ...props }: LabelProps & { align?: 'top' }) {
   const { value, label, key } = useInputContext()
   const { hideCopyButton } = usePanelSettingsContext()
 
