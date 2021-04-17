@@ -24,3 +24,4 @@ export function useTh<C extends keyof FullTheme>(category: C, key: keyof FullThe
 }
 
 export * from './stitches.config'
+export { lightTheme } from './themes/light'
