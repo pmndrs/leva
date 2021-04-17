@@ -1,4 +1,4 @@
-import { LevaCustomTheme } from '..'
+import { LevaCustomTheme } from '../stitches.config'
 
 export const lightTheme: LevaCustomTheme = {
   colors: {
