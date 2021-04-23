@@ -1,4 +1,3 @@
-import { useRef, useEffect } from 'react'
 import shallow from 'zustand/shallow'
 import { getValuesForPaths } from '../utils/data'
 import type { Data, StoreType } from '../types'
@@ -9,16 +8,10 @@ import type { Data, StoreType } from '../types'
  * @param initialData
  */
 export function useValuesForPath(store: StoreType, paths: string[], initialData: Data) {
-  // init is used to return the initialData on the first render
-  const init = useRef(true)
-
   const valuesForPath = store.useStore((s) => {
-    const data = init.current ? initialData : s.data
+    const data = { ...initialData, ...s.data }
     return getValuesForPaths(data, paths)
   }, shallow)
 
-  useEffect(() => {
-    init.current = false
-  })
   return valuesForPath
 }

@@ -5,4 +5,4 @@
 '@leva-ui/plugin-spring': patch
 ---
 
-fix: double render issue when using nested compoents.
+fix: double render issue when using nested components.
