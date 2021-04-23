@@ -109,6 +109,26 @@ const { position } = useControls({
 })
 ```
 
+The `step` setting can be used to change joystick's resistance.
+
+```jsx
+const { position } = useControls({
+  position: {
+    value: { x: 0, y: 0 },
+    step: 0.1
+  }
+})
+```
+
+You can also use your keyboard to control the step.
+Pressing the shift key while dragging increases the step. Pressing alt decreases the step.
+
+You can set options separately for each coordinate by nesting them under coordinate's key.
+
+```jsx
+useControls({ vec2: { value: { x: 0, y: 0 }, x: { step: 0.1 }, y: { step: 1 } } })
+```
+
 ### Vector3
 
 @todo
