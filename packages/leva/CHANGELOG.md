@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.9
+
+### Patch Changes
+
+- f8f7b57: fix: double render issue when using nested components.
+
 ## 0.9.8
 
 ### Patch Changes
