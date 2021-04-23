@@ -1,5 +1,13 @@
 # @leva-ui/plugin-plot
 
+## 0.9.8
+
+### Patch Changes
+
+- f8f7b57: fix: double render issue when using nested components.
+- Updated dependencies [f8f7b57]
+  - leva@0.9.9
+
 ## 0.0.3
 
 ### Patch Changes

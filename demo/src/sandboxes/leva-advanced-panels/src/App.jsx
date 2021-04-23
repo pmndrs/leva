@@ -21,8 +21,8 @@ export default function App() {
         padding: 10,
         background: '#fff',
       }}>
-      <LevaPanel store={store1} />
-      <LevaPanel store={store2} />
+      <LevaPanel store={store1} fill flat titleBar={false} />
+      <LevaPanel store={store2} fill flat titleBar={false} />
       <LevaStoreProvider store={store1}>
         <MyComponent />
       </LevaStoreProvider>
