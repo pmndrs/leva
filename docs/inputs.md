@@ -115,8 +115,8 @@ The `step` setting can be used to change joystick's resistance.
 const { position } = useControls({
   position: {
     value: { x: 0, y: 0 },
-    step: 0.1
-  }
+    step: 0.1,
+  },
 })
 ```
 
