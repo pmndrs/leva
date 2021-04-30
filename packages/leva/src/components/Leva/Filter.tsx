@@ -1,9 +1,9 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useDrag } from 'react-use-gesture'
 import { debounce, LevaErrors, warn } from '../../utils'
 import { FolderTitleProps } from '../Folder'
 import { Chevron } from '../UI'
-import { StyledFilterInput, StyledTitleWithFilter, TitleContainer, Icon, FilterWrapper } from './StyledFilter'
+import { FilterWrapper, Icon, StyledFilterInput, StyledTitleWithFilter, TitleContainer } from './StyledFilter'
 import { useStoreContext } from '../../context'
 import { DataInput } from '../../types'
 
@@ -93,7 +93,7 @@ export function TitleWithFilter({
 
   const [copied, setCopied] = useState(false)
   const handleCopyClick = async () => {
-    const data: any = store.getData()
+    const data = { ...store.getData() } as any
     try {
       for (let key in data) {
         if (data.hasOwnProperty(key)) {
