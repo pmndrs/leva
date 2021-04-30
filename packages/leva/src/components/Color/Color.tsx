@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import tinycolor from 'tinycolor2'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
@@ -18,6 +18,8 @@ export function Color({
   settings,
   onUpdate,
 }: Pick<ColorProps, 'value' | 'displayValue' | 'settings' | 'onChange' | 'onUpdate'>) {
+  const { emitOnEditStart, emitOnEditEnd } = useInputContext()
+
   const { format, hasAlpha } = settings
 
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
@@ -37,18 +39,29 @@ export function Color({
   const showPicker = () => {
     setInitialRgb(convertToRgb(value, format))
     show()
+    emitOnEditStart()
+  }
+
+  const hidePicker = () => {
+    hide()
+    emitOnEditEnd()
+    window.clearTimeout(timer.current)
   }
 
   const hideAfterDelay = () => {
-    timer.current = window.setTimeout(hide, 500)
+    timer.current = window.setTimeout(hidePicker, 500)
   }
+
+  useEffect(() => {
+    return () => window.clearTimeout(timer.current)
+  }, [])
 
   return (
     <>
       <ColorPreview ref={popinRef} active={shown} onClick={() => showPicker()} style={{ color: displayValue }} />
       {shown && (
         <Portal>
-          <Overlay onPointerUp={hide} />
+          <Overlay onPointerUp={hidePicker} />
           <PickerWrapper
             ref={wrapperRef}
             onMouseEnter={() => window.clearTimeout(timer.current)}

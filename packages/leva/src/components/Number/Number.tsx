@@ -43,7 +43,11 @@ export function Number({
   onChange,
   settings,
   innerLabelTrim = 1,
-}: Omit<NumberProps, 'setSettings'> & { id?: string; label: string; innerLabelTrim?: number }) {
+}: Omit<NumberProps, 'setSettings' | 'emitOnEditStart' | 'emitOnEditEnd'> & {
+  id?: string
+  label: string
+  innerLabelTrim?: number
+}) {
   const InnerLabel = innerLabelTrim > 0 && (
     <DraggableLabel label={label} step={settings.step} onUpdate={onUpdate} innerLabelTrim={innerLabelTrim} />
   )

@@ -1,11 +1,11 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { CommonOptions, Data, DataInput, DataInputOptions, SpecialInputs, StoreType } from '../types'
+import { CommonOptions, Data, DataInput, DataInputOptions, PanelInputOptions, SpecialInputs, StoreType } from '../types'
 
 type ParsedOptions = {
   type?: string
   input: any
-  options: CommonOptions | DataInputOptions
+  options: CommonOptions | DataInputOptions | PanelInputOptions
 }
 
 export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
@@ -38,7 +38,19 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, copy, onChange, transient, ...inputWithType } = _input
+  const {
+    render,
+    label,
+    optional,
+    disabled,
+    hint,
+    copy,
+    onChange,
+    onEditStart,
+    onEditEnd,
+    transient,
+    ...inputWithType
+  } = _input
   const commonOptions = {
     render,
     key,
@@ -46,6 +58,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
     hint,
     copy,
     transient: transient ?? !!onChange,
+    onEditStart,
+    onEditEnd,
     ...mergedOptions,
   }
 
@@ -84,8 +98,8 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
       // If the input is a special input then we return it as it is.
       return parsedInputAndOptions
 
-    // If the type key exists at this point, it must be a custom plugin
-    // defined by the user, and it's already been normalized.
+    // If the type key exists at this point, it must be a forced type or a
+    // custom plugin defined by the user.
     return { type, input: normalize(type, parsedInput, path, data), options }
   }
   let inputType = getValueType(parsedInput)
@@ -95,13 +109,14 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
 
   if (inputType) return { type: inputType, input: normalize(inputType, { value: parsedInput }, path, data), options }
 
-  // At this point, the input is not recognized and we return false
+  // At this point, the input is not recognized and we return false.
   return false
 }
 
-export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType) {
+export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType, fromPanel: boolean) {
   const { value, type, settings } = input
   input.value = sanitizeValue({ type, value, settings }, newValue, path, store)
+  input.fromPanel = fromPanel
 }
 
 type SanitizeProps = {

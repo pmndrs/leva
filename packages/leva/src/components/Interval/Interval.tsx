@@ -10,8 +10,8 @@ import type { IntervalSliderProps, IntervalProps, InternalInterval } from './int
 
 const Container = styled('div', {
   display: 'grid',
-  columnGap: '$leva__colGap',
-  gridTemplateColumns: 'auto calc($sizes$leva__numberInputMinWidth * 2 + $space$leva__rowGap)',
+  columnGap: '$colGap',
+  gridTemplateColumns: 'auto calc($sizes$numberInputMinWidth * 2 + $space$rowGap)',
 })
 
 function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: IntervalSliderProps) {
@@ -19,7 +19,7 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   const minScrubberRef = useRef<HTMLDivElement>(null)
   const maxScrubberRef = useRef<HTMLDivElement>(null)
   const rangeWidth = useRef<number>(0)
-  const scrubberWidth = useTh('sizes', 'leva__scrubberWidth')
+  const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
     if (first) {
@@ -39,8 +39,8 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
     return memo
   })
 
-  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth}))`
-  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth}))`
+  const minStyle = `calc(${range(value.min, min, max)} * (100% - ${scrubberWidth} - 8px) + 4px)`
+  const maxStyle = `calc(${1 - range(value.max, min, max)} * (100% - ${scrubberWidth} - 8px) + 4px)`
 
   return (
     <RangeWrapper ref={ref} {...bind()}>

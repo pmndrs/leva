@@ -2,8 +2,8 @@ import { styled } from '../../styles'
 
 export const StyledInput = styled('input', {
   /* input reset */
-  $leva__reset: '',
-  padding: '0 $leva__sm',
+  $reset: '',
+  padding: '0 $sm',
   width: 0,
   minWidth: 0,
   flex: 1,
@@ -14,11 +14,11 @@ export const StyledInput = styled('input', {
 })
 
 export const InnerLabel = styled('div', {
-  $leva__draggable: '',
+  $draggable: '',
   height: '100%',
-  $leva__flexCenter: '',
+  $flexCenter: '',
   position: 'relative',
-  padding: '0 $leva__xs',
+  padding: '0 $xs',
   fontSize: '0.8em',
   opacity: 0.8,
   cursor: 'default',
@@ -27,24 +27,24 @@ export const InnerLabel = styled('div', {
 
 export const InnerNumberLabel = styled(InnerLabel, {
   cursor: 'ew-resize',
-  marginRight: '-$leva__xs',
+  marginRight: '-$xs',
   textTransform: 'uppercase',
   opacity: 0.3,
   '&:hover': { opacity: 1 },
   variants: {
-    dragging: { true: { backgroundColor: '$leva__accent2', opacity: 1 } },
+    dragging: { true: { backgroundColor: '$accent2', opacity: 1 } },
   },
 })
 
 export const InputContainer = styled('div', {
-  $leva__flex: '',
+  $flex: '',
   position: 'relative',
-  borderRadius: '$leva__sm',
+  borderRadius: '$sm',
   overflow: 'hidden',
   color: 'inherit',
-  height: '$leva__rowHeight',
-  backgroundColor: '$leva__elevation3',
-  $leva__inputStyle: '$leva__elevation1',
-  $leva__hover: '',
-  $leva__focusWithin: '',
+  height: '$rowHeight',
+  backgroundColor: '$elevation3',
+  $inputStyle: '$elevation1',
+  $hover: '',
+  $focusWithin: '',
 })

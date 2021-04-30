@@ -3,7 +3,7 @@ import { Meta } from '@storybook/react'
 import Reset from './components/decorator-reset'
 import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
 
-import { folder, Leva, useControls } from '../src'
+import { folder, useControls, Leva, LevaInputs } from '../src'
 
 export default {
   title: 'Misc/Input options',
@@ -119,6 +119,8 @@ export const OnChange = () => {
   )
 }
 
+OnChange.storyName = 'onChange'
+
 export const CustomCopy = () => {
   const { id, label } = useControls({
     id: {
@@ -173,3 +175,112 @@ export const OnChangeWithRender = ({ transient }) => {
 OnChangeWithRender.args = {
   transient: false,
 }
+
+OnChangeWithRender.storyName = 'onChange With Render'
+
+export const OnChangeFromPanel = () => {
+  const ref = React.useRef<HTMLDivElement>()
+  const [, set] = useControls(() => ({
+    value: {
+      value: 0.1,
+      optional: true,
+      onChange: (value, path, context) => {
+        const node = window.document.createElement('pre')
+        node.innerText = JSON.stringify({ value, path, context })
+        ref.current.appendChild(node)
+        ref.current.scrollTop = ref.current.scrollHeight
+      },
+    },
+  }))
+
+  return (
+    <>
+      <div ref={ref} style={{ overflowY: 'scroll', height: 150 }}></div>
+      <button onClick={() => set({ value: Math.random() })}>Change Value externally</button>
+    </>
+  )
+}
+
+OnChangeFromPanel.storyName = 'onChange From Panel'
+
+export const EnforceInputType = () => {
+  useControls({
+    color: {
+      type: LevaInputs.STRING,
+      value: '#f00',
+    },
+    number: {
+      type: LevaInputs.STRING,
+      value: '1',
+    },
+  })
+
+  return null
+}
+
+export const OnEditStartOnEditEnd = () => {
+  const [isEditing, setIsEditing] = React.useState(0)
+  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>(null)
+
+  const onEditStart = (value, path, context) => {
+    setIsEditing((i) => i + 1)
+    setEditedInput({ value, path })
+  }
+
+  const onEditEnd = () => {
+    setIsEditing((i) => i - 1)
+  }
+
+  const data = useControls({
+    string: { value: 'foobars', onEditStart, onEditEnd },
+    number: { value: 1, onEditStart, onEditEnd },
+    numberSlider: { value: 1, onEditStart, onEditEnd, min: 0, max: 10 },
+    interval: { value: [1, 10], min: 1, max: 10, onEditStart, onEditEnd },
+    vector2d: { value: [1, 1], onEditStart, onEditEnd },
+    vector3d: { value: [1, 1, 1], onEditStart, onEditEnd },
+    color: { value: '#fff', onEditStart, onEditEnd },
+  })
+
+  return (
+    <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
+      <pre>Value</pre>
+      <pre>{JSON.stringify(data, null, '  ')}</pre>
+      <pre>
+        {isEditing === 0
+          ? 'Not Editing'
+          : `Editing ${editedInput.path} with initial value ${String(editedInput.value)}`}
+      </pre>
+    </div>
+  )
+}
+
+OnEditStartOnEditEnd.storyName = 'onEditStart And onEditEnd'
+
+function OnEditComponent({ name }) {
+  const [edited, setEdited] = React.useState(false)
+  useControls({
+    input: {
+      value: 'something',
+      onEditStart: () => setEdited(true),
+      onEditEnd: () => setEdited(false),
+    },
+  })
+  return (
+    <pre>
+      Component {name} is being edited: {String(edited)}
+    </pre>
+  )
+}
+
+export const OnEditStartOnEditEndMultiPanel = () => {
+  const [toggled, toggle] = React.useState(true)
+  return (
+    <>
+      <button onClick={() => toggle((t) => !t)}>{toggled ? 'Hide' : 'Show'} B</button>
+      <OnEditComponent name="A" />
+      {toggled && <OnEditComponent name="B" />}
+    </>
+  )
+}
+
+OnEditStartOnEditEndMultiPanel.storyName = 'onEdit Multiple Callbacks'

@@ -13,6 +13,8 @@ type ControlInputProps = Omit<DataInput, '__refCount' | 'key'> & {
   setValue: (value: any) => void
   setSettings: (settings: any) => void
   disable: (flag: boolean) => void
+  emitOnEditStart?: (...args: any) => void
+  emitOnEditEnd?: (...args: any) => void
 }
 
 export function ControlInput({
@@ -39,7 +41,7 @@ export function ControlInput({
       value={{
         key: valueKey,
         path,
-        id: 'leva__' + path,
+        id: '' + path,
         label,
         displayValue,
         value,

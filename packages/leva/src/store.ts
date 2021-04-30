@@ -1,11 +1,14 @@
 import { useMemo } from 'react'
 import create from 'zustand'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
-import { SpecialInputs, MappedPaths } from './types'
+import { SpecialInputs, MappedPaths, DataInput } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
+import { createEventEmitter } from './eventEmitter'
 
 export const Store = (function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
+
+  const eventEmitter = createEventEmitter()
 
   this.storeId = getUid()
   this.useStore = store
@@ -166,11 +169,11 @@ export const Store = (function (this: StoreType) {
    * @param path path of the input
    * @param value new value of the input
    */
-  this.setValueAtPath = (path, value) => {
+  this.setValueAtPath = (path, value, fromPanel) => {
     store.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
-      updateInput(data[path], value, path, this)
+      updateInput(data[path], value, path, this, fromPanel)
       return { data }
     })
   }
@@ -193,26 +196,47 @@ export const Store = (function (this: StoreType) {
     })
   }
 
-  this.set = (values) => {
+  this.set = (values, fromPanel: boolean) => {
     store.setState((s) => {
       const data = s.data
       Object.entries(values).forEach(([path, value]) => {
         try {
           //@ts-expect-error (we always update inputs with a value)
-          updateInput(data[path], value)
+          updateInput(data[path], value, undefined, undefined, fromPanel)
         } catch {}
       })
       return { data }
     })
   }
 
-  this.get = (path) => {
+  this.getInput = (path) => {
     try {
-      //@ts-expect-error
-      return this.getData()[path].value
+      return this.getData()[path] as DataInput
     } catch (e) {
       warn(LevaErrors.PATH_DOESNT_EXIST, path)
     }
+  }
+
+  this.get = (path) => {
+    return this.getInput(path)?.value
+  }
+
+  this.emitOnEditStart = (path: string) => {
+    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
+  }
+
+  this.emitOnEditEnd = (path: string) => {
+    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
+  }
+
+  this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditStart:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
+  }
+
+  this.subscribeToEditEnd = (path: string, listener: (value: any) => void): (() => void) => {
+    eventEmitter.on(`onEditEnd:${path}`, listener)
+    return () => eventEmitter.off(path, listener)
   }
 
   /**
@@ -248,9 +272,9 @@ export const Store = (function (this: StoreType) {
         if (normalizedInput) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
-          const { onChange, transient, ..._options } = options
-          data[newPath] = { type, ..._options, ...input }
-          mappedPaths[key] = { path: newPath, onChange, transient }
+          const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
+          data[newPath] = { type, ..._options, ...input, fromPanel: true }
+          mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
         }
@@ -276,5 +300,5 @@ export function useCreateStore() {
 if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
   // TODO remove store from window
   // @ts-expect-error
-  window.__LEVA__STORE = levaStore
+  window.__STORE = levaStore
 }

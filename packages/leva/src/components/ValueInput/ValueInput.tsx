@@ -14,7 +14,7 @@ type ValueInputProps = {
 }
 
 export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
-  const { id: _id } = useInputContext()
+  const { id: _id, emitOnEditStart, emitOnEditEnd } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -34,10 +34,13 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
 
   React.useEffect(() => {
     const ref = inputRef.current
-    const _onUpdate = update(onUpdate)
+    const _onUpdate = update((value) => {
+      onUpdate(value)
+      emitOnEditEnd()
+    })
     ref?.addEventListener('blur', _onUpdate)
     return () => ref?.removeEventListener('blur', _onUpdate)
-  }, [update, onUpdate])
+  }, [update, onUpdate, emitOnEditEnd])
 
   const onKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,6 +64,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         spellCheck="false"
         value={value}
         onChange={update(onChange)}
+        onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
         {...props}

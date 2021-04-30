@@ -3,7 +3,7 @@ import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
-import type { FolderSettings, Schema, SchemaToValues, StoreType } from './types'
+import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
 import shallow from 'zustand/shallow'
 
 type HookSettings = { store?: StoreType }
@@ -129,11 +129,14 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
    * parses the schema inside nested folder.
    */
   const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema), [store, _schema])
-  const [allPaths, renderPaths, onChangePaths] = useMemo(() => {
+  const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
-    const onChangePaths: Record<string, (v: any) => void> = {}
-    Object.values(mappedPaths).forEach(({ path, onChange, transient }) => {
+    const onChangePaths: Record<string, OnChangeHandler> = {}
+    const onEditStartPaths: Record<string, (...args: any) => void> = {}
+    const onEditEndPaths: Record<string, (...args: any) => void> = {}
+
+    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
       allPaths.push(path)
       if (!!onChange) {
         onChangePaths[path] = onChange
@@ -143,8 +146,15 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
       } else {
         renderPaths.push(path)
       }
+
+      if (onEditStart) {
+        onEditStartPaths[path] = onEditStart
+      }
+      if (onEditEnd) {
+        onEditEndPaths[path] = onEditEnd
+      }
     })
-    return [allPaths, renderPaths, onChangePaths]
+    return [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths]
   }, [mappedPaths])
 
   // Extracts the paths from the initialData and ensures order of paths.
@@ -166,7 +176,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
         (acc, [p, v]) => Object.assign(acc, { [mappedPaths[p].path]: v }),
         {}
       )
-      store.set(_values)
+      store.set(_values, false)
     },
     [store, mappedPaths]
   )
@@ -190,13 +200,32 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     // let's handle transient subscriptions
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
-      onChange(store.get(path))
-      // @ts-ignore
-      const unsub = store.useStore.subscribe(onChange, (s) => s.data[path].value, shallow)
+      onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
+      const unsub = store.useStore.subscribe(
+        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        (s) => {
+          const input = s.data[path]
+          // @ts-ignore
+          const value = input.disabled ? undefined : input.value
+          return [value, input]
+        },
+        shallow
+      )
       unsubscriptions.push(unsub)
     })
     return () => unsubscriptions.forEach((unsub) => unsub())
   }, [store, onChangePaths])
+
+  useEffect(() => {
+    const unsubscriptions: Array<() => void> = []
+    Object.entries(onEditStartPaths).forEach(([path, onEditStart]) =>
+      unsubscriptions.push(store.subscribeToEditStart(path, onEditStart))
+    )
+    Object.entries(onEditEndPaths).forEach(([path, onEditEnd]) =>
+      unsubscriptions.push(store.subscribeToEditEnd(path, onEditEnd))
+    )
+    return () => unsubscriptions.forEach((unsub) => unsub())
+  }, [onEditStartPaths, onEditEndPaths, store])
 
   if (schemaIsFunction) return [values, set] as any
   return values as any

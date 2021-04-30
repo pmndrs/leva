@@ -2,7 +2,7 @@
  * Types exposed through the public API
  */
 import type { VectorSettings } from '../components/Vector/vector-types'
-import { StoreType, Data } from './internal'
+import { StoreType, Data, DataInput } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean
@@ -12,8 +12,7 @@ export type RenderFn = (get: (key: string) => any) => boolean
  */
 export type InputWithSettings<V extends unknown, Settings = {}, K extends string = 'value'> = {
   [key in K]: V
-} &
-  Settings
+} & { type?: LevaInputs } & Settings
 
 /**
  * Either the raw value, either the value with its settings
@@ -50,9 +49,20 @@ export type ButtonInput = {
   onClick: () => any
 }
 
+export type ButtonGroupOpts = {
+  [title: string]: () => void
+}
+
+export type ButtonGroupInputOpts =
+  | ButtonGroupOpts
+  | {
+      label?: string | JSX.Element | null
+      opts: ButtonGroupOpts
+    }
+
 export type ButtonGroupInput = {
   type: SpecialInputs.BUTTON_GROUP
-  opts: { [title: string]: () => void }
+  opts: ButtonGroupInputOpts
 }
 
 export type MonitorSettings = { graph?: boolean; interval?: number }
@@ -128,13 +138,24 @@ type GenericSchemaItemOptions = {
   copy?: (key: string, value: unknown) => string
 }
 
+type OnHandlerContext = DataInput & { get(path: string): any }
+
+type OnChangeHandlerContext = OnHandlerContext & {
+  /**
+   * Whether the onChange handler is invoked initially.
+   */
+  initial: boolean
+}
+
+export type OnChangeHandler = (value: any, path: string, context: OnChangeHandlerContext) => void
+
 type TransientOnChangeSchemaItemOptions = {
-  onChange: (v: any) => void
+  onChange: OnChangeHandler
   transient?: true
 }
 
 type NonTransientOnChangeSchemaItemOptions = {
-  onChange: (v: any) => void
+  onChange: OnChangeHandler
   transient: false
 }
 
@@ -152,6 +173,8 @@ export type InputOptions = GenericSchemaItemOptions &
   OnChangeSchemaItemOptions & {
     optional?: boolean
     disabled?: boolean
+    onEditStart?: (value: any, path: string, context: OnHandlerContext) => void
+    onEditEnd?: (value: any, path: string, context: OnHandlerContext) => void
   }
 
 type SchemaItemWithOptions =
@@ -298,6 +321,8 @@ export type InputContextProps = {
   value: unknown
   displayValue: unknown
   onChange: React.Dispatch<any>
+  emitOnEditStart: () => void
+  emitOnEditEnd: () => void
   onUpdate: (v: any | ((v: any) => any)) => void
   settings: unknown
   setSettings: (v: any) => void
@@ -320,6 +345,8 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>
+  emitOnEditStart: () => void
+  emitOnEditEnd: () => void
   onUpdate: (v: any | ((v: any) => any)) => void
   settings: InternalSettings
   setSettings: (v: Partial<InternalSettings>) => void

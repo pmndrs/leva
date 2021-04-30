@@ -6,8 +6,8 @@ export const RangeGrid = styled('div', {
       true: {
         position: 'relative',
         display: 'grid',
-        gridTemplateColumns: 'auto $sizes$leva__numberInputMinWidth',
-        columnGap: '$leva__colGap',
+        gridTemplateColumns: 'auto $sizes$numberInputMinWidth',
+        columnGap: '$colGap',
         alignItems: 'center',
       },
     },

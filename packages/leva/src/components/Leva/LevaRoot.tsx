@@ -134,7 +134,7 @@ const LevaCore = React.memo(
               <TitleWithFilter
                 onDrag={set}
                 setFilter={setFilter}
-                toggle={() => setToggle((t) => !t)}
+                toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
                 toggled={toggled}
                 title={title}
                 drag={drag}
@@ -143,9 +143,7 @@ const LevaCore = React.memo(
                 copy={copy}
               />
             )}
-            {shouldShow && (
-                <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
-            )}
+            {shouldShow && <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />}
           </StyledRoot>
         </StoreContext.Provider>
       </PanelSettingsContext.Provider>

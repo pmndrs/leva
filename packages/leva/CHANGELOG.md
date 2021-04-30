@@ -1,5 +1,171 @@
 # leva
 
+## 0.9.9
+
+### Patch Changes
+
+- f8f7b57: fix: double render issue when using nested components.
+
+## 0.9.8
+
+### Patch Changes
+
+- e29e5fd: style: wrap hint text
+
+## 0.9.7
+
+### Patch Changes
+
+- d5383c0: fix: fix bug in which the panel would remove the root node of the app.
+
+## 0.9.6
+
+### Patch Changes
+
+- 0511799: styles: remove manual 'leva\_\_' prefix from stitches styles.
+
+## 0.9.5
+
+### Patch Changes
+
+- 234cfcd: Add `onEditStart` and `onEditEnd` callbacks for values.
+
+  ```tsx
+  useControls({
+    value: {
+      value: 1,
+      onEditStart: (value, path) => {},
+      onEditEnd: (value, path) => {},
+    },
+  })
+  ```
+
+  Add `path` as a second parameter to `onChange` callback to mimic `onEditXXX` signature.
+
+- a2db0e6: Improve `buttonGroup` API.
+
+  The label is now completely hidden when specifying key that only includes spaces. Previously the label was still rendered, but without text, this caused ugly spacing when using the `oneLineLabels` option on the `Leva` component.
+
+  ```ts
+  const [values, set] = useControls(() => ({
+    Size: 1,
+    ' ': buttonGroup({
+      '0.25x': () => set({ Size: 0.25 }),
+      '0.5x': () => set({ Size: 0.5 }),
+      '1x': () => set({ Size: 1 }),
+      '2x': () => set({ Size: 2 }),
+      '3x': () => set({ Size: 3 }),
+    }),
+  }))
+  ```
+
+  It is now possible to set the `label` via the `buttonGroup` arguments by using the alternative API:
+
+  ```ts
+  const [values, set] = useControls(() => ({
+    Width: 1,
+    WidthPresets: buttonGroup({
+      label: null,
+      opts: {
+        '0.25x': () => set({ Size: 0.25 }),
+        '0.5x': () => set({ Size: 0.5 }),
+        '1x': () => set({ Size: 1 }),
+        '2x': () => set({ Size: 2 }),
+        '3x': () => set({ Size: 3 }),
+      },
+    }),
+    Height: 1,
+    HeightPresets: buttonGroup({
+      label: null,
+      opts: {
+        '0.25x': () => set({ Size: 0.25 }),
+        '0.5x': () => set({ Size: 0.5 }),
+        '1x': () => set({ Size: 1 }),
+        '2x': () => set({ Size: 2 }),
+        '3x': () => set({ Size: 3 }),
+      },
+    }),
+  }))
+  ```
+
+  This also allows passing any JSX element as the label beside strings.
+
+  It also helps avoiding a bunch of `` labels (where each new one contains one more space).
+
+- d0b45de: Add `context` argument to `onChange` handler.
+
+  The `context.initial` boolean parameter can be used to identify whether `onChange` is invoked initially.
+
+  ```tsx
+  useControls({
+    value: {
+      value: 1,
+      onChange: (value, { initial }) => {
+        syncValue(value)
+        if (!initial) {
+          saveValueOnRemote(value)
+        }
+      },
+    },
+  })
+  ```
+
+  The `context.fromPanel` boolean parameter can be used to identify whether the `onChange` invocation is caused by the `Leva` component or via the `set` function return from the `useControl` hook.
+
+  ```tsx
+  const [, set] = useControls(() => ({
+    value: {
+      value: 1,
+      onChange: (value, { initial, fromPanel }) => {
+        syncValue(value)
+        if (!initial && !fromPanel) {
+          // we don't wanna trigger a remote save in case the value has not been updated from the panel
+          saveValueOnRemote(value)
+        }
+      },
+    },
+  }))
+  ```
+
+  The `context.get` parameter can be used for retrieving the up to date state of the store. This is handy if you need to do some invocations based on all the store values.
+
+  ```tsx
+  const [, set] = useControls(() => ({
+    value1: 1,
+    value2: 2,
+    value3: {
+      value: 1,
+      onChange: (value3, { get }) => {
+        const { value1, value2 } = get()
+        // calculate something based on value1 and value2
+      },
+    },
+  }))
+  ```
+
+## 0.9.4
+
+### Patch Changes
+
+- 50e8096: fix: sanitize step should behave better.
+  improvement: expand panel when filter changes.
+- 09a1a38: Allow specifying the explicit input type via the `type` option. This is handy when you want to prevent your string value being casted to a color or number.
+
+  ```tsx
+  import { LevaInputs, useControls } from 'leva'
+
+  useControls({
+    color: {
+      type: LevaInputs.STRING,
+      value: '#f00',
+    },
+    number: {
+      type: LevaInputs.STRING,
+      value: '1',
+    },
+  })
+  ```
+
 ## 0.9.3
 
 ### Patch Changes
@@ -16,7 +182,7 @@
   const data = useControls({
     color: {
       value: '#7c3d3d',
-      onChange: value => {
+      onChange: (value) => {
         console.log(value)
       },
       transient: false,
@@ -30,7 +196,7 @@
   const data = useControls({
     color: {
       value: '#7c3d3d',
-      onChange: value => {
+      onChange: (value) => {
         console.log(value)
       },
       transient: true,
@@ -218,7 +384,7 @@
 - f323cfc: Feat: `onChange` callback for transient updates
 
   ```js
-  useControls({ color: { value: 'red', onChange: v => console.log(v) } })
+  useControls({ color: { value: 'red', onChange: (v) => console.log(v) } })
   ```
 
 ## 0.6.3

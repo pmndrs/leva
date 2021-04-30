@@ -1,5 +1,21 @@
 # @leva-ui/plugin-spring
 
+## 0.9.8
+
+### Patch Changes
+
+- f8f7b57: fix: double render issue when using nested components.
+- Updated dependencies [f8f7b57]
+  - leva@0.9.9
+
+## 0.9.6
+
+### Patch Changes
+
+- 0511799: styles: remove manual 'leva\_\_' prefix from stitches styles.
+- Updated dependencies [0511799]
+  - leva@0.9.6
+
 ## 0.9.3
 
 ### Patch Changes
