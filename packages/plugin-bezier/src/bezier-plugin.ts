@@ -4,7 +4,7 @@ import type { BezierArray, BezierInput, InternalBezierSettings, InternalBezier, 
 
 const abscissasSettings = { min: 0, max: 1, step: 0.01 }
 const ordinatesSettings = { step: 0.01 }
-const defaultSettings = { graph: true }
+const defaultSettings = { graph: true, preview: true }
 
 export const BuiltIn: Record<BuiltInKeys, BezierArray> = {
   ease: [0.25, 0.1, 0.25, 1],

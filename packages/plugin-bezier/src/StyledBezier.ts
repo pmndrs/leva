@@ -28,6 +28,9 @@ export const Svg = styled('svg', {
   '> g > line': {
     stroke: 'currentColor',
   },
+  variants: {
+    withPreview: { true: { marginBottom: 0 }, false: { marginBottom: '$rowGap' } },
+  },
 })
 
 const fadeIn = (o: number) =>
