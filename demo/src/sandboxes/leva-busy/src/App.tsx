@@ -58,11 +58,17 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
-  const { hideTitleBar, oneLineLabels } = useControls({ hideTitleBar: false, oneLineLabels: false })
+  const { showTitleBar, title, drag, filter, oneLineLabels } = useControls('Panel', {
+    showTitleBar: true,
+    drag: { value: true, render: (get) => get('Panel.showTitleBar') },
+    title: { value: 'Leva', render: (get) => get('Panel.showTitleBar') },
+    filter: { value: true, render: (get) => get('Panel.showTitleBar') },
+    oneLineLabels: false,
+  })
 
   return (
     <>
-      <Leva titleBar={!hideTitleBar} oneLineLabels={oneLineLabels} />
+      <Leva titleBar={showTitleBar && { drag, title, filter }} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>
