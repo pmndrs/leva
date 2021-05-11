@@ -1,5 +1,13 @@
 # @leva-ui/plugin-spring
 
+## 0.9.10
+
+### Patch Changes
+
+- 3570975: chore: update core dependency.
+- Updated dependencies [16e3c14]
+  - leva@0.9.10
+
 ## 0.9.8
 
 ### Patch Changes
