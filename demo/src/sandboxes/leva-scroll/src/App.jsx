@@ -23,6 +23,7 @@ export default function App() {
       spring: { tension: 100, friction: 30 },
       folder3: folder(
         {
+          // eslint-disable-next-line no-console
           'Hello Button': button(() => console.log('hello')),
           folder4: folder({
             pos2d: { x: 3, y: 4 },
