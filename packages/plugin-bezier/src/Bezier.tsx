@@ -29,7 +29,7 @@ function SelectBezier({ value, onUpdate }: Pick<BezierProps, 'value' | 'onUpdate
 
 export function Bezier() {
   const { label, value, displayValue, settings, onUpdate, setSettings } = useInputContext<BezierProps>()
-  const { graph } = settings
+  const { graph, preview } = settings
 
   return (
     <>
@@ -42,11 +42,17 @@ export function Bezier() {
           <SelectBezier value={value} onUpdate={onUpdate} />
         </Container>
       </Row>
-      <Row>
-        {graph && <BezierSvg displayValue={displayValue} onUpdate={onUpdate} />}
-        <BezierPreview value={value} />
-        {graph && <Vector value={displayValue} settings={settings} onUpdate={onUpdate} innerLabelTrim={2} />}
-      </Row>
+      {graph && <BezierSvg displayValue={displayValue} onUpdate={onUpdate} withPreview={preview} />}
+      {preview && (
+        <Row>
+          <BezierPreview value={value} />
+        </Row>
+      )}
+      {graph && (
+        <Row>
+          <Vector value={displayValue} settings={settings} onUpdate={onUpdate} innerLabelTrim={2} />
+        </Row>
+      )}
     </>
   )
 }

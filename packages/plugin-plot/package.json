@@ -21,6 +21,6 @@
     "mathjs": "^9.3.2"
   },
   "devDependencies": {
-    "@types/mathjs": "^6.0.11"
+    "@types/mathjs": "^6.0.12"
   }
 }
