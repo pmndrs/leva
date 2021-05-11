@@ -16,9 +16,9 @@ export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
 }
 
 export const normalize = ({ value, ...settings }: NumberInput) => {
-  const { min, max } = settings
+  const { min = -Infinity, max = Infinity, ..._settings } = settings
 
-  const _value = parseFloat(value as string)
+  const _value = clamp(parseFloat(value as string), min, max)
   let suffix
   if (!Number.isFinite(value)) {
     const match = String(value).match(/[A-Z]+/i)
@@ -43,8 +43,8 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
   const pad = Math.round(clamp(Math.log10(1 / padStep), 0, 2))
 
   return {
-    value,
-    settings: { initialValue: _value, step, pad, min: -Infinity, max: Infinity, suffix, ...settings },
+    value: _value,
+    settings: { initialValue: _value, step, pad, min, max, suffix, ..._settings },
   }
 }
 

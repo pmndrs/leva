@@ -23,7 +23,11 @@ export const sanitize = (
 
 export const normalize = ({ value, min, max }: IntervalInput) => {
   const boundsSettings = { min, max }
-  const settings = normalizeKeyedNumberSettings(format(value), { min: boundsSettings, max: boundsSettings })
+  const _settings = normalizeKeyedNumberSettings(format(value), { min: boundsSettings, max: boundsSettings })
   const bounds: [number, number] = [min, max]
-  return { value, settings: { ...settings, bounds } }
+  const settings = { ..._settings, bounds }
+
+  // sanitizing value to make sure it's withing interval bounds
+  const _value = sanitize(format(value), settings, value)
+  return { value: _value, settings }
 }
