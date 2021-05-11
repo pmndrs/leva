@@ -40,7 +40,7 @@ function Controls() {
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
-    color: '#ffffffff',
+    color: '#ffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
     colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },

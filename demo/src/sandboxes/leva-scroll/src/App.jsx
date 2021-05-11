@@ -15,7 +15,7 @@ export default function App() {
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
-    color: '#ffffffff',
+    color: '#ffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
     folder2: folder({
