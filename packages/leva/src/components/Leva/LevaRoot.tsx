@@ -110,7 +110,7 @@ const LevaCore = React.memo(
 
     // this generally happens on first render because the store is initialized in useEffect.
     const shouldShow = paths.length > 0
-    const title = typeof titleBar === 'object' ? titleBar.title : undefined
+    const title = typeof titleBar === 'object' ? titleBar.title || undefined : undefined
     const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
     const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
 
