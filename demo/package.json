@@ -9,13 +9,13 @@
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.0.3",
-    "@react-three/drei": "^3.11.2",
+    "@react-three/drei": "^4.3.3",
+    "@react-three/fiber": "^6.0.21",
     "@stitches/react": "^0.1.9",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-three-fiber": "^5.3.22",
     "three": "^0.128.0",
     "wouter": "^2.7.4"
   },
