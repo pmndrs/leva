@@ -1,5 +1,12 @@
 # leva
 
+## 0.9.10
+
+### Patch Changes
+
+- 16e3c14: feat: add clamp Range and Interval initial values to bounds.
+  feat: when title is empty show the drag dots.
+
 ## 0.9.9
 
 ### Patch Changes
