@@ -32,7 +32,7 @@ export const OneLineLabels = Template.bind({})
 OneLineLabels.args = { oneLineLabels: true }
 
 export const HideTitleBar = Template.bind({})
-HideTitleBar.args = { hideTitleBar: true }
+HideTitleBar.args = { titleBar: false }
 
 export const Fill = Template.bind({})
 Fill.args = { fill: true }
