@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.11
+
+### Patch Changes
+
+- cedd742: chore: update deps
+
 ## 0.9.10
 
 ### Patch Changes
