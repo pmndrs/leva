@@ -1,5 +1,6 @@
 import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useFullscreen } from 'react-use'
 // @ts-ignore
 import { Noise } from 'noisejs'
 import { DimensionsIcon } from '@radix-ui/react-icons'
@@ -58,12 +59,17 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
-  const { showTitleBar, title, drag, filter, oneLineLabels } = useControls('Panel', {
+  const [{ showTitleBar, title, drag, filter, fullScreen, oneLineLabels }, set] = useControls('Panel', () => ({
     showTitleBar: true,
+    fullScreen: false,
     drag: { value: true, render: (get) => get('Panel.showTitleBar') },
     title: { value: 'Leva', render: (get) => get('Panel.showTitleBar') },
     filter: { value: true, render: (get) => get('Panel.showTitleBar') },
     oneLineLabels: false,
+  }))
+
+  useFullscreen({ current: document.documentElement }, fullScreen, {
+    onClose: () => set({ fullScreen: false }),
   })
 
   return (
