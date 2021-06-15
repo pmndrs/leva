@@ -2148,7 +2148,7 @@ __metadata:
   dependencies:
     react-use-measure: ^2.0.4
   peerDependencies:
-    leva: ">=0.9.10"
+    leva: ">=0.9.12"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
