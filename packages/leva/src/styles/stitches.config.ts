@@ -111,23 +111,6 @@ export const {
   global: _global,
   keyframes,
 } = createCss({
-  insertionMethod() {
-    let currentCssHead: HTMLHeadElement | null = null
-    let currentCssNode: HTMLElement | null = null
-
-    return (cssText) => {
-      if (typeof document === 'object') {
-        if (!currentCssHead) currentCssHead = document.head || document.documentElement
-        if (!currentCssNode)
-          currentCssNode =
-            document.getElementById('leva__stitches') ||
-            Object.assign(document.createElement('style'), { id: 'leva__stitches' })
-        if (!currentCssNode.parentNode) currentCssHead.append(currentCssNode)
-
-        currentCssNode.textContent = cssText
-      }
-    }
-  },
   prefix: 'leva',
   theme: getDefaultTheme(),
   utils: {
