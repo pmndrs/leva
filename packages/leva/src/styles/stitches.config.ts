@@ -104,7 +104,13 @@ const utils = {
     createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const { styled, css, theme, global: _global, keyframes } = createCss({
+export const {
+  styled,
+  css,
+  theme,
+  global: _global,
+  keyframes,
+} = createCss({
   insertionMethod() {
     let currentCssHead: HTMLHeadElement | null = null
     let currentCssNode: HTMLElement | null = null
