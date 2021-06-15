@@ -1,5 +1,6 @@
 import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
+import { useFullscreen } from 'react-use'
 // @ts-ignore
 import { Noise } from 'noisejs'
 import { DimensionsIcon } from '@radix-ui/react-icons'
@@ -14,6 +15,7 @@ function frame() {
 
 const ExtraControls = () => {
   const data = useControls('folder.subfolder', {
+    // eslint-disable-next-line no-console
     'Hello Button': button(() => console.log('hello')),
     'deep nested': folder({
       pos2d: { value: { x: 3, y: 4 }, lock: true },
@@ -40,7 +42,7 @@ function Controls() {
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
-    color: '#ffffffff',
+    color: '#ffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
     colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },
@@ -57,11 +59,22 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
-  const { hideTitleBar, oneLineLabels } = useControls({ hideTitleBar: false, oneLineLabels: false })
+  const [{ showTitleBar, title, drag, filter, fullScreen, oneLineLabels }, set] = useControls('Panel', () => ({
+    showTitleBar: true,
+    fullScreen: false,
+    drag: { value: true, render: (get) => get('Panel.showTitleBar') },
+    title: { value: 'Leva', render: (get) => get('Panel.showTitleBar') },
+    filter: { value: true, render: (get) => get('Panel.showTitleBar') },
+    oneLineLabels: false,
+  }))
+
+  useFullscreen({ current: document.documentElement }, fullScreen, {
+    onClose: () => set({ fullScreen: false }),
+  })
 
   return (
     <>
-      <Leva titleBar={!hideTitleBar} oneLineLabels={oneLineLabels} />
+      <Leva titleBar={showTitleBar && { drag, title, filter }} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
         <button onClick={() => setCount((c) => Math.max(0, c - 1))}>-</button>

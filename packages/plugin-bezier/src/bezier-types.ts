@@ -16,7 +16,7 @@ export type BezierArray = [number, number, number, number]
 
 export type Bezier = BezierArray | BuiltInKeys
 
-export type BezierSettings = { graph?: boolean }
+export type BezierSettings = { graph?: boolean; preview?: boolean }
 export type BezierInput = MergedInputWithSettings<Bezier, BezierSettings, 'handles'>
 
 export type InternalBezier = [number, number, number, number] & { evaluate(value: number): number; cssEasing: string }
@@ -27,6 +27,6 @@ export type InternalBezierSettings = InternalVectorSettings<
   keyof DisplayValueBezier,
   (keyof DisplayValueBezier)[],
   'array'
-> & { graph: boolean }
+> & { graph: boolean; preview: boolean }
 
 export type BezierProps = LevaInputProps<InternalBezier, InternalBezierSettings, DisplayValueBezier>

@@ -12,5 +12,6 @@
     "/demo/src/sandboxes/leva-plugin-bezier",
     "/demo/src/sandboxes/leva-plugin-spring",
     "/demo/src/sandboxes/leva-custom-plugin"
-  ]
+  ],
+  "node": "14"
 }

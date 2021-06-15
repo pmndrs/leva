@@ -34,6 +34,13 @@ MinMax.args = {
   max: 10,
 }
 
+export const WithValueOverflow = Template.bind({})
+WithValueOverflow.args = {
+  value: 100,
+  min: 0,
+  max: 10,
+}
+
 export const Step = Template.bind({})
 Step.args = {
   value: 10,

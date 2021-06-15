@@ -1,5 +1,13 @@
 # @leva-ui/plugin-bezier
 
+## 0.9.10
+
+### Patch Changes
+
+- 16e3c14: feat: add `preview` flag to disable dot preview.
+- Updated dependencies [16e3c14]
+  - leva@0.9.10
+
 ## 0.9.8
 
 ### Patch Changes

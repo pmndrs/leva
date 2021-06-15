@@ -22,7 +22,11 @@ function Line({ sx, sy, cx, cy }: LineProps) {
   return <line x1={cxs} y1={cys} x2={sx} y2={sy} />
 }
 
-export function BezierSvg({ displayValue, onUpdate }: Pick<BezierProps, 'displayValue' | 'onUpdate'>) {
+export function BezierSvg({
+  displayValue,
+  onUpdate,
+  withPreview,
+}: Pick<BezierProps, 'displayValue' | 'onUpdate'> & { withPreview: boolean }) {
   const r = useRange()
   const ir = useInvertedRange()
   const [ref, { width, height }] = useMeasure()
@@ -69,7 +73,7 @@ export function BezierSvg({ displayValue, onUpdate }: Pick<BezierProps, 'display
   )
 
   return (
-    <Svg ref={mergeRefs([svgRef, ref])} {...bind()}>
+    <Svg ref={mergeRefs([svgRef, ref])} {...bind()} withPreview={withPreview}>
       <line x1={sx} y1={sy} x2={ex} y2={ey} />
       <path fill="none" d={`M${sx},${sy} C${cx1},${cy1} ${cx2},${cy2} ${ex},${ey}`} strokeLinecap="round" />
       <g>
