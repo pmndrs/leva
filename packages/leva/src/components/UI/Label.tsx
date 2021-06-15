@@ -24,6 +24,10 @@ type LabelProps = React.ComponentProps<typeof StyledLabel>
 function RawLabel(props: LabelProps) {
   const { id, optional, hint } = useInputContext()
   const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
+
+  // If there's no tooltip, and if the label is of type string, then add a title.
+  const title = !hint && typeof props.children === 'string' ? { title: props.children } : null
+
   return (
     <>
       {optional && <OptionalToggle />}
@@ -38,7 +42,7 @@ function RawLabel(props: LabelProps) {
           </RadixTooltip.Content>
         </RadixTooltip.Root>
       ) : (
-        <StyledLabel {...htmlFor} {...props} />
+        <StyledLabel {...htmlFor} {...title} {...props} />
       )}
     </>
   )
