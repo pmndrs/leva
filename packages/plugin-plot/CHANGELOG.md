@@ -7,6 +7,7 @@
 - d5a5dd2: - Fix: prevent selection on Firefox when closing the Color picker.
   - Fix: add suffix to Number plugin initial value.
   - Feat: add `title` attribute to Labels when there is no `hint` prop.
+- Updated dependencies [dd17591]
 - Updated dependencies [d5a5dd2]
   - leva@0.9.12
 

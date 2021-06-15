@@ -11,7 +11,7 @@
     "@radix-ui/react-icons": "^1.0.3",
     "@react-three/drei": "^6.1.2",
     "@react-three/fiber": "^7.0.1",
-    "@stitches/react": "0.1.9",
+    "@stitches/react": "^0.2.0",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^17.0.2",

@@ -10,7 +10,7 @@ export function mergeTheme(newTheme?: LevaCustomTheme) {
     // @ts-ignore
     Object.assign(defaultTheme![key], newTheme![key])
   })
-  const className = theme(newTheme).className
+  const className = theme(newTheme)
   return { theme: defaultTheme, className }
 }
 

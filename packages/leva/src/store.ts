@@ -5,7 +5,7 @@ import { SpecialInputs, MappedPaths, DataInput } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
-export const Store = (function (this: StoreType) {
+export const Store = function (this: StoreType) {
   const store = create<State>(() => ({ data: {} }))
 
   const eventEmitter = createEventEmitter()
@@ -289,7 +289,7 @@ export const Store = (function (this: StoreType) {
     const data = _getDataFromSchema(schema, '', mappedPaths)
     return [data, mappedPaths]
   }
-} as any) as { new (): StoreType }
+} as any as { new (): StoreType }
 
 export const levaStore = new Store()
 

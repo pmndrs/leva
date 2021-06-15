@@ -3004,21 +3004,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/core@npm:^0.1.9":
-  version: 0.1.9
-  resolution: "@stitches/core@npm:0.1.9"
-  checksum: 808d2dfa253c184c9fa0322d0fb27d5364840af9726fa4f1fde8327d6bc0b8da26d13728f50421bb1ebf31e31b13515ce3f143c10b90614af490a937aa329c98
-  languageName: node
-  linkType: hard
-
-"@stitches/react@npm:0.1.9":
-  version: 0.1.9
-  resolution: "@stitches/react@npm:0.1.9"
-  dependencies:
-    "@stitches/core": ^0.1.9
+"@stitches/react@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@stitches/react@npm:0.2.0"
   peerDependencies:
-    react: ">=17.0.0 <19.0.0"
-  checksum: da1c1e767e681980f2d0480e62e5e6ac547ca2dcc1609ecf42de8998348310cf10b475c3ea91fe205ebb4ae2b7e99a77dbfa96a200e435a5844c95ebc3ba4d9e
+    react: ">= 17.0.0"
+  checksum: 83b6b311a86dc96b3ac6da5bf1627653e234a3863972897f4ca41569b94fdab82dd5f76539acb4f445b8b1e4294107cea0558a3c38ef2d5b968f9d01c6e3d150
   languageName: node
   linkType: hard
 
@@ -7447,7 +7438,7 @@ __metadata:
     "@radix-ui/react-icons": ^1.0.3
     "@react-three/drei": ^6.1.2
     "@react-three/fiber": ^7.0.1
-    "@stitches/react": 0.1.9
+    "@stitches/react": ^0.2.0
     "@types/react": ^17.0.11
     "@types/react-dom": ^17.0.7
     "@vitejs/plugin-react-refresh": ^1.3.3
@@ -11525,7 +11516,7 @@ fsevents@^1.2.7:
   dependencies:
     "@radix-ui/react-portal": ^0.0.13
     "@radix-ui/react-tooltip": 0.0.18
-    "@stitches/react": 0.1.9
+    "@stitches/react": ^0.2.0
     "@welldone-software/why-did-you-render": ^6.2.0
     dequal: ^2.0.2
     merge-value: ^1.0.0
