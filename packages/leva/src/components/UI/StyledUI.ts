@@ -127,6 +127,7 @@ export const Overlay = styled('div', {
   right: 0,
   left: 0,
   zIndex: 1000,
+  userSelect: 'none',
 })
 
 export const StyledToolTipContent = styled('div', {
