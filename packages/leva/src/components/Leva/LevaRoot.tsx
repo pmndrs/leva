@@ -9,7 +9,6 @@ import { mergeTheme, LevaCustomTheme } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { StoreType } from '../../types'
-import { getUid } from '../../utils'
 
 export type LevaRootProps = {
   /**
@@ -67,8 +66,7 @@ export type LevaRootProps = {
 }
 
 export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
-  const rootId = useMemo(() => getUid(), [])
-  const themeContext = useDeepMemo(() => mergeTheme(rootId, theme), [theme])
+  const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
   if (!store || hidden) return null
