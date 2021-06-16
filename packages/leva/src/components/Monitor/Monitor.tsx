@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef, forwardRef, useImperativeHandle } from 'react'
-import tc from 'tinycolor2'
+import { colord } from 'colord'
 import { Canvas } from './StyledMonitor'
 import { Label, Row } from '../UI'
 import { range } from '../../utils'
@@ -23,7 +23,7 @@ const MonitorCanvas = forwardRef(function ({ initialValue }: ObjectProps, ref) {
   const fillColor = useTh('colors', 'highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
-    return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
+    return [colord(fillColor).alpha(0.4).toRgbString(), colord(fillColor).alpha(0.1).toRgbString()]
   }, [fillColor])
 
   const points = useRef([initialValue])

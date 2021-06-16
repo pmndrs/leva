@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
-import tinycolor from 'tinycolor2'
+import { colord } from 'colord'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'
 import { ValueInput } from '../ValueInput'
 import { Label, Row, Overlay, Portal } from '../UI'
@@ -9,7 +9,7 @@ import { usePopin } from '../../hooks'
 import type { ColorProps, Color as ColorType } from './color-types'
 
 function convertToRgb(value: ColorType, format: string) {
-  return format !== 'rgb' ? tinycolor(value).toRgb() : (value as RgbaColor)
+  return format !== 'rgb' ? colord(value).toRgb() : (value as RgbaColor)
 }
 
 export function Color({
