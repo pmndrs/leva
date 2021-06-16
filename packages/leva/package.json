@@ -32,7 +32,6 @@
     "react-colorful": "^5.2.2",
     "react-dropzone": "^11.3.2",
     "react-use-gesture": "^9.1.3",
-    "tinycolor2": "^1.4.2",
     "v8n": "^1.3.3",
     "zustand": "^3.5.2"
   }
