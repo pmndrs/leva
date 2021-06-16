@@ -22,7 +22,7 @@ export const Components = {
   InnerLabel,
 }
 
-export { default as tinycolor2 } from 'tinycolor2'
+export { colord } from 'colord'
 export { dequal } from 'dequal/lite'
 
 export { debounce, clamp, pad, evaluate, range, invertedRange, mergeRefs } from '../utils'

@@ -6644,6 +6644,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colord@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "colord@npm:2.0.1"
+  checksum: b2b402f3c3ef06d18d9add66fc4d3e2b9cf9d853732fe59b8ddb637f922b8c487fe80fb27879e48035605a96deb5d1fc574c6c74608b9ce87ac8cedc20f24a96
+  languageName: node
+  linkType: hard
+
 "colorette@npm:^1.2.1, colorette@npm:^1.2.2":
   version: 1.2.2
   resolution: "colorette@npm:1.2.2"
@@ -11518,6 +11525,7 @@ fsevents@^1.2.7:
     "@radix-ui/react-tooltip": 0.0.18
     "@stitches/react": ^0.2.0
     "@welldone-software/why-did-you-render": ^6.2.0
+    colord: ^2.0.1
     dequal: ^2.0.2
     merge-value: ^1.0.0
     react-colorful: ^5.2.2
