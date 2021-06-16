@@ -1,5 +1,18 @@
 # @leva-ui/plugin-spring
 
+## 0.9.12
+
+### Patch Changes
+
+- 4f51de7: Switch from tinycolor to colord
+- d5a5dd2: - Fix: prevent selection on Firefox when closing the Color picker.
+  - Fix: add suffix to Number plugin initial value.
+  - Feat: add `title` attribute to Labels when there is no `hint` prop.
+- Updated dependencies [4f51de7]
+- Updated dependencies [dd17591]
+- Updated dependencies [d5a5dd2]
+  - leva@0.9.12
+
 ## 0.9.10
 
 ### Patch Changes
