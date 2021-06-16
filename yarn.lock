@@ -2200,7 +2200,6 @@ __metadata:
     "@testing-library/cypress": ^7.0.6
     "@types/react": ^17.0.11
     "@types/react-dom": ^17.0.7
-    "@types/tinycolor2": ^1.4.2
     "@typescript-eslint/eslint-plugin": ^4.27.0
     "@typescript-eslint/parser": ^4.27.0
     all-contributors-cli: ^6.20.0
@@ -4363,13 +4362,6 @@ __metadata:
   version: 1.0.7
   resolution: "@types/tapable@npm:1.0.7"
   checksum: efae5c6cd184cbd768f98c0777c829e30045d57664731f36fcc7e32a372fd01c0f50283375e8cd6e325d321d7962906d2bdb82ee4595f7b9f53cefd3011bfa82
-  languageName: node
-  linkType: hard
-
-"@types/tinycolor2@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "@types/tinycolor2@npm:1.4.2"
-  checksum: 4687c4c7081d08e8758f8238daf48d5fb19bb0ad15a14354dd742ad1d61ff6b66fcbd8f4cd6388ecb9e6b155bfec104883c550495ec0e0ff5333b6e5bcc56795
   languageName: node
   linkType: hard
 
@@ -6641,6 +6633,13 @@ __metadata:
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"colord@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "colord@npm:2.0.1"
+  checksum: b2b402f3c3ef06d18d9add66fc4d3e2b9cf9d853732fe59b8ddb637f922b8c487fe80fb27879e48035605a96deb5d1fc574c6c74608b9ce87ac8cedc20f24a96
   languageName: node
   linkType: hard
 
@@ -11518,12 +11517,12 @@ fsevents@^1.2.7:
     "@radix-ui/react-tooltip": 0.0.18
     "@stitches/react": ^0.2.0
     "@welldone-software/why-did-you-render": ^6.2.0
+    colord: ^2.0.1
     dequal: ^2.0.2
     merge-value: ^1.0.0
     react-colorful: ^5.2.2
     react-dropzone: ^11.3.2
     react-use-gesture: ^9.1.3
-    tinycolor2: ^1.4.2
     v8n: ^1.3.3
     zustand: ^3.5.2
   peerDependencies:
@@ -16636,13 +16635,6 @@ resolve@^2.0.0-next.3:
   version: 1.0.3
   resolution: "tiny-inflate@npm:1.0.3"
   checksum: 4086a1f8938dafa4a20c63b099aeb47bf8fef5aca991bf4ea4b35dd2684fa52363b2c19b3e76660311e7613cb7c4f063bc48751b9bdf9555e498d997c30bc2d6
-  languageName: node
-  linkType: hard
-
-"tinycolor2@npm:^1.4.2":
-  version: 1.4.2
-  resolution: "tinycolor2@npm:1.4.2"
-  checksum: 57ed262e08815a4ab0ed933edafdbc6555a17081781766149813b44a080ecbe58b3ee281e81c0e75b42e4d41679f138cfa98eabf043f829e0683c04adb12c031
   languageName: node
   linkType: hard
 

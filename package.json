@@ -70,7 +70,6 @@
     "@testing-library/cypress": "^7.0.6",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
-    "@types/tinycolor2": "^1.4.2",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "all-contributors-cli": "^6.20.0",

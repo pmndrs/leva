@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from '@react-spring/web'
-import { useCanvas2d, useDrag, useInputContext, debounce, tinycolor2 as tc, useTh } from 'leva/plugin'
+import { useCanvas2d, useDrag, useInputContext, debounce, colord, useTh } from 'leva/plugin'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
 import type { SpringProps } from './spring-types'
@@ -16,7 +16,7 @@ export function SpringCanvas() {
   const fillColor = useTh('colors', 'highlight1')
 
   const [gradientTop, gradientBottom] = useMemo(() => {
-    return [tc(fillColor).setAlpha(0.4).toRgbString(), tc(fillColor).setAlpha(0.1).toRgbString()]
+    return [colord(fillColor).alpha(0.4).toRgbString(), colord(fillColor).alpha(0.1).toRgbString()]
   }, [fillColor])
 
   const { tension, friction, mass = 1 } = displayValue
