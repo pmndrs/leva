@@ -1,5 +1,16 @@
 # leva
 
+## 0.9.12
+
+### Patch Changes
+
+- 4f51de7: Switch from tinycolor to colord
+- dd17591: chore: update to stitches 0.2.0
+- ac99a90: feat: add `color` option to folders
+- d5a5dd2: - Fix: prevent selection on Firefox when closing the Color picker.
+  - Fix: add suffix to Number plugin initial value.
+  - Feat: add `title` attribute to Labels when there is no `hint` prop.
+
 ## 0.9.11
 
 ### Patch Changes
