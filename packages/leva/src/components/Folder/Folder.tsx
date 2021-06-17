@@ -7,6 +7,7 @@ import { Control } from '../Control'
 import { useToggle } from '../../hooks'
 import { useStoreContext } from '../../context'
 import type { Tree } from '../../types'
+import { useTh } from '../../styles'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 
@@ -18,12 +19,13 @@ const Folder = ({ name, path, tree }: FolderProps) => {
 
   const folderRef = useRef<HTMLDivElement>(null)
 
+  const widgetColor = useTh('colors', 'folderWidgetColor')
+  const textColor = useTh('colors', 'folderTextColor')
+
   useLayoutEffect(() => {
-    if (color) {
-      folderRef.current!.style.setProperty('--leva-colors-folderWidgetColor', color)
-      folderRef.current!.style.setProperty('--leva-colors-folderTextColor', color)
-    }
-  }, [color])
+    folderRef.current!.style.setProperty('--leva-colors-folderWidgetColor', color || widgetColor)
+    folderRef.current!.style.setProperty('--leva-colors-folderTextColor', color || textColor)
+  }, [color, widgetColor, textColor])
 
   return (
     <StyledFolder ref={folderRef}>
