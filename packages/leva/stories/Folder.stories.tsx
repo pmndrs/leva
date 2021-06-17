@@ -40,6 +40,12 @@ Collapsed.args = {
   name: 'collapsedFolder',
 }
 
+export const Color = Template.bind({})
+Color.args = {
+  options: { color: 'yellow' },
+  name: 'withColor',
+}
+
 const FolderHelperTemplate: Story<any> = (args) => {
   const values = useControls({
     myFolder: folder(

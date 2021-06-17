@@ -13,6 +13,8 @@ export const getDefaultTheme = () => ({
     highlight2: '#8c92a4',
     highlight3: '#fefefe',
     vivid1: '#ffcc00',
+    folderWidgetColor: '$highlight2',
+    folderTextColor: '$highlight3',
     toolTipBackground: '$highlight3',
     toolTipText: '$elevation2',
   },

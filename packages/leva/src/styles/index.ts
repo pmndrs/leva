@@ -20,7 +20,13 @@ export function useTh<C extends keyof FullTheme>(category: C, key: keyof FullThe
     warn(LevaErrors.THEME_ERROR, category, key)
     return ''
   }
-  return theme[category][key]
+
+  let _key = key
+  while (true) {
+    let value = theme[category][_key]
+    if (typeof value === 'string' && value.charAt(0) === '$') _key = value.substr(1) as any
+    else return value
+  }
 }
 
 export * from './stitches.config'

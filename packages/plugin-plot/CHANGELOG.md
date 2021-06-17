@@ -9,6 +9,7 @@
   - Feat: add `title` attribute to Labels when there is no `hint` prop.
 - Updated dependencies [4f51de7]
 - Updated dependencies [dd17591]
+- Updated dependencies [ac99a90]
 - Updated dependencies [d5a5dd2]
   - leva@0.9.12
 

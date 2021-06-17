@@ -17,19 +17,22 @@ const ExtraControls = () => {
   const data = useControls('folder.subfolder', {
     // eslint-disable-next-line no-console
     'Hello Button': button(() => console.log('hello')),
-    'deep nested': folder({
-      pos2d: { value: { x: 3, y: 4 }, lock: true },
-      pos2dArr: [100, 200],
-      pos3d: {
-        value: {
-          x: 0.3,
-          y: 0.1,
-          z: 0.5,
+    'deep nested': folder(
+      {
+        pos2d: { value: { x: 3, y: 4 }, lock: true },
+        pos2dArr: [100, 200],
+        pos3d: {
+          value: {
+            x: 0.3,
+            y: 0.1,
+            z: 0.5,
+          },
+          label: <DimensionsIcon />,
         },
-        label: <DimensionsIcon />,
+        pos3dArr: [Math.PI / 2, 20, 4],
       },
-      pos3dArr: [Math.PI / 2, 20, 4],
-    }),
+      { color: 'red' }
+    ),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>
 }
@@ -46,11 +49,14 @@ function Controls() {
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
     colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },
-    folder: folder({
-      noJoy: { value: [1, 2], joystick: false },
-      boolean: true,
-      spring: { tension: 100, friction: 30 },
-    }),
+    folder: folder(
+      {
+        noJoy: { value: [1, 2], joystick: false },
+        boolean: true,
+        spring: { tension: 100, friction: 30 },
+      },
+      { color: 'yellow' }
+    ),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>
 }
@@ -59,14 +65,18 @@ export default function App() {
   const [count, setCount] = React.useState(0)
   const [show, setShow] = React.useState(true)
 
-  const [{ showTitleBar, title, drag, filter, fullScreen, oneLineLabels }, set] = useControls('Panel', () => ({
-    showTitleBar: true,
-    fullScreen: false,
-    drag: { value: true, render: (get) => get('Panel.showTitleBar') },
-    title: { value: 'Leva', render: (get) => get('Panel.showTitleBar') },
-    filter: { value: true, render: (get) => get('Panel.showTitleBar') },
-    oneLineLabels: false,
-  }))
+  const [{ showTitleBar, title, drag, filter, fullScreen, oneLineLabels }, set] = useControls(
+    'Panel',
+    () => ({
+      showTitleBar: true,
+      fullScreen: false,
+      drag: { value: true, render: (get) => get('Panel.showTitleBar') },
+      title: { value: 'Leva', render: (get) => get('Panel.showTitleBar') },
+      filter: { value: true, render: (get) => get('Panel.showTitleBar') },
+      oneLineLabels: false,
+    }),
+    { color: 'royalblue' }
+  )
 
   useFullscreen({ current: document.documentElement }, fullScreen, {
     onClose: () => set({ fullScreen: false }),
