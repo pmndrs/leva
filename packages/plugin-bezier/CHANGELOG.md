@@ -1,5 +1,12 @@
 # @leva-ui/plugin-bezier
 
+## 0.9.12
+
+### Patch Changes
+
+- Updated dependencies
+  - leva@0.9.12
+
 ## 0.9.10
 
 ### Patch Changes
