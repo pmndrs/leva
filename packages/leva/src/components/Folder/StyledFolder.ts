@@ -20,7 +20,8 @@ export const StyledWrapper = styled('div', {
           top: 0,
           width: '$borderWidths$folder',
           height: '100%',
-          backgroundColor: '$elevation3',
+          backgroundColor: '$folderWidgetColor',
+          opacity: 0.4,
           transform: 'translateX(-50%)',
         },
       },
@@ -46,28 +47,30 @@ export const StyledWrapper = styled('div', {
 
 export const StyledTitle = styled('div', {
   $flex: '',
-  color: '$highlight3',
+  color: '$folderTextColor',
   userSelect: 'none',
   cursor: 'pointer',
   height: '$folderTitleHeight',
   fontWeight: '$folder',
+
   '> svg': {
     marginLeft: -4,
     marginRight: 4,
     cursor: 'pointer',
-    fill: '$highlight1',
+    fill: '$folderWidgetColor',
+    opacity: 0.6,
   },
   '&:hover > svg': {
-    fill: '$highlight2',
+    fill: '$folderWidgetColor',
   },
   [`&:hover + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight2',
+    opacity: 0.6,
   },
   [`${StyledFolder}:hover > & + ${StyledWrapper}::after`]: {
-    backgroundColor: '$highlight1',
+    opacity: 0.6,
   },
   [`${StyledFolder}:hover > & > svg`]: {
-    fill: '$highlight1',
+    opacity: 1,
   },
 })
 
