@@ -75,7 +75,7 @@ export type MonitorInput = {
 
 export type SpecialInput = MonitorInput | ButtonInput | ButtonGroupInput
 
-export type FolderSettings = { collapsed?: boolean; render?: RenderFn }
+export type FolderSettings = { collapsed?: boolean; render?: RenderFn; color?: string }
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
 
