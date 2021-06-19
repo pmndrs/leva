@@ -90,7 +90,7 @@ function createStateClass(value: string, options: Options) {
   }
 
   if (bgColor) {
-    css.backgroundColor = bgColor || options.backgroundColor
+    css.backgroundColor = bgColor
   }
 
   return css
