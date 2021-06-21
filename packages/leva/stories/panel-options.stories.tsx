@@ -28,6 +28,21 @@ const Template: Story<any> = (args) => {
 export const Collapsed = Template.bind({})
 Collapsed.args = { collapsed: true }
 
+export const CollapsedControlled: Story<any> = (args, context) => {
+  const [collapsed, setCollapsed] = React.useState(true)
+  return Template(
+    {
+      collapsed: {
+        collapsed,
+        onChange: (collapsed) => {
+          setCollapsed(collapsed)
+        },
+      },
+    },
+    context
+  )
+}
+
 export const OneLineLabels = Template.bind({})
 OneLineLabels.args = { oneLineLabels: true }
 

@@ -32,9 +32,15 @@ export type LevaRootProps = {
    */
   flat?: boolean
   /**
-   * If true, the panel will start collapsed
+   * If true, the panel will start collapsed.
+   * If set to an object, the collapsed state is controlled via the property.
    */
-  collapsed?: boolean
+  collapsed?:
+    | boolean
+    | {
+        collapsed: boolean
+        onChange: (collapsed: boolean) => void
+      }
   /**
    * If true, input labels will stand above the controls
    */
@@ -69,11 +75,32 @@ export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...p
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
+
+  const computedToggled = typeof collapsed === 'object' ? !collapsed.collapsed : toggled
+  const computedSetToggle = useMemo(() => {
+    if (typeof collapsed === 'object') {
+      return (value: React.SetStateAction<boolean>) => {
+        if (typeof value === 'function') {
+          collapsed.onChange(!value(!collapsed.collapsed))
+        } else {
+          collapsed.onChange(!value)
+        }
+      }
+    }
+    return setToggle
+  }, [collapsed])
+
   if (!store || hidden) return null
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <LevaCore store={store} {...props} toggled={toggled} setToggle={setToggle} rootClass={themeContext.className} />
+      <LevaCore
+        store={store}
+        {...props}
+        toggled={computedToggled}
+        setToggle={computedSetToggle}
+        rootClass={themeContext.className}
+      />
     </ThemeContext.Provider>
   )
 }
