@@ -100,7 +100,7 @@ The joystick can be hidden with `joystick: false` and inverted with `"invertY"`.
 const { position } = useControls({
   position: {
     value: { x: 0, y: 0 },
-    joystick: "invertY,
+    joystick: "invertY",
   },
   boxSize: {
     value: [10, 20],
