@@ -24,7 +24,7 @@
   "dependencies": {
     "@radix-ui/react-portal": "^0.0.13",
     "@radix-ui/react-tooltip": "0.0.18",
-    "@stitches/react": "^0.2.0",
+    "@stitches/react": "0.2.0",
     "@welldone-software/why-did-you-render": "^6.2.0",
     "colord": "^2.0.1",
     "dequal": "^2.0.2",
