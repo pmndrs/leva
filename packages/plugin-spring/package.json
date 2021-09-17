@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-spring",
-  "version": "0.9.12",
+  "version": "1.0.0",
   "main": "dist/leva-ui-plugin-spring.cjs.js",
   "module": "dist/leva-ui-plugin-spring.esm.js",
   "types": "dist/leva-ui-plugin-spring.cjs.d.ts",
@@ -12,7 +12,7 @@
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
-    "leva": ">=0.9.12",
+    "leva": ">=1.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
