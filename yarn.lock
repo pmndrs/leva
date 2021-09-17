@@ -2253,7 +2253,7 @@ __metadata:
     react-dom: ^17.0.2
     start-server-and-test: ^1.12.5
     tsd: ^0.17.0
-    typescript: ^4.3.2
+    typescript: 4.3.2
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
@@ -17258,6 +17258,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+typescript@4.3.2:
+  version: 4.3.2
+  resolution: "typescript@npm:4.3.2"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: c2a86fa03ce03b255adc13ccd70a55173ca6539ae12114feca59f34a4e9bb69f14fb7cd5adc6c2416e568cff05c870b89d1366768ec55fce04fbdffb429a1cee
+  languageName: node
+  linkType: hard
+
 typescript@^4.3.2:
   version: 4.4.3
   resolution: "typescript@npm:4.4.3"
@@ -17265,6 +17275,16 @@ typescript@^4.3.2:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 05823f21796d450531a7e4ab299715d38fd9ded0e4ce7400876053f4b5166ca3dde7a68cecfe72d9086039f03c0b6edba36516fb10ed83c5837d9600532ea4c2
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@4.3.2#~builtin<compat/typescript>":
+  version: 4.3.2
+  resolution: "typescript@patch:typescript@npm%3A4.3.2#~builtin<compat/typescript>::version=4.3.2&hash=d8b4e7"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 3d3dec06ba6e5b05caa292355712ed9db813fa1c2377630b1f24b42e5ee8957f0bcdd5efd1500c970a11a6f684897f5728f5542ac822932227159a0611499a5e
   languageName: node
   linkType: hard
 
