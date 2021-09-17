@@ -1,5 +1,11 @@
 # leva
 
+## 1.0.0
+
+### Minor Changes
+
+- 1001f25: Fix version for stitches before moving to 1.x
+
 ## 0.9.13
 
 ### Patch Changes
