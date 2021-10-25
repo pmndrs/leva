@@ -88,4 +88,13 @@ const { showLighting, showStats } = useControls('My folder', {
 })
 ```
 
-One thing to note is that all inputs used here are returned on the same level. So not in a `lighting` or `'Show stats'` variable. This means that having properties with the same names will cause conflicts.
+⚠️ One thing to note is that all inputs used here are returned on the same level. So the state will look like:
+
+```
+{
+  showLighting: true,
+  showStats: false
+}
+```
+
+Notice how they are at the top level and the folder properties are ignored. This means that having properties with the same names in different folders will cause conflicts.
