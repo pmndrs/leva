@@ -100,12 +100,12 @@ The joystick can be hidden with `joystick: false` and inverted with `"invertY"`.
 const { position } = useControls({
   position: {
     value: { x: 0, y: 0 },
-    joystick: "invertY",
+    joystick: 'invertY',
   },
   boxSize: {
     value: [10, 20],
     joystick: false,
-  }
+  },
 })
 ```
 
@@ -126,9 +126,35 @@ Pressing the shift key while dragging increases the step. Pressing alt decreases
 You can set options separately for each coordinate by nesting them under coordinate's key.
 
 ```jsx
-useControls({ vec2: { value: { x: 0, y: 0 }, x: { step: 0.1 }, y: { step: 1 } } })
+useControls({
+  vec2: {
+    value: {
+      x: 0,
+      y: 0,
+    },
+    x: {
+      step: 0.1,
+    },
+    y: {
+      step: 1,
+    },
+  },
+})
 ```
 
 ### Vector3
 
-@todo
+Very similar to Vector2 but now with the z axis.
+
+```jsx
+useControls({
+  vec3: {
+    x: 0,
+    y: 2,
+    z: 1.5,
+  },
+  anotherVec3: [3, 1, 1],
+})
+```
+
+One difference with Vector2 to keep in mind is that you don't have the `joystick` option.

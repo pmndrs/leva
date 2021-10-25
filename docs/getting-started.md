@@ -19,7 +19,7 @@ function MyComponent() {
 }
 
 function AnotherComponent() {
-  const { anotherValue } = useControls({ anotherValue: "alive!!" })
+  const { anotherValue } = useControls({ anotherValue: 'alive!!' })
 
   return <div>Hey, I'm {anotherValue}</div>
 }
@@ -31,14 +31,12 @@ function UnmountedComponent() {
 }
 
 function MyApp() {
-  
   return (
     <>
       <MyComponent />
       <AnotherComponent />
     </>
   )
-
 }
 ```
 
@@ -64,4 +62,39 @@ The `color` input will show in the pane only if `check` is `true` and `myNumber`
 
 ## Folders
 
-// TODO
+Using a folder structure can be as easy as setting the name you want as the first parameter of `useControls`.
+
+```jsx
+useControls('My folder', {
+  showLighting: true,
+  showStats: false,
+})
+```
+
+### Nested folders
+
+Say you want folders in your folders. For this we are going to need the `folder` function. Using this method the object key becomes the folder name
+
+```jsx
+import { folder, useControls } from 'leva'
+
+const { showLighting, showStats } = useControls('My folder', {
+  lighting: folder({
+    showLighting: true,
+  }),
+  'Show stats': folder({
+    showStats: false,
+  }),
+})
+```
+
+⚠️ One thing to note is that all inputs used here are returned on the same level. So the state will look like:
+
+```
+{
+  showLighting: true,
+  showStats: false
+}
+```
+
+Notice how they are at the top level and the folder properties are ignored. This means that having properties with the same names in different folders will cause conflicts.
