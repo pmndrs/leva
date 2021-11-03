@@ -32,7 +32,7 @@ export { useControls } from './useControls'
 export { Leva, LevaPanel } from './components/Leva'
 
 // simplifies passing store as context
-export { useStoreContext, LevaStoreProvider, InputContext } from './context'
+export { useStoreContext, LevaStoreProvider, InputContextProvider } from './context'
 
 // export the levaStore (default store)
 // hook to create custom store

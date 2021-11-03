@@ -32,3 +32,16 @@ type LevaStoreProviderProps = {
 export function LevaStoreProvider({ children, store }: LevaStoreProviderProps) {
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }
+
+type InputContextProvider = {
+    children: React.ReactChild | React.ReactChild[] | React.ReactChildren
+    value: any
+}
+
+export function InputContextProvider ( { children, value }: InputContextProvider ) {
+    return (
+        <InputContext.Provider value={value}>
+            { children }
+        </InputContext.Provider>
+    )
+}
