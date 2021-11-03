@@ -55,6 +55,7 @@ function MyComponent() {
 
 - [Advanced: Controlled Inputs](/docs/advanced/controlled-inputs.md)
 - [Advanced: Creating Plugins](/docs/advanced/creating-plugins.md)
+- [Advanced: Custom UI](/docs/advanced/custom-ui.md)
 
 
 ## Contributors ✨
