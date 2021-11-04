@@ -1,10 +1,10 @@
 # Creating Custom UI
 
-Incase if you need to use leva as backbone for your custom UI needs here is an approach
+This guide will walk you through how to use leva as the backbone of your UI while briging your own components.
 
 ## Setup store provider
 
-First we will create a StoreProvider which will take care of creating an instance of store and providing it
+First we will create a `StoreProvider` which will take care of creating an instance of the store and providing it to the children:
 
 
 ```tsx
@@ -32,7 +32,7 @@ First we will create a StoreProvider which will take care of creating an instanc
 
 ## Creating Wrapper Control Input
 
-Now lets create a wrapper control input component that we can use to wrap our controls so that we can access the helper methods using the provided hooks
+Now we create a wrapper control input component that we can use to wrap our controls so that we can access the helper methods using the provided hooks:
 
 ```tsx
     import { InputContextProvider } from 'leva'
