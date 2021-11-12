@@ -2180,8 +2180,8 @@ __metadata:
     react-use-measure: ^2.0.4
   peerDependencies:
     leva: ">=0.9.14"
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
+    react: ">=18.0"
+    react-dom: ">=18.0"
   languageName: unknown
   linkType: soft
 
@@ -2193,8 +2193,8 @@ __metadata:
     mathjs: ^9.4.2
   peerDependencies:
     leva: ">=0.9.14"
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
+    react: ">=18.0"
+    react-dom: ">=18.0"
     react-use-gesture: ^9.1.3
   languageName: unknown
   linkType: soft
@@ -2206,8 +2206,8 @@ __metadata:
     "@react-spring/web": 9.2.3
   peerDependencies:
     leva: ">=1.0.0"
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
+    react: ">=18.0"
+    react-dom: ">=18.0"
   languageName: unknown
   linkType: soft
 
@@ -2249,14 +2249,14 @@ __metadata:
     postinstall-postinstall: ^2.1.0
     prettier: ^2.3.1
     pretty-quick: ^3.1.0
-    react: ^17.0.2
-    react-dom: ^17.0.2
+    react: experimental
+    react-dom: experimental
     start-server-and-test: ^1.12.5
     tsd: ^0.17.0
     typescript: 4.3.2
   peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
+    react: ">=18.0"
+    react-dom: ">=18.0"
   languageName: unknown
   linkType: soft
 
@@ -7628,8 +7628,8 @@ __metadata:
     "@vitejs/plugin-react-refresh": ^1.3.3
     leva: "*"
     noisejs: ^2.1.0
-    react: ^17.0.2
-    react-dom: ^17.0.2
+    react: experimental
+    react-dom: experimental
     react-use: ^17.2.4
     three: ^0.129.0
     typescript: ^4.3.2
@@ -11716,9 +11716,9 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"leva@*, leva@workspace:packages/leva":
-  version: 0.0.0-use.local
-  resolution: "leva@workspace:packages/leva"
+"leva@npm:*":
+  version: 0.9.14
+  resolution: "leva@npm:0.9.14"
   dependencies:
     "@radix-ui/react-portal": ^0.0.13
     "@radix-ui/react-tooltip": 0.0.18
@@ -11735,6 +11735,29 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
+  checksum: 41e7a8b26d490e5fb6dd6982f9010383f03081482093aa2ae0a83fedf71860b40fe1c11b0e487d62768c7e5a1e7afdc641aaef92f46b084df159873ea393b46e
+  languageName: node
+  linkType: hard
+
+"leva@workspace:packages/leva":
+  version: 0.0.0-use.local
+  resolution: "leva@workspace:packages/leva"
+  dependencies:
+    "@radix-ui/react-portal": ^0.0.13
+    "@radix-ui/react-tooltip": 0.0.18
+    "@stitches/react": 0.2.0
+    "@welldone-software/why-did-you-render": ^6.2.0
+    colord: ^2.0.1
+    dequal: ^2.0.2
+    merge-value: ^1.0.0
+    react-colorful: ^5.2.2
+    react-dropzone: ^11.3.2
+    react-use-gesture: ^9.1.3
+    v8n: ^1.3.3
+    zustand: ^3.6.5
+  peerDependencies:
+    react: ">=18.0"
+    react-dom: ">=18.0"
   languageName: unknown
   linkType: soft
 
@@ -14606,16 +14629,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "react-dom@npm:17.0.2"
+"react-dom@npm:experimental":
+  version: 0.0.0-experimental-cb11155c8-20211112
+  resolution: "react-dom@npm:0.0.0-experimental-cb11155c8-20211112"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    scheduler: ^0.20.2
+    scheduler: 0.0.0-experimental-cb11155c8-20211112
   peerDependencies:
-    react: 17.0.2
-  checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
+    react: 0.0.0-experimental-cb11155c8-20211112
+  checksum: d1e9bc0f13b05a4d40cf98e63116b12f5bea592694b9365f8ed9b12bdbc36e0f34748ebe708c8fafeeb3c49187cc3b1c18a966be2dccafd542dd771f9f188a2e
   languageName: node
   linkType: hard
 
@@ -14886,13 +14909,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "react@npm:17.0.2"
+"react@npm:experimental":
+  version: 0.0.0-experimental-cb11155c8-20211112
+  resolution: "react@npm:0.0.0-experimental-cb11155c8-20211112"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
+  checksum: 4ac45d5bb00b726666f2b2ff632a3b03a0fc92967bcbad5f8581e5ff8606c6ba2c49b5a3aac3dc3d99458986e594b77d1d54bd1c0e78b61759d25dce9633f8bf
   languageName: node
   linkType: hard
 
@@ -15554,6 +15577,16 @@ resolve@^2.0.0-next.3:
   bin:
     sane: ./src/cli.js
   checksum: 97716502d456c0d38670a902a4ea943d196dcdf998d1e40532d8f3e24e25d7eddfd4c3579025a1eee8eac09a48dfd05fba61a2156c56704e7feaa450eb249f7c
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:0.0.0-experimental-cb11155c8-20211112":
+  version: 0.0.0-experimental-cb11155c8-20211112
+  resolution: "scheduler@npm:0.0.0-experimental-cb11155c8-20211112"
+  dependencies:
+    loose-envify: ^1.1.0
+    object-assign: ^4.1.1
+  checksum: 08f5293b1e200f7167063f185f05979a82d8d4754733ad3e752a365897690a18890728db215f6220666f177f35c8a7ada0e5eb13ec7033314f25d18f92f682d7
   languageName: node
   linkType: hard
 
@@ -18298,6 +18331,18 @@ typescript@^4.3.2:
     react:
       optional: true
   checksum: a9bb68c137bda6facd9e01cf9f027c80a394b1ca788dab4271942e23deaeacda7909a22039621d3157d3c13e8c497413a2a518619ec452e2a7d16efa7cc96130
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^3.6.5":
+  version: 3.6.5
+  resolution: "zustand@npm:3.6.5"
+  peerDependencies:
+    react: ">=16.8"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 1c3eee75ba04c9ec2d9390bb5f8a9ef736f21f9b266cf39e578a359325b10db816f54783ae70a5ee69cd0846e4a504d460fe8e91fde57a276cd3e7ce2538caa3
   languageName: node
   linkType: hard
 

@@ -40,7 +40,7 @@ export function useRenderRoot(isGlobalPanel: boolean) {
           document.getElementById('leva__root') || Object.assign(document.createElement('div'), { id: 'leva__root' })
         if (document.body) {
           document.body.appendChild(rootEl)
-          ReactDOM.render(<Leva isRoot />, rootEl)
+          ReactDOM.createRoot(rootEl).render(<Leva isRoot />)
         }
       }
       rootInitialized = true

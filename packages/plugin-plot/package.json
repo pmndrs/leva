@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-plot",
-  "version": "0.9.14",
+  "version": "0.10.0-alpha.1",
   "main": "dist/leva-ui-plugin-plot.cjs.js",
   "module": "dist/leva-ui-plugin-plot.esm.js",
   "types": "dist/leva-ui-plugin-plot.cjs.d.ts",
@@ -13,8 +13,8 @@
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
     "leva": ">=0.9.14",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
+    "react": ">=18.0",
+    "react-dom": ">=18.0",
     "react-use-gesture": "^9.1.3"
   },
   "dependencies": {
