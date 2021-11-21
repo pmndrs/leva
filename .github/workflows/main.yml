@@ -5,6 +5,7 @@ on:
       - '.github/**'
       - 'packages/**'
       - 'package.json'
+      - 'yarn.lock'
       - '!demo/**'
       - '!docs/**'
       - '!**.md'
