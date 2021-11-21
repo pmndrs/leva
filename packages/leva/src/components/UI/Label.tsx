@@ -33,7 +33,9 @@ function RawLabel(props: LabelProps) {
       {optional && <OptionalToggle />}
       {hint !== undefined ? (
         <RadixTooltip.Root>
-          <RadixTooltip.Trigger as={StyledLabel} {...htmlFor} {...props} />
+          <RadixTooltip.Trigger asChild>
+            <StyledLabel {...htmlFor} {...props} />
+          </RadixTooltip.Trigger>
           <RadixTooltip.Content side="top" sideOffset={2}>
             <StyledToolTipContent>
               {hint}

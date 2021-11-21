@@ -72,7 +72,7 @@ export const OnChangeAndSet: Story = () => {
       if (last) circleRef.current.style.removeProperty('cursor')
       set({ position: { x, y } })
     },
-    { domTarget: circleRef }
+    { target: circleRef }
   )
 
   return (

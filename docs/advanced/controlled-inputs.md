@@ -36,6 +36,7 @@ const data = useControls({
 See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-input-options--on-change).
 
 ### Transient
+
 If you need the `onChange` callback while still wanting to retrieve the input value, you can set `transient: false`.
 
 ```jsx
@@ -62,10 +63,7 @@ const [, set] = useControls(() => ({
 }))
 
 const targetRef = useRef()
-useDrag(
-  ({ offset: [x, y] }) => set({ position: { x, y } }),
-  { domTarget: targetRef }
-)
+useDrag(({ offset: [x, y] }) => set({ position: { x, y } }), { target: targetRef })
 ```
 
 [codesandbox-drag]: (https://codesandbox.io/s/leva-controlled-input-71dkb?file=/src/App.tsx)
