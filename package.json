@@ -19,7 +19,7 @@
     "dev": "preconstruct dev",
     "lint": "pretty-quick --staged",
     "lint:full": "eslint packages/*/src",
-    "ci:version": "yarn changeset version",
+    "ci:version": "yarn changeset version && yarn install --mode=update-lockfile",
     "ci:release": "yarn build && yarn changeset publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",

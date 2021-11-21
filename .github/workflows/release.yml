@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --silent --no-lockfile
+        run: yarn install --silent
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
