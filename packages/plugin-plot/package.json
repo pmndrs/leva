@@ -18,9 +18,6 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "mathjs": "^9.4.2"
-  },
-  "devDependencies": {
-    "@types/mathjs": "^9.4.2"
+    "mathjs": "^10.0.0"
   }
 }

@@ -2593,7 +2593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.0, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.0, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.7.7, @babel/runtime@npm:^7.8.4":
   version: 7.15.4
   resolution: "@babel/runtime@npm:7.15.4"
   dependencies:
@@ -2602,7 +2602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.16.3":
+"@babel/runtime@npm:^7.16.0, @babel/runtime@npm:^7.16.3":
   version: 7.16.3
   resolution: "@babel/runtime@npm:7.16.3"
   dependencies:
@@ -3350,8 +3350,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@leva-ui/plugin-plot@workspace:packages/plugin-plot"
   dependencies:
-    "@types/mathjs": ^9.4.2
-    mathjs: ^9.4.2
+    mathjs: ^10.0.0
   peerDependencies:
     "@use-gesture/react": ^10.0.0
     leva: ">=0.9.14"
@@ -5626,15 +5625,6 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: 9775a5a86c254f7235b6992474687197b9d1c44e7d95f631579aea9da5b880d9819653b3c549e7960c66e0ba6240b6e769d2d5141e7b10aa920f554c5a47fdd8
-  languageName: node
-  linkType: hard
-
-"@types/mathjs@npm:^9.4.2":
-  version: 9.4.2
-  resolution: "@types/mathjs@npm:9.4.2"
-  dependencies:
-    mathjs: "*"
-  checksum: 13d4e7a70719f6cd83273560d2e6e6b4fb0db5e794164ffcf66e49678d59b42eff0f3861b04d1a522b94c8cebeaed7c0585c088e1ca0e71d36910e502dd2eea2
   languageName: node
   linkType: hard
 
@@ -13934,11 +13924,11 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mathjs@npm:*, mathjs@npm:^9.4.2":
-  version: 9.4.5
-  resolution: "mathjs@npm:9.4.5"
+"mathjs@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "mathjs@npm:10.0.0"
   dependencies:
-    "@babel/runtime": ^7.15.4
+    "@babel/runtime": ^7.16.0
     complex.js: ^2.0.15
     decimal.js: ^10.3.1
     escape-latex: ^1.2.0
@@ -13949,7 +13939,7 @@ fsevents@^1.2.7:
     typed-function: ^2.0.0
   bin:
     mathjs: bin/cli.js
-  checksum: ce29106d5317e864e798ab303ba1ade04ea6c6f3e08c64aed8f3e99e6ad5d5c4012d14ddda953d6735c13d9bcdae7f19301ecf25932a1430d14e6f1d7d481e31
+  checksum: 86f4f45804bd799182d5fe54c93a8cc88f1a03a3ab73a9851bc520981310423ec379421b0fb79e50c0a0c22c64cbcf1dcac0636eeaa1b65577366a1c55f27da8
   languageName: node
   linkType: hard
 
