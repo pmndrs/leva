@@ -3411,7 +3411,7 @@ __metadata:
     pretty-quick: ^3.1.2
     react: ^17.0.2
     react-dom: ^17.0.2
-    start-server-and-test: ^1.12.5
+    start-server-and-test: ^1.14.0
     tsd: ^0.19.0
     typescript: 4.5.2
   peerDependencies:
@@ -9087,7 +9087,7 @@ __metadata:
     noisejs: ^2.1.0
     react: ^17.0.2
     react-dom: ^17.0.2
-    react-use: ^17.2.4
+    react-use: ^17.3.1
     three: ^0.134.0
     typescript: ^4.5.2
     vite: 2.6.14
@@ -16626,7 +16626,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-use@npm:^17.2.4":
+"react-use@npm:^17.3.1":
   version: 17.3.1
   resolution: "react-use@npm:17.3.1"
   dependencies:
@@ -17955,7 +17955,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"start-server-and-test@npm:^1.12.5":
+"start-server-and-test@npm:^1.14.0":
   version: 1.14.0
   resolution: "start-server-and-test@npm:1.14.0"
   dependencies:
