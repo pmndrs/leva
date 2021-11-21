@@ -22,6 +22,7 @@ export const InnerLabel = styled('div', {
   fontSize: '0.8em',
   opacity: 0.8,
   cursor: 'default',
+  touchAction: 'none',
   [`& + ${StyledInput}`]: { paddingLeft: 0 },
 })
 

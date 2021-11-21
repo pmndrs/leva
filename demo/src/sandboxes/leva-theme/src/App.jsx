@@ -64,7 +64,7 @@ export default function App() {
   const colors = useControls(
     {
       colors: folder({
-        elevation1: '#ff0',
+        elevation1: '#292d39',
         elevation2: '#181C20',
         elevation3: '#373C4B',
         accent1: '#0066DC',

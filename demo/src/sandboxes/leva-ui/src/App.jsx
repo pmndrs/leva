@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { folder, Leva, useControls, LevaPanel, useCreateStore, button } from 'leva'
-import { useDrag, addV } from 'react-use-gesture'
+import { useDrag } from '@use-gesture/react'
 import './styles.css'
 
 function Box({ index, selected, setSelect }) {
@@ -38,7 +38,8 @@ function Box({ index, selected, setSelect }) {
     controls.forEach(([control, mod]) => {
       switch (control) {
         case 'position':
-          _position = addV(_position, [x, y])
+          _position[0] += x
+          _position[1] += y
           break
         case 'width':
           _size.width += x * mod
@@ -143,7 +144,7 @@ export default function App() {
       </div>
       <div className="panel">
         <Leva fill flat titleBar={false} />
-        <LevaPanel store={store} fill flat  titleBar={false} />
+        <LevaPanel store={store} fill flat titleBar={false} />
       </div>
     </div>
   )

@@ -8,6 +8,7 @@ export const JoystickTrigger = styled('div', {
   cursor: 'pointer',
   height: '$rowHeight',
   width: '$rowHeight',
+  touchAction: 'none',
   $draggable: '',
   $hover: '',
 
