@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Route } from 'wouter'
-import { createCss } from '@stitches/react'
+import { createStitches } from '@stitches/react'
 
 import styles from './styles.module.css'
 
@@ -16,7 +16,7 @@ import Theme from './sandboxes/leva-theme/src/App'
 import CustomPlugin from './sandboxes/leva-custom-plugin/src/App'
 import LevaTransient from './sandboxes/leva-transient/src/App'
 
-const { styled } = createCss({
+const { styled } = createStitches({
   theme: {
     colors: { pageBackground: '#f7f7f7' },
     sizes: { maxWidth: '720px' },
