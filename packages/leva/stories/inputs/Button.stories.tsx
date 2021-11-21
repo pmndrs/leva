@@ -21,3 +21,15 @@ export const Button = () => {
     </div>
   )
 }
+
+export const DisabledButton = () => {
+  const values = useControls({
+    foo: button(() => alert('click'), { disabled: true }),
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}

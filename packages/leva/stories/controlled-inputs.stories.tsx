@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '@use-gesture/react'
 import { Meta, Story } from '@storybook/react'
 import Reset from './components/decorator-reset'
 
@@ -72,7 +72,7 @@ export const OnChangeAndSet: Story = () => {
       if (last) circleRef.current.style.removeProperty('cursor')
       set({ position: { x, y } })
     },
-    { domTarget: circleRef }
+    { target: circleRef }
   )
 
   return (

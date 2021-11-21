@@ -1,5 +1,4 @@
-import { createCss } from '@stitches/react'
-// import prefixes from '@stitches/react/utils/prefixes'
+import { createStitches } from '@stitches/react'
 
 export const getDefaultTheme = () => ({
   colors: {
@@ -106,28 +105,22 @@ const utils = {
     createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const {
-  styled,
-  css,
-  theme,
-  global: _global,
-  keyframes,
-} = createCss({
+export const { styled, css, createTheme, globalCss, keyframes } = createStitches({
   prefix: 'leva',
   theme: getDefaultTheme(),
   utils: {
     // ...prefixes,
     ...utils,
-    $flex: () => () => ({
+    $flex: () => ({
       display: 'flex',
       alignItems: 'center',
     }),
-    $flexCenter: () => () => ({
+    $flexCenter: () => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
     }),
-    $reset: () => () => ({
+    $reset: () => ({
       outline: 'none',
       fontSize: 'inherit',
       fontWeight: 'inherit',
@@ -137,19 +130,19 @@ export const {
       backgroundColor: 'transparent',
       appearance: 'none',
     }),
-    $draggable: () => () => ({
+    $draggable: () => ({
       touchAction: 'none',
       WebkitUserDrag: 'none',
       userSelect: 'none',
     }),
-    $focus: () => (value: string) => ({ '&:focus': utils.$focusStyle()(value) }),
-    $focusWithin: () => (value: string) => ({ '&:focus-within': utils.$focusStyle()(value) }),
-    $hover: () => (value: string) => ({ '&:hover': utils.$hoverStyle()(value) }),
-    $active: () => (value: string) => ({ '&:active': utils.$activeStyle()(value) }),
+    $focus: (value: string) => ({ '&:focus': utils.$focusStyle()(value) }),
+    $focusWithin: (value: string) => ({ '&:focus-within': utils.$focusStyle()(value) }),
+    $hover: (value: string) => ({ '&:hover': utils.$hoverStyle()(value) }),
+    $active: (value: string) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
 
-const globalStyles = _global({
+const globalStyles = globalCss({
   '.panel__dragged': {
     WebkitUserDrag: 'none',
     userSelect: 'none',

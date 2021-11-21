@@ -3,7 +3,7 @@ import * as math from 'mathjs'
 export function getSymbols(expr: math.MathNode) {
   return expr
     .filter((node) => {
-      if (node.isSymbolNode) {
+      if (node instanceof math.SymbolNode && node.isSymbolNode) {
         try {
           const e = node.evaluate()
           return !!e.units
@@ -13,7 +13,7 @@ export function getSymbols(expr: math.MathNode) {
       }
       return false
     })
-    .map(({ name }) => name!)
+    .map((node: unknown) => (node as math.SymbolNode).name)
 }
 
 export function parseExpression(expression: string, get: (path: string) => any) {

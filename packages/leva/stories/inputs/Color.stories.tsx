@@ -66,12 +66,12 @@ export const AllTheColors = () => {
     RgbaString: 'rgba(233, 30, 99, 0.9)',
     Rgb: { r: 0, g: 150, b: 136 },
     Rgba: { r: 139, g: 195, b: 74, a: 0.5 },
-    Hsl: { h: 4, s: 0.9, l: 0.58 },
-    Hsla: { h: 36, s: 1, l: 0.5, a: 1 },
+    Hsl: { h: 4, s: 90, l: 58 },
+    Hsla: { h: 36, s: 100, l: 50, a: 1 },
     HslString: 'hsl(199,98%,48%)',
     HslaString: 'hsla(187,1%,42%,0.9)',
-    Hsv: { h: 238, s: 1, v: 0.7 },
-    Hsva: { h: 58, s: 0.92, v: 1, a: 0.3 },
+    Hsv: { h: 238, s: 100, v: 70 },
+    Hsva: { h: 58, s: 92, v: 100, a: 0.3 },
   })
 
   return (

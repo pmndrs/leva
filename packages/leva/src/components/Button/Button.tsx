@@ -1,16 +1,18 @@
 import React from 'react'
+import { ButtonInput } from '../../types'
 import { Row } from '../UI'
 import { StyledButton } from './StyledButton'
 
 type ButtonProps = {
   label: string
-  onClick: () => any
-}
+} & Omit<ButtonInput, 'type'>
 
-export function Button({ onClick, label }: ButtonProps) {
+export function Button({ onClick, settings, label }: ButtonProps) {
   return (
     <Row>
-      <StyledButton onClick={() => onClick()}>{label}</StyledButton>
+      <StyledButton disabled={settings.disabled} onClick={() => onClick()}>
+        {label}
+      </StyledButton>
     </Row>
   )
 }

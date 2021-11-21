@@ -65,6 +65,7 @@ export const StyledFilterInput = styled('input', {
 })
 
 export const TitleContainer = styled('div', {
+  touchAction: 'none',
   $flexCenter: '',
   flex: 1,
   '> svg': {

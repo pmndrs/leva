@@ -21,7 +21,7 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
     (updatedValue: any) => {
       try {
         setValue(updatedValue)
-      } catch (error) {
+      } catch (error: any) {
         const { type, previousValue } = error
         // make sure we throw an error if it's not a sanitization error
         if (type !== 'LEVA_ERROR') throw error

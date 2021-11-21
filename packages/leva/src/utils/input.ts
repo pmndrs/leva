@@ -38,18 +38,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
   }
 
   // parse generic options from input object
-  const {
-    render,
-    label,
-    optional,
-    disabled,
-    hint,
-    onChange,
-    onEditStart,
-    onEditEnd,
-    transient,
-    ...inputWithType
-  } = _input
+  const { render, label, optional, disabled, hint, onChange, onEditStart, onEditEnd, transient, ...inputWithType } =
+    _input
   const commonOptions = {
     render,
     key,
@@ -125,12 +115,12 @@ type SanitizeProps = {
 
 type ValueErrorType = { type: string; message: string; previousValue: any; error?: Error }
 
-const ValueError = (function (this: ValueErrorType, message: string, value: any, error?: Error) {
+const ValueError = function (this: ValueErrorType, message: string, value: any, error?: Error) {
   this.type = 'LEVA_ERROR'
   this.message = 'LEVA: ' + message
   this.previousValue = value
   this.error = error
-} as unknown) as { new (message: string, value: any, error?: Error): ValueErrorType }
+} as unknown as { new (message: string, value: any, error?: Error): ValueErrorType }
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any, path: string, store: StoreType) {
   // sanitizeValue can accept a new value in the form of fn(oldValue). This
@@ -143,7 +133,7 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
   let sanitizedNewValue
   try {
     sanitizedNewValue = sanitize(type, _newValue, settings, value, path, store)
-  } catch (e) {
+  } catch (e: any) {
     throw new ValueError(`The value \`${newValue}\` did not result in a correct value.`, value, e)
   }
   if (dequal(sanitizedNewValue, value)) {
