@@ -73,6 +73,7 @@ export function BezierSvg({
   )
 
   return (
+    // @ts-ignore
     <Svg ref={mergeRefs([svgRef, ref])} {...bind()} withPreview={withPreview}>
       <line x1={sx} y1={sy} x2={ex} y2={ey} />
       <path fill="none" d={`M${sx},${sy} C${cx1},${cy1} ${cx2},${cy2} ${ex},${ey}`} strokeLinecap="round" />

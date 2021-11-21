@@ -1,4 +1,4 @@
-import type { StoreApi, UseBoundStore } from 'zustand'
+import type { UseBoundStore } from 'zustand'
 import { StoreApiWithSubscribeWithSelector } from 'zustand/middleware'
 import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
