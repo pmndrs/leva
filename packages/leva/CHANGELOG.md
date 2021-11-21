@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.15
+
+### Patch Changes
+
+- 05ebf42: Upgrade deps and add `disabled` option to button
+
 ## 1.0.0
 
 ### Minor Changes
