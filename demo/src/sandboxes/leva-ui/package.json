@@ -10,7 +10,7 @@
     "react-dom": "^17.0.1",
     "react-dropzone": "11.3.1",
     "react-scripts": "4.0.3",
-    "react-use-gesture": "^9.0.0"
+    "@use-gesture/react": "^10.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

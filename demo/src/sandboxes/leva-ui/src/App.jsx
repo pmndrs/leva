@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { folder, Leva, useControls, LevaPanel, useCreateStore, button } from 'leva'
-import { useDrag, addV } from 'react-use-gesture'
+import { useDrag, addV } from '@use-gesture/react'
 import './styles.css'
 
 function Box({ index, selected, setSelect }) {
@@ -143,7 +143,7 @@ export default function App() {
       </div>
       <div className="panel">
         <Leva fill flat titleBar={false} />
-        <LevaPanel store={store} fill flat  titleBar={false} />
+        <LevaPanel store={store} fill flat titleBar={false} />
       </div>
     </div>
   )

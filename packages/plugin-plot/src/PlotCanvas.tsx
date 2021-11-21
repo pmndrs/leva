@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
-import { useMove } from 'react-use-gesture'
+import { useMove } from '@use-gesture/react'
 import { useCanvas2d, useTh, range, invertedRange, debounce, useTransform, clamp, Components } from 'leva/plugin'
 import { Wrapper, Canvas, Dot, ToolTip } from './StyledPlot'
 import type { InternalPlot, InternalPlotSettings } from './plot-types'
@@ -63,11 +63,10 @@ export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps
   const [canvas, ctx] = useCanvas2d(drawPlot)
 
   // replace with throttle
-  const updatePlot = useMemo(() => debounce(() => drawPlot(canvas.current!, ctx.current!), 250), [
-    canvas,
-    ctx,
-    drawPlot,
-  ])
+  const updatePlot = useMemo(
+    () => debounce(() => drawPlot(canvas.current!, ctx.current!), 250),
+    [canvas, ctx, drawPlot]
+  )
   useEffect(() => updatePlot(), [updatePlot])
 
   const [toolTipOpen, toggleToolTip] = useState(false)
