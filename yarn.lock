@@ -13455,7 +13455,7 @@ fsevents@^1.2.7:
     dequal: ^2.0.2
     merge-value: ^1.0.0
     react-colorful: ^5.5.1
-    react-dropzone: ^11.3.2
+    react-dropzone: ^11.4.2
     v8n: ^1.3.3
     zustand: ^3.5.2
   peerDependencies:
@@ -16391,16 +16391,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-dropzone@npm:^11.3.2":
-  version: 11.4.0
-  resolution: "react-dropzone@npm:11.4.0"
+"react-dropzone@npm:^11.4.2":
+  version: 11.4.2
+  resolution: "react-dropzone@npm:11.4.2"
   dependencies:
     attr-accept: ^2.2.1
     file-selector: ^0.2.2
     prop-types: ^15.7.2
   peerDependencies:
     react: ">= 16.8"
-  checksum: a076b1bd98778abb81738cb0e532fbe1c1141f3f0055368206e370f49c2b59413bf84c8f32bc6543e4c55c6b79b639305e8be8c4608ee95655b04f47220c87a8
+  checksum: f8dc6af69193133efe30ed11dd8c2212a180abd3833e91d03dab4bdc9546d47dcad311d7f72b4968b7d016871884555b9e16f7a490913b78dbfec8ce8f569193
   languageName: node
   linkType: hard
 
