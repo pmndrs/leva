@@ -6021,7 +6021,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@use-gesture/react@npm:^10.0.0":
+"@use-gesture/react@npm:^10.1.5":
   version: 10.1.5
   resolution: "@use-gesture/react@npm:10.1.5"
   dependencies:
@@ -6032,7 +6032,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react-refresh@npm:^1.3.3":
+"@vitejs/plugin-react-refresh@npm:^1.3.6":
   version: 1.3.6
   resolution: "@vitejs/plugin-react-refresh@npm:1.3.6"
   dependencies:
@@ -6240,14 +6240,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@welldone-software/why-did-you-render@npm:^6.2.0":
-  version: 6.2.1
-  resolution: "@welldone-software/why-did-you-render@npm:6.2.1"
+"@welldone-software/why-did-you-render@npm:^6.2.3":
+  version: 6.2.3
+  resolution: "@welldone-software/why-did-you-render@npm:6.2.3"
   dependencies:
     lodash: ^4
   peerDependencies:
     react: ^16 || ^17
-  checksum: cb3605af204dc37fce658b18ca28debaa9c9690d980d9f6841e333c8dcb401947318364f6f4d4671bad4b405a5e925f308c0001a67b65bb3f2489bed2e6b2301
+  checksum: 6c012f0a67c94c19cd2e8221438d547990a26b0593b0d1e8fd57084253d7cd305f4904e5bda984fd38416390b35b95fb0c3631fa485bd41b0b317568f080376c
   languageName: node
   linkType: hard
 
@@ -8204,10 +8204,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colord@npm:^2.0.1":
-  version: 2.7.0
-  resolution: "colord@npm:2.7.0"
-  checksum: 8366539ab254c565926b2f80579d57dfc399aa7e0ffa823922d85defb342df03d61b3aab4ec71f4ad1cb1feb8f651e8dac3d1b0b7cdd8ca95abdd951a6bd974e
+"colord@npm:^2.9.1":
+  version: 2.9.1
+  resolution: "colord@npm:2.9.1"
+  checksum: c47ff86c6ffc28ac55812c64fe35563809ccf860687506e4127137dcd27595b49610b85dcf3551b39a1c19af6a1a41ed41a42043ef6e795f787f29e4e49b4014
   languageName: node
   linkType: hard
 
@@ -9030,7 +9030,7 @@ __metadata:
     "@stitches/react": 1.2.5
     "@types/react": ^17.0.35
     "@types/react-dom": ^17.0.11
-    "@vitejs/plugin-react-refresh": ^1.3.3
+    "@vitejs/plugin-react-refresh": ^1.3.6
     leva: "*"
     noisejs: ^2.1.0
     react: ^17.0.2
@@ -13307,9 +13307,9 @@ fsevents@^1.2.7:
     "@radix-ui/react-portal": ^0.0.13
     "@radix-ui/react-tooltip": 0.0.18
     "@stitches/react": 1.2.5
-    "@use-gesture/react": ^10.0.0
-    "@welldone-software/why-did-you-render": ^6.2.0
-    colord: ^2.0.1
+    "@use-gesture/react": ^10.1.5
+    "@welldone-software/why-did-you-render": ^6.2.3
+    colord: ^2.9.1
     dequal: ^2.0.2
     merge-value: ^1.0.0
     react-colorful: ^5.2.2
