@@ -1,4 +1,5 @@
-import type { UseStore } from 'zustand'
+import type { StoreApi, UseBoundStore } from 'zustand'
+import { StoreApiWithSubscribeWithSelector } from 'zustand/middleware'
 import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
@@ -17,7 +18,7 @@ export type MappedPaths = Record<
 type Dispose = () => void
 
 export type StoreType = {
-  useStore: UseStore<State>
+  useStore: UseBoundStore<State, StoreApiWithSubscribeWithSelector<State>>
   storeId: string
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void

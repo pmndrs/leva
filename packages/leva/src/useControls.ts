@@ -11,11 +11,9 @@ type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [
   SchemaToValues<S>,
-  (
-    value: {
-      [K in keyof Partial<SchemaToValues<S, true>>]: any
-    }
-  ) => void
+  (value: {
+    [K in keyof Partial<SchemaToValues<S, true>>]: any
+  }) => void
 ]
 
 type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
@@ -202,14 +200,14 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
       onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
       const unsub = store.useStore.subscribe(
-        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
         (s) => {
           const input = s.data[path]
           // @ts-ignore
           const value = input.disabled ? undefined : input.value
           return [value, input]
         },
-        shallow
+        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        { equalityFn: shallow }
       )
       unsubscriptions.push(unsub)
     })

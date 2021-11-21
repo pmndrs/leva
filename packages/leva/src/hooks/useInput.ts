@@ -16,9 +16,7 @@ type Input = Omit<DataItem, '__refCount'>
  *
  * @param path
  */
-export function useInput(
-  path: string
-): [
+export function useInput(path: string): [
   Input | null,
   {
     set: (value: any, onValueChanged?: (value: any) => void) => void
@@ -40,7 +38,7 @@ export function useInput(
 
   useEffect(() => {
     setState(getInputAtPath(store.getData(), path))
-    const unsub = store.useStore.subscribe(setState, (s) => getInputAtPath(s.data, path), shallow)
+    const unsub = store.useStore.subscribe((s) => getInputAtPath(s.data, path), setState, { equalityFn: shallow })
     return () => unsub()
   }, [store, path])
 

@@ -1,12 +1,15 @@
 import { useMemo } from 'react'
-import create from 'zustand'
+import create, { SetState, GetState, StoreApi } from 'zustand'
+import { subscribeWithSelector } from 'zustand/middleware'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths, DataInput } from './types'
 import type { Data, FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
 export const Store = function (this: StoreType) {
-  const store = create<State>(() => ({ data: {} }))
+  const store = create(
+    subscribeWithSelector<State, SetState<State>, GetState<State>, StoreApi<State>>(() => ({ data: {} }))
+  )
 
   const eventEmitter = createEventEmitter()
 
