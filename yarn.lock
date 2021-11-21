@@ -9091,7 +9091,7 @@ __metadata:
     three: ^0.134.0
     typescript: ^4.5.2
     vite: 2.6.14
-    wouter: ^2.7.4
+    wouter: ^2.7.5
   languageName: unknown
   linkType: soft
 
@@ -13469,7 +13469,7 @@ fsevents@^1.2.7:
     colord: ^2.9.1
     dequal: ^2.0.2
     merge-value: ^1.0.0
-    react-colorful: ^5.2.2
+    react-colorful: ^5.5.1
     react-dropzone: ^11.3.2
     v8n: ^1.3.3
     zustand: ^3.5.2
@@ -16288,13 +16288,23 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-colorful@npm:^5.1.2, react-colorful@npm:^5.2.2":
+"react-colorful@npm:^5.1.2":
   version: 5.4.0
   resolution: "react-colorful@npm:5.4.0"
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: eabecd223a2984c9f35118a42f09b0283aa0a5037c1e4bbecca37002ca0789d83d9adb932123bd78e9b856451ea0784e21e08addb06a978954cb3aa82b9f5c4b
+  languageName: node
+  linkType: hard
+
+"react-colorful@npm:^5.5.1":
+  version: 5.5.1
+  resolution: "react-colorful@npm:5.5.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: e60811781716e57f0990379eff20d6f22d4d35b9e858c47ecf857c1dc1c1a2274c924ded7248bad5f1e2fbf2aab06e59b12852910c8dee5e6850f8e4df293670
   languageName: node
   linkType: hard
 
@@ -19845,12 +19855,12 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"wouter@npm:^2.7.4":
-  version: 2.7.4
-  resolution: "wouter@npm:2.7.4"
+"wouter@npm:^2.7.5":
+  version: 2.7.5
+  resolution: "wouter@npm:2.7.5"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 03fb517a186fe621f6985eebd9ca11b13d320f2e0ce166e7c11e22b5ccccf90cc5c5c24df8d4364bcec6b7abfbcc679a71864af540402d3b19e479c6bb05cc10
+  checksum: 6059e18642fb6d0b29fbc9e9d845d1efa1e540ba8e5d3af7c3d770554568e4bae08d675888eae8a1da842654aae4c3e556469b3e890f822d6374e65e11bc8c42
   languageName: node
   linkType: hard
 

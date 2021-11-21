@@ -18,7 +18,7 @@
     "react-dom": "^17.0.2",
     "react-use": "^17.2.4",
     "three": "^0.134.0",
-    "wouter": "^2.7.4"
+    "wouter": "^2.7.5"
   },
   "devDependencies": {
     "@types/react": "^17.0.35",
