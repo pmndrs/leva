@@ -65,8 +65,7 @@ export function Color({
           <PickerWrapper
             ref={wrapperRef}
             onMouseEnter={() => window.clearTimeout(timer.current)}
-            onMouseLeave={(e) => e.buttons === 0 && hideAfterDelay()}
-          >
+            onMouseLeave={(e) => e.buttons === 0 && hideAfterDelay()}>
             <ColorPicker color={initialRgb} onChange={onUpdate} />
           </PickerWrapper>
         </Portal>

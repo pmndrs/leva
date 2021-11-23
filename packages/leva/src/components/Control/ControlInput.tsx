@@ -51,8 +51,7 @@ export function ControlInput({
         setValue,
         disabled,
         ...rest,
-      }}
-    >
+      }}>
       <StyledInputWrapper disabled={disabled}>
         <Input />
       </StyledInputWrapper>

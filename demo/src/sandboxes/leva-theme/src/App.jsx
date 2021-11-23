@@ -170,8 +170,7 @@ export default function App() {
           paddingBottom: 40,
           overflow: 'auto',
           background: '#181C20',
-        }}
-      >
+        }}>
         <LevaPanel fill flat titleBar={false} store={colorsStore} />
         <LevaPanel fill flat titleBar={false} store={radiiStore} />
         <LevaPanel fill flat titleBar={false} store={spaceStore} />

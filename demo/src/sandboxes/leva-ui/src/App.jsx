@@ -87,8 +87,7 @@ function Box({ index, selected, setSelect }) {
         height: size.height,
         boxShadow: `inset 0 0 0 ${width}px ${color}`,
         transform: `translate(${position[0]}px, ${position[1]}px)`,
-      }}
-    >
+      }}>
       <span className="handle top" {...bind(['height', -1])} />
       <span className="handle right" {...bind(['width', 1])} />
       <span className="handle bottom" {...bind(['height', 1])} />

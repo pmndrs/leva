@@ -150,8 +150,7 @@ const LevaCore = React.memo(
           flat={flat}
           oneLineLabels={oneLineLabels}
           hideTitleBar={!titleBar}
-          style={{ display: shouldShow ? 'block' : 'none' }}
-        >
+          style={{ display: shouldShow ? 'block' : 'none' }}>
           {titleBar && (
             <TitleWithFilter
               onDrag={set}
