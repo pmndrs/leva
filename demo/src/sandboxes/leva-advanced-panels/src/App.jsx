@@ -20,7 +20,8 @@ export default function App() {
         gridRowGap: 10,
         padding: 10,
         background: '#fff',
-      }}>
+      }}
+    >
       <LevaPanel store={store1} fill flat titleBar={false} />
       <LevaPanel store={store2} fill flat titleBar={false} />
       <LevaStoreProvider store={store1}>
