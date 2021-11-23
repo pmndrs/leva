@@ -1,0 +1,11 @@
+.changeset/
+.codesandbox/
+.github/
+.husky/
+.storybook/
+.vscode/
+.yarn/
+dist/
+node_modules/
+patches/
+storybook-static/

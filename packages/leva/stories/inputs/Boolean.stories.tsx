@@ -1,29 +1,33 @@
-import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import React from 'react'
+import { Story, Meta } from '@storybook/react'
 
 import Reset from '../components/decorator-reset'
 
-import { useControls } from '../../src';
+import { useControls } from '../../src'
 
 export default {
   title: 'Inputs/Boolean',
-  decorators: [Reset]
-} as Meta;
+  decorators: [Reset],
+} as Meta
 
 const Template: Story<any> = (args) => {
   const values = useControls({
     foo: args,
   })
-  
-  return <div><pre>{JSON.stringify(values, null, '  ')}</pre></div>;
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
 }
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
-  value: false
-};
+  value: false,
+}
 
-export const Checked = Template.bind({});
+export const Checked = Template.bind({})
 Checked.args = {
-  value: true
-};
+  value: true,
+}

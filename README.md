@@ -2,6 +2,7 @@
 
 <a href=""><img src="https://raw.githubusercontent.com/gsimone/leva/master/hero.png" /></a>
 <br />
+
 <div align="center"><strong>A GUI you are going to lava.</strong></div>
 <div align="center"> Customizable, extensible and beautiful by default.</div>
 <br />
@@ -37,12 +38,16 @@ npm i leva
 Simply call the `useControls` hook from anywhere in your app:
 
 ```jsx
-import { useControls } from "leva"
+import { useControls } from 'leva'
 
 function MyComponent() {
-  const { name, aNumber } = useControls({ name: "World", aNumber: 0 })
-  
-  return <div>Hey {name}, hello! {aNumber}</div>
+  const { name, aNumber } = useControls({ name: 'World', aNumber: 0 })
+
+  return (
+    <div>
+      Hey {name}, hello! {aNumber}
+    </div>
+  )
 }
 ```
 
@@ -55,7 +60,6 @@ function MyComponent() {
 
 - [Advanced: Controlled Inputs](/docs/advanced/controlled-inputs.md)
 - [Advanced: Creating Plugins](/docs/advanced/creating-plugins.md)
-
 
 ## Contributors ✨
 

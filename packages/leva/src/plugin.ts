@@ -64,7 +64,7 @@ export function createPlugin<Input, Value, InternalSettings>(plugin: Plugin<Inpu
   const type = getUniqueType()
   Plugins[type] = plugin
   return (input?: PluginInput<Input>) => {
-    return ({ type, __customInput: input } as unknown) as CustomInput<Value>
+    return { type, __customInput: input } as unknown as CustomInput<Value>
   }
 }
 

@@ -1,4 +1,4 @@
 # Customizing Style
 
-@todo 
+@todo
 Talk about how to use themes to customize styles
