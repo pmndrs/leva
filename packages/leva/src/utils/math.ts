@@ -25,7 +25,8 @@ export function getStep(number: number) {
 
 export const range = (v: number, min: number, max: number) => {
   if (max === min) return 0
-  return (v - min) / (max - min)
+  const _v = clamp(v, min, max)
+  return (_v - min) / (max - min)
 }
 export const invertedRange = (p: number, min: number, max: number) => p * (max - min) + min
 
