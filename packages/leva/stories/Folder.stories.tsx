@@ -80,8 +80,8 @@ export const NestedFolders = () => {
       }),
       'Third Collapsed Folder': folder(
         {
-          a: 'hello',
-          b: 'ff005b',
+          e: 'hello',
+          f: 'ff005b',
         },
         {
           collapsed: true,
