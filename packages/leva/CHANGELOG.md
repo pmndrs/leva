@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.17
+
+### Patch Changes
+
+- dc284c7: fix: correct listener path to prevent onEdit callbacks from firing twice or more
+
 ## 0.9.16
 
 ### Patch Changes
