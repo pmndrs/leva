@@ -3454,7 +3454,7 @@ __metadata:
   dependencies:
     react-use-measure: ^2.1.1
   peerDependencies:
-    leva: ">=0.9.14"
+    leva: ">=0.9.18"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
@@ -3479,7 +3479,7 @@ __metadata:
   dependencies:
     "@react-spring/web": 9.3.1
   peerDependencies:
-    leva: ">=0.9.15"
+    leva: ">=0.9.18"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown

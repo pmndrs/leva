@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.18
+
+### Patch Changes
+
+- e45e9de: Feat: pass `get` function to Button and ButtonGroup
+
 ## 0.9.17
 
 ### Patch Changes
