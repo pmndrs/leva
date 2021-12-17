@@ -17,6 +17,6 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "react-use-measure": "^2.0.4"
+    "react-use-measure": "^2.1.1"
   }
 }
