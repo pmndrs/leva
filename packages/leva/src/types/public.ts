@@ -48,12 +48,12 @@ export type ButtonSettings = { disabled?: boolean }
 
 export type ButtonInput = {
   type: SpecialInputs.BUTTON
-  onClick: () => any
+  onClick: (get: (path: string) => any) => void
   settings: ButtonSettings
 }
 
 export type ButtonGroupOpts = {
-  [title: string]: () => void
+  [title: string]: (get: (path: string) => any) => void
 }
 
 export type ButtonGroupInputOpts =

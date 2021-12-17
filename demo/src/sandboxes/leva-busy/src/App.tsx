@@ -16,7 +16,7 @@ function frame() {
 const ExtraControls = () => {
   const data = useControls('folder.subfolder', {
     // eslint-disable-next-line no-console
-    'Hello Button': button(() => console.log('hello')),
+    'Hello Button': button((get) => console.log('hello', get('folder.subfolder.deep nested.pos2d'))),
     'deep nested': folder(
       {
         pos2d: { value: { x: 3, y: 4 }, lock: true },

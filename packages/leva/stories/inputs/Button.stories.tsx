@@ -12,7 +12,8 @@ export default {
 
 export const Button = () => {
   const values = useControls({
-    foo: button(() => alert('click')),
+    number: 3,
+    foo: button((get) => alert(`Number value is ${get('number').toFixed(2)}`)),
   })
 
   return (
@@ -24,7 +25,8 @@ export const Button = () => {
 
 export const DisabledButton = () => {
   const values = useControls({
-    foo: button(() => alert('click'), { disabled: true }),
+    number: 3,
+    foo: button((get) => alert(`Number value is ${get('number')}`), { disabled: true }),
   })
 
   return (

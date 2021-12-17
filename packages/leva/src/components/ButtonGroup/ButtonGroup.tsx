@@ -3,6 +3,7 @@ import { Row, Label } from '../UI'
 import { StyledButtonGroup } from './StyledButtonGroup'
 import { StyledButtonGroupButton } from './StyledButtonGroupButton'
 import { ButtonGroupInputOpts, ButtonGroupOpts } from '../../types'
+import { useStoreContext } from '../..'
 
 export type ButtonGroupInternalOpts = {
   label: null | JSX.Element | string
@@ -24,12 +25,13 @@ const getOpts = ({ label: _label, opts: _opts }: ButtonGroupInternalOpts) => {
 
 export function ButtonGroup(props: ButtonGroupInternalOpts) {
   const { label, opts } = getOpts(props)
+  const store = useStoreContext()
   return (
     <Row input={!!label}>
       {label && <Label>{label}</Label>}
       <StyledButtonGroup>
         {Object.entries(opts).map(([label, onClick]) => (
-          <StyledButtonGroupButton key={label} onClick={() => onClick()}>
+          <StyledButtonGroupButton key={label} onClick={() => onClick(store.get)}>
             {label}
           </StyledButtonGroupButton>
         ))}
