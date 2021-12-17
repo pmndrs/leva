@@ -1,5 +1,13 @@
 # @leva-ui/plugin-bezier
 
+## 0.9.18
+
+### Patch Changes
+
+- e45e9de: Feat: pass `get` function to Button and ButtonGroup
+- Updated dependencies [e45e9de]
+  - leva@0.9.18
+
 ## 1.0.0
 
 ### Minor Changes
