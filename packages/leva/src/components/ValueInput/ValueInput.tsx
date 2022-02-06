@@ -3,20 +3,37 @@ import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
 
-type ValueInputProps = {
+export type ValueInputProps = {
   id?: string
   value: string
   innerLabel?: false | React.ReactNode
-  type?: 'number' | undefined
+  type?: 'number'
+  inputType?: string
   onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
+  asType?: string | React.ComponentType
+  rows?: number
 }
 
-export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, type, id, ...props }: ValueInputProps) {
+export function ValueInput({
+  innerLabel,
+  value,
+  onUpdate,
+  onChange,
+  onKeyDown,
+  type,
+  id,
+  inputType = 'text',
+  asType = 'input',
+  rows = 5,
+  ...props
+}: ValueInputProps) {
   const { id: _id, emitOnEditStart, emitOnEditEnd } = useInputContext()
   const inputId = id || _id
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
+
+  const isTextArea = asType === 'textarea'
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {
@@ -52,14 +69,19 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
     [update, onUpdate]
   )
 
+  // It's a bit sad but we're passing the `as` prop here to avoid Typescript
+  // complaining.
+  const inputProps = Object.assign({ as: asType }, isTextArea ? { rows } : {}, props)
+
   return (
-    <InputContainer>
+    <InputContainer textArea={isTextArea}>
       {innerLabel && typeof innerLabel === 'string' ? <InnerLabel>{innerLabel}</InnerLabel> : innerLabel}
       <StyledInput
         levaType={type}
+        // @ts-ignore
         ref={inputRef}
         id={inputId}
-        type="text"
+        type={inputType}
         autoComplete="off"
         spellCheck="false"
         value={value}
@@ -67,7 +89,7 @@ export function ValueInput({ innerLabel, value, onUpdate, onChange, onKeyDown, t
         onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
-        {...props}
+        {...inputProps}
       />
     </InputContainer>
   )

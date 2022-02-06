@@ -10,6 +10,7 @@ export const StyledInput = styled('input', {
   height: '100%',
   variants: {
     levaType: { number: { textAlign: 'right' } },
+    as: { textarea: { padding: '$sm' } },
   },
 })
 
@@ -48,4 +49,7 @@ export const InputContainer = styled('div', {
   $inputStyle: '$elevation1',
   $hover: '',
   $focusWithin: '',
+  variants: {
+    textArea: { true: { height: 'auto' } },
+  },
 })
