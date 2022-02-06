@@ -27,10 +27,16 @@ Simple.args = {
   value: 'Leva is awesome',
 }
 
-export const Textarea = Template.bind({})
-Textarea.args = {
-  value: 'Leva also supports <textarea/>\nAllowing for\nmultiple\nlines',
-  textarea: true,
+export const DefaultRows = Template.bind({})
+DefaultRows.args = {
+  value: 'Leva also supports <textarea/>\nAllowing for\nmultiple lines',
+  rows: true,
+}
+
+export const CustomRows = Template.bind({})
+CustomRows.args = {
+  value: 'You can specify the number of rows you need',
+  rows: 3,
 }
 
 export const NonEditable = Template.bind({})

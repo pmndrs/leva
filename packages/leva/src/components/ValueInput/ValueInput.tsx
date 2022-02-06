@@ -12,7 +12,6 @@ export type ValueInputProps = {
   onUpdate: (value: any) => void
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
-  asType?: string | React.ComponentType
   rows?: number
 }
 
@@ -25,15 +24,15 @@ export function ValueInput({
   type,
   id,
   inputType = 'text',
-  asType = 'input',
-  rows = 5,
+  rows = 0,
   ...props
 }: ValueInputProps) {
   const { id: _id, emitOnEditStart, emitOnEditEnd } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
-  const isTextArea = asType === 'textarea'
+  const isTextArea = rows > 0
+  const asType = isTextArea ? 'textarea' : 'input'
 
   const update = useCallback(
     (fn: (value: string) => void) => (event: any) => {

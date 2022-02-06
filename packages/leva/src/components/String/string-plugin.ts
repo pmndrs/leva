@@ -8,6 +8,9 @@ export const sanitize = (v: any) => {
   return v
 }
 
-export const normalize = ({ value, textarea = false, editable = true, rows = 5 }: StringInput) => {
-  return { value, settings: { asType: textarea ? 'textarea' : 'input', editable, rows } }
+export const normalize = ({ value, editable = true, rows = false }: StringInput) => {
+  return {
+    value,
+    settings: { editable, rows: typeof rows === 'number' ? rows : rows ? 5 : 0 },
+  }
 }

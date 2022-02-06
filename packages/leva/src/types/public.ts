@@ -110,7 +110,7 @@ export type ColorVectorInput = ColorRgbaInput | ColorHslaInput | ColorHsvaInput
 
 type BooleanInput = boolean
 
-type StringSettings = { textarea?: boolean; rows?: number; editable?: boolean }
+type StringSettings = { rows?: boolean | number; editable?: boolean }
 type StringInput = InputWithSettings<string, StringSettings>
 
 export type FolderInput<Schema> = {
