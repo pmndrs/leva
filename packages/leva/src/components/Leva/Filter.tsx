@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react'
-import { useDrag } from '@use-gesture/react'
+import { useDrag } from '../../hooks'
 import { debounce } from '../../utils'
 import { FolderTitleProps } from '../Folder'
 import { Chevron } from '../UI'
