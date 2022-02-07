@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.19
+
+### Patch Changes
+
+- 991f557: feat: add `editable`, `rows` to String component
+
 ## 0.9.18
 
 ### Patch Changes
