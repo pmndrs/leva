@@ -142,13 +142,11 @@ export const { styled, css, createTheme, globalCss, keyframes } = createStitches
   },
 })
 
-const globalStyles = globalCss({
-  '.panel__dragged': {
+export const globalStyles = globalCss({
+  '.leva__panel__dragged': {
     WebkitUserDrag: 'none',
     userSelect: 'none',
     input: { userSelect: 'none' },
     '*': { cursor: 'ew-resize !important' },
   },
 })
-
-globalStyles()

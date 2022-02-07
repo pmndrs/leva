@@ -5,7 +5,7 @@ import { TreeWrapper } from '../Folder'
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
 
 import { StyledRoot } from './StyledRoot'
-import { mergeTheme, LevaCustomTheme } from '../../styles'
+import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { StoreType } from '../../types'
@@ -140,6 +140,8 @@ const LevaCore = React.memo(
     const title = typeof titleBar === 'object' ? titleBar.title || undefined : undefined
     const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
     const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
+
+    globalStyles()
 
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
