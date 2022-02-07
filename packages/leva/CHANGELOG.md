@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.20
+
+### Patch Changes
+
+- 37d9cb5: fix: global styles and user-select fixes
+
 ## 0.9.19
 
 ### Patch Changes
