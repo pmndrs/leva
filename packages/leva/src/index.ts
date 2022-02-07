@@ -42,3 +42,5 @@ export { levaStore, useCreateStore } from './store'
 export * from './helpers'
 
 export { LevaInputs }
+
+export { lightTheme, LevaCustomTheme } from './styles'
