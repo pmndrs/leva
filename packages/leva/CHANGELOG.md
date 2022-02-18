@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.21
+
+### Patch Changes
+
+- 6fbb57f: Allow panels to show always using the neverHide option
+
 ## 0.9.20
 
 ### Patch Changes
