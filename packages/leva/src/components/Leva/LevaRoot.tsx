@@ -24,6 +24,10 @@ export type LevaRootProps = {
    */
   hidden?: boolean
   /**
+   * If true, will preset the panel even if no paths are defined
+   */
+  showAlways?: boolean
+  /**
    * If true, the panel will fill its parent
    */
   fill?: boolean
@@ -118,6 +122,7 @@ const LevaCore = React.memo(
     rootClass,
     fill = false,
     flat = false,
+    showAlways = false,
     oneLineLabels = false,
     titleBar = {
       title: undefined,
@@ -136,7 +141,7 @@ const LevaCore = React.memo(
     const [rootRef, set] = useTransform<HTMLDivElement>()
 
     // this generally happens on first render because the store is initialized in useEffect.
-    const shouldShow = paths.length > 0
+    const shouldShow = showAlways || paths.length > 0
     const title = typeof titleBar === 'object' ? titleBar.title || undefined : undefined
     const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
     const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
