@@ -72,3 +72,24 @@ export const Filter: Story<any> = (args, context) => {
   return Template({ titleBar: { filter: args.filter } }, context)
 }
 Filter.args = { filter: true }
+
+const Component = () => {
+  const values = useControls({ value: 3 })
+  return (
+    <div style={{ background: '#000', padding: 20, margin: '20px 0' }}>
+      Component using <code>useControls</code>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const neverHide: Story<any> = () => {
+  const [shown, setShown] = React.useState(true)
+  return (
+    <div>
+      <button onClick={() => setShown((f) => !f)}>{shown ? 'Hide component' : 'Show component'}</button>
+      {shown && <Component />}
+      <Leva neverHide />
+    </div>
+  )
+}
