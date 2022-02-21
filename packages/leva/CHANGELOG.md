@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.23
+
+### Patch Changes
+
+- 3177e59: fix: `disabled` regression
+
 ## 0.9.22
 
 ### Patch Changes
