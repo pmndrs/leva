@@ -34,7 +34,7 @@ export function Bezier() {
   return (
     <>
       <Row input>
-        <Label align="top">{label}</Label>
+        <Label>{label}</Label>
         <Container>
           <SyledInnerLabel graph={graph} onClick={() => setSettings({ graph: !graph })}>
             𝑓
