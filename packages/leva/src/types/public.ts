@@ -344,6 +344,7 @@ export interface LevaInputProps<V, InternalSettings = {}, DisplayValue = V> {
   path?: string
   id?: string
   hint?: string
+  disabled?: boolean
   displayValue: DisplayValue
   value: V
   onChange: React.Dispatch<any>

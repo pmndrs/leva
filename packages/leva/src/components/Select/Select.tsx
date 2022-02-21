@@ -10,7 +10,8 @@ export function Select({
   onUpdate,
   id,
   settings,
-}: Pick<SelectProps, 'value' | 'displayValue' | 'onUpdate' | 'id' | 'settings'>) {
+  disabled,
+}: Pick<SelectProps, 'value' | 'displayValue' | 'onUpdate' | 'id' | 'settings' | 'disabled'>) {
   const { keys, values } = settings
   const lastDisplayedValue = useRef<any>()
 
@@ -22,7 +23,11 @@ export function Select({
 
   return (
     <SelectContainer>
-      <NativeSelect id={id} value={displayValue} onChange={(e) => onUpdate(values[Number(e.currentTarget.value)])}>
+      <NativeSelect
+        id={id}
+        value={displayValue}
+        onChange={(e) => onUpdate(values[Number(e.currentTarget.value)])}
+        disabled={disabled}>
         {keys.map((key, index) => (
           <option key={key} value={index}>
             {key}
@@ -36,11 +41,18 @@ export function Select({
 }
 
 export function SelectComponent() {
-  const { label, value, displayValue, onUpdate, id, settings } = useInputContext<SelectProps>()
+  const { label, value, displayValue, onUpdate, id, disabled, settings } = useInputContext<SelectProps>()
   return (
     <Row input>
       <Label>{label}</Label>
-      <Select id={id} value={value} displayValue={displayValue} onUpdate={onUpdate} settings={settings} />
+      <Select
+        id={id}
+        value={value}
+        displayValue={displayValue}
+        onUpdate={onUpdate}
+        settings={settings}
+        disabled={disabled}
+      />
     </Row>
   )
 }
