@@ -54,6 +54,7 @@ export function parseOptions(
   // parse generic options from input object
   const { render, label, optional, disabled, hint, onChange, onEditStart, onEditEnd, transient, ...inputWithType } =
     _input
+
   const commonOptions = {
     render,
     key,
@@ -62,6 +63,8 @@ export function parseOptions(
     transient: transient ?? !!onChange,
     onEditStart,
     onEditEnd,
+    disabled,
+    optional,
     ...mergedOptions,
   }
 

@@ -238,7 +238,9 @@ type Tree<IncludeTransient extends boolean, Leaf, LeafKey extends string | numbe
   1: never
   // if the leaf is an object, we run the type check on each of its keys
   2: {
-    [Key in LeafKey]: Leaf extends { optional: true } ? PrimitiveToValue<Leaf> | undefined : PrimitiveToValue<Leaf>
+    [Key in LeafKey]: Leaf extends { optional: true } | { disabled: true }
+      ? PrimitiveToValue<Leaf> | undefined
+      : PrimitiveToValue<Leaf>
   }
   // recursivity
   3: { [Key in keyof Leaf]: Join<Leaf, Key, Tree<IncludeTransient, Leaf[Key], Key>> }[keyof Leaf]
