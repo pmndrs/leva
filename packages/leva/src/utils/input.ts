@@ -1,6 +1,15 @@
 import { dequal } from 'dequal/lite'
 import { getValueType, normalize, sanitize } from '../plugin'
-import { CommonOptions, Data, DataInput, DataInputOptions, PanelInputOptions, SpecialInputs, StoreType } from '../types'
+import {
+  CommonOptions,
+  Data,
+  DataInput,
+  DataInputOptions,
+  InputOptions,
+  PanelInputOptions,
+  SpecialInputs,
+  StoreType,
+} from '../types'
 
 type ParsedOptions = {
   type?: string
@@ -8,7 +17,12 @@ type ParsedOptions = {
   options: CommonOptions | DataInputOptions | PanelInputOptions
 }
 
-export function parseOptions(_input: any, key: string, mergedOptions = {}, customType?: string): ParsedOptions {
+export function parseOptions(
+  _input: any,
+  key: string,
+  mergedOptions: Partial<InputOptions> = {},
+  customType?: string
+): ParsedOptions {
   // if input isn't an object then we just need to assing default options to it.
   if (typeof _input !== 'object' || Array.isArray(_input)) {
     return {
@@ -64,8 +78,8 @@ export function parseOptions(_input: any, key: string, mergedOptions = {}, custo
     options: {
       ...commonOptions,
       onChange,
-      optional: optional ?? false,
-      disabled: disabled ?? false,
+      optional: commonOptions.optional ?? false,
+      disabled: commonOptions.disabled ?? false,
     },
   }
 }
