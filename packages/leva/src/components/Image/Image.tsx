@@ -7,7 +7,7 @@ import { usePopin } from '../../hooks'
 import type { ImageProps } from './image-types'
 
 export function ImageComponent() {
-  const { label, value, onUpdate } = useInputContext<ImageProps>()
+  const { label, value, onUpdate, disabled } = useInputContext<ImageProps>()
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
 
   const onDrop = useCallback(
@@ -25,7 +25,12 @@ export function ImageComponent() {
     [onUpdate]
   )
 
-  const { getRootProps, getInputProps, isDragAccept } = useDropzone({ maxFiles: 1, accept: 'image/*', onDrop })
+  const { getRootProps, getInputProps, isDragAccept } = useDropzone({
+    maxFiles: 1,
+    accept: 'image/*',
+    onDrop,
+    disabled,
+  })
 
   // TODO fix any in DropZone
   return (

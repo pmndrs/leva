@@ -27,7 +27,7 @@ export function ValueInput({
   rows = 0,
   ...props
 }: ValueInputProps) {
-  const { id: _id, emitOnEditStart, emitOnEditEnd } = useInputContext()
+  const { id: _id, emitOnEditStart, emitOnEditEnd, disabled } = useInputContext()
   const inputId = id || _id
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
 
@@ -88,6 +88,7 @@ export function ValueInput({
         onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
+        disabled={disabled}
         {...inputProps}
       />
     </InputContainer>
