@@ -1,5 +1,13 @@
 # @leva-ui/plugin-bezier
 
+## 0.9.19
+
+### Patch Changes
+
+- 3177e59: style: label alignment
+- Updated dependencies [3177e59]
+  - leva@0.9.23
+
 ## 0.9.18
 
 ### Patch Changes
