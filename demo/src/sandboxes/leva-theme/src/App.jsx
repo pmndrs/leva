@@ -168,7 +168,8 @@ export default function App() {
           width: 300,
           gap: 10,
           paddingBottom: 40,
-          overflow: 'auto',
+          marginRight: 10,
+          float: 'left',
           background: '#181C20',
         }}>
         <LevaPanel fill flat titleBar={false} store={colorsStore} />
@@ -179,6 +180,7 @@ export default function App() {
         <LevaPanel fill flat titleBar={false} store={borderWidthsStore} />
         <LevaPanel fill flat titleBar={false} store={fontWeightsStore} />
       </div>
+      <pre>{JSON.stringify(theme, null, '  ')}</pre>
       <Controls />
     </div>
   )
