@@ -53,7 +53,7 @@ Leva will automagically use the best input type for your values, all the rules c
 ```jsx
 useControls({
   check: false,
-  myNumber: 4
+  myNumber: 4,
   color: { value: '#ffffffff', render: (get) => get('check') && get('myNumber') > 5 },
 })
 ```
