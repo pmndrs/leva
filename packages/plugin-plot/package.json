@@ -14,7 +14,7 @@
   "peerDependencies": {
     "@use-gesture/react": "^10.0.0",
     "leva": ">=0.9.23",
-    "react": ">=16.8.0",
+    "react": ">=18.0.0",
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
@@ -23,7 +23,7 @@
   "devDependencies": {
     "@use-gesture/react": "^10.2.5",
     "leva": "*",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
