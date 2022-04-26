@@ -60,6 +60,3 @@ jobs:
       - name: Yarn build without cache
         if: steps.yarn-build-cache.outputs.cache-hit != 'true'
         run: yarn build
-
-      - name: Cypress run
-        run: yarn ci:test

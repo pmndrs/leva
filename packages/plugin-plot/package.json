@@ -19,5 +19,11 @@
   },
   "dependencies": {
     "mathjs": "^10.1.1"
+  },
+  "devDependencies": {
+    "@use-gesture/react": "^10.2.5",
+    "leva": "*",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
