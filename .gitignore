@@ -31,4 +31,3 @@ yarn-error.log*
 
 storybook-static/
 .idea
-cypress/screenshots
