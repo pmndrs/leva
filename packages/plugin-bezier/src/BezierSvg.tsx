@@ -1,4 +1,6 @@
-import type { StyledComponent } from '@stitches/react'
+// Magic, otherwise nothing works wtf
+// @ts-ignore
+import type * as stitches from '@stitches/react'
 
 import React, { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
