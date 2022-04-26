@@ -16,6 +16,9 @@
     "esModuleInterop": true                   /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "preserveSymlinks": false
+    "preserveSymlinks": false,
+    "paths": {
+      "@emotion/core": ["node_modules/@emotion/react"] /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+    }
   }
 }
