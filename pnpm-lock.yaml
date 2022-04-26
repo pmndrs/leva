@@ -158,41 +158,38 @@ importers:
 
   packages/plugin-bezier:
     specifiers:
-      leva: '*'
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      leva: '>=0.9.23'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
       react-use-measure: ^2.1.1
     dependencies:
-      react-use-measure: 2.1.1_react-dom@17.0.2+react@17.0.2
-    devDependencies:
       leva: link:../leva
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      react-use-measure: 2.1.1_react-dom@17.0.2+react@17.0.2
 
   packages/plugin-plot:
     specifiers:
-      '@use-gesture/react': ^10.2.5
-      leva: '*'
+      '@use-gesture/react': ^10.0.0
+      leva: '>=0.9.18'
       mathjs: ^10.1.1
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
     dependencies:
-      mathjs: 10.5.0
-    devDependencies:
       '@use-gesture/react': 10.2.11_react@17.0.2
       leva: link:../leva
+      mathjs: 10.5.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
 
   packages/plugin-spring:
     specifiers:
       '@react-spring/web': 9.4.2
-      leva: '*'
-      react: ^17.0.2
-      react-dom: ^17.0.2
+      leva: '>=0.9.18'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
     dependencies:
       '@react-spring/web': 9.4.2_react-dom@17.0.2+react@17.0.2
-    devDependencies:
       leva: link:../leva
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -4824,6 +4821,7 @@ packages:
   /@use-gesture/core/10.2.11:
     resolution:
       { integrity: sha512-5YeVrT9prf9UeaAO+2fIuiKdZ01uVBvVsjG79berGZPTHVkz01eFX2ODWJG05uQTqmRw6olz1J80yt6qcGPdvA== }
+    dev: false
 
   /@use-gesture/react/10.2.11_react@17.0.2:
     resolution:
@@ -4833,6 +4831,7 @@ packages:
     dependencies:
       '@use-gesture/core': 10.2.11
       react: 17.0.2
+    dev: false
 
   /@vitejs/plugin-react-refresh/1.3.6:
     resolution:
