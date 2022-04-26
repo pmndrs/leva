@@ -1,3 +1,5 @@
+import type { StyledComponent } from '@stitches/react'
+
 import React, { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
 import { mergeRefs, useDrag } from 'leva/plugin'
