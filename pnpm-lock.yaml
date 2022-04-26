@@ -131,6 +131,7 @@ importers:
       '@radix-ui/react-portal': ^0.1.3
       '@radix-ui/react-tooltip': 0.1.6
       '@stitches/react': ^1.2.8
+      '@types/react-dom': ^18.0.0
       '@use-gesture/react': ^10.2.5
       '@welldone-software/why-did-you-render': ^6.2.3
       colord: ^2.9.2
@@ -156,6 +157,7 @@ importers:
       v8n: 1.4.0
       zustand: 3.7.2_react@18.0.0
     devDependencies:
+      '@types/react-dom': 18.0.0
       react: 18.0.0
       react-dom: 18.0.0_react@18.0.0
 
@@ -165,40 +167,40 @@ importers:
   packages/plugin-bezier:
     specifiers:
       leva: '>=0.9.23'
-      react: '>=16.8.0'
+      react: '>=18.0.0'
       react-dom: '>=16.8.0'
       react-use-measure: ^2.1.1
     dependencies:
       leva: link:../leva
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
-      react-use-measure: 2.1.1_react-dom@17.0.2+react@17.0.2
+      react: 18.0.0
+      react-dom: 17.0.2_react@18.0.0
+      react-use-measure: 2.1.1_react-dom@17.0.2+react@18.0.0
 
   packages/plugin-plot:
     specifiers:
       '@use-gesture/react': ^10.0.0
       leva: '>=0.9.23'
       mathjs: ^10.1.1
-      react: '>=16.8.0'
+      react: '>=18.0.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@use-gesture/react': 10.2.11_react@17.0.2
+      '@use-gesture/react': 10.2.11_react@18.0.0
       leva: link:../leva
       mathjs: 10.5.0
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 17.0.2_react@18.0.0
 
   packages/plugin-spring:
     specifiers:
       '@react-spring/web': 9.4.2
       leva: '>=0.9.23'
-      react: '>=16.8.0'
+      react: '>=18.0.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@react-spring/web': 9.4.2_react-dom@17.0.2+react@17.0.2
+      '@react-spring/web': 9.4.2_react-dom@17.0.2+react@18.0.0
       leva: link:../leva
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 17.0.2_react@18.0.0
 
 packages:
   /@ampproject/remapping/2.1.2:
@@ -2919,17 +2921,6 @@ packages:
       '@babel/runtime': 7.17.9
     dev: false
 
-  /@react-spring/animated/9.4.4_react@17.0.2:
-    resolution:
-      { integrity: sha512-e9xnuBaUTD+NolKikUmrGWjX8AVCPyj1GcEgjgq9E+0sXKv46UY7cm2EmB6mUDTxWIDVKebARY++xT4nGDraBQ== }
-    peerDependencies:
-      react: ^16.8.0  || ^17.0.0
-    dependencies:
-      '@react-spring/shared': 9.4.4_react@17.0.2
-      '@react-spring/types': 9.4.4
-      react: 17.0.2
-    dev: false
-
   /@react-spring/animated/9.4.4_react@18.0.0:
     resolution:
       { integrity: sha512-e9xnuBaUTD+NolKikUmrGWjX8AVCPyj1GcEgjgq9E+0sXKv46UY7cm2EmB6mUDTxWIDVKebARY++xT4nGDraBQ== }
@@ -2939,19 +2930,6 @@ packages:
       '@react-spring/shared': 9.4.4_react@18.0.0
       '@react-spring/types': 9.4.4
       react: 18.0.0
-    dev: false
-
-  /@react-spring/core/9.4.4_react@17.0.2:
-    resolution:
-      { integrity: sha512-llgb0ljFyjMB0JhWsaFHOi9XFT8n1jBMVs1IFY2ipIBerWIRWrgUmIpakLPHTa4c4jwqTaDSwX90s2a0iN7dxQ== }
-    peerDependencies:
-      react: ^16.8.0  || ^17.0.0
-    dependencies:
-      '@react-spring/animated': 9.4.4_react@17.0.2
-      '@react-spring/rafz': 9.4.4
-      '@react-spring/shared': 9.4.4_react@17.0.2
-      '@react-spring/types': 9.4.4
-      react: 17.0.2
     dev: false
 
   /@react-spring/core/9.4.4_react@18.0.0:
@@ -2970,17 +2948,6 @@ packages:
   /@react-spring/rafz/9.4.4:
     resolution:
       { integrity: sha512-5ki/sQ06Mdf8AuFstSt5zbNNicRT4LZogiJttDAww1ozhuvemafNWEHxhzcULgCPCDu2s7HsroaISV7+GQWrhw== }
-    dev: false
-
-  /@react-spring/shared/9.4.4_react@17.0.2:
-    resolution:
-      { integrity: sha512-ySVgScDZlhm/+Iy2smY9i/DDrShArY0j6zjTS/Re1lasKnhq8qigoGiAxe8xMPJNlCaj3uczCqHy3TY9bKRtfQ== }
-    peerDependencies:
-      react: ^16.8.0  || ^17.0.0
-    dependencies:
-      '@react-spring/rafz': 9.4.4
-      '@react-spring/types': 9.4.4
-      react: 17.0.2
     dev: false
 
   /@react-spring/shared/9.4.4_react@18.0.0:
@@ -3016,19 +2983,19 @@ packages:
       { integrity: sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ== }
     dev: false
 
-  /@react-spring/web/9.4.2_react-dom@17.0.2+react@17.0.2:
+  /@react-spring/web/9.4.2_react-dom@17.0.2+react@18.0.0:
     resolution:
       { integrity: sha512-sWfA9NkVuvVOpjSlMkD2zcF6X3i8NSHTeH/uHCGKsN3mYqgkhvAF+E8GASO/H4KKGNhbRvgCZiwJXOtOGyUg6A== }
     peerDependencies:
       react: ^16.8.0  || ^17.0.0
       react-dom: ^16.8.0  || ^17.0.0
     dependencies:
-      '@react-spring/animated': 9.4.4_react@17.0.2
-      '@react-spring/core': 9.4.4_react@17.0.2
-      '@react-spring/shared': 9.4.4_react@17.0.2
+      '@react-spring/animated': 9.4.4_react@18.0.0
+      '@react-spring/core': 9.4.4_react@18.0.0
+      '@react-spring/shared': 9.4.4_react@18.0.0
       '@react-spring/types': 9.4.4
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 17.0.2_react@18.0.0
     dev: false
 
   /@react-three/drei/8.20.2_6790012f247f3172eb21f5fa41cac8bb:
@@ -4779,6 +4746,13 @@ packages:
     dependencies:
       '@types/react': 17.0.44
 
+  /@types/react-dom/18.0.0:
+    resolution:
+      { integrity: sha512-49897Y0UiCGmxZqpC8Blrf6meL8QUla6eb+BBhn69dTXlmuOlzkfr7HHY/O8J25e1lTUMs+YYxSlVDAaGHCOLg== }
+    dependencies:
+      '@types/react': 17.0.44
+    dev: true
+
   /@types/react-reconciler/0.26.6:
     resolution:
       { integrity: sha512-N8MpyC6PJksD+CbMaZ1GW1t940+L4K+f7soiNKcKfgOgof3xWLvs5nPRQ/Q0P6QwDX0GH1PT1MsiQh2FtUY6aw== }
@@ -5028,16 +5002,6 @@ packages:
   /@use-gesture/core/10.2.11:
     resolution:
       { integrity: sha512-5YeVrT9prf9UeaAO+2fIuiKdZ01uVBvVsjG79berGZPTHVkz01eFX2ODWJG05uQTqmRw6olz1J80yt6qcGPdvA== }
-    dev: false
-
-  /@use-gesture/react/10.2.11_react@17.0.2:
-    resolution:
-      { integrity: sha512-yATjHv6ZNe9Jar1YtJvcb6KxwpcGGW/X8FEUY6xo2mDxHkP7dCsnhZZm7I+giGlrJKBMvpVBARsbUhwQP6v6nA== }
-    peerDependencies:
-      react: '>= 16.8.0'
-    dependencies:
-      '@use-gesture/core': 10.2.11
-      react: 17.0.2
     dev: false
 
   /@use-gesture/react/10.2.11_react@18.0.0:
@@ -12658,7 +12622,7 @@ packages:
       - supports-color
     dev: false
 
-  /react-dom/17.0.2_react@17.0.2:
+  /react-dom/17.0.2_react@18.0.0:
     resolution:
       { integrity: sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA== }
     peerDependencies:
@@ -12666,7 +12630,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-      react: 17.0.2
+      react: 18.0.0
       scheduler: 0.20.2
     dev: false
 
@@ -12898,7 +12862,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /react-use-measure/2.1.1_react-dom@17.0.2+react@17.0.2:
+  /react-use-measure/2.1.1_react-dom@17.0.2+react@18.0.0:
     resolution:
       { integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig== }
     peerDependencies:
@@ -12906,8 +12870,8 @@ packages:
       react-dom: '>=16.13'
     dependencies:
       debounce: 1.2.1
-      react: 17.0.2
-      react-dom: 17.0.2_react@17.0.2
+      react: 18.0.0
+      react-dom: 17.0.2_react@18.0.0
     dev: false
 
   /react-use-measure/2.1.1_react-dom@18.0.0+react@18.0.0:
@@ -12945,15 +12909,6 @@ packages:
       throttle-debounce: 3.0.1
       ts-easing: 0.2.0
       tslib: 2.4.0
-    dev: false
-
-  /react/17.0.2:
-    resolution:
-      { integrity: sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA== }
-    engines: { node: '>=0.10.0' }
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
     dev: false
 
   /react/18.0.0:
