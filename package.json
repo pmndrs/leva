@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
@@ -78,7 +79,6 @@
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "all-contributors-cli": "^6.20.0",
-    "@babel/eslint-parser": "^7.17.0",
     "eslint": "^8.14.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-flowtype": "^8.0.3",
