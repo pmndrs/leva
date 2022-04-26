@@ -1,5 +1,6 @@
 {
   "extends": "react-app",
+  "parser": "@babel/eslint-parser",
   "rules": {
     "no-console": "warn"
   }
