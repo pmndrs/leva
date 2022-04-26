@@ -1,5 +1,6 @@
 module.exports = {
   comments: false,
+  parser: '@babel/eslint-parser',
   presets: [
     [
       '@babel/preset-env',
