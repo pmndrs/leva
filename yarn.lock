@@ -5609,12 +5609,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stitches/react@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@stitches/react@npm:1.2.6"
+"@stitches/react@npm:1.2.8":
+  version: 1.2.8
+  resolution: "@stitches/react@npm:1.2.8"
   peerDependencies:
     react: ">= 16.3.0"
-  checksum: 416088cdde17a22d6cdb04cf1cf756c6e5fc291dd7e41f82ce422bb95432ad32b6d990e7264d996d367c40bbc674d61be087e4e1f7b23eea7f81ef6266373a9c
+  checksum: 029795323cdedb5599ec0636526fc233b2cf41fa9c1f4a704b1f7f457c6170053384a7430afed45e25f73e348d7c391cf1379bc079943cd9cad44302234a5244
   languageName: node
   linkType: hard
 
@@ -10551,7 +10551,7 @@ __metadata:
     "@radix-ui/react-icons": ^1.0.3
     "@react-three/drei": ^8.8.3
     "@react-three/fiber": ^7.0.26
-    "@stitches/react": 1.2.6
+    "@stitches/react": 1.2.8
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@vitejs/plugin-react-refresh": ^1.3.6
@@ -14976,7 +14976,7 @@ fsevents@^1.2.7:
   dependencies:
     "@radix-ui/react-portal": ^0.1.3
     "@radix-ui/react-tooltip": 0.1.6
-    "@stitches/react": 1.2.6
+    "@stitches/react": 1.2.8
     "@use-gesture/react": ^10.2.5
     "@welldone-software/why-did-you-render": ^6.2.3
     colord: ^2.9.2
