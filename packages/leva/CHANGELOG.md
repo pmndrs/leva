@@ -1,5 +1,17 @@
 # leva
 
+## 0.9.23
+
+### Patch Changes
+
+- 3177e59: fix: `disabled` regression
+
+## 0.9.22
+
+### Patch Changes
+
+- bdbe233: fix: properly handle the `disabled` prop. Should fix #309
+
 ## 0.9.21
 
 ### Patch Changes
