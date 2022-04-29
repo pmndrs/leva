@@ -2,7 +2,7 @@ import * as mathjs from 'mathjs'
 
 let math = mathjs
 
-export function createInstance(imported: ImportObject) {
+export function createInstance(imported: math.ImportObject) {
   math = mathjs.create(mathjs.all)
   if (imported !== undefined) {
     math.import(imported, {})
