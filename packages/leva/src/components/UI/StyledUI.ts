@@ -110,15 +110,6 @@ export const StyledOptionalToggle = styled('input', {
   },
 })
 
-export const StyledInputWrapper = styled('div', {
-  opacity: 1,
-  variants: {
-    disabled: {
-      true: { opacity: 0.6, pointerEvents: 'none' },
-    },
-  },
-})
-
 export const StyledLabel = styled('label', {
   fontWeight: '$label',
   overflow: 'hidden',
@@ -126,6 +117,19 @@ export const StyledLabel = styled('label', {
   whiteSpace: 'nowrap',
   '& > svg': {
     display: 'block', // fixes svg vertical misalignment
+  },
+})
+
+export const StyledInputWrapper = styled('div', {
+  opacity: 1,
+  variants: {
+    disabled: {
+      true: {
+        opacity: 0.6,
+        pointerEvents: 'none',
+        [`& ${StyledLabel}`]: { pointerEvents: 'auto' },
+      },
+    },
   },
 })
 
