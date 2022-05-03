@@ -48,6 +48,11 @@ function Controls() {
     color: '#ffffff',
     refMonitor: monitor(frame, { graph: true, interval: 30 }),
     number: { value: 1000, min: 3 },
+    disabled: {
+      value: 'A disabled input',
+      disabled: true,
+      hint: 'This input is disabled',
+    },
     colorObj: { value: { r: 1, g: 2, b: 3 }, render: (get) => get('folder.boolean') },
     folder: folder(
       {
