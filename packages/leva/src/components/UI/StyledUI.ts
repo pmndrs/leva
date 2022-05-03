@@ -16,8 +16,17 @@ export const StyledRow = styled('div', {
     '&:last-of-type': { marginBottom: '$rowGap' },
   },
 
-  '&:hover,&:focus-within': {
-    color: '$highlight3',
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+      },
+      false: {
+        '&:hover,&:focus-within': {
+          color: '$highlight3',
+        },
+      },
+    },
   },
 })
 
