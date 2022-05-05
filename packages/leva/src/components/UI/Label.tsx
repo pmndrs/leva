@@ -51,7 +51,7 @@ function RawLabel(props: LabelProps) {
 }
 
 export function Label({ align, ...props }: LabelProps & { align?: 'top' }) {
-  const { value, label, key } = useInputContext()
+  const { value, label, key, disabled } = useInputContext()
   const { hideCopyButton } = usePanelSettingsContext()
 
   const copyEnabled = !hideCopyButton && key !== undefined
@@ -70,7 +70,7 @@ export function Label({ align, ...props }: LabelProps & { align?: 'top' }) {
   return (
     <CopyLabelContainer align={align} onPointerLeave={() => setCopied(false)}>
       <RawLabel {...props} />
-      {copyEnabled && (
+      {copyEnabled && !disabled && (
         <div title={`Click to copy ${typeof label === 'string' ? label : key} value`}>
           {!copied ? (
             <svg onClick={handleClick} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
