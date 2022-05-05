@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.25
+
+### Patch Changes
+
+- 66c5414: Fixes an issue where tooltips for disabled inputs weren't being displayed
+
 ## 0.9.24
 
 ### Patch Changes
