@@ -5,7 +5,6 @@ import type { PlotInput, InternalPlot, InternalPlotSettings } from './plot-types
 
 export const sanitize = (
   expression: string,
-  // _imported: ImportObject,
   _settings: InternalPlotSettings,
   _prevValue: math.MathNode,
   _path: string,
