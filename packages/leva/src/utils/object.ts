@@ -19,3 +19,5 @@ export function mapArrayToKeys<U extends any, K extends string>(value: U[], keys
 export function isObject(variable: any) {
   return Object.prototype.toString.call(variable) === '[object Object]'
 }
+
+export const isEmptyObject = (obj: Object) => isObject(obj) && Object.keys(obj).length === 0

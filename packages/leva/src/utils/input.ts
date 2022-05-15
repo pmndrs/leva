@@ -1,4 +1,5 @@
 import { dequal } from 'dequal/lite'
+import { isObject, isEmptyObject } from '.'
 import { getValueType, normalize, sanitize } from '../plugin'
 import {
   CommonOptions,
@@ -75,9 +76,15 @@ export function parseOptions(
     return { type, input, options: commonOptions }
   }
 
+  // in case this is a custom input like beziers where the argument is an array,
+  // then the array could be passed as { value: [0,0,0,0], onChange: () => {} }.
+  let computedInput
+  if (customType && isObject(input) && 'value' in input) computedInput = input.value
+  else computedInput = isEmptyObject(input) ? undefined : input
+
   return {
     type,
-    input,
+    input: computedInput,
     options: {
       ...commonOptions,
       onChange,
