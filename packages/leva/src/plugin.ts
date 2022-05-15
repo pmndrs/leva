@@ -52,7 +52,11 @@ export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
   return plugin
 }
 
-type PluginInput<Input> = Input extends object ? Input & InputOptions : Input
+type PluginInput<Input> = Input extends object
+  ? Input extends Array<any>
+    ? Input | ({ value: Input } & InputOptions)
+    : Input & InputOptions
+  : Input
 
 /**
  * This function should be used by custom plugins. It is mostly used as a way
