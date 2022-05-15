@@ -54,7 +54,7 @@ export function createInternalPlugin<Input, Value, InternalSettings, Settings>(
 
 type PluginInput<Input> = Input extends object
   ? Input extends Array<any>
-    ? Input | ({ value: Input } & InputOptions)
+    ? Input | ({ value?: Input } & InputOptions)
     : Input & InputOptions
   : Input
 
