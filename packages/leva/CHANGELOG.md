@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.26
+
+### Patch Changes
+
+- b6b9c7e: fix: support { value: input } for custom plugins that are not object-based
+
 ## 0.9.25
 
 ### Patch Changes
