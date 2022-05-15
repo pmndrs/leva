@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.27
+
+### Patch Changes
+
+- 2feb630: fix: make value optional in plugin return type
+
 ## 0.9.26
 
 ### Patch Changes
