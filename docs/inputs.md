@@ -75,7 +75,18 @@ All rules from Number type also apply.
 
 ### Select
 
-@todo
+A drop-down list input. Created by specifying an object with the `value` and `options` properties. 
+
+```jsx
+const { select } = useControls({
+  mySelectColor: {
+    value: 'red',
+    options: ['red', 'blue', 'green'],
+  }
+}) 
+```
+
+This example creates a drop down list called `mySelectColor` with a default value of `red` and other selectable values of `blue` and `green`. 
 
 ### Image
 
