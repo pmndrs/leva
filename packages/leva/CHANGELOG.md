@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.28
+
+### Patch Changes
+
+- 61f88f7: [number]: unit can be symbols such as '%' (#349)
+
 ## 0.9.27
 
 ### Patch Changes
