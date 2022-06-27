@@ -18,12 +18,9 @@ export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
 export const normalize = ({ value, ...settings }: NumberInput) => {
   const { min = -Infinity, max = Infinity, ..._settings } = settings
 
-  const _value = clamp(parseFloat(value as string), min, max)
-  let suffix
-  if (!Number.isFinite(value)) {
-    const match = String(value).match(/[A-Z]+/i)
-    if (match) suffix = match[0]
-  }
+  let _value = parseFloat(value as string)
+  const suffix = typeof value === 'string' ? value.substring(('' + _value).length) : undefined
+  _value = clamp(_value, min, max)
 
   // ideally:
   // 3 -> 3.0
