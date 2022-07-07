@@ -1,7 +1,17 @@
 import { getStep, clamp } from '../../utils'
 import type { InternalNumberSettings, NumberInput } from './number-types'
 
-export const schema = (o: any) => typeof o === 'number' || (typeof o === 'string' && !isNaN(parseFloat(o)))
+export const schema = (v: any) => {
+  if (typeof v === 'number') return true
+  // we consider a string as a number if it starts with a number and it's suffix is less than 4 characters
+  if (typeof v === 'string') {
+    const _v = parseFloat(v)
+    if (isNaN(_v)) return false
+    const suffix = v.substring(('' + _v).length).trim()
+    return suffix.length < 4
+  }
+  return false
+}
 
 export const sanitize = (v: any, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
   const _v = parseFloat(v as string)
