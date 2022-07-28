@@ -49,9 +49,9 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
 
 export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
-    onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
-    onDragStart: (point: { x?: number | undefined; y?: number | undefined }) => void
-    onDragEnd: (point: { x?: number | undefined; y?: number | undefined }) => void
+    onDrag: (point: { x?: number; y?: number }) => void
+    onDragStart: (point: { x?: number; y?: number }) => void
+    onDragEnd: (point: { x?: number; y?: number }) => void
     title: React.ReactNode
     drag: boolean
     filterEnabled: boolean
