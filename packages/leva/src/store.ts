@@ -206,7 +206,12 @@ export const Store = function (this: StoreType) {
         try {
           //@ts-expect-error (we always update inputs with a value)
           updateInput(data[path], value, undefined, undefined, fromPanel)
-        } catch {}
+        } catch (e) {
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.warn(`[This message will only show in development]: \`set\` for path ${path} has failed.`, e)
+          }
+        }
       })
       return { data }
     })
