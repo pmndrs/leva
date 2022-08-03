@@ -76,14 +76,14 @@ export const Optional = () => {
 
 function A() {
   const renderRef = React.useRef(0)
-  const divRef = React.useRef(null)
+  const divRef = React.useRef<HTMLDivElement>(null)
   renderRef.current++
   const data = useControls({
     color: {
       value: '#f00',
       onChange: (v) => {
-        divRef.current.style.color = v
-        divRef.current.innerText = `Transient color is ${v}`
+        divRef.current!.style.color = v
+        divRef.current!.innerText = `Transient color is ${v}`
       },
     },
   })
@@ -127,7 +127,7 @@ export const OnChangeWithRender = ({ transient }) => {
     color: {
       value: '#f00',
       onChange: (value) => {
-        ref.current.innerHTML = value
+        ref.current!.innerHTML = value
       },
       transient,
     },
@@ -149,7 +149,7 @@ OnChangeWithRender.args = {
 OnChangeWithRender.storyName = 'onChange With Render'
 
 export const OnChangeFromPanel = () => {
-  const ref = React.useRef<HTMLDivElement>()
+  const ref = React.useRef<HTMLDivElement>(null)
   const [, set] = useControls(() => ({
     value: {
       value: 0.1,
@@ -157,8 +157,8 @@ export const OnChangeFromPanel = () => {
       onChange: (value, path, context) => {
         const node = window.document.createElement('pre')
         node.innerText = JSON.stringify({ value, path, context })
-        ref.current.appendChild(node)
-        ref.current.scrollTop = ref.current.scrollHeight
+        ref.current!.appendChild(node)
+        ref.current!.scrollTop = ref.current!.scrollHeight
       },
     },
   }))
@@ -190,7 +190,7 @@ export const EnforceInputType = () => {
 
 export const OnEditStartOnEditEnd = () => {
   const [isEditing, setIsEditing] = React.useState(0)
-  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string }>(null)
+  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string } | null>(null)
 
   const onEditStart = (value, path, context) => {
     setIsEditing((i) => i + 1)
@@ -218,7 +218,7 @@ export const OnEditStartOnEditEnd = () => {
       <pre>
         {isEditing === 0
           ? 'Not Editing'
-          : `Editing ${editedInput.path} with initial value ${String(editedInput.value)}`}
+          : `Editing ${editedInput!.path} with initial value ${String(editedInput!.value)}`}
       </pre>
     </div>
   )

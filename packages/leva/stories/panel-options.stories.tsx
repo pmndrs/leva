@@ -90,7 +90,7 @@ const Component = () => {
   )
 }
 
-export const neverHide: Story<any> = () => {
+export const NeverHide: Story<any> = () => {
   const [shown, setShown] = React.useState(true)
   return (
     <div>
