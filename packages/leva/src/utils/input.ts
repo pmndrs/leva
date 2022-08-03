@@ -137,14 +137,14 @@ type SanitizeProps = {
   settings: object | undefined
 }
 
-type ValueErrorType = { type: string; message: string; previousValue: any; error?: Error }
+type ValueErrorType = { type: string; message: string; previousValue: any; error?: unknown }
 
-const ValueError = function (this: ValueErrorType, message: string, value: any, error?: Error) {
+const ValueError = function (this: ValueErrorType, message: string, value: any, error?: unknown) {
   this.type = 'LEVA_ERROR'
   this.message = 'LEVA: ' + message
   this.previousValue = value
   this.error = error
-} as unknown as { new (message: string, value: any, error?: Error): ValueErrorType }
+} as unknown as { new (message: string, value: any, error?: unknown): ValueErrorType }
 
 export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any, path: string, store: StoreType) {
   // sanitizeValue can accept a new value in the form of fn(oldValue). This
@@ -157,7 +157,7 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
   let sanitizedNewValue
   try {
     sanitizedNewValue = sanitize(type, _newValue, settings, value, path, store)
-  } catch (e: any) {
+  } catch (e) {
     throw new ValueError(`The value \`${newValue}\` did not result in a correct value.`, value, e)
   }
   if (dequal(sanitizedNewValue, value)) {

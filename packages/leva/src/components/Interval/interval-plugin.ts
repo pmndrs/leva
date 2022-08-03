@@ -12,12 +12,14 @@ export const schema = (o: any, s: any) =>
 export const format = (v: Interval) => ({ min: v[0], max: v[1] })
 
 export const sanitize = (
-  value: InternalInterval,
+  value: InternalInterval | Interval,
   { bounds: [MIN, MAX] }: InternalIntervalSettings,
   prevValue: any
 ): Interval => {
+  // value can be passed as an array externally
+  const _value: InternalInterval = Array.isArray(value) ? format(value as Interval) : value
   const _newValue = { min: prevValue[0], max: prevValue[1] }
-  const { min, max } = { ..._newValue, ...value }
+  const { min, max } = { ..._newValue, ..._value }
   return [clamp(Number(min), MIN, Math.max(MIN, max)), clamp(Number(max), Math.min(MAX, min), MAX)]
 }
 
