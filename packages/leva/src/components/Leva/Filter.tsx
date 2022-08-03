@@ -49,20 +49,26 @@ const FilterInput = React.forwardRef<HTMLInputElement, FilterProps>(({ setFilter
 
 export type TitleWithFilterProps = FilterProps &
   FolderTitleProps & {
-    onDrag: (point: { x?: number | undefined; y?: number | undefined }) => void
+    onDrag: (point: { x?: number; y?: number }) => void
+    onDragStart: (point: { x?: number; y?: number }) => void
+    onDragEnd: (point: { x?: number; y?: number }) => void
     title: React.ReactNode
     drag: boolean
     filterEnabled: boolean
+    from?: { x?: number; y?: number }
   }
 
 export function TitleWithFilter({
   setFilter,
   onDrag,
+  onDragStart,
+  onDragEnd,
   toggle,
   toggled,
   title,
   drag,
   filterEnabled,
+  from,
 }: TitleWithFilterProps) {
   const [filterShown, setShowFilter] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -72,7 +78,23 @@ export function TitleWithFilter({
     else inputRef.current?.blur()
   }, [filterShown])
 
-  const bind = useDrag(({ offset: [x, y] }) => onDrag({ x, y }), { filterTaps: true })
+  const bind = useDrag(
+    ({ offset: [x, y], first, last }) => {
+      onDrag({ x, y })
+
+      if (first) {
+        onDragStart({ x, y })
+      }
+
+      if (last) {
+        onDragEnd({ x, y })
+      }
+    },
+    {
+      filterTaps: true,
+      from: ({ offset: [x, y] }) => [from?.x || x, from?.y || y],
+    }
+  )
 
   useEffect(() => {
     const handleShortcut = (event: KeyboardEvent) => {

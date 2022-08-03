@@ -73,6 +73,13 @@ export const Filter: Story<any> = (args, context) => {
 }
 Filter.args = { filter: true }
 
+export const PositionControlled: Story<any> = (args, context) => {
+  const [{ position }, set] = useControls(() => ({ position: { x: -50, y: 50 } }))
+
+  return Template({ titleBar: { drag: args.drag, position, onDrag: (point) => set({ position: point }) } }, context)
+}
+PositionControlled.args = { drag: true }
+
 const Component = () => {
   const values = useControls({ value: 3 })
   return (
@@ -83,7 +90,7 @@ const Component = () => {
   )
 }
 
-export const neverHide: Story<any> = () => {
+export const NeverHide: Story<any> = () => {
   const [shown, setShown] = React.useState(true)
   return (
     <div>

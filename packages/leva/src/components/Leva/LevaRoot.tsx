@@ -68,6 +68,22 @@ export type LevaRootProps = {
          * Toggle whether filtering should be enabled or disabled.
          */
         filter?: boolean
+        /**
+         * The position(x and y coordinates) of the leva panel.
+         */
+        position?: { x?: number; y?: number }
+        /**
+         * The callback is called when the leva panel is dragged.
+         */
+        onDrag?: (position: { x?: number; y?: number }) => void
+        /**
+         * The callback is called when the leva panel starts to be dragged.
+         */
+        onDragStart?: (position: { x?: number; y?: number }) => void
+        /**
+         * The callback is called when the leva panel stops being dragged.
+         */
+        onDragEnd?: (position: { x?: number; y?: number }) => void
       }
   /**
    * If true, the copy button will be hidden
@@ -128,6 +144,10 @@ const LevaCore = React.memo(
       title: undefined,
       drag: true,
       filter: true,
+      position: undefined,
+      onDrag: undefined,
+      onDragStart: undefined,
+      onDragEnd: undefined,
     },
     hideCopyButton = false,
     toggled,
@@ -145,6 +165,14 @@ const LevaCore = React.memo(
     const title = typeof titleBar === 'object' ? titleBar.title || undefined : undefined
     const drag = typeof titleBar === 'object' ? titleBar.drag ?? true : true
     const filterEnabled = typeof titleBar === 'object' ? titleBar.filter ?? true : true
+    const position = typeof titleBar === 'object' ? titleBar.position || undefined : undefined
+    const onDrag = typeof titleBar === 'object' ? titleBar.onDrag || undefined : undefined
+    const onDragStart = typeof titleBar === 'object' ? titleBar.onDragStart || undefined : undefined
+    const onDragEnd = typeof titleBar === 'object' ? titleBar.onDragEnd || undefined : undefined
+
+    React.useEffect(() => {
+      set({ x: position?.x, y: position?.y })
+    }, [position, set])
 
     globalStyles()
 
@@ -160,13 +188,19 @@ const LevaCore = React.memo(
           style={{ display: shouldShow ? 'block' : 'none' }}>
           {titleBar && (
             <TitleWithFilter
-              onDrag={set}
+              onDrag={(point) => {
+                set(point)
+                onDrag?.(point)
+              }}
+              onDragStart={(point) => onDragStart?.(point)}
+              onDragEnd={(point) => onDragEnd?.(point)}
               setFilter={setFilter}
               toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
               toggled={toggled}
               title={title}
               drag={drag}
               filterEnabled={filterEnabled}
+              from={position}
             />
           )}
           {shouldShow && (
