@@ -1,5 +1,12 @@
 # leva
 
+## 0.9.30
+
+### Patch Changes
+
+- fd8b07f: feat: add `onDrag` / `onDragStart` / `onDragEnd` callbacks when dragging Leva panel.
+- 81acf37: fix: allow interval to be set externally with [number, number]
+
 ## 0.9.29
 
 ### Patch Changes
