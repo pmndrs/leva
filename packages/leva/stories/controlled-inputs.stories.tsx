@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEventHandler, useCallback } from 'react'
 import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
 import { useDrag } from '@use-gesture/react'
 import { Meta, Story } from '@storybook/react'
@@ -24,6 +24,28 @@ export const ExternalUpdatesWithSet: Story = () => {
       <label>
         counter: {counter}{' '}
         <button type="button" onClick={() => set({ counter: counter + 1 })}>
+          ➕ inc
+        </button>
+      </label>
+    </form>
+  )
+}
+
+export const ExternalUpdatesWithGetAndSet: Story = () => {
+  const [{ username, counter }, set, get] = useControls(() => ({ username: 'Mario', counter: { value: 0, step: 1 } }))
+
+  const onClick = useCallback(() => {
+    set({ counter: get('counter') + 1 })
+  }, [])
+
+  return (
+    <form style={formStyles}>
+      <label>
+        username: <input type="text" value={username} onChange={(e) => set({ username: e.target.value })} />
+      </label>
+      <label>
+        counter: {counter}{' '}
+        <button type="button" onClick={onClick}>
           ➕ inc
         </button>
       </label>

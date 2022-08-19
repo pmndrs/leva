@@ -13,7 +13,8 @@ type FunctionReturnType<S extends Schema> = [
   SchemaToValues<S>,
   (value: {
     [K in keyof Partial<SchemaToValues<S, true>>]: any
-  }) => void
+  }) => void,
+  <T extends keyof SchemaToValues<S, true>>(path: T) => SchemaToValues<S, true>[T]
 ]
 
 type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
@@ -179,6 +180,8 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     [store, mappedPaths]
   )
 
+  const get = useMemo(() => store.get, [store])
+
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
     // Note that doing this while rendering (ie in useMemo) would make
@@ -225,6 +228,6 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     return () => unsubscriptions.forEach((unsub) => unsub())
   }, [onEditStartPaths, onEditEndPaths, store])
 
-  if (schemaIsFunction) return [values, set] as any
+  if (schemaIsFunction) return [values, set, get] as any
   return values as any
 }
