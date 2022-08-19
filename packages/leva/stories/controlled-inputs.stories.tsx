@@ -32,7 +32,7 @@ export const ExternalUpdatesWithSet: Story = () => {
 }
 
 export const ExternalUpdatesWithGetAndSet: Story = () => {
-  const [{ username, counter }, set, get] = useControls(() => ({ username: 'Mario', counter: { value: 0, step: 1 } }))
+  const [{ counter }, set, get] = useControls(() => ({ counter: { value: 0, step: 1 } }))
 
   const onClick = useCallback(() => {
     set({ counter: get('counter') + 1 })
@@ -40,9 +40,6 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
 
   return (
     <form style={formStyles}>
-      <label>
-        username: <input type="text" value={username} onChange={(e) => set({ username: e.target.value })} />
-      </label>
       <label>
         counter: {counter}{' '}
         <button type="button" onClick={onClick}>
