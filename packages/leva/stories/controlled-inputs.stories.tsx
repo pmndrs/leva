@@ -1,7 +1,6 @@
-import React, { ChangeEventHandler, useCallback } from 'react'
-import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
-import { useDrag } from '@use-gesture/react'
 import { Meta, Story } from '@storybook/react'
+import { useDrag } from '@use-gesture/react'
+import React, { ComponentPropsWithoutRef, forwardRef, useCallback, useRef } from 'react'
 import Reset from './components/decorator-reset'
 
 import { useControls } from '../src'
