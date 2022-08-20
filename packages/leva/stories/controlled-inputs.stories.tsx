@@ -32,9 +32,14 @@ export const ExternalUpdatesWithSet: Story = () => {
 
 export const ExternalUpdatesWithGetAndSet: Story = () => {
   const [{ counter }, set, get] = useControls(() => ({ counter: { value: 0, step: 1 } }))
+  const [{ counter: counter2 }, set2, get2] = useControls('folder', () => ({ counter: { value: 0, step: 1 } }))
 
   const onClick = useCallback(() => {
     set({ counter: get('counter') + 1 })
+  }, [])
+
+  const onClick2 = useCallback(() => {
+    set2({ counter: get2('folder.counter') + 1 })
   }, [])
 
   return (
@@ -42,6 +47,12 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
       <label>
         counter: {counter}{' '}
         <button type="button" onClick={onClick}>
+          ➕ inc
+        </button>
+      </label>
+      <label>
+        folder.counter: {counter2}{' '}
+        <button type="button" onClick={onClick2}>
           ➕ inc
         </button>
       </label>
