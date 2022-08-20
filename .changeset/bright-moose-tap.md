@@ -1,5 +1,5 @@
 ---
-'leva': patch
+'leva': minor
 ---
 
 feat: `useControls` returns a `get` function
