@@ -14,9 +14,7 @@ type FunctionReturnType<S extends Schema, FOLDER extends string | void> = [
   (value: {
     [K in keyof Partial<SchemaToValues<S, true>>]: SchemaToValues<S, true>[K]
   }) => void,
-  <K extends string & keyof SchemaToValues<S, true>>(
-    path: FOLDER extends string ? `${FOLDER}.${K}` : K
-  ) => SchemaToValues<S, true>[K]
+  <T extends keyof SchemaToValues<S, true>>(path: T) => SchemaToValues<S, true>[T]
 ]
 
 type ReturnType<F extends SchemaOrFn, FOLDER extends string | void = void> = F extends SchemaOrFn<infer S>
@@ -184,7 +182,12 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     [store, mappedPaths]
   )
 
-  const get = useMemo(() => store.get, [store])
+  const get = useCallback(
+    (path: string) => {
+      store.get(mappedPaths[path].path)
+    },
+    [store, mappedPaths]
+  )
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.

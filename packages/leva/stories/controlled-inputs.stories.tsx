@@ -3,7 +3,7 @@ import { useDrag } from '@use-gesture/react'
 import React, { ComponentPropsWithoutRef, forwardRef, useCallback, useRef } from 'react'
 import Reset from './components/decorator-reset'
 
-import { useControls } from '../src'
+import { folder, useControls } from '../src'
 
 export default {
   title: 'Misc/Controlled inputs',
@@ -31,15 +31,24 @@ export const ExternalUpdatesWithSet: Story = () => {
 }
 
 export const ExternalUpdatesWithGetAndSet: Story = () => {
-  const [{ counter }, set, get] = useControls(() => ({ counter: { value: 0, step: 1 } }))
-  const [{ counter: counter2 }, set2, get2] = useControls('folder', () => ({ counter: { value: 0, step: 1 } }))
+  const [{ counter }, set, get] = useControls(() => ({ counter: 0 }))
+  const [{ counter: counter2, counterB }, set2, get2] = useControls('folder', () => ({
+    counter: 0,
+    folder2: folder({
+      counterB: 0,
+    }),
+  }))
 
   const onClick = useCallback(() => {
     set({ counter: get('counter') + 1 })
   }, [])
 
   const onClick2 = useCallback(() => {
-    set2({ counter: get2('folder.counter') + 1 })
+    set2({ counter: get2('counter') + 1 })
+  }, [])
+
+  const onClick3 = useCallback(() => {
+    set2({ counter: get2('counterB') + 1 })
   }, [])
 
   return (
@@ -52,6 +61,12 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
       </label>
       <label>
         folder.counter: {counter2}{' '}
+        <button type="button" onClick={onClick2}>
+          ➕ inc
+        </button>
+      </label>
+      <label>
+        folder.folder2.counterB: {counterB}{' '}
         <button type="button" onClick={onClick2}>
           ➕ inc
         </button>
