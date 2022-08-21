@@ -48,7 +48,7 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
   }, [])
 
   const onClick3 = useCallback(() => {
-    set2({ counter: get2('counterB') + 1 })
+    set2({ counterB: get2('counterB') + 1 })
   }, [])
 
   return (
@@ -67,7 +67,7 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
       </label>
       <label>
         folder.folder2.counterB: {counterB}{' '}
-        <button type="button" onClick={onClick2}>
+        <button type="button" onClick={onClick3}>
           ➕ inc
         </button>
       </label>
