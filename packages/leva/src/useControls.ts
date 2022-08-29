@@ -25,8 +25,6 @@ type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
 
 type HookReturnType<F extends SchemaOrFn | string, G extends SchemaOrFn> = F extends SchemaOrFn
   ? ReturnType<F>
-  : F extends string
-  ? ReturnType<G>
   : ReturnType<G>
 
 function parseArgs(
