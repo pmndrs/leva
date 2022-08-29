@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react'
 import { useDrag } from '@use-gesture/react'
-import React, { ComponentPropsWithoutRef, forwardRef, useCallback, useRef } from 'react'
+import React, { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
 import Reset from './components/decorator-reset'
 
 import { folder, useControls } from '../src'
@@ -39,17 +39,17 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
     }),
   }))
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     set({ counter: get('counter') + 1 })
-  }, [])
+  }
 
-  const onClick2 = useCallback(() => {
+  const onClick2 = () => {
     set2({ counter: get2('counter') + 1 })
-  }, [])
+  }
 
-  const onClick3 = useCallback(() => {
+  const onClick3 = () => {
     set2({ counterB: get2('counterB') + 1 })
-  }, [])
+  }
 
   return (
     <form style={formStyles}>

@@ -9,7 +9,7 @@ import shallow from 'zustand/shallow'
 type HookSettings = { store?: StoreType }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
-type FunctionReturnType<S extends Schema, FOLDER extends string | void> = [
+type FunctionReturnType<S extends Schema> = [
   SchemaToValues<S>,
   (value: {
     [K in keyof Partial<SchemaToValues<S, true>>]: SchemaToValues<S, true>[K]
@@ -17,16 +17,16 @@ type FunctionReturnType<S extends Schema, FOLDER extends string | void> = [
   <T extends keyof SchemaToValues<S, true>>(path: T) => SchemaToValues<S, true>[T]
 ]
 
-type ReturnType<F extends SchemaOrFn, FOLDER extends string | void = void> = F extends SchemaOrFn<infer S>
+type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
   ? F extends Function
-    ? FunctionReturnType<S, FOLDER>
+    ? FunctionReturnType<S>
     : SchemaToValues<S>
   : never
 
 type HookReturnType<F extends SchemaOrFn | string, G extends SchemaOrFn> = F extends SchemaOrFn
   ? ReturnType<F>
   : F extends string
-  ? ReturnType<G, F>
+  ? ReturnType<G>
   : ReturnType<G>
 
 function parseArgs(
