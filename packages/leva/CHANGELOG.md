@@ -1,5 +1,11 @@
 # leva
 
+## 0.10.0
+
+### Minor Changes
+
+- 466f307: feat: `useControls` returns a `get` function
+
 ## 0.9.30
 
 ### Patch Changes
