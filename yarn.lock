@@ -4684,7 +4684,7 @@ __metadata:
   dependencies:
     react-use-measure: ^2.1.1
   peerDependencies:
-    leva: ">=0.9.23"
+    leva: ">=0.10.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
@@ -4697,7 +4697,7 @@ __metadata:
     mathjs: ^10.1.1
   peerDependencies:
     "@use-gesture/react": ^10.0.0
-    leva: ">=0.9.15"
+    leva: ">=0.10.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
@@ -4709,7 +4709,7 @@ __metadata:
   dependencies:
     "@react-spring/web": 9.4.2
   peerDependencies:
-    leva: ">=0.9.18"
+    leva: ">=0.10.0"
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   languageName: unknown
