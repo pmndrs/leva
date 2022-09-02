@@ -22,11 +22,6 @@
 
 - 1001f25: Fix version for stitches before moving to 1.x
 
-### Patch Changes
-
-- Updated dependencies [1001f25]
-  - leva@1.0.0
-
 ## 0.9.12
 
 ### Patch Changes
