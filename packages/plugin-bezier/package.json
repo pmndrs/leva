@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-bezier",
-  "version": "1.0.0",
+  "version": "0.9.19",
   "main": "dist/leva-ui-plugin-bezier.cjs.js",
   "module": "dist/leva-ui-plugin-bezier.esm.js",
   "types": "dist/leva-ui-plugin-bezier.cjs.d.ts",
@@ -12,7 +12,7 @@
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
-    "leva": ">=0.10.0",
+    "leva": ">=0.9.23",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },

@@ -1,12 +1,5 @@
 # @leva-ui/plugin-plot
 
-## 1.0.0
-
-### Patch Changes
-
-- Updated dependencies [466f307]
-  - leva@0.10.0
-
 ## 0.9.15
 
 ### Patch Changes

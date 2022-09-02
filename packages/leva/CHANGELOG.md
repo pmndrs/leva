@@ -1,8 +1,8 @@
 # leva
 
-## 0.10.0
+## 0.9.31
 
-### Minor Changes
+### Patch Changes
 
 - 466f307: feat: `useControls` returns a `get` function
 
@@ -103,7 +103,7 @@
 
 - 05ebf42: Upgrade deps and add `disabled` option to button
 
-## 1.0.0
+## 0.9.14
 
 ### Minor Changes
 
