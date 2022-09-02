@@ -50,6 +50,7 @@ function MyComponent() {
   )
 }
 ```
+
 NOTE: Using Leva with React 18 will cause a console error about createRoot which you can safely ignore, or fix by following the instructions here: [discussion](https://github.com/pmndrs/leva/issues/358)
 
 ### Documentation
