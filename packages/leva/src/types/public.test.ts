@@ -20,10 +20,14 @@ expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', onChange: () =
 expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', transient: true } }))
 // b should be returned when transient is false
 expectType<{ a: number; b: string }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {}, transient: false } }))
-expectType<[{ a: number }, (value: { a?: number }) => void]>(useControls(() => ({ a: 3 })))
-expectType<[{ a: number }, (value: { a?: number; color?: string }) => void]>(
-  useControls(() => ({ a: 3, color: { value: '#fff', onChange: () => {} } }))
-)
+expectType<[{ a: number }, (value: { a?: number }) => void, (path: 'a') => number]>(useControls(() => ({ a: 3 })))
+expectType<
+  [
+    { a: number },
+    (value: { a?: number; color?: string }) => void,
+    <T extends 'a' | 'color'>(path: T) => { a: number; color: string }[T]
+  ]
+>(useControls(() => ({ a: 3, color: { value: '#fff', onChange: () => {} } })))
 
 /**
  * options
