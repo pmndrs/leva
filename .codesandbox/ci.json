@@ -1,5 +1,7 @@
 {
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "sandboxes": [
     "/demo/src/sandboxes/leva-minimal",
     "/demo/src/sandboxes/leva-busy",
@@ -11,6 +13,7 @@
     "/demo/src/sandboxes/leva-plugin-plot",
     "/demo/src/sandboxes/leva-plugin-bezier",
     "/demo/src/sandboxes/leva-plugin-spring",
+    "/demo/src/sandboxes/leva-plugin-dates",
     "/demo/src/sandboxes/leva-custom-plugin"
   ],
   "node": "14"
