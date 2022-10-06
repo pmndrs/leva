@@ -27,40 +27,40 @@ export const InputContainer = styled('div', {
 export const StyledWrapper = styled('div', {
   position: 'relative',
 
-  ['& .react-datepicker__header']: {
+  '& .react-datepicker__header': {
     backgroundColor: '$elevation3',
     border: 'none',
   },
 
-  ['& .react-datepicker__current-month, .react-datepicker__day, .react-datepicker__day-name']: {
+  '& .react-datepicker__current-month, .react-datepicker__day, .react-datepicker__day-name': {
     color: 'inherit',
   },
 
-  ['& .react-datepicker__day']: {
+  '& .react-datepicker__day': {
     transition: 'all 0.2s ease',
   },
 
-  ['& .react-datepicker__day--selected']: {
+  '& .react-datepicker__day--selected': {
     backgroundColor: '$accent1',
     color: '$highlight3',
   },
 
-  ['& .react-datepicker__day--keyboard-selected']: {
+  '& .react-datepicker__day--keyboard-selected': {
     backgroundColor: 'transparent',
     color: 'inherit',
   },
 
-  ['& .react-datepicker__day--today']: {
+  '& .react-datepicker__day--today': {
     backgroundColor: '$accent3',
     color: '$highlight3',
   },
 
-  ['& .react-datepicker__month-container']: {
+  '& .react-datepicker__month-container': {
     backgroundColor: '$elevation2',
     borderRadius: '$lg',
   },
 
-  ['& .react-datepicker__day:hover']: {
+  '& .react-datepicker__day:hover': {
     backgroundColor: '$highlight1',
   },
 })

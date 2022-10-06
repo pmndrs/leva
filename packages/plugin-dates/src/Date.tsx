@@ -4,7 +4,6 @@ import React, { forwardRef, useCallback } from 'react'
 import DatePicker, { CalendarContainer } from 'react-datepicker'
 import { DateCalendarContainerProps, DateInputProps, DateProps } from './date-types'
 import { InputContainer, StyledInput, StyledWrapper } from './StyledDate'
-
 import 'react-datepicker/dist/react-datepicker.css'
 
 const { Label, Row } = Components
@@ -22,13 +21,13 @@ const DateInput = forwardRef<HTMLInputElement, Partial<DateInputProps>>(({ value
 })
 
 export function Date() {
-  const { id: _id, label, value, onUpdate, settings } = useInputContext<DateProps>()
+  const { label, value, onUpdate, settings } = useInputContext<DateProps>()
 
   const update = useCallback(
     (fn: (value: string) => void) => (date: Date) => {
       fn(format(date, settings.format))
     },
-    []
+    [settings.format]
   )
 
   return (
