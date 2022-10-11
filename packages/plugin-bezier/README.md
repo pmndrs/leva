@@ -1,9 +1,9 @@
-## Leva Plot
+## Leva Bezier
 
 ### Installation
 
 ```bash
-npm i @leva-ui/plugin-plot
+npm i @leva-ui/plugin-bezier
 ```
 
 ### Quick start
