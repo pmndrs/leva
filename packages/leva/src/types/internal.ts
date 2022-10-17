@@ -64,6 +64,8 @@ export type DataInput = {
   __refCount: number
   type: string
   value: unknown
+  /** works similar to css order property */
+  order?: number
   /**
    * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
    */
