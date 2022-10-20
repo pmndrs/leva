@@ -39,9 +39,9 @@ const ExtraControls = () => {
 
 function Controls() {
   const data = useControls({
-    range: { value: 0, min: -10, max: 10 },
     dimension: '4px',
-    string: 'something',
+    string: { value: 'something', optional: true, order: -1 },
+    range: { value: 0, min: -10, max: 10, order: -2 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
@@ -60,7 +60,7 @@ function Controls() {
         boolean: true,
         spring: { tension: 100, friction: 30 },
       },
-      { color: 'yellow' }
+      { color: 'yellow', order: -1 }
     ),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>
