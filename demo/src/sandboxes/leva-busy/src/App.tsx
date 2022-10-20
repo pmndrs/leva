@@ -40,8 +40,8 @@ const ExtraControls = () => {
 function Controls() {
   const data = useControls({
     dimension: '4px',
-    string: { value: 'something', optional: true, order: -1 },
-    range: { value: 0, min: -10, max: 10, order: -2 },
+    string: { value: 'something', optional: true, order: -2 },
+    range: { value: 0, min: -10, max: 10, order: -3 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
