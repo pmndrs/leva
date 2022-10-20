@@ -20,5 +20,8 @@ const Template: Story<DateInput> = (args) => {
 export const DefaultDate = Template.bind({})
 DefaultDate.args = { date: new Date() }
 
-export const CustomFormat = Template.bind({})
-CustomFormat.args = { date: new Date(), format: 'dd/MM/yyyy' }
+export const CustomLocale = Template.bind({})
+CustomLocale.args = { date: new Date(), locale: 'en-US' }
+
+export const CustomInputFormat = Template.bind({})
+CustomInputFormat.args = { date: new Date(), inputFormat: 'yyyy-MM-dd' }

@@ -1,10 +1,9 @@
-import format from 'date-fns/format'
 import { Components, useInputContext } from 'leva/plugin'
 import React, { forwardRef, useCallback } from 'react'
 import DatePicker, { CalendarContainer } from 'react-datepicker'
+// import 'react-datepicker/dist/react-datepicker.css'
 import { DateCalendarContainerProps, DateInputProps, DateProps } from './date-types'
 import { InputContainer, StyledInput, StyledWrapper } from './StyledDate'
-import 'react-datepicker/dist/react-datepicker.css'
 
 const { Label, Row } = Components
 
@@ -24,10 +23,10 @@ export function Date() {
   const { label, value, onUpdate, settings } = useInputContext<DateProps>()
 
   const update = useCallback(
-    (fn: (value: string) => void) => (date: Date) => {
-      fn(format(date, settings.format))
+    (fn: (value: Date) => void) => (date: Date) => {
+      fn(date)
     },
-    [settings.format]
+    []
   )
 
   return (
@@ -36,8 +35,8 @@ export function Date() {
       <InputContainer>
         <DatePicker
           selected={value.date}
-          dateFormat={settings.format}
           onChange={update(onUpdate)}
+          dateFormat={settings.inputFormat}
           calendarContainer={DateCalendarContainer}
           customInput={<DateInput />}
         />

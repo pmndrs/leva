@@ -6,6 +6,8 @@ export default function App() {
   const { birthday } = useControls({
     birthday: date({
       date: new Date(),
+      locale: 'en-UK',
+      inputFormat: 'dd.MM.yyyy',
     }),
   })
 
