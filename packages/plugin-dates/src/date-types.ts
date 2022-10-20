@@ -3,7 +3,7 @@ import { ChangeEventHandler, MouseEventHandler } from 'react'
 import { CalendarContainerProps } from 'react-datepicker'
 
 export type DateSettings = { format: string }
-export type DateInput = { date: Date } & DateSettings
+export type DateInput = { date: Date } & Partial<DateSettings>
 
 export type DateCalendarContainerProps = CalendarContainerProps
 export type DateInputProps = { value: string; onClick: MouseEventHandler; onChange: ChangeEventHandler }
