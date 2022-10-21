@@ -259,7 +259,7 @@ export const Ordered = () => {
   const values = useControls(() => ({
     last: folder({ firstVal: 0 }, { order: 1, collapsed: true }),
     middle: folder({ secondVal: 0 }, { order: -1, collapsed: true }),
-    first: { value: 0, order: -2 },
+    first: { value: 'ola', order: -2 },
   }))
 
   return (

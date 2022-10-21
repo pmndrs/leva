@@ -8,9 +8,9 @@ export const sanitize = (v: any) => {
   return v
 }
 
-export const normalize = ({ value, editable = true, rows = false }: StringInput) => {
+export const normalize = ({ value, editable = true, rows = false, ...props }: StringInput) => {
   return {
     value,
-    settings: { editable, rows: typeof rows === 'number' ? rows : rows ? 5 : 0 },
+    settings: { editable, rows: typeof rows === 'number' ? rows : rows ? 5 : 0, ...props },
   }
 }
