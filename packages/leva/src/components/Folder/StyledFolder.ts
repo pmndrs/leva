@@ -32,7 +32,8 @@ export const StyledWrapper = styled('div', {
       isRoot: true,
       fill: false,
       css: {
-        overflowY: 'auto',
+        // TODO: fix for calendar popup
+        // overflowY: 'auto',
         // 20px accounts for top margin
         maxHeight: 'calc(100vh - 20px - $$titleBarHeight)',
       },

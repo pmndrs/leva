@@ -1,15 +1,19 @@
 {
-  "name": "leva-transient",
+  "name": "leva-plugin-dates",
   "version": "1.0.0",
+  "keywords": [],
   "main": "src/index.jsx",
   "dependencies": {
-    "@react-three/drei": "^4.3.3",
-    "@react-three/fiber": "^6.0.21",
+    "@leva-ui/plugin-dates": "*",
     "leva": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3",
-    "three": "^0.143.0"
+    "react-scripts": "4.0.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "typescript": "^4.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -53,6 +53,7 @@ export function ControlInput({
         ...rest,
       }}>
       <StyledInputWrapper disabled={disabled}>
+        {/* @ts-ignore */}
         <Input />
       </StyledInputWrapper>
     </InputContext.Provider>
