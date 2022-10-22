@@ -182,11 +182,20 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
      * the value to be notified (ie there wouldn't be a new render)
      */
 
+    /**
+     * @update 22.10.22 this warning is a bit cumbersome when dragging something, which can
+     * result in the same value being set. Commenting out.
+     */
+
+    return value
+
+    /*
     throw new ValueError(
       `The value \`${newValue}\` did not result in a value update, which remained the same: \`${value}\`.
         You can ignore this warning if this is the intended behavior.`,
       value
     )
+    */
   }
   return sanitizedNewValue
 }
