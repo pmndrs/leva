@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.32
+
+### Patch Changes
+
+- 33b2d99: option to set order of inputs and folders
+
 ## 0.9.31
 
 ### Patch Changes

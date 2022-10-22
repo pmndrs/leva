@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-dates",
-  "version": "0.9.15",
+  "version": "1.0.0",
   "main": "dist/leva-ui-plugin-dates.cjs.js",
   "module": "dist/leva-ui-plugin-dates.esm.js",
   "types": "dist/leva-ui-plugin-dates.cjs.d.ts",
@@ -13,7 +13,7 @@
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
     "@use-gesture/react": "^10.0.0",
-    "leva": ">=0.9.15",
+    "leva": ">=0.9.32",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
