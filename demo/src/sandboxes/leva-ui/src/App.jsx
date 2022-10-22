@@ -72,6 +72,7 @@ function Box({ index, selected, setSelect }) {
     maxFiles: 1,
     accept: 'image/*',
     onDrop,
+    noClick: true,
   })
 
   const background = fillMode === 'color' || !fillImage ? fillColor : `center / cover no-repeat url(${fillImage})`
