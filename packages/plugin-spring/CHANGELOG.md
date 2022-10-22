@@ -16,7 +16,7 @@
 - Updated dependencies [05ebf42]
   - leva@0.9.15
 
-## 1.0.0
+## 0.9.13
 
 ### Minor Changes
 
