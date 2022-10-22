@@ -78,7 +78,13 @@ export type MonitorInput = {
 
 export type SpecialInput = MonitorInput | ButtonInput | ButtonGroupInput
 
-export type FolderSettings = { collapsed?: boolean; render?: RenderFn; color?: string }
+export type FolderSettings = {
+  collapsed?: boolean
+  render?: RenderFn
+  color?: string
+  /** works similar to css order property */
+  order?: number
+}
 
 export type NumberSettings = { min?: number; max?: number; step?: number }
 
@@ -139,6 +145,7 @@ type GenericSchemaItemOptions = {
   render?: RenderFn
   label?: string | JSX.Element
   hint?: string
+  order?: number
 }
 
 type OnHandlerContext = DataInput & { get(path: string): any }

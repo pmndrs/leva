@@ -34,6 +34,7 @@ export function parseOptions(
         label: key,
         optional: false,
         disabled: false,
+        order: 0,
         ...mergedOptions,
       },
     }
@@ -53,8 +54,19 @@ export function parseOptions(
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, onChange, onEditStart, onEditEnd, transient, ...inputWithType } =
-    _input
+  const {
+    render,
+    label,
+    optional,
+    order = 0,
+    disabled,
+    hint,
+    onChange,
+    onEditStart,
+    onEditEnd,
+    transient,
+    ...inputWithType
+  } = _input
 
   const commonOptions = {
     render,
@@ -66,6 +78,7 @@ export function parseOptions(
     onEditEnd,
     disabled,
     optional,
+    order,
     ...mergedOptions,
   }
 
@@ -169,11 +182,20 @@ export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue
      * the value to be notified (ie there wouldn't be a new render)
      */
 
+    /**
+     * @update 22.10.22 this warning is a bit cumbersome when dragging something, which can
+     * result in the same value being set. Commenting out.
+     */
+
+    return value
+
+    /*
     throw new ValueError(
       `The value \`${newValue}\` did not result in a value update, which remained the same: \`${value}\`.
         You can ignore this warning if this is the intended behavior.`,
       value
     )
+    */
   }
   return sanitizedNewValue
 }

@@ -66,9 +66,10 @@ export const Store = function (this: StoreType) {
         hiddenFolders.every((p) => path.indexOf(p) === -1) &&
         // if its render functions doesn't exists or returns true
         (!data[path].render || data[path].render!(this.get))
-      )
+      ) {
         // then the input path is visible
         visiblePaths.push(path)
+      }
     })
 
     return visiblePaths

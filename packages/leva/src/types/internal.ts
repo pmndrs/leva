@@ -47,6 +47,7 @@ export type CommonOptions = {
   label: string | JSX.Element
   hint?: string
   render?: RenderFn
+  order: number
 }
 
 export type DataInputOptions = CommonOptions & {
