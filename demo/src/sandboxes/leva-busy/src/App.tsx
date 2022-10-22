@@ -14,34 +14,38 @@ function frame() {
 }
 
 const ExtraControls = () => {
-  const data = useControls('folder.subfolder', {
-    // eslint-disable-next-line no-console
-    'Hello Button': button((get) => console.log('hello', get('folder.subfolder.deep nested.pos2d'))),
-    'deep nested': folder(
-      {
-        pos2d: { value: { x: 3, y: 4 }, lock: true },
-        pos2dArr: [100, 200],
-        pos3d: {
-          value: {
-            x: 0.3,
-            y: 0.1,
-            z: 0.5,
+  const data = useControls(
+    'folder.subfolder',
+    {
+      // eslint-disable-next-line no-console
+      'Hello Button': button((get) => console.log('hello', get('folder.subfolder.deep nested.pos2d'))),
+      'deep nested': folder(
+        {
+          pos2d: { value: { x: 3, y: 4 }, lock: true },
+          pos2dArr: [100, 200],
+          pos3d: {
+            value: {
+              x: 0.3,
+              y: 0.1,
+              z: 0.5,
+            },
+            label: <DimensionsIcon />,
           },
-          label: <DimensionsIcon />,
+          pos3dArr: [Math.PI / 2, 20, 4],
         },
-        pos3dArr: [Math.PI / 2, 20, 4],
-      },
-      { color: 'red' }
-    ),
-  })
+        { color: 'red' }
+      ),
+    },
+    { order: -1 }
+  )
   return <pre>{JSON.stringify(data, null, '  ')}</pre>
 }
 
 function Controls() {
   const data = useControls({
-    range: { value: 0, min: -10, max: 10 },
     dimension: '4px',
-    string: 'something',
+    string: { value: 'something', optional: true, order: -2 },
+    range: { value: 0, min: -10, max: 10, order: -3 },
     image: { image: undefined },
     select: { options: ['x', 'y', ['x', 'y']] },
     interval: { min: -100, max: 100, value: [-10, 10] },
@@ -60,7 +64,7 @@ function Controls() {
         boolean: true,
         spring: { tension: 100, friction: 30 },
       },
-      { color: 'yellow' }
+      { color: 'yellow', order: -1 }
     ),
   })
   return <pre>{JSON.stringify(data, null, '  ')}</pre>

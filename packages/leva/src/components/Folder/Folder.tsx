@@ -1,13 +1,13 @@
-import React, { useState, useRef, useLayoutEffect } from 'react'
-import { FolderTitle } from './FolderTitle'
-import { StyledFolder, StyledWrapper, StyledContent } from './StyledFolder'
-import { isInput } from '../Leva/tree'
+import React, { useLayoutEffect, useRef, useState } from 'react'
+import { useStoreContext } from '../../context'
+import { useToggle } from '../../hooks'
+import { useTh } from '../../styles'
+import type { Tree } from '../../types'
 import { join } from '../../utils'
 import { Control } from '../Control'
-import { useToggle } from '../../hooks'
-import { useStoreContext } from '../../context'
-import type { Tree } from '../../types'
-import { useTh } from '../../styles'
+import { isInput } from '../Leva/tree'
+import { FolderTitle } from './FolderTitle'
+import { StyledContent, StyledFolder, StyledWrapper } from './StyledFolder'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 
@@ -47,10 +47,18 @@ type TreeWrapperProps = {
 export const TreeWrapper = React.memo(
   ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
+    const store = useStoreContext()
+
+    const getOrder = ([key, o]: [key: string, o: any]) => {
+      const order = isInput(o) ? store.getInput(o.path)?.order : store.getFolderSettings(join(parent, key)).order
+      return order || 0
+    }
+
+    const entries = Object.entries(tree).sort((a, b) => getOrder(a) - getOrder(b))
     return (
       <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat}>
         <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
-          {Object.entries(tree).map(([key, value]) =>
+          {entries.map(([key, value]) =>
             isInput(value) ? (
               // @ts-expect-error
               <Control key={value.path} valueKey={value.valueKey} path={value.path} />

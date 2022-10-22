@@ -254,3 +254,19 @@ export const OnEditStartOnEditEndMultiPanel = () => {
 }
 
 OnEditStartOnEditEndMultiPanel.storyName = 'onEdit Multiple Callbacks'
+
+export const Ordered = () => {
+  const values = useControls(() => ({
+    last: folder({ firstVal: 0 }, { order: 1, collapsed: true }),
+    middle: folder({ secondVal: 0 }, { order: -1, collapsed: true }),
+    first: { value: 'ola', order: -2 },
+  }))
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+Ordered.storyName = 'ordered folders and inputs'
