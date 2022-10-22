@@ -145,6 +145,7 @@ type GenericSchemaItemOptions = {
   render?: RenderFn
   label?: string | JSX.Element
   hint?: string
+  order?: number
 }
 
 type OnHandlerContext = DataInput & { get(path: string): any }

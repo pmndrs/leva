@@ -47,6 +47,7 @@ export type CommonOptions = {
   label: string | JSX.Element
   hint?: string
   render?: RenderFn
+  order: number
 }
 
 export type DataInputOptions = CommonOptions & {
@@ -64,8 +65,6 @@ export type DataInput = {
   __refCount: number
   type: string
   value: unknown
-  /** works similar to css order property */
-  order?: number
   /**
    * Whether the onChange handler invocation is caused internally via the panel or  externally via a set call.
    */

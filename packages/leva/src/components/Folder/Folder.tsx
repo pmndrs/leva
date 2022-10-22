@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useStoreContext } from '../../context'
 import { useToggle } from '../../hooks'
 import { useTh } from '../../styles'
-import type { StoreType, Tree } from '../../types'
+import type { Tree } from '../../types'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { isInput } from '../Leva/tree'
@@ -48,7 +48,13 @@ export const TreeWrapper = React.memo(
   ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     const store = useStoreContext()
-    const entries = Object.entries(tree).sort((a, b) => getOrder(a[0], store) - getOrder(b[0], store))
+
+    const getOrder = ([key, o]: [key: string, o: any]) => {
+      const order = isInput(o) ? store.getInput(o.path)?.order : store.getFolderSettings(join(parent, key)).order
+      return order || 0
+    }
+
+    const entries = Object.entries(tree).sort((a, b) => getOrder(a) - getOrder(b))
     return (
       <StyledWrapper ref={wrapperRef} isRoot={isRoot} fill={fill} flat={flat}>
         <StyledContent ref={contentRef} isRoot={isRoot} toggled={toggled}>
@@ -65,12 +71,3 @@ export const TreeWrapper = React.memo(
     )
   }
 )
-
-function getOrder(path: string, store: StoreType) {
-  const order =
-    {
-      ...store.getFolderSettings(path),
-      ...store.getInput(path)?.settings,
-    }?.order || 0
-  return order
-}

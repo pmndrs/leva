@@ -34,6 +34,7 @@ export function parseOptions(
         label: key,
         optional: false,
         disabled: false,
+        order: 0,
         ...mergedOptions,
       },
     }
@@ -53,8 +54,19 @@ export function parseOptions(
   }
 
   // parse generic options from input object
-  const { render, label, optional, disabled, hint, onChange, onEditStart, onEditEnd, transient, ...inputWithType } =
-    _input
+  const {
+    render,
+    label,
+    optional,
+    order = 0,
+    disabled,
+    hint,
+    onChange,
+    onEditStart,
+    onEditEnd,
+    transient,
+    ...inputWithType
+  } = _input
 
   const commonOptions = {
     render,
@@ -66,6 +78,7 @@ export function parseOptions(
     onEditEnd,
     disabled,
     optional,
+    order,
     ...mergedOptions,
   }
 
