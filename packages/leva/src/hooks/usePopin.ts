@@ -10,17 +10,18 @@ export function usePopin(margin = 3) {
   const hide = useCallback(() => setShow(false), [])
 
   useLayoutEffect(() => {
+    if (!popinRef.current || !wrapperRef.current) return
     if (shown) {
-      const { bottom, top, left } = popinRef.current!.getBoundingClientRect()
-      const { height } = wrapperRef.current!.getBoundingClientRect()
+      const { bottom, top, left } = popinRef.current.getBoundingClientRect()
+      const { height } = wrapperRef.current.getBoundingClientRect()
       const direction = bottom + height > window.innerHeight - 40 ? 'up' : 'down'
 
-      wrapperRef.current!.style.position = 'fixed'
-      wrapperRef.current!.style.zIndex = '10000'
-      wrapperRef.current!.style.left = left + 'px'
+      wrapperRef.current.style.position = 'fixed'
+      wrapperRef.current.style.zIndex = '10000'
+      wrapperRef.current.style.left = left + 'px'
 
-      if (direction === 'down') wrapperRef.current!.style.top = bottom + margin + 'px'
-      else wrapperRef.current!.style.bottom = window.innerHeight - top + margin + 'px'
+      if (direction === 'down') wrapperRef.current.style.top = bottom + margin + 'px'
+      else wrapperRef.current.style.bottom = window.innerHeight - top + margin + 'px'
     }
   }, [margin, shown])
 

@@ -112,8 +112,9 @@ export const OnChangeAndSet: Story = () => {
 
   useDrag(
     ({ first, last, offset: [x, y] }) => {
-      if (first) circleRef.current!.style.cursor = 'grabbing'
-      if (last) circleRef.current!.style.removeProperty('cursor')
+      if (!circleRef.current) return
+      if (first) circleRef.current.style.cursor = 'grabbing'
+      if (last) circleRef.current.style.removeProperty('cursor')
       set({ position: { x, y } })
     },
     { target: circleRef }

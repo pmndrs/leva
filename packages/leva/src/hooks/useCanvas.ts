@@ -12,8 +12,9 @@ export function useCanvas2d(
   // have a fixed width
   useEffect(() => {
     const handleCanvas = debounce(() => {
-      canvas.current!.width = canvas.current!.offsetWidth * window.devicePixelRatio
-      canvas.current!.height = canvas.current!.offsetHeight * window.devicePixelRatio
+      if (!canvas.current) return
+      canvas.current.width = canvas.current.offsetWidth * window.devicePixelRatio
+      canvas.current.height = canvas.current.offsetHeight * window.devicePixelRatio
       fn(canvas.current, ctx.current)
     }, 250)
     window.addEventListener('resize', handleCanvas)
@@ -25,7 +26,8 @@ export function useCanvas2d(
   }, [fn])
 
   useEffect(() => {
-    ctx.current = canvas.current!.getContext('2d')
+    if (!canvas.current) return
+    ctx.current = canvas.current.getContext('2d')
   }, [])
 
   return [canvas, ctx]

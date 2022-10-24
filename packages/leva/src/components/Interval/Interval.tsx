@@ -22,8 +22,9 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
+    if (!ref.current) return
     if (first) {
-      const { width, left } = ref.current!.getBoundingClientRect()
+      const { width, left } = ref.current.getBoundingClientRect()
       rangeWidth.current = width - parseFloat(scrubberWidth)
 
       const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current

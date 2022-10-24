@@ -76,8 +76,9 @@ export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps
   const canvasBounds = useRef<DOMRect>()
 
   const bind = useMove(({ xy: [x], first }) => {
+    if (!canvas.current) return
     if (first) {
-      canvasBounds.current = canvas.current!.getBoundingClientRect()
+      canvasBounds.current = canvas.current.getBoundingClientRect()
     }
     const { left, top, width, height } = canvasBounds.current!
     const [minX, maxX] = boundsX
