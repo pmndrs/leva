@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.33
+
+### Patch Changes
+
+- 01eb144: fix(Leva): disable dev warning
+
 ## 0.9.32
 
 ### Patch Changes
