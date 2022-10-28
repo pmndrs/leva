@@ -1,5 +1,5 @@
 import { Components, useInputContext } from 'leva/plugin'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import DatePicker, { CalendarContainer } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { DateCalendarContainerProps, DateInputProps, DateProps } from './date-types'
@@ -22,8 +22,10 @@ const DateInput = forwardRef<HTMLInputElement, Partial<DateInputProps>>(({ value
 export function Date() {
   const { label, value, onUpdate, settings } = useInputContext<DateProps>()
 
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <Row input>
+    <Row input style={{ height: isOpen ? 300 : 'auto' }}>
       <Label>{label}</Label>
       <InputContainer>
         <DatePicker
@@ -32,6 +34,8 @@ export function Date() {
           dateFormat={settings.inputFormat}
           calendarContainer={DateCalendarContainer}
           customInput={<DateInput />}
+          onCalendarOpen={() => setIsOpen(true)}
+          onCalendarClose={() => setIsOpen(false)}
         />
       </InputContainer>
     </Row>
