@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import { levaStore } from '../../store'
 import { LevaRoot, LevaRootProps } from './LevaRoot'
+import { render } from '../../utils/react'
 
 let rootInitialized = false
 let rootEl: HTMLElement | null = null
@@ -40,7 +40,7 @@ export function useRenderRoot(isGlobalPanel: boolean) {
           document.getElementById('leva__root') || Object.assign(document.createElement('div'), { id: 'leva__root' })
         if (document.body) {
           document.body.appendChild(rootEl)
-          ReactDOM.render(<Leva isRoot />, rootEl)
+          render(<Leva isRoot />, rootEl)
         }
       }
       rootInitialized = true
