@@ -25,3 +25,18 @@ CustomLocale.args = { date: new Date(), locale: 'en-US' }
 
 export const CustomInputFormat = Template.bind({})
 CustomInputFormat.args = { date: new Date(), inputFormat: 'yyyy-MM-dd' }
+
+export const WithOtherFields = () => {
+  const { birthday, ...values } = useControls({
+    text: 'text',
+    birthday: date({ date: new Date() }),
+    number: 0,
+  })
+  return (
+    <div>
+      {birthday.formattedDate}
+      <br />
+      {JSON.stringify(values)}
+    </div>
+  )
+}

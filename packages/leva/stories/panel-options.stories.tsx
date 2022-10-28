@@ -100,3 +100,14 @@ export const NeverHide: Story<any> = () => {
     </div>
   )
 }
+
+export const ReallyLongPanel = () => {
+  useControls({
+    ...Object.fromEntries(
+      Array(50)
+        .fill(0)
+        .map((_, i) => [i, i])
+    ),
+  })
+  return <></>
+}
