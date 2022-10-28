@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.34
+
+### Patch Changes
+
+- 8b21a5c: fix: scrolling long panels
+
 ## 0.9.33
 
 ### Patch Changes
