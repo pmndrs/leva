@@ -16,7 +16,7 @@ See an [example in Storybook](https://leva.pmnd.rs/?path=/story/misc-controlled-
 
 ## onChange
 
-`onChange` callback in the schema is called for all changes to the value. Values with `onChange` will no longer cause React to rerender (unless passing an additional `transient` flag set to `true`, see below), so you can use it to efficiently update frequently changing values.
+`onChange` callback in the schema is called for all changes to the value. Values with `onChange` will no longer cause React to rerender (unless passing an additional `transient` flag set to `false`, see below), so you can use it to efficiently update frequently changing values.
 
 ```jsx
 const divRef = React.useRef(null)
