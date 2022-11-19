@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -114,13 +115,15 @@ export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...p
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <LevaCore
-        store={store}
-        {...props}
-        toggled={computedToggled}
-        setToggle={computedSetToggle}
-        rootClass={themeContext.className}
-      />
+      <RadixTooltip.Provider>
+        <LevaCore
+          store={store}
+          {...props}
+          toggled={computedToggled}
+          setToggle={computedSetToggle}
+          rootClass={themeContext.className}
+        />
+      </RadixTooltip.Provider>
     </ThemeContext.Provider>
   )
 }
