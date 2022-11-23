@@ -33,7 +33,7 @@ importers:
       eslint-plugin-jsx-a11y: ^6.5.1
       eslint-plugin-react: ^7.28.0
       eslint-plugin-react-hooks: ^4.3.0
-      husky: ^7.0.4
+      husky: ^8.0.2
       pnpm: ^7.17.0
       postinstall-postinstall: ^2.1.0
       prettier: ^2.8.0
@@ -75,7 +75,7 @@ importers:
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.28.0
       eslint-plugin-react: 7.31.11_eslint@8.28.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.28.0
-      husky: 7.0.4
+      husky: 8.0.2
       pnpm: 7.17.0
       postinstall-postinstall: 2.1.0
       prettier: 2.8.0
@@ -10536,10 +10536,10 @@ packages:
     engines: { node: '>=10.17.0' }
     dev: true
 
-  /husky/7.0.4:
+  /husky/8.0.2:
     resolution:
-      { integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ== }
-    engines: { node: '>=12' }
+      { integrity: sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg== }
+    engines: { node: '>=14' }
     hasBin: true
     dev: true
 
