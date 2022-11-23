@@ -1,5 +1,7 @@
 {
-  "extends": "react-app",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["react-app"],
   "rules": {
     "no-console": "warn"
   }
