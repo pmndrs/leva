@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Label, Portal, Overlay, Row } from '../UI'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, DropzoneOptions } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
@@ -10,15 +10,15 @@ export function ImageComponent() {
   const { label, value, onUpdate, disabled } = useInputContext<ImageProps>()
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
 
-  const onDrop = useCallback(
-    (acceptedFiles) => {
+  const onDrop: DropzoneOptions['onDrop'] = useCallback(
+    (acceptedFiles: File[]) => {
       if (acceptedFiles.length) onUpdate(acceptedFiles[0])
     },
     [onUpdate]
   )
 
   const clear = useCallback(
-    (e) => {
+    (e: React.MouseEvent) => {
       e.stopPropagation()
       onUpdate(undefined)
     },
