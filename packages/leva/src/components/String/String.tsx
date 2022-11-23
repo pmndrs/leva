@@ -1,4 +1,3 @@
-import React from 'react'
 import { ValueInput, ValueInputProps } from '../ValueInput'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'

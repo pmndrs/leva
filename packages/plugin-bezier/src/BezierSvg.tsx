@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
 import { mergeRefs, useDrag } from 'leva/plugin'
 import { useRange, useInvertedRange } from './bezier-utils'

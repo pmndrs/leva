@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { RangeWrapper, Range, Scrubber, Indicator } from './StyledRange'
 import { sanitizeStep } from './number-plugin'
 import { useDrag } from '../../hooks'

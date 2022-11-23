@@ -27,7 +27,7 @@ export function ImageComponent() {
 
   const { getRootProps, getInputProps, isDragAccept } = useDropzone({
     maxFiles: 1,
-    accept: 'image/*',
+    accept: { 'image/*': [] },
     onDrop,
     disabled,
   })

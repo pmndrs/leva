@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { RgbaColorPicker, RgbaColor, RgbColorPicker } from 'react-colorful'
 import { colord } from 'colord'
 import { PickerWrapper, ColorPreview, PickerContainer } from './StyledColor'

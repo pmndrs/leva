@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, Route } from 'wouter'
 import { createStitches } from '@stitches/react'
 

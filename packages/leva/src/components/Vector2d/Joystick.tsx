@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
+import { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
 import { useDrag } from '../../hooks'
 import { clamp, multiplyStep } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'

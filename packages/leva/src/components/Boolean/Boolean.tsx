@@ -1,4 +1,3 @@
-import React from 'react'
 import { useInputContext } from '../../context'
 import { Label, Row } from '../UI'
 import { StyledInputWrapper } from './StyledBoolean'

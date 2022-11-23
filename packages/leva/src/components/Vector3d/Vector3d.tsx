@@ -1,4 +1,3 @@
-import React from 'react'
 import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'

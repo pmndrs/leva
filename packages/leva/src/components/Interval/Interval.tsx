@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'

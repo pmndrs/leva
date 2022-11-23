@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useInputContext, useInputSetters, Components } from 'leva/plugin'
 import { BezierSvg } from './BezierSvg'
 import type { BezierProps } from './bezier-types'

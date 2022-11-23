@@ -1,4 +1,3 @@
-import React from 'react'
 import { Row, Label } from '../UI'
 import { StyledButtonGroup } from './StyledButtonGroup'
 import { StyledButtonGroupButton } from './StyledButtonGroupButton'
