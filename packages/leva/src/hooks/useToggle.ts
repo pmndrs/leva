@@ -3,6 +3,7 @@ import { useRef, useEffect, useLayoutEffect } from 'react'
 export function useToggle(toggled: boolean) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
+  const initialToggled = useRef(toggled)
   const firstRender = useRef(true)
 
   // this should be fine for SSR since the store is set in useEffect and
@@ -19,8 +20,8 @@ export function useToggle(toggled: boolean) {
   useEffect(() => {
     // prevents first animation
     if (firstRender.current) {
-      firstRender.current = false
-      return
+      if (initialToggled.current !== toggled) firstRender.current = false
+      else return
     }
 
     let timeout: number
@@ -38,6 +39,7 @@ export function useToggle(toggled: boolean) {
 
     const { height } = contentRef.current!.getBoundingClientRect()
     ref.style.height = height + 'px'
+
     if (!toggled) {
       ref.style.overflow = 'hidden'
       timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
