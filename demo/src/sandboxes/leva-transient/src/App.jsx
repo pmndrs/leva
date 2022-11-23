@@ -1,11 +1,11 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useControls } from 'leva'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
 import * as THREE from 'three'
 
-const torusknot = new THREE.TorusKnotBufferGeometry(3, 0.8, 256, 16)
+const torusknot = new THREE.TorusKnotGeometry(3, 0.8, 256, 16)
 
 const Mesh = () => {
   const matRef = useRef()

@@ -35,6 +35,6 @@
     "zustand": "^3.6.9"
   },
   "devDependencies": {
-    "@welldone-software/why-did-you-render": "^6.2.3"
+    "@welldone-software/why-did-you-render": "^7.0.1"
   }
 }
