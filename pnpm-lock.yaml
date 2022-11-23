@@ -160,9 +160,9 @@ importers:
 
   packages/plugin-plot:
     specifiers:
-      mathjs: ^10.1.1
+      mathjs: ^11.4.0
     dependencies:
-      mathjs: 10.6.4
+      mathjs: 11.4.0
 
   packages/plugin-spring:
     specifiers:
@@ -11293,9 +11293,9 @@ packages:
       { integrity: sha512-8z4efJYk43E0upd0NbVXwgSTQs6cT3T06etieCMEg7dRbzCbxUCK/GHlX8mhHRDcp+OLlHkPKsvqQTCvsRl2cg== }
     dev: true
 
-  /mathjs/10.6.4:
+  /mathjs/11.4.0:
     resolution:
-      { integrity: sha512-omQyvRE1jIy+3k2qsqkWASOcd45aZguXZDckr3HtnTYyXk5+2xpVfC3kATgbO2Srjxlqww3TVdhD0oUdZ/hiFA== }
+      { integrity: sha512-SGhKmXnwsPWrLHvhzm849RJPMjFTgLgVwKtv2L+IY7XHB4nuzyZLfV2eHT1HtBZ4yzsLHgcqak47zMmxuEIIUg== }
     engines: { node: '>= 14' }
     hasBin: true
     dependencies:
@@ -11307,7 +11307,7 @@ packages:
       javascript-natural-sort: 0.7.1
       seedrandom: 3.0.5
       tiny-emitter: 2.1.0
-      typed-function: 2.1.0
+      typed-function: 4.1.0
     dev: false
 
   /md5.js/1.3.5:
@@ -15344,10 +15344,10 @@ packages:
       mime-types: 2.1.35
     dev: true
 
-  /typed-function/2.1.0:
+  /typed-function/4.1.0:
     resolution:
-      { integrity: sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ== }
-    engines: { node: '>= 10' }
+      { integrity: sha512-DGwUl6cioBW5gw2L+6SMupGwH/kZOqivy17E4nsh1JI9fKF87orMmlQx3KISQPmg3sfnOUGlwVkroosvgddrlg== }
+    engines: { node: '>= 14' }
     dev: false
 
   /typedarray-to-buffer/3.1.5:
