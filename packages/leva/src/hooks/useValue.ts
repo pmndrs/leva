@@ -10,7 +10,7 @@ export const useValues = <T extends string>(paths: T[]) => {
   const value = store.useStore(
     ({ data }) =>
       paths.reduce((acc, path) => {
-        // @ts-expect-error
+        // @ts-expect-error data[path].value is correct since we know it's an object
         if (data[path] && 'value' in data[path]) return Object.assign(acc, { [path]: data[path].value })
         return acc
       }, {} as { [key in T]: any }),

@@ -25,7 +25,7 @@ export function usePanelSettingsContext() {
 }
 
 type LevaStoreProviderProps = {
-  children: React.ReactChild | React.ReactChild[] | React.ReactChildren
+  children: React.ReactNode
   store: StoreType
 }
 

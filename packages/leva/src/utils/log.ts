@@ -46,7 +46,5 @@ function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: P
   console[fn]('LEVA: ' + message, ...rest)
 }
 
-// @ts-expect-error
 export const warn = _log.bind(null, 'warn')
-// @ts-expect-error
 export const log = _log.bind(null, 'log')

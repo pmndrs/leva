@@ -1,4 +1,3 @@
-import React from 'react'
 import { styled } from '../../styles'
 import { Vector } from '../Vector'
 import { Label, Row } from '../UI'
