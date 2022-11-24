@@ -9,7 +9,9 @@ const torusknot = new THREE.TorusKnotGeometry(3, 0.8, 256, 16)
 
 const Mesh = () => {
   const matRef = useRef()
-  useControls({ color: { value: 'indianred', onChange: (v) => matRef.current && matRef.current.color.set(v) } })
+  useControls({
+    color: { value: 'indianred', onChange: (v) => matRef.current && matRef.current.color.set(v) },
+  })
   return (
     <mesh geometry={torusknot}>
       <meshPhysicalMaterial ref={matRef} attach="material" flatShading />

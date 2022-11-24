@@ -135,11 +135,11 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const onEditStartPaths: Record<string, (...args: any) => void> = {}
     const onEditEndPaths: Record<string, (...args: any) => void> = {}
 
-    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
+    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, reactive }) => {
       allPaths.push(path)
       if (!!onChange) {
         onChangePaths[path] = onChange
-        if (!transient) {
+        if (reactive) {
           renderPaths.push(path)
         }
       } else {

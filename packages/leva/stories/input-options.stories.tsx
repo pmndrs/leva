@@ -83,7 +83,7 @@ function A() {
       value: '#f00',
       onChange: (v) => {
         divRef.current!.style.color = v
-        divRef.current!.innerText = `Transient color is ${v}`
+        divRef.current!.innerText = `Non reactive color is ${v}`
       },
     },
   })
@@ -121,7 +121,7 @@ export const OnChange = () => {
 
 OnChange.storyName = 'onChange'
 
-export const OnChangeWithRender = ({ transient }) => {
+export const OnChangeWithRender = ({ reactive }) => {
   const ref = React.useRef<HTMLPreElement | null>(null)
   const data = useControls({
     color: {
@@ -129,21 +129,21 @@ export const OnChangeWithRender = ({ transient }) => {
       onChange: (value) => {
         ref.current!.innerHTML = value
       },
-      transient,
+      reactive,
     },
   })
 
   return (
     <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-      <pre>color data (should{transient ? ' not' : null} update)</pre>
+      <pre>color data (should{reactive ? null : 'not'} update)</pre>
       <pre>{JSON.stringify(data, null, '  ')}</pre>
-      <pre>Transient Value (should also update)</pre>
+      <pre>Non reactive Value (should also update)</pre>
       <pre ref={ref}></pre>
     </div>
   )
 }
 OnChangeWithRender.args = {
-  transient: false,
+  reactive: true,
 }
 
 OnChangeWithRender.storyName = 'onChange With Render'

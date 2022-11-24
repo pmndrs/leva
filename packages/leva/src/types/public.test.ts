@@ -15,11 +15,11 @@ expectType<{ a: number }>(useControls({ a: 3 }))
 // b shouldn't be returned by useControls when transient
 expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {} } }))
 // b shouldn't be returned by useControls when transient
-expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {}, transient: true } }))
+expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {}, reactive: false } }))
 // @ts-expect-error transient shouldn't be usable alone
-expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', transient: true } }))
+expectType<{ a: number }>(useControls({ a: 3, b: { value: '#fff', reactive: false } }))
 // b should be returned when transient is false
-expectType<{ a: number; b: string }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {}, transient: false } }))
+expectType<{ a: number; b: string }>(useControls({ a: 3, b: { value: '#fff', onChange: () => {}, reactive: true } }))
 expectType<[{ a: number }, (value: { a?: number }) => void, (path: 'a') => number]>(useControls(() => ({ a: 3 })))
 expectType<
   [

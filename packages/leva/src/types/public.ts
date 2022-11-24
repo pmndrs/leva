@@ -161,17 +161,17 @@ export type OnChangeHandler = (value: any, path: string, context: OnChangeHandle
 
 type TransientOnChangeSchemaItemOptions = {
   onChange: OnChangeHandler
-  transient?: true
+  reactive?: false
 }
 
 type NonTransientOnChangeSchemaItemOptions = {
   onChange: OnChangeHandler
-  transient: false
+  reactive: true
 }
 
 type NoOnChangeSchemaItemOptions = {
   onChange?: undefined
-  transient?: undefined
+  reactive?: undefined
 }
 
 type OnChangeSchemaItemOptions =

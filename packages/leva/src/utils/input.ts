@@ -1,3 +1,4 @@
+import { warn, LevaErrors } from '../utils/log'
 import { dequal } from 'dequal/lite'
 import { isObject, isEmptyObject } from '.'
 import { getValueType, normalize, sanitize } from '../plugin'
@@ -64,16 +65,21 @@ export function parseOptions(
     onChange,
     onEditStart,
     onEditEnd,
+    reactive,
     transient,
     ...inputWithType
   } = _input
+
+  if (transient !== undefined) {
+    warn(LevaErrors.TRANSIENT_DEPRECATED, key)
+  }
 
   const commonOptions = {
     render,
     key,
     label: label ?? key,
     hint,
-    transient: transient ?? !!onChange,
+    reactive: reactive ?? !onChange,
     onEditStart,
     onEditEnd,
     disabled,

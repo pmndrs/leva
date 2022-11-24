@@ -10,7 +10,7 @@ export type MappedPaths = Record<
     onChange?: OnChangeHandler
     onEditStart?: (...args: any) => void
     onEditEnd?: (...args: any) => void
-    transient: boolean
+    reactive: boolean
   }
 >
 
