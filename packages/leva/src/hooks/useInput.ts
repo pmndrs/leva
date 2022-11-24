@@ -37,8 +37,10 @@ export function useInput(path: string): [
   const emitOnEditEnd = useCallback(() => store.emitOnEditEnd(path), [path, store])
 
   useEffect(() => {
-    setState(getInputAtPath(store.getData(), path))
-    const unsub = store.useStore.subscribe((s) => getInputAtPath(s.data, path), setState, { equalityFn: shallow })
+    const unsub = store.useStore.subscribe((s) => getInputAtPath(s.data, path), setState, {
+      fireImmediately: true,
+      equalityFn: shallow,
+    })
     return () => unsub()
   }, [store, path])
 

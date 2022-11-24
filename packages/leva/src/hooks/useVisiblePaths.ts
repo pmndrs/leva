@@ -9,8 +9,10 @@ export const useVisiblePaths = (store: StoreType) => {
   const [paths, setPaths] = useState(store.getVisiblePaths())
 
   useEffect(() => {
-    setPaths(store.getVisiblePaths())
-    const unsub = store.useStore.subscribe(store.getVisiblePaths, setPaths, { equalityFn: shallow })
+    const unsub = store.useStore.subscribe(store.getVisiblePaths, setPaths, {
+      fireImmediately: true,
+      equalityFn: shallow,
+    })
     return () => unsub()
   }, [store])
 
