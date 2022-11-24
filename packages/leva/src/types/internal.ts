@@ -1,5 +1,4 @@
-import type { UseBoundStore } from 'zustand'
-import { StoreApiWithSubscribeWithSelector } from 'zustand/middleware'
+import type { UseBoundStore, StoreApi } from 'zustand'
 import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
@@ -16,9 +15,24 @@ export type MappedPaths = Record<
 >
 
 type Dispose = () => void
+type Write<T, U> = Omit<T, keyof U> & U
+
+type StoreSubscribeWithSelector<T> = {
+  subscribe: {
+    (listener: (selectedState: T, previousSelectedState: T) => void): () => void
+    <U>(
+      selector: (state: T) => U,
+      listener: (selectedState: U, previousSelectedState: U) => void,
+      options?: {
+        equalityFn?: (a: U, b: U) => boolean
+        fireImmediately?: boolean
+      }
+    ): () => void
+  }
+}
 
 export type StoreType = {
-  useStore: UseBoundStore<State, StoreApiWithSubscribeWithSelector<State>>
+  useStore: UseBoundStore<Write<StoreApi<State>, StoreSubscribeWithSelector<State>>>
   storeId: string
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void

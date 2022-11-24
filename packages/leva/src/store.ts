@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import create, { SetState, GetState, StoreApi } from 'zustand'
+import create from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths, DataInput } from './types'
@@ -7,14 +7,13 @@ import type { Data, FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
 export const Store = function (this: StoreType) {
-  const store = create(
-    subscribeWithSelector<State, SetState<State>, GetState<State>, StoreApi<State>>(() => ({ data: {} }))
-  )
+  const store = create(subscribeWithSelector<State>(() => ({ data: {} })))
 
   const eventEmitter = createEventEmitter()
 
   this.storeId = getUid()
   this.useStore = store
+
   /**
    * Folders will hold the folder settings for the pane.
    * @note possibly make this reactive
