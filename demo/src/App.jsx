@@ -4,6 +4,7 @@ import { createStitches } from '@stitches/react'
 import styles from './styles.module.css'
 
 import Minimal from './sandboxes/leva-minimal/src/App'
+import React18 from './sandboxes/leva-react18/src/App'
 import PluginSpring from './sandboxes/leva-plugin-spring/src/App'
 import PluginPlot from './sandboxes/leva-plugin-plot/src/App'
 import PluginBezier from './sandboxes/leva-plugin-bezier/src/App'
@@ -33,6 +34,7 @@ const Page = styled('div', {
 
 const links = {
   'leva-minimal': Minimal,
+  'leva-react18': React18,
   'leva-busy': Busy,
   'leva-advanced-panels': AdvancedPanels,
   'leva-scroll': Scroll,
