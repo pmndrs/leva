@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import create from 'zustand'
+import create from 'zustand/vanilla'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths, DataInput } from './types'
@@ -12,7 +12,7 @@ export const Store = function (this: StoreType) {
   const eventEmitter = createEventEmitter()
 
   this.storeId = getUid()
-  this.useStore = store
+  this.dataStore = store
 
   /**
    * Folders will hold the folder settings for the pane.

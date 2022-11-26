@@ -202,11 +202,11 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
       onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
-      const unsub = store.useStore.subscribe(
+      const unsub = store.dataStore.subscribe(
         (s) => {
           const input = s.data[path]
           // @ts-ignore
-          const value = input.disabled ? undefined : input.value
+          const value = input.disabled ? undefined : input.stateValue
           return [value, input]
         },
         ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),

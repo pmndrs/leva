@@ -1,4 +1,5 @@
 import shallow from 'zustand/shallow'
+import { useZustand } from 'use-zustand'
 import { getValuesForPaths } from '../utils/data'
 import type { Data, StoreType } from '../types'
 
@@ -8,10 +9,14 @@ import type { Data, StoreType } from '../types'
  * @param initialData
  */
 export function useValuesForPath(store: StoreType, paths: string[], initialData: Data) {
-  const valuesForPath = store.useStore((s) => {
-    const data = { ...initialData, ...s.data }
-    return getValuesForPaths(data, paths)
-  }, shallow)
+  const valuesForPath = useZustand(
+    store.dataStore,
+    (s) => {
+      const data = { ...initialData, ...s.data }
+      return getValuesForPaths(data, paths)
+    },
+    shallow
+  )
 
   return valuesForPath
 }

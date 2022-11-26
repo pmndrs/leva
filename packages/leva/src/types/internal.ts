@@ -1,4 +1,4 @@
-import type { UseBoundStore, StoreApi } from 'zustand'
+import type { StoreApi } from 'zustand'
 import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
@@ -32,7 +32,7 @@ type StoreSubscribeWithSelector<T> = {
 }
 
 export type StoreType = {
-  useStore: UseBoundStore<Write<StoreApi<State>, StoreSubscribeWithSelector<State>>>
+  dataStore: Write<StoreApi<State>, StoreSubscribeWithSelector<State>>
   storeId: string
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
