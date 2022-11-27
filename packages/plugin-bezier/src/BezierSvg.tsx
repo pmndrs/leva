@@ -36,15 +36,16 @@ export function BezierSvg({
   const bounds = useRef<DOMRect>()
 
   const bind = useDrag(({ xy: [x, y], event, first, memo }) => {
+    if (!bounds.current || !svgRef.current) return memo
     if (first) {
-      bounds.current = svgRef.current!.getBoundingClientRect()
-      memo = [handleLeft.current, handleRight.current].indexOf(event!.target as any)
+      bounds.current = svgRef.current.getBoundingClientRect()
+      memo = [handleLeft.current, handleRight.current].indexOf(event.target as any)
       if (memo < 0) memo = x - bounds.current.left < width / 2 ? 0 : 1
       memo *= 2
     }
 
-    const relX = x - bounds.current!.left
-    const relY = y - bounds.current!.top
+    const relX = x - bounds.current.left
+    const relY = y - bounds.current.top
 
     onUpdate((v: BezierType) => {
       const newV = [...v]

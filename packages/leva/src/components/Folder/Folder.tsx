@@ -23,8 +23,9 @@ const Folder = ({ name, path, tree }: FolderProps) => {
   const textColor = useTh('colors', 'folderTextColor')
 
   useLayoutEffect(() => {
-    folderRef.current!.style.setProperty('--leva-colors-folderWidgetColor', color || widgetColor)
-    folderRef.current!.style.setProperty('--leva-colors-folderTextColor', color || textColor)
+    if (!folderRef.current) return
+    folderRef.current.style.setProperty('--leva-colors-folderWidgetColor', color || widgetColor)
+    folderRef.current.style.setProperty('--leva-colors-folderTextColor', color || textColor)
   }, [color, widgetColor, textColor])
 
   return (

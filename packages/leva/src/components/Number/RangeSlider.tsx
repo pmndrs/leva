@@ -13,9 +13,10 @@ export function RangeSlider({ value, min, max, onDrag, step, initialValue }: Ran
   const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo }) => {
+    if (!ref.current) return memo
     if (first) {
       // rangeWidth is the width of the slider el minus the width of the scrubber el itself
-      const { width, left } = ref.current!.getBoundingClientRect()
+      const { width, left } = ref.current.getBoundingClientRect()
       rangeWidth.current = width - parseFloat(scrubberWidth)
 
       const targetIsScrub = event?.target === scrubberRef.current
