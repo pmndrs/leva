@@ -9,6 +9,7 @@ import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { LevaStore } from '../../types'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 export type LevaRootProps = {
   /**
@@ -114,13 +115,15 @@ export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...p
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <LevaCore
-        store={store}
-        {...props}
-        toggled={computedToggled}
-        setToggle={computedSetToggle}
-        rootClass={themeContext.className}
-      />
+      <TooltipProvider>
+        <LevaCore
+          store={store}
+          {...props}
+          toggled={computedToggled}
+          setToggle={computedSetToggle}
+          rootClass={themeContext.className}
+        />
+      </TooltipProvider>
     </ThemeContext.Provider>
   )
 }

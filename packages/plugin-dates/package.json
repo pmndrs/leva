@@ -21,6 +21,6 @@
     "react-datepicker": "^4.8.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "4.4.2"
+    "@types/react-datepicker": "4.8.0"
   }
 }
