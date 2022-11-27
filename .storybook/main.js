@@ -15,6 +15,9 @@ module.exports = {
     // Return the altered config
     return config
   },
+  features: {
+    postcss: false
+  },
   typescript: {
     reactDocgen: 'none', // temp fix for TS 4.3.2
   },
