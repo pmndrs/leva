@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react'
 import type { FullTheme } from './styles'
-import type { StoreType, PanelSettingsType, InputContextProps } from './types'
+import type { PanelSettingsType, InputContextProps, LevaStore } from './types'
 
 export const InputContext = createContext({})
 
@@ -12,7 +12,7 @@ type ThemeContextProps = { theme: FullTheme; className: string }
 
 export const ThemeContext = createContext<ThemeContextProps | null>(null)
 
-export const StoreContext = createContext<StoreType | null>(null)
+export const StoreContext = createContext<LevaStore | null>(null)
 
 export const PanelSettingsContext = createContext<PanelSettingsType | null>(null)
 
@@ -26,7 +26,7 @@ export function usePanelSettingsContext() {
 
 type LevaStoreProviderProps = {
   children: React.ReactNode
-  store: StoreType
+  store: LevaStore
 }
 
 export function LevaStoreProvider({ children, store }: LevaStoreProviderProps) {

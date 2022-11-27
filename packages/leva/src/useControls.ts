@@ -3,10 +3,10 @@ import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
-import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
+import type { FolderSettings, Schema, SchemaToValues, OnChangeHandler, LevaStore } from './types'
 import shallow from 'zustand/shallow'
 
-type HookSettings = { store?: StoreType }
+type HookSettings = { store?: LevaStore }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [

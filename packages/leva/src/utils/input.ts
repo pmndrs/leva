@@ -10,7 +10,7 @@ import {
   InputOptions,
   PanelInputOptions,
   SpecialInputs,
-  StoreType,
+  LevaStore,
 } from '../types'
 
 type ParsedOptions = {
@@ -144,7 +144,7 @@ export function normalizeInput(_input: any, key: string, path: string, data: Dat
   return false
 }
 
-export function updateInput(input: DataInput, newValue: any, path: string, store: StoreType, fromPanel: boolean) {
+export function updateInput(input: DataInput, newValue: any, path: string, store: LevaStore, fromPanel: boolean) {
   const { value, type, settings } = input
   input.value = sanitizeValue({ type, value, settings }, newValue, path, store)
   input.fromPanel = fromPanel
@@ -165,7 +165,7 @@ const ValueError = function (this: ValueErrorType, message: string, value: any, 
   this.error = error
 } as unknown as { new (message: string, value: any, error?: unknown): ValueErrorType }
 
-export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any, path: string, store: StoreType) {
+export function sanitizeValue({ type, value, settings }: SanitizeProps, newValue: any, path: string, store: LevaStore) {
   // sanitizeValue can accept a new value in the form of fn(oldValue). This
   // allows inputs to run onUpdate(oldValue => oldValue + 1). However, this
   // issue makes the case of a SELECT input with functions as options:

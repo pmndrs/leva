@@ -8,7 +8,7 @@ import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
-import { StoreType } from '../../types'
+import { LevaStore } from '../../types'
 
 export type LevaRootProps = {
   /**
@@ -18,7 +18,7 @@ export type LevaRootProps = {
   /**
    * The store to be used by the panel
    */
-  store?: StoreType | null
+  store?: LevaStore | null
   /**
    * If true, won't display the panel
    */
@@ -126,7 +126,7 @@ export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...p
 }
 
 type LevaCoreProps = Omit<LevaRootProps, 'theme' | 'hidden' | 'collapsed'> & {
-  store: StoreType
+  store: LevaStore
   rootClass: string
   toggled: boolean
   setToggle: React.Dispatch<React.SetStateAction<boolean>>

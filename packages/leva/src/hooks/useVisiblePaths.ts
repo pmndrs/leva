@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import shallow from 'zustand/shallow'
-import type { StoreType } from '../types'
+import type { LevaStore } from '../types'
 
 /**
  * Hook used by the root component to get all visible inputs.
  */
-export const useVisiblePaths = (store: StoreType) => {
+export const useVisiblePaths = (store: LevaStore) => {
   const [paths, setPaths] = useState(store.getVisiblePaths())
 
   useEffect(() => {

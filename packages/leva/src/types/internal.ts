@@ -1,7 +1,8 @@
-import type { StoreApi } from 'zustand'
-import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
+import { Store } from '../store'
+import type { SpecialInput, RenderFn, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }
+export type LevaStore = Store
 
 export type MappedPaths = Record<
   string,
@@ -13,48 +14,6 @@ export type MappedPaths = Record<
     reactive: boolean
   }
 >
-
-type Dispose = () => void
-type Write<T, U> = Omit<T, keyof U> & U
-
-type StoreSubscribeWithSelector<T> = {
-  subscribe: {
-    (listener: (selectedState: T, previousSelectedState: T) => void): () => void
-    <U>(
-      selector: (state: T) => U,
-      listener: (selectedState: U, previousSelectedState: U) => void,
-      options?: {
-        equalityFn?: (a: U, b: U) => boolean
-        fireImmediately?: boolean
-      }
-    ): () => void
-  }
-}
-
-export type StoreType = {
-  dataStore: Write<StoreApi<State>, StoreSubscribeWithSelector<State>>
-  storeId: string
-  orderPaths: (paths: string[]) => string[]
-  setOrderedPaths: (newPaths: string[]) => void
-  disposePaths: (paths: string[]) => void
-  dispose: () => void
-  getVisiblePaths: () => string[]
-  getFolderSettings: (path: string) => FolderSettings
-  getData: () => Data
-  addData: (newData: Data, override: boolean) => void
-  setValueAtPath: (path: string, value: any, fromPanel: boolean) => void
-  setSettingsAtPath: (path: string, settings: any) => void
-  disableInputAtPath: (path: string, flag: boolean) => void
-  // TODO possibly better type this
-  set: (values: Record<string, any>, fromPanel: boolean) => void
-  getInput: (path: string) => DataInput | undefined
-  get: (path: string) => any
-  getDataFromSchema: (schema: any) => [Data, MappedPaths]
-  subscribeToEditStart: (path: string, listener: (value: any) => void) => Dispose
-  subscribeToEditEnd: (path: string, listener: (value: any) => void) => Dispose
-  emitOnEditStart: (path: string) => void
-  emitOnEditEnd: (path: string) => void
-}
 
 export type CommonOptions = {
   key: string
