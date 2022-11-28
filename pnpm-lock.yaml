@@ -21,6 +21,7 @@ importers:
       '@types/react-dom': ^18.0.9
       '@typescript-eslint/eslint-plugin': ^5.44.0
       '@typescript-eslint/parser': ^5.44.0
+      '@welldone-software/why-did-you-render': ^7.0.1
       all-contributors-cli: ^6.20.0
       eslint: ^8.8.0
       eslint-config-react-app: ^7.0.0
@@ -58,6 +59,7 @@ importers:
       '@types/react-dom': 18.0.9
       '@typescript-eslint/eslint-plugin': 5.44.0_fnsv2sbzcckq65bwfk7a5xwslu
       '@typescript-eslint/parser': 5.44.0_hsf322ms6xhhd4b5ne6lb74y4a
+      '@welldone-software/why-did-you-render': 7.0.1_react@18.2.0
       all-contributors-cli: 6.24.0
       eslint: 8.28.0
       eslint-config-react-app: 7.0.1_hsf322ms6xhhd4b5ne6lb74y4a
@@ -120,7 +122,6 @@ importers:
       '@radix-ui/react-tooltip': ^1.0.2
       '@stitches/react': ^1.2.8
       '@use-gesture/react': ^10.2.5
-      '@welldone-software/why-did-you-render': ^7.0.1
       colord: ^2.9.2
       dequal: ^2.0.2
       merge-value: ^1.0.0
@@ -142,8 +143,6 @@ importers:
       use-zustand: 0.0.1
       v8n: 1.5.1
       zustand: 4.1.4
-    devDependencies:
-      '@welldone-software/why-did-you-render': 7.0.1
 
   packages/plugin-bezier:
     specifiers:
@@ -5323,13 +5322,14 @@ packages:
       { integrity: sha512-niT+Prh3Aff8Uf1MVBVUsaNjFj9rJAKDXuoHIKiQbB+6IUP/3J3JIhBNyZ7lDhytvXxw6ppgnwKZdDJ08UMj4Q== }
     dev: false
 
-  /@welldone-software/why-did-you-render/7.0.1:
+  /@welldone-software/why-did-you-render/7.0.1_react@18.2.0:
     resolution:
       { integrity: sha512-Qe/8Xxa2G+LMdI6VoazescPzjjkHYduCDa8aHOJR50e9Bgs8ihkfMBY+ev7B4oc3N59Zm547Sgjf8h5y0FOyoA== }
     peerDependencies:
       react: ^16 || ^17 || ^18
     dependencies:
       lodash: 4.17.21
+      react: 18.2.0
     dev: true
 
   /@xobotyi/scrollbar-width/1.9.5:
