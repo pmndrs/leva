@@ -13,9 +13,7 @@
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
     "@use-gesture/react": "^10.0.0",
-    "leva": ">=0.9.34",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "leva": ">=0.9.34"
   },
   "dependencies": {
     "react-datepicker": "^4.8.0"
