@@ -8,6 +8,11 @@ export function useCanvas2d(
   const ctx = useRef<CanvasRenderingContext2D | null>(null)
   const hasFired = useRef(false)
 
+  useEffect(() => {
+    if (!canvas.current) return
+    ctx.current = canvas.current.getContext('2d')
+  }, [])
+
   // TODO this is pretty much useless in 90% of cases since panels
   // have a fixed width
   useEffect(() => {
@@ -28,11 +33,6 @@ export function useCanvas2d(
     }
     return () => window.removeEventListener('resize', onResize)
   }, [fn])
-
-  useEffect(() => {
-    if (!canvas.current) return
-    ctx.current = canvas.current.getContext('2d')
-  }, [])
 
   return [canvas, ctx]
 }
