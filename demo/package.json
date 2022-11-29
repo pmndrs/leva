@@ -8,17 +8,17 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@radix-ui/react-icons": "^1.0.3",
-    "@react-three/drei": "^9.44.1",
+    "@radix-ui/react-icons": "^1.1.1",
+    "@react-three/drei": "^9.45.1",
     "@react-three/fiber": "^8.9.1",
     "@stitches/react": "^1.2.8",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-use": "^17.3.2",
+    "react-use": "^17.4.0",
     "three": "^0.146.0",
-    "wouter": "^2.7.5"
+    "wouter": "^2.9.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.25",
