@@ -1,5 +1,4 @@
 import shallow from 'zustand/shallow'
-import { useZustand } from 'use-zustand'
 import { useStoreContext } from '../context'
 
 export const useValue = (path: string) => {
@@ -8,8 +7,7 @@ export const useValue = (path: string) => {
 
 export const useValues = <T extends string>(paths: T[]) => {
   const store = useStoreContext()
-  const value = useZustand(
-    store.dataStore,
+  const value = store.dataStore(
     ({ data }) =>
       paths.reduce((acc, path) => {
         // @ts-expect-error data[path].value is correct since we know it's an object

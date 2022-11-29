@@ -1,7 +1,7 @@
 import shallow from 'zustand/shallow'
-import { useZustand } from 'use-zustand'
 import { getValuesForPaths } from '../utils/data'
 import type { Data, LevaStore } from '../types'
+// import { useZustand } from './useZustand'
 
 /**
  * Hook that returns the values from the zustand store for the given paths.
@@ -9,14 +9,10 @@ import type { Data, LevaStore } from '../types'
  * @param initialData
  */
 export function useValuesForPath(store: LevaStore, paths: string[], initialData: Data) {
-  const valuesForPath = useZustand(
-    store.dataStore,
-    (s) => {
-      const data = { ...initialData, ...s.data }
-      return getValuesForPaths(data, paths)
-    },
-    shallow
-  )
+  const valuesForPath = store.dataStore((s) => {
+    const data = { ...initialData, ...s.data }
+    return getValuesForPaths(data, paths)
+  }, shallow)
 
   return valuesForPath
 }

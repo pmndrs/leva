@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import create from 'zustand/vanilla'
+import create from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths, DataInput, Data, FolderSettings, State } from './types'
