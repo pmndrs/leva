@@ -3,10 +3,7 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["react-app"],
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "import/no-relative-packages": "error"
   }
-  // "plugins": ["cypress"],
-  // "env": {
-  //   "cypress/globals": true
-  // }
 }
