@@ -11,18 +11,22 @@ export function useCanvas2d(
   // TODO this is pretty much useless in 90% of cases since panels
   // have a fixed width
   useEffect(() => {
-    const handleCanvas = debounce(() => {
-      if (!canvas.current) return
-      canvas.current.width = canvas.current.offsetWidth * window.devicePixelRatio
-      canvas.current.height = canvas.current.offsetHeight * window.devicePixelRatio
-      fn(canvas.current, ctx.current)
-    }, 250)
-    window.addEventListener('resize', handleCanvas)
+    const onResize = debounce(
+      () => {
+        if (!canvas.current) return
+        canvas.current.width = canvas.current.offsetWidth * window.devicePixelRatio
+        canvas.current.height = canvas.current.offsetHeight * window.devicePixelRatio
+        fn(canvas.current, ctx.current)
+      },
+      250,
+      true
+    )
+    window.addEventListener('resize', onResize)
     if (!hasFired.current) {
-      handleCanvas()
+      onResize()
       hasFired.current = true
     }
-    return () => window.removeEventListener('resize', handleCanvas)
+    return () => window.removeEventListener('resize', onResize)
   }, [fn])
 
   useEffect(() => {
