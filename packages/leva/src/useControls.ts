@@ -180,7 +180,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     [store, mappedPaths]
   )
 
-  const get = useCallback((path: string) => store.get(mappedPaths[path].path), [store, mappedPaths])
+  const get = useCallback((path: string) => store.get(mappedPaths[path]?.path), [store, mappedPaths])
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
