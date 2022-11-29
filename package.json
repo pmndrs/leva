@@ -50,10 +50,6 @@
     "url": "https://github.com/pmndrs/leva.git"
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
