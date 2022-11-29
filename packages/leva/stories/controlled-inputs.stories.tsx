@@ -30,6 +30,8 @@ export const ExternalUpdatesWithSet: Story = () => {
   )
 }
 
+ExternalUpdatesWithSet.storyName = 'External updates with set'
+
 export const ExternalUpdatesWithGetAndSet: Story = () => {
   const [{ counter }, set, get] = useControls(() => ({ counter: 0 }))
   const [{ counter: counter2, counterB }, set2, get2] = useControls('folder', () => ({
@@ -75,6 +77,8 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
   )
 }
 
+ExternalUpdatesWithGetAndSet.storyName = 'External updates with get and set'
+
 const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((props, ref) => {
   return (
     <div
@@ -94,8 +98,6 @@ const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((prop
     />
   )
 })
-
-ExternalUpdatesWithSet.storyName = 'External Updates With set'
 
 export const OnChangeAndSet: Story = () => {
   const circleRef = useRef<HTMLDivElement>(null)
@@ -128,4 +130,4 @@ export const OnChangeAndSet: Story = () => {
   )
 }
 
-OnChangeAndSet.storyName = 'onChange And set'
+OnChangeAndSet.storyName = 'onChange and set'
