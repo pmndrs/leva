@@ -12,7 +12,8 @@
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
-    "leva": ">=0.9.18"
+    "leva": ">=0.9.18",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "@react-spring/web": "^9.5.5"

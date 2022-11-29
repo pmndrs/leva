@@ -5,5 +5,14 @@
   "rules": {
     "no-console": "warn",
     "import/no-relative-packages": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["packages/**"],
+      "excludedFiles": "*.stories.*",
+      "rules": {
+        "import/no-extraneous-dependencies": ["error"]
+      }
+    }
+  ]
 }
