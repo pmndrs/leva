@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "react-use-measure": "^2.1.1"
+  },
+  "devDependencies": {
+    "leva": ">=0.9.15"
   }
 }

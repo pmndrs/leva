@@ -1,8 +1,10 @@
 import { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from '@react-spring/web'
 import { useCanvas2d, useDrag, useInputContext, debounce, colord, useTh } from 'leva/plugin'
+
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
+
 import type { SpringProps } from './spring-types'
 
 const SpringPreviewAnimated = a(SpringPreview)

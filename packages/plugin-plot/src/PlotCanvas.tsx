@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { useMove } from '@use-gesture/react'
 import { useCanvas2d, useTh, range, invertedRange, debounce, useTransform, clamp, Components } from 'leva/plugin'
+
 import { Wrapper, Canvas, Dot, ToolTip } from './StyledPlot'
+
 import type { InternalPlot, InternalPlotSettings } from './plot-types'
 
 type PlotCanvasProps = { value: InternalPlot; settings: InternalPlotSettings }

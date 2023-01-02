@@ -3,6 +3,21 @@
   "plugins": ["@typescript-eslint"],
   "extends": ["react-app"],
   "rules": {
+    "import/no-duplicates": "error",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["type"]
+      }
+    ],
     "no-console": "warn",
     "import/no-relative-packages": "error"
   },

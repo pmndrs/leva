@@ -20,6 +20,7 @@
     "react-datepicker": "^4.8.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "4.8.0"
+    "@types/react-datepicker": "4.8.0",
+    "leva": ">=0.9.15"
   }
 }

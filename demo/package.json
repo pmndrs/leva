@@ -8,23 +8,27 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@leva-ui/plugin-bezier": "*",
+    "@leva-ui/plugin-dates": "*",
+    "@leva-ui/plugin-plot": "*",
+    "@leva-ui/plugin-spring": "*",
     "@radix-ui/react-icons": "^1.1.1",
     "@react-three/drei": "^9.45.1",
     "@react-three/fiber": "^8.9.1",
     "@stitches/react": "^1.2.8",
+    "@use-gesture/react": "^10.2.23",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-use": "^17.4.0",
     "three": "^0.146.0",
     "wouter": "^2.9.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.25",
-    "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.9.3",
-    "vite": "^3.2.4"
+    "vite": "^4.0.3",
+    "vite-tsconfig-paths": "^4.0.3"
   }
 }
