@@ -1,6 +1,7 @@
 import { Vector2dComponent } from './Vector2d'
 import { getVectorPlugin } from '../Vector'
 import { createInternalPlugin } from '../../plugin'
+
 import type { InternalVector2dSettings } from './vector2d-types'
 
 export * from './Vector2d'

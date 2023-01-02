@@ -1,9 +1,11 @@
 import React, { useCallback } from 'react'
-import { Label, Portal, Overlay, Row } from '../UI'
 import { useDropzone, DropzoneOptions } from 'react-dropzone'
+
+import { Label, Portal, Overlay, Row } from '../UI'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { useInputContext } from '../../context'
 import { usePopin } from '../../hooks'
+
 import type { ImageProps } from './image-types'
 
 export function ImageComponent() {

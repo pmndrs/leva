@@ -1,4 +1,5 @@
 import { SpecialInputs } from '../types'
+
 import type { FolderInput, Schema, SchemaToValues, FolderSettings } from '../types'
 
 const defaultSettings = { collapsed: false }

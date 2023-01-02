@@ -1,9 +1,11 @@
 import React, { useRef, useCallback } from 'react'
+
 import { useInputContext } from '../../context'
 import { styled } from '../../styles'
 import { useInputSetters } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
+
 import type { CoordinateProps, VectorProps } from './vector-types'
 
 function Coordinate<T extends Record<string, number>>({

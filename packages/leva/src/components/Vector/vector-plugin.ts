@@ -1,7 +1,9 @@
 import v8n from 'v8n'
+
 import { mapArrayToKeys } from '../../utils'
 import { sanitize } from '../Number/number-plugin'
 import { normalizeKeyedNumberSettings } from './vector-utils'
+
 import type { InputWithSettings } from '../../types'
 import type {
   VectorType,

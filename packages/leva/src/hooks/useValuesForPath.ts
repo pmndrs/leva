@@ -1,5 +1,7 @@
 import shallow from 'zustand/shallow'
+
 import { getValuesForPaths } from '../utils/data'
+
 import type { Data, LevaStore } from '../types'
 // import { useZustand } from './useZustand'
 

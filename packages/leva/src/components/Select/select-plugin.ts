@@ -1,4 +1,5 @@
 import v8n from 'v8n'
+
 import type { SelectInput, InternalSelectSettings } from './select-types'
 
 // the options attribute is either an key value object or an array

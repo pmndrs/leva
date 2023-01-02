@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef, forwardRef, useImperativeHandle } from 'react'
 import { colord } from 'colord'
+
 import { Canvas } from './StyledMonitor'
 import { Label, Row } from '../UI'
 import { range } from '../../utils'
 import { useCanvas2d } from '../../hooks'
 import { useTh } from '../../styles'
+
 import type { MonitorInput } from '../../types'
 
 type MonitorProps = { label: string } & Omit<MonitorInput, 'type'>

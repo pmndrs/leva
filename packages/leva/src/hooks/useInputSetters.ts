@@ -1,5 +1,6 @@
 import { dequal } from 'dequal/lite'
 import { useState, useCallback, useEffect, useRef } from 'react'
+
 import { format } from '../plugin'
 
 type Props<V, Settings> = {

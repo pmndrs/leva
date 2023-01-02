@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useEffect } from 'react'
+
 import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'

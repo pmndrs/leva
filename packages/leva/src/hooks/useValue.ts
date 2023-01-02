@@ -1,4 +1,5 @@
 import shallow from 'zustand/shallow'
+
 import { useStoreContext } from '../context'
 
 export const useValue = (path: string) => {

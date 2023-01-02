@@ -1,4 +1,5 @@
 import { getStep, clamp } from '../../utils'
+
 import type { InternalNumberSettings, NumberInput } from './number-types'
 
 export const schema = (v: any) => {

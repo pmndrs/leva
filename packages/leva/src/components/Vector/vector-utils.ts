@@ -1,4 +1,5 @@
 import { normalize } from '../Number/number-plugin'
+
 import type { NumberSettings } from '../../types'
 import type { InternalNumberSettings } from '../Number/number-types'
 

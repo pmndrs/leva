@@ -1,8 +1,9 @@
 /**
  * Types exposed through the public API
  */
-import type { VectorSettings } from '../components/Vector/vector-types'
 import { LevaStore, Data, DataInput } from './internal'
+
+import type { VectorSettings } from '../components/Vector/vector-types'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
 export type RenderFn = (get: (key: string) => any) => boolean

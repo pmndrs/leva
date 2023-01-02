@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
@@ -6,6 +7,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
+
 import type { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
 
 const Container = styled('div', {

@@ -1,6 +1,8 @@
 import { Data, LevaStore } from 'packages/leva/src/types'
 import * as math from 'mathjs'
+
 import { parseExpression } from './plot-utils'
+
 import type { PlotInput, InternalPlot, InternalPlotSettings } from './plot-types'
 
 export const sanitize = (

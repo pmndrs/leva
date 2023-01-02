@@ -1,8 +1,9 @@
 import { ValueInput, ValueInputProps } from '../ValueInput'
 import { Label, Row } from '../UI'
 import { useInputContext } from '../../context'
-import type { StringProps } from './string-types'
 import { styled } from '../../styles'
+
+import type { StringProps } from './string-types'
 
 type BaseStringProps = Pick<StringProps, 'displayValue' | 'onUpdate' | 'onChange'> &
   Omit<ValueInputProps, 'value'> & { editable?: boolean }

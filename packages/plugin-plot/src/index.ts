@@ -1,4 +1,5 @@
 import { createPlugin } from 'leva/plugin'
+
 import { Plot } from './Plot'
 import { normalize, sanitize, format } from './plot-plugin'
 

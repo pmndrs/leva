@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+
 import { debounce } from '../utils'
 
 export function useCanvas2d(

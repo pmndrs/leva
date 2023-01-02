@@ -1,4 +1,5 @@
 import { normalizeVector, sanitizeVector } from 'leva/plugin'
+
 import type { InternalSpring, InternalSpringSettings, SpringInput } from './spring-types'
 
 const defaultTensionSettings = { min: 1, step: 1 }

@@ -1,9 +1,11 @@
 import { useRef } from 'react'
+
 import { RangeWrapper, Range, Scrubber, Indicator } from './StyledRange'
 import { sanitizeStep } from './number-plugin'
 import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useTh } from '../../styles'
+
 import type { RangeSliderProps } from './number-types'
 
 export function RangeSlider({ value, min, max, onDrag, step, initialValue }: RangeSliderProps) {

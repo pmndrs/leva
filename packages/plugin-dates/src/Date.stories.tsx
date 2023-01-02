@@ -2,9 +2,9 @@ import { Story, Meta } from '@storybook/react'
 
 import Reset from '../../leva/stories/components/decorator-reset'
 import { useControls } from '../../leva/src'
+import { DateInput } from './date-types'
 
 import { date } from './index'
-import { DateInput } from './date-types'
 
 export default {
   title: 'Plugins/Dates',

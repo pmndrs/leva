@@ -1,6 +1,8 @@
 import { useCallback, useState, useEffect } from 'react'
 import shallow from 'zustand/shallow'
+
 import { useStoreContext } from '../context'
+
 import type { Data, DataItem } from '../types'
 
 const getInputAtPath = (data: Data, path: string) => {

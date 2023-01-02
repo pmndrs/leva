@@ -1,4 +1,5 @@
 import { Store } from '../store'
+
 import type { SpecialInput, RenderFn, Plugin, OnChangeHandler } from './public'
 
 export type State = { data: Data }

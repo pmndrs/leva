@@ -1,13 +1,15 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
+
 import { useStoreContext } from '../../context'
 import { useToggle } from '../../hooks'
 import { useTh } from '../../styles'
-import type { Tree } from '../../types'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { isInput } from '../Leva/tree'
 import { FolderTitle } from './FolderTitle'
 import { StyledContent, StyledFolder, StyledWrapper } from './StyledFolder'
+
+import type { Tree } from '../../types'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 

@@ -1,5 +1,7 @@
 import { normalizeVector, sanitizeVector } from 'leva/plugin'
+
 import { bezier } from './bezier-utils'
+
 import type { BezierArray, BezierInput, InternalBezierSettings, InternalBezier, BuiltInKeys } from './bezier-types'
 
 const abscissasSettings = { min: 0, max: 1, step: 0.01 }

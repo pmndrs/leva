@@ -1,15 +1,14 @@
 import React, { useMemo, useState } from 'react'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
-
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
-
 import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
 import { LevaStore } from '../../types'
-import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 export type LevaRootProps = {
   /**

@@ -1,8 +1,10 @@
 import { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
 import { mergeRefs, useDrag } from 'leva/plugin'
+
 import { useRange, useInvertedRange } from './bezier-utils'
 import { Svg } from './StyledBezier'
+
 import type { Bezier as BezierType, BezierProps } from './bezier-types'
 
 const HANDLE_RADIUS = 4

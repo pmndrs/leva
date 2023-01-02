@@ -1,6 +1,6 @@
-import { warn, LevaErrors } from '../utils/log'
 import { dequal } from 'dequal/lite'
-import { isObject, isEmptyObject } from '.'
+
+import { warn, LevaErrors } from '../utils/log'
 import { getValueType, normalize, sanitize } from '../plugin'
 import {
   CommonOptions,
@@ -12,6 +12,8 @@ import {
   SpecialInputs,
   LevaStore,
 } from '../types'
+
+import { isObject, isEmptyObject } from '.'
 
 type ParsedOptions = {
   type?: string
