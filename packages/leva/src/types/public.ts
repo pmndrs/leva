@@ -195,7 +195,7 @@ type SchemaItemWithOptions =
   | (SpecialInput & GenericSchemaItemOptions)
   | FolderInput<unknown>
 
-export type Schema = Record<string, SchemaItemWithOptions>
+export type Schema<K = string> = Record<K, SchemaItemWithOptions>
 
 /**
  * Dummy type used internally to flag non compatible input types.
