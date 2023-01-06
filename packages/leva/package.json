@@ -17,6 +17,12 @@
       "plugin/index.ts"
     ]
   },
+  "files": [
+    "*.md",
+    "dist",
+    "src",
+    "plugins"
+  ],
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
