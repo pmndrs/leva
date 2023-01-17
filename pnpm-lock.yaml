@@ -140,7 +140,7 @@ importers:
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dropzone: ^14.2.3
       v8n: ^1.5.1
-      zustand: ^4.1.4
+      zustand: ^4.3.2
     dependencies:
       '@radix-ui/react-portal': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-tooltip': 1.0.3_biqbaboplfbrettd7655fr4n2y

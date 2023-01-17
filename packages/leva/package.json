@@ -32,6 +32,6 @@
     "react-colorful": "^5.6.1",
     "react-dropzone": "^14.2.3",
     "v8n": "^1.5.1",
-    "zustand": "^4.1.4"
+    "zustand": "^4.3.2"
   }
 }
