@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback, useState, useRef } from 'react'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 import { levaStore } from './store'
 import { folder } from './helpers'

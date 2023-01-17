@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 import type { LevaStore } from '../types'
 

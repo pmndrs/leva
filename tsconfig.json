@@ -1,11 +1,10 @@
 {
   "include": ["packages/*/src/**/*"],
   "compilerOptions": {
-    "declaration": false,
     "target": "ES5",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "noEmit": true,
     "downlevelIteration": true,
     "strict": true,
