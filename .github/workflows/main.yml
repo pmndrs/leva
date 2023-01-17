@@ -9,9 +9,6 @@ on:
       - '.changeset/**'
       - '.github/workflows/release.yml'
 
-env:
-  HUSKY: 0 # Bypass husky commit hook for CI
-
 jobs:
   version:
     timeout-minutes: 8
