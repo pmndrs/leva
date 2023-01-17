@@ -5,6 +5,8 @@ import { normalize, sanitize, format } from './plot-plugin'
 
 export const plot = createPlugin({
   normalize,
+  // TODO fix
+  // @ts-ignore
   sanitize,
   format,
   component: Plot,

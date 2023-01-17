@@ -1,6 +1,7 @@
 {
   "include": ["packages/*/src/**/*"],
   "compilerOptions": {
+    "declaration": false,
     "target": "ES5",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
