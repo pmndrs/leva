@@ -1,5 +1,6 @@
 import { dequal } from 'dequal/lite'
 import { useState, useCallback, useEffect, useRef } from 'react'
+
 import { format } from '../plugin'
 
 type Props<V, Settings> = {
@@ -15,7 +16,7 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
   const previousValueRef = useRef(value)
   const settingsRef = useRef(settings)
   settingsRef.current = settings
-  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settingsRef.current)), [type])
+  const setFormat = useCallback((v: any) => setDisplayValue(format(type, v, settingsRef.current)), [type])
 
   const onUpdate = useCallback(
     (updatedValue: any) => {

@@ -1,13 +1,15 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import { memo, useLayoutEffect, useRef, useState } from 'react'
+
 import { useStoreContext } from '../../context'
 import { useToggle } from '../../hooks'
 import { useTh } from '../../styles'
-import type { Tree } from '../../types'
 import { join } from '../../utils'
 import { Control } from '../Control'
 import { isInput } from '../Leva/tree'
 import { FolderTitle } from './FolderTitle'
 import { StyledContent, StyledFolder, StyledWrapper } from './StyledFolder'
+
+import type { Tree } from '../../types'
 
 type FolderProps = { name: string; path?: string; tree: Tree }
 
@@ -23,8 +25,9 @@ const Folder = ({ name, path, tree }: FolderProps) => {
   const textColor = useTh('colors', 'folderTextColor')
 
   useLayoutEffect(() => {
-    folderRef.current!.style.setProperty('--leva-colors-folderWidgetColor', color || widgetColor)
-    folderRef.current!.style.setProperty('--leva-colors-folderTextColor', color || textColor)
+    if (!folderRef.current) return
+    folderRef.current.style.setProperty('--leva-colors-folderWidgetColor', color || widgetColor)
+    folderRef.current.style.setProperty('--leva-colors-folderTextColor', color || textColor)
   }, [color, widgetColor, textColor])
 
   return (
@@ -44,7 +47,7 @@ type TreeWrapperProps = {
   toggled: boolean
 }
 
-export const TreeWrapper = React.memo(
+export const TreeWrapper = memo(
   ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     const store = useStoreContext()

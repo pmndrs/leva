@@ -1,5 +1,6 @@
-import { pick } from '.'
 import { Data } from '../types'
+
+import { pick } from '.'
 
 /**
  * Takes a data object with { [path.key]: value } and returns { [key]: value }.

@@ -1,6 +1,8 @@
-import { Data, StoreType } from 'packages/leva/src/types'
+import { Data, LevaStore } from 'packages/leva/src/types'
 import * as math from 'mathjs'
+
 import { parseExpression } from './plot-utils'
+
 import type { PlotInput, InternalPlot, InternalPlotSettings } from './plot-types'
 
 export const sanitize = (
@@ -8,7 +10,7 @@ export const sanitize = (
   _settings: InternalPlotSettings,
   _prevValue: math.MathNode,
   _path: string,
-  store: StoreType
+  store: LevaStore
 ) => {
   if (expression === '') throw Error('Empty mathjs expression')
   try {

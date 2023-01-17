@@ -1,4 +1,3 @@
-import React from 'react'
 import Reset from './components/decorator-reset'
 import { Story, Meta } from '@storybook/react'
 

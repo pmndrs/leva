@@ -1,4 +1,3 @@
-import React from 'react'
 import { useStoreContext } from '../..'
 import { ButtonInput } from '../../types'
 import { Row } from '../UI'

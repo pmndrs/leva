@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
+
 import { Label, Row } from '../UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
@@ -6,6 +7,7 @@ import { useDrag } from '../../hooks'
 import { invertedRange, range } from '../../utils'
 import { useInputContext } from '../../context'
 import { styled, useTh } from '../../styles'
+
 import type { IntervalSliderProps, IntervalProps, InternalInterval } from './interval-types'
 
 const Container = styled('div', {
@@ -22,8 +24,9 @@ function IntervalSlider({ value, bounds: [min, max], onDrag, ...settings }: Inte
   const scrubberWidth = useTh('sizes', 'scrubberWidth')
 
   const bind = useDrag(({ event, first, xy: [x], movement: [mx], memo = {} }) => {
+    if (!ref.current) return
     if (first) {
-      const { width, left } = ref.current!.getBoundingClientRect()
+      const { width, left } = ref.current.getBoundingClientRect()
       rangeWidth.current = width - parseFloat(scrubberWidth)
 
       const targetIsScrub = event?.target === minScrubberRef.current || event?.target === maxScrubberRef.current

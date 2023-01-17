@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import * as P from '@radix-ui/react-portal'
+
 import { ThemeContext } from '../../context'
 export { Overlay } from './StyledUI'
 

@@ -1,9 +1,9 @@
-import React from 'react'
+import { useRef } from 'react'
 import { useControls, monitor } from 'leva'
 import { plot } from '@leva-ui/plugin-plot'
 
 export default function App() {
-  const p = React.useRef(performance.now())
+  const p = useRef(performance.now())
   const values = useControls({
     w: 1,
     y1: plot({ expression: 'cos(x*w)', boundsX: [-10, 10] }),

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useControls } from 'leva'
 import { bezier } from '@leva-ui/plugin-bezier'
 import './style.css'

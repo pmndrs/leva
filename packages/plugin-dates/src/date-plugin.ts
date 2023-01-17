@@ -1,5 +1,6 @@
-import type { DateInput, DateSettings, InternalDate, InternalDateSettings } from './date-types'
 import { formatDate } from './date-utils'
+
+import type { DateInput, DateSettings, InternalDate, InternalDateSettings } from './date-types'
 
 const defaultSettings = {
   inputFormat: 'MM/dd/yyyy',

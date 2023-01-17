@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyledTitle } from './StyledFolder'
 import { Chevron } from '../UI'
 

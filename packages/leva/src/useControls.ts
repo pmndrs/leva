@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useCallback, useState, useRef } from 'react'
+import { shallow } from 'zustand/shallow'
+
 import { levaStore } from './store'
 import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
-import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
-import shallow from 'zustand/shallow'
 
-type HookSettings = { store?: StoreType }
+import type { FolderSettings, Schema, SchemaToValues, OnChangeHandler, LevaStore } from './types'
+
+type HookSettings = { store?: LevaStore }
 type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [
@@ -135,11 +137,11 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const onEditStartPaths: Record<string, (...args: any) => void> = {}
     const onEditEndPaths: Record<string, (...args: any) => void> = {}
 
-    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
+    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, reactive }) => {
       allPaths.push(path)
       if (!!onChange) {
         onChangePaths[path] = onChange
-        if (!transient) {
+        if (reactive) {
           renderPaths.push(path)
         }
       } else {
@@ -180,7 +182,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     [store, mappedPaths]
   )
 
-  const get = useCallback((path: string) => store.get(mappedPaths[path].path), [store, mappedPaths])
+  const get = useCallback((path: string) => store.get(mappedPaths[path]?.path), [store, mappedPaths])
 
   useEffect(() => {
     // We initialize the store with the initialData in useEffect.
@@ -202,14 +204,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     const unsubscriptions: (() => void)[] = []
     Object.entries(onChangePaths).forEach(([path, onChange]) => {
       onChange(store.get(path), path, { initial: true, get: store.get, ...store.getInput(path)! })
-      const unsub = store.useStore.subscribe(
+      const unsub = store.dataStore.subscribe(
         (s) => {
           const input = s.data[path]
           // @ts-ignore
           const value = input.disabled ? undefined : input.value
           return [value, input]
         },
-        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        ([value, input]: any) => {
+          onChange(value, path, { initial: false, get: store.get, ...input })
+        },
         { equalityFn: shallow }
       )
       unsubscriptions.push(unsub)

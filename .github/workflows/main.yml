@@ -1,65 +1,61 @@
 name: CI
+
 on:
   push:
+    branches:
+      - main
     paths:
-      - '.github/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'yarn.lock'
-      - '!demo/**'
-      - '!docs/**'
-      - '!**.md'
-      - '!.changeset/**'
-jobs:
-  build:
-    name: Build, lint, and test
-    runs-on: ubuntu-latest
+      - '**/package.json'
+      - '.changeset/**'
+      - '.github/workflows/release.yml'
 
+env:
+  CI: true
+jobs:
+  version:
+    timeout-minutes: 8
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: checkout code repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
 
-      - name: Install dependencies
-        run: yarn --silent
-
-      - name: Check types
-        run: yarn tsc
-
-      - name: Check formatting
-        run: yarn prettier
-
-      - name: Lint files
-        run: yarn lint:full
-
-      - uses: actions/cache@v2
-        name: Setup Yarn build cache
-        id: yarn-build-cache
+      - uses: pnpm/action-setup@v2.0.1
         with:
-          path: packages/**/dist
-          key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-build-
+          version: 7.1.0
+          run_install: true
 
-      - name: Yarn build without cache
-        if: steps.yarn-build-cache.outputs.cache-hit != 'true'
-        run: yarn build
+      - name: Set up NPM credentials
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Cypress run
-        run: yarn ci:test
+      - name: Create versions PR & prepare publish
+        id: changesets
+        uses: changesets/action@master
+        # if: github.ref == 'refs/heads/master'
+        with:
+          version: pnpm ci:version
+          publish: pnpm ci:publish
+          # Messages
+          commit: 'chore(deploy): Release'
+          title: 'chore(deploy): Release'
+        env:
+          # npm publish token required for publishing. Set this in secrets
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # automatically available in actions
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

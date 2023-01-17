@@ -1,4 +1,5 @@
 import v8n from 'v8n'
+
 import { StringInput } from './string-types'
 
 export const schema = (o: any) => v8n().string().test(o)

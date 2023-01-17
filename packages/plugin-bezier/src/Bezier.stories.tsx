@@ -1,6 +1,4 @@
-import React from 'react'
 import { Story, Meta } from '@storybook/react'
-
 import Reset from 'leva/stories/components/decorator-reset'
 import { useControls } from 'leva/src'
 

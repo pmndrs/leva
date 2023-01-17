@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef, useState } from 'react'
 import { Meta } from '@storybook/react'
 import Reset from './components/decorator-reset'
 import { Half2Icon, OpacityIcon, DimensionsIcon } from '@radix-ui/react-icons'
@@ -75,15 +75,15 @@ export const Optional = () => {
 }
 
 function A() {
-  const renderRef = React.useRef(0)
-  const divRef = React.useRef<HTMLDivElement>(null)
+  const renderRef = useRef(0)
+  const divRef = useRef<HTMLDivElement>(null)
   renderRef.current++
   const data = useControls({
     color: {
       value: '#f00',
       onChange: (v) => {
         divRef.current!.style.color = v
-        divRef.current!.innerText = `Transient color is ${v}`
+        divRef.current!.innerText = `Non reactive color is ${v}`
       },
     },
   })
@@ -109,7 +109,7 @@ function B() {
 }
 
 export const OnChange = () => {
-  const [showA, setShowA] = React.useState(true)
+  const [showA, setShowA] = useState(true)
   return (
     <>
       <button onClick={() => setShowA((s) => !s)}>{showA ? 'Hide A' : 'Show A'}</button>
@@ -121,35 +121,35 @@ export const OnChange = () => {
 
 OnChange.storyName = 'onChange'
 
-export const OnChangeWithRender = ({ transient }) => {
-  const ref = React.useRef<HTMLPreElement | null>(null)
+export const OnChangeWithRender = ({ reactive }) => {
+  const ref = useRef<HTMLPreElement | null>(null)
   const data = useControls({
     color: {
       value: '#f00',
       onChange: (value) => {
         ref.current!.innerHTML = value
       },
-      transient,
+      reactive,
     },
   })
 
   return (
     <div style={{ padding: 20, margin: 20, border: '1px solid black' }}>
-      <pre>color data (should{transient ? ' not' : null} update)</pre>
+      <pre>color data (should{reactive ? null : 'not'} update)</pre>
       <pre>{JSON.stringify(data, null, '  ')}</pre>
-      <pre>Transient Value (should also update)</pre>
+      <pre>Non reactive Value (should also update)</pre>
       <pre ref={ref}></pre>
     </div>
   )
 }
 OnChangeWithRender.args = {
-  transient: false,
+  reactive: true,
 }
 
 OnChangeWithRender.storyName = 'onChange With Render'
 
 export const OnChangeFromPanel = () => {
-  const ref = React.useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [, set] = useControls(() => ({
     value: {
       value: 0.1,
@@ -189,8 +189,8 @@ export const EnforceInputType = () => {
 }
 
 export const OnEditStartOnEditEnd = () => {
-  const [isEditing, setIsEditing] = React.useState(0)
-  const [editedInput, setEditedInput] = React.useState<{ value: any; path: string } | null>(null)
+  const [isEditing, setIsEditing] = useState(0)
+  const [editedInput, setEditedInput] = useState<{ value: any; path: string } | null>(null)
 
   const onEditStart = (value, path, context) => {
     setIsEditing((i) => i + 1)
@@ -227,7 +227,7 @@ export const OnEditStartOnEditEnd = () => {
 OnEditStartOnEditEnd.storyName = 'onEditStart And onEditEnd'
 
 function OnEditComponent({ name }) {
-  const [edited, setEdited] = React.useState(false)
+  const [edited, setEdited] = useState(false)
   useControls({
     input: {
       value: 'something',
@@ -243,7 +243,7 @@ function OnEditComponent({ name }) {
 }
 
 export const OnEditStartOnEditEndMultiPanel = () => {
-  const [toggled, toggle] = React.useState(true)
+  const [toggled, toggle] = useState(true)
   return (
     <>
       <button onClick={() => toggle((t) => !t)}>{toggled ? 'Hide' : 'Show'} B</button>

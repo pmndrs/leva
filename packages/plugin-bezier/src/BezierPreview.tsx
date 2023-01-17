@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useMemo, useReducer } from 'react'
+import { memo, useEffect, useState, useMemo, useReducer } from 'react'
 import { debounce } from 'leva/plugin'
+
 import { PreviewSvg } from './StyledBezier'
+
 import type { BezierProps } from './bezier-types'
 
-const DebouncedBezierPreview = React.memo(({ value }: Pick<BezierProps, 'value'>) => {
+const DebouncedBezierPreview = memo(({ value }: Pick<BezierProps, 'value'>) => {
   // use to forceUpdate on click
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
 

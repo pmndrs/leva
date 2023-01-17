@@ -1,5 +1,6 @@
-import { useInputContext } from '../context'
 import { FullGestureState, useDrag as useDragHook, UserDragConfig } from '@use-gesture/react'
+
+import { useInputContext } from '../context'
 
 export function useDrag(handler: (state: FullGestureState<'drag'>) => any, config?: UserDragConfig) {
   const { emitOnEditStart, emitOnEditEnd } = useInputContext()

@@ -1,5 +1,10 @@
 import v8n from 'v8n'
+
 import type { SelectInput, InternalSelectSettings } from './select-types'
+
+const stringify = (value: any) => {
+  return JSON.stringify(value).replace(/"([^"]+)"/g, '$1')
+}
 
 // the options attribute is either an key value object or an array
 export const schema = (_o: any, s: any) =>
@@ -25,7 +30,7 @@ export const normalize = (input: SelectInput) => {
 
   if (Array.isArray(options)) {
     values = options
-    keys = options.map((o) => String(o))
+    keys = options.map((o) => stringify(o))
   } else {
     values = Object.values(options)
     keys = Object.keys(options)
@@ -33,10 +38,10 @@ export const normalize = (input: SelectInput) => {
 
   if (!('value' in input)) value = values[0]
   else if (!values.includes(value)) {
-    keys.unshift(String(value))
+    keys.unshift(stringify(value))
     values.unshift(value)
   }
 
-  if (!Object.values(options).includes(value)) (options as any)[String(value)] = value
+  if (!Object.values(options).includes(value)) (options as any)[stringify(value)] = value
   return { value, settings: { keys, values } }
 }

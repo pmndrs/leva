@@ -1,4 +1,3 @@
-import React from 'react'
 import { date } from '@leva-ui/plugin-dates'
 import { useControls } from 'leva'
 

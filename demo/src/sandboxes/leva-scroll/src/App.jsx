@@ -1,4 +1,3 @@
-import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
 import { Noise } from 'noisejs'
 

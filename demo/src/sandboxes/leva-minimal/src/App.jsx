@@ -1,4 +1,3 @@
-import React from 'react'
 import { useControls, Leva } from 'leva'
 import { Half2Icon } from '@radix-ui/react-icons'
 

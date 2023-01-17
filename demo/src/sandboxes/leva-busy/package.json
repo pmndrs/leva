@@ -6,9 +6,9 @@
     "@radix-ui/react-icons": "^1.0.2",
     "leva": "*",
     "noisejs": "2.1.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
+    "react-scripts": "^5.0.1",
     "react-use": "^17.2.4"
   },
   "scripts": {

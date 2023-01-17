@@ -1,14 +1,15 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import * as React from 'react'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
+
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
-
 import { useDeepMemo, useTransform, useVisiblePaths } from '../../hooks'
-
 import { StyledRoot } from './StyledRoot'
 import { mergeTheme, LevaCustomTheme, globalStyles } from '../../styles'
 import { ThemeContext, StoreContext, PanelSettingsContext } from '../../context'
 import { TitleWithFilter } from './Filter'
-import { StoreType } from '../../types'
+import { LevaStore } from '../../types'
 
 export type LevaRootProps = {
   /**
@@ -18,7 +19,7 @@ export type LevaRootProps = {
   /**
    * The store to be used by the panel
    */
-  store?: StoreType | null
+  store?: LevaStore | null
   /**
    * If true, won't display the panel
    */
@@ -114,19 +115,21 @@ export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...p
 
   return (
     <ThemeContext.Provider value={themeContext}>
-      <LevaCore
-        store={store}
-        {...props}
-        toggled={computedToggled}
-        setToggle={computedSetToggle}
-        rootClass={themeContext.className}
-      />
+      <TooltipProvider>
+        <LevaCore
+          store={store}
+          {...props}
+          toggled={computedToggled}
+          setToggle={computedSetToggle}
+          rootClass={themeContext.className}
+        />
+      </TooltipProvider>
     </ThemeContext.Provider>
   )
 }
 
 type LevaCoreProps = Omit<LevaRootProps, 'theme' | 'hidden' | 'collapsed'> & {
-  store: StoreType
+  store: LevaStore
   rootClass: string
   toggled: boolean
   setToggle: React.Dispatch<React.SetStateAction<boolean>>

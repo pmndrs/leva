@@ -1,4 +1,3 @@
-import React from 'react'
 import { Leva, useControls } from 'leva'
 import { createPlugin, useInputContext, LevaInputProps, Components } from 'leva/plugin'
 

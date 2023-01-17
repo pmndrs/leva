@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import * as React from 'react'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
+
 import { StyledLabel, CopyLabelContainer, StyledOptionalToggle, StyledToolTipContent, ToolTipArrow } from './StyledUI'
 import { useInputContext, usePanelSettingsContext } from '../../context'
 import { LevaErrors, warn } from '../../utils'
@@ -23,7 +25,7 @@ type LabelProps = React.ComponentProps<typeof StyledLabel>
 
 function RawLabel(props: LabelProps) {
   const { id, optional, hint } = useInputContext()
-  const htmlFor = props.htmlFor || (id ? { htmlFor: id } : null)
+  const htmlFor = { htmlFor: props.htmlFor } || (id ? { htmlFor: id } : null)
 
   // If there's no tooltip, and if the label is of type string, then add a title.
   const title = !hint && typeof props.children === 'string' ? { title: props.children } : null

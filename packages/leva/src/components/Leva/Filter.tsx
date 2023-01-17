@@ -1,4 +1,6 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
+import * as React from 'react'
+
 import { useDrag } from '../../hooks'
 import { debounce } from '../../utils'
 import { FolderTitleProps } from '../Folder'

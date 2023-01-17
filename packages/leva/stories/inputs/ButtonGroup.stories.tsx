@@ -1,4 +1,3 @@
-import React from 'react'
 import { Meta } from '@storybook/react'
 import { Half2Icon } from '@radix-ui/react-icons'
 

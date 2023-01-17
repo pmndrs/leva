@@ -8,6 +8,7 @@ export const StyledRoot = styled('div', {
   fontSize: '$root',
   color: '$rootText',
   backgroundColor: '$elevation1',
+  pointerEvents: 'auto',
   variants: {
     fill: {
       false: {

@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 
 export const useRange = () => {
-  return useCallback((v: number, size) => size * v, [])
+  return useCallback((v: number, size: number) => size * v, [])
 }
 
 export const useInvertedRange = () => {
-  return useCallback((v: number, size) => v / size, [])
+  return useCallback((v: number, size: number) => v / size, [])
 }
 
 /**

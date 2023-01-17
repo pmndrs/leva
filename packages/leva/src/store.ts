@@ -1,31 +1,28 @@
 import { useMemo } from 'react'
-import create, { SetState, GetState, StoreApi } from 'zustand'
+import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
+
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
-import { SpecialInputs, MappedPaths, DataInput } from './types'
-import type { Data, FolderSettings, State, StoreType } from './types'
+import { SpecialInputs, MappedPaths, DataInput, Data, FolderSettings, State } from './types'
 import { createEventEmitter } from './eventEmitter'
 
-export const Store = function (this: StoreType) {
-  const store = create(
-    subscribeWithSelector<State, SetState<State>, GetState<State>, StoreApi<State>>(() => ({ data: {} }))
-  )
+export class Store {
+  public dataStore = create(subscribeWithSelector<State>(() => ({ data: {} })))
+  private eventEmitter = createEventEmitter()
 
-  const eventEmitter = createEventEmitter()
+  public storeId = getUid()
 
-  this.storeId = getUid()
-  this.useStore = store
   /**
    * Folders will hold the folder settings for the pane.
    * @note possibly make this reactive
    */
-  const folders: Record<string, FolderSettings> = {}
+  private folders: Record<string, FolderSettings> = {}
 
   /**
    * OrderedPaths will hold all the paths in a parent -> children order.
    * This will ensure we can display the controls in a predictable order.
    */
-  const orderedPaths = new Set<String>()
+  private orderedPaths = new Set<String>()
 
   /**
    * For a given data structure, gets all paths for which inputs have
@@ -35,12 +32,12 @@ export const Store = function (this: StoreType) {
    *
    * @param data
    */
-  this.getVisiblePaths = () => {
+  getVisiblePaths = () => {
     const data = this.getData()
     const paths = Object.keys(data)
     // identifies hiddenFolders
     const hiddenFolders: string[] = []
-    Object.entries(folders).forEach(([path, settings]) => {
+    Object.entries(this.folders).forEach(([path, settings]) => {
       if (
         // the folder settings have a render function
         settings.render &&
@@ -57,7 +54,7 @@ export const Store = function (this: StoreType) {
     })
 
     const visiblePaths: string[] = []
-    orderedPaths.forEach((path: any) => {
+    this.orderedPaths.forEach((path: any) => {
       if (
         path in data &&
         // if input is mounted
@@ -76,11 +73,11 @@ export const Store = function (this: StoreType) {
   }
 
   // adds paths to OrderedPaths
-  this.setOrderedPaths = (newPaths) => {
-    newPaths.forEach((p) => orderedPaths.add(p))
+  public setOrderedPaths = (newPaths: string[]) => {
+    newPaths.forEach((p) => this.orderedPaths.add(p))
   }
 
-  this.orderPaths = (paths) => {
+  public orderPaths = (paths: string[]) => {
     this.setOrderedPaths(paths)
     return paths
   }
@@ -92,8 +89,8 @@ export const Store = function (this: StoreType) {
    *
    * @param paths
    */
-  this.disposePaths = (paths) => {
-    store.setState((s) => {
+  public disposePaths = (paths: string[]) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       paths.forEach((path) => {
         if (path in data) {
@@ -110,19 +107,19 @@ export const Store = function (this: StoreType) {
     })
   }
 
-  this.dispose = () => {
-    store.setState(() => {
+  public dispose = () => {
+    this.dataStore.setState(() => {
       return { data: {} }
     })
   }
 
-  this.getFolderSettings = (path) => {
-    return folders[path] || {}
+  public getFolderSettings = (path: string) => {
+    return this.folders[path] || {}
   }
 
   // Shorthand to get zustand store data
-  this.getData = () => {
-    return store.getState().data
+  public getData = () => {
+    return this.dataStore.getState().data
   }
 
   /**
@@ -137,8 +134,8 @@ export const Store = function (this: StoreType) {
    * @param newData the data to update
    * @param depsChanged to keep track of dependencies
    */
-  this.addData = (newData, override) => {
-    store.setState((s) => {
+  public addData = (newData: Data, override: boolean) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       Object.entries(newData).forEach(([path, newInputData]) => {
         let input = data[path]
@@ -173,8 +170,8 @@ export const Store = function (this: StoreType) {
    * @param path path of the input
    * @param value new value of the input
    */
-  this.setValueAtPath = (path, value, fromPanel) => {
-    store.setState((s) => {
+  public setValueAtPath = (path: string, value: any, fromPanel: boolean) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
       updateInput(data[path], value, path, this, fromPanel)
@@ -182,8 +179,8 @@ export const Store = function (this: StoreType) {
     })
   }
 
-  this.setSettingsAtPath = (path, settings) => {
-    store.setState((s) => {
+  public setSettingsAtPath = (path: string, settings: any) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with settings)
       data[path].settings = { ...data[path].settings, ...settings }
@@ -191,8 +188,8 @@ export const Store = function (this: StoreType) {
     })
   }
 
-  this.disableInputAtPath = (path, flag) => {
-    store.setState((s) => {
+  public disableInputAtPath = (path: string, flag: boolean) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       //@ts-expect-error (we always update inputs with a value)
       data[path].disabled = flag
@@ -200,8 +197,8 @@ export const Store = function (this: StoreType) {
     })
   }
 
-  this.set = (values, fromPanel: boolean) => {
-    store.setState((s) => {
+  public set = (values: Record<string, any>, fromPanel: boolean) => {
+    this.dataStore.setState((s) => {
       const data = s.data
       Object.entries(values).forEach(([path, value]) => {
         try {
@@ -218,7 +215,7 @@ export const Store = function (this: StoreType) {
     })
   }
 
-  this.getInput = (path) => {
+  public getInput = (path: string) => {
     try {
       return this.getData()[path] as DataInput
     } catch (e) {
@@ -226,28 +223,28 @@ export const Store = function (this: StoreType) {
     }
   }
 
-  this.get = (path) => {
+  public get = (path: string) => {
     return this.getInput(path)?.value
   }
 
-  this.emitOnEditStart = (path: string) => {
-    eventEmitter.emit(`onEditStart:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
+  public emitOnEditStart = (path: string) => {
+    this.eventEmitter.emit(`onEditStart:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
   }
 
-  this.emitOnEditEnd = (path: string) => {
-    eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
+  public emitOnEditEnd = (path: string) => {
+    this.eventEmitter.emit(`onEditEnd:${path}`, this.get(path), path, { ...this.getInput(path), get: this.get })
   }
 
-  this.subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {
+  public subscribeToEditStart = (path: string, listener: (value: any) => void): (() => void) => {
     const _path = `onEditStart:${path}`
-    eventEmitter.on(_path, listener)
-    return () => eventEmitter.off(_path, listener)
+    this.eventEmitter.on(_path, listener)
+    return () => this.eventEmitter.off(_path, listener)
   }
 
-  this.subscribeToEditEnd = (path: string, listener: (value: any) => void): (() => void) => {
+  public subscribeToEditEnd = (path: string, listener: (value: any) => void): (() => void) => {
     const _path = `onEditEnd:${path}`
-    eventEmitter.on(_path, listener)
-    return () => eventEmitter.off(_path, listener)
+    this.eventEmitter.on(_path, listener)
+    return () => this.eventEmitter.off(_path, listener)
   }
 
   /**
@@ -258,7 +255,7 @@ export const Store = function (this: StoreType) {
    * @param schema
    * @param rootPath used for recursivity
    */
-  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
+  private _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
     const data: Data = {}
 
     Object.entries(schema).forEach(([key, rawInput]: [string, any]) => {
@@ -270,11 +267,11 @@ export const Store = function (this: StoreType) {
       // If the input is a folder, then we recursively parse its schema and assign
       // it to the current data.
       if (rawInput.type === SpecialInputs.FOLDER) {
-        const newData = _getDataFromSchema(rawInput.schema, newPath, mappedPaths)
+        const newData = this._getDataFromSchema(rawInput.schema, newPath, mappedPaths)
         Object.assign(data, newData)
 
         // Sets folder preferences if it wasn't set before
-        if (!(newPath in folders)) folders[newPath] = rawInput.settings as FolderSettings
+        if (!(newPath in this.folders)) this.folders[newPath] = rawInput.settings as FolderSettings
       } else if (key in mappedPaths) {
         // if a key already exists, prompt an error.
         warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key].path)
@@ -283,9 +280,9 @@ export const Store = function (this: StoreType) {
         if (normalizedInput) {
           const { type, options, input } = normalizedInput
           // @ts-ignore
-          const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
+          const { onChange, reactive, onEditStart, onEditEnd, ..._options } = options
           data[newPath] = { type, ..._options, ...input, fromPanel: true }
-          mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
+          mappedPaths[key] = { path: newPath, onChange, reactive, onEditStart, onEditEnd }
         } else {
           warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
         }
@@ -295,12 +292,12 @@ export const Store = function (this: StoreType) {
     return data
   }
 
-  this.getDataFromSchema = (schema) => {
+  public getDataFromSchema = (schema: any) => {
     const mappedPaths: MappedPaths = {}
-    const data = _getDataFromSchema(schema, '', mappedPaths)
-    return [data, mappedPaths]
+    const data = this._getDataFromSchema(schema, '', mappedPaths)
+    return [data, mappedPaths] as [Data, MappedPaths]
   }
-} as any as { new (): StoreType }
+}
 
 export const levaStore = new Store()
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Reset from './components/decorator-reset'
 import { Story, Meta } from '@storybook/react'
 
@@ -29,7 +29,7 @@ export const Collapsed = Template.bind({})
 Collapsed.args = { collapsed: true }
 
 export const CollapsedControlled: Story<any> = (args, context) => {
-  const [collapsed, setCollapsed] = React.useState(true)
+  const [collapsed, setCollapsed] = useState(true)
   return Template(
     {
       collapsed: {
@@ -91,7 +91,7 @@ const Component = () => {
 }
 
 export const NeverHide: Story<any> = () => {
-  const [shown, setShown] = React.useState(true)
+  const [shown, setShown] = useState(true)
   return (
     <div>
       <button onClick={() => setShown((f) => !f)}>{shown ? 'Hide component' : 'Show component'}</button>

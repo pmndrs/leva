@@ -12,12 +12,14 @@
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
-    "@use-gesture/react": "^10.0.0",
     "leva": ">=0.9.15",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
-    "mathjs": "^10.1.1"
+    "@use-gesture/react": "10.2.22",
+    "mathjs": "^11.4.0"
+  },
+  "devDependencies": {
+    "leva": ">=0.9.15"
   }
 }

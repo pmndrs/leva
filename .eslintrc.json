@@ -1,10 +1,33 @@
 {
-  "extends": "react-app",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["react-app"],
   "rules": {
-    "no-console": "warn"
+    "import/no-duplicates": "error",
+    "import/order": [
+      "warn",
+      {
+        "newlines-between": "always",
+        "groups": ["builtin", "external", "internal", ["parent", "sibling"], "index", "object", "type"],
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["type"]
+      }
+    ],
+    "no-console": "warn",
+    "import/no-relative-packages": "error"
   },
-  "plugins": ["cypress"],
-  "env": {
-    "cypress/globals": true
-  }
+  "overrides": [
+    {
+      "files": ["packages/**"],
+      "excludedFiles": "*.stories.*",
+      "rules": {
+        "import/no-extraneous-dependencies": ["error"]
+      }
+    }
+  ]
 }

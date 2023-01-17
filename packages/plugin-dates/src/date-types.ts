@@ -1,6 +1,7 @@
-import type { LevaInputProps } from 'leva/plugin'
 import { ChangeEventHandler, MouseEventHandler } from 'react'
 import { CalendarContainerProps } from 'react-datepicker'
+
+import type { LevaInputProps } from 'leva/plugin'
 
 export type DateSettings = { locale: string; inputFormat: string }
 export type DateInput = { date: Date } & Partial<DateSettings>

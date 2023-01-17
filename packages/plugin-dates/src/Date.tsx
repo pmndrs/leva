@@ -1,6 +1,7 @@
 import { Components, useInputContext } from 'leva/plugin'
-import React, { forwardRef, useState } from 'react'
+import { forwardRef, useState } from 'react'
 import DatePicker, { CalendarContainer } from 'react-datepicker'
+
 import 'react-datepicker/dist/react-datepicker.css'
 import { DateCalendarContainerProps, DateInputProps, DateProps } from './date-types'
 import { InputContainer, StyledInput, StyledWrapper } from './StyledDate'

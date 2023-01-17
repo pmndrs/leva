@@ -9,6 +9,7 @@ export enum LevaErrors {
   PATH_DOESNT_EXIST,
   INPUT_TYPE_OVERRIDE,
   EMPTY_KEY,
+  TRANSIENT_DEPRECATED,
 }
 
 const ErrorList = {
@@ -37,6 +38,9 @@ const ErrorList = {
     `Input at path \`${path}\` already exists with type: \`${type}\`. Its type cannot be overridden with type \`${wrongType}\`.`,
   ],
   [LevaErrors.EMPTY_KEY]: () => ['Keys can not be empty, if you want to hide a label use whitespace.'],
+  [LevaErrors.TRANSIENT_DEPRECATED]: (key: string) => [
+    `Error with the input \`${key}\`: The \`transient\` option has been renamed to \`reactive\` for clarity. You should use \`{ reactive: true }\` where you were using \`{ transient: false }\` and vice versa.`,
+  ],
 }
 
 function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
@@ -46,7 +50,5 @@ function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: P
   console[fn]('LEVA: ' + message, ...rest)
 }
 
-// @ts-expect-error
 export const warn = _log.bind(null, 'warn')
-// @ts-expect-error
 export const log = _log.bind(null, 'log')

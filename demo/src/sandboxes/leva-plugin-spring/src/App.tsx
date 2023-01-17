@@ -1,4 +1,3 @@
-import React from 'react'
 import { useControls } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 

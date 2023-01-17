@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { useInputContext, useInputSetters, Components } from 'leva/plugin'
+
 import { BezierSvg } from './BezierSvg'
-import type { BezierProps } from './bezier-types'
 import { BezierPreview } from './BezierPreview'
 import { Container, SyledInnerLabel } from './StyledBezier'
 import { BuiltIn } from './bezier-plugin'
+
+import type { BezierProps } from './bezier-types'
 
 const { Label, Row, Vector, Select } = Components
 

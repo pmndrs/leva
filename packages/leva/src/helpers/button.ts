@@ -1,4 +1,5 @@
 import { SpecialInputs } from '../types'
+
 import type { ButtonInput, ButtonSettings } from '../types'
 
 const defaultSettings = { disabled: false }

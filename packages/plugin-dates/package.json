@@ -14,13 +14,13 @@
   "peerDependencies": {
     "@use-gesture/react": "^10.0.0",
     "leva": ">=0.9.34",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
     "react-datepicker": "^4.8.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "4.4.2"
+    "@types/react-datepicker": "4.8.0",
+    "leva": ">=0.9.15"
   }
 }

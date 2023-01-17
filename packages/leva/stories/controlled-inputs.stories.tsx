@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import { useDrag } from '@use-gesture/react'
-import React, { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import * as React from 'react'
 import Reset from './components/decorator-reset'
 
 import { folder, useControls } from '../src'
@@ -29,6 +30,8 @@ export const ExternalUpdatesWithSet: Story = () => {
     </form>
   )
 }
+
+ExternalUpdatesWithSet.storyName = 'External updates with set'
 
 export const ExternalUpdatesWithGetAndSet: Story = () => {
   const [{ counter }, set, get] = useControls(() => ({ counter: 0 }))
@@ -75,6 +78,8 @@ export const ExternalUpdatesWithGetAndSet: Story = () => {
   )
 }
 
+ExternalUpdatesWithGetAndSet.storyName = 'External updates with get and set'
+
 const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((props, ref) => {
   return (
     <div
@@ -95,8 +100,6 @@ const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((prop
   )
 })
 
-ExternalUpdatesWithSet.storyName = 'External Updates With set'
-
 export const OnChangeAndSet: Story = () => {
   const circleRef = useRef<HTMLDivElement>(null)
   const [, set] = useControls(() => ({
@@ -112,8 +115,9 @@ export const OnChangeAndSet: Story = () => {
 
   useDrag(
     ({ first, last, offset: [x, y] }) => {
-      if (first) circleRef.current!.style.cursor = 'grabbing'
-      if (last) circleRef.current!.style.removeProperty('cursor')
+      if (!circleRef.current) return
+      if (first) circleRef.current.style.cursor = 'grabbing'
+      if (last) circleRef.current.style.removeProperty('cursor')
       set({ position: { x, y } })
     },
     { target: circleRef }
@@ -127,4 +131,4 @@ export const OnChangeAndSet: Story = () => {
   )
 }
 
-OnChangeAndSet.storyName = 'onChange And set'
+OnChangeAndSet.storyName = 'onChange and set'

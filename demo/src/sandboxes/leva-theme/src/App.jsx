@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef, useEffect } from 'react'
 import { useControls, useCreateStore, folder, Leva, LevaPanel, monitor, button } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
@@ -6,8 +6,8 @@ import { Noise } from 'noisejs'
 const noise = new Noise(Math.random())
 
 function Controls() {
-  const ref = React.useRef(4)
-  React.useEffect(() => {
+  const ref = useRef(4)
+  useEffect(() => {
     let x = 0
     setInterval(() => {
       x += 0.1

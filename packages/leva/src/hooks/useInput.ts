@@ -1,6 +1,8 @@
 import { useCallback, useState, useEffect } from 'react'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
+
 import { useStoreContext } from '../context'
+
 import type { Data, DataItem } from '../types'
 
 const getInputAtPath = (data: Data, path: string) => {
@@ -30,15 +32,22 @@ export function useInput(path: string): [
   const store = useStoreContext()
   const [state, setState] = useState<Input | null>(getInputAtPath(store.getData(), path))
 
-  const set = useCallback((value) => store.setValueAtPath(path, value, true), [path, store])
-  const setSettings = useCallback((settings) => store.setSettingsAtPath(path, settings), [path, store])
-  const disable = useCallback((flag) => store.disableInputAtPath(path, flag), [path, store])
+  const set = useCallback(
+    (value: any) => {
+      store.setValueAtPath(path, value, true)
+    },
+    [path, store]
+  )
+  const setSettings = useCallback((settings: any) => store.setSettingsAtPath(path, settings), [path, store])
+  const disable = useCallback((flag: boolean) => store.disableInputAtPath(path, flag), [path, store])
   const emitOnEditStart = useCallback(() => store.emitOnEditStart(path), [path, store])
   const emitOnEditEnd = useCallback(() => store.emitOnEditEnd(path), [path, store])
 
   useEffect(() => {
-    setState(getInputAtPath(store.getData(), path))
-    const unsub = store.useStore.subscribe((s) => getInputAtPath(s.data, path), setState, { equalityFn: shallow })
+    const unsub = store.dataStore.subscribe((s) => getInputAtPath(s.data, path), setState, {
+      fireImmediately: true,
+      equalityFn: shallow,
+    })
     return () => unsub()
   }, [store, path])
 

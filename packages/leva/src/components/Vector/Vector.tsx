@@ -1,9 +1,12 @@
-import React, { useRef, useCallback } from 'react'
+import { useRef, useCallback } from 'react'
+import * as React from 'react'
+
 import { useInputContext } from '../../context'
 import { styled } from '../../styles'
 import { useInputSetters } from '../../hooks'
 import { sanitizeValue } from '../../utils'
 import { Number } from '../Number'
+
 import type { CoordinateProps, VectorProps } from './vector-types'
 
 function Coordinate<T extends Record<string, number>>({
@@ -57,7 +60,7 @@ export const Container = styled('div', {
   },
 })
 
-// TODO increase click area
+// TODO increase click area.
 
 function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked: boolean }) {
   return (

@@ -1,4 +1,6 @@
-import React, { useCallback, useRef } from 'react'
+import { useCallback, useRef, useEffect } from 'react'
+import * as React from 'react'
+
 import { useInputContext } from '../../context'
 import { parseNumber } from '../../utils'
 import { StyledInput, InputContainer, InnerLabel } from './StyledInput'
@@ -48,7 +50,7 @@ export function ValueInput({
    * https://github.com/facebook/react/issues/12363
    */
 
-  React.useEffect(() => {
+  useEffect(() => {
     const ref = inputRef.current
     const _onUpdate = update((value) => {
       onUpdate(value)

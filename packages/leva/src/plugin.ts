@@ -1,10 +1,11 @@
 import { warn, LevaErrors } from './utils/log'
+
 import type {
   Plugin,
   CustomInput,
   InputWithSettings,
   InternalPlugin,
-  StoreType,
+  LevaStore,
   Data,
   LevaInputs,
   InputOptions,
@@ -93,7 +94,7 @@ export function sanitize<Settings extends object | undefined>(
   settings: Settings,
   prevValue: any,
   path: string,
-  store: StoreType
+  store: LevaStore
 ) {
   const { sanitize } = Plugins[type]
   if (sanitize) return sanitize(value, settings, prevValue, path, store)

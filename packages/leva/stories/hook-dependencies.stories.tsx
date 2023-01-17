@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import * as React from 'react'
 import Reset from './components/decorator-reset'
 import { Meta } from '@storybook/react'
 

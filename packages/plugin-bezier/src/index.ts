@@ -1,4 +1,5 @@
 import { createPlugin, formatVector } from 'leva/plugin'
+
 import { Bezier } from './Bezier'
 import { normalize, sanitize } from './bezier-plugin'
 import { InternalBezierSettings } from './bezier-types'

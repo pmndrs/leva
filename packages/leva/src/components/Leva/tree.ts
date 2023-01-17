@@ -1,6 +1,8 @@
 // @ts-expect-error
 import merge from 'merge-value'
+
 import { getKeyPath } from '../../utils'
+
 import type { Tree } from '../../types'
 
 export const isInput = (v: object) => '__levaInput' in v

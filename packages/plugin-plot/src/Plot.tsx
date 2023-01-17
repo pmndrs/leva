@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useInputContext, useValues, Components } from 'leva/plugin'
+
 import { PlotCanvas } from './PlotCanvas'
-import type { PlotProps } from './plot-types'
 import { SyledInnerLabel, Container } from './StyledPlot'
+
+import type { PlotProps } from './plot-types'
 
 const { Label, Row, String } = Components
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useControls, useStoreContext, useCreateStore, LevaPanel, LevaStoreProvider } from 'leva'
 
 function MyComponent() {

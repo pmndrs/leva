@@ -8,23 +8,27 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@radix-ui/react-icons": "^1.0.3",
-    "@react-three/drei": "^8.8.3",
-    "@react-three/fiber": "^7.0.26",
-    "@stitches/react": "1.2.8",
+    "@leva-ui/plugin-bezier": "*",
+    "@leva-ui/plugin-dates": "*",
+    "@leva-ui/plugin-plot": "*",
+    "@leva-ui/plugin-spring": "*",
+    "@radix-ui/react-icons": "^1.1.1",
+    "@react-three/drei": "^9.45.1",
+    "@react-three/fiber": "^8.9.1",
+    "@stitches/react": "^1.2.8",
+    "@use-gesture/react": "10.2.22",
     "leva": "*",
     "noisejs": "^2.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-use": "^17.3.2",
-    "three": "^0.143.0",
-    "wouter": "^2.7.5"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-use": "^17.4.0",
+    "three": "^0.146.0",
+    "wouter": "^2.9.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
-    "@vitejs/plugin-react-refresh": "^1.3.6",
-    "typescript": "^4.5.5",
-    "vite": "2.7.13"
+    "@vitejs/plugin-react": "^2.2.0",
+    "vite": "^4.0.3",
+    "vite-tsconfig-paths": "^4.0.3"
   }
 }

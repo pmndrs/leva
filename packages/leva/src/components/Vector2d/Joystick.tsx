@@ -1,10 +1,11 @@
-import React, { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
-import { useDrag } from '../../hooks'
+import { useState, useRef, useCallback, useEffect, useLayoutEffect } from 'react'
+
+import { useDrag, useTransform } from '../../hooks'
 import { clamp, multiplyStep } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { useTh } from '../../styles'
 import { Portal } from '../UI'
-import { useTransform } from '../../hooks'
+
 import type { Vector2d } from '../../types'
 import type { Vector2dProps } from './vector2d-types'
 
@@ -25,10 +26,11 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   const playgroundRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
+    if (!joystickeRef.current || !playgroundRef.current) return
     if (joystickShown) {
-      const { top, left, width, height } = joystickeRef.current!.getBoundingClientRect()
-      playgroundRef.current!.style.left = left + width / 2 + 'px'
-      playgroundRef.current!.style.top = top + height / 2 + 'px'
+      const { top, left, width, height } = joystickeRef.current.getBoundingClientRect()
+      playgroundRef.current.style.left = left + width / 2 + 'px'
+      playgroundRef.current.style.top = top + height / 2 + 'px'
     }
   }, [joystickShown])
 
