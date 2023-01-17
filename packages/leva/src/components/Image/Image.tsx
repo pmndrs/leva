@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
+import * as React from 'react'
 import { useDropzone, DropzoneOptions } from 'react-dropzone'
 
 import { Label, Portal, Overlay, Row } from '../UI'

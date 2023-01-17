@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import { memo, useLayoutEffect, useRef, useState } from 'react'
 
 import { useStoreContext } from '../../context'
 import { useToggle } from '../../hooks'
@@ -47,7 +47,7 @@ type TreeWrapperProps = {
   toggled: boolean
 }
 
-export const TreeWrapper = React.memo(
+export const TreeWrapper = memo(
   ({ isRoot = false, fill = false, flat = false, parent, tree, toggled }: TreeWrapperProps) => {
     const { wrapperRef, contentRef } = useToggle(toggled)
     const store = useStoreContext()

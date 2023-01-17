@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import { useDrag } from '@use-gesture/react'
-import React, { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import * as React from 'react'
 import Reset from './components/decorator-reset'
 
 import { folder, useControls } from '../src'

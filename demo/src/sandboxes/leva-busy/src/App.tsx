@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
 import { useFullscreen } from 'react-use'
 // @ts-ignore
@@ -71,8 +71,8 @@ function Controls() {
 }
 
 export default function App() {
-  const [count, setCount] = React.useState(0)
-  const [show, setShow] = React.useState(true)
+  const [count, setCount] = useState(0)
+  const [show, setShow] = useState(true)
 
   const [{ showTitleBar, title, drag, filter, fullScreen, oneLineLabels }, set] = useControls(
     'Panel',

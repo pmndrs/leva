@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 
 import { ControlInput } from './ControlInput'
 import { log, LevaErrors } from '../../utils/log'
@@ -17,7 +17,7 @@ const specialComponents = {
   [SpecialInputs.MONITOR]: Monitor,
 }
 
-export const Control = React.memo(({ path }: ControlProps) => {
+export const Control = memo(({ path }: ControlProps) => {
   const [input, { set, setSettings, disable, storeId, emitOnEditStart, emitOnEditEnd }] = useInput(path)
   if (!input) return null
 

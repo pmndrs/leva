@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from 'react'
+import { createContext, useContext } from 'react'
+import * as React from 'react'
 
 import type { FullTheme } from './styles'
 import type { PanelSettingsType, InputContextProps, LevaStore } from './types'

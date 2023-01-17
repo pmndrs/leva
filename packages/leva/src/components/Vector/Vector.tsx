@@ -1,4 +1,5 @@
-import React, { useRef, useCallback } from 'react'
+import { useRef, useCallback } from 'react'
+import * as React from 'react'
 
 import { useInputContext } from '../../context'
 import { styled } from '../../styles'

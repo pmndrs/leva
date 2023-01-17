@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
+import { memo, useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { useMove } from '@use-gesture/react'
 import { useCanvas2d, useTh, range, invertedRange, debounce, useTransform, clamp, Components } from 'leva/plugin'
 
@@ -8,7 +8,7 @@ import type { InternalPlot, InternalPlotSettings } from './plot-types'
 
 type PlotCanvasProps = { value: InternalPlot; settings: InternalPlotSettings }
 
-export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps) => {
+export const PlotCanvas = memo(({ value: expr, settings }: PlotCanvasProps) => {
   const { boundsX, boundsY } = settings
 
   const accentColor = useTh('colors', 'highlight3')

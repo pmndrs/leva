@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
+import * as React from 'react'
 import { useDropzone } from 'react-dropzone'
 import { folder, Leva, useControls, LevaPanel, useCreateStore, button } from 'leva'
 import { useDrag } from '@use-gesture/react'

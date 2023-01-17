@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import Reset from './components/decorator-reset'
 import { Story, Meta } from '@storybook/react'
 
@@ -20,7 +20,7 @@ const Controls = () => {
 }
 
 const Template: Story<any> = () => {
-  const [mounted, toggle] = React.useState(true)
+  const [mounted, toggle] = useState(true)
   return (
     <div>
       <button onClick={() => toggle((t) => !t)}>{mounted ? 'Unmount' : 'Mount'}</button>

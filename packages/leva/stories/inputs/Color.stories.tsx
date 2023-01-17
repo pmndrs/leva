@@ -1,4 +1,4 @@
-import React from 'react'
+import { useMemo } from 'react'
 import { Story, Meta } from '@storybook/react'
 import Reset from '../components/decorator-reset'
 
@@ -14,7 +14,7 @@ export default {
 const Template: Story<any> = (args: Color) => {
   const values = useControls({ color: args })
 
-  const _color = React.useMemo(() => {
+  const _color = useMemo(() => {
     if (typeof values.color !== 'string') {
       let c = values.color as Color
 
