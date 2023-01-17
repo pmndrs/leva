@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "postinstall": "husky install && preconstruct dev",
+    "postinstall": "preconstruct dev",
     "build": "preconstruct build",
     "watch": "preconstruct watch",
     "dev": "preconstruct dev",
@@ -25,7 +25,6 @@
     "demo:serve": "pnpm --filter demo un serve",
     "ci:version": "pnpm changeset version && pnpm --filter \"leva\" --filter \"@leva-ui/*\" install --lockfile-only",
     "ci:publish": "pnpm build && pnpm changeset publish",
-    "prepare": "husky install",
     "prettier": "prettier --check ."
   },
   "size-limit": [
