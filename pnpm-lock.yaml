@@ -91,7 +91,7 @@ importers:
       '@react-three/drei': ^9.45.1
       '@react-three/fiber': ^8.9.1
       '@stitches/react': ^1.2.8
-      '@use-gesture/react': ^10.2.23
+      '@use-gesture/react': 10.2.22
       '@vitejs/plugin-react': ^2.2.0
       leva: '*'
       noisejs: ^2.1.0
@@ -112,7 +112,7 @@ importers:
       '@react-three/drei': 9.53.0_3fw52qkxz2iovoyuamzqptmq6y
       '@react-three/fiber': 8.10.0_mjlgqb43i6mvslmnwgzrdumoh4
       '@stitches/react': 1.2.8_react@18.2.0
-      '@use-gesture/react': 10.2.23_react@18.2.0
+      '@use-gesture/react': 10.2.22_react@18.2.0
       leva: link:../packages/leva
       noisejs: 2.1.0
       react: 18.2.0
@@ -131,7 +131,7 @@ importers:
       '@radix-ui/react-portal': ^1.0.1
       '@radix-ui/react-tooltip': ^1.0.2
       '@stitches/react': ^1.2.8
-      '@use-gesture/react': ^10.2.23
+      '@use-gesture/react': 10.2.22
       colord: ^2.9.3
       dequal: ^2.0.3
       merge-value: ^1.0.0
@@ -145,7 +145,7 @@ importers:
       '@radix-ui/react-portal': 1.0.1_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/react-tooltip': 1.0.3_biqbaboplfbrettd7655fr4n2y
       '@stitches/react': 1.2.8_react@18.2.0
-      '@use-gesture/react': 10.2.23_react@18.2.0
+      '@use-gesture/react': 10.2.22_react@18.2.0
       colord: 2.9.3
       dequal: 2.0.3
       merge-value: 1.0.0
@@ -184,12 +184,12 @@ importers:
 
   packages/plugin-plot:
     specifiers:
-      '@use-gesture/react': ^10.2.23
+      '@use-gesture/react': 10.2.22
       leva: '>=0.9.15'
       mathjs: ^11.4.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@use-gesture/react': 10.2.23_react@18.2.0
+      '@use-gesture/react': 10.2.22_react@18.2.0
       mathjs: 11.5.0
       react: 18.2.0
     devDependencies:
@@ -5247,9 +5247,24 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@use-gesture/core/10.2.22:
+    resolution:
+      { integrity: sha512-Ek0JZFYfk+hicLmoG094gm3YOuDMBNckHb988e59YOZoAkETT8dQSzT+g3QkSHSiP1m5wFXAGPSgxvOuwvGKHQ== }
+    dev: false
+
   /@use-gesture/core/10.2.23:
     resolution:
       { integrity: sha512-Ynap/Uh6RX1Vgn3zNmFTyKapapdf7Av+GzAe6h+RsBZaxMF1z3cK6aohHPJP6T1hLrPyH/yehxa7RBqyESG9RA== }
+    dev: false
+
+  /@use-gesture/react/10.2.22_react@18.2.0:
+    resolution:
+      { integrity: sha512-ECo7ig16SxBE06ENIURO1woKEB6TC8qY3a0rugJjQ2f1o0Tj28xS/eYNyJuqzQB5YT0q5IrF7ZFpbx1p/5ohYA== }
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      '@use-gesture/core': 10.2.22
+      react: 18.2.0
     dev: false
 
   /@use-gesture/react/10.2.23_react@18.2.0:

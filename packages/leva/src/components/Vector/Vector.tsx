@@ -60,7 +60,7 @@ export const Container = styled('div', {
   },
 })
 
-// TODO increase click area
+// TODO increase click area.
 
 function Lock({ locked, ...props }: React.HTMLAttributes<SVGElement> & { locked: boolean }) {
   return (
