@@ -16,7 +16,7 @@
     "@react-three/drei": "^9.45.1",
     "@react-three/fiber": "^8.9.1",
     "@stitches/react": "^1.2.8",
-    "@use-gesture/react": "^10.2.23",
+    "@use-gesture/react": "10.2.22",
     "leva": "*",
     "noisejs": "^2.1.0",
     "react": "^18.2.0",
