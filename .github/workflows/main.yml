@@ -9,6 +9,8 @@ on:
       - '.changeset/**'
       - '.github/workflows/release.yml'
 
+env:
+  CI: true
 jobs:
   version:
     timeout-minutes: 8
