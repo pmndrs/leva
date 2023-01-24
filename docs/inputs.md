@@ -75,7 +75,13 @@ All rules from Number type also apply.
 
 ### Select
 
-@todo
+A dropdown select. Add options with array:
+
+```jsx
+const { difficulty } = useControls({
+  difficulty: { value: 'easy' , options:['easy', 'medium', 'hard'] },
+})
+```
 
 ### Image
 
