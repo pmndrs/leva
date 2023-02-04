@@ -2309,6 +2309,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@leva-ui/plugin-vector3j@workspace:packages/plugin-vector3j":
+  version: 0.0.0-use.local
+  resolution: "@leva-ui/plugin-vector3j@workspace:packages/plugin-vector3j"
+  peerDependencies:
+    leva: ">=0.9.34"
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  languageName: unknown
+  linkType: soft
+
 "@leva-ui/root@workspace:.":
   version: 0.0.0-use.local
   resolution: "@leva-ui/root@workspace:."
