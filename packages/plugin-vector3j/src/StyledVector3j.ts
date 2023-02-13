@@ -10,17 +10,13 @@ export const StyledInput = styled('input', {
 })
 
 export const InputContainer = styled('div', {
-  $flex: '',
-  position: 'relative',
-  borderRadius: '$sm',
-  color: 'inherit',
-  height: '$rowHeight',
-  backgroundColor: '$elevation3',
-  $inputStyle: '$elevation1',
-  $hover: '',
-  $focusWithin: '',
+  display: 'grid',
+  columnGap: '$colGap',
   variants: {
-    textArea: { true: { height: 'auto' } },
+    withJoystick: {
+      true: { gridTemplateColumns: '$sizes$rowHeight auto' },
+      false: { gridTemplateColumns: 'auto' },
+    },
   },
 })
 

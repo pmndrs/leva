@@ -1,20 +1,5 @@
-// import React from 'react'
-// import { Components, useInputContext, styled } from 'leva/plugin'
 // import { Joystick3d } from './UI/Joystick3d'
 // import type { Vector3jProps } from './vector3j-types'
-
-// const { Label, Row, Vector } = Components
-
-// const Container = styled('div', {
-//   display: 'grid',
-//   columnGap: '$colGap',
-//   variants: {
-//     withJoystick: {
-//       true: { gridTemplateColumns: '$sizes$rowHeight auto' },
-//       false: { gridTemplateColumns: 'auto' },
-//     },
-//   },
-// })
 
 // export function Vector3j() {
 //   const { label, displayValue, onUpdate, settings } = useInputContext<Vector3jProps>()
@@ -29,14 +14,14 @@
 //   )
 // }
 
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef } from 'react'
 import { Components, useInputContext } from 'leva/plugin'
 import DatePicker, { CalendarContainer } from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { DateCalendarContainerProps, DateInputProps, DateProps } from './vector3j-types'
 import { InputContainer, StyledInput, StyledWrapper } from './StyledVector3j'
 
-const { Label, Row } = Components
+const { Label, Row, Vector } = Components
 
 const DateCalendarContainer = ({ children }: DateCalendarContainerProps) => {
   return (
@@ -68,3 +53,15 @@ export function Vector3j() {
     </Row>
   )
 }
+
+/* FIXME: replace true with !!settings.joystick */
+/* FIXME: replace true with settings.joystick */
+/* 
+<Row input>
+<Label>{label}</Label>
+<InputContainer withJoystick={true}>
+  {true && <Joystick3d value={displayValue} settings={settings} onUpdate={onUpdate} />}
+  <Vector value={displayValue} settings={settings} onUpdate={onUpdate} />
+</InputContainer>
+</Row> 
+*/
