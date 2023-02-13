@@ -48,7 +48,7 @@ function Controls() {
   const data = useControls({
     vector2d: [10, 10],
     vector3d: [10, 10, 10],
-    vector3j: vector3j([10, 10, 10]),
+    vector3j: vector3j([20, 20, 20]),
     curve: bezier([0.54, 0.05, 0.6, 0.98]),
     dimension: '4px',
     string: { value: 'something', optional: true, order: -2 },
