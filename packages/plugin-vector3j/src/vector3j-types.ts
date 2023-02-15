@@ -26,3 +26,5 @@ export type InternalVector3dSettings = InternalVectorSettings<string, [string, s
   joystick: boolean | 'invertY'
 }
 export type Vector3jProps = LevaInputProps<Vector3d, InternalVector3dSettings, VectorObj>
+
+export type Vector3dProps = LevaInputProps<Vector3d, InternalVector3dSettings, VectorObj>
