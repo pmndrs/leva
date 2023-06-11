@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.35
+
+### Patch Changes
+
+- d658bf0: fix(leva): update radiux-ui for peer deps
+
 ## 0.9.34
 
 ### Patch Changes
