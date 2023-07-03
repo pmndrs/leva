@@ -1,6 +1,6 @@
 {
   "name": "leva",
-  "version": "0.9.35",
+  "version": "0.9.36",
   "main": "dist/leva.cjs.js",
   "module": "dist/leva.esm.js",
   "types": "dist/leva.cjs.d.ts",
