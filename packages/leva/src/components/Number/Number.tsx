@@ -20,7 +20,8 @@ const DraggableLabel = React.memo(({ label, onUpdate, step, innerLabelTrim }: Dr
   const [dragging, setDragging] = useState(false)
   const bind = useDrag(({ active, delta: [dx], event, memo = 0, first, last, target }) => {
     if (first) {
-      ;(target as HTMLElement).requestPointerLock()
+      const label = target as HTMLElement
+      label.requestPointerLock()
     }
     if (last) {
       document.exitPointerLock()
