@@ -3,7 +3,7 @@
 <a href=""><img src="https://raw.githubusercontent.com/gsimone/leva/master/hero.png" /></a>
 <br />
 
-<div align="center"><strong>A GUI you are going to lava.</strong></div>
+<div align="center"><strong>A GUI you are going to lova.</strong></div>
 <div align="center"> Customizable, extensible and beautiful by default.</div>
 <br />
 <div align="center">
