@@ -205,11 +205,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
       const unsub = store.useStore.subscribe(
         (s) => {
           const input = s.data[path]
+          if (input === undefined) return
           // @ts-ignore
           const value = input.disabled ? undefined : input.value
           return [value, input]
         },
-        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        (props: any) => {
+          if (props === undefined) return
+          const [value, input] = props
+          onChange(value, path, { initial: false, get: store.get, ...input })
+        },
         { equalityFn: shallow }
       )
       unsubscriptions.push(unsub)

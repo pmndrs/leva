@@ -93,20 +93,26 @@ export const Store = function (this: StoreType) {
    * @param paths
    */
   this.disposePaths = (paths) => {
+    const disableCache = store.getState().disableCache
     store.setState((s) => {
       const data = s.data
       paths.forEach((path) => {
-        if (path in data) {
-          const input = data[path]
-          input.__refCount--
-          if (input.__refCount === 0 && input.type in SpecialInputs) {
-            // this makes sure special inputs such as buttons are properly
-            // refreshed. This might need some attention though.
-            delete data[path]
-          }
-        }
+        if (!(path in data)) return
+        const input = data[path]
+        input.__refCount--
+        if (input.__refCount !== 0) return
+        // we clear only `SpecialInputs` like buttons
+        // but if the cache is disabled we clear all inputs
+        if (!disableCache && !(input.type in SpecialInputs)) return
+        delete data[path]
       })
       return { data }
+    })
+  }
+
+  this.disableCache = (disableCache) => {
+    store.setState(() => {
+      return { disableCache }
     })
   }
 

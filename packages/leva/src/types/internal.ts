@@ -2,7 +2,7 @@ import type { UseBoundStore } from 'zustand'
 import { StoreApiWithSubscribeWithSelector } from 'zustand/middleware'
 import type { SpecialInput, RenderFn, FolderSettings, Plugin, OnChangeHandler } from './public'
 
-export type State = { data: Data }
+export type State = { data: Data; disableCache?: boolean }
 
 export type MappedPaths = Record<
   string,
@@ -24,6 +24,7 @@ export type StoreType = {
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[]) => void
   dispose: () => void
+  disableCache: (flag: boolean) => void
   getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data

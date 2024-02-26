@@ -6,10 +6,10 @@ import { render } from '../../utils/react'
 let rootInitialized = false
 let rootEl: HTMLElement | null = null
 
-type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
+type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean; disableCache?: boolean }
 
 // uses global store
-export function Leva({ isRoot = false, ...props }: LevaProps) {
+export function Leva({ isRoot = false, disableCache, ...props }: LevaProps) {
   useEffect(() => {
     rootInitialized = true
     // if this panel was attached somewhere in the app and there is already
@@ -22,6 +22,10 @@ export function Leva({ isRoot = false, ...props }: LevaProps) {
       if (!isRoot) rootInitialized = false
     }
   }, [isRoot])
+
+  useEffect(() => {
+    levaStore.disableCache(!!disableCache)
+  }, [disableCache])
 
   return <LevaRoot store={levaStore} {...props} />
 }
