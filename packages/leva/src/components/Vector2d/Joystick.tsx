@@ -3,7 +3,6 @@ import { useDrag } from '../../hooks'
 import { clamp, multiplyStep } from '../../utils'
 import { JoystickTrigger, JoystickPlayground } from './StyledJoystick'
 import { useTh } from '../../styles'
-import { Portal } from '../UI'
 import { useTransform } from '../../hooks'
 import type { Vector2d } from '../../types'
 import type { Vector2dProps } from './vector2d-types'
@@ -126,12 +125,10 @@ export function Joystick({ value, settings, onUpdate }: JoystickProps) {
   return (
     <JoystickTrigger ref={joystickeRef} {...bind()}>
       {joystickShown && (
-        <Portal>
-          <JoystickPlayground ref={playgroundRef} isOutOfBounds={isOutOfBounds}>
-            <div />
-            <span ref={spanRef} />
-          </JoystickPlayground>
-        </Portal>
+        <JoystickPlayground ref={playgroundRef} isOutOfBounds={isOutOfBounds}>
+          <div />
+          <span ref={spanRef} />
+        </JoystickPlayground>
       )}
     </JoystickTrigger>
   )

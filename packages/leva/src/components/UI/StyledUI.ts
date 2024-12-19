@@ -4,7 +4,7 @@ import { StyledContent } from '../Folder/StyledFolder'
 
 export const StyledRow = styled('div', {
   position: 'relative',
-  zIndex: 100,
+  zIndex: 'auto',
   display: 'grid',
   rowGap: '$rowGap',
   gridTemplateRows: 'minmax($sizes$rowHeight, max-content)',
