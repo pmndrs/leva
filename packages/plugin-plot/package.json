@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-plot",
-  "version": "0.9.15",
+  "version": "0.10.0",
   "main": "dist/leva-ui-plugin-plot.cjs.js",
   "module": "dist/leva-ui-plugin-plot.esm.js",
   "types": "dist/leva-ui-plugin-plot.cjs.d.ts",

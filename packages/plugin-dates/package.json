@@ -1,6 +1,6 @@
 {
   "name": "@leva-ui/plugin-dates",
-  "version": "0.9.32",
+  "version": "0.10.0",
   "main": "dist/leva-ui-plugin-dates.cjs.js",
   "module": "dist/leva-ui-plugin-dates.esm.js",
   "types": "dist/leva-ui-plugin-dates.cjs.d.ts",
