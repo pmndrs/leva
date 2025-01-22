@@ -1,5 +1,11 @@
 # @leva-ui/plugin-dates
 
+## 0.10.1
+
+### Patch Changes
+
+- 89764b0: fix(plugin-dates): update React Calendar
+
 ## 0.10.0
 
 ### Minor Changes
