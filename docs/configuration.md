@@ -23,3 +23,28 @@ export default function MyApp() {
 ```
 
 - TODO // Add default config for LevaPanel as well
+
+### Disabling the GUI
+
+Each instance of the `useControls` hook will render the panel. If you want to completely disable the GUI based on preferences, you need to explicitly set `hidden` to false.
+
+```jsx
+import { Leva } from 'leva'
+
+function MyComponent() {
+  const { myValue } = useControls({ myValue: 10 }) // Won't be visible because the panel will not render.
+
+  return myValue
+}
+
+export default function MyApp() {
+  return (
+    <>
+      <Leva
+        {...config}
+        hidden={false}
+      />
+    </>
+  )
+}
+```
