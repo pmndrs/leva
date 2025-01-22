@@ -24,8 +24,10 @@ export function usePanelSettingsContext() {
   return useContext(PanelSettingsContext)!
 }
 
+type ReactChild = React.ReactElement | string | number
+
 type LevaStoreProviderProps = {
-  children: React.ReactChild | React.ReactChild[] | React.ReactChildren
+  children: ReactChild | ReactChild[] | typeof React.Children
   store: StoreType
 }
 
