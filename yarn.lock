@@ -2765,7 +2765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-portal@npm:1.0.2, @radix-ui/react-portal@npm:^1.0.2":
+"@radix-ui/react-portal@npm:1.0.2":
   version: 1.0.2
   resolution: "@radix-ui/react-portal@npm:1.0.2"
   dependencies:
@@ -2817,7 +2817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-tooltip@npm:^1.0.5":
+"@radix-ui/react-tooltip@npm:1.0.5":
   version: 1.0.5
   resolution: "@radix-ui/react-tooltip@npm:1.0.5"
   dependencies:
@@ -12727,8 +12727,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "leva@workspace:packages/leva"
   dependencies:
-    "@radix-ui/react-portal": ^1.0.2
-    "@radix-ui/react-tooltip": ^1.0.5
+    "@radix-ui/react-portal": 1.0.2
+    "@radix-ui/react-tooltip": 1.0.5
     "@stitches/react": ^1.2.8
     "@use-gesture/react": ^10.2.5
     "@welldone-software/why-did-you-render": ^6.2.3
