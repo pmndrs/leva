@@ -6,7 +6,7 @@ A simple button:
 
 ```jsx
 const button = useControls({
-  foo: button(() => console.log('clicked'))
+  foo: button(() => console.log('clicked')),
 })
 ```
 

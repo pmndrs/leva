@@ -80,7 +80,7 @@ A dropdown select input with a specified list of elements. An optional default v
 ```jsx
 const presetColor = useControls({
   options: ['red', 'green', 'blue', 'yellow'],
-  value: 'red'
+  value: 'red',
 })
 ```
 

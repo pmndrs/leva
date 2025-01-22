@@ -40,10 +40,7 @@ function MyComponent() {
 export default function MyApp() {
   return (
     <>
-      <Leva
-        {...config}
-        hidden={false}
-      />
+      <Leva {...config} hidden={false} />
     </>
   )
 }
