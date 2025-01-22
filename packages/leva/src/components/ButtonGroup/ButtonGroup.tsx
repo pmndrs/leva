@@ -6,7 +6,7 @@ import { ButtonGroupInputOpts, ButtonGroupOpts } from '../../types'
 import { useStoreContext } from '../..'
 
 export type ButtonGroupInternalOpts = {
-  label: null | JSX.Element | string
+  label: null | React.JSX.Element | string
   opts: ButtonGroupInputOpts
 }
 

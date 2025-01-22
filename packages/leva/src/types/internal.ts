@@ -44,7 +44,7 @@ export type StoreType = {
 
 export type CommonOptions = {
   key: string
-  label: string | JSX.Element
+  label: string | React.JSX.Element
   hint?: string
   render?: RenderFn
   order: number
