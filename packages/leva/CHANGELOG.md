@@ -1,5 +1,11 @@
 # leva
 
+## 0.9.36
+
+### Patch Changes
+
+- b613ceb: fix(deps): pin joystick and color picker
+
 ## 0.9.35
 
 ### Patch Changes
