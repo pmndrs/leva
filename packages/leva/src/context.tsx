@@ -32,5 +32,6 @@ type LevaStoreProviderProps = {
 }
 
 export function LevaStoreProvider({ children, store }: LevaStoreProviderProps) {
+  // @ts-expect-error portal JSX types are broken upstream
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }

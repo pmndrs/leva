@@ -18,9 +18,9 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "react-datepicker": "^4.8.0"
+    "react-datepicker": "^7.6.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "4.4.2"
+    "@types/react-datepicker": "^7.0.0"
   }
 }

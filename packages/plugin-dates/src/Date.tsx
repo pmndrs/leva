@@ -10,6 +10,7 @@ const { Label, Row } = Components
 const DateCalendarContainer = ({ children }: DateCalendarContainerProps) => {
   return (
     <CalendarContainer>
+      {/* @ts-expect-error portal JSX types are broken upstream */}
       <StyledWrapper>{children}</StyledWrapper>
     </CalendarContainer>
   )
