@@ -15,7 +15,7 @@ export function useInputSetters<V, Settings extends object>({ value, type, setti
   const previousValueRef = useRef(value)
   const settingsRef = useRef(settings)
   settingsRef.current = settings
-  const setFormat = useCallback((v) => setDisplayValue(format(type, v, settingsRef.current)), [type])
+  const setFormat = useCallback((v: V) => setDisplayValue(format(type, v, settingsRef.current)), [type])
 
   const onUpdate = useCallback(
     (updatedValue: any) => {
