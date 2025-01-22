@@ -1,5 +1,12 @@
 # leva
 
+## 0.10.0
+
+### Minor Changes
+
+- b9c6376: feat: use Pointer Lock API for Number input
+- 3d4a620: feat!: React 18 and 19 support
+
 ## 0.9.36
 
 ### Patch Changes

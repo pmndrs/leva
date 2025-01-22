@@ -1,5 +1,17 @@
 # @leva-ui/plugin-bezier
 
+## 0.10.0
+
+### Minor Changes
+
+- 3d4a620: feat!: React 18 and 19 support
+
+### Patch Changes
+
+- Updated dependencies [b9c6376]
+- Updated dependencies [3d4a620]
+  - leva@0.10.0
+
 ## 0.9.19
 
 ### Patch Changes
