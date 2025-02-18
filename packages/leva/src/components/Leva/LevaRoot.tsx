@@ -179,6 +179,7 @@ const LevaCore = React.memo(
     return (
       <PanelSettingsContext.Provider value={{ hideCopyButton }}>
         <StyledRoot
+          id="leva-styled-root"
           ref={rootRef}
           className={rootClass}
           fill={fill}
