@@ -53,7 +53,7 @@ jobs:
         id: yarn-build-cache
         with:
           path: packages/**/dist
-          key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/') }}
+          key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-yarn-build-
 
