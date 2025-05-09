@@ -1,6 +1,7 @@
 import React from 'react'
 import { useControls, folder, button, monitor, Leva } from 'leva'
 import { Noise } from 'noisejs'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 const noise = new Noise(Math.random())
 
@@ -39,12 +40,12 @@ export default function App() {
   })
 
   return (
-    <>
+    <TooltipProvider>
       <Leva oneLineLabels />
 
       <div className="App">
         <pre>{JSON.stringify(data, null, '  ')}</pre>
       </div>
-    </>
+    </TooltipProvider>
   )
 }

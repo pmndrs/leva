@@ -5,6 +5,7 @@ import { useFullscreen } from 'react-use'
 import { Noise } from 'noisejs'
 import { DimensionsIcon } from '@radix-ui/react-icons'
 import styles from './styles.module.css'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 const noise = new Noise(Math.random())
 
@@ -92,7 +93,7 @@ export default function App() {
   })
 
   return (
-    <>
+    <TooltipProvider>
       <Leva titleBar={showTitleBar && { drag, title, filter }} oneLineLabels={oneLineLabels} />
       <div className={styles.buttons}>
         Reference count: {count}
@@ -106,6 +107,6 @@ export default function App() {
         .map((_, i) => (
           <ExtraControls key={i} />
         ))}
-    </>
+    </TooltipProvider>
   )
 }

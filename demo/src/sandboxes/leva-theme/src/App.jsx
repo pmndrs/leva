@@ -2,6 +2,7 @@ import React from 'react'
 import { useControls, useCreateStore, folder, Leva, LevaPanel, monitor, button } from 'leva'
 import { spring } from '@leva-ui/plugin-spring'
 import { Noise } from 'noisejs'
+import { TooltipProvider } from '@radix-ui/react-tooltip'
 
 const noise = new Noise(Math.random())
 
@@ -160,29 +161,31 @@ export default function App() {
   const theme = { colors, radii, space, fontSizes, sizes, borderWidths, fontWeights }
 
   return (
-    <div style={{ backgroundColor: 'lightgray', minHeight: '100vh' }}>
-      <Leva theme={theme} />
-      <div
-        style={{
-          display: 'grid',
-          width: 300,
-          gap: 10,
-          paddingBottom: 40,
-          marginRight: 10,
-          float: 'left',
-          background: '#181C20',
-        }}>
-        <LevaPanel fill flat titleBar={false} store={colorsStore} />
-        <LevaPanel fill flat titleBar={false} store={radiiStore} />
-        <LevaPanel fill flat titleBar={false} store={spaceStore} />
-        <LevaPanel fill flat titleBar={false} store={fontSizesStore} />
-        <LevaPanel fill flat titleBar={false} store={sizesStore} />
-        <LevaPanel fill flat titleBar={false} store={borderWidthsStore} />
-        <LevaPanel fill flat titleBar={false} store={fontWeightsStore} />
+    <TooltipProvider>
+      <div style={{ backgroundColor: 'lightgray', minHeight: '100vh' }}>
+        <Leva theme={theme} />
+        <div
+          style={{
+            display: 'grid',
+            width: 300,
+            gap: 10,
+            paddingBottom: 40,
+            marginRight: 10,
+            float: 'left',
+            background: '#181C20',
+          }}>
+          <LevaPanel fill flat titleBar={false} store={colorsStore} />
+          <LevaPanel fill flat titleBar={false} store={radiiStore} />
+          <LevaPanel fill flat titleBar={false} store={spaceStore} />
+          <LevaPanel fill flat titleBar={false} store={fontSizesStore} />
+          <LevaPanel fill flat titleBar={false} store={sizesStore} />
+          <LevaPanel fill flat titleBar={false} store={borderWidthsStore} />
+          <LevaPanel fill flat titleBar={false} store={fontWeightsStore} />
+        </div>
+        <pre>{JSON.stringify(theme, null, '  ')}</pre>
+        <Controls />
       </div>
-      <pre>{JSON.stringify(theme, null, '  ')}</pre>
-      <Controls />
-    </div>
+    </TooltipProvider>
   )
 }
 
