@@ -51,8 +51,6 @@ const addsub = /(-?\d+(?:\.\d+)?)\s*([+-])\s*(-?\d+(?:\.\d+)?)/ // Addition or S
 export function evaluate(expr: string): number {
   expr = expr.replace(/\s+/g, '') // Remove all whitespace
 
-  console.log('Evaluate called');
-
   if (parens.test(expr)) {
     return evaluate(expr.replace(parens, (_, subExpr) => evaluate(subExpr).toString()))
   }
