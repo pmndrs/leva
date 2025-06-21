@@ -71,4 +71,3 @@ export function evaluate(expr: string): number {
 }
 // Example usage
 //console.log(evaluate("2 + 4*(30/5) - 34 + 45/2"));
-// This file is intentionally left blank.
