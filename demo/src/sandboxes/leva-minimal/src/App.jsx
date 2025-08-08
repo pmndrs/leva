@@ -1,6 +1,7 @@
 import React from 'react'
 import { useControls, Leva } from 'leva'
 import { Half2Icon } from '@radix-ui/react-icons'
+import * as RadixTooltip from '@radix-ui/react-tooltip'
 
 export default function App() {
   const data = useControls({
@@ -15,9 +16,9 @@ export default function App() {
   })
 
   return (
-    <>
+    <RadixTooltip.Provider>
       <Leva titleBar={false} />
       <pre>{JSON.stringify(data, null, '  ')}</pre>
-    </>
+    </RadixTooltip.Provider>
   )
 }

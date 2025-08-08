@@ -10,6 +10,8 @@ on:
       - '!docs/**'
       - '!**.md'
       - '!.changeset/**'
+  pull_request:
+    branches: ['main']
 jobs:
   build:
     name: Build, lint, and test
@@ -61,5 +63,9 @@ jobs:
         if: steps.yarn-build-cache.outputs.cache-hit != 'true'
         run: yarn build
 
-      - name: Cypress run
-        run: yarn ci:test
+      - uses: cypress-io/github-action@v6
+        name: Cypress run
+        with:
+          build: yarn demo:build
+          start: yarn demo:serve
+          wait-on: 'http://localhost:5000'
