@@ -1,5 +1,4 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 
 import Reset from '../components/decorator-reset'
 
@@ -10,7 +9,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args = undefined) => {
+const Template: StoryFn<any> = (args = undefined) => {
   const values = useControls({ foo: args }) as any
 
   return (

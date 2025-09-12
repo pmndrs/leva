@@ -1,6 +1,5 @@
-import React from 'react'
 import Reset from './components/decorator-reset'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import { folder, useControls } from '../src'
 
@@ -9,7 +8,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn = (args) => {
   const values = useControls(
     args.name,
     {
@@ -46,7 +45,7 @@ Color.args = {
   name: 'withColor',
 }
 
-const FolderHelperTemplate: Story<any> = (args) => {
+const FolderHelperTemplate: StoryFn = (args) => {
   const values = useControls({
     myFolder: folder(
       {

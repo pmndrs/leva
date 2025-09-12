@@ -1,6 +1,6 @@
 import React from 'react'
 import Reset from './components/decorator-reset'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import { Leva, folder, useControls } from '../src'
 
@@ -9,7 +9,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn = (args) => {
   const values = useControls({
     number: 3,
     color: 'lightblue',
@@ -28,7 +28,7 @@ const Template: Story<any> = (args) => {
 export const Collapsed = Template.bind({})
 Collapsed.args = { collapsed: true }
 
-export const CollapsedControlled: Story<any> = (args, context) => {
+export const CollapsedControlled: StoryFn = (args, context) => {
   const [collapsed, setCollapsed] = React.useState(true)
   return Template(
     {
@@ -58,22 +58,22 @@ Flat.args = { flat: true }
 export const HideCopyButton = Template.bind({})
 HideCopyButton.args = { hideCopyButton: true }
 
-export const Title: Story<any> = (args, context) => {
+export const Title: StoryFn = (args, context) => {
   return Template({ titleBar: { title: args.title } }, context)
 }
 Title.args = { title: 'Custom title' }
 
-export const Drag: Story<any> = (args, context) => {
+export const Drag: StoryFn = (args, context) => {
   return Template({ titleBar: { drag: args.drag } }, context)
 }
 Drag.args = { drag: true }
 
-export const Filter: Story<any> = (args, context) => {
+export const Filter: StoryFn = (args, context) => {
   return Template({ titleBar: { filter: args.filter } }, context)
 }
 Filter.args = { filter: true }
 
-export const PositionControlled: Story<any> = (args, context) => {
+export const PositionControlled: StoryFn = (args, context) => {
   const [{ position }, set] = useControls(() => ({ position: { x: -50, y: 50 } }))
 
   return Template({ titleBar: { drag: args.drag, position, onDrag: (point) => set({ position: point }) } }, context)
@@ -90,7 +90,7 @@ const Component = () => {
   )
 }
 
-export const NeverHide: Story<any> = () => {
+export const NeverHide: StoryFn = () => {
   const [shown, setShown] = React.useState(true)
   return (
     <div>

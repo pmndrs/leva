@@ -1,5 +1,5 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Reset from 'leva/stories/components/decorator-reset'
 import { useControls } from 'leva/src'
@@ -12,7 +12,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn = (args: any) => {
   const data = useControls({ curve: args })
   return (
     <div>

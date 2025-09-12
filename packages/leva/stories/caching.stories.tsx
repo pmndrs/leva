@@ -1,6 +1,6 @@
 import React from 'react'
 import Reset from './components/decorator-reset'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import { useControls } from '../src'
 
@@ -19,7 +19,7 @@ const Controls = () => {
   )
 }
 
-const Template: Story<any> = () => {
+const Template: StoryFn = () => {
   const [mounted, toggle] = React.useState(true)
   return (
     <div>
