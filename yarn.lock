@@ -2454,7 +2454,6 @@ __metadata:
     eslint-plugin-react-hooks: ^4.3.0
     husky: ^7.0.4
     patch-package: ^6.4.7
-    postinstall-postinstall: ^2.1.0
     prettier: ^2.5.1
     pretty-quick: ^3.1.3
     react: ^18.0.0
@@ -15860,13 +15859,6 @@ __metadata:
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
   checksum: 9349fd99849b2e3d2e134ff949b7770ecb12375f352723ce2bcc06167eba3850ea7844c1b191a85cd915d6a396b4e8ee9a5267e6cc5d8d003d0cbc7a97555d39
-  languageName: node
-  linkType: hard
-
-"postinstall-postinstall@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "postinstall-postinstall@npm:2.1.0"
-  checksum: e1d34252cf8d2c5641c7d2db7426ec96e3d7a975f01c174c68f09ef5b8327bc8d5a9aa2001a45e693db2cdbf69577094d3fe6597b564ad2d2202b65fba76134b
   languageName: node
   linkType: hard
 

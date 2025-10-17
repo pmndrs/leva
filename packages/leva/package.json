@@ -4,6 +4,14 @@
   "main": "dist/leva.cjs.js",
   "module": "dist/leva.esm.js",
   "types": "dist/leva.cjs.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "plugin"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare-package.js"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
