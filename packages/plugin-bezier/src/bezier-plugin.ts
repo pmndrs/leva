@@ -21,13 +21,14 @@ export const BuiltIn: Record<BuiltInKeys, BezierArray> = {
 
 export const normalize = (input: BezierInput = [0.25, 0.1, 0.25, 1]) => {
   let { handles, ..._settings } = typeof input === 'object' && 'handles' in input ? input : { handles: input }
-  handles = typeof handles === 'string' ? BuiltIn[handles] : handles
+  handles = typeof handles === 'string' ? BuiltIn[handles as BuiltInKeys] || handles : handles
 
   const mergedSettings = { x1: abscissasSettings, y1: ordinatesSettings, x2: abscissasSettings, y2: ordinatesSettings }
 
   const { value: _value, settings } = normalizeVector(handles, mergedSettings, ['x1', 'y1', 'x2', 'y2'])
   const value = _value as InternalBezier
-  value.evaluate = bezier(..._value)
+  const bezierArgs = _value as [number, number, number, number]
+  value.evaluate = bezier(...bezierArgs)
   value.cssEasing = `cubic-bezier(${_value.join(',')})`
   return { value, settings: { ...settings, ...defaultSettings, ..._settings } as InternalBezierSettings }
 }
@@ -35,7 +36,8 @@ export const normalize = (input: BezierInput = [0.25, 0.1, 0.25, 1]) => {
 export const sanitize = (value: any, settings: InternalBezierSettings, prevValue?: any) => {
   const _value = sanitizeVector(value, settings, prevValue) as BezierArray
   const newValue = _value as InternalBezier
-  newValue.evaluate = bezier(..._value)
+  const bezierArgs = _value as [number, number, number, number]
+  newValue.evaluate = bezier(...bezierArgs)
   newValue.cssEasing = `cubic-bezier(${_value.join(',')})`
   return newValue
 }

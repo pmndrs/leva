@@ -261,6 +261,10 @@ importers:
       react-use-measure:
         specifier: ^2.1.1
         version: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@use-gesture/react':
+        specifier: ^10.0.0
+        version: 10.3.1(react@18.3.1)
 
   packages/plugin-dates:
     dependencies:
@@ -316,6 +320,10 @@ importers:
       react-dom:
         specifier: ^18.0.0 || ^19.0.0
         version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@use-gesture/react':
+        specifier: ^10.0.0
+        version: 10.3.1(react@18.3.1)
 
 packages:
   '@babel/code-frame@7.27.1':
