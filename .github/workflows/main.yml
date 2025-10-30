@@ -46,12 +46,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-build-
 
-      - name: Check formatting
-        run: pnpm prettier
-
-      - name: Lint files
-        run: pnpm lint:full
-
       - name: Build
         if: steps.pnpm-build-cache.outputs.cache-hit != 'true'
         run: pnpm build
@@ -59,4 +53,8 @@ jobs:
       - name: Check types
         run: pnpm tsc
 
-      
+      - name: Check formatting
+        run: pnpm prettier
+
+      - name: Lint files
+        run: pnpm lint:full
