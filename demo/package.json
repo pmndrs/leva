@@ -8,14 +8,20 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@leva-ui/plugin-bezier": "workspace:*",
+    "@leva-ui/plugin-dates": "workspace:*",
+    "@leva-ui/plugin-plot": "workspace:*",
+    "@leva-ui/plugin-spring": "workspace:*",
     "@radix-ui/react-icons": "^1.0.3",
     "@react-three/drei": "^8.8.3",
     "@react-three/fiber": "^7.0.26",
     "@stitches/react": "1.2.8",
-    "leva": "*",
+    "@use-gesture/react": "^10.0.0",
+    "leva": "workspace:*",
     "noisejs": "^2.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-dropzone": "^12.0.0",
     "react-use": "^17.3.2",
     "three": "^0.143.0",
     "wouter": "^2.7.5"

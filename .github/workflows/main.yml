@@ -5,7 +5,7 @@ on:
       - '.github/**'
       - 'packages/**'
       - 'package.json'
-      - 'yarn.lock'
+      - 'pnpm-lock.yaml'
       - '!demo/**'
       - '!docs/**'
       - '!**.md'
@@ -24,44 +24,37 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> "$GITHUB_OUTPUT"
-
-      - name: Cache Yarn dependencies
+      - name: Cache pnpm modules
         uses: actions/cache@v3
-        id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: yarn --silent
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.25.0
+          run_install: true
 
       - name: Check types
-        run: yarn tsc
+        run: pnpm tsc
 
       - name: Check formatting
-        run: yarn prettier
+        run: pnpm prettier
 
       - name: Lint files
-        run: yarn lint:full
+        run: pnpm lint:full
 
-      # TODO: this was blocking release #539
-      # - name: Cache Yarn build output
-      #   uses: actions/cache@v3
-      #   id: yarn-build-cache
-      #   with:
-      #     path: packages/**/dist
-      #     key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-yarn-build-
+      - uses: actions/cache@v3
+        name: Setup pnpm build cache
+        id: pnpm-build-cache
+        with:
+          path: packages/**/dist
+          key: ${{ runner.os }}-pnpm-build-${{ hashFiles('/packages/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-build-
 
-      - name: Yarn build (if no cache hit)
-        # if: steps.yarn-build-cache.outputs.cache-hit != 'true'
-        run: yarn build
-
-      # - name: Cypress run
-      #   run: yarn ci:test
+      - name: Build without cache
+        if: steps.pnpm-build-cache.outputs.cache-hit != 'true'
+        run: pnpm build
