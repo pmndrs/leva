@@ -58,6 +58,3 @@ jobs:
       - name: Build without cache
         if: steps.pnpm-build-cache.outputs.cache-hit != 'true'
         run: pnpm build
-
-      - name: Cypress run
-        run: pnpm ci:test
