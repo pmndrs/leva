@@ -4,6 +4,13 @@
   "main": "dist/leva-ui-plugin-dates.cjs.js",
   "module": "dist/leva-ui-plugin-dates.esm.js",
   "types": "dist/leva-ui-plugin-dates.cjs.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "node ../../scripts/prepare-package.js"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
