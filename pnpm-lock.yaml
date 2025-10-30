@@ -133,6 +133,18 @@ importers:
 
   demo:
     dependencies:
+      '@leva-ui/plugin-bezier':
+        specifier: workspace:*
+        version: link:../packages/plugin-bezier
+      '@leva-ui/plugin-dates':
+        specifier: workspace:*
+        version: link:../packages/plugin-dates
+      '@leva-ui/plugin-plot':
+        specifier: workspace:*
+        version: link:../packages/plugin-plot
+      '@leva-ui/plugin-spring':
+        specifier: workspace:*
+        version: link:../packages/plugin-spring
       '@radix-ui/react-icons':
         specifier: ^1.0.3
         version: 1.3.2(react@18.3.1)
@@ -145,9 +157,12 @@ importers:
       '@stitches/react':
         specifier: 1.2.8
         version: 1.2.8(react@18.3.1)
+      '@use-gesture/react':
+        specifier: ^10.0.0
+        version: 10.3.1(react@18.3.1)
       leva:
-        specifier: '*'
-        version: 0.10.0(@types/react@18.3.26)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: workspace:*
+        version: link:../packages/leva
       noisejs:
         specifier: ^2.1.0
         version: 2.1.0
@@ -157,6 +172,9 @@ importers:
       react-dom:
         specifier: ^18.0.0
         version: 18.3.1(react@18.3.1)
+      react-dropzone:
+        specifier: ^12.0.0
+        version: 12.1.0(react@18.3.1)
       react-use:
         specifier: ^17.3.2
         version: 17.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -12480,7 +12498,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.46.0
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@5.102.1)
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.57.1)(typescript@4.9.5)(webpack@4.47.0)
       glob: 7.2.3
@@ -12498,7 +12516,7 @@ snapshots:
       style-loader: 1.3.0(webpack@4.47.0)
       terser-webpack-plugin: 4.2.3(webpack@4.47.0)
       ts-dedent: 2.2.0
-      url-loader: 4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0)
+      url-loader: 4.1.1(file-loader@6.2.0(webpack@5.102.1))(webpack@4.47.0)
       util-deprecate: 1.0.2
       webpack: 4.47.0
       webpack-dev-middleware: 3.7.3(webpack@4.47.0)
@@ -12860,7 +12878,7 @@ snapshots:
       telejson: 6.0.8
       terser-webpack-plugin: 4.2.3(webpack@4.47.0)
       ts-dedent: 2.2.0
-      url-loader: 4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0)
+      url-loader: 4.1.1(file-loader@6.2.0(webpack@5.102.1))(webpack@4.47.0)
       util-deprecate: 1.0.2
       webpack: 4.47.0
       webpack-dev-middleware: 3.7.3(webpack@4.47.0)
@@ -15902,12 +15920,6 @@ snapshots:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
       webpack: 4.47.0
-
-  file-loader@6.2.0(webpack@5.102.1):
-    dependencies:
-      loader-utils: 2.0.4
-      schema-utils: 3.3.0
-      webpack: 5.102.1
 
   file-selector@0.5.0:
     dependencies:
@@ -19804,14 +19816,14 @@ snapshots:
 
   urix@0.1.0: {}
 
-  url-loader@4.1.1(file-loader@6.2.0(webpack@4.47.0))(webpack@4.47.0):
+  url-loader@4.1.1(file-loader@6.2.0(webpack@5.102.1))(webpack@4.47.0):
     dependencies:
       loader-utils: 2.0.4
       mime-types: 2.1.35
       schema-utils: 3.3.0
       webpack: 4.47.0
     optionalDependencies:
-      file-loader: 6.2.0(webpack@5.102.1)
+      file-loader: 6.2.0(webpack@4.47.0)
 
   url-parse@1.5.10:
     dependencies:
