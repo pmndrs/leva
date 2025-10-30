@@ -26,7 +26,6 @@ const defaultSettings = { boundsX: [-1, 1], boundsY: [-Infinity, Infinity], grap
 
 export const normalize = ({ expression, ..._settings }: PlotInput, _path: string, data: Data) => {
   const get = (path: string) => {
-    // @ts-expect-error
     if ('value' in data[path]) return data[path].value
     return undefined // TODO should throw
   }

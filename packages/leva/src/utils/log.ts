@@ -32,21 +32,18 @@ const ErrorList = {
   [LevaErrors.PATH_DOESNT_EXIST]: (path: string) => [
     `Error getting the value at path \`${path}\`. There is probably an error in your \`render\` function.`,
   ],
-  [LevaErrors.PATH_DOESNT_EXIST]: (path: string) => [`Error accessing the value at path \`${path}\``],
   [LevaErrors.INPUT_TYPE_OVERRIDE]: (path: string, type: string, wrongType: string) => [
     `Input at path \`${path}\` already exists with type: \`${type}\`. Its type cannot be overridden with type \`${wrongType}\`.`,
   ],
   [LevaErrors.EMPTY_KEY]: () => ['Keys can not be empty, if you want to hide a label use whitespace.'],
 }
 
-function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: Parameters<typeof ErrorList[T]>) {
-  //@ts-expect-error
-  const [message, ...rest] = ErrorList[errorType](...args)
+function _log<T extends LevaErrors>(fn: 'log' | 'warn', errorType: T, ...args: any[]) {
+  const errorFn = ErrorList[errorType] as (...args: any[]) => [string, ...unknown[]]
+  const [message, ...rest] = errorFn(...args)
   // eslint-disable-next-line no-console
   console[fn]('LEVA: ' + message, ...rest)
 }
 
-// @ts-expect-error
-export const warn = _log.bind(null, 'warn')
-// @ts-expect-error
-export const log = _log.bind(null, 'log')
+export const warn = _log.bind(null, 'warn') as <T extends LevaErrors>(errorType: T, ...args: any[]) => void
+export const log = _log.bind(null, 'log') as <T extends LevaErrors>(errorType: T, ...args: any[]) => void

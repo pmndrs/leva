@@ -4,5 +4,5 @@ import { useCompareMemoize } from './useCompareMemoize'
 export function useDeepMemo<T>(fn: () => T, deps: React.DependencyList | undefined) {
   // NOTE: useMemo implementation allows undefined, but types do not
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useMemo(fn, useCompareMemoize(deps, true)!)
+  return useMemo(fn, useCompareMemoize(deps, true) ?? [])
 }
