@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
 
@@ -177,39 +178,41 @@ const LevaCore = React.memo(
     globalStyles()
 
     return (
-      <PanelSettingsContext.Provider value={{ hideCopyButton }}>
-        <StyledRoot
-          ref={rootRef}
-          className={rootClass}
-          fill={fill}
-          flat={flat}
-          oneLineLabels={oneLineLabels}
-          hideTitleBar={!titleBar}
-          style={{ display: shouldShow ? 'block' : 'none' }}>
-          {titleBar && (
-            <TitleWithFilter
-              onDrag={(point) => {
-                set(point)
-                onDrag?.(point)
-              }}
-              onDragStart={(point) => onDragStart?.(point)}
-              onDragEnd={(point) => onDragEnd?.(point)}
-              setFilter={setFilter}
-              toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
-              toggled={toggled}
-              title={title}
-              drag={drag}
-              filterEnabled={filterEnabled}
-              from={position}
-            />
-          )}
-          {shouldShow && (
-            <StoreContext.Provider value={store}>
-              <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
-            </StoreContext.Provider>
-          )}
-        </StyledRoot>
-      </PanelSettingsContext.Provider>
+      <RadixTooltip.Provider>
+        <PanelSettingsContext.Provider value={{ hideCopyButton }}>
+          <StyledRoot
+            ref={rootRef}
+            className={rootClass}
+            fill={fill}
+            flat={flat}
+            oneLineLabels={oneLineLabels}
+            hideTitleBar={!titleBar}
+            style={{ display: shouldShow ? 'block' : 'none' }}>
+            {titleBar && (
+              <TitleWithFilter
+                onDrag={(point) => {
+                  set(point)
+                  onDrag?.(point)
+                }}
+                onDragStart={(point) => onDragStart?.(point)}
+                onDragEnd={(point) => onDragEnd?.(point)}
+                setFilter={setFilter}
+                toggle={(flag?: boolean) => setToggle((t) => flag ?? !t)}
+                toggled={toggled}
+                title={title}
+                drag={drag}
+                filterEnabled={filterEnabled}
+                from={position}
+              />
+            )}
+            {shouldShow && (
+              <StoreContext.Provider value={store}>
+                <TreeWrapper isRoot fill={fill} flat={flat} tree={tree} toggled={toggled} />
+              </StoreContext.Provider>
+            )}
+          </StyledRoot>
+        </PanelSettingsContext.Provider>
+      </RadixTooltip.Provider>
     )
   }
 )
