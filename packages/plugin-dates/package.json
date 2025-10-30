@@ -21,6 +21,8 @@
     "react-datepicker": "^7.6.0"
   },
   "devDependencies": {
-    "@types/react-datepicker": "^7.0.0"
+    "@types/react-datepicker": "^7.0.0",
+    "@use-gesture/react": "^10.0.0",
+    "leva": "workspace:*"
   }
 }
