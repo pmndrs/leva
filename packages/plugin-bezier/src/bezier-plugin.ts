@@ -23,9 +23,9 @@ export const normalize = (input: BezierInput = [0.25, 0.1, 0.25, 1]) => {
   let { handles, ..._settings } = typeof input === 'object' && 'handles' in input ? input : { handles: input }
   if (typeof handles === 'string') {
     if (handles in BuiltIn) {
-      handles = BuiltIn[handles as BuiltInKeys];
+      handles = BuiltIn[handles as BuiltInKeys]
     } else {
-      throw new Error(`Invalid bezier key: "${handles}". Must be one of: ${Object.keys(BuiltIn).join(', ')}`);
+      throw new Error(`Invalid bezier key: "${handles}". Must be one of: ${Object.keys(BuiltIn).join(', ')}`)
     }
   }
 
