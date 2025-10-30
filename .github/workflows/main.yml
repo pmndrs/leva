@@ -26,10 +26,11 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+        run: echo "dir=$(yarn config get cacheFolder)" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v3
+        id: yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -48,16 +49,16 @@ jobs:
       - name: Lint files
         run: yarn lint:full
 
-      - uses: actions/cache@v3
-        name: Setup Yarn build cache
+      - name: Cache Yarn build output
+        uses: actions/cache@v3
         id: yarn-build-cache
         with:
           path: packages/**/dist
-          key: ${{ runner.os }}-yarn-build-${{ hashFiles('/packages/**/*') }}
+          key: ${{ runner.os }}-yarn-build-${{ hashFiles('packages/**') }}
           restore-keys: |
             ${{ runner.os }}-yarn-build-
 
-      - name: Yarn build without cache
+      - name: Yarn build (if no cache hit)
         if: steps.yarn-build-cache.outputs.cache-hit != 'true'
         run: yarn build
 
