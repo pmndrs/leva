@@ -48,7 +48,7 @@ jobs:
       - name: Lint files
         run: yarn lint:full
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v2
         name: Setup Yarn build cache
         id: yarn-build-cache
         with:
