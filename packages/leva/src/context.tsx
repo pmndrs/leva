@@ -24,14 +24,11 @@ export function usePanelSettingsContext() {
   return useContext(PanelSettingsContext)!
 }
 
-type ReactChild = React.ReactElement | string | number
-
 type LevaStoreProviderProps = {
-  children: ReactChild | ReactChild[] | typeof React.Children
+  children: React.ReactNode
   store: StoreType
 }
 
 export function LevaStoreProvider({ children, store }: LevaStoreProviderProps) {
-  // @ts-expect-error portal JSX types are broken upstream
   return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
 }

@@ -1,5 +1,6 @@
 import React, { useMemo, useRef } from 'react'
 import useMeasure from 'react-use-measure'
+import type { FullGestureState } from '@use-gesture/react'
 import { mergeRefs, useDrag } from 'leva/plugin'
 import { useRange, useInvertedRange } from './bezier-utils'
 import { Svg } from './StyledBezier'
@@ -35,12 +36,20 @@ export function BezierSvg({
   const handleRight = useRef<SVGCircleElement>(null)
   const bounds = useRef<DOMRect>()
 
-  const bind = useDrag(({ xy: [x, y], event, first, memo }) => {
+  const bind = useDrag((state: FullGestureState<'drag'>) => {
+    const {
+      xy: [x, y],
+      event,
+      first,
+      memo,
+    } = state
+    let currentMemo = memo as number | undefined
+
     if (first) {
       bounds.current = svgRef.current!.getBoundingClientRect()
-      memo = [handleLeft.current, handleRight.current].indexOf(event!.target as any)
-      if (memo < 0) memo = x - bounds.current.left < width / 2 ? 0 : 1
-      memo *= 2
+      currentMemo = [handleLeft.current, handleRight.current].indexOf(event!.target as any)
+      if (currentMemo < 0) currentMemo = x - bounds.current.left < width / 2 ? 0 : 1
+      currentMemo *= 2
     }
 
     const relX = x - bounds.current!.left
@@ -48,12 +57,12 @@ export function BezierSvg({
 
     onUpdate((v: BezierType) => {
       const newV = [...v]
-      newV[memo] = ir(relX, width)
-      newV[memo + 1] = 1 - ir(relY, height)
+      newV[currentMemo!] = ir(relX, width)
+      newV[currentMemo! + 1] = 1 - ir(relY, height)
       return newV
     })
 
-    return memo
+    return currentMemo
   })
 
   const { x1, y1, x2, y2 } = displayValue
