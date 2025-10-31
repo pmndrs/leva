@@ -1,6 +1,7 @@
 // used as entrypoint
 
 // export all components
+import React from 'react'
 import { Row, Label, Portal, Overlay } from '../components/UI'
 import { String } from '../components/String'
 import { Number } from '../components/Number'
@@ -9,7 +10,7 @@ import { Select } from '../components/Select'
 import { Vector } from '../components/Vector'
 import { InnerLabel } from '../components/ValueInput/StyledInput'
 
-export const Components = {
+export const Components: Record<string, React.ComponentType<any>> = {
   Row,
   Label,
   Portal,

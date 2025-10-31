@@ -105,7 +105,7 @@ const utils = {
     createStateClass(value, { key: '$active', borderColor: '$accent1', inset: true }),
 }
 
-export const { styled, css, createTheme, globalCss, keyframes } = createStitches({
+const stitches: ReturnType<typeof createStitches> = createStitches({
   prefix: 'leva',
   theme: getDefaultTheme(),
   utils: {
@@ -141,6 +141,12 @@ export const { styled, css, createTheme, globalCss, keyframes } = createStitches
     $active: (value: string) => ({ '&:active': utils.$activeStyle()(value) }),
   },
 })
+
+export const styled: typeof stitches.styled = stitches.styled
+export const css: typeof stitches.css = stitches.css
+export const createTheme: typeof stitches.createTheme = stitches.createTheme
+export const globalCss: typeof stitches.globalCss = stitches.globalCss
+export const keyframes: typeof stitches.keyframes = stitches.keyframes
 
 export const globalStyles = globalCss({
   '.leva__panel__dragged': {
