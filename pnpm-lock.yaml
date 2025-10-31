@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@use-gesture/react':
+      specifier: ^10.3.1
+      version: 10.3.1
+
 importers:
 
   .:
@@ -192,7 +198,7 @@ importers:
         specifier: 1.2.8
         version: 1.2.8(react@18.3.1)
       '@use-gesture/react':
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       leva:
         specifier: workspace:*
@@ -247,7 +253,7 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8(react@18.3.1)
       '@use-gesture/react':
-        specifier: ^10.2.5
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       colord:
         specifier: ^2.9.2
@@ -294,7 +300,7 @@ importers:
         version: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@use-gesture/react':
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       leva:
         specifier: workspace:*
@@ -316,7 +322,7 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@use-gesture/react':
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       leva:
         specifier: workspace:*
@@ -335,7 +341,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@use-gesture/react':
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       leva:
         specifier: workspace:*
@@ -354,7 +360,7 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@use-gesture/react':
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.3.1(react@18.3.1)
       leva:
         specifier: workspace:*
