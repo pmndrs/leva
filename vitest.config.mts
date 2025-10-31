@@ -6,6 +6,9 @@ export default defineConfig(async () => {
   const storybookPlugins = await storybookTest({ configDir: '.storybook' })
   return {
     plugins: storybookPlugins,
+    optimizeDeps: {
+      noDiscovery: true,
+    },
     test: {
       name: 'storybook',
       exclude: ['**/node_modules/**', '**/dist/**'],
