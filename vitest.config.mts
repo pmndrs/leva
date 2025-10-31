@@ -7,13 +7,10 @@ export default defineConfig(async () => {
   return {
     plugins: storybookPlugins,
     optimizeDeps: {
-      noDiscovery: true,
-      include: [],
+      include: ['react', 'react-dom'],
     },
-    server: {
-      deps: {
-        disabled: true,
-      },
+    resolve: {
+      dedupe: ['react', 'react-dom'],
     },
     test: {
       name: 'storybook',
