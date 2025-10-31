@@ -109,7 +109,7 @@ export const Store = function (this: StoreType) {
   }
 
   this.dispose = () => {
-    store.setState((s) => {
+    store.setState(() => {
       return { data: {} }
     })
   }
