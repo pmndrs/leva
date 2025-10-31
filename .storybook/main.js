@@ -2,7 +2,7 @@ const path = require('path')
 
 module.exports = {
   stories: ['../packages/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
+  addons: ['@storybook/addon-links', '@storybook/addon-docs', '@storybook/addon-vitest'],
   framework: {
     name: '@storybook/react-webpack5',
     options: {
@@ -25,7 +25,7 @@ module.exports = {
       ...options.presets,
     ],
   }),
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     // Add babel-loader for TS/TSX/JS/JSX files in our packages and .storybook
     config.module.rules.push({
       test: /\.(js|jsx|ts|tsx)$/,
