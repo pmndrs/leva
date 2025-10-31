@@ -8,14 +8,13 @@ export default defineConfig(async () => {
     plugins: storybookPlugins,
     test: {
       name: 'storybook',
-      include: ['**/*.stories.@(js|jsx|ts|tsx)'],
       exclude: ['**/node_modules/**', '**/dist/**'],
       globals: true,
       browser: {
         enabled: true,
         name: 'chromium',
         provider: playwright(),
-        instances: [playwright()],
+        instances: [{ browser: 'chromium', provider: playwright() }],
       },
     },
   }
