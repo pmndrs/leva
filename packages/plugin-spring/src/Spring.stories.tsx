@@ -12,7 +12,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: StoryFn<ReturnType<typeof spring>> = (args: ReturnType<typeof spring>) => {
+const Template: StoryFn<ReturnType<typeof spring>> = (args) => {
   const values = useControls(
     {
       bar: spring({ tension: 100, friction: 30 }),
