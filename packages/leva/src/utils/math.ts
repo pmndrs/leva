@@ -58,14 +58,24 @@ export function evaluate(expr: string): number {
     return evaluate(expr.replace(exp, (_, a, b) => Math.pow(Number(a), Number(b)).toString()))
   }
   if (muldiv.test(expr)) {
-    return evaluate(expr.replace(muldiv, (_, a, op, b) =>
-      op === '*' ? (Number(a) * Number(b)).toString() : (Number(b) === 0 ? (() => { throw new Error('Division by zero') })() : (Number(a) / Number(b)).toString())
-    ))
+    return evaluate(
+      expr.replace(muldiv, (_, a, op, b) =>
+        op === '*'
+          ? (Number(a) * Number(b)).toString()
+          : Number(b) === 0
+          ? (() => {
+              throw new Error('Division by zero')
+            })()
+          : (Number(a) / Number(b)).toString()
+      )
+    )
   }
   if (addsub.test(expr)) {
-    return evaluate(expr.replace(addsub, (_, a, op, b) =>
-      op === '+' ? (Number(a) + Number(b)).toString() : (Number(a) - Number(b)).toString()
-    ))
+    return evaluate(
+      expr.replace(addsub, (_, a, op, b) =>
+        op === '+' ? (Number(a) + Number(b)).toString() : (Number(a) - Number(b)).toString()
+      )
+    )
   }
   return Number(expr)
 }
