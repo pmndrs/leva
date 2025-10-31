@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within } from 'storybook/test'
+import { expect, within, userEvent } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -18,7 +18,7 @@ const Template: StoryFn = (args) => {
 
   return (
     <div>
-      <pre>{JSON.stringify(values, null, '  ')}</pre>
+      <pre data-testid="output">{JSON.stringify(values, null, '  ')}</pre>
     </div>
   )
 }
@@ -88,4 +88,40 @@ Complete.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
   // Verify the story renders
   await expect(canvas.getByText(/5/)).toBeInTheDocument()
+}
+
+export const SuffixValueTest = Template.bind({})
+SuffixValueTest.args = {
+  value: 10,
+  min: 10,
+  suffix: 'ms',
+}
+SuffixValueTest.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+
+  // Verify initial value is a number, not a string with suffix
+  const output = canvas.getByTestId('output')
+  await expect(output.textContent).toContain('"foo": 10')
+
+  // Find the input field (Leva panel is rendered in document.body)
+  const input = within(document.body).getByLabelText(/foo/i) as HTMLInputElement
+
+  // Verify the input displays the suffix
+  await expect(input.value).toBe('10ms')
+
+  // Change the value
+  await userEvent.clear(input)
+  await userEvent.type(input, '15')
+
+  // Blur to trigger update
+  await userEvent.tab()
+
+  // Wait a bit for the state to update
+  await new Promise((resolve) => setTimeout(resolve, 100))
+
+  // Verify the returned value is numeric without suffix
+  await expect(output.textContent).toContain('"foo": 15')
+
+  // Verify it doesn't contain the suffix in the value
+  await expect(output.textContent).not.toContain('"foo": "15ms"')
 }

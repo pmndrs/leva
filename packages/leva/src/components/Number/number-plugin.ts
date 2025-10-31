@@ -13,11 +13,10 @@ export const schema = (v: any) => {
   return false
 }
 
-export const sanitize = (v: any, { min = -Infinity, max = Infinity, suffix }: InternalNumberSettings) => {
+export const sanitize = (v: any, { min = -Infinity, max = Infinity }: InternalNumberSettings) => {
   const _v = parseFloat(v as string)
   if (v === '' || isNaN(_v)) throw Error('Invalid number')
-  const f = clamp(_v, min, max)
-  return suffix ? f + suffix : f
+  return clamp(_v, min, max)
 }
 
 export const format = (v: any, { pad = 0, suffix }: InternalNumberSettings) => {
@@ -50,7 +49,7 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
   const pad = Math.round(clamp(Math.log10(1 / padStep), 0, 2))
 
   return {
-    value: suffix ? _value + suffix : _value,
+    value: _value,
     settings: { initialValue: _value, step, pad, min, max, suffix, ..._settings },
   }
 }
