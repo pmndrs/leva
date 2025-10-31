@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within, userEvent } from 'storybook/test'
+import { expect, within, userEvent, waitFor } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -45,10 +45,14 @@ Simple.play = async ({ canvasElement }) => {
   await userEvent.tab()
 
   // Wait for the value to update in the JSON output
-  await expect(canvas.getByText(/New text value/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/New text value/)).toBeInTheDocument()
+  })
 
   // Verify the old value is gone
-  await expect(canvas.queryByText(/Leva is awesome/)).not.toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.queryByText(/Leva is awesome/)).not.toBeInTheDocument()
+  })
 }
 
 export const DefaultRows = Template.bind({})
@@ -72,7 +76,9 @@ DefaultRows.play = async ({ canvasElement }) => {
   await userEvent.tab()
 
   // Verify the updated value appears in the output
-  await expect(canvas.getByText(/Updated textarea content/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/Updated textarea content/)).toBeInTheDocument()
+  })
 }
 
 export const CustomRows = Template.bind({})
@@ -94,7 +100,9 @@ CustomRows.play = async ({ canvasElement }) => {
   await userEvent.tab()
 
   // Verify update
-  await expect(canvas.getByText(/Changed content/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/Changed content/)).toBeInTheDocument()
+  })
 }
 
 export const NonEditable = Template.bind({})
