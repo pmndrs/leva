@@ -8,6 +8,12 @@ export default defineConfig(async () => {
     plugins: storybookPlugins,
     optimizeDeps: {
       noDiscovery: true,
+      include: [],
+    },
+    server: {
+      deps: {
+        disabled: true,
+      },
     },
     test: {
       name: 'storybook',
