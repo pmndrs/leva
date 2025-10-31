@@ -55,7 +55,7 @@ export const Store = function (this: StoreType) {
     })
 
     const visiblePaths: string[] = []
-    orderedPaths.forEach((path: string) => {
+    orderedPaths.forEach((path) => {
       if (
         path in data &&
         // if input is mounted
