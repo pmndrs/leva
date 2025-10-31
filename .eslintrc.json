@@ -1,5 +1,5 @@
 {
-  "extends": "react-app",
+  "extends": ["react-app", "plugin:storybook/recommended"],
   "rules": {
     "no-console": "warn"
   },
