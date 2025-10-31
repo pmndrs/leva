@@ -1,5 +1,6 @@
-import shallow from 'zustand/shallow'
+import { useShallow } from 'zustand/shallow'
 import { useStoreContext } from '../context'
+import type { State } from '../types'
 
 export const useValue = (path: string) => {
   return useValues([path])[path]
@@ -8,12 +9,13 @@ export const useValue = (path: string) => {
 export const useValues = <T extends string>(paths: T[]) => {
   const store = useStoreContext()
   const value = store.useStore(
-    ({ data }) =>
+    useShallow((state: State) =>
       paths.reduce((acc, path) => {
-        if (data[path] && 'value' in data[path]) return Object.assign(acc, { [path]: data[path].value })
+        if (state.data[path] && 'value' in state.data[path])
+          return Object.assign(acc, { [path]: state.data[path].value })
         return acc
-      }, {} as { [key in T]: any }),
-    shallow
+      }, {} as { [key in T]: any })
+    )
   )
   return value
 }
