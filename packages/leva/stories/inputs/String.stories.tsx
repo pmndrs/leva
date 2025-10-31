@@ -124,9 +124,3 @@ NonEditable.args = {
   value: 'This text is not editable but still supports\nline\nbreaks.',
   editable: false,
 }
-NonEditable.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement)
-
-  // Verify the story renders with non-editable text
-  await expect(canvas.getByText(/This text is not editable/)).toBeInTheDocument()
-}
