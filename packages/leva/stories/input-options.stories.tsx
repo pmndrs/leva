@@ -127,7 +127,8 @@ export const OnChangeWithRender = ({ transient }) => {
     color: {
       value: '#f00',
       onChange: (value) => {
-        ref.current!.innerHTML = value
+        if (!ref.current) return
+        ref.current.innerHTML = value
       },
       transient,
     },
@@ -157,6 +158,7 @@ export const OnChangeFromPanel = () => {
       onChange: (value, path, context) => {
         const node = window.document.createElement('pre')
         node.innerText = JSON.stringify({ value, path, context })
+        if (!ref.current) return
         ref.current!.appendChild(node)
         ref.current!.scrollTop = ref.current!.scrollHeight
       },
