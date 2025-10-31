@@ -18,4 +18,4 @@ export const parameters = {
   }
 }
 
-export const  decorators = [(Story) => <div style={{ color: "white" }}><Story /></div>]
+export const decorators = [(Story) => <div><Story /></div>]

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Meta } from '@storybook/react'
+import { expect, within } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -22,6 +23,11 @@ export const Button = () => {
     </div>
   )
 }
+Button.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/number/)).toBeInTheDocument()
+}
 
 export const DisabledButton = () => {
   const values = useControls({
@@ -34,4 +40,9 @@ export const DisabledButton = () => {
       <pre>{JSON.stringify(values, null, '  ')}</pre>
     </div>
   )
+}
+DisabledButton.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/number/)).toBeInTheDocument()
 }

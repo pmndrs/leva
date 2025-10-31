@@ -6,6 +6,7 @@ on:
       - 'packages/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - '.storybook/**'
       - '!demo/**'
       - '!docs/**'
       - '!**.md'
@@ -34,7 +35,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 7.25.0
+          version: 9
           run_install: true
 
       - uses: actions/cache@v3

@@ -25,7 +25,7 @@ module.exports = {
       ...options.presets,
     ],
   }),
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (config) => {
     // Add babel-loader for TS/TSX/JS/JSX files in our packages and .storybook
     config.module.rules.push({
       test: /\.(js|jsx|ts|tsx)$/,
