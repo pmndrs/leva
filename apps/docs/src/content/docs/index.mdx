@@ -1,0 +1,73 @@
+---
+title: Welcome to Leva
+description: A GUI you are going to lava. Customizable, extensible and beautiful by default.
+template: splash
+hero:
+  tagline: A GUI you are going to lava. Customizable, extensible and beautiful by default.
+  actions:
+    - text: Get Started
+      link: /getting-started/installation/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/pmndrs/leva
+      icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+
+## Features
+
+<CardGrid>
+  <Card title="Beautiful by default" icon="star">
+    Leva comes with a gorgeous, modern UI that works great in any application.
+  </Card>
+  <Card title="12+ Input Types" icon="setting">
+    Support for numbers, colors, vectors, images, and more with smart type recognition.
+  </Card>
+  <Card title="Easy Plugins" icon="puzzle">
+    Create custom input types with a simple, well-documented plugin API.
+  </Card>
+  <Card title="Keyboard Accessible" icon="keyboard">
+    Full keyboard support for navigation and value manipulation.
+  </Card>
+  <Card title="Zero Config" icon="rocket">
+    No setup required—just import and use anywhere in your app.
+  </Card>
+  <Card title="TypeScript Support" icon="approve-check">
+    First-class TypeScript support with full type inference.
+  </Card>
+</CardGrid>
+
+## Quick Example
+
+```jsx
+import { useControls } from 'leva'
+
+function MyComponent() {
+  const { name, age, color } = useControls({
+    name: 'World',
+    age: 25,
+    color: '#ff0000',
+  })
+
+  return (
+    <div style={{ color }}>
+      Hello {name}, you are {age} years old!
+    </div>
+  )
+}
+```
+
+## Why Leva?
+
+Leva makes it incredibly easy to add a GUI to your React applications. Whether you're prototyping, debugging, or building creative tools, Leva provides an intuitive interface that adapts to your needs.
+
+- **Smart Type Recognition**: Just pass your values, Leva figures out the best input type
+- **Extensible**: Create custom plugins for specialized inputs
+- **Customizable**: Theme the entire GUI to match your application
+- **No Boilerplate**: Start using it immediately without configuration
+
+## Ready to get started?
+
+Check out the [Installation Guide](/getting-started/installation/) to begin using Leva in your project.

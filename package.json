@@ -27,6 +27,9 @@
     "demo:dev": "pnpm --filter demo run dev",
     "demo:build": "pnpm --filter demo run build",
     "demo:serve": "pnpm --filter demo run serve",
+    "docs:dev": "pnpm --filter docs run dev",
+    "docs:build": "pnpm --filter docs run build",
+    "docs:preview": "pnpm --filter docs run preview",
     "ci:test": "pnpm demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run",
     "prettier": "prettier --check ."
   },
