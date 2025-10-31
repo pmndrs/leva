@@ -96,7 +96,7 @@
     "start-server-and-test": "^1.15.2",
     "storybook": "^10.0.2",
     "tsd": "^0.25.0",
-    "typescript": "^4.9.4"
+    "typescript": "^5.7.2"
   },
   "prettier": {
     "bracketSameLine": true,

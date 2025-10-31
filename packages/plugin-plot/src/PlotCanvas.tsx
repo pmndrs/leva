@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
-import { useMove } from '@use-gesture/react'
+import { useMove, type FullGestureState } from '@use-gesture/react'
 import { useCanvas2d, useTh, range, invertedRange, debounce, useTransform, clamp, Components } from 'leva/plugin'
 import { Wrapper, Canvas, Dot, ToolTip } from './StyledPlot'
 import type { InternalPlot, InternalPlotSettings } from './plot-types'
@@ -75,7 +75,11 @@ export const PlotCanvas = React.memo(({ value: expr, settings }: PlotCanvasProps
   const [dotRef, set] = useTransform<HTMLDivElement>()
   const canvasBounds = useRef<DOMRect>()
 
-  const bind = useMove(({ xy: [x], first }) => {
+  const bind = useMove((state: FullGestureState<'move'>) => {
+    const {
+      xy: [x],
+      first,
+    } = state
     if (first) {
       canvasBounds.current = canvas.current!.getBoundingClientRect()
     }

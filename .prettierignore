@@ -9,3 +9,4 @@ dist/
 node_modules/
 patches/
 storybook-static/
+pnpm-lock.yaml

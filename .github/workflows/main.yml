@@ -37,15 +37,6 @@ jobs:
           version: 7.25.0
           run_install: true
 
-      - name: Check types
-        run: pnpm tsc
-
-      - name: Check formatting
-        run: pnpm prettier
-
-      - name: Lint files
-        run: pnpm lint:full
-
       - uses: actions/cache@v3
         name: Setup pnpm build cache
         id: pnpm-build-cache
@@ -55,6 +46,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-build-
 
-      - name: Build without cache
+      - name: Build
         if: steps.pnpm-build-cache.outputs.cache-hit != 'true'
         run: pnpm build
+
+      - name: Check types
+        run: pnpm tsc
+
+      - name: Check formatting
+        run: pnpm prettier
+
+      - name: Lint files
+        run: pnpm lint:full

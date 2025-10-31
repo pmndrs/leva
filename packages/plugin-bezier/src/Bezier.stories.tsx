@@ -1,8 +1,9 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 
+// @ts-ignore
 import Reset from 'leva/stories/components/decorator-reset'
-import { useControls } from 'leva/src'
+import { useControls } from 'leva'
 
 import { bezier } from './index'
 import './Bezier.stories.css'

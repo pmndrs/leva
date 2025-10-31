@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useMemo } from 'react'
 import { a, useSpring } from '@react-spring/web'
+import type { FullGestureState } from '@use-gesture/react'
 import { useCanvas2d, useDrag, useInputContext, debounce, colord, useTh } from 'leva/plugin'
 import { Canvas, SpringPreview } from './StyledSpring'
 import { springFn } from './math'
@@ -28,7 +29,11 @@ export function SpringCanvas() {
     immediate: (k) => k === 'opacity',
   }))
 
-  const bind = useDrag(({ movement: [x, y], memo = [tension, friction] }) => {
+  const bind = useDrag((state: FullGestureState<'drag'>) => {
+    const {
+      movement: [x, y],
+      memo = [tension, friction],
+    } = state
     onUpdate({
       ...value,
       tension: memo[0] - Math.round(x) * ts.step,
