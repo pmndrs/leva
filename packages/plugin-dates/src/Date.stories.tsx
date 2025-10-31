@@ -1,5 +1,5 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 // @ts-ignore
 import Reset from '../../leva/stories/components/decorator-reset'
@@ -13,7 +13,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<DateInput> = (args) => {
+const Template: StoryFn<DateInput> = (args: DateInput) => {
   const { birthday } = useControls({ birthday: date(args) })
   return <div>{birthday.formattedDate}</div>
 }
