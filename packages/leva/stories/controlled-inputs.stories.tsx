@@ -1,4 +1,4 @@
-import { Meta, Story } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { useDrag } from '@use-gesture/react'
 import React, { ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
 import Reset from './components/decorator-reset'
@@ -12,7 +12,7 @@ export default {
 
 const formStyles: React.CSSProperties = { display: 'flex', flexDirection: 'column', gap: '0.5em' }
 
-export const ExternalUpdatesWithSet: Story = () => {
+export const ExternalUpdatesWithSet: StoryFn = () => {
   const [{ username, counter }, set] = useControls(() => ({ username: 'Mario', counter: { value: 0, step: 1 } }))
 
   return (
@@ -30,7 +30,7 @@ export const ExternalUpdatesWithSet: Story = () => {
   )
 }
 
-export const ExternalUpdatesWithGetAndSet: Story = () => {
+export const ExternalUpdatesWithGetAndSet: StoryFn = () => {
   const [{ counter }, set, get] = useControls(() => ({ counter: 0 }))
   const [{ counter: counter2, counterB }, set2, get2] = useControls('folder', () => ({
     counter: 0,
@@ -97,7 +97,7 @@ const Circle = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<'div'>>((prop
 
 ExternalUpdatesWithSet.storyName = 'External Updates With set'
 
-export const OnChangeAndSet: Story = () => {
+export const OnChangeAndSet: StoryFn = () => {
   const circleRef = useRef<HTMLDivElement>(null)
   const [, set] = useControls(() => ({
     position: {

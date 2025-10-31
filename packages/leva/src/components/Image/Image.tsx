@@ -11,14 +11,14 @@ export function ImageComponent() {
   const { popinRef, wrapperRef, shown, show, hide } = usePopin()
 
   const onDrop = useCallback(
-    <T extends File>(acceptedFiles: T[]) => {
+    (acceptedFiles: File[]) => {
       if (acceptedFiles.length) onUpdate(acceptedFiles[0])
     },
     [onUpdate]
   )
 
   const clear = useCallback(
-    (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation()
       onUpdate(undefined)
     },

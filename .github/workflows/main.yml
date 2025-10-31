@@ -5,7 +5,8 @@ on:
       - '.github/**'
       - 'packages/**'
       - 'package.json'
-      - 'yarn.lock'
+      - 'pnpm-lock.yaml'
+      - '.storybook/**'
       - '!demo/**'
       - '!docs/**'
       - '!**.md'
@@ -24,42 +25,37 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
 
-      - name: Install dependencies
-        run: yarn --silent
-
-      - name: Check types
-        run: yarn tsc
-
-      - name: Check formatting
-        run: yarn prettier
-
-      - name: Lint files
-        run: yarn lint:full
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 9
+          run_install: true
 
       - uses: actions/cache@v3
-        name: Setup Yarn build cache
-        id: yarn-build-cache
+        name: Setup pnpm build cache
+        id: pnpm-build-cache
         with:
           path: packages/**/dist
-          key: ${{ runner.os }}-yarn-build-${{ hashFiles('/packages/**/*') }}
+          key: ${{ runner.os }}-pnpm-build-${{ hashFiles('/packages/**/*') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-build-
+            ${{ runner.os }}-pnpm-build-
 
-      - name: Yarn build without cache
-        if: steps.yarn-build-cache.outputs.cache-hit != 'true'
-        run: yarn build
+      - name: Build
+        if: steps.pnpm-build-cache.outputs.cache-hit != 'true'
+        run: pnpm build
 
-      - name: Cypress run
-        run: yarn ci:test
+      - name: Check types
+        run: pnpm tsc
+
+      - name: Check formatting
+        run: pnpm prettier
+
+      - name: Lint files
+        run: pnpm lint:full

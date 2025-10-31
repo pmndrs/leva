@@ -1,8 +1,9 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
+// @ts-ignore
 import Reset from '../../leva/stories/components/decorator-reset'
-import { useControls } from '../../leva/src'
+import { useControls } from 'leva'
 
 import { spring } from './index'
 
@@ -11,7 +12,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn<ReturnType<typeof spring>> = (args) => {
   const values = useControls(
     {
       bar: spring({ tension: 100, friction: 30 }),

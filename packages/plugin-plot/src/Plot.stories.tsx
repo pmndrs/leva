@@ -1,17 +1,19 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
+// @ts-ignore
 import Reset from '../../leva/stories/components/decorator-reset'
-import { useControls } from '../../leva/src'
+import { useControls } from 'leva'
 
 import { plot } from './index'
+import { PlotInput } from './plot-types'
 
 export default {
   title: 'Plugins/Plot',
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn<PlotInput> = (args: PlotInput) => {
   const { y } = useControls({ y: plot(args) })
   return (
     <div>

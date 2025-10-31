@@ -1,23 +1,20 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import Reset from '../components/decorator-reset'
 
 import { useControls } from '../../src'
+import type { ImageInput } from '../../src/types'
 
 export default {
   title: 'Inputs/Image',
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args = undefined) => {
-  const values = useControls({ foo: args }) as any
+const Template: StoryFn<ImageInput> = (args) => {
+  const values = useControls({ foo: args })
 
-  return (
-    <div>
-      <img src={values.foo} alt="" width="200" />
-    </div>
-  )
+  return <div>{values.foo && <img src={values.foo} alt="" width="200" />}</div>
 }
 
 export const Image = Template.bind({})

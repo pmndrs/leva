@@ -1,5 +1,6 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
+import { expect, within } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -10,7 +11,7 @@ export default {
   decorators: [Reset],
 } as Meta
 
-const Template: Story<any> = (args) => {
+const Template: StoryFn = (args) => {
   const values = useControls({
     foo: args,
   })
@@ -26,12 +27,22 @@ export const Simple = Template.bind({})
 Simple.args = {
   value: 1,
 }
+Simple.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/1/)).toBeInTheDocument()
+}
 
 export const MinMax = Template.bind({})
 MinMax.args = {
   value: 1,
   min: 0,
   max: 10,
+}
+MinMax.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/1/)).toBeInTheDocument()
 }
 
 export const WithValueOverflow = Template.bind({})
@@ -40,15 +51,30 @@ WithValueOverflow.args = {
   min: 0,
   max: 10,
 }
+WithValueOverflow.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/10/)).toBeInTheDocument()
+}
 
 export const Step = Template.bind({})
 Step.args = {
   value: 10,
   step: 0.25,
 }
+Step.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/10/)).toBeInTheDocument()
+}
 
 export const Suffix = Template.bind({})
 Suffix.args = { value: '10px' }
+Suffix.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/10px/)).toBeInTheDocument()
+}
 
 export const Complete = Template.bind({})
 Complete.args = {
@@ -57,4 +83,9 @@ Complete.args = {
   max: 10,
   step: 1,
   suffix: 'px',
+}
+Complete.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  // Verify the story renders
+  await expect(canvas.getByText(/5/)).toBeInTheDocument()
 }
