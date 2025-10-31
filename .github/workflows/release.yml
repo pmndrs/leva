@@ -23,7 +23,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Cache pnpm modules
         uses: actions/cache@v3
@@ -35,7 +35,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 7.25.0
+          version: 9
           run_install: true
 
       - name: Create Release Pull Request or Publish to npm
