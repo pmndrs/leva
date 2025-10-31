@@ -30,6 +30,10 @@ Simple.args = {
 Simple.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
 
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify initial value is rendered in the JSON output
   await expect(canvas.getByText(/Leva is awesome/)).toBeInTheDocument()
 
@@ -62,6 +66,11 @@ DefaultRows.args = {
 }
 DefaultRows.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders with multi-line text
   await expect(canvas.getByText(/Leva also supports/)).toBeInTheDocument()
 
@@ -88,6 +97,11 @@ CustomRows.args = {
 }
 CustomRows.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/You can specify/)).toBeInTheDocument()
 
@@ -112,6 +126,7 @@ NonEditable.args = {
 }
 NonEditable.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
   // Verify the story renders with non-editable text
   await expect(canvas.getByText(/This text is not editable/)).toBeInTheDocument()
 }

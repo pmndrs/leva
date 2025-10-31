@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within } from 'storybook/test'
+import { expect, within, waitFor } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -29,6 +29,11 @@ Simple.args = {
 }
 Simple.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
 }
@@ -41,6 +46,11 @@ MinMax.args = {
 }
 MinMax.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
 }
@@ -53,6 +63,11 @@ WithValueOverflow.args = {
 }
 WithValueOverflow.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/10/)).toBeInTheDocument()
 }
@@ -64,6 +79,11 @@ Step.args = {
 }
 Step.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/10/)).toBeInTheDocument()
 }
@@ -72,6 +92,11 @@ export const Suffix = Template.bind({})
 Suffix.args = { value: '10px' }
 Suffix.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/10px/)).toBeInTheDocument()
 }
@@ -86,6 +111,11 @@ Complete.args = {
 }
 Complete.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders
   await expect(canvas.getByText(/5/)).toBeInTheDocument()
 }
