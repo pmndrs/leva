@@ -9,6 +9,7 @@ import { Boolean } from '../components/Boolean'
 import { Select } from '../components/Select'
 import { Vector } from '../components/Vector'
 import { InnerLabel } from '../components/ValueInput/StyledInput'
+import { RangeSlider } from '../components/Number/RangeSlider'
 
 export const Components: Record<string, React.ComponentType<any>> = {
   Row,
@@ -21,6 +22,7 @@ export const Components: Record<string, React.ComponentType<any>> = {
   Select,
   Vector,
   InnerLabel,
+  RangeSlider,
 }
 
 export { colord } from 'colord'
