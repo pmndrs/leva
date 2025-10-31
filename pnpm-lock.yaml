@@ -46,7 +46,7 @@ importers:
         version: 10.0.2(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))
       '@storybook/addon-vitest':
         specifier: ^10.0.2
-        version: 10.0.2(@vitest/browser@4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6))(@vitest/runner@4.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))(vitest@4.0.6)
+        version: 10.0.2(@vitest/browser-playwright@4.0.6)(@vitest/browser@4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6))(@vitest/runner@4.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))(vitest@4.0.6)
       '@storybook/react':
         specifier: ^10.0.2
         version: 10.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))(typescript@5.9.3)
@@ -89,6 +89,9 @@ importers:
       '@vitest/browser':
         specifier: ^4.0.6
         version: 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
+      '@vitest/browser-playwright':
+        specifier: ^4.0.6
+        version: 4.0.6(playwright@1.56.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
       '@vitest/ui':
         specifier: ^4.0.6
         version: 4.0.6(vitest@4.0.6)
@@ -172,7 +175,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.0.6
-        version: 4.0.6(@types/node@18.19.130)(@vitest/ui@4.0.6)(terser@5.44.0)
+        version: 4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0)
 
   demo:
     dependencies:
@@ -2344,6 +2347,12 @@ packages:
     resolution: {integrity: sha512-iNR/UqhUOmFFxiezt0em9CgmiJBdWR+5jGxB2FihaoJfqGt76kiwaKoVOJVU5NYcDWMdN06LbyN2VIGIoYdsEA==}
     engines: {node: '>=12.0.0'}
     deprecated: This package has been deprecated in favor of @vitejs/plugin-react
+
+  '@vitest/browser-playwright@4.0.6':
+    resolution: {integrity: sha512-u6DliDabPQYXz8U4ZwnCvr9q2kJnribkenO6FK0qv5Gu/m1X884JOf0IZ71x7rLrmSsoP3YD3hVnNutAbhEX3A==}
+    peerDependencies:
+      playwright: '*'
+      vitest: 4.0.6
 
   '@vitest/browser@4.0.6':
     resolution: {integrity: sha512-SdrcvwvP6q8n82cS2BthbZuHGFPHeKkjbpeIRhGaeV8hJ8P0swWFx5lUZ/Vnd7G0CsfL6m4/3lOaqd/n12vtZA==}
@@ -8220,7 +8229,7 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  '@storybook/addon-vitest@10.0.2(@vitest/browser@4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6))(@vitest/runner@4.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))(vitest@4.0.6)':
+  '@storybook/addon-vitest@10.0.2(@vitest/browser-playwright@4.0.6)(@vitest/browser@4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6))(@vitest/runner@4.0.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@10.0.2(@testing-library/dom@10.4.1)(prettier@2.8.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0)))(vitest@4.0.6)':
     dependencies:
       '@storybook/global': 5.0.0
       '@storybook/icons': 1.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -8229,8 +8238,9 @@ snapshots:
       ts-dedent: 2.2.0
     optionalDependencies:
       '@vitest/browser': 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
+      '@vitest/browser-playwright': 4.0.6(playwright@1.56.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
       '@vitest/runner': 4.0.6
-      vitest: 4.0.6(@types/node@18.19.130)(@vitest/ui@4.0.6)(terser@5.44.0)
+      vitest: 4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0)
     transitivePeerDependencies:
       - react
       - react-dom
@@ -8733,6 +8743,19 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@vitest/browser-playwright@4.0.6(playwright@1.56.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)':
+    dependencies:
+      '@vitest/browser': 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
+      '@vitest/mocker': 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))
+      playwright: 1.56.1
+      tinyrainbow: 3.0.3
+      vitest: 4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0)
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
   '@vitest/browser@4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)':
     dependencies:
       '@vitest/mocker': 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))
@@ -8742,7 +8765,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.0.3
-      vitest: 4.0.6(@types/node@18.19.130)(@vitest/ui@4.0.6)(terser@5.44.0)
+      vitest: 4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0)
       ws: 8.18.3
     transitivePeerDependencies:
       - bufferutil
@@ -8836,7 +8859,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.6(@types/node@18.19.130)(@vitest/ui@4.0.6)(terser@5.44.0)
+      vitest: 4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0)
 
   '@vitest/utils@2.0.5':
     dependencies:
@@ -12934,7 +12957,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.44.0
 
-  vitest@4.0.6(@types/node@18.19.130)(@vitest/ui@4.0.6)(terser@5.44.0):
+  vitest@4.0.6(@types/node@18.19.130)(@vitest/browser-playwright@4.0.6)(@vitest/ui@4.0.6)(terser@5.44.0):
     dependencies:
       '@vitest/expect': 4.0.6
       '@vitest/mocker': 4.0.6(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))
@@ -12958,6 +12981,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 18.19.130
+      '@vitest/browser-playwright': 4.0.6(playwright@1.56.1)(vite@7.1.12(@types/node@18.19.130)(terser@5.44.0))(vitest@4.0.6)
       '@vitest/ui': 4.0.6(vitest@4.0.6)
     transitivePeerDependencies:
       - jiti
