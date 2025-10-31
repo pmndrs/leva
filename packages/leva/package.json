@@ -25,7 +25,7 @@
     "@radix-ui/react-portal": "^1.1.4",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@stitches/react": "^1.2.8",
-    "@use-gesture/react": "^10.2.5",
+    "@use-gesture/react": "10.3.1",
     "colord": "^2.9.2",
     "dequal": "^2.0.2",
     "merge-value": "^1.0.0",
