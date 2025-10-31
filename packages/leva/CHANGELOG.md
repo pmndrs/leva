@@ -1,5 +1,12 @@
 # leva
 
+## 0.10.1
+
+### Patch Changes
+
+- 7315fc4: Fix handling of negative numbers in math expressions
+- d32ffaf: `@radix-ui/*` upgrades to prevent peerDeps warnings with React 19
+
 ## 0.10.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within } from 'storybook/test'
+import { expect, within, waitFor } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -29,6 +29,11 @@ Default.args = {
 }
 Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders without errors
   await expect(canvas.getByText(/false/)).toBeInTheDocument()
 }
@@ -39,6 +44,11 @@ Checked.args = {
 }
 Checked.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/foo/i)).toBeInTheDocument()
+  })
+
   // Verify the story renders without errors
   await expect(canvas.getByText(/true/)).toBeInTheDocument()
 }
