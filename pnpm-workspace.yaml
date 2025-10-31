@@ -2,3 +2,6 @@ packages:
   # all packages in subdirs of packages/
   - 'packages/*'
   - 'demo'
+
+catalog:
+  '@use-gesture/react': ^10.3.1

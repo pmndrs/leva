@@ -12,7 +12,7 @@
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
   "peerDependencies": {
-    "@use-gesture/react": "^10.3.1",
+    "@use-gesture/react": "catalog:",
     "leva": ">=0.10.1",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
@@ -21,7 +21,7 @@
     "@react-spring/web": "9.4.2"
   },
   "devDependencies": {
-    "@use-gesture/react": "10.3.1",
+    "@use-gesture/react": "catalog:",
     "leva": "workspace:*"
   }
 }
