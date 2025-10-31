@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import create, { SetState, GetState, StoreApi } from 'zustand'
+import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
 import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
 import { SpecialInputs, MappedPaths, DataInput } from './types'
@@ -7,9 +7,7 @@ import type { Data, FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
 export const Store = function (this: StoreType) {
-  const store = create(
-    subscribeWithSelector<State, SetState<State>, GetState<State>, StoreApi<State>>(() => ({ data: {} }))
-  )
+  const store = create<State>()(subscribeWithSelector(() => ({ data: {} })))
 
   const eventEmitter = createEventEmitter()
 
@@ -25,7 +23,7 @@ export const Store = function (this: StoreType) {
    * OrderedPaths will hold all the paths in a parent -> children order.
    * This will ensure we can display the controls in a predictable order.
    */
-  const orderedPaths = new Set<String>()
+  const orderedPaths = new Set<string>()
 
   /**
    * For a given data structure, gets all paths for which inputs have
@@ -57,7 +55,7 @@ export const Store = function (this: StoreType) {
     })
 
     const visiblePaths: string[] = []
-    orderedPaths.forEach((path: any) => {
+    orderedPaths.forEach((path) => {
       if (
         path in data &&
         // if input is mounted
@@ -300,7 +298,7 @@ export const Store = function (this: StoreType) {
     const data = _getDataFromSchema(schema, '', mappedPaths)
     return [data, mappedPaths]
   }
-} as any as { new (): StoreType }
+} as unknown as { new (): StoreType }
 
 export const levaStore = new Store()
 
