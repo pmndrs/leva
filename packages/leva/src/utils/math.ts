@@ -33,12 +33,11 @@ export const invertedRange = (p: number, min: number, max: number) => p * (max -
 // from https://gist.github.com/gordonbrander/2230317
 export const getUid = () => '_' + Math.random().toString(36).substr(2, 9)
 
-const parens = /\(([0-9+\-*/^ .]+)\)/ // Regex for identifying parenthetical expressions
-const exp = /(\d+(?:\.\d+)?) ?\^ ?(\d+(?:\.\d+)?)/ // Regex for identifying exponentials (x ^ y)
-const mul = /(\d+(?:\.\d+)?) ?\* ?(\d+(?:\.\d+)?)/ // Regex for identifying multiplication (x * y)
-const div = /(\d+(?:\.\d+)?) ?\/ ?(\d+(?:\.\d+)?)/ // Regex for identifying division (x / y)
-const add = /(\d+(?:\.\d+)?) ?\+ ?(\d+(?:\.\d+)?)/ // Regex for identifying addition (x + y)
-const sub = /(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/ // Regex for identifying subtraction (x - y)
+//Updated regexes to handle negative numbers and decimals
+const parens = /\(([^\(\)]+)\)/ // Handles nested parentheses
+const exp = /(-?\d+(?:\.\d+)?)\s*\^\s*(-?\d+(?:\.\d+)?)/ // Exponentiation
+const muldiv = /(-?\d+(?:\.\d+)?)\s*([*/])\s*(-?\d+(?:\.\d+)?)/ // Multiplication or Division
+const addsub = /(-?\d+(?:\.\d+)?)\s*([+-])\s*(-?\d+(?:\.\d+)?)/ // Addition or Subtraction
 
 /**
  * Copyright: copied from here: https://stackoverflow.com/a/63105543
@@ -50,33 +49,33 @@ const sub = /(\d+(?:\.\d+)?) ?- ?(\d+(?:\.\d+)?)/ // Regex for identifying subtr
  * @returns {Number} Result of expression
  */
 export function evaluate(expr: string): number {
-  if (isNaN(Number(expr))) {
-    if (parens.test(expr)) {
-      const newExpr = expr.replace(parens, (match, subExpr) => String(evaluate(subExpr)))
-      return evaluate(newExpr)
-    } else if (exp.test(expr)) {
-      const newExpr = expr.replace(exp, (match, base, pow) => String(Math.pow(Number(base), Number(pow))))
-      return evaluate(newExpr)
-    } else if (mul.test(expr)) {
-      const newExpr = expr.replace(mul, (match, a, b) => String(Number(a) * Number(b)))
-      return evaluate(newExpr)
-    } else if (div.test(expr)) {
-      const newExpr = expr.replace(div, (match, a, b) => {
-        // b can equal either 0 or "0" this is on purpose
-        // eslint-disable-next-line eqeqeq
-        if (b != 0) return String(Number(a) / Number(b))
-        else throw new Error('Division by zero')
-      })
-      return evaluate(newExpr)
-    } else if (add.test(expr)) {
-      const newExpr = expr.replace(add, (match, a: string, b: string) => String(Number(a) + Number(b)))
-      return evaluate(newExpr)
-    } else if (sub.test(expr)) {
-      const newExpr = expr.replace(sub, (match, a, b) => String(Number(a) - Number(b)))
-      return evaluate(newExpr)
-    } else {
-      return Number(expr)
-    }
+  expr = expr.replace(/\s+/g, '') // Remove all whitespace
+
+  if (parens.test(expr)) {
+    return evaluate(expr.replace(parens, (_, subExpr) => evaluate(subExpr).toString()))
+  }
+  if (exp.test(expr)) {
+    return evaluate(expr.replace(exp, (_, a, b) => Math.pow(Number(a), Number(b)).toString()))
+  }
+  if (muldiv.test(expr)) {
+    return evaluate(
+      expr.replace(muldiv, (_, a, op, b) =>
+        op === '*'
+          ? (Number(a) * Number(b)).toString()
+          : Number(b) === 0
+          ? (() => {
+              throw new Error('Division by zero')
+            })()
+          : (Number(a) / Number(b)).toString()
+      )
+    )
+  }
+  if (addsub.test(expr)) {
+    return evaluate(
+      expr.replace(addsub, (_, a, op, b) =>
+        op === '+' ? (Number(a) + Number(b)).toString() : (Number(a) - Number(b)).toString()
+      )
+    )
   }
   return Number(expr)
 }
