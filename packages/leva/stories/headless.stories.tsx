@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Meta, StoryFn } from '@storybook/react'
+import { expect, within, userEvent, waitFor } from 'storybook/test'
 import Reset from './components/decorator-reset'
 import { folder, useControls as useControlsHeaded, LevaPanel } from '../src'
 import { useControls, useLevaInputs, useLevaInput, useLevaTree, useCreateStore } from '../src/headless'
@@ -444,6 +445,66 @@ function HeadedComponent() {
 }
 
 HeadlessToHeadedSwitch.storyName = 'Headless to Headed Switch'
+
+HeadlessToHeadedSwitch.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+  const body = within(document.body)
+
+  // 1. Verify starts in headless mode
+  await waitFor(() => {
+    expect(canvas.getByText('Current Mode:')).toBeInTheDocument()
+    expect(canvas.getByText('Headless')).toBeInTheDocument()
+  })
+
+  // 2. Verify custom headless UI is visible
+  await expect(canvas.getByText(/Custom Headless UI/)).toBeInTheDocument()
+
+  // 3. Verify Leva panel (#leva__root) does NOT exist yet
+  await waitFor(() => {
+    expect(document.getElementById('leva__root')).toBeNull()
+  })
+
+  // 4. Click button to switch to headed mode
+  const switchButton = canvas.getByText(/Switch to Headed Mode/)
+  await userEvent.click(switchButton)
+
+  // 5. Verify mode changed to Headed
+  await waitFor(() => {
+    expect(canvas.getByText('Current Mode:')).toBeInTheDocument()
+    expect(canvas.getByText('Headed')).toBeInTheDocument()
+  })
+
+  // 6. Verify custom headless UI disappeared
+  await waitFor(() => {
+    expect(canvas.queryByText(/Custom Headless UI/)).not.toBeInTheDocument()
+  })
+
+  // 7. Verify Leva panel now exists in DOM
+  await waitFor(() => {
+    expect(document.getElementById('leva__root')).not.toBeNull()
+  })
+
+  // 8. Click button to switch back to headless mode
+  const switchBackButton = canvas.getByText(/Switch to Headless Mode/)
+  await userEvent.click(switchBackButton)
+
+  // 9. Verify mode changed back to Headless
+  await waitFor(() => {
+    expect(canvas.getByText('Current Mode:')).toBeInTheDocument()
+    expect(canvas.getByText('Headless')).toBeInTheDocument()
+  })
+
+  // 10. Verify custom headless UI is back
+  await waitFor(() => {
+    expect(canvas.getByText(/Custom Headless UI/)).toBeInTheDocument()
+  })
+
+  // 11. CRITICAL TEST: Verify Leva panel is COMPLETELY REMOVED from DOM
+  // This is the bug - without the fix, the panel element persists
+  await waitFor(() => {
+    expect(document.getElementById('leva__root')).toBeNull()
+  })
+}
 
 export const HeadlessHooks: StoryFn = () => {
   // Set up the same controls as other stories
