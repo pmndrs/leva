@@ -24,8 +24,14 @@ export const normalize = (input: SelectInput) => {
   let values
 
   if (Array.isArray(options)) {
-    values = options
-    keys = options.map((o) => String(o))
+    // Check if this is an array of {value, label} objects
+    if (options.length > 0 && typeof options[0] === 'object' && options[0] !== null && 'value' in options[0]) {
+      values = options.map((o: any) => o.value)
+      keys = options.map((o: any) => ('label' in o ? String(o.label) : String(o.value)))
+    } else {
+      values = options
+      keys = options.map((o) => String(o))
+    }
   } else {
     values = Object.values(options)
     keys = Object.keys(options)

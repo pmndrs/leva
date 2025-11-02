@@ -104,10 +104,11 @@ export type IntervalInput = { value: [number, number]; min: number; max: number 
 
 export type ImageInput = { image: undefined | string }
 
-type SelectInput = { options: any[] | Record<string, any>; value?: any }
+type SelectOption<T = any> = { value: T; label?: string }
+type SelectInput = { options: any[] | Record<string, any> | SelectOption[]; value?: any }
 
-type SelectWithValueInput<T, K> = { options: T[] | Record<string, T>; value: K }
-type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> }
+type SelectWithValueInput<T, K> = { options: T[] | Record<string, T> | SelectOption<T>[]; value: K }
+type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> | SelectOption<T>[] }
 
 type ColorRgbaInput = { r: number; g: number; b: number; a?: number }
 type ColorHslaInput = { h: number; s: number; l: number; a?: number }
