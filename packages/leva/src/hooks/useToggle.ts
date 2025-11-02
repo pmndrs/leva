@@ -131,14 +131,30 @@ export function useToggle(toggled: boolean) {
     if (!toggled || !contentRef.current || !wrapperRef.current) return
 
     const resizeObserver = new ResizeObserver(() => {
-      // Only update if the panel is expanded and height is not already managed by CSS
-      if (toggled && wrapperRef.current && contentRef.current) {
-        const currentHeight = wrapperRef.current.style.height
-        // Only update if we have a fixed height (not empty/auto)
-        if (currentHeight && currentHeight !== '0px') {
-          const { height } = contentRef.current.getBoundingClientRect()
-          wrapperRef.current.style.height = height + 'px'
-        }
+      const wrapper = wrapperRef.current
+      const content = contentRef.current
+      if (!wrapper || !content) return
+
+      // Get the current and target heights
+      const currentHeight = wrapper.getBoundingClientRect().height
+      const targetHeight = content.getBoundingClientRect().height
+
+      // Only update if there's a meaningful difference
+      if (Math.abs(currentHeight - targetHeight) > 1) {
+        // Set explicit height to enable transition
+        wrapper.style.height = currentHeight + 'px'
+        
+        // Use requestAnimationFrame to ensure the height is set before changing it
+        requestAnimationFrame(() => {
+          wrapper.style.height = targetHeight + 'px'
+          
+          // Remove fixed height after transition completes
+          const handleTransitionEnd = () => {
+            wrapper.style.removeProperty('height')
+            wrapper.removeEventListener('transitionend', handleTransitionEnd)
+          }
+          wrapper.addEventListener('transitionend', handleTransitionEnd, { once: true })
+        })
       }
     })
 
