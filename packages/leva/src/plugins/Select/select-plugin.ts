@@ -1,7 +1,7 @@
 import v8n from 'v8n'
 import type { SelectInput, InternalSelectSettings } from './select-types'
 
-// the options attribute is either an key value object or an array
+// the options attribute is either a key value object, an array, or an array of {value, label} objects
 export const schema = (_o: any, s: any) =>
   v8n()
     .schema({
