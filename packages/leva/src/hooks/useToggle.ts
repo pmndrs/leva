@@ -80,7 +80,7 @@ import { useRef, useEffect, useLayoutEffect } from 'react'
 export function useToggle(toggled: boolean) {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const firstRender = useRef(true)
+  const prevToggledRef = useRef<boolean | null>(null)
 
   // this should be fine for SSR since the store is set in useEffect and
   // therefore the pane doesn't show on first render.
@@ -94,11 +94,15 @@ export function useToggle(toggled: boolean) {
   }, [])
 
   useEffect(() => {
-    // prevents first animation
-    if (firstRender.current) {
-      firstRender.current = false
+    // On initial render (including StrictMode's double-invocation), 
+    // prevToggledRef.current is null, so we skip animation.
+    // We only animate when toggled actually changes from a previous value.
+    if (prevToggledRef.current === null || prevToggledRef.current === toggled) {
+      prevToggledRef.current = toggled
       return
     }
+
+    prevToggledRef.current = toggled
 
     let timeout: number
     const ref = wrapperRef.current!
