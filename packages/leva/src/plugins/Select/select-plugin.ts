@@ -22,12 +22,10 @@ export const normalize = (input: SelectInput) => {
   let { value, options } = input
   let keys
   let values
-  let isValueLabelArray = false
 
   if (Array.isArray(options)) {
     // Check if this is an array of {value, label} objects
     if (options.length > 0 && typeof options[0] === 'object' && options[0] !== null && 'value' in options[0]) {
-      isValueLabelArray = true
       values = options.map((o: any) => o.value)
       keys = options.map((o: any) => ('label' in o ? String(o.label) : String(o.value)))
     } else {
