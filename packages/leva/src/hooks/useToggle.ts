@@ -126,5 +126,28 @@ export function useToggle(toggled: boolean) {
     }
   }, [toggled])
 
+  // Watch for content size changes when panel is expanded
+  useEffect(() => {
+    if (!toggled || !contentRef.current || !wrapperRef.current) return
+
+    const resizeObserver = new ResizeObserver(() => {
+      // Only update if the panel is expanded and height is not already managed by CSS
+      if (toggled && wrapperRef.current && contentRef.current) {
+        const currentHeight = wrapperRef.current.style.height
+        // Only update if we have a fixed height (not empty/auto)
+        if (currentHeight && currentHeight !== '0px') {
+          const { height } = contentRef.current.getBoundingClientRect()
+          wrapperRef.current.style.height = height + 'px'
+        }
+      }
+    })
+
+    resizeObserver.observe(contentRef.current)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [toggled])
+
   return { wrapperRef, contentRef }
 }
