@@ -19,18 +19,18 @@ const Template: StoryFn<DateInput> = (args: DateInput) => {
 }
 
 export const DefaultDate = Template.bind({})
-DefaultDate.args = { date: new Date() }
+DefaultDate.args = { date: new Date('2025-10-31') }
 
 export const CustomLocale = Template.bind({})
-CustomLocale.args = { date: new Date(), locale: 'en-US' }
+CustomLocale.args = { date: new Date('2025-10-31'), locale: 'en-US' }
 
 export const CustomInputFormat = Template.bind({})
-CustomInputFormat.args = { date: new Date(), inputFormat: 'yyyy-MM-dd' }
+CustomInputFormat.args = { date: new Date('2025-10-31'), inputFormat: 'yyyy-MM-dd' }
 
 export const WithOtherFields = () => {
   const { birthday, ...values } = useControls({
     text: 'text',
-    birthday: date({ date: new Date() }),
+    birthday: date({ date: new Date('2025-10-31') }),
     number: 0,
   })
   return (

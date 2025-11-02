@@ -1,9 +1,9 @@
 import { useMemo } from 'react'
 import create, { SetState, GetState, StoreApi } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
-import { normalizeInput, join, updateInput, warn, LevaErrors, getUid } from './utils'
+import { updateInput, warn, LevaErrors, getUid, getDataFromSchema } from './utils'
 import { SpecialInputs, MappedPaths, DataInput } from './types'
-import type { Data, FolderSettings, State, StoreType } from './types'
+import type { FolderSettings, State, StoreType } from './types'
 import { createEventEmitter } from './eventEmitter'
 
 export const Store = function (this: StoreType) {
@@ -250,54 +250,9 @@ export const Store = function (this: StoreType) {
     return () => eventEmitter.off(_path, listener)
   }
 
-  /**
-   * Recursively extract the data from the schema, sets folder initial
-   * preferences and normalize the inputs (normalizing an input means parsing the
-   * input object, identify its type and normalize its settings).
-   *
-   * @param schema
-   * @param rootPath used for recursivity
-   */
-  const _getDataFromSchema = (schema: any, rootPath: string, mappedPaths: MappedPaths): Data => {
-    const data: Data = {}
-
-    Object.entries(schema).forEach(([key, rawInput]: [string, any]) => {
-      // if the key is empty, skip schema parsing and prompt an error.
-      if (key === '') return warn(LevaErrors.EMPTY_KEY)
-
-      let newPath = join(rootPath, key)
-
-      // If the input is a folder, then we recursively parse its schema and assign
-      // it to the current data.
-      if (rawInput.type === SpecialInputs.FOLDER) {
-        const newData = _getDataFromSchema(rawInput.schema, newPath, mappedPaths)
-        Object.assign(data, newData)
-
-        // Sets folder preferences if it wasn't set before
-        if (!(newPath in folders)) folders[newPath] = rawInput.settings as FolderSettings
-      } else if (key in mappedPaths) {
-        // if a key already exists, prompt an error.
-        warn(LevaErrors.DUPLICATE_KEYS, key, newPath, mappedPaths[key].path)
-      } else {
-        const normalizedInput = normalizeInput(rawInput, key, newPath, data)
-        if (normalizedInput) {
-          const { type, options, input } = normalizedInput
-          // @ts-ignore
-          const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
-          data[newPath] = { type, ..._options, ...input, fromPanel: true }
-          mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
-        } else {
-          warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
-        }
-      }
-    })
-
-    return data
-  }
-
   this.getDataFromSchema = (schema) => {
     const mappedPaths: MappedPaths = {}
-    const data = _getDataFromSchema(schema, '', mappedPaths)
+    const data = getDataFromSchema(schema, '', mappedPaths, folders)
     return [data, mappedPaths]
   }
 } as any as { new (): StoreType }
