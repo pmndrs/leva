@@ -2,19 +2,19 @@ import { styled } from '../../styles'
 import { JoystickGrid } from './StyledJoystick'
 
 export const JoystickButtons = styled('div', {
-  $reset: '',
   display: 'grid',
   columnGap: '$colGap',
   gridAutoFlow: 'column dense',
   alignItems: 'center',
   padding: '0 $colGap',
-  fontSize: 'calc(0.8 * $fontSizes$root)',
   position: 'absolute',
   bottom: 'calc(-1 * $sizes$rowHeight - 2 * $space$rowGap + $radii$sm)',
   backgroundColor: '$elevation2',
   borderRadius: '$sm',
   width: '$joystickWidth',
   height: 'calc(2 * $space$rowGap + $sizes$rowHeight)',
+  fontFamily: '$mono',
+  fontSize: '$root',
 })
 
 export const KeyLabel = styled('span', {
