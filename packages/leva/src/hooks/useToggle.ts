@@ -94,15 +94,13 @@ export function useToggle(toggled: boolean) {
   }, [])
 
   useEffect(() => {
-    // On initial render (including StrictMode's double-invocation), 
+    // On initial render (including StrictMode's double-invocation),
     // prevToggledRef.current is null, so we skip animation.
     // We only animate when toggled actually changes from a previous value.
     if (prevToggledRef.current === null || prevToggledRef.current === toggled) {
       prevToggledRef.current = toggled
       return
     }
-
-    prevToggledRef.current = toggled
 
     let timeout: number
     const ref = wrapperRef.current!
@@ -123,6 +121,8 @@ export function useToggle(toggled: boolean) {
       ref.style.overflow = 'hidden'
       timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
     }
+
+    prevToggledRef.current = toggled
 
     return () => {
       ref.removeEventListener('transitionend', fixHeight)
