@@ -29,6 +29,8 @@
     "demo:build": "pnpm --filter demo run build",
     "demo:serve": "pnpm --filter demo run serve",
     "ci:test": "pnpm demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run",
+    "test": "vitest",
+    "test:run": "vitest run",
     "prettier": "prettier --check ."
   },
   "size-limit": [
@@ -105,7 +107,10 @@
     "start-server-and-test": "^1.15.2",
     "storybook": "^10.0.2",
     "tsd": "^0.25.0",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.0",
+    "@vitest/ui": "^2.1.0",
+    "jsdom": "^24.0.0"
   },
   "prettier": {
     "bracketSameLine": true,
