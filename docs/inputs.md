@@ -55,6 +55,46 @@ A simple toggle.
 const { toggle } = useControls({ toggle: true })
 ```
 
+### String
+
+A text input field. Can be configured as a single-line input or multi-line textarea.
+
+```jsx
+const { myString } = useControls({
+  myString: 'Hello World',
+})
+```
+
+#### Multi-line strings
+
+Enable multi-line editing with `rows: true` for default height, or specify a number:
+
+```jsx
+const { description } = useControls({
+  description: {
+    value: 'Multi-line\ntext\ncontent',
+    rows: true, // Default height
+  },
+  notes: {
+    value: 'Custom height',
+    rows: 5, // 5 rows tall
+  },
+})
+```
+
+#### Non-editable strings
+
+Make strings read-only while still allowing display:
+
+```jsx
+const { status } = useControls({
+  status: {
+    value: 'This text cannot be edited',
+    editable: false,
+  },
+})
+```
+
 ### Interval
 
 An array containing two numerical values.
@@ -78,15 +118,40 @@ All rules from Number type also apply.
 A dropdown select input with a specified list of elements. An optional default value can be provided.
 
 ```jsx
-const presetColor = useControls({
-  options: ['red', 'green', 'blue', 'yellow'],
-  value: 'red',
+const { color } = useControls({
+  color: {
+    options: ['red', 'green', 'blue', 'yellow'],
+    value: 'red',
+  },
+})
+```
+
+You can also use objects for labeled options:
+
+```jsx
+const { preset } = useControls({
+  preset: {
+    options: {
+      low: 'Low Quality',
+      medium: 'Medium Quality',
+      high: 'High Quality',
+    },
+    value: 'medium',
+  },
 })
 ```
 
 ### Image
 
-@todo
+An image input that allows uploading or selecting an image file. Returns the image URL or `undefined`.
+
+```jsx
+const { myImage } = useControls({
+  myImage: { image: undefined },
+})
+```
+
+The returned value will be a data URL string when an image is selected, or `undefined` when no image is set.
 
 ### Vector2
 
@@ -165,3 +230,162 @@ useControls({
 ```
 
 One difference with Vector2 to keep in mind is that you don't have the `joystick` option.
+
+### Lock
+
+Both Vector2 and Vector3 support a `lock` option that synchronizes all coordinates when one is changed:
+
+```jsx
+const { position } = useControls({
+  position: {
+    value: [1, 1, 1],
+    lock: true, // Changing x will also update y and z
+  },
+})
+```
+
+## Input Options
+
+All inputs support common options:
+
+### Label
+
+Customize the display label:
+
+```jsx
+const { color } = useControls({
+  color: {
+    value: '#f00',
+    label: 'Background Color',
+  },
+})
+```
+
+You can also use React elements as labels:
+
+```jsx
+import { Half2Icon } from '@radix-ui/react-icons'
+
+const { color } = useControls({
+  color: {
+    value: '#f00',
+    label: <Half2Icon />,
+  },
+})
+```
+
+### Hint
+
+Add a tooltip or help text:
+
+```jsx
+const { position } = useControls({
+  position: {
+    value: [0, 0, 0],
+    hint: 'Position of the object relative to the screen',
+  },
+})
+```
+
+### Render
+
+Conditionally show inputs based on other values:
+
+```jsx
+const { showAdvanced, advancedValue } = useControls({
+  showAdvanced: false,
+  advancedValue: {
+    value: 0,
+    render: (get) => get('showAdvanced'),
+  },
+})
+```
+
+### Order
+
+Control the display order of inputs:
+
+```jsx
+const values = useControls({
+  last: { value: 0, order: 1 },
+  middle: { value: 0, order: -1 },
+  first: { value: 0, order: -2 },
+})
+```
+
+Lower order values appear first.
+
+### Optional
+
+Mark inputs as optional (they can be hidden/shown via UI):
+
+```jsx
+const { color } = useControls({
+  color: {
+    value: '#f00',
+    optional: true,
+  },
+})
+```
+
+### Disabled
+
+Disable inputs (they won't be editable):
+
+```jsx
+const { readonly } = useControls({
+  readonly: {
+    value: 'Cannot edit',
+    disabled: true,
+    hint: 'This input is disabled',
+  },
+})
+```
+
+### onChange
+
+Execute a callback when the value changes (see [Controlled Inputs](advanced/controlled-inputs.md)):
+
+```jsx
+const values = useControls({
+  color: {
+    value: '#f00',
+    onChange: (value) => {
+      console.log('Color changed:', value)
+    },
+  },
+})
+```
+
+### onEditStart / onEditEnd
+
+Callbacks for when editing begins/ends:
+
+```jsx
+const values = useControls({
+  position: {
+    value: { x: 0, y: 0 },
+    onEditStart: (value, path) => {
+      console.log('Started editing', path)
+    },
+    onEditEnd: (value, path) => {
+      console.log('Finished editing', path)
+    },
+  },
+})
+```
+
+### Enforcing Input Type
+
+Force a specific input type even if Leva would infer differently:
+
+```jsx
+import { LevaInputs } from 'leva'
+
+const { value } = useControls({
+  value: {
+    type: LevaInputs.STRING,
+    value: '#f00', // Would normally be a color, but forced to string
+  },
+})
+```
