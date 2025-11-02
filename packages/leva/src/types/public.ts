@@ -241,6 +241,8 @@ type Join<Leaf1, Leaf1Key extends keyof Leaf1, Leaf2> = EndLeaf extends Leaf2
 
 type Tree<IncludeTransient extends boolean, Leaf, LeafKey extends string | number | symbol = ''> = {
   // if it's a folder we run the type check on it's schema key
+  // recursively process each item in the folder with Tree to propagate IncludeTransient flag,
+  // which ensures items with onChange inside folders are correctly handled for the get function
   0: Leaf extends { schema: infer Schema }
     ? { [Key in keyof Schema]: Join<Schema, Key, Tree<IncludeTransient, Schema[Key], Key>> }[keyof Schema]
     : never
