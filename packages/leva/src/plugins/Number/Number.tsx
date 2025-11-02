@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { NumberInput } from '../ValueInput'
-import { Label, Row } from '../UI'
+import { NumberInput } from '../../components/ValueInput'
+import { Label, Row } from '../../components/UI'
 import { useDrag } from '../../hooks'
 import { RangeGrid } from './StyledNumber'
 import { RangeSlider } from './RangeSlider'
 import { useInputContext } from '../../context'
 import type { NumberProps } from './number-types'
 import { multiplyStep } from '../../utils'
-import { InnerNumberLabel } from '../ValueInput/StyledInput'
+import { InnerNumberLabel } from '../../components/ValueInput/StyledInput'
 
 type DraggableLabelProps = {
   label: string

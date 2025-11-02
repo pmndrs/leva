@@ -3,11 +3,11 @@
 // export all components
 import React from 'react'
 import { Row, Label, Portal, Overlay } from '../components/UI'
-import { String } from '../components/String'
-import { Number } from '../components/Number'
-import { Boolean } from '../components/Boolean'
-import { Select } from '../components/Select'
-import { Vector } from '../components/Vector'
+import { String } from '../plugins/String'
+import { Number } from '../plugins/Number'
+import { Boolean } from '../plugins/Boolean'
+import { Select } from '../plugins/Select'
+import { Vector } from '../plugins/Vector'
 import { InnerLabel } from '../components/ValueInput/StyledInput'
 
 export const Components: Record<string, React.ComponentType<any>> = {
@@ -27,12 +27,12 @@ export { colord } from 'colord'
 export { dequal } from 'dequal/lite'
 
 export { debounce, clamp, pad, evaluate, range, invertedRange, mergeRefs } from '../utils'
-export { normalizeKeyedNumberSettings } from '../components/Vector/vector-utils'
+export { normalizeKeyedNumberSettings } from '../plugins/Vector/vector-utils'
 
 export { createPlugin } from '../plugin'
 
 // export vector utilities
-export * from '../components/Vector/vector-plugin'
+export * from '../plugins/Vector/vector-plugin'
 // export useful hooks
 export { useDrag, useCanvas2d, useTransform, useInput, useValue, useValues, useInputSetters } from '../hooks'
 export { useInputContext, useStoreContext } from '../context'
@@ -42,5 +42,5 @@ export { styled, keyframes, useTh } from '../styles'
 
 // export types
 export * from '../types/public'
-export type { InternalVectorSettings } from '../components/Vector/vector-types'
-export type { InternalNumberSettings } from '../components/Number/number-types'
+export type { InternalVectorSettings } from '../plugins/Vector/vector-types'
+export type { InternalNumberSettings } from '../plugins/Number/number-types'

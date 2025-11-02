@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useInputContext } from '../../context'
-import { Label, Row, Chevron } from '../UI'
+import { Label, Row, Chevron } from '../../components/UI'
 import { NativeSelect, PresentationalSelect, SelectContainer } from './StyledSelect'
 import type { SelectProps } from './select-types'
 
