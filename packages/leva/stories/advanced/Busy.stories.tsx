@@ -55,7 +55,7 @@ function BusyControls() {
     string: { value: 'something', optional: true, order: -2 },
     range: { value: 0, min: -10, max: 10, order: -3 },
     image: { image: undefined },
-    select: { options: ['x', 'y', ['x', 'y']] },
+    select: { options: ['x', 'y', 'x,y'] },
     interval: { min: -100, max: 100, value: [-10, 10] },
     color: '#ffffff',
     refMonitor: monitor(noise ? frame : () => 0, { graph: true, interval: 30 }),

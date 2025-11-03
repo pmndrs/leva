@@ -37,8 +37,22 @@ const arrayOfValueLabelObjectsSchema = z.array(valueLabelObjectSchema)
 
 const allUsecases = z.union([arrayOfPrimitivesSchema, keyAsLabelObjectSchema, arrayOfValueLabelObjectsSchema])
 
+/**
+ * Schema for the settings object - checks if it has an 'options' key
+ * We accept the three valid SELECT formats:
+ * 1. Array of primitives: ['x', 'y', 1]
+ * 2. Array of {value, label} objects: [{ value: 'x', label: 'X' }]
+ * 3. Object with key-value pairs: { x: 1, y: 2 }
+ *
+ * Note: We use allUsecases which handles detailed validation, so invalid formats
+ * will be caught and warned about in normalize()
+ */
+const selectInputSchema = z.object({
+  options: allUsecases,
+})
+
 // the options attribute is either a key value object, an array, or an array of {value, label} objects
-export const schema = (_o: any, s: any) => allUsecases.safeParse(s)
+export const schema = (_o: any, s: any) => selectInputSchema.safeParse(s).success
 
 export const sanitize = (value: any, { values }: InternalSelectSettings) => {
   if (values.indexOf(value) < 0) throw Error(`Selected value doesn't match Select options`)
@@ -77,6 +91,14 @@ export const normalize = (input: SelectInput) => {
         gatheredKeys = Object.keys(isKeyAsLabelObject.data)
       } else {
         // Fallback (shouldn't happen if schema validation is correct)
+        console.warn(
+          '[Leva] Invalid Select options format. Expected one of:\n' +
+            '  - Array of primitives: ["x", "y", 1, true]\n' +
+            '  - Object with key-value pairs: { x: 1, foo: "bar" }\n' +
+            '  - Array of {value, label} objects: [{ value: "x", label: "X" }]\n' +
+            'Received:',
+          options
+        )
         gatheredValues = []
         gatheredKeys = []
       }

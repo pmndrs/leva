@@ -245,33 +245,88 @@ describe('Select Plugin - normalize function', () => {
       expect(result.settings.keys).toEqual(['', 'a', 'b'])
       expect(result.settings.values).toEqual(['', 'a', 'b'])
     })
+
+    it('should handle invalid mixed-type arrays (fallback scenario)', () => {
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      // This tests the fallback case where options contain invalid types like nested arrays
+      const input = { options: ['x', 'y', ['x', 'y']] as any }
+      const result = normalize(input)
+
+      // Falls through to empty fallback
+      expect(result.value).toBe(undefined)
+      expect(result.settings.keys).toEqual([])
+      expect(result.settings.values).toEqual([])
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('[Leva] Invalid Select options format'),
+        input.options
+      )
+
+      consoleWarnSpy.mockRestore()
+    })
+
+    it('should handle completely invalid options (not array or object)', () => {
+      const consoleWarnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+      const input = { options: null as any }
+      const result = normalize(input)
+
+      expect(result.value).toBe(undefined)
+      expect(result.settings.keys).toEqual([])
+      expect(result.settings.values).toEqual([])
+      expect(consoleWarnSpy).toHaveBeenCalled()
+
+      consoleWarnSpy.mockRestore()
+    })
   })
 })
 
 describe('Select Plugin - schema validation', () => {
   it('should accept array of primitives', () => {
-    const result = schema(null, ['x', 'y', 'z'])
-    expect(result.success).toBe(true)
+    const result = schema(null, { options: ['x', 'y', 'z'] })
+    expect(result).toBe(true)
   })
 
   it('should accept object with primitive values', () => {
-    const result = schema(null, { foo: 'bar', baz: 1 })
-    expect(result.success).toBe(true)
+    const result = schema(null, { options: { foo: 'bar', baz: 1 } })
+    expect(result).toBe(true)
   })
 
   it('should accept array of value/label objects', () => {
-    const result = schema(null, [{ value: 'x', label: 'X' }, { value: 'y' }])
-    expect(result.success).toBe(true)
+    const result = schema(null, { options: [{ value: 'x', label: 'X' }, { value: 'y' }] })
+    expect(result).toBe(true)
   })
 
-  it('should reject invalid input', () => {
+  it('should reject invalid input (missing options)', () => {
+    const result = schema(null, {})
+    expect(result).toBe(false)
+  })
+
+  it('should reject null', () => {
     const result = schema(null, null)
-    expect(result.success).toBe(false)
+    expect(result).toBe(false)
   })
 
   it('should reject array with non-primitive values', () => {
-    const result = schema(null, [{ nested: 'object' }, 'string'])
-    expect(result.success).toBe(false)
+    // Schema now properly validates that options are in one of the three valid formats
+    // This prevents invalid SELECT inputs from being recognized as SELECT at all
+    const result = schema(null, { options: [{ nested: 'object' }, 'string'] })
+    expect(result).toBe(false)
+  })
+
+  it('should reject boolean primitives', () => {
+    const result = schema(null, true)
+    expect(result).toBe(false)
+  })
+
+  it('should reject number primitives', () => {
+    const result = schema(null, 10)
+    expect(result).toBe(false)
+  })
+
+  it('should reject settings without options key', () => {
+    const result = schema(null, { value: 'x' })
+    expect(result).toBe(false)
   })
 })
 
