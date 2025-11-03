@@ -10,10 +10,14 @@ import { JoyCube } from './JoyCube'
 
 type Joystick3dProps = { value: Vector3d } & Pick<Vector3dProps, 'onUpdate' | 'settings'>
 
+// Detect OS to show appropriate modifier key label
+const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(navigator.platform)
+const metaKeyLabel = isMac ? '⌘' : 'win'
+
 const joystick3dKeyBindings = [
   { key: 'Control', keyLabel: 'ctrl', plane: 'xz', label: 'XZ' },
   { key: '', keyLabel: '', plane: 'xy', label: 'XY' },
-  { key: 'Meta', keyLabel: 'meta', plane: 'zy', label: 'ZY' },
+  { key: 'Meta', keyLabel: metaKeyLabel, plane: 'zy', label: 'ZY' },
 ]
 
 export function Joystick3d({ value, settings, onUpdate }: Joystick3dProps) {
