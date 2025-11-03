@@ -1,7 +1,7 @@
 import React from 'react'
 import { Joystick } from './Joystick'
 import { useKeyPress } from '../../hooks/useKeyPress'
-import { JoystickButtons, KeyLabel } from './StyledJoystick3d'
+import { JoystickButtons, PlaneLabel, KeyLabel } from './StyledJoystick3d'
 import { Button } from '../Button'
 import type { InternalVector2dSettings } from '../../plugins/Vector2d/vector2d-types'
 import type { Vector3d } from '../../types'
@@ -41,10 +41,10 @@ export function Joystick3d({ value, settings, onUpdate }: Joystick3dProps) {
             <Button
               key={kb.label}
               label={
-                <>
-                  <span>{kb.label}</span>
-                  <KeyLabel>{kb.keyLabel || kb.key}</KeyLabel>
-                </>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                  <PlaneLabel>{kb.label}</PlaneLabel>
+                  <KeyLabel>{kb.keyLabel || '\u00A0'}</KeyLabel>
+                </div>
               }
               onClick={() => ''}
               settings={{ disabled: plane !== kb.plane }}

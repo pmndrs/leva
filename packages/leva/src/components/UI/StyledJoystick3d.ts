@@ -10,19 +10,23 @@ export const JoystickButtons = styled('div', {
   position: 'absolute',
   bottom: 'calc(-1 * $sizes$rowHeight - 2 * $space$rowGap + $radii$sm)',
   backgroundColor: '$elevation2',
-  borderRadius: '$sm',
+  borderRadius: '$lg',
   width: '$joystickWidth',
   height: 'calc(2 * $space$rowGap + $sizes$rowHeight)',
   fontFamily: '$mono',
   fontSize: '$root',
 })
 
-export const KeyLabel = styled('span', {
-  position: 'absolute',
-  top: '0',
-  right: '2px',
-  fontSize: '0.8em',
+export const PlaneLabel = styled('div', {
+  fontSize: '1em',
+  fontWeight: 'bold',
+})
+
+export const KeyLabel = styled('div', {
+  fontSize: '0.6em',
   fontStyle: 'italic',
+  opacity: 1.0,
+  textAlign: 'center',
 })
 
 export const StyledJoyCubeFace = styled(JoystickGrid, {
