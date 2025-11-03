@@ -22,12 +22,26 @@ const Template: StoryFn = (args) => {
   )
 }
 
+/**
+ * Passes a list of values. The value will be used as both value AND label.
+ */
 export const Simple = Template.bind({})
 Simple.args = {
   value: 'x',
   options: ['x', 'y'],
 }
 
+/**
+ * No value is passed, so the first option will be selected as the default.
+ */
+export const NoValue = Template.bind({})
+NoValue.args = {
+  options: ['x', 'y'],
+}
+
+/**
+ * Passes an object of values. The key will be used as label and the value will be used as value.
+ */
 export const CustomLabels = Template.bind({})
 CustomLabels.args = {
   value: 'helloWorld',
@@ -43,27 +57,41 @@ InferredValueAsOption.args = {
   options: [false],
 }
 
+/**
+ * Unsupported/deprecated use case, instead use consistent format for options
+ */
 export const DifferentOptionTypes = Template.bind({})
 DifferentOptionTypes.args = {
   value: undefined,
   options: ['x', 'y', ['x', 'y']],
 }
 
-const IconA = () => <span>IconA</span>
-const IconB = () => <span>IconB</span>
+const ComponentA = () => <span>Component A</span>
+const ComponentB = () => <span>Component B</span>
 
+/**
+ * Shows passing functions as the option values.
+ */
 export const FunctionAsOptions = () => {
   const values = useControls({
-    foo: { options: { none: '', IconA, IconB } },
+    foo: { options: { none: '', ComponentA, ComponentB } },
   })
+
+  if (!values.foo) return null
+
+  // render value.foo as a react component
+  const Component = values.foo as React.ComponentType
 
   return (
     <div>
-      <pre>{values.foo.toString()}</pre>
+      <Component />
     </div>
   )
 }
 
+/**
+ * Shows passing a value/label records array.
+ */
 export const ValueLabelObjects = Template.bind({})
 ValueLabelObjects.args = {
   value: '#f00',
