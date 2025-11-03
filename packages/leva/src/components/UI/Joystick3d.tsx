@@ -1,7 +1,7 @@
 import React from 'react'
 import { Joystick } from './Joystick'
 import { useKeyPress } from '../../hooks/useKeyPress'
-import { JoystickButtons, PlaneLabel, KeyLabel } from './StyledJoystick3d'
+import { JoystickButtons, ButtonLabelContainer, PlaneLabel, KeyLabel } from './StyledJoystick3d'
 import { Button } from '../Button'
 import type { InternalVector2dSettings } from '../../plugins/Vector2d/vector2d-types'
 import type { Vector3d } from '../../types'
@@ -15,7 +15,7 @@ const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.test(na
 const metaKeyLabel = isMac ? '⌘' : 'win'
 
 const joystick3dKeyBindings = [
-  { key: 'Control', keyLabel: 'ctrl', plane: 'xz', label: 'XZ' },
+  { key: 'Control', keyLabel: '^', plane: 'xz', label: 'XZ' },
   { key: '', keyLabel: '', plane: 'xy', label: 'XY' },
   { key: 'Meta', keyLabel: metaKeyLabel, plane: 'zy', label: 'ZY' },
 ]
@@ -45,10 +45,10 @@ export function Joystick3d({ value, settings, onUpdate }: Joystick3dProps) {
             <Button
               key={kb.label}
               label={
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                <ButtonLabelContainer>
+                  {kb.keyLabel && <KeyLabel>{kb.keyLabel}</KeyLabel>}
                   <PlaneLabel>{kb.label}</PlaneLabel>
-                  <KeyLabel>{kb.keyLabel || '\u00A0'}</KeyLabel>
-                </div>
+                </ButtonLabelContainer>
               }
               onClick={() => ''}
               settings={{ disabled: plane !== kb.plane }}

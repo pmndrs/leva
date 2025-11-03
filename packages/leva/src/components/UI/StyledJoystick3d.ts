@@ -17,16 +17,30 @@ export const JoystickButtons = styled('div', {
   fontSize: '$root',
 })
 
+export const ButtonLabelContainer = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  height: '100%',
+})
+
 export const PlaneLabel = styled('div', {
   fontSize: '1em',
   fontWeight: 'bold',
+  textAlign: 'center',
+  marginTop: '0.1em',
 })
 
 export const KeyLabel = styled('div', {
-  fontSize: '0.6em',
+  position: 'absolute',
+  top: '-2px',
+  right: '-4px',
+  fontSize: '0.8em',
   fontStyle: 'italic',
-  opacity: 1.0,
-  textAlign: 'center',
+  margin: '0.2em',
+  opacity: 0.8,
 })
 
 export const StyledJoyCubeFace = styled(JoystickGrid, {
