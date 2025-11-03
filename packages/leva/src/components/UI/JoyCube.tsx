@@ -1,19 +1,21 @@
 import React from 'react'
 import { StyledJoyCubeFace, StyledJoyCube } from './StyledJoystick3d'
 
+type JoyCubeProps = {
+  isTop?: boolean
+  isRight?: boolean
+  showFront?: boolean
+  showMid?: boolean
+  showRear?: boolean
+}
+
 export function JoyCube({
   isTop,
   isRight,
   showFront = true,
   showMid = true,
   showRear = false,
-}: {
-  isTop?: boolean
-  isRight?: boolean
-  showFront?: boolean
-  showMid?: boolean
-  showRear?: boolean
-}) {
+}: JoyCubeProps) {
   return (
     <StyledJoyCube top={isTop} right={isRight}>
       {showFront && (

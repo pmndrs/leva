@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Joystick } from './Joystick'
 import { useKeyPress } from '../../hooks/useKeyPress'
 import { JoystickButtons, ButtonLabelContainer, PlaneLabel, KeyLabel } from './StyledJoystick3d'
@@ -21,17 +22,17 @@ const joystick3dKeyBindings = [
 ]
 
 export function Joystick3d({ value, settings, onUpdate }: Joystick3dProps) {
-  const [plane, setPlane] = React.useState('xy')
+  const [plane, setPlane] = useState('xy')
   const keyPress0 = useKeyPress(joystick3dKeyBindings[0].key)
   const keyPress2 = useKeyPress(joystick3dKeyBindings[2].key)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (keyPress0) setPlane(joystick3dKeyBindings[0].plane)
     else if (keyPress2) setPlane(joystick3dKeyBindings[2].plane)
     else setPlane(joystick3dKeyBindings[1].plane)
   }, [keyPress0, keyPress2])
 
-  const settings2d = React.useMemo(() => {
+  const settings2d = useMemo(() => {
     const { keys, ...rest } = settings
     return { keys: plane, ...rest } as unknown as InternalVector2dSettings
   }, [settings, plane])
