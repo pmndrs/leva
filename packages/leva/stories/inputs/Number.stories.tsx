@@ -119,3 +119,37 @@ Complete.play = async ({ canvasElement }) => {
   // Verify the story renders
   await expect(canvas.getByText(/5/)).toBeInTheDocument()
 }
+
+// Multiple controls to test step visualization in context
+const MultipleTemplate: StoryFn = () => {
+  const values = useControls({
+    wideSteps: { value: 4, min: 0, max: 20, step: 2 },
+    mediumSteps: { value: 2.5, min: 0, max: 8, step: 0.5 },
+    fineSteps: { value: 1.25, min: 0, max: 5, step: 0.25 },
+    denseSteps: { value: 50, min: 0, max: 100, step: 1 },
+    veryDenseSteps: { value: 0.5, min: 0, max: 1, step: 0.01 },
+  })
+
+  return (
+    <div>
+      <pre>{JSON.stringify(values, null, '  ')}</pre>
+    </div>
+  )
+}
+
+export const StepVisualizationShowcase = MultipleTemplate.bind({})
+StepVisualizationShowcase.storyName = 'Step Visualization - All Scenarios'
+StepVisualizationShowcase.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
+
+  await waitFor(() => {
+    expect(within(document.body).getByLabelText(/wideSteps/i)).toBeInTheDocument()
+  })
+
+  // Verify multiple controls render
+  await expect(canvas.getByText(/"wideSteps"/)).toBeInTheDocument()
+  await expect(canvas.getByText(/"mediumSteps"/)).toBeInTheDocument()
+  await expect(canvas.getByText(/"fineSteps"/)).toBeInTheDocument()
+  await expect(canvas.getByText(/"denseSteps"/)).toBeInTheDocument()
+  await expect(canvas.getByText(/"veryDenseSteps"/)).toBeInTheDocument()
+}
