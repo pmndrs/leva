@@ -2,3 +2,6 @@ packages:
   # all packages in subdirs of packages/
   - 'packages/*'
   - 'demo'
+
+catalog:
+  typescript: ^5.7.2
