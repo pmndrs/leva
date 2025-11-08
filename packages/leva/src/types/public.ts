@@ -4,8 +4,7 @@
 import type { VectorSettings } from '../plugins/Vector/vector-types'
 import { StoreType, Data, DataInput } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
-import type { z } from 'zod'
-import type { valueLabelObjectSchema, selectOptionsSchema } from '../plugins/Select/select-plugin'
+import type { SelectOptionsType, ValueLabelObjectType } from '../plugins/Select/select-plugin'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
@@ -107,8 +106,8 @@ export type IntervalInput = { value: [number, number]; min: number; max: number 
 export type ImageInput = { image: undefined | string }
 
 // Infer valid select types from Zod schemas to ensure runtime validation and types stay in sync
-export type SelectOption<T = unknown> = z.infer<typeof valueLabelObjectSchema> & { value: T }
-export type SelectOptionsType = z.infer<typeof selectOptionsSchema>
+export type SelectOption<T = unknown> = ValueLabelObjectType & { value: T }
+export type { SelectOptionsType }
 export type SelectInput = { options: SelectOptionsType; value?: any }
 
 // Type inference helpers that extract value types from different option formats

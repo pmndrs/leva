@@ -41,6 +41,11 @@ export const selectOptionsSchema = z.union([
   arrayOfValueLabelObjectsSchema,
 ])
 
+export type SelectOptionSchema = typeof valueLabelObjectSchema
+export type SelectOptionsSchemaType = typeof selectOptionsSchema
+export type SelectOptionsType = z.infer<typeof selectOptionsSchema>
+export type ValueLabelObjectType = z.infer<typeof valueLabelObjectSchema>
+
 /**
  * Schema for the settings object - checks if it has an 'options' key
  * We accept the three valid SELECT formats:
