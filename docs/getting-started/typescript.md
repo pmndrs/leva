@@ -1,3 +1,9 @@
+---
+title: Using With Typescript
+description:
+nav: 0
+---
+
 # Using With TypeScript
 
 Leva has excellent TypeScript support with full type inference for your control values.
