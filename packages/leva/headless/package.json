@@ -1,0 +1,4 @@
+{
+  "main": "dist/leva-headless.cjs.js",
+  "module": "dist/leva-headless.esm.js"
+}

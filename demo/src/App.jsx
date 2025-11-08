@@ -16,6 +16,7 @@ import UI from './sandboxes/leva-ui/src/App'
 import Theme from './sandboxes/leva-theme/src/App'
 import CustomPlugin from './sandboxes/leva-custom-plugin/src/App'
 import LevaTransient from './sandboxes/leva-transient/src/App'
+import Headless from './sandboxes/leva-headless/src/App'
 
 const { styled } = createStitches({
   theme: {
@@ -34,6 +35,7 @@ const Page = styled('div', {
 
 const links = {
   'leva-minimal': Minimal,
+  'leva-headless': Headless,
   'leva-busy': Busy,
   'leva-advanced-panels': AdvancedPanels,
   'leva-scroll': Scroll,

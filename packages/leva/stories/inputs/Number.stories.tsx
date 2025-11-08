@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within, waitFor } from 'storybook/test'
+import { expect, within, waitFor, userEvent } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -36,6 +36,22 @@ Simple.play = async ({ canvasElement }) => {
 
   // Verify the story renders
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
+
+  // Leva panel is rendered outside canvasElement (in document.body)
+  // Find the input field by label (the control label is "foo")
+  const input = within(document.body).getByLabelText(/foo/i)
+  await userEvent.clear(input)
+  await userEvent.type(input, "2")
+
+  await userEvent.tab()
+  
+  await expect(canvas.getByText(/2/)).toBeInTheDocument()
+
+  await userEvent.clear(input)
+  await userEvent.type(input, "1")
+  await userEvent.tab()
+
+  await expect(canvas.getByText(/1/)).toBeInTheDocument()
 }
 
 export const MinMax = Template.bind({})
@@ -52,6 +68,34 @@ MinMax.play = async ({ canvasElement }) => {
   })
 
   // Verify the story renders
+  await expect(canvas.getByText(/1/)).toBeInTheDocument()
+
+  // Leva panel is rendered outside canvasElement (in document.body)
+  // Find the input field by label (the control label is "foo")
+  const input = within(document.body).getByLabelText(/foo/i)
+  await userEvent.clear(input)
+  await userEvent.type(input, "2")
+
+  await userEvent.tab()
+  
+  await expect(canvas.getByText(/2/)).toBeInTheDocument()
+
+  await userEvent.clear(input)
+  await userEvent.type(input, "11")
+  await userEvent.tab()
+
+  await expect(canvas.getByText(/10/)).toBeInTheDocument()
+
+  await userEvent.clear(input)
+  await userEvent.type(input, "-2")
+  await userEvent.tab()
+
+  await expect(canvas.getByText(/0/)).toBeInTheDocument()
+
+  await userEvent.clear(input)
+  await userEvent.type(input, "1")
+  await userEvent.tab()
+
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
 }
 
@@ -85,6 +129,21 @@ Step.play = async ({ canvasElement }) => {
   })
 
   // Verify the story renders
+  await expect(canvas.getByText(/10/)).toBeInTheDocument()
+
+  // Leva panel is rendered outside canvasElement (in document.body)
+  // Find the input field by label (the control label is "foo")
+  const input = within(document.body).getByLabelText(/foo/i)
+  await userEvent.clear(input)
+  await userEvent.type(input, "12.13")
+  await userEvent.tab()
+
+  await expect(canvas.getByText(/12.13/)).toBeInTheDocument()
+
+  await userEvent.clear(input)
+  await userEvent.type(input, "10")
+  await userEvent.tab()
+
   await expect(canvas.getByText(/10/)).toBeInTheDocument()
 }
 
