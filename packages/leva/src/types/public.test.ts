@@ -137,6 +137,52 @@ expectType<{
   })
 )
 
+// folders with onChange should exclude transient items from return type but include them in get function
+expectType<{ a1: number }>(
+  useControls({
+    a: folder({
+      a1: 1,
+      a2: { value: 'transient', onChange: () => {} },
+    }),
+  })
+)
+
+// test that get function includes transient items in folders
+expectType<
+  [
+    { a1: number },
+    (value: { a1?: number; a2?: string }) => void,
+    <T extends 'a1' | 'a2'>(path: T) => { a1: number; a2: string }[T]
+  ]
+>(
+  useControls(() => ({
+    a: folder({
+      a1: 1,
+      a2: { value: 'transient', onChange: () => {} },
+    }),
+  }))
+)
+
+// nested folders with onChange
+expectType<
+  [
+    { a1: number },
+    (value: { a1?: number; b1?: number; b2?: string }) => void,
+    <T extends 'a1' | 'b1' | 'b2'>(path: T) => { a1: number; b1: number; b2: string }[T]
+  ]
+>(
+  useControls(() => ({
+    a: folder({
+      a1: 1,
+      a2: { value: 'transient', onChange: () => {} },
+      b: folder({
+        b1: { value: 10 },
+        b2: { value: 'also transient', onChange: () => {} },
+      }),
+    }),
+  }))
+)
+
 /**
  * custom plugins
  */
