@@ -1,3 +1,9 @@
+---
+title: Plugins
+description:
+nav: 0
+---
+
 # Plugins
 
 Plugins extend Leva with custom input types beyond the built-in primitives. They allow you to create specialized controls for specific use cases.
