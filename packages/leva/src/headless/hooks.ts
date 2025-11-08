@@ -3,8 +3,7 @@
  */
 
 import { useMemo, useState, useEffect, useCallback } from 'react'
-// Note: zustand/shallow exports as default export, not named export
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import { levaStore } from '../store'
 import { useVisiblePaths } from '../hooks/useVisiblePaths'
 import { buildTree } from '../components/Leva/tree'
