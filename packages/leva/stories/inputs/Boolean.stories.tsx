@@ -35,17 +35,23 @@ Default.play = async ({ canvasElement }) => {
   })
 
   // Verify the story renders without errors
-  await expect(canvas.getByText(/false/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/false/)).toBeInTheDocument()
+  })
 
   // Leva panel is rendered outside canvasElement (in document.body)
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
 
   input.click()
-  await expect(canvas.getByText(/true/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/true/)).toBeInTheDocument()
+  })
 
   input.click()
-  await expect(canvas.getByText(/false/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/false/)).toBeInTheDocument()
+  })
 }
 
 export const Checked = Template.bind({})
@@ -60,12 +66,16 @@ Checked.play = async ({ canvasElement }) => {
   })
 
   // Verify the story renders without errors
-  await expect(canvas.getByText(/true/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/true/)).toBeInTheDocument()
+  })
 
   // Leva panel is rendered outside canvasElement (in document.body)
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
 
   input.click()
-  await expect(canvas.getByText(/false/)).toBeInTheDocument()
+  await waitFor(() => {
+    expect(canvas.getByText(/false/)).toBeInTheDocument()
+  })
 }
