@@ -4,6 +4,8 @@
 import type { VectorSettings } from '../plugins/Vector/vector-types'
 import { StoreType, Data, DataInput } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
+import type { z } from 'zod'
+import type { valueLabelObjectSchema, selectOptionsSchema } from '../plugins/Select/select-plugin'
 
 export type RenderFn = (get: (key: string) => any) => boolean
 
@@ -104,12 +106,12 @@ export type IntervalInput = { value: [number, number]; min: number; max: number 
 
 export type ImageInput = { image: undefined | string }
 
-export type SelectOption<T = unknown> = { value: T; label?: string }
+// Infer valid select types from Zod schemas to ensure runtime validation and types stay in sync
+export type SelectOption<T = unknown> = z.infer<typeof valueLabelObjectSchema> & { value: T }
+export type SelectOptionsType = z.infer<typeof selectOptionsSchema>
+export type SelectInput = { options: SelectOptionsType; value?: any }
 
-type SelectInput = { options: any[] | Record<string, any> | SelectOption[]; value?: any }
-
-// Union branches prevent SelectOption objects from appearing in inferred value types.
-// SelectOption<T>[] branch extracts T; Exclude<T, SelectOption> branch handles primitives.
+// Type inference helpers that extract value types from different option formats
 type SelectWithValueInput<T, K> =
   | { options: SelectOption<T>[]; value: K }
   | { options: Exclude<T, SelectOption<any>>[] | Record<string, Exclude<T, SelectOption<any>>>; value: K }

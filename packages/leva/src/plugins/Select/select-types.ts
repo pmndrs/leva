@@ -1,9 +1,10 @@
 import type { LevaInputProps } from '../../types'
-import type { SelectOption } from '../../types/public'
+import type { z } from 'zod'
+import type { selectOptionsSchema } from './select-plugin'
 
-export type SelectSettings<U = unknown> = { options: Record<string, U> | U[] | SelectOption<U>[] }
+export type SelectSettings = { options: z.infer<typeof selectOptionsSchema> }
 export type InternalSelectSettings = { keys: string[]; values: any[] }
 
-export type SelectInput<P = unknown, U = unknown> = { value?: P } & SelectSettings<U>
+export type SelectInput<P = unknown> = { value?: P } & SelectSettings
 
 export type SelectProps = LevaInputProps<any, InternalSelectSettings, number>

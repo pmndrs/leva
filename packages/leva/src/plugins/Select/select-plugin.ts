@@ -1,7 +1,7 @@
 import type { SelectInput, InternalSelectSettings } from './select-types'
 import { z } from 'zod'
 
-const zValidPrimitive = z.union([z.string(), z.number(), z.boolean()])
+const zValidPrimitive = z.union([z.string(), z.number(), z.boolean(), z.function()])
 
 /**
  * Schema for the usecase
@@ -28,14 +28,18 @@ const keyAsLabelObjectSchema = z.record(z.string(), zValidPrimitive)
  * [{ value: 'x', label: 'X' }, { value: 'y', label: 'Y' }]
  * ```
  */
-const valueLabelObjectSchema = z.object({
+export const valueLabelObjectSchema = z.object({
   value: zValidPrimitive,
   label: z.string().optional(),
 })
 
 const arrayOfValueLabelObjectsSchema = z.array(valueLabelObjectSchema)
 
-const allUsecases = z.union([arrayOfPrimitivesSchema, keyAsLabelObjectSchema, arrayOfValueLabelObjectsSchema])
+export const selectOptionsSchema = z.union([
+  arrayOfPrimitivesSchema,
+  keyAsLabelObjectSchema,
+  arrayOfValueLabelObjectsSchema,
+])
 
 /**
  * Schema for the settings object - checks if it has an 'options' key
@@ -44,11 +48,11 @@ const allUsecases = z.union([arrayOfPrimitivesSchema, keyAsLabelObjectSchema, ar
  * 2. Array of {value, label} objects: [{ value: 'x', label: 'X' }]
  * 3. Object with key-value pairs: { x: 1, y: 2 }
  *
- * Note: We use allUsecases which handles detailed validation, so invalid formats
+ * Note: We use selectOptionsSchema which handles detailed validation, so invalid formats
  * will be caught and warned about in normalize()
  */
 const selectInputSchema = z.object({
-  options: allUsecases,
+  options: selectOptionsSchema,
 })
 
 // the options attribute is either a key value object, an array, or an array of {value, label} objects

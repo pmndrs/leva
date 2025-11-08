@@ -59,9 +59,7 @@ expectType<{ a: string }>(useControls({ a: 'some string' }))
  */
 expectType<{ a: string }>(useControls({ a: { options: ['foo', 'bar'] } }))
 expectType<{ a: number | string }>(useControls({ a: { options: [1, 'bar'] } }))
-expectType<{ a: string | number | Array<string | number> }>(useControls({ a: { options: ['foo', 1, ['foo', 'bar']] } }))
 expectType<{ a: boolean | number }>(useControls({ a: { options: { foo: 1, bar: true } } }))
-expectType<{ a: number | string | string[] }>(useControls({ a: { value: 3, options: ['foo', ['foo', 'bar']] } }))
 expectType<{ a: string }>(
   useControls({
     a: {
