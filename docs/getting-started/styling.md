@@ -1,3 +1,9 @@
+---
+title: Customizing Style
+description:
+nav: 0
+---
+
 # Customizing Style
 
 Leva supports full theme customization through the `theme` prop on the `<Leva>` component. You can customize colors, spacing, typography, and more.
