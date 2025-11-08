@@ -1,5 +1,11 @@
 # leva
 
+## 0.10.2
+
+### Patch Changes
+
+- 7a61602: Export RangeSlider
+
 ## 0.10.1
 
 ### Patch Changes
