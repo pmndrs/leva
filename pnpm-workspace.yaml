@@ -2,3 +2,7 @@ packages:
   # all packages in subdirs of packages/
   - 'packages/*'
   - 'demo'
+
+catalog:
+  typescript: ^5.7.2
+  '@use-gesture/react': ^10.3.1
