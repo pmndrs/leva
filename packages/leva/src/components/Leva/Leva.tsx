@@ -13,6 +13,7 @@ class PanelLifecycle {
   private rootEl: HTMLElement | null = null
   private reactRoot: Root | null = null
   private initialized = false
+  private explicitPanelInTree = false
 
   /**
    * Mounts a new instance of the global panel.
@@ -21,7 +22,7 @@ class PanelLifecycle {
   mount(): void {
     this.refCount++
 
-    if (!this.initialized) {
+    if (!this.initialized && !this.explicitPanelInTree) {
       this.createPanel()
       this.initialized = true
     }
@@ -88,6 +89,18 @@ class PanelLifecycle {
   isInitialized(): boolean {
     return this.initialized
   }
+
+  /**
+   * Marks that an explicit <Leva> component is in the tree
+   */
+  setExplicitPanel(isExplicit: boolean): void {
+    this.explicitPanelInTree = isExplicit
+    // If an explicit panel is added and we have an auto-created one, remove it
+    if (isExplicit && this.initialized) {
+      this.destroyPanel()
+      this.initialized = false
+    }
+  }
 }
 
 // Singleton instance for managing the global panel lifecycle
@@ -95,15 +108,22 @@ const panelLifecycle = new PanelLifecycle()
 
 type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
-// uses global store
+/**
+ * Used to pass custom props to the global panel.
+ *
+ * @example
+ * <Leva fill titleBar={{ drag: false }} />
+ *
+ */
 export function Leva({ isRoot = false, ...props }: LevaProps) {
   useEffect(() => {
-    // Note: This logic for handling non-root panels remains unchanged
-    // as it's separate from the global panel lifecycle
-    if (!isRoot && panelLifecycle.isInitialized()) {
-      // If this panel was attached somewhere in the app and there is already
-      // a floating panel, we would need to handle it here
-      // For now, keeping the original behavior
+    // When an explicit <Leva> component is rendered (not the auto-created root),
+    // we need to signal to the panel lifecycle to prevent creating duplicate panels
+    if (!isRoot) {
+      panelLifecycle.setExplicitPanel(true)
+      return () => {
+        panelLifecycle.setExplicitPanel(false)
+      }
     }
   }, [isRoot])
 

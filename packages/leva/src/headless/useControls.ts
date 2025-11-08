@@ -3,6 +3,7 @@
  * Automatically passes { headless: true } to prevent UI rendering
  */
 
+import { useMemo } from 'react'
 import {
   useControls as useControlsBase,
   parseArgs,
@@ -11,6 +12,7 @@ import {
   type HookReturnType,
 } from '../useControls'
 import type { Schema, FolderSettings } from '../types'
+import { reconstructArgsWithHeadless } from './useControls.utils'
 
 /**
  * Headless version of useControls that manages state without rendering UI.
@@ -42,22 +44,42 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   depsOrSettings?: React.DependencyList | HookSettings,
   depsOrUndefined?: React.DependencyList
 ): HookReturnType<F, G> {
-  // Parse arguments using the shared utility
-  const { schema, folderName, folderSettings, hookSettings, deps } = parseArgs(
-    schemaOrFolderName,
-    settingsOrDepsOrSchema,
-    depsOrSettingsOrFolderSettings,
-    depsOrSettings,
-    depsOrUndefined
+  // Parse arguments to understand structure
+  const { folderName, hookSettings } = useMemo(
+    () =>
+      parseArgs(
+        schemaOrFolderName,
+        settingsOrDepsOrSchema,
+        depsOrSettingsOrFolderSettings,
+        depsOrSettings,
+        depsOrUndefined
+      ),
+    [schemaOrFolderName, settingsOrDepsOrSchema, depsOrSettingsOrFolderSettings, depsOrSettings, depsOrUndefined]
   )
 
-  // Inject headless: true into hook settings
-  const headlessSettings: HookSettings = { ...hookSettings, headless: true }
+  // Reconstruct arguments with modified settings, ensuring single unconditional hook call
+  // Always inject headless: true into hook settings
+  const modifiedArgs = useMemo<Parameters<typeof useControlsBase>>(
+    () =>
+      reconstructArgsWithHeadless({
+        folderName,
+        schemaOrFolderName,
+        settingsOrDepsOrSchema,
+        depsOrSettingsOrFolderSettings,
+        depsOrSettings,
+        depsOrUndefined,
+        hookSettings,
+      }),
+    [
+      folderName,
+      schemaOrFolderName,
+      settingsOrDepsOrSchema,
+      depsOrSettingsOrFolderSettings,
+      depsOrSettings,
+      depsOrUndefined,
+      hookSettings,
+    ]
+  )
 
-  // Call base useControls with properly parsed and modified arguments
-  if (folderName) {
-    return useControlsBase(folderName, schema, folderSettings, headlessSettings, deps) as HookReturnType<F, G>
-  }
-
-  return useControlsBase(schema, headlessSettings, deps) as HookReturnType<F, G>
+  return useControlsBase(...modifiedArgs) as HookReturnType<F, G>
 }
