@@ -108,8 +108,14 @@ export type SelectOption<T = unknown> = { value: T; label?: string }
 
 type SelectInput = { options: any[] | Record<string, any> | SelectOption[]; value?: any }
 
-type SelectWithValueInput<T, K> = { options: T[] | Record<string, T> | SelectOption<T>[]; value: K }
-type SelectWithoutValueInput<T> = { options: T[] | Record<string, T> | SelectOption<T>[] }
+// Union branches prevent SelectOption objects from appearing in inferred value types.
+// SelectOption<T>[] branch extracts T; Exclude<T, SelectOption> branch handles primitives.
+type SelectWithValueInput<T, K> =
+  | { options: SelectOption<T>[]; value: K }
+  | { options: Exclude<T, SelectOption<any>>[] | Record<string, Exclude<T, SelectOption<any>>>; value: K }
+type SelectWithoutValueInput<T> =
+  | { options: SelectOption<T>[] }
+  | { options: Exclude<T, SelectOption<any>>[] | Record<string, Exclude<T, SelectOption<any>>> }
 
 type ColorRgbaInput = { r: number; g: number; b: number; a?: number }
 type ColorHslaInput = { h: number; s: number; l: number; a?: number }
