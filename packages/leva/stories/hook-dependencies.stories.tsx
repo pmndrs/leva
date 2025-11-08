@@ -5,7 +5,7 @@ import { Meta } from '@storybook/react'
 import { useControls } from '../src'
 
 export default {
-  title: 'Hook/Dependency',
+  title: 'Dev/Hook/Dependencies',
   decorators: [Reset],
 } as Meta
 

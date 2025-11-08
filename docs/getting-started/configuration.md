@@ -1,3 +1,9 @@
+---
+title: Configuration
+description:
+nav: 0
+---
+
 ## Configuration
 
 You can configure Leva by using the `<Leva>` component anywhere in your App:
