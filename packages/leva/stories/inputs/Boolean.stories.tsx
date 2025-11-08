@@ -46,7 +46,6 @@ Default.play = async ({ canvasElement }) => {
 
   input.click()
   await expect(canvas.getByText(/false/)).toBeInTheDocument()
-
 }
 
 export const Checked = Template.bind({})

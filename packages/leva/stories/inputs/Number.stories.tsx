@@ -41,14 +41,14 @@ Simple.play = async ({ canvasElement }) => {
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
   await userEvent.clear(input)
-  await userEvent.type(input, "2")
+  await userEvent.type(input, '2')
 
   await userEvent.tab()
-  
+
   await expect(canvas.getByText(/2/)).toBeInTheDocument()
 
   await userEvent.clear(input)
-  await userEvent.type(input, "1")
+  await userEvent.type(input, '1')
   await userEvent.tab()
 
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
@@ -74,26 +74,26 @@ MinMax.play = async ({ canvasElement }) => {
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
   await userEvent.clear(input)
-  await userEvent.type(input, "2")
+  await userEvent.type(input, '2')
 
   await userEvent.tab()
-  
+
   await expect(canvas.getByText(/2/)).toBeInTheDocument()
 
   await userEvent.clear(input)
-  await userEvent.type(input, "11")
+  await userEvent.type(input, '11')
   await userEvent.tab()
 
   await expect(canvas.getByText(/10/)).toBeInTheDocument()
 
   await userEvent.clear(input)
-  await userEvent.type(input, "-2")
+  await userEvent.type(input, '-2')
   await userEvent.tab()
 
   await expect(canvas.getByText(/0/)).toBeInTheDocument()
 
   await userEvent.clear(input)
-  await userEvent.type(input, "1")
+  await userEvent.type(input, '1')
   await userEvent.tab()
 
   await expect(canvas.getByText(/1/)).toBeInTheDocument()
@@ -135,13 +135,13 @@ Step.play = async ({ canvasElement }) => {
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
   await userEvent.clear(input)
-  await userEvent.type(input, "12.13")
+  await userEvent.type(input, '12.13')
   await userEvent.tab()
 
   await expect(canvas.getByText(/12.13/)).toBeInTheDocument()
 
   await userEvent.clear(input)
-  await userEvent.type(input, "10")
+  await userEvent.type(input, '10')
   await userEvent.tab()
 
   await expect(canvas.getByText(/10/)).toBeInTheDocument()
