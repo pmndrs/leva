@@ -1,6 +1,6 @@
 import type { LevaInputProps } from '../../types'
+import type { SelectOption } from '../../types/public'
 
-export type SelectOption<T = unknown> = { value: T; label?: string }
 export type SelectSettings<U = unknown> = { options: Record<string, U> | U[] | SelectOption<U>[] }
 export type InternalSelectSettings = { keys: string[]; values: any[] }
 

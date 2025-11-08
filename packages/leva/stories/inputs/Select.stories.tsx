@@ -57,15 +57,6 @@ InferredValueAsOption.args = {
   options: [false],
 }
 
-/**
- * Unsupported/deprecated use case, instead use consistent format for options
- */
-export const DifferentOptionTypes = Template.bind({})
-DifferentOptionTypes.args = {
-  value: undefined,
-  options: ['x', 'y', ['x', 'y']],
-}
-
 const ComponentA = () => <span>Component A</span>
 const ComponentB = () => <span>Component B</span>
 

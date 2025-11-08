@@ -104,7 +104,8 @@ export type IntervalInput = { value: [number, number]; min: number; max: number 
 
 export type ImageInput = { image: undefined | string }
 
-type SelectOption<T = any> = { value: T; label?: string }
+export type SelectOption<T = unknown> = { value: T; label?: string }
+
 type SelectInput = { options: any[] | Record<string, any> | SelectOption[]; value?: any }
 
 type SelectWithValueInput<T, K> = { options: T[] | Record<string, T> | SelectOption<T>[]; value: K }
