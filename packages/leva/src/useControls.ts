@@ -4,10 +4,10 @@ import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
 import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
-type HookSettings = { store?: StoreType }
-type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
+export type HookSettings = { store?: StoreType; headless?: boolean }
+export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
 
 type FunctionReturnType<S extends Schema> = [
   SchemaToValues<S>,
@@ -23,11 +23,11 @@ type ReturnType<F extends SchemaOrFn> = F extends SchemaOrFn<infer S>
     : SchemaToValues<S>
   : never
 
-type HookReturnType<F extends SchemaOrFn | string, G extends SchemaOrFn> = F extends SchemaOrFn
+export type HookReturnType<F extends SchemaOrFn | string, G extends SchemaOrFn> = F extends SchemaOrFn
   ? ReturnType<F>
   : ReturnType<G>
 
-function parseArgs(
+export function parseArgs(
   schemaOrFolderName: string | SchemaOrFn,
   settingsOrDepsOrSchema?: HookSettings | React.DependencyList | SchemaOrFn,
   depsOrSettingsOrFolderSettings?: React.DependencyList | HookSettings | FolderSettings,
@@ -115,8 +115,9 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
 
   // GlobalPanel means that no store was provided, therefore we're using the levaStore
   const isGlobalPanel = !hookSettings?.store
+  const headless = hookSettings?.headless ?? false
 
-  useRenderRoot(isGlobalPanel)
+  useRenderRoot(isGlobalPanel && !headless)
   const [store] = useState(() => hookSettings?.store || levaStore)
 
   /**
@@ -209,7 +210,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
           const value = input.disabled ? undefined : input.value
           return [value, input]
         },
-        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        ([value, input]) => onChange(value, path, { initial: false, get: store.get, ...input }),
         { equalityFn: shallow }
       )
       unsubscriptions.push(unsub)
@@ -228,6 +229,6 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     return () => unsubscriptions.forEach((unsub) => unsub())
   }, [onEditStartPaths, onEditEndPaths, store])
 
-  if (schemaIsFunction) return [values, set, get] as any
-  return values as any
+  if (schemaIsFunction) return [values, set, get] as HookReturnType<F, G>
+  return values as HookReturnType<F, G>
 }

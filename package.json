@@ -23,12 +23,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet",
     "chromatic": "chromatic --exit-zero-on-changes",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
     "demo:dev": "pnpm --filter demo run dev",
     "demo:build": "pnpm --filter demo run build",
     "demo:serve": "pnpm --filter demo run serve",
-    "ci:test": "pnpm demo:build && start-server-and-test demo:serve http-get://localhost:5000 cypress:run",
     "prettier": "prettier --check ."
   },
   "size-limit": [
@@ -69,7 +66,6 @@
     "@storybook/react": "^10.0.2",
     "@storybook/react-webpack5": "^10.0.2",
     "@storybook/test": "^8.6.14",
-    "@testing-library/cypress": "^8.0.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -83,10 +79,8 @@
     "all-contributors-cli": "^6.24.0",
     "babel-loader": "^10.0.0",
     "chromatic": "^13.3.3",
-    "cypress": "6.9.1",
     "eslint": "^8.32.0",
     "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
@@ -102,10 +96,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "size-limit": "^8.1.0",
-    "start-server-and-test": "^1.15.2",
     "storybook": "^10.0.2",
     "tsd": "^0.25.0",
-    "typescript": "^5.7.2"
+    "typescript": "catalog:"
   },
   "prettier": {
     "bracketSameLine": true,

@@ -1,3 +1,9 @@
+---
+title: Creating Plugins
+description:
+nav: 1
+---
+
 # Creating Plugins
 
 Plugins allow you to extend Leva with custom input types. They're perfect for domain-specific controls like bezier curves, spring physics, date pickers, or any custom input type your application needs.
