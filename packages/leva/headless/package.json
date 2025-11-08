@@ -1,4 +1,5 @@
 {
-  "main": "dist/leva-headless.cjs.js",
-  "module": "dist/leva-headless.esm.js"
+  "main": "../dist/headless/index.cjs",
+  "module": "../dist/headless/index.mjs",
+  "types": "../dist/headless/index.d.cts"
 }
