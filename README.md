@@ -55,10 +55,10 @@ NOTE: Using Leva with React 18 will cause a console error about createRoot which
 
 ### Documentation
 
-- [Getting Started](/docs/getting-started.md)
-- [Inputs](/docs/inputs.md)
-- [Configuration](/docs/configuration.md)
-- [Styling](/docs/styling.md)
+- [Getting Started](/docs/getting-started/introduction.md)
+- [Inputs](/docs/getting-started/inputs.md)
+- [Configuration](/docs/getting-started/configuration.md)
+- [Styling](/docs/getting-started/styling.md)
 
 - [Advanced: Controlled Inputs](/docs/advanced/controlled-inputs.md)
 - [Advanced: Creating Plugins](/docs/advanced/creating-plugins.md)

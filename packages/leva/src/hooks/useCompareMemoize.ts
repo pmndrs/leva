@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react'
 import { dequal } from 'dequal/lite'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 /**
  * A memoization hook that returns the previous value if the new value is equal
