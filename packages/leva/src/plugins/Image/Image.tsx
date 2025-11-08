@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Label, Portal, Overlay, Row } from '../UI'
+import { Label, Portal, Overlay, Row } from '../../components/UI'
 import { useDropzone } from 'react-dropzone'
 import { DropZone, ImageContainer, ImagePreview, Instructions, ImageLargePreview, Remove } from './StyledImage'
 import { useInputContext } from '../../context'

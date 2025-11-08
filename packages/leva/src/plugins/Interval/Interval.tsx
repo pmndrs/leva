@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Label, Row } from '../UI'
+import { Label, Row } from '../../components/UI'
 import { Vector } from '../Vector'
 import { Range, RangeWrapper, Scrubber, Indicator, sanitizeStep } from '../Number'
 import { useDrag } from '../../hooks'

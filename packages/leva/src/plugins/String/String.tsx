@@ -1,6 +1,6 @@
 import React from 'react'
-import { ValueInput, ValueInputProps } from '../ValueInput'
-import { Label, Row } from '../UI'
+import { ValueInput, ValueInputProps } from '../../components/ValueInput'
+import { Label, Row } from '../../components/UI'
 import { useInputContext } from '../../context'
 import type { StringProps } from './string-types'
 import { styled } from '../../styles'

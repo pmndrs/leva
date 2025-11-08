@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '../../styles'
 import { Vector } from '../Vector'
-import { Label, Row } from '../UI'
+import { Label, Row } from '../../components/UI'
 import { Joystick } from './Joystick'
 import { useInputContext } from '../../context'
 import type { Vector2dProps } from './vector2d-types'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useInputContext } from '../../context'
-import { Label, Row } from '../UI'
+import { Label, Row } from '../../components/UI'
 import { StyledInputWrapper } from './StyledBoolean'
 import type { BooleanProps } from './boolean-types'
 

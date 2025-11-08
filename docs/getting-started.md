@@ -8,10 +8,10 @@ npm i leva
 
 ## Basics
 
-To use Leva, simply import `useControls` and use it anywhere in your app:
+To use Leva, simply import `useControls` and use it anywhere in your app. The `Leva` panel will automatically render:
 
 ```jsx
-import { useControls } from 'leva'
+import { useControls, Leva } from 'leva'
 
 function MyComponent() {
   const { myValue } = useControls({ myValue: 10 })
@@ -33,6 +33,7 @@ function UnmountedComponent() {
 function MyApp() {
   return (
     <>
+      <Leva />
       <MyComponent />
       <AnotherComponent />
     </>
@@ -54,6 +55,7 @@ Leva will automagically use the best input type for your values, all the rules c
 useControls({
   check: false,
   myNumber: 4,
+  // get will let you address other controls in the schema by path
   color: { value: '#ffffffff', render: (get) => get('check') && get('myNumber') > 5 },
 })
 ```
@@ -98,3 +100,37 @@ const { showLighting, showStats } = useControls('My folder', {
 ```
 
 Notice how they are at the top level and the folder properties are ignored. This means that having properties with the same names in different folders will cause conflicts.
+
+## Using dependencies
+
+When your schema depends on external values, pass a dependency array as the last argument to `useControls`. This ensures inputs update when dependencies change:
+
+```jsx
+function DynamicInputs({ count }) {
+  const inputs = useMemo(() => {
+    return Array(count)
+      .fill(0)
+      .reduce((acc, _, i) => {
+        acc[`input${i}`] = i
+        return acc
+      }, {})
+  }, [count])
+
+  const values = useControls(inputs, [count])
+  return <pre>{JSON.stringify(values, null, 2)}</pre>
+}
+```
+
+## Using the function API
+
+Pass a function to `useControls` to get access to `set` and `get` methods for external updates:
+
+```jsx
+const [{ username, counter }, set] = useControls(() => ({
+  username: 'Mario',
+  counter: { value: 0, step: 1 },
+}))
+
+// Update from outside Leva
+set({ username: 'Luigi', counter: 5 })
+```

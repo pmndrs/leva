@@ -4,7 +4,7 @@ import { folder } from './helpers'
 import { useDeepMemo, useValuesForPath } from './hooks'
 import { useRenderRoot } from './components/Leva'
 import type { FolderSettings, Schema, SchemaToValues, StoreType, OnChangeHandler } from './types'
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 export type HookSettings = { store?: StoreType; headless?: boolean }
 export type SchemaOrFn<S extends Schema = Schema> = S | (() => S)
@@ -210,7 +210,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
           const value = input.disabled ? undefined : input.value
           return [value, input]
         },
-        ([value, input]: any) => onChange(value, path, { initial: false, get: store.get, ...input }),
+        ([value, input]) => onChange(value, path, { initial: false, get: store.get, ...input }),
         { equalityFn: shallow }
       )
       unsubscriptions.push(unsub)
@@ -229,6 +229,6 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     return () => unsubscriptions.forEach((unsub) => unsub())
   }, [onEditStartPaths, onEditEndPaths, store])
 
-  if (schemaIsFunction) return [values, set, get] as any
-  return values as any
+  if (schemaIsFunction) return [values, set, get] as HookReturnType<F, G>
+  return values as HookReturnType<F, G>
 }

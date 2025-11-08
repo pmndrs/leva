@@ -1,7 +1,7 @@
 /**
  * Types exposed through the public API
  */
-import type { VectorSettings } from '../components/Vector/vector-types'
+import type { VectorSettings } from '../plugins/Vector/vector-types'
 import { StoreType, Data, DataInput } from './internal'
 import type { BeautifyUnionType, UnionToIntersection } from './utils'
 
