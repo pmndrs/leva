@@ -1,6 +1,6 @@
 import React from 'react'
 import { StoryFn, Meta } from '@storybook/react'
-import { expect, within, waitFor } from 'storybook/test'
+import { expect, within, waitFor, userEvent } from 'storybook/test'
 
 import Reset from '../components/decorator-reset'
 
@@ -43,12 +43,12 @@ Default.play = async ({ canvasElement }) => {
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
 
-  input.click()
+  await userEvent.click(input)
   await waitFor(() => {
     expect(canvas.getByText(/true/)).toBeInTheDocument()
   })
 
-  input.click()
+  await userEvent.click(input)
   await waitFor(() => {
     expect(canvas.getByText(/false/)).toBeInTheDocument()
   })
@@ -74,7 +74,7 @@ Checked.play = async ({ canvasElement }) => {
   // Find the input field by label (the control label is "foo")
   const input = within(document.body).getByLabelText(/foo/i)
 
-  input.click()
+  await userEvent.click(input)
   await waitFor(() => {
     expect(canvas.getByText(/false/)).toBeInTheDocument()
   })
