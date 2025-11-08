@@ -61,5 +61,5 @@ export const sanitizeStep = (
   { step, initialValue }: Pick<InternalNumberSettings, 'step' | 'initialValue'>
 ) => {
   const steps = Math.round((v - initialValue) / step)
-  return initialValue + steps * step!
+  return initialValue + steps * step
 }

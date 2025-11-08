@@ -42,7 +42,7 @@ export const getDefaultTheme = () => ({
     controlWidth: '160px',
     numberInputMinWidth: '38px',
     scrubberWidth: '8px',
-    scrubberHeight: '16px',
+    scrubberHeight: '8px',
     rowHeight: '24px',
     folderTitleHeight: '20px',
     checkboxSize: '16px',

@@ -117,7 +117,7 @@ export default function App() {
         rootWidth: '280px',
         controlWidth: '160px',
         scrubberWidth: '8px',
-        scrubberHeight: '16px',
+        scrubberHeight: '8px',
         rowHeight: '24px',
         folderHeight: '20px',
         checkboxSize: '16px',

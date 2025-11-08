@@ -3,7 +3,7 @@ import { styled } from '../../styles'
 export const Range = styled('div', {
   position: 'relative',
   width: '100%',
-  height: 2,
+  height: 4,
   borderRadius: '$xs',
   backgroundColor: '$elevation1',
 })
@@ -12,10 +12,12 @@ export const Scrubber = styled('div', {
   position: 'absolute',
   width: '$scrubberWidth',
   height: '$scrubberHeight',
-  borderRadius: '$xs',
+  borderRadius: '$sm',
   boxShadow: '0 0 0 2px $colors$elevation2',
   backgroundColor: '$accent2',
   cursor: 'pointer',
+  opacity: 0,
+  transition: 'opacity 0.15s ease',
   $active: 'none $accent1',
   $hover: 'none $accent3',
   variants: {
@@ -40,10 +42,16 @@ export const RangeWrapper = styled('div', {
   height: '100%',
   cursor: 'pointer',
   touchAction: 'none',
+
+  // Show scrubber when wrapper is hovered
+  [`&:hover ${Scrubber}`]: {
+    opacity: 1,
+  },
 })
 
 export const Indicator = styled('div', {
   position: 'absolute',
   height: '100%',
   backgroundColor: '$accent2',
+  borderRadius: '$xs',
 })
