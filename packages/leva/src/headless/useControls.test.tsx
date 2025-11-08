@@ -21,8 +21,8 @@ describe('useControls.utils', () => {
       expect(isHookSettings(null)).toBe(false)
     })
 
-    it('should reject objects without store property', () => {
-      expect(isHookSettings({ headless: true })).toBe(false)
+    it('should accept objects with headless property', () => {
+      expect(isHookSettings({ headless: true })).toBe(true)
     })
 
     it('should reject primitives', () => {
@@ -75,6 +75,21 @@ describe('useControls.utils', () => {
 
       expect(result[0]).toBe(schema)
       expect(result[1]).toEqual({ store: hookSettings.store, headless: true })
+      expect(result[2]).toBeUndefined()
+    })
+
+    it('should handle schema-only case with headless-only HookSettings', () => {
+      const schema = { x: 1, y: 2 }
+      const hookSettings: HookSettings = { headless: true }
+      const result = reconstructArgsWithHeadless({
+        folderName: undefined,
+        schemaOrFolderName: schema,
+        settingsOrDepsOrSchema: hookSettings,
+        hookSettings,
+      })
+
+      expect(result[0]).toBe(schema)
+      expect(result[1]).toEqual({ headless: true })
       expect(result[2]).toBeUndefined()
     })
 

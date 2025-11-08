@@ -8,9 +8,10 @@ import type { useControls as UseControlsType } from '../useControls'
 
 /**
  * Helper to check if a value is HookSettings
+ * Accepts any non-null, non-array object to distinguish from dependency arrays
  */
 export function isHookSettings(value: any): value is HookSettings {
-  return typeof value === 'object' && !Array.isArray(value) && value !== null && 'store' in value
+  return typeof value === 'object' && !Array.isArray(value) && value !== null
 }
 
 /**
