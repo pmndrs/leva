@@ -62,6 +62,51 @@ export const Render = () => {
   )
 }
 
+export const ConditionalRenderingPanelHeight = () => {
+  const values = useControls({
+    showBasicFields: { value: true, label: 'Show Basic Fields' },
+    name: { value: 'John Doe', render: (get) => get('showBasicFields') },
+    age: { value: 25, render: (get) => get('showBasicFields') },
+    
+    showAdvanced: { value: false, label: 'Show Advanced Settings' },
+    advancedSettings: folder(
+      {
+        apiEndpoint: { value: 'https://api.example.com', render: (get) => get('advancedSettings.enableAPI') },
+        enableAPI: true,
+        timeout: { value: 5000, min: 1000, max: 30000 },
+        retries: { value: 3, min: 0, max: 10 },
+      },
+      { render: (get) => get('showAdvanced') }
+    ),
+    
+    showDebug: { value: false, label: 'Show Debug Options' },
+    debugOptions: folder(
+      {
+        verbose: false,
+        logLevel: { value: 'info', options: ['debug', 'info', 'warn', 'error'] },
+        showTimestamps: true,
+        colorOutput: { value: true, render: (get) => get('debugOptions.verbose') },
+      },
+      { render: (get) => get('showDebug') }
+    ),
+  })
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h3 style={{ marginTop: 0 }}>Panel Height Auto-Adjusts Demo</h3>
+      <p style={{ marginBottom: 20, color: '#666' }}>
+        Toggle the checkboxes to show/hide different sections. 
+        The panel height will smoothly animate to accommodate the content.
+      </p>
+      <pre style={{ background: '#f5f5f5', padding: 15, borderRadius: 8, overflow: 'auto' }}>
+        {JSON.stringify(values, null, 2)}
+      </pre>
+    </div>
+  )
+}
+
+ConditionalRenderingPanelHeight.storyName = 'Conditional Rendering - Panel Height Fix'
+
 export const Optional = () => {
   const values = useControls({
     color: { value: '#f00', optional: true },

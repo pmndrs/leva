@@ -126,5 +126,67 @@ export function useToggle(toggled: boolean) {
     }
   }, [toggled])
 
+  // Watch for content size changes when panel is expanded
+  useEffect(() => {
+    if (!toggled || !contentRef.current || !wrapperRef.current) return
+
+    const wrapper = wrapperRef.current
+    let rafId: number | null = null
+    let currentTransitionHandler: (() => void) | null = null
+
+    const resizeObserver = new ResizeObserver(() => {
+      const content = contentRef.current
+      if (!content) return
+
+      // Cancel any pending animation
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+
+      // Remove any existing transition handler
+      if (currentTransitionHandler) {
+        wrapper.removeEventListener('transitionend', currentTransitionHandler)
+        currentTransitionHandler = null
+      }
+
+      // Get the current and target heights
+      const currentHeight = wrapper.getBoundingClientRect().height
+      const targetHeight = content.getBoundingClientRect().height
+
+      // Only update if there's a meaningful difference
+      if (Math.abs(currentHeight - targetHeight) > 1) {
+        // Set explicit height to enable transition
+        wrapper.style.height = currentHeight + 'px'
+        
+        // Use requestAnimationFrame to ensure the height is set before changing it
+        rafId = requestAnimationFrame(() => {
+          rafId = null
+          wrapper.style.height = targetHeight + 'px'
+          
+          // Remove fixed height after transition completes
+          const handleTransitionEnd = () => {
+            wrapper.style.removeProperty('height')
+            currentTransitionHandler = null
+          }
+          currentTransitionHandler = handleTransitionEnd
+          wrapper.addEventListener('transitionend', handleTransitionEnd, { once: true })
+        })
+      }
+    })
+
+    resizeObserver.observe(contentRef.current)
+
+    return () => {
+      resizeObserver.disconnect()
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+      }
+      if (currentTransitionHandler) {
+        wrapper.removeEventListener('transitionend', currentTransitionHandler)
+      }
+    }
+  }, [toggled])
+
   return { wrapperRef, contentRef }
 }
