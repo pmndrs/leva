@@ -19,6 +19,9 @@
     "ci:publish": "pnpm build && pnpm changeset publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
     "size": "size-limit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet",
@@ -98,7 +101,9 @@
     "size-limit": "^8.1.0",
     "storybook": "^10.0.2",
     "tsd": "^0.25.0",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "jsdom": "^27.1.0",
+    "vitest": "^4.0.8"
   },
   "prettier": {
     "bracketSameLine": true,
