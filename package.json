@@ -101,7 +101,9 @@
     "size-limit": "^8.1.0",
     "storybook": "^10.0.2",
     "tsd": "^0.25.0",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "jsdom": "^27.1.0",
+    "vitest": "^4.0.8"
   },
   "prettier": {
     "bracketSameLine": true,
@@ -110,9 +112,5 @@
     "singleQuote": true,
     "tabWidth": 2,
     "printWidth": 120
-  },
-  "dependencies": {
-    "jsdom": "^27.1.0",
-    "vitest": "^4.0.8"
   }
 }
