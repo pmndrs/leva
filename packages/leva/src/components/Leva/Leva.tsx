@@ -108,7 +108,13 @@ const panelLifecycle = new PanelLifecycle()
 
 type LevaProps = Omit<Partial<LevaRootProps>, 'store'> & { isRoot?: boolean }
 
-// uses global store
+/**
+ * Used to pass custom props to the global panel.
+ *
+ * @example
+ * <Leva fill titleBar={{ drag: false }} />
+ *
+ */
 export function Leva({ isRoot = false, ...props }: LevaProps) {
   useEffect(() => {
     // When an explicit <Leva> component is rendered (not the auto-created root),
