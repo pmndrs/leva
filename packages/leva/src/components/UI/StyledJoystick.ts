@@ -65,7 +65,7 @@ export const JoystickGrid = styled('div', {
   '&::after,&::before': {
     content: '""',
     position: 'absolute',
-    zindex: 10,
+    zIndex: 10,
     backgroundColor: '$highlight1',
   },
 
