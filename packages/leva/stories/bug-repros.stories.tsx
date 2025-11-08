@@ -4,7 +4,7 @@ import { Meta } from '@storybook/react'
 import { Leva, LevaPanel, useControls, useCreateStore } from '../src'
 
 export default {
-  title: 'Dev/Dynamic Controls',
+  title: 'Dev/BugRepro',
   decorators: [Reset],
 } as Meta
 
