@@ -75,7 +75,7 @@ function MyApp() {
 
 ### Disabling the GUI
 
-Each instance of the `useControls` hook will render the panel. If you want to completely disable the GUI based on preferences, you need to explicitly set `hidden` to false.
+Each instance of the `useControls` hook will render the panel. If you want to completely disable the GUI based on preferences, you need to explicitly set `hidden` to true.
 
 ```jsx
 import { Leva } from 'leva'
