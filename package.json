@@ -19,6 +19,9 @@
     "ci:publish": "pnpm build && pnpm changeset publish",
     "validate": "preconstruct validate",
     "tsc": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
     "size": "size-limit",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --quiet",
@@ -107,5 +110,9 @@
     "singleQuote": true,
     "tabWidth": 2,
     "printWidth": 120
+  },
+  "dependencies": {
+    "jsdom": "^27.1.0",
+    "vitest": "^4.0.8"
   }
 }
