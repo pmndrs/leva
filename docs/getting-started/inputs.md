@@ -1,3 +1,9 @@
+---
+title: Inputs
+description:
+nav: 0
+---
+
 # Input Types
 
 `leva` will check the input settings and provide the best possible component.
