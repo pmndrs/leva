@@ -17,6 +17,7 @@ build/
 dist/
 .cache/
 .parcel-cache/
+.turbo/
 
 # misc
 .DS_Store

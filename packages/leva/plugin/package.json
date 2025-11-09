@@ -1,5 +1,5 @@
 {
-  "main": "dist/leva-plugin.cjs.js",
-  "module": "dist/leva-plugin.esm.js",
-  "types": "dist/leva-plugin.cjs.d.ts"
+  "main": "../dist/plugin/index.cjs",
+  "module": "../dist/plugin/index.mjs",
+  "types": "../dist/plugin/index.d.cts"
 }

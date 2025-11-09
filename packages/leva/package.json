@@ -1,9 +1,41 @@
 {
   "name": "leva",
   "version": "0.10.1",
-  "main": "dist/leva.cjs.js",
-  "module": "dist/leva.esm.js",
-  "types": "dist/leva.cjs.d.ts",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./plugin": {
+      "import": {
+        "types": "./dist/plugin/index.d.mts",
+        "default": "./dist/plugin/index.mjs"
+      },
+      "require": {
+        "types": "./dist/plugin/index.d.cts",
+        "default": "./dist/plugin/index.cjs"
+      }
+    },
+    "./headless": {
+      "import": {
+        "types": "./dist/headless/index.d.mts",
+        "default": "./dist/headless/index.mjs"
+      },
+      "require": {
+        "types": "./dist/headless/index.d.cts",
+        "default": "./dist/headless/index.cjs"
+      }
+    }
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,12 +43,10 @@
     "directory": "packages/leva"
   },
   "bugs": "https://github.com/pmndrs/leva/issues",
-  "preconstruct": {
-    "entrypoints": [
-      "index.ts",
-      "plugin/index.ts",
-      "headless/index.ts"
-    ]
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "rm -rf dist && tsdown",
+    "clean": "rm -rf dist"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
@@ -36,6 +66,8 @@
     "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "@welldone-software/why-did-you-render": "^6.2.3"
+    "@welldone-software/why-did-you-render": "^6.2.3",
+    "tsdown": "^0.16.0",
+    "typescript": "catalog:"
   }
 }
