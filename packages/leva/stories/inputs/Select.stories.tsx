@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { expect, within, userEvent, waitFor } from 'storybook/test'
-import { vi } from 'vitest'
 
 import Reset from '../components/decorator-reset'
 

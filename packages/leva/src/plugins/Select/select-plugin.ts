@@ -1,7 +1,14 @@
 import type { SelectInput, InternalSelectSettings } from './select-types'
 import { z } from 'zod'
 
-const zValidPrimitive = z.union([z.string(), z.number(), z.boolean(), z.function()])
+// Use z.custom() for functions instead of z.function() to preserve function identity.
+// z.function() wraps values in zod proxies, changing their references.
+const zValidPrimitive = z.union([
+  z.string(),
+  z.number(),
+  z.boolean(),
+  z.custom<Function>((v) => typeof v === 'function'),
+])
 
 /**
  * Schema for the usecase
