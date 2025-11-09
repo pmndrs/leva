@@ -28,7 +28,6 @@ export const ButtonLabelContainer = styled('div', {
 
 export const PlaneLabel = styled('div', {
   fontSize: '1em',
-  fontWeight: 'bold',
   textAlign: 'center',
   marginTop: '0.1em',
 })
