@@ -12,6 +12,8 @@ type JoystickProps = { value: Vector2d | Vector3d } & Pick<Vector2dProps, 'onUpd
   children?: React.ReactNode
 }
 
+const AXIS_KEYS = ['x', 'y', 'z'] as const
+
 export function Joystick({ value, settings, onUpdate, children }: JoystickProps) {
   const timeout = useRef<number | undefined>()
   const outOfBoundsX = useRef(0)
@@ -60,8 +62,8 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
 
         return Array.isArray(v)
           ? {
-              [v1]: v[['x', 'y', 'z'].indexOf(v1)] + incX,
-              [v2]: v[['x', 'y', 'z'].indexOf(v2)] + incY,
+              [v1]: v[AXIS_KEYS.indexOf(v1)] + incX,
+              [v2]: v[AXIS_KEYS.indexOf(v2)] + incY,
             }
           : {
               [v1]: v[v1] + incX,
