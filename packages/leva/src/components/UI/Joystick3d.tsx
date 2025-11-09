@@ -51,7 +51,7 @@ export function Joystick3d({ value, settings, onUpdate }: Joystick3dProps) {
                   <PlaneLabel>{kb.label}</PlaneLabel>
                 </ButtonLabelContainer>
               }
-              onClick={() => ''}
+              onClick={() => {}}
               settings={{ disabled: plane !== kb.plane }}
             />
           ))}
