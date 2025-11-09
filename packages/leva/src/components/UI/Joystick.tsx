@@ -13,6 +13,7 @@ type JoystickProps = { value: Vector2d | Vector3d } & Pick<Vector2dProps, 'onUpd
 }
 
 const AXIS_KEYS = ['x', 'y', 'z'] as const
+const AXIS_INDEX: Record<string, number> = { x: 0, y: 1, z: 2 }
 
 /**
  * Type-safe helper to extract axis values from Vector2d/Vector3d
@@ -44,9 +45,12 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
 
   useLayoutEffect(() => {
     if (joystickShown) {
-      const { top, left, width, height } = joystickRef.current!.getBoundingClientRect()
-      playgroundRef.current!.style.left = left + width / 2 + 'px'
-      playgroundRef.current!.style.top = top + height / 2 + 'px'
+      const rect = joystickRef.current?.getBoundingClientRect()
+      const playground = playgroundRef.current
+      if (rect && playground) {
+        playground.style.left = rect.left + rect.width / 2 + 'px'
+        playground.style.top = rect.top + rect.height / 2 + 'px'
+      }
     }
   }, [joystickShown])
 
@@ -74,15 +78,10 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
         const incX = stepV1 * outOfBoundsX.current * stepMultiplier.current
         const incY = yFactor * stepV2 * outOfBoundsY.current * stepMultiplier.current
 
-        return Array.isArray(v)
-          ? {
-              [v1]: v[AXIS_KEYS.indexOf(v1 as 'x' | 'y' | 'z')] + incX,
-              [v2]: v[AXIS_KEYS.indexOf(v2 as 'x' | 'y' | 'z')] + incY,
-            }
-          : {
-              [v1]: v[v1] + incX,
-              [v2]: v[v2] + incY,
-            }
+        return {
+          [v1]: getAxisValue(v, v1) + incX,
+          [v2]: getAxisValue(v, v2) + incY,
+        }
       })
     }, 16)
   }, [w, h, onUpdate, set, stepV1, stepV2, v1, v2, yFactor])
@@ -145,7 +144,7 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
       {joystickShown && (
         <Portal>
           <JoystickPlayground ref={playgroundRef} isOutOfBounds={isOutOfBounds}>
-            {children ? children : <JoystickGrid />}
+            {children || <JoystickGrid />}
             <span ref={spanRef} />
           </JoystickPlayground>
         </Portal>
