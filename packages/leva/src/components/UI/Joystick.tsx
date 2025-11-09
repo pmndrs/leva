@@ -14,6 +14,20 @@ type JoystickProps = { value: Vector2d | Vector3d } & Pick<Vector2dProps, 'onUpd
 
 const AXIS_KEYS = ['x', 'y', 'z'] as const
 
+/**
+ * Type-safe helper to extract axis values from Vector2d/Vector3d
+ * @param value - Array or object representation of vector
+ * @param axis - Axis key ('x', 'y', or 'z')
+ * @returns The numeric value for the given axis, or 0 if not found
+ */
+function getAxisValue(value: Vector2d | Vector3d, axis: string): number {
+  if (Array.isArray(value)) {
+    const index = AXIS_KEYS.indexOf(axis as 'x' | 'y' | 'z')
+    return index !== -1 ? value[index] : 0
+  }
+  return value[axis as keyof typeof value] ?? 0
+}
+
 export function Joystick({ value, settings, onUpdate, children }: JoystickProps) {
   const timeout = useRef<number | undefined>()
   const outOfBoundsX = useRef(0)
@@ -101,10 +115,8 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
     outOfBoundsX.current = Math.abs(mx) > Math.abs(_x) ? Math.sign(mx - _x) : 0
     outOfBoundsY.current = Math.abs(my) > Math.abs(_y) ? Math.sign(_y - my) : 0
 
-    // @ts-expect-error
-    let newX = value[v1]
-    // @ts-expect-error
-    let newY = value[v2]
+    let newX = getAxisValue(value, v1)
+    let newY = getAxisValue(value, v2)
 
     if (active) {
       if (!outOfBoundsX.current) {
