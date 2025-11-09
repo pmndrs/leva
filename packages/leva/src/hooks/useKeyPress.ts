@@ -10,6 +10,9 @@ export function useKeyPress(targetKey: string) {
   const [keyPressed, setKeyPressed] = useState(false)
 
   useEffect(() => {
+    // Reset state when targetKey changes to avoid stuck pressed state
+    setKeyPressed(false)
+
     // NOTE: consider event.getModifierState("CapsLock") etc. for future enhancements
     function downHandler(e: KeyboardEvent) {
       if (e.key === targetKey) {
@@ -23,12 +26,18 @@ export function useKeyPress(targetKey: string) {
       }
     }
 
+    function blurHandler() {
+      setKeyPressed(false)
+    }
+
     window.addEventListener('keydown', downHandler)
     window.addEventListener('keyup', upHandler)
+    window.addEventListener('blur', blurHandler)
 
     return () => {
       window.removeEventListener('keydown', downHandler)
       window.removeEventListener('keyup', upHandler)
+      window.removeEventListener('blur', blurHandler)
     }
   }, [targetKey])
 
