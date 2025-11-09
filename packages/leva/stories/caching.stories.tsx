@@ -5,7 +5,7 @@ import { StoryFn, Meta } from '@storybook/react'
 import { useControls } from '../src'
 
 export default {
-  title: 'Hook/Caching',
+  title: 'Dev/Hook/Caching',
   decorators: [Reset],
 } as Meta
 
@@ -19,6 +19,9 @@ const Controls = () => {
   )
 }
 
+/**
+ * The hook should keep the state even after unmounting/remounting
+ */
 const Template: StoryFn = () => {
   const [mounted, toggle] = React.useState(true)
   return (

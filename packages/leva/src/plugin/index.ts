@@ -5,6 +5,7 @@ import React from 'react'
 import { Row, Label, Portal, Overlay } from '../components/UI'
 import { String } from '../plugins/String'
 import { Number } from '../plugins/Number'
+import { RangeSlider } from '../plugins/Number/RangeSlider'
 import { Boolean } from '../plugins/Boolean'
 import { Select } from '../plugins/Select'
 import { Vector } from '../plugins/Vector'
@@ -21,6 +22,7 @@ export const Components: Record<string, React.ComponentType<any>> = {
   Select,
   Vector,
   InnerLabel,
+  RangeSlider,
 }
 
 export { colord } from 'colord'
