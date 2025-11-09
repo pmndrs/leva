@@ -25,12 +25,12 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
 
   const [spanRef, set] = useTransform<HTMLSpanElement>()
 
-  const joystickeRef = useRef<HTMLDivElement>(null)
+  const joystickRef = useRef<HTMLDivElement>(null)
   const playgroundRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     if (joystickShown) {
-      const { top, left, width, height } = joystickeRef.current!.getBoundingClientRect()
+      const { top, left, width, height } = joystickRef.current!.getBoundingClientRect()
       playgroundRef.current!.style.left = left + width / 2 + 'px'
       playgroundRef.current!.style.top = top + height / 2 + 'px'
     }
@@ -62,8 +62,8 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
 
         return Array.isArray(v)
           ? {
-              [v1]: v[AXIS_KEYS.indexOf(v1)] + incX,
-              [v2]: v[AXIS_KEYS.indexOf(v2)] + incY,
+              [v1]: v[AXIS_KEYS.indexOf(v1 as 'x' | 'y' | 'z')] + incX,
+              [v2]: v[AXIS_KEYS.indexOf(v2 as 'x' | 'y' | 'z')] + incY,
             }
           : {
               [v1]: v[v1] + incX,
@@ -129,7 +129,7 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
   })
 
   return (
-    <JoystickTrigger ref={joystickeRef} {...bind()}>
+    <JoystickTrigger ref={joystickRef} {...bind()}>
       {joystickShown && (
         <Portal>
           <JoystickPlayground ref={playgroundRef} isOutOfBounds={isOutOfBounds}>
