@@ -45,7 +45,7 @@ export const JoystickPlayground = styled('div', {
 
   '> span': {
     position: 'relative',
-    zindex: 100,
+    zIndex: 100,
     width: 10,
     height: 10,
     backgroundColor: '$accent2',
