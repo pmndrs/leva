@@ -62,6 +62,7 @@
     "@emotion/react": "^11.10.5",
     "@preconstruct/cli": "^2.3.0",
     "@radix-ui/react-icons": "^1.1.1",
+    "@react-three/fiber": "^9.3.0",
     "@size-limit/preset-big-lib": "^8.1.0",
     "@stitches/react": "^1.2.8",
     "@storybook/addon-docs": "10.0.2",
@@ -91,6 +92,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "10.0.2",
     "husky": "^8.0.3",
+    "jsdom": "^27.1.0",
     "playwright": "^1.56.1",
     "playwright-core": "^1.56.1",
     "pnpm": "^7.25.0",
@@ -100,9 +102,9 @@
     "react-dom": "^18.2.0",
     "size-limit": "^8.1.0",
     "storybook": "^10.0.2",
+    "three": "^0.169.0",
     "tsd": "^0.25.0",
     "typescript": "catalog:",
-    "jsdom": "^27.1.0",
     "vitest": "^4.0.8"
   },
   "prettier": {
