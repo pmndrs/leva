@@ -29,17 +29,12 @@
     {
       "name": "Leva",
       "limit": "3s",
-      "path": "packages/leva/dist/leva.*.prod.js"
+      "path": "packages/leva/dist/index.mjs"
     },
     {
       "name": "Leva Plugin Spring",
       "limit": "3s",
-      "path": "packages/plugin-spring/dist/leva-ui-plugin-spring.*.prod.js"
-    },
-    {
-      "name": "Leva Plugin Dates",
-      "limit": "3s",
-      "path": "packages/plugin-dates/dist/leva-ui-plugin-dates.*.prod.js"
+      "path": "packages/plugin-spring/dist/index.mjs"
     }
   ],
   "repository": {
