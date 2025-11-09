@@ -74,7 +74,7 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
   }, [w, h, onUpdate, set, stepV1, stepV2, v1, v2, yFactor])
 
   const endOutOfBounds = useCallback(() => {
-    window.clearTimeout(timeout.current)
+    window.clearInterval(timeout.current)
     timeout.current = undefined
     setIsOutOfBounds(false)
   }, [])
@@ -86,7 +86,7 @@ export function Joystick({ value, settings, onUpdate, children }: JoystickProps)
     window.addEventListener('keydown', setStepMultiplier)
     window.addEventListener('keyup', setStepMultiplier)
     return () => {
-      window.clearTimeout(timeout.current)
+      window.clearInterval(timeout.current)
       window.removeEventListener('keydown', setStepMultiplier)
       window.removeEventListener('keyup', setStepMultiplier)
     }
