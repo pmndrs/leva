@@ -11,6 +11,17 @@ on:
       - '!docs/**'
       - '!**.md'
       - '!.changeset/**'
+  pull_request:
+    paths:
+      - '.github/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.storybook/**'
+      - '!demo/**'
+      - '!docs/**'
+      - '!**.md'
+      - '!.changeset/**'
 jobs:
   build:
     name: Build, lint, and test

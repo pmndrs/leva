@@ -89,12 +89,16 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
   depsOrUndefined?: React.DependencyList
 ): HookReturnType<F, G> {
   // We parse the args
-  const { folderName, schema, folderSettings, hookSettings, deps } = parseArgs(
-    schemaOrFolderName,
-    settingsOrDepsOrSchema,
-    depsOrSettingsOrFolderSettings,
-    depsOrSettings,
-    depsOrUndefined
+  const { folderName, schema, folderSettings, hookSettings, deps } = useMemo(
+    () =>
+      parseArgs(
+        schemaOrFolderName,
+        settingsOrDepsOrSchema,
+        depsOrSettingsOrFolderSettings,
+        depsOrSettings,
+        depsOrUndefined
+      ),
+    [schemaOrFolderName, settingsOrDepsOrSchema, depsOrSettingsOrFolderSettings, depsOrSettings, depsOrUndefined]
   )
 
   const schemaIsFunction = typeof schema === 'function'
@@ -138,7 +142,7 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
 
     Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
       allPaths.push(path)
-      if (!!onChange) {
+      if (onChange) {
         onChangePaths[path] = onChange
         if (!transient) {
           renderPaths.push(path)
