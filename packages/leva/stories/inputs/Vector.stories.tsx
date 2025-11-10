@@ -67,3 +67,23 @@ Vector3WithLock.args = {
   value: [1, 10, 0],
   lock: true,
 }
+
+export const Vector3WithJoystick = Template.bind({})
+Vector3WithJoystick.args = {
+  value: [0, 0, 0],
+  joystick: true,
+}
+
+export const Vector3WithJoystickFromArray = Template.bind({})
+Vector3WithJoystickFromArray.args = {
+  value: [5, 10, 15],
+  joystick: true,
+}
+
+export const Vector3WithInvertedJoystickY = ({ value, invertY }) => (
+  <Template value={value} joystick={invertY ? 'invertY' : true} />
+)
+Vector3WithInvertedJoystickY.args = {
+  value: [0, 0, 0],
+  invertY: true,
+}
