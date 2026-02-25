@@ -116,6 +116,8 @@ export const Store = function (this: StoreType) {
 
   this.clearPath = (path) => {
     store.setState((s) => {
+      const input = s.data[path]
+      if (!input || input.__refCount > 0) return s
       const data = { ...s.data }
       delete data[path]
       return { data }
