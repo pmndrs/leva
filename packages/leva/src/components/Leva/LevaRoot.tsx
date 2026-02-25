@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import * as RadixTooltip from '@radix-ui/react-tooltip'
 import { buildTree } from './tree'
 import { TreeWrapper } from '../Folder'
@@ -90,10 +90,20 @@ export type LevaRootProps = {
    * If true, the copy button will be hidden
    */
   hideCopyButton?: boolean
+  /**
+   * If true, all inputs will be cleared from the store when their component unmounts,
+   * regardless of the per-input clearOnUnmount setting.
+   */
+  clearOnUnmount?: boolean
 }
 
-export function LevaRoot({ store, hidden = false, theme, collapsed = false, ...props }: LevaRootProps) {
+export function LevaRoot({ store, hidden = false, theme, collapsed = false, clearOnUnmount = false, ...props }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
+
+  useEffect(() => {
+    if (store) store.setClearOnUnmount(clearOnUnmount)
+  }, [store, clearOnUnmount])
+
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)
 

@@ -13,6 +13,10 @@ export const Store = function (this: StoreType) {
 
   this.storeId = getUid()
   this.useStore = store
+  this.clearOnUnmount = false
+  this.setClearOnUnmount = (flag) => {
+    this.clearOnUnmount = flag
+  }
   /**
    * Folders will hold the folder settings for the pane.
    * @note possibly make this reactive

@@ -26,6 +26,7 @@ import { levaStore } from './store'
 
 afterEach(() => {
   levaStore.dispose()
+  levaStore.setClearOnUnmount(false)
 })
 
 function NumberComponent({ id }: { id?: string }) {
@@ -120,6 +121,23 @@ describe('useControls mount/unmount lifecycle', () => {
     act(() => unmount())
 
     const { getByTestId: getByTestId2 } = render(<ClearOnUnmountOptionComponent id="value2" />)
+    expect(getByTestId2('value2').textContent).toBe('5')
+  })
+
+  it('store-level clearOnUnmount resets all inputs on remount', () => {
+    levaStore.setClearOnUnmount(true)
+
+    const { getByTestId, unmount } = render(<NumberComponent id="value" />)
+    expect(getByTestId('value').textContent).toBe('5')
+
+    act(() => {
+      levaStore.setValueAtPath('myNumber', 42, true)
+    })
+    expect(getByTestId('value').textContent).toBe('42')
+
+    act(() => unmount())
+
+    const { getByTestId: getByTestId2 } = render(<NumberComponent id="value2" />)
     expect(getByTestId2('value2').textContent).toBe('5')
   })
 

@@ -207,7 +207,8 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     depsChanged.current = false
     return () => {
       store.disposePaths(paths)
-      clearOnUnmountPaths.forEach((path) => store.clearPath(path))
+      const pathsToClear = store.clearOnUnmount ? paths : [...clearOnUnmountPaths]
+      pathsToClear.forEach((path) => store.clearPath(path))
     }
   }, [store, paths, initialData, clearOnUnmountPaths])
 

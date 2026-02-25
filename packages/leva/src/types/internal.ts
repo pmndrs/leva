@@ -29,6 +29,8 @@ type Dispose = () => void
 export type StoreType = {
   useStore: UseBoundStore<StoreApi<State>> & SubscribeWithSelectorAPI<State>
   storeId: string
+  clearOnUnmount: boolean
+  setClearOnUnmount: (flag: boolean) => void
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[]) => void
