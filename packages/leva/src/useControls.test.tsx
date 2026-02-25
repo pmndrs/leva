@@ -18,7 +18,7 @@ vi.mock('@stitches/react', () => ({
   }),
 }))
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, act } from '@testing-library/react'
 import { useControls } from './useControls'
@@ -38,6 +38,17 @@ function NestedNumberComponent({ id }: { id?: string }) {
   return <div data-testid={id ?? 'value'}>{myNumber}</div>
 }
 
+function NumberComponentClearOnUnmount({ id }: { id?: string }) {
+  const { myNumber } = useControls({ myNumber: 5 }, { headless: true })
+  useEffect(() => () => { levaStore.clearPath('myNumber') }, [])
+  return <div data-testid={id ?? 'value'}>{myNumber}</div>
+}
+
+function ClearOnUnmountOptionComponent({ id }: { id?: string }) {
+  const { myNumber } = useControls({ myNumber: { value: 5, clearOnUnmount: true } }, { headless: true })
+  return <div data-testid={id ?? 'value'}>{myNumber}</div>
+}
+
 describe('useControls mount/unmount lifecycle', () => {
   it('does not clear a path that is still mounted', () => {
     const { unmount } = render(<NumberComponent id="value" />)
@@ -53,7 +64,7 @@ describe('useControls mount/unmount lifecycle', () => {
     unmount()
   })
 
-  it('works with nested folder paths', async () => {
+  it('works with nested folder paths', () => {
     const { getByTestId, unmount } = render(<NestedNumberComponent id="value" />)
     expect(getByTestId('value').textContent).toBe('5')
 
@@ -69,24 +80,61 @@ describe('useControls mount/unmount lifecycle', () => {
     expect(getByTestId2('value2').textContent).toBe('5')
   })
 
-  it('resets to the initial value when remounted after clearPath', async () => {
-    // Mount the component
-    const { getByTestId, unmount } = render(<NumberComponent id="value" />)
+  it('preserves the value on remount when not cleared', () => {
+    const { unmount } = render(<NumberComponent id="value" />)
+
+    act(() => {
+      levaStore.setValueAtPath('myNumber', 42, true)
+    })
+
+    act(() => unmount())
+
+    // value survives unmount without clearing
+    expect(levaStore.get('myNumber')).toBe(42)
+  })
+
+  it('useEffect clearPath resets the value on remount', () => {
+    const { getByTestId, unmount } = render(<NumberComponentClearOnUnmount id="value" />)
     expect(getByTestId('value').textContent).toBe('5')
 
-    // Simulate a value change via the store (as if the user dragged the slider)
     act(() => {
       levaStore.setValueAtPath('myNumber', 42, true)
     })
     expect(getByTestId('value').textContent).toBe('42')
 
-    // Unmount – disposePaths decrements __refCount to 0 but the value stays in the store
-    unmount()
+    act(() => unmount())
 
-    // Clear the cached value so the next mount starts fresh
+    const { getByTestId: getByTestId2 } = render(<NumberComponentClearOnUnmount id="value2" />)
+    expect(getByTestId2('value2').textContent).toBe('5')
+  })
+
+  it('clearOnUnmount option resets the value on remount', () => {
+    const { getByTestId, unmount } = render(<ClearOnUnmountOptionComponent id="value" />)
+    expect(getByTestId('value').textContent).toBe('5')
+
+    act(() => {
+      levaStore.setValueAtPath('myNumber', 42, true)
+    })
+    expect(getByTestId('value').textContent).toBe('42')
+
+    act(() => unmount())
+
+    const { getByTestId: getByTestId2 } = render(<ClearOnUnmountOptionComponent id="value2" />)
+    expect(getByTestId2('value2').textContent).toBe('5')
+  })
+
+  it('resets to the initial value when remounted after clearPath', () => {
+    const { getByTestId, unmount } = render(<NumberComponent id="value" />)
+    expect(getByTestId('value').textContent).toBe('5')
+
+    act(() => {
+      levaStore.setValueAtPath('myNumber', 42, true)
+    })
+    expect(getByTestId('value').textContent).toBe('42')
+
+    unmount()
     levaStore.clearPath('myNumber')
 
-    // Remount – useControls reads from the schema (value: 5) because the path is gone
     const { getByTestId: getByTestId2 } = render(<NumberComponent id="value2" />)
     expect(getByTestId2('value2').textContent).toBe('5')
   })

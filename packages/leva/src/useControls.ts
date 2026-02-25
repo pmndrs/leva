@@ -133,14 +133,15 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
    * parses the schema inside nested folder.
    */
   const [initialData, mappedPaths] = useMemo(() => store.getDataFromSchema(_schema), [store, _schema])
-  const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths] = useMemo(() => {
+  const [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths, clearOnUnmountPaths] = useMemo(() => {
     const allPaths: string[] = []
     const renderPaths: string[] = []
     const onChangePaths: Record<string, OnChangeHandler> = {}
     const onEditStartPaths: Record<string, (...args: any) => void> = {}
     const onEditEndPaths: Record<string, (...args: any) => void> = {}
+    const clearOnUnmountPaths = new Set<string>()
 
-    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient }) => {
+    Object.values(mappedPaths).forEach(({ path, onChange, onEditStart, onEditEnd, transient, clearOnUnmount }) => {
       allPaths.push(path)
       if (onChange) {
         onChangePaths[path] = onChange
@@ -157,8 +158,13 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
       if (onEditEnd) {
         onEditEndPaths[path] = onEditEnd
       }
+      if (clearOnUnmount) {
+        clearOnUnmountPaths.add(path)
+      } else {
+        clearOnUnmountPaths.delete(path)
+      }
     })
-    return [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths]
+    return [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths, clearOnUnmountPaths]
   }, [mappedPaths])
 
   // Extracts the paths from the initialData and ensures order of paths.
@@ -199,8 +205,11 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     store.addData(initialData, shouldOverrideSettings)
     firstRender.current = false
     depsChanged.current = false
-    return () => store.disposePaths(paths)
-  }, [store, paths, initialData])
+    return () => {
+      store.disposePaths(paths)
+      clearOnUnmountPaths.forEach((path) => store.clearPath(path))
+    }
+  }, [store, paths, initialData, clearOnUnmountPaths])
 
   useEffect(() => {
     // let's handle transient subscriptions

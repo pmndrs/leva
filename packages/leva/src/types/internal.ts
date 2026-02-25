@@ -20,6 +20,7 @@ export type MappedPaths = Record<
     onEditStart?: (...args: any) => void
     onEditEnd?: (...args: any) => void
     transient: boolean
+    clearOnUnmount: boolean
   }
 >
 
