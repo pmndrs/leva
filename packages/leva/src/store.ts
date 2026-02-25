@@ -114,6 +114,14 @@ export const Store = function (this: StoreType) {
     })
   }
 
+  this.clearPath = (path) => {
+    store.setState((s) => {
+      const data = { ...s.data }
+      delete data[path]
+      return { data }
+    })
+  }
+
   this.getFolderSettings = (path) => {
     return folders[path] || {}
   }

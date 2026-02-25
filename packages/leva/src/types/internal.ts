@@ -32,6 +32,7 @@ export type StoreType = {
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[]) => void
   dispose: () => void
+  clearPath: (path: string) => void
   getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data
