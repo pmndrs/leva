@@ -2,9 +2,16 @@
  * Integration tests for useControls with store lifecycle
  */
 
+import React, { useEffect } from 'react'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { render, act } from '@testing-library/react'
+import { useControls } from './useControls'
+import { levaStore } from './store'
+
 // Mock stitches to avoid CSS-in-JS insertRule errors in jsdom.
 // @stitches/react is imported transitively via useControls -> components/Leva -> stitches.config.ts.
 // The mock is scoped to this file and doesn't affect production code.
+// NOTE: vi.mock is hoisted by Vitest's transformer at build time, so this runs before imports regardless of position.
 vi.mock('@stitches/react', () => ({
   createStitches: () => ({
     styled: () => () => null,
@@ -17,12 +24,6 @@ vi.mock('@stitches/react', () => ({
     config: {},
   }),
 }))
-
-import React, { useEffect } from 'react'
-import { describe, it, expect, vi, afterEach } from 'vitest'
-import { render, act } from '@testing-library/react'
-import { useControls } from './useControls'
-import { levaStore } from './store'
 
 afterEach(() => {
   levaStore.dispose()
