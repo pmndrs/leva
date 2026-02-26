@@ -2,8 +2,8 @@
 "leva": minor
 ---
 
-Add `clearOnUnmount` option and `store.clearPath` to remove inputs from the store when their component unmounts.
+Add `clearOnUnmount` option and `store.clearPath` to discard cached input values when they are no longer in use.
 
-- `store.clearPath(path)` — new method to imperatively remove a single input from the store.
-- `InputOptions.clearOnUnmount` — per-input flag; when `true` the input is removed from the store on unmount.
-- `LevaRootProps.clearOnUnmount` — panel-level flag; when `true` all inputs managed by that panel are cleared on unmount, overriding the per-input setting.
+- `store.clearPath(path)` — new method to imperatively discard the cached value of an input that is no longer mounted.
+- `InputOptions.clearOnUnmount` — per-input flag; when `true` the input's cached value is discarded from the store on unmount.
+- `LevaRootProps.clearOnUnmount` — panel-level flag; when `true` all inputs managed by that panel have their cached values discarded on unmount, overriding the per-input setting.
