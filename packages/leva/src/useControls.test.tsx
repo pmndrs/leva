@@ -41,7 +41,12 @@ function NestedNumberComponent({ id }: { id?: string }) {
 
 function NumberComponentClearOnUnmount({ id }: { id?: string }) {
   const { myNumber } = useControls({ myNumber: 5 }, { headless: true })
-  useEffect(() => () => { levaStore.clearPath('myNumber') }, [])
+  useEffect(
+    () => () => {
+      levaStore.clearPath('myNumber')
+    },
+    []
+  )
   return <div data-testid={id ?? 'value'}>{myNumber}</div>
 }
 

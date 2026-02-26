@@ -97,7 +97,14 @@ export type LevaRootProps = {
   clearOnUnmount?: boolean
 }
 
-export function LevaRoot({ store, hidden = false, theme, collapsed = false, clearOnUnmount = false, ...props }: LevaRootProps) {
+export function LevaRoot({
+  store,
+  hidden = false,
+  theme,
+  collapsed = false,
+  clearOnUnmount = false,
+  ...props
+}: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
 
   useEffect(() => {
