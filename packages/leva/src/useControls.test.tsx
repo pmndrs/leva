@@ -7,6 +7,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, act } from '@testing-library/react'
 import { useControls } from './useControls'
 import { levaStore } from './store'
+import { LevaPanel } from './components/Leva'
 
 // Mock stitches to avoid CSS-in-JS insertRule errors in jsdom.
 // @stitches/react is imported transitively via useControls -> components/Leva -> stitches.config.ts.
@@ -145,6 +146,29 @@ describe('useControls mount/unmount lifecycle', () => {
 
     const { getByTestId: getByTestId2 } = render(<NumberComponent id="value2" />)
     expect(getByTestId2('value2').textContent).toBe('5')
+  })
+
+  it('LevaPanel clearOnUnmount prop wires to store and resets inputs on remount', () => {
+    // LevaPanel and the consuming component are rendered in separate trees so
+    // that unmounting the component doesn't also unmount LevaPanel (which would
+    // trigger the cleanup that resets clearOnUnmount to false before the
+    // component's own cleanup can call clearPath).
+    const { unmount: unmountPanel } = render(<LevaPanel store={levaStore} clearOnUnmount />)
+
+    const { getByTestId, unmount: unmountComponent } = render(<NumberComponent id="value" />)
+    expect(getByTestId('value').textContent).toBe('5')
+
+    act(() => {
+      levaStore.setValueAtPath('myNumber', 42, true)
+    })
+    expect(getByTestId('value').textContent).toBe('42')
+
+    act(() => unmountComponent())
+
+    const { getByTestId: getByTestId2 } = render(<NumberComponent id="value2" />)
+    expect(getByTestId2('value2').textContent).toBe('5')
+
+    unmountPanel()
   })
 
   it('resets to the initial value when remounted after clearPath', () => {

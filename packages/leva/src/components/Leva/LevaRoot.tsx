@@ -108,7 +108,10 @@ export function LevaRoot({
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
 
   useEffect(() => {
-    if (store) store.setClearOnUnmount(clearOnUnmount)
+    if (store) {
+      store.setClearOnUnmount(clearOnUnmount)
+      return () => store.setClearOnUnmount(false)
+    }
   }, [store, clearOnUnmount])
 
   // collapsible
