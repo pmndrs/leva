@@ -185,7 +185,7 @@ export type InputOptions = GenericSchemaItemOptions &
     disabled?: boolean
     onEditStart?: (value: any, path: string, context: OnHandlerContext) => void
     onEditEnd?: (value: any, path: string, context: OnHandlerContext) => void
-    clearOnUnmount?: boolean
+    noCache?: boolean
   }
 
 type SchemaItemWithOptions =

@@ -13,9 +13,9 @@ export const Store = function (this: StoreType) {
 
   this.storeId = getUid()
   this.useStore = store
-  this.clearOnUnmount = false
-  this.setClearOnUnmount = (flag) => {
-    this.clearOnUnmount = flag
+  this.noCache = false
+  this.setNoCache = (flag) => {
+    this.noCache = flag
   }
   /**
    * Folders will hold the folder settings for the pane.

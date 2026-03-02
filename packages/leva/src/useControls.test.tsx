@@ -28,7 +28,7 @@ vi.mock('@stitches/react', () => ({
 
 afterEach(() => {
   levaStore.dispose()
-  levaStore.setClearOnUnmount(false)
+  levaStore.setNoCache(false)
 })
 
 function NumberComponent({ id }: { id?: string }) {
@@ -41,7 +41,7 @@ function NestedNumberComponent({ id }: { id?: string }) {
   return <div data-testid={id ?? 'value'}>{myNumber}</div>
 }
 
-function NumberComponentClearOnUnmount({ id }: { id?: string }) {
+function NumberComponentNoCache({ id }: { id?: string }) {
   const { myNumber } = useControls({ myNumber: 5 }, { headless: true })
   useEffect(
     () => () => {
@@ -52,8 +52,8 @@ function NumberComponentClearOnUnmount({ id }: { id?: string }) {
   return <div data-testid={id ?? 'value'}>{myNumber}</div>
 }
 
-function ClearOnUnmountOptionComponent({ id }: { id?: string }) {
-  const { myNumber } = useControls({ myNumber: { value: 5, clearOnUnmount: true } }, { headless: true })
+function NoCacheOptionComponent({ id }: { id?: string }) {
+  const { myNumber } = useControls({ myNumber: { value: 5, noCache: true } }, { headless: true })
   return <div data-testid={id ?? 'value'}>{myNumber}</div>
 }
 
@@ -102,7 +102,7 @@ describe('useControls mount/unmount lifecycle', () => {
   })
 
   it('useEffect clearPath resets the value on remount', () => {
-    const { getByTestId, unmount } = render(<NumberComponentClearOnUnmount id="value" />)
+    const { getByTestId, unmount } = render(<NumberComponentNoCache id="value" />)
     expect(getByTestId('value').textContent).toBe('5')
 
     act(() => {
@@ -112,12 +112,12 @@ describe('useControls mount/unmount lifecycle', () => {
 
     act(() => unmount())
 
-    const { getByTestId: getByTestId2 } = render(<NumberComponentClearOnUnmount id="value2" />)
+    const { getByTestId: getByTestId2 } = render(<NumberComponentNoCache id="value2" />)
     expect(getByTestId2('value2').textContent).toBe('5')
   })
 
-  it('clearOnUnmount option resets the value on remount', () => {
-    const { getByTestId, unmount } = render(<ClearOnUnmountOptionComponent id="value" />)
+  it('noCache option resets the value on remount', () => {
+    const { getByTestId, unmount } = render(<NoCacheOptionComponent id="value" />)
     expect(getByTestId('value').textContent).toBe('5')
 
     act(() => {
@@ -127,12 +127,12 @@ describe('useControls mount/unmount lifecycle', () => {
 
     act(() => unmount())
 
-    const { getByTestId: getByTestId2 } = render(<ClearOnUnmountOptionComponent id="value2" />)
+    const { getByTestId: getByTestId2 } = render(<NoCacheOptionComponent id="value2" />)
     expect(getByTestId2('value2').textContent).toBe('5')
   })
 
-  it('store-level clearOnUnmount resets all inputs on remount', () => {
-    levaStore.setClearOnUnmount(true)
+  it('store-level noCache resets all inputs on remount', () => {
+    levaStore.setNoCache(true)
 
     const { getByTestId, unmount } = render(<NumberComponent id="value" />)
     expect(getByTestId('value').textContent).toBe('5')
@@ -148,12 +148,12 @@ describe('useControls mount/unmount lifecycle', () => {
     expect(getByTestId2('value2').textContent).toBe('5')
   })
 
-  it('LevaPanel clearOnUnmount prop wires to store and resets inputs on remount', () => {
+  it('LevaPanel noCache prop wires to store and resets inputs on remount', () => {
     // LevaPanel and the consuming component are rendered in separate trees so
     // that unmounting the component doesn't also unmount LevaPanel (which would
-    // trigger the cleanup that resets clearOnUnmount to false before the
+    // trigger the cleanup that resets noCache to false before the
     // component's own cleanup can call clearPath).
-    const { unmount: unmountPanel } = render(<LevaPanel store={levaStore} clearOnUnmount />)
+    const { unmount: unmountPanel } = render(<LevaPanel store={levaStore} noCache />)
 
     const { getByTestId, unmount: unmountComponent } = render(<NumberComponent id="value" />)
     expect(getByTestId('value').textContent).toBe('5')

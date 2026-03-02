@@ -10,13 +10,13 @@ export default {
 } as Meta
 
 // ---------------------------------------------------------------------------
-// Per-input clearOnUnmount
+// Per-input noCache
 // ---------------------------------------------------------------------------
 
 const PerInputControls = () => {
   const values = useControls({
     persistent: { value: 10 },
-    clearable: { value: 42, clearOnUnmount: true },
+    clearable: { value: 42, noCache: true },
   })
 
   return (
@@ -33,7 +33,7 @@ const PerInputControls = () => {
 }
 
 /**
- * Only the input marked with `clearOnUnmount: true` resets when the component
+ * Only the input marked with `noCache: true` resets when the component
  * unmounts. The other input retains its value.
  *
  * Steps to verify:
@@ -52,10 +52,10 @@ export const PerInput: StoryFn = () => {
   )
 }
 
-PerInput.storyName = 'clearOnUnmount (per-input)'
+PerInput.storyName = 'noCache (per-input)'
 
 // ---------------------------------------------------------------------------
-// Panel-level clearOnUnmount via <Leva clearOnUnmount>
+// Panel-level noCache via <Leva noCache>
 // ---------------------------------------------------------------------------
 
 const PanelLevelControls = () => {
@@ -63,16 +63,16 @@ const PanelLevelControls = () => {
 
   return (
     <div style={{ padding: 20, border: '1px solid #444', margin: '10px 0' }}>
-      <p>All inputs clear on unmount because the panel has clearOnUnmount.</p>
+      <p>All inputs clear on unmount because the panel has noCache.</p>
       <pre>{JSON.stringify(values, null, '  ')}</pre>
     </div>
   )
 }
 
 /**
- * When `<Leva clearOnUnmount>` is set, ALL inputs managed by the default panel
+ * When `<Leva noCache>` is set, ALL inputs managed by the default panel
  * have their cached values discarded when they unmount, regardless of the
- * per-input `clearOnUnmount` setting.
+ * per-input `noCache` setting.
  *
  * Steps to verify:
  * 1. Change `num` and `color` in the panel.
@@ -84,36 +84,36 @@ export const PanelLevel: StoryFn = () => {
 
   return (
     <div>
-      <Leva clearOnUnmount />
+      <Leva noCache />
       <button onClick={() => toggle((t) => !t)}>{mounted ? 'Unmount' : 'Mount'}</button>
       {mounted && <PanelLevelControls />}
     </div>
   )
 }
 
-PanelLevel.storyName = 'clearOnUnmount (panel-level)'
+PanelLevel.storyName = 'noCache (panel-level)'
 
 // ---------------------------------------------------------------------------
-// Panel-level clearOnUnmount overrides per-input false
+// Panel-level noCache overrides per-input false
 // ---------------------------------------------------------------------------
 
 const MixedControls = () => {
   const values = useControls({
     willClear: { value: 99 },
-    alsoWillClear: { value: '#0f0', clearOnUnmount: false },
+    alsoWillClear: { value: '#0f0', noCache: false },
   })
 
   return (
     <div style={{ padding: 20, border: '1px solid #444', margin: '10px 0' }}>
-      <p>Panel-level clearOnUnmount overrides per-input clearOnUnmount: false.</p>
+      <p>Panel-level noCache overrides per-input noCache: false.</p>
       <pre>{JSON.stringify(values, null, '  ')}</pre>
     </div>
   )
 }
 
 /**
- * Panel-level `clearOnUnmount` takes priority over the per-input setting.
- * Even `alsoWillClear` (which sets `clearOnUnmount: false`) will be cleared
+ * Panel-level `noCache` takes priority over the per-input setting.
+ * Even `alsoWillClear` (which sets `noCache: false`) will be cleared
  * because the panel flag overrides it.
  */
 export const PanelOverridesPerInput: StoryFn = () => {
@@ -121,14 +121,14 @@ export const PanelOverridesPerInput: StoryFn = () => {
 
   return (
     <div>
-      <Leva clearOnUnmount />
+      <Leva noCache />
       <button onClick={() => toggle((t) => !t)}>{mounted ? 'Unmount' : 'Mount'}</button>
       {mounted && <MixedControls />}
     </div>
   )
 }
 
-PanelOverridesPerInput.storyName = 'panel clearOnUnmount overrides per-input'
+PanelOverridesPerInput.storyName = 'panel noCache overrides per-input'
 
 // ---------------------------------------------------------------------------
 // store.clearPath — custom store, imperative usage

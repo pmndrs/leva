@@ -92,9 +92,9 @@ export type LevaRootProps = {
   hideCopyButton?: boolean
   /**
    * If true, all inputs will be cleared from the store when their component unmounts,
-   * regardless of the per-input clearOnUnmount setting.
+   * regardless of the per-input noCache setting.
    */
-  clearOnUnmount?: boolean
+  noCache?: boolean
 }
 
 export function LevaRoot({
@@ -102,17 +102,17 @@ export function LevaRoot({
   hidden = false,
   theme,
   collapsed = false,
-  clearOnUnmount = false,
+  noCache = false,
   ...props
 }: LevaRootProps) {
   const themeContext = useDeepMemo(() => mergeTheme(theme), [theme])
 
   useEffect(() => {
     if (store) {
-      store.setClearOnUnmount(clearOnUnmount)
-      return () => store.setClearOnUnmount(false)
+      store.setNoCache(noCache)
+      return () => store.setNoCache(false)
     }
-  }, [store, clearOnUnmount])
+  }, [store, noCache])
 
   // collapsible
   const [toggled, setToggle] = useState(!collapsed)

@@ -65,7 +65,7 @@ export function parseOptions(
     onEditStart,
     onEditEnd,
     transient,
-    clearOnUnmount,
+    noCache,
     ...inputWithType
   } = _input
 
@@ -80,7 +80,7 @@ export function parseOptions(
     disabled,
     optional,
     order,
-    clearOnUnmount,
+    noCache,
     ...mergedOptions,
   }
 

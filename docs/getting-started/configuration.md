@@ -32,7 +32,7 @@ export default function MyApp() {
           position: { x: 0, y: 0 }, // Initial position (when drag is enabled)
           onDrag: (position) => {}, // Callback when dragged
         }}
-        clearOnUnmount // default = false, discards cached input values when inputs unmount
+        noCache // default = false, discards cached input values when inputs unmount
       />
     </>
   )
@@ -50,7 +50,7 @@ export default function MyApp() {
 - `hidden`: Hides the GUI completely
 - `neverHide`: Keeps GUI visible even when no controls are mounted
 - `hideCopyButton`: Hides the copy button in the title bar
-- `clearOnUnmount`: When `true`, all inputs managed by this panel discard their cached values when they unmount (overrides the per-input `clearOnUnmount` setting)
+- `noCache`: When `true`, all inputs managed by this panel discard their cached values when they unmount (overrides the per-input `noCache` setting)
 - `titleBar`: Object with title bar configuration:
   - `title`: Custom title string
   - `drag`: Enable/disable dragging
@@ -107,17 +107,17 @@ export default function MyApp() {
 
 By default Leva caches input values so they survive unmount/remount cycles. You can opt out of this behaviour at two levels:
 
-**Panel-level** — pass `clearOnUnmount` to `<Leva>` (or `<LevaPanel>`). Every input managed by that panel will discard its cached value when its component unmounts. This takes priority over the per-input setting.
+**Panel-level** — pass `noCache` to `<Leva>` (or `<LevaPanel>`). Every input managed by that panel will discard its cached value when its component unmounts. This takes priority over the per-input setting.
 
 ```jsx
-<Leva clearOnUnmount />
+<Leva noCache />
 ```
 
-**Per-input** — set `clearOnUnmount: true` inside the schema for individual inputs (see [Input Options](inputs.md#clearonunmount)).
+**Per-input** — set `noCache: true` inside the schema for individual inputs (see [Input Options](inputs.md#nocache)).
 
 ```jsx
 useControls({
-  sessionValue: { value: 0, clearOnUnmount: true },
+  sessionValue: { value: 0, noCache: true },
   persistentValue: { value: 0 },
 })
 ```
