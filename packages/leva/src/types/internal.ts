@@ -20,6 +20,7 @@ export type MappedPaths = Record<
     onEditStart?: (...args: any) => void
     onEditEnd?: (...args: any) => void
     transient: boolean
+    noCache: boolean
   }
 >
 
@@ -28,10 +29,13 @@ type Dispose = () => void
 export type StoreType = {
   useStore: UseBoundStore<StoreApi<State>> & SubscribeWithSelectorAPI<State>
   storeId: string
+  noCache: boolean
+  setNoCache: (flag: boolean) => void
   orderPaths: (paths: string[]) => string[]
   setOrderedPaths: (newPaths: string[]) => void
   disposePaths: (paths: string[]) => void
   dispose: () => void
+  clearPath: (path: string) => void
   getVisiblePaths: () => string[]
   getFolderSettings: (path: string) => FolderSettings
   getData: () => Data

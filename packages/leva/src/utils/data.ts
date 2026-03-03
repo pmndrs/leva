@@ -65,9 +65,16 @@ export function getDataFromSchema(
       if (normalizedInput) {
         const { type, options, input } = normalizedInput
         // @ts-ignore
-        const { onChange, transient, onEditStart, onEditEnd, ..._options } = options
+        const { onChange, transient, onEditStart, onEditEnd, noCache, ..._options } = options
         data[newPath] = { type, ..._options, ...input, fromPanel: true }
-        mappedPaths[key] = { path: newPath, onChange, transient, onEditStart, onEditEnd }
+        mappedPaths[key] = {
+          path: newPath,
+          onChange,
+          transient,
+          onEditStart,
+          onEditEnd,
+          noCache: noCache ?? false,
+        }
       } else {
         warn(LevaErrors.UNKNOWN_INPUT, newPath, rawInput)
       }

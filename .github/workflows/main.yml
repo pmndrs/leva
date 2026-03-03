@@ -54,7 +54,7 @@ jobs:
         id: pnpm-build-cache
         with:
           path: packages/**/dist
-          key: ${{ runner.os }}-pnpm-build-${{ hashFiles('/packages/**/*') }}
+          key: ${{ runner.os }}-pnpm-build-${{ hashFiles('packages/**/*.ts', 'packages/**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-build-
 

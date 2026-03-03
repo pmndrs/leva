@@ -13,6 +13,10 @@ export const Store = function (this: StoreType) {
 
   this.storeId = getUid()
   this.useStore = store
+  this.noCache = false
+  this.setNoCache = (flag) => {
+    this.noCache = flag
+  }
   /**
    * Folders will hold the folder settings for the pane.
    * @note possibly make this reactive
@@ -111,6 +115,16 @@ export const Store = function (this: StoreType) {
   this.dispose = () => {
     store.setState(() => {
       return { data: {} }
+    })
+  }
+
+  this.clearPath = (path) => {
+    store.setState((s) => {
+      const input = s.data[path]
+      if (!input || input.__refCount > 0) return s
+      const data = { ...s.data }
+      delete data[path]
+      return { data }
     })
   }
 

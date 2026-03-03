@@ -381,6 +381,19 @@ const values = useControls({
 })
 ```
 
+### noCache
+
+By default, Leva caches input values so they persist across unmount/remount cycles. Set `noCache: true` on a specific input to discard its cached value when its component unmounts, so the next mount starts fresh from the initial value:
+
+```jsx
+const { sessionValue, persistentValue } = useControls({
+  sessionValue: { value: 0, noCache: true },
+  persistentValue: { value: 0 },
+})
+```
+
+See also the panel-level [`noCache`](configuration.md#nocache) option to apply this behaviour to all inputs at once.
+
 ### Enforcing Input Type
 
 Force a specific input type even if Leva would infer differently:
