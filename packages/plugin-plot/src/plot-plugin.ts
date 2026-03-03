@@ -1,4 +1,4 @@
-import { Data, StoreType } from 'packages/leva/src/types'
+import type { Data, StoreType } from 'leva/plugin'
 import * as math from 'mathjs'
 import { parseExpression } from './plot-utils'
 import type { PlotInput, InternalPlot, InternalPlotSettings } from './plot-types'

@@ -134,18 +134,24 @@ PanelOverridesPerInput.storyName = 'panel noCache overrides per-input'
 // store.clearPath — custom store, imperative usage
 // ---------------------------------------------------------------------------
 
+const ClearPathControls = ({ store }: { store: ReturnType<typeof useCreateStore> }) => {
+  const values = useControls({ position: { x: 0, y: 0 }, speed: 1 }, { store })
+  return <pre>{JSON.stringify(values, null, '  ')}</pre>
+}
+
 /**
  * `store.clearPath(path)` lets you imperatively discard the cached value of a
  * single input. This is useful when you manage your own store and want fine-
  * grained control over cache invalidation without unmounting the component.
  *
- * Click "Clear position cache" — the next time the component remounts it will
- * start from the initial value again.
+ * 1. Change `position` in the panel.
+ * 2. Click "Unmount controls" — the component unmounts but the cache is preserved.
+ * 3. Click "Clear position cache" — discards the cached value.
+ * 4. Click "Mount controls" — position restarts from `{ x: 0, y: 0 }`.
  */
 export const ClearPath: StoryFn = () => {
   const store = useCreateStore()
-
-  const values = useControls({ position: { x: 0, y: 0 }, speed: 1 }, { store })
+  const [mounted, setMounted] = React.useState(true)
 
   return (
     <div>
@@ -154,15 +160,17 @@ export const ClearPath: StoryFn = () => {
         <p>
           <strong>store.clearPath</strong> imperatively discards a single cached input.
         </p>
-        <pre>{JSON.stringify(values, null, '  ')}</pre>
+        {mounted && <ClearPathControls store={store} />}
       </div>
-      <button
-        onClick={() => {
-          // Discard the cached position; next mount will use the initial value.
-          store.clearPath('position')
-        }}>
-        Clear position cache
-      </button>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button onClick={() => setMounted((m) => !m)}>{mounted ? 'Unmount controls' : 'Mount controls'}</button>
+        <button
+          onClick={() => {
+            store.clearPath('position')
+          }}>
+          Clear position cache
+        </button>
+      </div>
     </div>
   )
 }

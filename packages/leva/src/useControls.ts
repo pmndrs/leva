@@ -160,8 +160,6 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
       }
       if (noCache) {
         noCachePaths.add(path)
-      } else {
-        noCachePaths.delete(path)
       }
     })
     return [allPaths, renderPaths, onChangePaths, onEditStartPaths, onEditEndPaths, noCachePaths]
@@ -208,7 +206,9 @@ export function useControls<S extends Schema, F extends SchemaOrFn<S> | string, 
     return () => {
       store.disposePaths(paths)
       const pathsToClear = store.noCache ? paths : [...noCachePaths]
-      pathsToClear.forEach((path) => store.clearPath(path))
+      for (const path of pathsToClear) {
+        store.clearPath(path)
+      }
     }
   }, [store, paths, initialData, noCachePaths])
 
