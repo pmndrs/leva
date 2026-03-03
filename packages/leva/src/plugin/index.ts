@@ -44,6 +44,5 @@ export { styled, keyframes, useTh } from '../styles'
 
 // export types
 export * from '../types/public'
-export type { StoreType, Data } from '../types/internal'
 export type { InternalVectorSettings } from '../plugins/Vector/vector-types'
 export type { InternalNumberSettings } from '../plugins/Number/number-types'
