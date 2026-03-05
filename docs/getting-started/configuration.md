@@ -79,6 +79,22 @@ function MyApp() {
 }
 ```
 
+### Custom Stores
+
+You can create custom global stores outside components by instantiating `Store` and passing it to the `useControls` hook:
+
+```jsx
+import { useControls, Store } from 'leva'
+
+const store = new Store()
+
+const Example = () => {
+  const values = useControls({ x: 0 }, { store })
+
+  return values.x
+}
+```
+
 ### Disabling the GUI
 
 Each instance of the `useControls` hook will render the panel. If you want to completely disable the GUI based on preferences, you need to explicitly set `hidden` to false.
