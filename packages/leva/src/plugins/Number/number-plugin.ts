@@ -50,7 +50,7 @@ export const normalize = ({ value, ...settings }: NumberInput) => {
   const pad = Math.round(clamp(Math.log10(1 / padStep), 0, 2))
 
   return {
-    value: suffix ? _value + suffix : _value,
+    value: _value,
     settings: { initialValue: _value, step, pad, min, max, suffix, ..._settings },
   }
 }
