@@ -94,35 +94,48 @@ export function useToggle(toggled: boolean) {
   }, [])
 
   useEffect(() => {
-    // prevents first animation
-    if (firstRender.current) {
-      firstRender.current = false
+    const ref = wrapperRef.current!
+    const contentEl = contentRef.current!
+
+    const updateHeight = () => {
+      const { height } = contentEl.getBoundingClientRect()
+      if (ref.style.height !== `${height}px` && height > 0) {
+        ref.style.height = `${height}px`
+      }
+    }
+
+    if (!toggled) {
+      ref.style.height = '0px'
+      ref.style.overflow = 'hidden'
       return
     }
 
-    let timeout: number
-    const ref = wrapperRef.current!
+    // prevents first animation on initial expand
+    if (firstRender.current) {
+      firstRender.current = false
+      updateHeight()
+      return
+    }
 
     const fixHeight = () => {
-      if (toggled) {
-        ref.style.removeProperty('height')
-        ref.style.removeProperty('overflow')
-        contentRef.current!.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-      }
+      ref.style.removeProperty('height')
+      ref.style.removeProperty('overflow')
+      contentEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
     }
 
     ref.addEventListener('transitionend', fixHeight, { once: true })
 
-    const { height } = contentRef.current!.getBoundingClientRect()
-    ref.style.height = height + 'px'
-    if (!toggled) {
-      ref.style.overflow = 'hidden'
-      timeout = window.setTimeout(() => (ref.style.height = '0px'), 50)
-    }
+    const { height } = contentEl.getBoundingClientRect()
+    ref.style.height = `${height}px`
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateHeight()
+    })
+    resizeObserver.observe(contentEl)
 
     return () => {
       ref.removeEventListener('transitionend', fixHeight)
-      clearTimeout(timeout)
+      resizeObserver.disconnect()
     }
   }, [toggled])
 
