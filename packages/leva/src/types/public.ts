@@ -44,7 +44,7 @@ export enum LevaInputs {
   VECTOR2D = 'VECTOR2D',
 }
 
-export type ButtonSettings = { disabled?: boolean }
+export type ButtonSettings = { disabled?: boolean; label?: string }
 
 export type ButtonInput = {
   type: SpecialInputs.BUTTON
