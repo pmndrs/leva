@@ -126,7 +126,14 @@ export function useToggle(toggled: boolean) {
     ref.addEventListener('transitionend', fixHeight, { once: true })
 
     const { height } = contentEl.getBoundingClientRect()
+    const currentHeight = ref.style.height
     ref.style.height = `${height}px`
+
+    // If no transition will occur, call fixHeight directly
+    if (currentHeight === `${height}px`) {
+      ref.removeEventListener('transitionend', fixHeight)
+      fixHeight()
+    }
 
     const resizeObserver = new ResizeObserver(() => {
       updateHeight()

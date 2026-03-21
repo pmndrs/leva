@@ -2,4 +2,4 @@
 "leva": patch
 ---
 
-fix: update string input value in real-time
+fix: persist numeric suffix on inputs and update folder height dynamically
