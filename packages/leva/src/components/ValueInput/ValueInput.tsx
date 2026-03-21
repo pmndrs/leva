@@ -13,6 +13,7 @@ export type ValueInputProps = {
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
   rows?: number
+  liveUpdate?: boolean
 }
 
 export function ValueInput({
@@ -25,6 +26,7 @@ export function ValueInput({
   id,
   inputType = 'text',
   rows = 0,
+  liveUpdate = false,
   ...props
 }: ValueInputProps) {
   const { id: _id, emitOnEditStart, emitOnEditEnd, disabled } = useInputContext()
@@ -86,9 +88,7 @@ export function ValueInput({
         value={value}
         onChange={update((value) => {
           onChange(value)
-          // Only call onUpdate for non-number inputs; number inputs retain
-          // their original commit behavior (on blur/Enter via dragEnd)
-          if (type !== "number") onUpdate(value)
+          if (type !== "number" || liveUpdate) onUpdate(value)
         })}
         onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
