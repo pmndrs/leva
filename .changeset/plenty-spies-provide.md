@@ -2,4 +2,4 @@
 "leva": patch
 ---
 
-fix: update string input value in real-time
+fix: update folder height when content changes dynamically
