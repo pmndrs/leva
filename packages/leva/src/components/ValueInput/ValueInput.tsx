@@ -84,7 +84,12 @@ export function ValueInput({
         autoComplete="off"
         spellCheck="false"
         value={value}
-        onChange={update(onChange)}
+        onChange={update((value) => {
+          onChange(value)
+          // Only call onUpdate for non-number inputs; number inputs retain
+          // their original commit behavior (on blur/Enter via dragEnd)
+          if (type !== "number") onUpdate(value)
+        })}
         onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}
