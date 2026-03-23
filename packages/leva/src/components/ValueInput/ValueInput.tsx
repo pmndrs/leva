@@ -13,6 +13,7 @@ export type ValueInputProps = {
   onChange: (value: string) => void
   onKeyDown?: (event: React.KeyboardEvent) => void
   rows?: number
+  liveUpdate?: boolean
 }
 
 export function ValueInput({
@@ -25,6 +26,7 @@ export function ValueInput({
   id,
   inputType = 'text',
   rows = 0,
+  liveUpdate = false,
   ...props
 }: ValueInputProps) {
   const { id: _id, emitOnEditStart, emitOnEditEnd, disabled } = useInputContext()
@@ -84,7 +86,10 @@ export function ValueInput({
         autoComplete="off"
         spellCheck="false"
         value={value}
-        onChange={update(onChange)}
+        onChange={update((value) => {
+          onChange(value)
+          if (type !== "number" || liveUpdate) onUpdate(value)
+        })}
         onFocus={() => emitOnEditStart()}
         onKeyPress={onKeyPress}
         onKeyDown={onKeyDown}

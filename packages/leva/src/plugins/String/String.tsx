@@ -13,7 +13,7 @@ const NonEditableString = styled('div', {
 })
 
 export function String({ displayValue, onUpdate, onChange, editable = true, ...props }: BaseStringProps) {
-  if (editable) return <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} {...props} />
+  if (editable) return <ValueInput value={displayValue} onUpdate={onUpdate} onChange={onChange} liveUpdate {...props} />
   return <NonEditableString>{displayValue}</NonEditableString>
 }
 
